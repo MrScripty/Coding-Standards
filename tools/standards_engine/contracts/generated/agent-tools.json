@@ -3594,6 +3594,39 @@
       ],
       "type": "object"
     },
+    "DescribeInputCall": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_catalog": {
+          "$ref": "#/$defs/Digest"
+        },
+        "limit": {
+          "description": "Maximum whole schema records in this page; default 8. Byte pressure may return fewer.",
+          "maximum": 16,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Record offset within the selected closure. Continue with the returned next request.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "description": "An operation published in this running catalog.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "selector": {
+          "description": "A returned definition name (or the name in a schema $ref). Omit for the operation input root.",
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation"
+      ],
+      "type": "object"
+    },
     "Digest": {
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
@@ -4469,6 +4502,135 @@
         "operator",
         "fact",
         "values"
+      ],
+      "type": "object"
+    },
+    "InputContractRejectedResult": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "INPUT_DISCOVERY.INVALID_ARGUMENTS",
+            "INPUT_DISCOVERY.OPERATION_UNAVAILABLE",
+            "INPUT_DISCOVERY.CATALOG_CHANGED",
+            "INPUT_DISCOVERY.SELECTION_INVALID",
+            "INPUT_DISCOVERY.RESULT_LIMIT"
+          ]
+        },
+        "kind": {
+          "const": "input-contract-rejected-result"
+        },
+        "message": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "invalid",
+            "unavailable",
+            "unsupported"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "code",
+        "outcome",
+        "message"
+      ],
+      "type": "object"
+    },
+    "InputContractResult": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "dialect": {
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "interface_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "kind": {
+          "const": "input-contract-result"
+        },
+        "next": {
+          "$ref": "#/$defs/DescribeInputCall"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/InputSchemaRecord"
+          },
+          "maxItems": 16,
+          "type": "array"
+        },
+        "root": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "selector": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "total": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "interface_version",
+        "catalog_digest",
+        "operation",
+        "root",
+        "selector",
+        "dialect",
+        "offset",
+        "total",
+        "records"
+      ],
+      "type": "object"
+    },
+    "InputSchemaRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_json": {
+          "description": "Exact JSON Schema definition serialized as a JSON document; $refs name other returned/selectable definitions. Not a standalone validator without its closure.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "schema_json"
       ],
       "type": "object"
     },
@@ -9076,7 +9238,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 39,
+  "interface_schema_version": 40,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -9701,6 +9863,30 @@
           "result_definitions": [
             "RuntimeInfoResult",
             "ApplicationRejectedResult"
+          ]
+        }
+      }
+    },
+    {
+      "capability": "standards.read",
+      "id": "describe_input",
+      "input_definition": "DescribeInputCall",
+      "input_schema": {
+        "$ref": "#/$defs/DescribeInputCall"
+      },
+      "result_definitions": [
+        "InputContractResult",
+        "InputContractRejectedResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "DescribeInputCall",
+          "input_schema": {
+            "$ref": "#/$defs/DescribeInputCall"
+          },
+          "result_definitions": [
+            "InputContractResult",
+            "InputContractRejectedResult"
           ]
         }
       }

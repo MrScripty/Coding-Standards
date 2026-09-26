@@ -32,7 +32,7 @@ class RuntimeIdentityTests(unittest.TestCase):
             for result in (initial, catalog, response):
                 self.assertEqual(result['_meta']['standards-engine/runtime']['instance_id'], value['instance_id'])
                 self.assertEqual(result['_meta']['standards-engine/runtime']['catalog_digest'], value['catalog_digest'])
-            self.assertEqual(value['interface_version'], 39)
+            self.assertEqual(value['interface_version'], 40)
             self.assertEqual(value['installation_state'], 'current')
             self.assertEqual(value['action'], 'reuse')
             self.assertFalse(initial['capabilities']['tools']['listChanged'])
@@ -100,7 +100,7 @@ class RuntimeIdentityTests(unittest.TestCase):
                         request('tools/call', {'name': 'runtime_info', 'arguments': {}}, identifier=2)]
             environment = {**os.environ, 'PYTHONPATH': str(ROOT)}
             mcp = subprocess.run([sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-                    '--repo-root', str(root), '--purpose', 'application'],
+                    '--repo-root', str(root), '--purpose', 'application', '--advanced'],
                 input=''.join(json.dumps(item)+'\n' for item in messages), text=True, capture_output=True,
                 env=environment, timeout=60)
             self.assertEqual(mcp.returncode, 0, mcp.stderr)

@@ -37,3 +37,11 @@ catalog construction from transport. It preserves interface 39 and existing
 client mode behavior. Verification and client-dependent compatibility retirement
 are recorded in that plan's ledger and findings; this slice does not close the
 Standards Library Effectiveness objective.
+
+
+## Input Contract Discovery
+
+[Input Contract Discovery](input-contract-discovery/plan.md) adds a bounded
+model-accessible path to the exact running input contracts while preserving
+compatibility mode. Its separate client/model qualification gate remains explicit;
+transport/schema checks alone do not close the reported declaration-rendering gap.

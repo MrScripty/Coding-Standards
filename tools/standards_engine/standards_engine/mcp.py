@@ -18,6 +18,7 @@ from typing import TextIO
 from .tools import AgentToolFacade
 from .compiled_cache import CompiledSnapshotCache
 from .runtime_identity import RuntimeIdentity
+from .input_discovery import InputContractDiscovery
 from .context_projection import Purpose
 from .mcp_catalog import SchemaMode, tool_catalog
 
@@ -46,6 +47,10 @@ class MCPServer:
         )
         self.names = {tool["name"] for tool in self.tools}
         self._runtime_identity = RuntimeIdentity(self.root, self.purpose, self._interface, self.tools)
+        self._input_discovery = InputContractDiscovery(
+            self._interface, purpose=self.purpose, operation_names=self.names,
+            catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
+        )
         self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
         self._closed = False
         self.initialized = False
@@ -60,6 +65,7 @@ class MCPServer:
         self._compiled_cache.close()
         self._interface = None
         self._runtime_identity = None
+        self._input_discovery = None
         self.tools.clear()
         self.names.clear()
         self._closed = True
@@ -121,7 +127,8 @@ class MCPServer:
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": "standards-engine", "version": self._runtime_identity.implementation_version},
                 "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
-                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. " + (
+                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. "
+                "Use describe_input for missing or abbreviated input shapes; retain its catalog-bound selections. " + (
                     "Use route with content={} to obtain applicable exact guidance; follow content.next for more. Reuse returned snapshots for consistent observations."
                     if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
@@ -148,6 +155,8 @@ class MCPServer:
         arguments = params.get("arguments", {})
         if not isinstance(arguments, dict):
             raise ProtocolError(-32602, "Tool arguments must be an object.")
+        if name == "describe_input":
+            return self._tool_result(self._input_discovery.invoke(arguments))
         if name == "runtime_info":
             value = self._runtime_identity.invoke(arguments)
             return self._tool_result(value)
@@ -191,7 +200,7 @@ class MCPServer:
             "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result"}
+            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result", "input-contract-rejected-result"}
             or value.get("status") == "rejected",
         }
 

@@ -106,6 +106,24 @@ async def main(server_name, schema_mode):
                 Draft202012Validator(schema).validate(value)
                 return value
 
+            # Scripted discovery conformance is independent of catalog transport;
+            # the separate codex_discovery_client runs the model-visible scenario.
+            for name in ("propose", "revise", "resolve_workflow", "resolve_many", "review"):
+                arguments = {"operation": name, "limit": 16}
+                records = {}
+                while True:
+                    page = await call("describe_input", arguments)
+                    assert page["kind"] == "input-contract-result", page
+                    records.update({item["name"]: json.loads(item["schema_json"]) for item in page["records"]})
+                    if "next" not in page:
+                        break
+                    arguments = page["next"]
+                validator = Draft202012Validator({"$schema": page["dialect"],
+                    "$ref": "#/$defs/" + page["selector"], "$defs": records})
+                for fixture in (e["value"] for e in examples if e["definition"] == page["root"]):
+                    validator.validate(fixture)
+            print("Codex scripted discovery: five complete authoring input closures preserved (not a model qualification)", flush=True)
+
             routed = await call("route", {"facts": {}})
             assert routed["kind"] == "agent-route-result", routed
             assert all(i["operation"] in toolmap for i in routed["next_operations"])

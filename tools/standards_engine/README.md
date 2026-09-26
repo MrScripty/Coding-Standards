@@ -1,17 +1,18 @@
 # Standards Engine
 
-The current interface is **39**. Optional routed content, request-local evidence
+The current interface is **40**. Bounded `describe_input` observations expose exact
+input shapes when client declarations are abbreviated. Optional routed content, request-local evidence
 reuse and host-selected schema presentation extend the existing workflow. Compact pending `propose`, `revise`, `analyze`
 and decision responses include the next bounded work page. Carry the returned
 context once, answer ready work with `resolve_many`, and retrieve only remaining
 or supporting details. `workflow_status` remains a lightweight observation;
 review and publication remain explicit. Restart the MCP process and reconnect
 the client after this result-shape update, preserving all exact handles and the
-existing store. See [the current interaction contract](PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39).
+existing store. See [the current discovery contract](PURPOSE-SEPARATION.md#input-contract-discovery-interface-40).
 
 The versioned sections below retain implementation history.
 
-## Current purpose-separated interface
+## Purpose separation (interface 31)
 
 Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`
 purpose. Application views use exact reviewed content declarations; the real
@@ -249,3 +250,24 @@ remove the workaround and obsolete mode selection together. A single
 reference-preserving presentation can be selected then; the correctness repair
 does not change clients' configured schema mode or introduce another mode.
 See [the cleanup record](../../docs/plans/schema-projection-cleanup/plan.md).
+
+
+## Bounded input-contract discovery (interface 40)
+
+`describe_input` exposes the exact compiled input contract for an operation in the
+running catalog, including request-local evidence variants. Flat arguments select
+an operation, an optional returned definition name, a catalog digest and a page.
+Whole JSON schema records and exact continuations are result data, not another
+validator or a schema-dependent authoring request. The service has no repository,
+snapshot, evidence or workflow state access. MCP and CLI invoke it before opening
+the Engine; direct facade callers share full-catalog identity with `runtime_info`.
+
+The discovery owner uses the existing structural-reference traversal and the
+existing runtime catalog digest. The generated interface remains the schema
+source and validation authority. All public descriptions advertise discovery,
+not only the historical compatibility-workaround operations. Compatible and native
+catalog presentations remain available; removal is still gated on actual client
+qualification. Native request types and retained-state versions are unchanged.
+
+See [the operation contract](PURPOSE-SEPARATION.md#input-contract-discovery-interface-40)
+and [model-visible qualification](tests/INPUT-DISCOVERY-QUALIFICATION.md).

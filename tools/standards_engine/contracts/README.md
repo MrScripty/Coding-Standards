@@ -1,21 +1,26 @@
 # Standards Engine Contracts
 
+Interface 40 adds `describe_input` for bounded, catalog-bound input-contract
+discovery. Both purposes use the same observation algebra; only actually published
+operations and their input closure are visible. Mutation/state/handle contracts
+remain unchanged. See [the discovery contract](../PURPOSE-SEPARATION.md#input-contract-discovery-interface-40).
+
 Interface 39 adds optional bounded route content and request-local evidence in
 focused agent input variants. Host-selected native schema presentation is opt-in;
 compatibility remains the default. Native authoring inputs and all retained state
 versions stay unchanged. See
-[the current contract](../PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39).
+[the interface-39 contract](../PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39).
 
 Interface 38 introduced the focused workflow result contract. Pending mutations
 return a bounded first work page and relative continuations; status reads stay
 lightweight. The canonical schema, generated models and examples change together.
 Existing request/state/handle versions remain unchanged. Restart and reconnect
 supported clients without deleting their state. See
-[the current contract](../PURPOSE-SEPARATION.md#actionable-workflow-results-interface-38).
+[the interface-38 contract](../PURPOSE-SEPARATION.md#actionable-workflow-results-interface-38).
 
 The following notes describe earlier interface increments.
 
-## Current contract: interface 36
+## Review workflow additions (interface 36)
 
 
 Interface 36 adds `resolve_many`, `workflow_details`, and `runtime_info`.

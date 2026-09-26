@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 39
+interface_schema_version = 40
 request_contract_version = 6
 result_projection_version = 7
 
@@ -237,3 +237,11 @@ input_definition = "RuntimeInfoCall"
 result_definitions = ["RuntimeInfoResult", "RejectedResult"]
 capability = "standards.read"
 variants = { "application" = { "input_definition" = "RuntimeInfoCall", "result_definitions" = ["RuntimeInfoResult", "ApplicationRejectedResult"] } }
+
+
+[[operations]]
+id = "describe_input"
+input_definition = "DescribeInputCall"
+result_definitions = ["InputContractResult", "InputContractRejectedResult"]
+capability = "standards.read"
+variants = { "application" = { "input_definition" = "DescribeInputCall", "result_definitions" = ["InputContractResult", "InputContractRejectedResult"] } }

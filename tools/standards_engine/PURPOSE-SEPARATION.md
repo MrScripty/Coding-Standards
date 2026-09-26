@@ -546,7 +546,7 @@ mutations. Check the new instance ID as well as interface 37 and the catalog dig
 `listChanged` remains false: no hot reload is implemented. Content publication
 alone does not require an implementation restart. Standalone native facade
 catalog identity describes its native operation contract; compare catalogs within
-the same transport/purpose. The reference CLI uses the focused MCP catalog identity.
+the same transport/purpose. At interface 36 the reference CLI used the focused MCP catalog identity; interface 40 aligns it with its full listed operation surface.
 
 Interface 36 changes the focused result contract and adds three operations. It
 preserves Analysis 7, original Snapshot/SQLite representations, readiness, exact
@@ -709,3 +709,72 @@ selected text, explicit evidence decisions, cold stdio and serialized byte/call
 counts. These are not claims about model tokens, billed usage or client rendering.
 The plan records supported-runtime, configured-client and independent-review gates
 separately from local structural and unit evidence.
+
+
+## Input contract discovery (interface 40)
+
+`describe_input(operation, selector?, expected_catalog?, offset?, limit?)` is a
+read-only installed-interface observation. It is available in both purposes,
+focused and advanced catalogs, and both schema modes. Arguments stay flat and
+small so discovering an abbreviated input does not require another large union.
+
+The existing compiled interface selects the operation's purpose/agent input root.
+The actual published operation set further limits discovery. A definition is
+selectable only within that root's transitive input-reference closure; output
+schemas, another operation's private definitions, and unpublished operations are
+not made visible. Missing and off-purpose operations return the same bounded
+unavailable result. It observes the running process rather than hot-loading disk.
+
+A first operation-only request selects its input root and returns its catalog
+identity. A `selector` is a returned named definition, including a name in
+`#/$defs/Name`. Every selector or nonzero offset requires `expected_catalog`.
+Mismatches return `INPUT_DISCOVERY.CATALOG_CHANGED`; no stale cursor is reinterpreted.
+The catalog digest is the existing RuntimeIdentity digest, not a new handle/store.
+Root, selector, dialect, interface version, record offset, closure total and exact
+next-call arguments are returned. There is no snapshot requirement or capture.
+
+Each record contains a name and `schema_json`, an exact serialized JSON Schema
+definition. Schema documents are data; structured mutation arguments stay
+structured. Using document strings avoids a new recursive meta-schema projection
+or a schema evaluator in the discovery service. Literal/default/enum data and
+all existing constraints are preserved. Definition-reference traversal uses the
+contracts package's structural owner; recursion is visited once. Breadth-first
+order puts containing objects and union choices ahead of their descendants.
+
+The default page is eight records, the maximum sixteen, and the complete domain
+result JSON is at most 16 KiB with the MCP serializer's normal escaping/separators.
+This is not a bound on the whole transport frame (which also carries the text
+copy and runtime metadata), interpreter memory or model tokens. Byte pressure
+ends before a whole record and supplies `next`; an oversized first record returns
+`INPUT_DISCOVERY.RESULT_LIMIT` / unsupported with no partial schema. No unbounded
+retrieval is implied. All current published input records are qualified against
+this bound. A future oversized record keeps that discovery path unqualified until
+it is addressed by its owner.
+
+The selected closure is complete only after all of its pages are collected.
+Clients may instead select just the required edit, submission or nested input
+from references in an earlier page. A schema record alone is not a standalone
+validator unless it has no unresolved references. To assemble a standalone selected
+schema, use the records as `$defs`, `$ref` to the returned selector, and the returned
+dialect. The operation's `root` is also reported even when a narrower selector is
+being inspected. No example, inferred rationale or fabricated evidence is injected.
+
+Discovery failures have their own bounded `input-contract-rejected-result` algebra
+and MCP `isError: true`. Valid results have `isError: false`. Application and
+authoring results carry their purpose but expose no repository paths or private
+state. The reference CLI and direct native facade observers describe their full
+purpose-qualified compatibility catalog, matching their available operation set.
+Their identities can differ from focused MCP; reuse selections only in matching
+catalogs. The native facade runtime_info digest now includes the actual complete
+catalog rather than a list of
+operation metadata, so changed nested definitions invalidate discovery selections.
+
+Interface 40 is an additive observation capability and catalog update. All prior
+native/agent mutation definitions, Analysis, readiness, application/recovery and
+SQLite representations are retained. Restart/reconnect without migrating or
+removing stores. The actual agent-client test—not schema or transport validation—
+controls compatibility retirement. The model must acquire the relevant shapes,
+construct valid authoring requests, use single and batched decisions with real
+request-local evidence, and reach explicit readiness without publication or source
+file/schema fixture access. A recursive tail may remain `unknown` when its required
+shape is available through this qualified discovery path.

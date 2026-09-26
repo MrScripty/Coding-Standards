@@ -2,7 +2,7 @@
   "contract": "standards-metadata:suite-input-manifest:v1",
   "files": [
     {
-      "digest": "sha256:f42acff68a84dec48715eb80f0c38febb8d20ddbdc5780626de3dd9035cbf9f5",
+      "digest": "sha256:0456584b02100124a394d1a46d40a910382ffdb45ccd25e66494dc473c4fead6",
       "path": ".agents/skills/standards-engine/references/authoring.md",
       "state": "present",
       "uses": [
@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:affd69a47517b3451910a53d23838c809be6a1d638127f25df95d3eb41ad3506",
+      "digest": "sha256:f777c84fa7da9082e5e0b1b15379a8722fe6513c585d98d6a268d68c7b3e9f73",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -6951,7 +6951,7 @@
       ]
     },
     {
-      "digest": "sha256:2c28cba059a4947dbeee5c6d8184b7cf6e234c5265f2c09e048afd4752978ad0",
+      "digest": "sha256:62df3aeb87423e268e4bf093ecef4c987c860abcdf128df298cbbfec5ee098c4",
       "path": "tools/standards_contracts/standards_contracts/__init__.py",
       "state": "present",
       "uses": [
@@ -7077,7 +7077,7 @@
       ]
     },
     {
-      "digest": "sha256:b373b446e868846d49609c51a042c29fe2487560fb90bf6b7086f6ab3cf0c454",
+      "digest": "sha256:9a6fc454467e97a815d1062d03d396bc0865f59d4f3f3c4d505bf22e575ba982",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:07ecbe7ec95b1acb14746d651f61bfbf048b54e5e0cd74c2e90fc38269b91e68",
+      "digest": "sha256:95fc8909d3c37e27b41866a3e048218ca514c63ac02b4d0f8746ab2c511e07d0",
       "path": "tools/standards_engine/contracts/README.md",
       "state": "present",
       "uses": [
@@ -7101,7 +7101,7 @@
       ]
     },
     {
-      "digest": "sha256:ef90f5e0ba6a8b35a0ab442bee838c3e352c2a2a978743b0965e7c301986306a",
+      "digest": "sha256:03ad5de50044ad37a8bd1cfbabd996c86e4a66bd35a5399005455d11e4f83599",
       "path": "tools/standards_engine/contracts/a1-contract.schema.json",
       "state": "present",
       "uses": [
@@ -7118,7 +7118,7 @@
       ]
     },
     {
-      "digest": "sha256:9eabe0b306d2b28cf985f2a66706ac0cc62c51a1bbef79e6b2f7eaa14c2ac50a",
+      "digest": "sha256:73915da007c9a47f9cee4e3c976bba266420e578ea3761b6ebea0ec81c950ec6",
       "path": "tools/standards_engine/contracts/a1-interface.toml",
       "state": "present",
       "uses": [
@@ -7135,7 +7135,7 @@
       ]
     },
     {
-      "digest": "sha256:31602e9aac4969063cc215d449b57df9fe5d005c2a809457f89029893e6fa136",
+      "digest": "sha256:a2835a6b79739a1f087696654c1e219676760749ac37d36a2fef5defbba3cb1b",
       "path": "tools/standards_engine/contracts/examples/a1-examples.json",
       "state": "present",
       "uses": [
@@ -7152,7 +7152,7 @@
       ]
     },
     {
-      "digest": "sha256:4c2095e449d8af90c276a9fb01423f60d3a3b45a0cebf3cf336d8cdf35f06ecb",
+      "digest": "sha256:679f3c49b7b9b980a31b6b64f5cca624e243946133c6480628a6b5819647ed1f",
       "path": "tools/standards_engine/contracts/generated/agent-tools.json",
       "state": "present",
       "uses": [
@@ -7215,7 +7215,7 @@
       ]
     },
     {
-      "digest": "sha256:a2dea747fea486ba7d873be312e9292f6f2575f8d08ad255a1c2dabced7d2808",
+      "digest": "sha256:76d302ccfe77c1f65e35eefea44278a7e8a5e35252231ac72406dbbaa5d52221",
       "path": "tools/standards_engine/standards_engine/_generated_contract.py",
       "state": "present",
       "uses": [
@@ -7367,6 +7367,18 @@
       ]
     },
     {
+      "digest": "sha256:6519bbd75d620c92c57e4725629c5dc2c9f3e68625f91214b14eaf65c029c8e5",
+      "path": "tools/standards_engine/standards_engine/input_discovery.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
       "digest": "sha256:54a7b06564ebcc90c8fa905293017d26223b82a33b18026688464c2dfcdafc60",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
@@ -7379,7 +7391,7 @@
       ]
     },
     {
-      "digest": "sha256:fa4830576a73c45e9db6c9fc48e085df119d86fbbb71b3cc57c268a5d85062f4",
+      "digest": "sha256:e42e0c0a053668a833898e5ef847781234afcf6b2ebd6266bf1e3493a0ecc18e",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [
@@ -7391,7 +7403,7 @@
       ]
     },
     {
-      "digest": "sha256:0b6773a9266ad343d3122591291ab9ac31b3fef38257b1f180c1472d69139f8f",
+      "digest": "sha256:b6d14c5469c76884eed49ff53850982f2d4fa65119eba7016b4aa8bca2b02861",
       "path": "tools/standards_engine/standards_engine/mcp_catalog.py",
       "state": "present",
       "uses": [
@@ -7504,7 +7516,7 @@
       ]
     },
     {
-      "digest": "sha256:e0b499aba7f7ea4b459a5735263293279549788fa1ed0159a30b1d001f2b10e0",
+      "digest": "sha256:77baa948dcef77066eaf9fc0548fd5f455f7775d678ef22cce9461513f29b2b7",
       "path": "tools/standards_engine/standards_engine/tools.py",
       "state": "present",
       "uses": [
@@ -13670,7 +13682,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:263e6243230879c04e84dee47030fa3f06f7ef66566aaee65c331bf5b44607e1",
+    "digest": "sha256:fb43b914540225d4873c03d8e7af4ed8b2b0f066d40d963f57d9c7d136834c06",
     "uses": [
       {
         "check": "python-package-contract",

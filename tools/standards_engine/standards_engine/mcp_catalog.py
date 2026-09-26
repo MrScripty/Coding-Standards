@@ -21,6 +21,7 @@ READ_ONLY_OPERATIONS = frozenset(
         "workflow_status",
         "workflow_details",
         "runtime_info",
+        "describe_input",
         "resume",
         "find_snapshots",
         "find_proposals",
@@ -51,6 +52,7 @@ FOCUSED_OPERATIONS = frozenset(
         "workflow_status",
         "workflow_details",
         "runtime_info",
+        "describe_input",
         "resume",
     }
 )
@@ -60,6 +62,7 @@ FOCUSED_OPERATIONS = frozenset(
 # type renderer. This is generated documentation, never a second validator.
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
+    "describe_input": "Discover exact input fields when declarations abbreviate them as unknown. Start with operation only. Read schema_json documents; $refs name selectable definitions. Select a referenced name with selector and expected_catalog from the result. Pages contain up to 16 whole records (default 8), 16 KiB result JSON; follow next unchanged for the complete selected closure. Reuse acquired shapes while catalog_digest matches. No standards state or permissions change.",
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
     "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Serialized submissions are limited to 256 KiB. Compact pending results include the first work page. Reuse context with the next explicit batch; fetch workflow_details only for remaining or supporting material.",
     "workflow_details": (
@@ -110,6 +113,7 @@ DESCRIPTIONS = {
 
 
 APPLICATION_DESCRIPTIONS = {
+    "describe_input": DESCRIPTIONS["describe_input"],
     "runtime_info": DESCRIPTIONS["runtime_info"],
     "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
     "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Request content={} for selected exact guidance in this call: default 8, maximum 32 whole reads, 2 MiB total result. Follow content.next unchanged. Missing facts remain unresolved. Omit content for selection only; read_many accepts an explicit subset.",
@@ -143,6 +147,11 @@ def tool_catalog(
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
         description = APPLICATION_DESCRIPTIONS[name] if purpose is Purpose.APPLICATION else DESCRIPTIONS[name]
+        if name != "describe_input":
+            description = (
+                f'For abbreviated input fields, call describe_input(operation="{name}") '
+                "and reuse the returned contract while its catalog matches. " + description
+            )
         if purpose is Purpose.AUTHORING and "agent" in operation.get("variants", {}):
             description += (
                 " Optional evidence maps request-local names to complete exact evidence references; "

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v39",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v40",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
@@ -95,6 +95,9 @@
       "$ref": "#/$defs/DeleteSnapshotResult"
     },
     {
+      "$ref": "#/$defs/DescribeInputCall"
+    },
+    {
       "$ref": "#/$defs/FindProposalsCall"
     },
     {
@@ -105,6 +108,12 @@
     },
     {
       "$ref": "#/$defs/FindSnapshotsResult"
+    },
+    {
+      "$ref": "#/$defs/InputContractRejectedResult"
+    },
+    {
+      "$ref": "#/$defs/InputContractResult"
     },
     {
       "$ref": "#/$defs/InspectCall"
@@ -9335,6 +9344,168 @@
       },
       "additionalProperties": false,
       "description": "Exact compact reads of selected targets in Router order. Total counts selected targets, not unresolved applicability. Follow next unchanged for the remaining page."
+    },
+    "DescribeInputCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "An operation published in this running catalog."
+        },
+        "selector": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "description": "A returned definition name (or the name in a schema $ref). Omit for the operation input root."
+        },
+        "expected_catalog": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Record offset within the selected closure. Continue with the returned next request."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Maximum whole schema records in this page; default 8. Byte pressure may return fewer."
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
+    "InputSchemaRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_json": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact JSON Schema definition serialized as a JSON document; $refs name other returned/selectable definitions. Not a standalone validator without its closure."
+        }
+      },
+      "required": [
+        "name",
+        "schema_json"
+      ]
+    },
+    "InputContractResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "input-contract-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "interface_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalog_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "root": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dialect": {
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "records": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/InputSchemaRecord"
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/DescribeInputCall"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "interface_version",
+        "catalog_digest",
+        "operation",
+        "root",
+        "selector",
+        "dialect",
+        "offset",
+        "total",
+        "records"
+      ]
+    },
+    "InputContractRejectedResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "input-contract-rejected-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "code": {
+          "enum": [
+            "INPUT_DISCOVERY.INVALID_ARGUMENTS",
+            "INPUT_DISCOVERY.OPERATION_UNAVAILABLE",
+            "INPUT_DISCOVERY.CATALOG_CHANGED",
+            "INPUT_DISCOVERY.SELECTION_INVALID",
+            "INPUT_DISCOVERY.RESULT_LIMIT"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "invalid",
+            "unavailable",
+            "unsupported"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "code",
+        "outcome",
+        "message"
+      ]
     }
   }
 }

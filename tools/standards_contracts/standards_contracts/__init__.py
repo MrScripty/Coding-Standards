@@ -20,6 +20,7 @@ from .runtime import (
 )
 
 from .schema_structure import (
+    direct_schema_references,
     local_definition_name,
     map_schema_children,
     referenced_definitions,
@@ -54,6 +55,7 @@ __all__ = (
     "ProjectionArtifacts",
     "compile_contracts",
     "freeze_json",
+    "direct_schema_references",
     "local_definition_name",
     "map_schema_children",
     "referenced_definitions",

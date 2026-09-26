@@ -21,6 +21,16 @@ current input schema; call the named tool directly with structured arguments.
 Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `route`, `read`, and `propose`).
 
+When an input shape is unfamiliar or rendered as `unknown`, use `describe_input`
+with the operation name. Its `records[].schema_json` values are exact JSON Schema
+definitions, not examples to submit. Names in `$ref` are selectors: request the
+needed definition with the returned `catalog_digest` as `expected_catalog`.
+Follow `next` only for the rest of that selected closure; select a relevant edit
+or submission instead of downloading unrelated variants. Reuse known shapes
+while the running catalog is unchanged, rather than discovering before every call.
+Input discovery is available for the entire published catalog, including batched
+submission and review inputs. It neither reads nor changes standards state.
+
 Use `routing_facts` when the registered fact vocabulary is unknown. Use
 `route` with explicit engineering facts and `content: {}` to receive selected
 exact policies immediately. Follow `content.next` when more remain. Use `read_many`

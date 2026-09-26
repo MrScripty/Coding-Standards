@@ -51,7 +51,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 39. No network listener,
+The current implementation is 0.2.0 and Engine interface 40. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -123,3 +123,27 @@ Qualify the actual configured client before choosing native mode. The optional
 registration; it does not reconfigure Codex or start a model turn. Passing schema
 validation alone does not establish successful model-visible rendering. Retain
 compatibility mode while that client qualification is unavailable.
+
+
+## Input discovery and qualification (interface 40)
+
+Both catalog modes expose `describe_input` with small, flat arguments. Discovery
+returns exact input definitions as ordinary tool-result content and does not rely
+on the client's schema renderer. Keep compatibility mode until each supported
+client has a qualified direct or discovery path. This release does not assert that
+native declarations no longer contain `unknown`.
+
+The existing `codex_navigation_client.py` checks catalog/schema transport and
+scripted discovery/navigation without a model turn. It is not model-visible
+qualification. The separate opt-in `codex_discovery_client.py` starts an actual
+model turn against a run-owned local MCP registration and a disposable repository.
+It requires explicit model-use authorization, preserves its private transcript,
+checks all five authoring operations and shared evidence, and stops at readiness.
+See the [qualification procedure](../../../../tools/standards_engine/tests/INPUT-DISCOVERY-QUALIFICATION.md).
+Neither harness reconfigures the user's installed MCP registration or authorizes
+production publication. A passing baseline CI run is not qualification of a new
+client/catalog pair. Preserve existing stores and handles when restarting.
+
+For reference CLI or direct facade discovery, the observer uses the full
+purpose-qualified compatibility catalog, matching the operations those surfaces
+expose. Use the returned catalog identity; it may differ from focused MCP.

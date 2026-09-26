@@ -4,6 +4,40 @@ Use this workflow for standards changes. The Engine accepts canonical IDs,
 authored content, explicit semantics, rationale, evidence, and opaque handles.
 Repository representation remains private.
 
+## Discover Input Shapes
+
+A client may preserve the MCP schema yet abbreviate the declaration shown to the
+model. Start with `describe_input({"operation":"propose"})` when needed. The first
+page names the root input and containing definitions, including the edit union.
+Each `schema_json` is a serialized exact JSON Schema definition. Its `required`,
+`properties`, `oneOf`, constraints and literal values retain their canonical meaning.
+
+To inspect an edit, pass its returned definition name as `selector`, the same
+`operation`, and the result's `catalog_digest` as `expected_catalog`. For example,
+a returned `RevisePolicyUnitEdit` can be selected directly. Names in schema `$ref`
+values (`#/$defs/Name`) identify selectable definitions. References are limited to
+that operation's input closure; unrelated and unpublished contracts are unavailable.
+
+Pages contain whole records only: default eight, at most sixteen, and no more than
+16 KiB of serialized domain-result JSON. Follow the complete `next` request for
+remaining records. `total` counts the chosen closure, not all workflow work. A
+selected record is not a standalone schema until its referenced definitions have
+been acquired. For a complete selected schema, collect records by name under
+`$defs`, select `#/$defs/<selector>` as the root, and use the returned dialect.
+A single oversized record returns a typed unsupported result, never shortened data.
+
+`describe_input` covers all published inputs, including `propose`, `revise`,
+`resolve_workflow`, `resolve_many` and `review`. It is also available in native
+schema mode. Full schemas in catalog metadata are not proof of model-visible
+access; use this explicit discovery path when fields are abbreviated. Discovered
+constraints do not confer decisions, evidence sufficiency or publication authority.
+
+Reuse acquired shapes within the same catalog. Selections and nonzero offsets
+require `expected_catalog`; a changed catalog rejects instead of substituting a
+new definition. After an implementation replacement, restart/reconnect, inspect
+runtime/catalog identity and reacquire affected shapes. A normal successful
+mutation does not require another discovery or status call.
+
 ## Proposal Lifecycle
 
 1. Form one non-empty `StandardsChangeSet` with an evidence-backed purpose and

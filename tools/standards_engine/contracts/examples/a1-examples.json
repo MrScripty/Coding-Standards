@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 39,
+  "interface_schema_version": 40,
   "examples": [
     {
       "name": "create-snapshot",
@@ -1248,6 +1248,110 @@
         "facts": {},
         "content": {
           "limit": 8
+        }
+      }
+    },
+    {
+      "name": "describe-input-root",
+      "definition": "DescribeInputCall",
+      "value": {
+        "operation": "propose"
+      }
+    },
+    {
+      "name": "describe-input-selection",
+      "definition": "DescribeInputCall",
+      "value": {
+        "operation": "resolve_many",
+        "selector": "AgentSubmission",
+        "expected_catalog": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "limit": 8
+      }
+    },
+    {
+      "name": "input-contract-page",
+      "definition": "InputContractResult",
+      "value": {
+        "kind": "input-contract-result",
+        "purpose": "application",
+        "interface_version": 40,
+        "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation": "runtime_info",
+        "root": "RuntimeInfoCall",
+        "selector": "RuntimeInfoCall",
+        "dialect": "https://json-schema.org/draft/2020-12/schema",
+        "offset": 0,
+        "total": 2,
+        "records": [
+          {
+            "name": "RuntimeInfoCall",
+            "schema_json": "{\"additionalProperties\":false,\"properties\":{\"expected_catalog\":{\"$ref\":\"#/$defs/Digest\"}},\"required\":[],\"type\":\"object\"}"
+          }
+        ],
+        "next": {
+          "operation": "runtime_info",
+          "selector": "RuntimeInfoCall",
+          "expected_catalog": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "offset": 1,
+          "limit": 8
+        }
+      }
+    },
+    {
+      "name": "input-contract-stale",
+      "definition": "InputContractRejectedResult",
+      "value": {
+        "kind": "input-contract-rejected-result",
+        "purpose": "authoring",
+        "code": "INPUT_DISCOVERY.CATALOG_CHANGED",
+        "outcome": "unavailable",
+        "message": "Refresh tools and begin discovery against the running catalog; earlier selections are not reused."
+      }
+    },
+    {
+      "name": "resolve-native-discovery-fixture",
+      "definition": "ResolveCall",
+      "value": {
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "submission": {
+          "kind": "impact-disposition",
+          "obligation": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "schema_version": 7
+          },
+          "result": "confirmed",
+          "rationale": "Explicit review of this example scope.",
+          "fingerprint": {
+            "decision_kind": "unmapped-normative-change",
+            "decision_contract": "decision-contract.unmapped-normative-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "example-scope",
+                "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "id": "example-evidence",
+              "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ]
         }
       }
     }

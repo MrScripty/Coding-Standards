@@ -89,7 +89,7 @@ class SchemaPresentationTest(unittest.TestCase):
             for server in servers:
                 initialize(server)
                 value = server.dispatch(request('tools/call', {'name': 'runtime_info', 'arguments': {}}))['result']['structuredContent']
-                self.assertEqual(value['interface_version'], 39)
+                self.assertEqual(value['interface_version'], 40)
                 digests.append(value['catalog_digest'])
             self.assertNotEqual(*digests)
             native = servers[1].dispatch(request('tools/call', {'name': 'runtime_info', 'arguments': {'expected_catalog': digests[0]}}))['result']['structuredContent']

@@ -110,3 +110,12 @@ An `unmapped-normative-change` obligation means changed normative scope lacks
 one exact registered policy-unit mapping, so Analysis requires an explicit
 impact disposition for its conservative whole-artifact scope. It is not an
 instruction to infer an impact decision.
+
+
+## Input Discovery Is Not Standards Navigation
+
+Use `describe_input` for argument shapes, not policy text. It observes only the
+running purpose-qualified catalog and needs no snapshot. Application connections
+can discover their own reviewed-guidance navigation inputs but cannot discover
+unpublished authoring operations or definitions. `route`, `read`, and `related`
+remain the owners of policy selection, text and relationships.

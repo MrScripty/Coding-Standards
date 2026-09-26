@@ -292,15 +292,30 @@ class AgentToolFacade:
             return call
         return self._result("resolve_workflow", self._engine.resolve_workflow(call))
 
-    def runtime_info(self, arguments: object) -> dict[str, object]:
+    def _catalog_observers(self):
+        """Native callers observe the full purpose-qualified catalog consistently."""
         from .runtime_identity import RuntimeIdentity
-        from .context_projection import qualified_operations
+        from .mcp_catalog import tool_catalog
+        from .input_discovery import InputContractDiscovery
 
         if not hasattr(self, "_runtime_identity"):
+            catalog = tool_catalog(self._contracts, purpose=self._engine.purpose, advanced=True)
             self._runtime_identity = RuntimeIdentity(
-                self._engine._repository.root, self._engine.purpose, self._contracts,
-                qualified_operations(self._contracts.project().agent_tools, self._engine.purpose))
-        return self._runtime_identity.invoke(arguments)
+                self._engine._repository.root, self._engine.purpose, self._contracts, catalog)
+            self._input_discovery = InputContractDiscovery(
+                self._contracts, purpose=self._engine.purpose,
+                operation_names=[tool["name"] for tool in catalog],
+                catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
+            )
+        return self._runtime_identity, self._input_discovery
+
+    def runtime_info(self, arguments: object) -> dict[str, object]:
+        identity, _ = self._catalog_observers()
+        return identity.invoke(arguments)
+
+    def describe_input(self, arguments: object) -> dict[str, object]:
+        _, discovery = self._catalog_observers()
+        return discovery.invoke(arguments)
 
     def resolve_many(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("resolve_many", arguments)
