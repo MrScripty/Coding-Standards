@@ -72,12 +72,14 @@ DESCRIPTIONS = {
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
     "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Arguments are limited to 256 KiB. Compact results are default; use workflow_details for pending work.",
     "workflow_details": (
-        "Read one immutable Analysis section in pages of 1–16 records "
-        "(default 8, up to 64 KiB per page). Follow the exact next arguments; "
-        "observation bindings prevent mixing Analysis contexts, sections, or "
-        "their projected contents. Paging does not check live evidence "
-        "freshness. Decision and publication operations own current evidence "
-        "and authorization checks. Detail reads do not decide or publish."
+        "Read a section of an immutable historical Analysis. Compact pages contain "
+        "up to 16 whole items (default 8) and 64 KiB of result JSON; byte pressure "
+        "returns fewer items. Follow next exactly. If one record is oversized, a "
+        "rejection offers an explicit detail=full retry for that exact record, "
+        "without the compact byte cap. Full retrieval requires limit omitted or "
+        "1 and resumes compact paging. Observation binds Analysis, section and "
+        "contents, not live evidence. Decision and publication operations check "
+        "current evidence and authorization."
     ),
     "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
     "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",

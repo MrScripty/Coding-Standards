@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 36
+interface_schema_version = 37
 request_contract_version = 6
 result_projection_version = 7
 

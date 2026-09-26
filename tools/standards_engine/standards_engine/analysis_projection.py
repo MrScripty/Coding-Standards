@@ -134,6 +134,48 @@ def _analysis_result(
     )
 
 
+
+def _analysis_summary(evaluation: AnalysisEvaluation) -> dict[str, object]:
+    """Project compact status without constructing omitted full-result records.
+
+    Section order and presence match summarizing the full public result, not
+    every section that can be requested independently through detail reads.
+    The caller retains evaluation, lifecycle checks and result validation.
+    """
+    complete = evaluation.complete
+    if complete:
+        counts = {
+            "coverage_certificates": sum(
+                item.certificate is not None for item in evaluation.coverage
+            ),
+            "dispositions": len(evaluation.state.dispositions),
+            "fact_observations": len(evaluation.state.fact_observations),
+        }
+        required = pending_facts = 0
+    else:
+        pending_facts = len(evaluation.pending_requirements)
+        required = sum(item.state == "required" for item in evaluation.obligations)
+        counts = {
+            "obligations": len(evaluation.obligations),
+            "fact_requirements": pending_facts,
+        }
+    counts.update({
+        "reading_plan": len(evaluation.reading_plan),
+        "changed_units": sum(len(change.changed_units) for change in evaluation.changes),
+        "pending_obligations": required,
+    })
+    handle = _analysis_handle(evaluation.state.analysis_id)
+    return {
+        "kind": "workflow-analysis-summary",
+        "handle": handle,
+        "status": "complete" if complete else "needs-action",
+        "required_obligations": required,
+        "pending_facts": pending_facts,
+        "sections": [{"section": key, "count": count} for key, count in counts.items()],
+        "details": {"operation": "workflow_details", "analysis": handle},
+    }
+
+
 def _analysis_children(
     evaluation: AnalysisEvaluation,
 ) -> tuple[tuple[str, str, dict[str, object]], ...]:

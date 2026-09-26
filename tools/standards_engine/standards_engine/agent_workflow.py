@@ -14,6 +14,7 @@ from tools.standards_analysis.standards_analysis import (
     ProjectedRevisionMaterialRef,
 )
 from . import _generated_contract as c
+from . import analysis_projection
 from .authoring import (
     AuthoringError,
     AuthoringFailure,
@@ -111,6 +112,7 @@ def publication_status(engine, readiness):
 def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None, *, detail="compact"):
     context = bound.context.as_contract()
     status = "draft"
+    compact_summary = None
     if isinstance(outcome, c.ApplicationRecoveryRequiredResult):
         status = "recovery-required"
     elif isinstance(outcome, (c.ApplyProposalResult, c.RecoverApplicationResult)):
@@ -129,8 +131,13 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
                 None if materials is None
                 else engine._evaluation_materials(bound.analysis, materials)
             )
-            outcome = engine._analysis_result(engine._evaluate(bound.analysis, inputs))
-        status = "needs-action" if isinstance(outcome, c.PendingResult) else "complete"
+            evaluation = engine._evaluate(bound.analysis, inputs)
+            if detail == "compact":
+                compact_summary = analysis_projection._analysis_summary(evaluation)
+            else:
+                outcome = engine._analysis_result(evaluation)
+        status = (compact_summary["status"] if compact_summary is not None else
+                  "needs-action" if isinstance(outcome, c.PendingResult) else "complete")
         if status == "complete" and engine._review_requires_change(bound.analysis):
             status = "requires-change"
     if status not in ("recovery-required", "applied", "rejected"):
@@ -152,7 +159,9 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
             for operation in ACTIONS[status]
         ],
     }
-    if outcome is not None:
+    if compact_summary is not None:
+        result["outcome"] = compact_summary
+    elif outcome is not None:
         from .workflow_presentation import summarize
         result["outcome"] = (summarize(outcome)
                              if detail == "compact" and isinstance(outcome, (c.PendingResult, c.CompleteResult))

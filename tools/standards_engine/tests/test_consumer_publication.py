@@ -43,7 +43,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(process.stderr,'')
         responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
-        self.assertIn('interface 36;',responses[1]['result']['instructions'])
+        self.assertIn('interface 37;',responses[1]['result']['instructions'])
         return responses[2]
 
     def call(self,name,arguments,purpose='authoring',error=False):

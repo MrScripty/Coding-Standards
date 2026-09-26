@@ -42,14 +42,25 @@ def summarize(outcome: c.PendingResult | c.CompleteResult) -> dict[str, object]:
     }
 
 
-def details(engine: StandardsEngine, call: c.WorkflowDetailsCall):
+def details(
+    engine: StandardsEngine, call: c.WorkflowDetailsCall,
+) -> c.WorkflowDetailsResult | c.RejectedResult:
     """Project one bounded section of an immutable Analysis without publishing it."""
     try:
+        arguments = call.as_contract()
+        full = arguments.get("detail", "compact") == "full"
+        section = arguments["section"]
+        # JSON Schema integer admits integral JSON numbers such as 1.0.
+        # Validation is complete; normalize only the Python indexing representation.
+        offset = int(arguments.get("offset", 0))
+        limit = int(arguments.get("limit", 1 if full else 8))
+        if full and limit != 1:
+            return engine._reject(
+                "WORKFLOW.FULL_DETAIL_LIMIT", "invalid",
+                "Full detail retrieves one complete record; omit limit or select 1.",
+            )
         state = engine._load_analysis(call.analysis)
         evaluation = engine._evaluate(state)
-        arguments = call.as_contract()
-        section = arguments["section"]
-        offset, limit = arguments.get("offset", 0), arguments.get("limit", 8)
         if section == "pending_obligations":
             items = [{"kind": "workflow-obligation-work",
                       "obligation": analysis_projection._obligation_projection(state, item),
@@ -82,18 +93,56 @@ def details(engine: StandardsEngine, call: c.WorkflowDetailsCall):
             return engine._reject("WORKFLOW.PAGE_RANGE", "invalid",
                                   "Select an offset within the observed section.")
         stop = min(offset + limit, len(items))
-        result = {
-            "kind": "workflow-details-result", "analysis": call.analysis.as_contract(),
-            "section": section, "observation": observed, "offset": offset,
-            "total": len(items), "items": items[offset:stop],
-        }
-        if stop < len(items):
-            result["next"] = {"analysis": call.analysis.as_contract(), "section": section,
-                              "observation": observed, "offset": stop, "limit": limit}
-        if len(json.dumps(result).encode()) > PAGE_BYTES:
-            return engine._reject("WORKFLOW.RESULT_LIMIT", "unsupported",
-                                  "Select a smaller detail page or inspect one returned work handle.",
-                                  details={"limit_bytes": PAGE_BYTES})
+        analysis = call.analysis.as_contract()
+        result = _page(analysis, section, observed, items, offset, stop, limit)
+        if not full:
+            # At most sixteen candidate sizes. Keep complete records and the same
+            # whole-section observation; never skip an oversized first record.
+            while stop > offset and _page_size(result) > PAGE_BYTES:
+                stop -= 1
+                result = _page(analysis, section, observed, items, offset, stop, limit)
+            if (stop == offset and offset < len(items)) or _page_size(result) > PAGE_BYTES:
+                request = {
+                    "analysis": analysis, "section": section, "offset": offset,
+                    "limit": 1, "observation": observed, "detail": "full",
+                }
+                rejected = engine._reject(
+                    "WORKFLOW.RESULT_LIMIT", "unsupported",
+                    "One complete record exceeds the compact page limit. Explicitly "
+                    "select the returned full-detail request only when the client "
+                    "can receive its size-unbounded single-record result.",
+                    details={"limit_bytes": PAGE_BYTES, "offset": offset,
+                             "section": section},
+                ).as_contract()
+                rejected["next_operations"] = [{
+                    "operation": "workflow_details", "request_kind": "workflow-details",
+                    "request": request,
+                }]
+                return c.RejectedResult.from_value(rejected)
         return c.WorkflowDetailsResult.from_value(result)
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)
+
+
+def _page(
+    analysis: dict[str, object], section: str, observed: str,
+    items: list[dict[str, object]], offset: int, stop: int, limit: int,
+) -> dict[str, object]:
+    """Construct an exact contiguous page and its compact continuation."""
+    result = {
+        "kind": "workflow-details-result", "analysis": analysis,
+        "section": section, "observation": observed, "offset": offset,
+        "total": len(items), "items": items[offset:stop],
+    }
+    if stop < len(items):
+        result["next"] = {
+            "analysis": analysis, "section": section, "observation": observed,
+            "offset": stop, "limit": limit,
+        }
+    return result
+
+
+def _page_size(result: dict[str, object]) -> int:
+    # Keep the existing result-JSON accounting (including escapes and next).
+    # Transport envelopes and client-specific pretty-printing are not this cap.
+    return len(json.dumps(result).encode("utf-8"))

@@ -4073,6 +4073,9 @@
         },
         {
           "$ref": "#/$defs/FocusedQueryNextOperation"
+        },
+        {
+          "$ref": "#/$defs/WorkflowDetailsNextOperation"
         }
       ]
     },
@@ -7878,10 +7881,17 @@
     },
     "WorkflowDetailsCall": {
       "additionalProperties": false,
-      "description": "Read one live analysis section (default eight items). Continuations require the returned observation digest; changed observations reject paging rather than skip items.",
+      "description": "Read a section of an immutable historical Analysis. Compact pages (default eight items) contain up to 16 whole records and 64 KiB of result JSON, returning fewer items when needed. An oversized record returns an explicit full-detail retry. detail=full retrieves one complete record (limit omitted or 1) without the compact byte cap; choose it only when the client can receive that payload. Continuations bind the Analysis, section and projected contents. Decision and publication operations check current evidence and authorization. A full-record response resumes compact paging in its next request.",
       "properties": {
         "analysis": {
           "$ref": "#/$defs/AnalysisHandle"
+        },
+        "detail": {
+          "description": "Compact is byte-bounded; full explicitly retrieves one whole record without the compact byte cap.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         },
         "limit": {
           "maximum": 16,
@@ -7921,8 +7931,30 @@
       ],
       "type": "object"
     },
+    "WorkflowDetailsNextOperation": {
+      "additionalProperties": false,
+      "description": "An explicit historical detail retrieval alternative. Invoke operation with request; do not automatically select size-unbounded full detail.",
+      "properties": {
+        "operation": {
+          "const": "workflow_details"
+        },
+        "request": {
+          "$ref": "#/$defs/WorkflowDetailsCall"
+        },
+        "request_kind": {
+          "const": "workflow-details"
+        }
+      },
+      "required": [
+        "operation",
+        "request_kind",
+        "request"
+      ],
+      "type": "object"
+    },
     "WorkflowDetailsResult": {
       "additionalProperties": false,
+      "description": "Whole records from an immutable Analysis section. Compact may return fewer than limit to respect 64 KiB. Full returns at most one complete record and may exceed 64 KiB. Follow next exactly; observation and total are independent of page size and detail mode.",
       "properties": {
         "analysis": {
           "$ref": "#/$defs/AnalysisHandle"
@@ -8117,7 +8149,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 36,
+  "interface_schema_version": 37,
   "operations": [
     {
       "capability": "standards.snapshot.create",

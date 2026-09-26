@@ -31,7 +31,7 @@ class RuntimeIdentityTests(unittest.TestCase):
             for result in (initial, catalog, response):
                 self.assertEqual(result['_meta']['standards-engine/runtime']['instance_id'], value['instance_id'])
                 self.assertEqual(result['_meta']['standards-engine/runtime']['catalog_digest'], value['catalog_digest'])
-            self.assertEqual(value['interface_version'], 36)
+            self.assertEqual(value['interface_version'], 37)
             self.assertEqual(value['installation_state'], 'current')
             self.assertEqual(value['action'], 'reuse')
             self.assertFalse(initial['capabilities']['tools']['listChanged'])

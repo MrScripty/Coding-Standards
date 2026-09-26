@@ -1,14 +1,22 @@
 name: Purpose-separated Engine verification
 
 on:
+  workflow_dispatch:
   push:
-    branches: [implementation/purpose-separated-standards-engine]
+    branches: [main, implementation/purpose-separated-standards-engine]
   pull_request:
     branches: [main]
     paths:
       - 'tools/**'
       - '.agents/skills/standards-engine/**'
       - 'evaluation/standards-effectiveness/**'
+      - '*.md'
+      - 'workflows/**'
+      - 'topics/**'
+      - 'profiles/**'
+      - 'reference/**'
+      - 'prompts/**'
+      - 'templates/**'
       - '.github/workflows/purpose-separated-engine.yml'
 
 permissions:

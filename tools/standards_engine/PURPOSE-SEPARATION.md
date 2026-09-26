@@ -440,7 +440,7 @@ uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
 observation from the supported operation on the correct host. Ordinary application
 interfaces still cannot call either recovery operation or read its diagnostics.
 
-## Routing and review workflow (interface 36)
+## Routing and review workflow (interfaces 36–37)
 
 ### Router presentation
 
@@ -494,11 +494,29 @@ consumer/impact work is an obligation handle. `fact_requirements` supplies the
 actual fact definition and work. Preserve every decision's fingerprint, evidence,
 rationale and authority requirements. Registration is distinct from coverage.
 
-Other detail sections expose all obligations, current coverage certificates,
-recorded dispositions/facts, reading plan and changed policy units. Requests
-select at most 16 records (default 8). The 64 KiB JSON domain-result limit is
-independent of MCP framing and its text/structured duplication. Oversized items
-are rejected, never truncated. Use smaller pages or existing targeted inspection.
+Other detail sections expose all obligations, historical coverage certificates,
+recorded dispositions/facts, reading plan and changed policy units. Compact
+requests select at most 16 whole records (default 8) and 64 KiB of result JSON,
+including the continuation. Byte pressure returns a shorter contiguous page.
+The byte accounting uses default JSON encoding with ASCII escaping and default
+separators; MCP envelopes, text/structured duplication and client pretty-printing
+are outside this bound. Observation identity is independent of page size.
+
+When the first requested record alone is oversized, `WORKFLOW.RESULT_LIMIT`
+returns no partial record and supplies a typed `workflow_details` continuation
+under `next_operations`. The continuation's `request` selects `detail: full`,
+that exact Analysis/section/offset/observation, and `limit: 1`. Choose it explicitly
+only when the client can receive the complete payload: full detail is a
+size-unbounded diagnostic response for one record, not an automatic workaround
+for the compact limit. Full calls accept limit omitted or 1. Their `next` request
+resumes ordinary compact paging. No rationale, evidence, or item is truncated,
+no record is skipped, and no new blob store or paging session is created.
+
+Existing full workflow results do not expose every independently readable detail
+section. Full detail at this same operation therefore works for both snapshot-
+and proposal-backed Analysis without selecting a different context or weakening
+its purpose/lifecycle checks. It reads the same historical evaluation as compact
+paging, including after process replacement.
 
 Follow the exact `next` arguments. A nonzero offset requires the returned
 `observation` digest. It binds the exact analysis, section and complete observed
@@ -524,7 +542,7 @@ The server cannot inspect or clear the client's private cache.
 
 After replacing implementation files, stop the old process, install coherently,
 start the new process, reconnect and inspect `runtime_info`/`tools/list` before
-mutations. Check the new instance ID as well as interface 36 and the catalog digest.
+mutations. Check the new instance ID as well as interface 37 and the catalog digest.
 `listChanged` remains false: no hot reload is implemented. Content publication
 alone does not require an implementation restart. Standalone native facade
 catalog identity describes its native operation contract; compare catalogs within
@@ -536,3 +554,17 @@ candidate recovery and the current coverage-authorization semantics. Existing
 native or explicit-full diagnostics are current features, not a dual-version
 compatibility implementation. Local migrated standards and receipts stay owned
 by their accepted publication.
+
+
+Interface 37 adds the optional detail mode and a typed oversized-record retrieval
+continuation to the existing operation; operation count is unchanged. Install the
+schema, generated consumers and runtime together and restart/reconnect clients.
+Analysis, Snapshot, readiness, application and SQLite representations do not
+change. The existing full-result and compact/batch choices remain available.
+
+Compact status reconstruction projects counts directly from the already evaluated
+Analysis instead of constructing and serializing a full result only to discard
+its detail. Evaluation, current lifecycle and proposal-head checks still run.
+Calls that already produced a full result and explicit full diagnostics retain
+that path. This is a presentation-work reduction, not a claim that evaluation,
+Git capture, authoring or publication become proportionally faster.
