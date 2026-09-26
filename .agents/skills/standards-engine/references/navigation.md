@@ -13,7 +13,12 @@ MCP tool definitions supplied by the client; invoke the tools directly.
 3. `route` selects applicable standards and required closure from explicit facts;
    `read` returns exact policy by canonical ID; `related` traverses explicitly
    selected permitted relationship groups and directions.
-4. Use returned inspect operations and handles when more detail is needed.
+4. After routing, group the selected policies into `read_many` with the returned
+   snapshot and ordered `items` such as `[{"target":"core"}]`. Select up to 32
+   unique read items per call. The complete result is bounded to 2 MiB and any
+   unavailable item rejects the whole group; narrow the selection on a limit.
+   Grouping preserves the same exact text, authority and detail options as `read`.
+5. Use returned inspect operations and handles when more detail is needed.
    `inspect` accepts opaque handles, not repository locators.
 
 The default `read` result is compact: exact content, policy authority,
@@ -54,7 +59,9 @@ route again against the same snapshot. The advanced Router read with
 ## Accepted-Snapshot Analysis
 
 Use the advanced MCP catalog for accepted-snapshot Analysis and snapshot
-administration. Proposal workflows use focused context operations instead.
+administration. The single-decision loop below applies to that native Analysis
+API. Proposal workflows use focused contexts and `resolve_many` instead, as
+specified in [authoring.md](authoring.md).
 
 Use `prepare` only when comparing two accepted Snapshot handles. Supply the
 explicit change descriptors required by its schema; proposal authoring instead

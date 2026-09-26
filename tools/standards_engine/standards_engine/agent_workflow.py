@@ -109,7 +109,7 @@ def publication_status(engine, readiness):
     return "applied" if engine._authoring.application_outcome(application) is not None else "recovery-required"
 
 
-def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None, *, detail="compact"):
+def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None, *, detail="compact", include_work=False):
     context = bound.context.as_contract()
     status = "draft"
     compact_summary = None
@@ -153,7 +153,6 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         "next_operations": [
             {
                 "operation": operation,
-                "context": context,
                 "required_inputs": INPUTS.get(operation, []),
             }
             for operation in ACTIONS[status]
@@ -166,6 +165,9 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         result["outcome"] = (summarize(outcome)
                              if detail == "compact" and isinstance(outcome, (c.PendingResult, c.CompleteResult))
                              else outcome.as_contract())
+    if include_work and detail == "compact" and status == "needs-action" and isinstance(outcome, c.PendingResult):
+        from .workflow_presentation import pending_work
+        result["work"] = pending_work(outcome)
     return c.WorkflowResult.from_value(result)
 
 
@@ -176,7 +178,7 @@ def analyze_revision(engine, revision, materials: ProposalMaterials, *, detail="
         if isinstance(result, (c.PendingResult, c.CompleteResult))
         else revision
     )
-    return view(engine, bind(engine, context), result, materials, detail=detail)
+    return view(engine, bind(engine, context), result, materials, detail=detail, include_work=True)
 
 
 def propose(engine, call, materials: ProposalMaterials):
@@ -306,7 +308,8 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                 "WORKFLOW.OPERATION_INVALID", "Unsupported workflow operation."
             )
         return view(
-            engine, bound if context == call.context else bind(engine, context), result, materials, detail=detail
+            engine, bound if context == call.context else bind(engine, context), result, materials,
+            detail=detail, include_work=True
         )
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)

@@ -1,5 +1,15 @@
 # Standards Engine
 
+The current interface is **38**. Compact pending `propose`, `revise`, `analyze`
+and decision responses include the next bounded work page. Carry the returned
+context once, answer ready work with `resolve_many`, and retrieve only remaining
+or supporting details. `workflow_status` remains a lightweight observation;
+review and publication remain explicit. Restart the MCP process and reconnect
+the client after this result-shape update, preserving all exact handles and the
+existing store. See [the current interaction contract](PURPOSE-SEPARATION.md#actionable-workflow-results-interface-38).
+
+The versioned sections below retain implementation history.
+
 ## Current purpose-separated interface
 
 Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`

@@ -7756,12 +7756,10 @@
     },
     "WorkflowAnalysisSummary": {
       "additionalProperties": false,
+      "description": "Counts for the enclosing immutable Analysis context. Observation remains summary-only; successful compact pending mutations additionally return a bounded work page.",
       "properties": {
         "details": {
           "$ref": "#/$defs/WorkflowDetailsLink"
-        },
-        "handle": {
-          "$ref": "#/$defs/AnalysisHandle"
         },
         "kind": {
           "const": "workflow-analysis-summary"
@@ -7789,7 +7787,6 @@
       },
       "required": [
         "kind",
-        "handle",
         "status",
         "required_obligations",
         "pending_facts",
@@ -7813,10 +7810,8 @@
     },
     "WorkflowContinuation": {
       "additionalProperties": false,
+      "description": "Select the named operation with the enclosing WorkflowResult context and explicit required inputs. This descriptor is not an authorization grant.",
       "properties": {
-        "context": {
-          "$ref": "#/$defs/WorkflowContext"
-        },
         "operation": {
           "enum": [
             "revise",
@@ -7846,7 +7841,6 @@
       },
       "required": [
         "operation",
-        "context",
         "required_inputs"
       ],
       "type": "object"
@@ -7917,17 +7911,14 @@
     },
     "WorkflowDetailsLink": {
       "additionalProperties": false,
+      "description": "Supply the enclosing WorkflowResult Analysis context as analysis and explicitly select a section.",
       "properties": {
-        "analysis": {
-          "$ref": "#/$defs/AnalysisHandle"
-        },
         "operation": {
           "const": "workflow_details"
         }
       },
       "required": [
-        "operation",
-        "analysis"
+        "operation"
       ],
       "type": "object"
     },
@@ -7998,6 +7989,38 @@
       ],
       "type": "object"
     },
+    "WorkflowDetailsSelection": {
+      "additionalProperties": false,
+      "description": "A workflow_details selection relative to the enclosing WorkflowResult Analysis context. Add analysis from that context when invoking; preserve every returned selection field.",
+      "properties": {
+        "detail": {
+          "description": "Compact is byte-bounded; full explicitly retrieves one whole record without the compact byte cap.",
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "limit": {
+          "maximum": 16,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "section": {
+          "$ref": "#/$defs/WorkflowSection"
+        }
+      },
+      "required": [
+        "section"
+      ],
+      "type": "object"
+    },
     "WorkflowObligationWork": {
       "additionalProperties": false,
       "properties": {
@@ -8054,6 +8077,7 @@
     },
     "WorkflowResult": {
       "additionalProperties": false,
+      "description": "Exact immutable workflow context and relative action descriptors. Successful compact pending propose, revise, analyze and decision submissions include work from the already-produced Analysis. Status observations, full results, stale contexts and other outcomes omit work.",
       "properties": {
         "context": {
           "$ref": "#/$defs/WorkflowContext"
@@ -8087,6 +8111,16 @@
             "applied",
             "rejected",
             "stale"
+          ]
+        },
+        "work": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/WorkflowWorkPage"
+            },
+            {
+              "$ref": "#/$defs/WorkflowWorkDeferred"
+            }
           ]
         }
       },
@@ -8147,9 +8181,93 @@
         "context"
       ],
       "type": "object"
+    },
+    "WorkflowWorkDeferred": {
+      "additionalProperties": false,
+      "description": "The mutation succeeded but its first complete work record exceeds the compact page budget. Preserve the enclosing context and counts; request explicitly selects that exact full record without the compact byte cap.",
+      "properties": {
+        "code": {
+          "const": "WORKFLOW.RESULT_LIMIT"
+        },
+        "kind": {
+          "const": "workflow-work-deferred"
+        },
+        "request": {
+          "$ref": "#/$defs/WorkflowDetailsSelection"
+        },
+        "section": {
+          "enum": [
+            "fact_requirements",
+            "pending_obligations"
+          ]
+        },
+        "total": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "code",
+        "section",
+        "total",
+        "request"
+      ],
+      "type": "object"
+    },
+    "WorkflowWorkPage": {
+      "additionalProperties": false,
+      "description": "First actionable section of a successful compact pending mutation, bound to the enclosing Analysis context. Facts precede obligations. Up to eight whole items and 64 KiB of page JSON; next is a relative workflow_details selection. Work handles retain their complete authority.",
+      "properties": {
+        "items": {
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/FactRequirementWork"
+              },
+              {
+                "$ref": "#/$defs/WorkflowObligationWork"
+              }
+            ]
+          },
+          "maxItems": 8,
+          "type": "array"
+        },
+        "kind": {
+          "const": "workflow-work-page"
+        },
+        "next": {
+          "$ref": "#/$defs/WorkflowDetailsSelection"
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "const": 0
+        },
+        "section": {
+          "enum": [
+            "fact_requirements",
+            "pending_obligations"
+          ]
+        },
+        "total": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "section",
+        "observation",
+        "offset",
+        "total",
+        "items"
+      ],
+      "type": "object"
     }
   },
-  "interface_schema_version": 37,
+  "interface_schema_version": 38,
   "operations": [
     {
       "capability": "standards.snapshot.create",

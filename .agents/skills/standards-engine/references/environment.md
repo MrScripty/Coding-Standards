@@ -40,14 +40,18 @@ new application session after authoring. The Engine cannot erase prior context.
 
 These are separate intended audiences, not two registrations every agent should
 receive. Translate the command, arguments and environment to the client's actual
-configuration format. Reconnect after the breaking contract update. Verify the
-application catalog contains navigation and the authoring catalog contains the
+configuration format. Restart the Engine and reconnect after the interface-38
+result-shape update.
+Inspect `runtime_info` to verify the actual running interface and catalog;
+files on disk do not replace a running process. Preserve installed stores and
+exact workflow handles. The update changes presentation, not retained state.
+Verify the application catalog contains navigation and the authoring catalog contains the
 required maintenance workflow. `--advanced` adds only operations admitted by the
 configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 31. No network listener,
+The current implementation is 0.2.0 and Engine interface 38. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.

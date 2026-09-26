@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 37,
+  "interface_schema_version": 38,
   "examples": [
     {
       "name": "create-snapshot",
@@ -879,6 +879,62 @@
             }
           }
         ]
+      }
+    },
+    {
+      "name": "relative-work-selection",
+      "definition": "WorkflowDetailsSelection",
+      "value": {
+        "section": "pending_obligations",
+        "offset": 8,
+        "limit": 8,
+        "observation": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    },
+    {
+      "name": "relative-work-actions",
+      "definition": "WorkflowContinuation",
+      "value": {
+        "operation": "resolve_many",
+        "required_inputs": [
+          "submissions"
+        ]
+      }
+    },
+    {
+      "name": "relative-summary-details",
+      "definition": "WorkflowDetailsLink",
+      "value": {
+        "operation": "workflow_details"
+      }
+    },
+    {
+      "name": "deferred-work-page",
+      "definition": "WorkflowWorkDeferred",
+      "value": {
+        "kind": "workflow-work-deferred",
+        "code": "WORKFLOW.RESULT_LIMIT",
+        "section": "pending_obligations",
+        "total": 1,
+        "request": {
+          "section": "pending_obligations",
+          "offset": 0,
+          "limit": 1,
+          "observation": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "detail": "full"
+        }
+      }
+    },
+    {
+      "name": "empty-inline-work-page",
+      "definition": "WorkflowWorkPage",
+      "value": {
+        "kind": "workflow-work-page",
+        "section": "pending_obligations",
+        "observation": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "offset": 0,
+        "total": 0,
+        "items": []
       }
     }
   ]

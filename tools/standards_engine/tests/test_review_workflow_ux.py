@@ -64,7 +64,10 @@ class ReviewWorkflowTests(unittest.TestCase):
         self.assertEqual(full['outcome']['kind'], 'pending-result')
         self.assertEqual(proposed['outcome']['kind'], 'workflow-analysis-summary')
         self.assertEqual(proposed['outcome']['required_obligations'], 4)
-        self.assertLess(len(json.dumps(proposed)), len(json.dumps(full)) / 2)
+        status = self.facade.workflow_status({'context': proposed['context']})
+        self.assertLess(len(json.dumps(status)), len(json.dumps(full)) / 2)
+        self.assertEqual(proposed['work']['total'], 4)
+        self.assertNotIn('work', status)
         arguments = {'analysis': proposed['context'], 'section': 'pending_obligations', 'limit': 1}
         items = []
         while True:
@@ -136,7 +139,8 @@ class ReviewWorkflowTests(unittest.TestCase):
                 publish.assert_not_called()
         finally:
             evidence_path.write_bytes(original_bytes)
-        self.assertEqual(self.facade.workflow_status({'context': original['context']}), original)
+        self.assertEqual(self.facade.workflow_status({'context': original['context']}),
+                         {key: value for key, value in original.items() if key != 'work'})
 
     def test_single_full_and_compact_batch_remain_workload_options(self):
         for count in (1, 4):
@@ -183,7 +187,8 @@ class ReviewWorkflowTests(unittest.TestCase):
             self.assertEqual(result['kind'], 'rejected-result', result)
             self.assertEqual(result['details']['submission_index'], 3)
             publish.assert_not_called()
-        self.assertEqual(self.facade.workflow_status({'context': original['context']}), original)
+        self.assertEqual(self.facade.workflow_status({'context': original['context']}),
+                         {key: value for key, value in original.items() if key != 'work'})
 
     def test_duplicates_foreign_and_unknown_handles_reject_before_authorization(self):
         original = self.proposed('invalid-handles')
@@ -248,7 +253,8 @@ class ReviewWorkflowTests(unittest.TestCase):
                 result = self.facade.resolve_many({'context': original['context'], 'submissions': values})
                 self.assertEqual(result['kind'], 'rejected-result', result)
                 publish.assert_not_called()
-        self.assertEqual(self.facade.workflow_status({'context': original['context']}), original)
+        self.assertEqual(self.facade.workflow_status({'context': original['context']}),
+                         {key: value for key, value in original.items() if key != 'work'})
 
     def test_page_payload_limit_preserves_complete_items(self):
         from tools.standards_engine.standards_engine import workflow_presentation
@@ -311,11 +317,19 @@ prompt = "Is the selected consumer affected?"
                 self.assertEqual(original['kind'],'workflow-result',original)
                 self.assertEqual(original['outcome']['pending_facts'],1,original)
                 page = facade.workflow_details({'analysis':original['context'],'section':'fact_requirements'})
-                fact = {'kind':'provide-fact','requirement':page['items'][0]['requirement']['handle'],
+                self.assertEqual(original['work']['section'], 'fact_requirements')
+                self.assertEqual(original['work']['items'], page['items'])
+                self.assertEqual(original['work']['observation'], page['observation'])
+                fact = {'kind':'provide-fact','requirement':original['work']['items'][0]['requirement']['handle'],
                         'value':{'type':'boolean','state':'known','value':True},'evidence':[evidence(root)]}
                 result = facade.resolve_many({'context':original['context'],'submissions':[fact]})
                 self.assertEqual(result['kind'],'workflow-result',result)
                 self.assertEqual(result['outcome']['pending_facts'],0)
+                self.assertEqual(result['work']['section'], 'pending_obligations')
+                successor_page = facade.workflow_details({
+                    'analysis': result['context'], 'section': result['work']['section']})
+                self.assertEqual(result['work']['items'], successor_page['items'])
+                self.assertEqual(result['work']['observation'], successor_page['observation'])
                 serial = facade.resolve_workflow({'context': original['context'], 'submission': fact})
                 self.assertEqual(serial['context'], result['context'], serial)
                 records = facade.workflow_details({'analysis':result['context'],'section':'fact_observations'})

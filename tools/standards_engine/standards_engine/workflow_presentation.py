@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 
 
 PAGE_BYTES = 64 * 1024
+DEFAULT_PAGE_ITEMS = 8
 SECTIONS = (
     "pending_obligations", "obligations", "fact_requirements",
     "coverage_certificates", "dispositions", "fact_observations",
@@ -34,12 +35,11 @@ def summarize(outcome: c.PendingResult | c.CompleteResult) -> dict[str, object]:
     counts["pending_obligations"] = required
     return {
         "kind": "workflow-analysis-summary",
-        "handle": value["handle"],
         "status": value["status"],
         "required_obligations": required,
         "pending_facts": len(value.get("fact_requirements", [])),
         "sections": [{"section": key, "count": count} for key, count in counts.items()],
-        "details": {"operation": "workflow_details", "analysis": value["handle"]},
+        "details": {"operation": "workflow_details"},
     }
 
 
@@ -54,7 +54,7 @@ def details(
         # JSON Schema integer admits integral JSON numbers such as 1.0.
         # Validation is complete; normalize only the Python indexing representation.
         offset = int(arguments.get("offset", 0))
-        limit = int(arguments.get("limit", 1 if full else 8))
+        limit = int(arguments.get("limit", 1 if full else DEFAULT_PAGE_ITEMS))
         if full and limit != 1:
             return engine._reject(
                 "WORKFLOW.FULL_DETAIL_LIMIT", "invalid",
@@ -85,10 +85,8 @@ def details(
             items = [item.as_contract() for item in evaluation.reading_plan]
         else:  # The generated enum exhausts the selected sections.
             items = [unit.as_contract() for change in evaluation.changes for unit in change.changed_units]
-        binding = {"analysis": call.analysis.as_contract(), "section": section, "items": items}
-        observed = "sha256:" + hashlib.sha256(
-            json.dumps(binding, ensure_ascii=True, sort_keys=True, separators=(",", ":")).encode()
-        ).hexdigest()
+        analysis = call.analysis.as_contract()
+        observed = _observation(analysis, section, items)
         expected = arguments.get("observation")
         if (offset and expected is None) or (expected is not None and expected != observed):
             return engine._reject("WORKFLOW.OBSERVATION_CHANGED", "invalid",
@@ -96,36 +94,89 @@ def details(
         if offset > len(items):
             return engine._reject("WORKFLOW.PAGE_RANGE", "invalid",
                                   "Select an offset within the observed section.")
-        stop = min(offset + limit, len(items))
-        analysis = call.analysis.as_contract()
-        result = _page(analysis, section, observed, items, offset, stop, limit)
-        if not full:
-            # At most sixteen candidate sizes. Keep complete records and the same
-            # whole-section observation; never skip an oversized first record.
-            while stop > offset and _page_size(result) > PAGE_BYTES:
-                stop -= 1
-                result = _page(analysis, section, observed, items, offset, stop, limit)
-            if (stop == offset and offset < len(items)) or _page_size(result) > PAGE_BYTES:
-                request = {
-                    "analysis": analysis, "section": section, "offset": offset,
-                    "limit": 1, "observation": observed, "detail": "full",
-                }
-                rejected = engine._reject(
-                    "WORKFLOW.RESULT_LIMIT", "unsupported",
-                    "One complete record exceeds the compact page limit. Explicitly "
-                    "select the returned full-detail request only when the client "
-                    "can receive its size-unbounded single-record result.",
-                    details={"limit_bytes": PAGE_BYTES, "offset": offset,
-                             "section": section},
-                ).as_contract()
-                rejected["next_operations"] = [{
-                    "operation": "workflow_details", "request_kind": "workflow-details",
-                    "request": request,
-                }]
-                return c.RejectedResult.from_value(rejected)
+        result = _bounded_page(analysis, section, observed, items, offset, limit, full=full)
+        if result is None:
+            rejected = engine._reject(
+                "WORKFLOW.RESULT_LIMIT", "unsupported",
+                "One complete record exceeds the compact page limit. Explicitly "
+                "select the returned full-detail request only when the client "
+                "can receive its size-unbounded single-record result.",
+                details={"limit_bytes": PAGE_BYTES, "offset": offset, "section": section},
+            ).as_contract()
+            rejected["next_operations"] = [{
+                "operation": "workflow_details", "request_kind": "workflow-details",
+                "request": {"analysis": analysis, **_full_selection(section, observed, offset)},
+            }]
+            return c.RejectedResult.from_value(rejected)
         return c.WorkflowDetailsResult.from_value(result)
     except engine._domain_errors() as error:
         return engine._domain_rejection(error)
+
+
+def pending_work(outcome: c.PendingResult) -> dict[str, object]:
+    """Present already-issued work without another evaluation or evidence read.
+
+    Audit obligations use their issued coverage-requirement continuation, not
+    the obligation handle. Every actionable handle retains its exact Analysis
+    identity; only enclosing page and navigation bindings are relative.
+    """
+    if outcome.fact_requirements:
+        section = "fact_requirements"
+        items = [item.as_contract() for item in outcome.fact_requirements]
+    else:
+        section = "pending_obligations"
+        coverage = {item.target: item.work for item in outcome.next_operations
+                    if item.request_kind == "coverage-attestation"}
+        items = [
+            {"kind": "workflow-obligation-work", "obligation": item.as_contract(),
+             "work": (coverage[item.target] if item.kind == "audit-coverage" else item.handle).as_contract()}
+            for item in outcome.obligations if item.state == "required"
+        ]
+    analysis = outcome.handle.as_contract()
+    observed = _observation(analysis, section, items)
+    page = _bounded_page(analysis, section, observed, items, 0, DEFAULT_PAGE_ITEMS)
+    if page is None:
+        return {
+            "kind": "workflow-work-deferred", "code": "WORKFLOW.RESULT_LIMIT",
+            "section": section, "total": len(items),
+            "request": _full_selection(section, observed, 0),
+        }
+    # Budget the larger standalone representation so this relative projection
+    # also fits. Its observation and continuation match an independent read.
+    page.pop("analysis")
+    page["kind"] = "workflow-work-page"
+    if "next" in page:
+        page["next"].pop("analysis")
+    return page
+
+
+def _observation(analysis: dict[str, object], section: str, items: list[dict[str, object]]) -> str:
+    binding = {"analysis": analysis, "section": section, "items": items}
+    return "sha256:" + hashlib.sha256(
+        json.dumps(binding, ensure_ascii=True, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def _full_selection(section: str, observed: str, offset: int) -> dict[str, object]:
+    return {"section": section, "offset": offset, "limit": 1,
+            "observation": observed, "detail": "full"}
+
+
+def _bounded_page(
+    analysis: dict[str, object], section: str, observed: str,
+    items: list[dict[str, object]], offset: int, limit: int, *, full: bool = False,
+) -> dict[str, object] | None:
+    stop = min(offset + limit, len(items))
+    result = _page(analysis, section, observed, items, offset, stop, limit)
+    if not full:
+        # At most sixteen candidate sizes. Keep complete records and the same
+        # whole-section observation; never skip an oversized first record.
+        while stop > offset and _page_size(result) > PAGE_BYTES:
+            stop -= 1
+            result = _page(analysis, section, observed, items, offset, stop, limit)
+        if (stop == offset and offset < len(items)) or _page_size(result) > PAGE_BYTES:
+            return None
+    return result
 
 
 def _page(

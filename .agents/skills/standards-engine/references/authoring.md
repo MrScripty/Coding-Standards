@@ -10,11 +10,13 @@ Repository representation remains private.
    the smallest complete set of explicit edits. Use the `propose` tool schema.
 2. Call `propose` with that change set and a retained snapshot, or omit snapshot
    to capture current accepted authority. The Engine creates the proposal and
-   analyzes it. Retain its returned `context`.
-3. For `needs-action`, inspect `outcome.fact_requirements`, `outcome.obligations`,
-   and the projected work. Use `resolve_workflow` with the current context and
-   one actual evidence/owner-decision submission. A returned context identifies
-   the exact resulting immutable analysis branch.
+   analyzes it. Retain its returned `context` and act on that result directly.
+3. For compact `needs-action`, inspect the `work` variant and summary counts in
+   `outcome`. An inline page supplies `items`; deferred work supplies an explicit
+   read selection as described below. Submit ready explicit evidence/owner
+   decisions together with `resolve_many` and that context. The entire batch binds the original Analysis;
+   a rejection records no decisions. Use `resolve_workflow` for one decision.
+   The result supplies the exact successor context and its next work page.
 4. If meaning must change, call `revise` with the context and an atomic change
    set. It derives the exact expected revision and analyzes the successor.
    Stale contexts reject instead of selecting a newer head.
@@ -24,9 +26,14 @@ Repository representation remains private.
 6. `ready` returns a readiness context. Call `apply` once when authorized. It
    verifies the exact candidate (including coverage-audit publication) through
    the Engine's complete checkpoint before local publication.
-7. For `recovery-required`, call `recover` using that same context. It observes
-   durable state without verification, publication, retries, or rollback.
+7. For `recovery-required`, retain that same readiness context. `recover` with
+   `action: "observe"` reconciles durable publication without Git writes.
+   Explicit `action: "complete-publication"` requires current authority and
+   revalidates and publishes only the same admitted candidate. Follow the
+   returned outcome rather than issuing another `apply`.
 
+`propose` and `revise` already analyze. Continue from the returned result rather
+than adding an `analyze` or status call after each successful operation.
 Use `workflow_status` to reconstruct exact state after reconnecting. A `stale`
 context remains historical; `resume` explicitly selects the proposal's current
 revision and returns a draft context for `analyze` or `revise`. Existing Analysis
@@ -39,6 +46,41 @@ reads and relationship discovery. Native preflight `verify_proposal` is in the
 advanced catalog; it does not replace review or the verification inside apply.
 A verification or Analysis failure after proposal creation retains a revision
 context when available, so the created proposal is not mistaken for absent work.
+
+## Bounded Pending Work
+
+The compact `outcome` is a summary, not a native `pending-result`. Its counts
+cover every section. Successful pending `propose`, `revise`, `analyze`,
+`resolve_many` and `resolve_workflow` results include one `work` page, preferring
+`fact_requirements` when facts are missing, otherwise `pending_obligations`.
+A page contains at most eight whole items and 64 KiB of page JSON; it is not a
+claim that the full Analysis or all sections have been returned.
+
+For a fact item, use `item.requirement.handle` in the explicit `provide-fact`
+submission. For an obligation item, inspect `item.obligation` and its permitted
+submission, fingerprint and meaning, then use `item.work`. Audit work uses a
+coverage-requirement handle in `claim.requirement`, not an obligation handle.
+Each decision keeps its own actual evidence and authorization requirements.
+A batch has 1–128 submissions with a 256 KiB serialized-submissions limit.
+
+Focused actions in `next_operations` inherit the enclosing `context`; send it
+once alongside their remaining caller inputs. For more items, call
+`workflow_details` with `analysis: result.context` plus the unchanged fields of
+`work.next`. Those fields bind the same section and observation. Standalone
+`workflow_details` responses retain their complete `next` request, including
+`analysis`. For another section, explicitly select it using the same context.
+
+If the first record is oversized, `work.kind` is `workflow-work-deferred`.
+The mutation has succeeded and retains its context and counts. Its `request`
+selects one exact full record without the compact cap; add `analysis` from the
+enclosing context and choose that read explicitly when the client can receive
+it. Preserve a deferred or otherwise unavailable read as pending work.
+
+After a decision, use the newly returned context and work. Old handles remain
+valid only for their historical Analysis, and newly revealed work is decided in
+a later round. `workflow_status` stays summary-only; full diagnostic results
+retain their native fields and omit inline work. Neither presentation choice
+changes review, approval, publication or recovery authority.
 
 ## Edit Selection
 

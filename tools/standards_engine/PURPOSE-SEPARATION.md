@@ -577,3 +577,65 @@ its detail. Evaluation, current lifecycle and proposal-head checks still run.
 Calls that already produced a full result and explicit full diagnostics retain
 that path. This is a presentation-work reduction, not a claim that evaluation,
 Git capture, authoring or publication become proportionally faster.
+
+## Actionable Workflow Results (Interface 38)
+
+Compact pending mutation results carry the next work directly. `propose`,
+`revise`, `analyze`, `resolve_workflow` and `resolve_many` return a bounded
+`work` page derived from their already-produced immutable Analysis. Missing
+facts are presented first; otherwise the page contains required obligations.
+The first page has at most eight whole items and 64 KiB of page JSON. Summary
+counts still cover all sections. `workflow_status` remains summary-only, and
+`detail: "full"` retains the native outcome without an additional inline page.
+
+`context` appears once at the focused result boundary. Focused action
+continuations name their operation and remaining caller inputs; submit the
+result's exact context with those inputs. The compact summary omits its former
+`handle`, and its `details` link inherits the same Analysis context. Complete
+child work handles remain bound explicitly because they are submitted authority.
+
+A `workflow-work-page` carries `section`, `observation`, `offset: 0`, `total`,
+`items`, and optional `next`. For `fact_requirements`, items use the existing
+fact requirement work contract. For `pending_obligations`, each item contains
+`obligation` and its executable `work` handle. Coverage work uses a
+coverage-requirement handle, while consumer/impact decisions use an obligation
+handle. Read the permitted submission and supply an actual evidence-backed
+answer; presentation never supplies that answer.
+
+To retrieve remaining items, add `analysis: result.context` to `work.next` and
+invoke `workflow_details`. The resulting standalone page and all its later
+`next` requests retain their explicit Analysis binding. The observation is the
+same digest as an independent read of the section: page boundaries do not create
+new identity. Another section is selected explicitly against the same context.
+
+When the first complete work item exceeds the compact budget, the successful
+mutation returns `workflow-work-deferred` with `code: "WORKFLOW.RESULT_LIMIT"`,
+`section`, `total`, and a relative `request`. That request selects one exact
+record with `detail: "full"`, `limit: 1` and its observation; add `analysis` from
+the enclosing context. The full read has no compact byte cap and requires an
+explicit caller choice. The mutation is not rejected or repeated because its
+presentation was oversized. No incomplete record is emitted or skipped.
+
+The page budget counts serialized domain-page JSON, including its continuation,
+not the enclosing workflow/MCP envelope, dual compatibility representation, or
+client formatting. Inline construction budgets the larger standalone form
+before removing redundant parent bindings. It performs no additional Analysis
+evaluation, provider execution, evidence observation, or publication.
+
+### Client and retained-state cutover
+
+Interface 38 replaces the interface-37 focused result shape in one coordinated
+code/schema/generated-projection/consumer change. Restart the MCP process and
+reconnect or refresh the client's catalog as indicated by `runtime_info`.
+Old clients must use the new result contract before continuing. Preserve exact
+snapshot, proposal, revision, Analysis, readiness and application handles and
+their existing store. Request contract 6, result/state 7, handle versions,
+immutable historical results, evidence providers and publication guards are
+unchanged; no state migration or store deletion is part of this cutover.
+
+Existing `read_many` and `resolve_many` should serve ready grouped work. Automatic
+analysis in `propose`/`revise` means a successful result normally needs neither
+another analysis nor a status call. Keep explicit review, application, recovery
+and newly discovered decision rounds. Native complete diagnostic results and
+standalone paging remain supported. The schema-description client workaround
+and MCP structured/text compatibility representation are unchanged.

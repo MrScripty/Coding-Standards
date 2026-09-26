@@ -1,5 +1,14 @@
 # Standards Engine Contracts
 
+Interface 38 is the current focused workflow result contract. Pending mutations
+return a bounded first work page and relative continuations; status reads stay
+lightweight. The canonical schema, generated models and examples change together.
+Existing request/state/handle versions remain unchanged. Restart and reconnect
+supported clients without deleting their state. See
+[the current contract](../PURPOSE-SEPARATION.md#actionable-workflow-results-interface-38).
+
+The following notes describe earlier interface increments.
+
 ## Current contract: interface 36
 
 

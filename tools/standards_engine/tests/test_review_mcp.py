@@ -1,7 +1,6 @@
 """Cold MCP review batching with real candidate publication and recovery."""
 from __future__ import annotations
 
-import json
 from tools.standards_engine.tests import test_consumer_publication as fixture
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 from tools.standards_engine.tests.test_agent_workflow import evidence
@@ -32,13 +31,28 @@ class BatchedPublicationTests(fixture.ConsumerPublicationTest):
             self.assertNotIn(identity, seen); seen.add(identity)
             self.assertEqual(workflow['outcome']['kind'], 'workflow-analysis-summary')
             self.assertEqual(workflow['outcome']['pending_facts'], 0)
-            request = {'analysis': workflow['context'], 'section': 'pending_obligations', 'limit': 8}
-            work = []
-            while True:
-                page = self.call('workflow_details', request)
-                work.extend(page['items'])
-                if 'next' not in page:break
-                request = page['next']
+            # Mutations provide the first page. A resumed lightweight status
+            # deliberately requires one initial read, then uses the same paging.
+            page = workflow.get('work')
+            if page is None:
+                page = self.call('workflow_details', {
+                    'analysis': workflow['context'], 'section': 'pending_obligations',
+                })
+                self.assertEqual(page['kind'], 'workflow-details-result', page)
+            else:
+                self.assertEqual(page['kind'], 'workflow-work-page', page)
+            self.assertEqual(page['section'], 'pending_obligations')
+            total = page['total']
+            work = list(page['items'])
+            if 'next' in page:
+                request = {'analysis': workflow['context'], **page['next']}
+                while True:
+                    page = self.call('workflow_details', request)
+                    work.extend(page['items'])
+                    if 'next' not in page:
+                        break
+                    request = page['next']
+            self.assertEqual(len(work), total)
             self.assertTrue(work)
             submissions = []
             for item in work:

@@ -22,8 +22,9 @@ Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `route`, `read`, and `propose`).
 
 Use `routing_facts` when the registered fact vocabulary is unknown. Use
-`route` with explicit engineering facts, `read` for exact policy, and
-`related` for relationships. Omit `snapshot` on the first call to capture
+`route` with explicit engineering facts, then `read_many` for the selected
+exact policies in one call. Use `read` for one item and `related` for relationships.
+Omit `snapshot` on the first call to capture
 accepted authority; reuse the returned snapshot on subsequent calls. Omission
 always captures a new snapshot, so carry the handle when continuing a task.
 Compact reads preserve exact policy text and essential authority. Select
@@ -39,15 +40,21 @@ mutation.
 
 For authoring, `propose` and `revise` automatically analyze the exact new
 revision. Carry the returned `context` into subsequent workflow calls. It
-references immutable Engine records; preserve it unchanged. `workflow_status`
-reconstructs that exact state after reconnecting. `resume` explicitly selects
-the current proposal revision and returns a draft context.
+references immutable Engine records; preserve it unchanged. Act directly on
+that result: another `analyze` or `workflow_status` call is normally unnecessary.
+Use `workflow_status` for lightweight observation after reconnecting or an unknown
+outcome. `resume` explicitly selects the current revision and returns a draft.
 
-Inspect each result's `kind`. A `workflow-result` carries `status`, the native
-`outcome` when applicable, and Engine-derived `next_operations`:
+Inspect each result's `kind`. A `workflow-result` carries `status`, a compact
+`outcome` summary by default, and Engine-derived `next_operations`. Successful
+compact pending mutations also carry `work`; full diagnostic results remain
+available through `detail: "full"`:
 
 - `needs-action`: supply only the actual evidence or authorized decision named
-  in `outcome`, using `resolve_workflow` and the current context.
+  in a `workflow-work-page`'s `items`, using `resolve_many` with decisions ready for that exact
+  context. Use `resolve_workflow` for one decision. Each result issues the
+  successor context and work; newly revealed obligations belong to that round.
+  Summary counts cover all work, while the inline page covers one section.
 - `complete`: review is possible only with explicit evidence-backed acceptances.
 - `requires-change`: revise the proposal; do not treat completed analysis as
   approval of its content.
@@ -61,8 +68,16 @@ Inspect each result's `kind`. A `workflow-result` carries `status`, the native
   follow supported continuations. An unavailable tool or authority is not
   permission to mutate standards directly.
 
-A continuation supplies bound `context` and names remaining caller inputs. Its
-presence is not an authorization grant; the Engine revalidates current state
+Focused action continuations inherit the enclosing result's `context` and name
+remaining caller inputs. Supply that context once in the next call. For more
+work, invoke `workflow_details` with `analysis` set to that context and the fields
+from `work.next`. A `workflow-work-deferred` result preserves the successful
+mutation and offers `work.request` for an explicit size-unbounded full-record
+read; select it only when the client can receive it. A status observation has
+counts but no inline work; choose the needed section through `workflow_details`.
+
+A continuation's presence is not an authorization grant; the Engine revalidates
+current state
 and authority on every action. Transport failure after a mutation has an unknown
 outcome. For interrupted application, retain the readiness context and inspect
 `workflow_status` to obtain the supported recovery continuation.

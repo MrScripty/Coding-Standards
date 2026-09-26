@@ -70,7 +70,7 @@ FOCUSED_OPERATIONS = frozenset(
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
-    "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Arguments are limited to 256 KiB. Compact results are default; use workflow_details for pending work.",
+    "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Serialized submissions are limited to 256 KiB. Compact pending results include the first work page. Reuse context with the next explicit batch; fetch workflow_details only for remaining or supporting material.",
     "workflow_details": (
         "Read a section of an immutable historical Analysis. Compact pages contain "
         "up to 16 whole items (default 8) and 64 KiB of result JSON; byte pressure "
@@ -82,17 +82,17 @@ DESCRIPTIONS = {
         "current evidence and authorization."
     ),
     "read_many": "Read 1–32 selected items from one explicit snapshot in request order. Each item accepts the single-read options. The complete JSON result is limited to 2 MiB; a failed item rejects the whole request. Use the snapshot returned by route or read.",
-    "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
-    "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set. Stale contexts cannot select a newer head implicitly.",
-    "analyze": "Analyze the exact draft context and return pending requirements or complete analysis with a new context.",
-    "resolve_workflow": "Supply one actual evidence or owner-decision submission for pending workflow context. Return the new immutable context and Engine-derived continuations.",
+    "propose": "Create a proposal from explicit change intent and immediately analyze it. Reuse returned context and the bounded pending work page. Omit snapshot to capture accepted authority. Stops at missing evidence or decisions; never reviews or applies automatically.",
+    "revise": "Revise the exact proposal referenced by context and analyze the new revision. Supply an atomic change set; use returned pending work directly. Stale contexts cannot select a newer head implicitly.",
+    "analyze": "Analyze the exact draft context and return pending work or complete analysis. Propose and revise already analyze; use their returned context and work directly.",
+    "resolve_workflow": "Supply one actual evidence or owner-decision submission for pending workflow context. Return the new immutable context, bounded pending work and relative continuations. Prefer resolve_many when several explicit decisions are ready.",
     "review": "Explicitly accept complete analysis using three evidence-backed review decisions. Requires user authorization. Returns readiness as context, without applying.",
     "apply": "Explicitly verify and locally publish the exact accepted workflow context. Requires user authorization. Recovery-required continues only through recover; never retry an interrupted apply.",
     "recover": "Use observe to inspect the original admitted application, or explicitly select complete-publication to revalidate and publish that same candidate. Preserve the original readiness and current recovery authority.",
-    "workflow_status": "Reconstruct the exact workflow context and legal continuations from durable Engine records. Does not select newer revisions or perform mutation.",
+    "workflow_status": "Observe the exact context with lightweight counts and relative continuations. Use after reconnecting or an unknown outcome, rather than after every successful call. This observation omits inline work and performs no mutation.",
     "resume": "Explicitly select the current revision of the proposal identified by context. Returns a draft context; analysis is a separate next action. Recovery-required must be recovered first.",
     "routing_facts": "Discover snapshot-bound registered routing facts, meanings, types, allowed values, nullability and aliases. Supply known facts to route; missing facts remain unknown. Omit snapshot to capture new accepted authority.",
-    "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Preserve unresolved questions.",
+    "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Fetch selected policy text with read_many. Preserve unresolved questions.",
     "read": "Read exact authoritative policy by canonical ID. Compact detail preserves text and essential authority; full detail includes all relationship rows. Omit snapshot to capture new authority or supply an exact returned snapshot. For navigation authoring, target navigation-indexes to discover registered entrypoint handles, then read a returned navigation ID for its exact content. Navigation results carry authority and are not normative policy.",
     "related": "Traverse explicit permitted relationship groups against a supplied snapshot, or capture one when omitted. Preserve returned authoring-target handles.",
     "create_snapshot": "Capture canonical accepted standards for stable subsequent reads. Reuse the returned snapshot handle.",
@@ -121,7 +121,7 @@ DESCRIPTIONS = {
 APPLICATION_DESCRIPTIONS = {
     "runtime_info": DESCRIPTIONS["runtime_info"],
     "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
-    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Reuse the returned snapshot.",
+    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Fetch selected reading_plan targets with read_many and the returned snapshot, rather than one call per target.",
     "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
     "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",
     "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",

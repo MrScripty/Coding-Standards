@@ -92,7 +92,7 @@ External authorizer/evidence observations remain ordinary per-decision effects.
                                   "The proposal advanced before the decision batch was recorded.")
         context = c.AnalysisHandle.from_value(analysis_projection._analysis_handle(state.analysis_id))
         return view(engine, bind(engine, context), analysis_projection._analysis_result(evaluation), materials,
-                    detail=arguments.get("detail", "compact"))
+                    detail=arguments.get("detail", "compact"), include_work=True)
     except engine._domain_errors() as error:
         rejected = engine._domain_rejection(error).as_contract()
         if index is not None:

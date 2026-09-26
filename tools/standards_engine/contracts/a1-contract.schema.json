@@ -6437,9 +6437,6 @@
             "resolve_many"
           ]
         },
-        "context": {
-          "$ref": "#/$defs/WorkflowContext"
-        },
         "required_inputs": {
           "type": "array",
           "uniqueItems": true,
@@ -6456,9 +6453,9 @@
       },
       "required": [
         "operation",
-        "context",
         "required_inputs"
-      ]
+      ],
+      "description": "Select the named operation with the enclosing WorkflowResult context and explicit required inputs. This descriptor is not an authorization grant."
     },
     "WorkflowOutcome": {
       "oneOf": [
@@ -6531,6 +6528,16 @@
         },
         "outcome": {
           "$ref": "#/$defs/WorkflowOutcome"
+        },
+        "work": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/WorkflowWorkPage"
+            },
+            {
+              "$ref": "#/$defs/WorkflowWorkDeferred"
+            }
+          ]
         }
       },
       "required": [
@@ -6540,7 +6547,8 @@
         "revision",
         "status",
         "next_operations"
-      ]
+      ],
+      "description": "Exact immutable workflow context and relative action descriptors. Successful compact pending propose, revise, analyze and decision submissions include work from the already-produced Analysis. Status observations, full results, stale contexts and other outcomes omit work."
     },
     "FocusedQueryNextOperation": {
       "type": "object",
@@ -7559,7 +7567,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -7641,7 +7649,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -8092,9 +8100,6 @@
         "kind": {
           "const": "workflow-analysis-summary"
         },
-        "handle": {
-          "$ref": "#/$defs/AnalysisHandle"
-        },
         "status": {
           "enum": [
             "needs-action",
@@ -8121,13 +8126,13 @@
       },
       "required": [
         "kind",
-        "handle",
         "status",
         "required_obligations",
         "pending_facts",
         "sections",
         "details"
-      ]
+      ],
+      "description": "Counts for the enclosing immutable Analysis context. Observation remains summary-only; successful compact pending mutations additionally return a bounded work page."
     },
     "WorkflowSectionCount": {
       "type": "object",
@@ -8152,15 +8157,12 @@
       "properties": {
         "operation": {
           "const": "workflow_details"
-        },
-        "analysis": {
-          "$ref": "#/$defs/AnalysisHandle"
         }
       },
       "required": [
-        "operation",
-        "analysis"
-      ]
+        "operation"
+      ],
+      "description": "Supply the enclosing WorkflowResult Analysis context as analysis and explicitly select a section."
     },
     "WorkflowDetailsCall": {
       "type": "object",
@@ -8393,6 +8395,122 @@
         "request"
       ],
       "description": "An explicit historical detail retrieval alternative. Invoke operation with request; do not automatically select size-unbounded full detail."
+    },
+    "WorkflowDetailsSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "section": {
+          "$ref": "#/$defs/WorkflowSection"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact is byte-bounded; full explicitly retrieves one whole record without the compact byte cap."
+        }
+      },
+      "required": [
+        "section"
+      ],
+      "description": "A workflow_details selection relative to the enclosing WorkflowResult Analysis context. Add analysis from that context when invoking; preserve every returned selection field."
+    },
+    "WorkflowWorkPage": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "First actionable section of a successful compact pending mutation, bound to the enclosing Analysis context. Facts precede obligations. Up to eight whole items and 64 KiB of page JSON; next is a relative workflow_details selection. Work handles retain their complete authority.",
+      "properties": {
+        "kind": {
+          "const": "workflow-work-page"
+        },
+        "section": {
+          "enum": [
+            "fact_requirements",
+            "pending_obligations"
+          ]
+        },
+        "observation": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "const": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/FactRequirementWork"
+              },
+              {
+                "$ref": "#/$defs/WorkflowObligationWork"
+              }
+            ]
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/WorkflowDetailsSelection"
+        }
+      },
+      "required": [
+        "kind",
+        "section",
+        "observation",
+        "offset",
+        "total",
+        "items"
+      ]
+    },
+    "WorkflowWorkDeferred": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "The mutation succeeded but its first complete work record exceeds the compact page budget. Preserve the enclosing context and counts; request explicitly selects that exact full record without the compact byte cap.",
+      "properties": {
+        "kind": {
+          "const": "workflow-work-deferred"
+        },
+        "code": {
+          "const": "WORKFLOW.RESULT_LIMIT"
+        },
+        "section": {
+          "enum": [
+            "fact_requirements",
+            "pending_obligations"
+          ]
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "request": {
+          "$ref": "#/$defs/WorkflowDetailsSelection"
+        }
+      },
+      "required": [
+        "kind",
+        "code",
+        "section",
+        "total",
+        "request"
+      ]
     }
   }
 }
