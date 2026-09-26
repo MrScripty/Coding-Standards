@@ -16,7 +16,7 @@ from jsonschema import Draft202012Validator
 ROOT = Path(__file__).resolve().parents[3]
 
 
-async def main(server_name):
+async def main(server_name, schema_mode):
     with tempfile.TemporaryFile(mode="w+") as log:
         process = await asyncio.create_subprocess_exec(
             "codex",
@@ -70,42 +70,24 @@ async def main(server_name):
             )
             toolmap = server["tools"]
             print("Codex tools:", sorted(toolmap), flush=True)
-            propose = toolmap["propose"]
-            shape = propose["inputSchema"]
-            assert shape["properties"]["change_set"]["type"] == "object"
-            assert set(shape["properties"]["change_set"]["required"]) == {
-                "purpose",
-                "edits",
-            }
-            canonical = json.loads((ROOT / "tools/standards_engine/contracts/a1-contract.schema.json").read_text())
-            variants = canonical["$defs"]["StandardEdit"]["oneOf"]
-            assert len(shape["properties"]["change_set"]["properties"]["edits"]["items"]["oneOf"]) == len(variants)
-            assert {"PutDecisionProvenanceEdit", "RetireDecisionProvenanceEdit",
-                    "ApproveApplicationContentEdit", "WithdrawApplicationContentEdit",
-                    "ReviseOperationalArtifactEdit"} <= {item["$ref"].rsplit("/", 1)[-1] for item in variants}
-            print(
-                f"Codex authoring schema: purpose, edits, {len(variants)} inline edit variants",
-                flush=True,
-            )
-            for name in ("propose", "revise", "resolve_workflow"):
-                documented = json.loads(
-                    toolmap[name]["description"]
-                    .split("```json\n", 1)[1]
-                    .split("\n```", 1)[0]
-                )
-                Draft202012Validator.check_schema(documented)
-                assert set(documented["$defs"]["EvidenceReference"]["required"]) == {
-                    "id",
-                    "digest",
-                    "provider_contract",
-                    "provider_contract_version",
-                }
-                if name != "resolve_workflow":
-                    assert documented["$defs"]["StandardEdit"]["oneOf"] == variants
-            print(
-                "Codex descriptions: exact nested edit/evidence contracts preserved",
-                flush=True,
-            )
+            from tools.standards_engine.standards_engine.mcp import tool_catalog
+            expected = tool_catalog(ROOT, purpose="authoring", schema_mode=schema_mode)
+            examples = json.loads((ROOT / "tools/standards_engine/contracts/examples/a1-examples.json").read_text())["examples"]
+            for tool in expected:
+                observed = toolmap[tool["name"]]
+                for field in ("inputSchema", "outputSchema", "description"):
+                    assert observed[field] == tool[field], (tool["name"], field)
+                Draft202012Validator.check_schema(observed["inputSchema"])
+                Draft202012Validator.check_schema(observed["outputSchema"])
+            for name, definition in (("propose", "AgentProposeCall"),
+                                     ("revise", "AgentReviseCall"),
+                                     ("review", "AgentReviewCall"),
+                                     ("resolve_many", "AgentResolveManyCall"),
+                                     ("resolve_workflow", "AgentResolveWorkflowCall")):
+                validator = Draft202012Validator(toolmap[name]["inputSchema"])
+                for fixture in (e["value"] for e in examples if e["definition"] == definition):
+                    validator.validate(fixture)
+            print(f"Codex catalog: exact {schema_mode} input/output schemas and descriptions preserved", flush=True)
 
             async def call(name, arguments):
                 r = await request(
@@ -138,6 +120,10 @@ async def main(server_name):
                 "items": [{"target": op["target"]}, {"target": op["target"], "detail": "full"}],
             })
             assert grouped["kind"] == "read-many-result", grouped
+            composed = await call("route", {"facts": {}, "snapshot": routed["snapshot"], "content": {"limit": 32}})
+            assert composed["reading_plan"] == routed["reading_plan"]
+            assert composed["unresolved_questions"] == routed["unresolved_questions"]
+            assert read in composed["content"]["items"]
             assert grouped["items"][0] == read
             assert all(item["snapshot"] == routed["snapshot"] for item in grouped["items"])
             print(
@@ -160,5 +146,7 @@ async def main(server_name):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server", default="standards-authoring", help="Configured authoring-purpose MCP registration")
+    parser.add_argument("--schema-mode", choices=("compatibility", "native"), default="compatibility",
+                        help="Expected presentation of the already configured server; does not reconfigure it")
     arguments = parser.parse_args()
-    asyncio.run(main(arguments.server))
+    asyncio.run(main(arguments.server, arguments.schema_mode))

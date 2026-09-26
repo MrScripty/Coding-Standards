@@ -18,3 +18,13 @@ Completed prerequisites do not close the parent objective. See the
 [Standards Agent Interface](standards-agent-interface/plan.md) delivers focused
 navigation, explicit-fact discovery and routing explanations, and bound authoring
 contexts over the Engine. It is `Accepted`; all three milestones and their acceptance checks are complete. It does not replace the active Standards Library Effectiveness effort.
+
+## Engine Interface Efficiency Verification
+
+[Agent Interface Efficiency](agent-interface-efficiency/plan.md) implements the
+user-authorized continuation of the interface-38 workflow simplification: schema
+presentation, bounded routed content and request-local evidence reuse. It is
+`Verifying`; local implementation evidence and remaining environment/client/review
+gates are recorded in its [verification](agent-interface-efficiency/verification.md)
+and [findings](agent-interface-efficiency/issues.md). This bounded code-maintenance
+slice does not close or replace Standards Library Effectiveness acceptance.

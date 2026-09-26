@@ -9,6 +9,9 @@ from . import _generated_contract as contract
 
 # This is a serialized result bound, not a total interpreter-memory promise.
 READ_MANY_RESULT_BYTES = 2 * 1024 * 1024
+# A composed route response includes its reading plan, questions and continuation.
+ROUTE_CONTENT_RESULT_BYTES = 2 * 1024 * 1024
+ROUTE_CONTENT_DEFAULT_ITEMS = 8
 
 
 def focused_continuations(value):
@@ -26,6 +29,11 @@ def focused_continuations(value):
 
 def navigate(engine, operation: str, call):
     arguments = call.as_contract()
+    if operation == "route":
+        rejection = validate_route_content(engine, arguments)
+        if rejection is not None:
+            return rejection
+        arguments.pop("content", None)
     snapshot = arguments.pop("snapshot", None)
     detail = arguments.pop("detail", "compact")
     if snapshot is None:
@@ -41,7 +49,7 @@ def navigate(engine, operation: str, call):
         try:
             handle = contract.SnapshotHandle.from_value(snapshot)
             compiled = engine._compiled_snapshot(engine._snapshot_id(handle))
-            return contract.AgentRouteResult.from_value(
+            routed = contract.AgentRouteResult.from_value(
                 focused_continuations(
                     engine._route_value(
                         _QueryProjection.snapshot(handle),
@@ -53,6 +61,7 @@ def navigate(engine, operation: str, call):
                     )
                 )
             )
+            return with_route_content(engine, call, handle, compiled, routed)
         except engine._domain_errors() as error:
             return engine._domain_rejection(error)
     result = engine.query(
@@ -97,18 +106,10 @@ def read_many(engine, call, compiled, *, application_view=None):
     size = len(json.dumps(value).encode("utf-8"))
     for item in call.items:
         engine._snapshots.snapshot(snapshot_id)
-        arguments = item.as_contract()
-        detail = arguments.pop("detail", "compact")
-        if application:
-            result = application_view.read(arguments["target"], detail)
-        else:
-            result = engine._read(
-                call.snapshot, compiled,
-                contract.ReadRequest.from_value({"kind": "read", **arguments}),
-            )
-            if isinstance(result, contract.RejectedResult):
-                return result
-            result = present_read(result, detail)
+        result = read_selected_item(engine, call.snapshot, compiled, item.as_contract(),
+                                    application_view=application_view)
+        if isinstance(result, contract.RejectedResult):
+            return result
         output = result.as_contract()
         size += len(json.dumps(output).encode("utf-8")) + (2 if value["items"] else 0)
         if size > READ_MANY_RESULT_BYTES:
@@ -123,6 +124,107 @@ def read_many(engine, call, compiled, *, application_view=None):
     engine._snapshots.snapshot(snapshot_id)
     model = contract.ApplicationReadManyResult if application else contract.ReadManyResult
     return model.from_value(value)
+
+
+def read_selected_item(engine, snapshot, compiled, arguments, *, application_view=None):
+    """Use the same exact single-read owner for grouped and routed reads."""
+    arguments = dict(arguments)
+    detail = arguments.pop("detail", "compact")
+    if application_view is not None:
+        return application_view.read(arguments["target"], detail)
+    return present_read(engine._read(
+        snapshot, compiled,
+        contract.ReadRequest.from_value({"kind": "read", **arguments}),
+    ), detail)
+
+
+def _route_content_rejection(engine, code, outcome, message):
+    from .context_projection import Purpose, application_rejection
+
+    if engine.purpose is Purpose.APPLICATION:
+        public_code = "APPLICATION.INPUT_INVALID" if outcome == "invalid" else "APPLICATION.RESULT_LIMIT"
+        return application_rejection(public_code, outcome)
+    return engine._reject(code, outcome, message)
+
+
+def validate_route_content(engine, arguments):
+    """Check the cross-field continuation contract before capturing authority."""
+    selection = arguments.get("content", {})
+    if selection.get("offset", 0) and "snapshot" not in arguments:
+        return _route_content_rejection(
+            engine, "ROUTE.CONTENT_SELECTION", "invalid",
+            "A nonzero content offset requires the exact snapshot from the route.",
+        )
+    return None
+
+
+def with_route_content(engine, call, snapshot, compiled, routed, *, application_view=None):
+    """Compose a bounded selected read page without another capture or compile.
+
+    Results remain private through the final lifecycle check. Byte pressure ends
+    a page before a whole record; a single oversized record returns a typed limit
+    rejection so the caller can explicitly route without content and read it.
+    """
+    arguments = call.as_contract()
+    if "content" not in arguments:
+        return routed
+    selection = arguments["content"]
+    # JSON Schema integers also admit 1.0. Validation has established whole
+    # counts; normalize their Python representation before using slice indices.
+    offset = int(selection.get("offset", 0))
+    limit = int(selection.get("limit", ROUTE_CONTENT_DEFAULT_ITEMS))
+    value = routed.as_contract()
+    targets = list(dict.fromkeys(
+        entry["target"] for entry in value["reading_plan"] if entry["state"] == "selected"
+    ))
+    if offset > len(targets):
+        return _route_content_rejection(engine, "ROUTE.CONTENT_SELECTION", "invalid",
+                                        "The content offset exceeds this route's selected targets.")
+    snapshot_id = engine._snapshot_id(snapshot)
+    page = {"offset": offset, "total": len(targets), "items": []}
+    value["content"] = page
+    original_hints = value["next_operations"]
+
+    def continuation():
+        end = offset + len(page["items"])
+        if end < len(targets):
+            page["next"] = {
+                "snapshot": snapshot.as_contract(), "facts": arguments["facts"],
+                "content": {"offset": end, "limit": limit},
+            }
+        else:
+            page.pop("next", None)
+        covered = set(targets[:end])
+        value["next_operations"] = [
+            hint for hint in original_hints
+            if not (hint["operation"] == "read" and hint.get("target") in covered)
+        ]
+
+    def too_large():
+        return len(json.dumps(value).encode("utf-8")) > ROUTE_CONTENT_RESULT_BYTES
+
+    for target in targets[offset:offset + limit]:
+        engine._snapshots.snapshot(snapshot_id)
+        result = read_selected_item(engine, snapshot, compiled, {"target": target},
+                                    application_view=application_view)
+        if isinstance(result, contract.RejectedResult):
+            return result
+        page["items"].append(result.as_contract())
+        continuation()
+        if too_large():
+            page["items"].pop()
+            if not page["items"]:
+                return _route_content_rejection(
+                    engine, "ROUTE.CONTENT_LIMIT", "unsupported",
+                    "The complete routed-content result exceeds 2 MiB. Route without content, then explicitly read a selected item.",
+                )
+            break
+    continuation()
+    if too_large():
+        return _route_content_rejection(engine, "ROUTE.CONTENT_LIMIT", "unsupported",
+                                        "Route without content to inspect this selection.")
+    engine._snapshots.snapshot(snapshot_id)
+    return type(routed).from_value(value)
 
 
 def fact_definitions(router):

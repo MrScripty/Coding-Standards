@@ -82,6 +82,33 @@ a later round. `workflow_status` stays summary-only; full diagnostic results
 retain their native fields and omit inline work. Neither presentation choice
 changes review, approval, publication or recovery authority.
 
+## Request-Local Evidence Reuse
+
+The five focused authoring calls `propose`, `revise`, `resolve_workflow`,
+`resolve_many`, and `review` accept an optional top-level `evidence` map. A map
+entry binds a caller-selected name to one complete, real `EvidenceReference`.
+In a typed evidence-reference position, `{"evidence_ref":"review_record"}`
+selects that request's `evidence.review_record`. Inline references and local
+uses may be mixed. Use sharing when references repeat; a single use can be
+smaller inline.
+
+The table supports at most 128 entries. Every entry must be explicitly used;
+missing names, unused entries, references inside the table, and malformed fields
+reject before domain dispatch. Local names cannot refer to a previous call or
+another agent's table. Authored text and arbitrary JSON values are not interpreted
+as local references.
+
+Expansion produces the original native request. Each operation's native evidence
+uniqueness rules are checked after expansion. `resolve_many` checks its 256 KiB
+serialized-submissions bound after expansion too. Actual provider, digest, live
+bytes, exact work identity and per-decision authorization are still validated by
+the existing owners. Sharing bytes does not share decisions or approvals, and
+creates no persisted registry, new evidence or implicit acceptance.
+
+Advanced native operations keep their complete-reference input contracts. The
+canonical examples include inline and request-local forms; the installed tool
+schema determines the exact supported positions.
+
 ## Edit Selection
 
 Use the installed `propose` schema as the authority for edit variants and fields.

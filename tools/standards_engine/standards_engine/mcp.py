@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from contextlib import redirect_stdout
 from copy import deepcopy
+from enum import Enum
 import json
 from pathlib import Path
 import sys
@@ -92,7 +93,7 @@ DESCRIPTIONS = {
     "workflow_status": "Observe the exact context with lightweight counts and relative continuations. Use after reconnecting or an unknown outcome, rather than after every successful call. This observation omits inline work and performs no mutation.",
     "resume": "Explicitly select the current revision of the proposal identified by context. Returns a draft context; analysis is a separate next action. Recovery-required must be recovered first.",
     "routing_facts": "Discover snapshot-bound registered routing facts, meanings, types, allowed values, nullability and aliases. Supply known facts to route; missing facts remain unknown. Omit snapshot to capture new accepted authority.",
-    "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Fetch selected policy text with read_many. Preserve unresolved questions.",
+    "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Request content={} for exact selected policy text in this call (default 8, maximum 32 whole reads; 2 MiB total result). Follow content.next as route arguments. Preserve unresolved questions. Omit content for selection only; read_many accepts an explicit subset.",
     "read": "Read exact authoritative policy by canonical ID. Compact detail preserves text and essential authority; full detail includes all relationship rows. Omit snapshot to capture new authority or supply an exact returned snapshot. For navigation authoring, target navigation-indexes to discover registered entrypoint handles, then read a returned navigation ID for its exact content. Navigation results carry authority and are not normative policy.",
     "related": "Traverse explicit permitted relationship groups against a supplied snapshot, or capture one when omitted. Preserve returned authoring-target handles.",
     "create_snapshot": "Capture canonical accepted standards for stable subsequent reads. Reuse the returned snapshot handle.",
@@ -121,7 +122,7 @@ DESCRIPTIONS = {
 APPLICATION_DESCRIPTIONS = {
     "runtime_info": DESCRIPTIONS["runtime_info"],
     "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
-    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Fetch selected reading_plan targets with read_many and the returned snapshot, rather than one call per target.",
+    "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Request content={} for selected exact guidance in this call: default 8, maximum 32 whole reads, 2 MiB total result. Follow content.next unchanged. Missing facts remain unresolved. Omit content for selection only; read_many accepts an explicit subset.",
     "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
     "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",
     "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",
@@ -152,9 +153,17 @@ def schema_closure(root: dict, definitions: dict) -> dict:
     return {**root, "$defs": selected}
 
 
+class SchemaMode(str, Enum):
+    """Host-selected presentation; both modes retain canonical validation."""
+
+    COMPATIBILITY = "compatibility"
+    NATIVE = "native"
+
+
 def tool_catalog(
     root: Path, *, purpose: Purpose | str, advanced: bool = False,
     interface: CompiledContracts | None = None,
+    schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,
 ) -> list[dict]:
     # Discovery and invocation share the same installed schema authority.
     selected = interface if interface is not None else AgentToolFacade.load_interface(root)
@@ -162,12 +171,20 @@ def tool_catalog(
     definitions = contract["$defs"]
     result = []
     purpose = Purpose(purpose)
+    mode = SchemaMode(schema_mode)
     for operation in qualified_operations(contract, purpose):
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
         description = APPLICATION_DESCRIPTIONS[name] if purpose is Purpose.APPLICATION else DESCRIPTIONS[name]
-        if name in INPUT_CONTRACT_DESCRIPTIONS:
+        if purpose is Purpose.AUTHORING and "agent" in operation.get("variants", {}):
+            description += (
+                " Optional evidence maps request-local names to complete exact evidence references; "
+                'use {"evidence_ref":"name"} only in evidence-reference positions. Maximum 128 entries; '
+                "every entry must be used. Native validation, expanded size limits and current "
+                "evidence/authorization checks still apply. Names do not survive this request."
+            )
+        if mode is SchemaMode.COMPATIBILITY and name in INPUT_CONTRACT_DESCRIPTIONS:
             schema = schema_closure(
                 definitions[operation["input_definition"]], definitions
             )
@@ -184,8 +201,8 @@ def tool_catalog(
                 "name": name,
                 "description": description,
                 "annotations": {"readOnlyHint": purpose is Purpose.APPLICATION or name in READ_ONLY_OPERATIONS},
-                "inputSchema": input_schema(
-                    definitions[operation["input_definition"]], definitions
+                "inputSchema": presented_input_schema(
+                    definitions[operation["input_definition"]], definitions, mode
                 ),
                 "outputSchema": schema_closure(
                     {
@@ -232,6 +249,20 @@ def input_schema(root: dict, definitions: dict) -> dict:
     return schema_closure(expand(root), definitions)
 
 
+def presented_input_schema(root: dict, definitions: dict, mode: SchemaMode) -> dict:
+    """Choose a lossless representation at discovery, never a decoding fallback.
+
+    References save repeated nested structures but cost more for small schemas.
+    Native mode selects the smaller JSON encoding of the two existing complete
+    projections. Compatibility mode preserves the qualified inline rendering.
+    """
+    inline = input_schema(root, definitions)
+    if mode is SchemaMode.COMPATIBILITY:
+        return inline
+    referenced = schema_closure(root, definitions)
+    return min((inline, referenced), key=lambda value: len(json.dumps(value).encode("utf-8")))
+
+
 class ProtocolError(Exception):
     def __init__(self, code: int, message: str, data: dict | None = None) -> None:
         super().__init__(message)
@@ -240,13 +271,16 @@ class ProtocolError(Exception):
 
 
 class MCPServer:
-    def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False) -> None:
+    def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
+                 schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
+        self.schema_mode = SchemaMode(schema_mode)
         self._interface = AgentToolFacade.load_interface(self.root)
         self.tools = tool_catalog(
-            self.root, purpose=self.purpose, advanced=advanced, interface=self._interface
+            self.root, purpose=self.purpose, advanced=advanced, interface=self._interface,
+            schema_mode=self.schema_mode,
         )
         self.names = {tool["name"] for tool in self.tools}
         self._runtime_identity = RuntimeIdentity(self.root, self.purpose, self._interface, self.tools)
@@ -326,7 +360,7 @@ class MCPServer:
                 "serverInfo": {"name": "standards-engine", "version": self._runtime_identity.implementation_version},
                 "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
                 "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. " + (
-                    "Use route and read to obtain applicable guidance. Reuse returned snapshots for consistent observations."
+                    "Use route with content={} to obtain applicable exact guidance; follow content.next for more. Reuse returned snapshots for consistent observations."
                     if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
                     + (
@@ -431,9 +465,15 @@ def main() -> int:
         action="store_true",
         help="Expose additional operations within the configured purpose.",
     )
+    parser.add_argument(
+        "--schema-mode", choices=[mode.value for mode in SchemaMode],
+        default=SchemaMode.COMPATIBILITY.value,
+        help="Use compatibility rendering (default), or native reference schemas for a qualified client.",
+    )
     arguments = parser.parse_args()
     serve(
-        MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced),
+        MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
+                  schema_mode=arguments.schema_mode),
         sys.stdin,
         sys.stdout,
     )

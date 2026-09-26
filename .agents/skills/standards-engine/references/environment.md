@@ -51,7 +51,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 38. No network listener,
+The current implementation is 0.2.0 and Engine interface 39. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -102,3 +102,24 @@ MCP SDK harness requires the SDK in a separate client environment and the locked
 Engine Python supplied through `--engine-python`. The optional Codex test uses
 `--server standards-authoring` (or the actual configured authoring name) and does
 not start a model turn. These checks do not certify the content's editorial quality.
+
+## Schema presentation (interface 39)
+
+`--schema-mode compatibility` is the default. It retains inline input schemas and
+schema text for the established nested-rendering workaround. Hosts with verified
+support for local JSON Schema references may explicitly select `--schema-mode native`.
+Native mode omits the duplicate description text and chooses the smaller complete
+inline/reference input projection per tool. It is a lossless catalog presentation;
+validation, output schemas, purpose, permissions and domain behavior are unchanged.
+
+Select the mode in host configuration, then restart/reconnect. There is no guessed
+client-name policy, automatic downgrade, or transport-session state. The existing
+catalog digest reflects the actual tool definitions (identical projections share
+a digest even across mode names); use `runtime_info` to detect a
+stale client catalog. Preserve all stores, proposals, readiness and recovery handles.
+
+Qualify the actual configured client before choosing native mode. The optional
+`codex_navigation_client.py --schema-mode native` checks the already configured
+registration; it does not reconfigure Codex or start a model turn. Passing schema
+validation alone does not establish successful model-visible rendering. Retain
+compatibility mode while that client qualification is unavailable.

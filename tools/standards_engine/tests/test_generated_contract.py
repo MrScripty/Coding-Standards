@@ -348,7 +348,11 @@ class GeneratedContractTest(unittest.TestCase):
                     operation.input_definition,
                 )
                 self.assertTrue(callable(getattr(facade, operation.id)))
-                self.assertEqual(facade._operation(operation.id), operation)
+                selected = operation.select_variant("agent") if "agent" in operation.variants else operation
+                self.assertEqual(facade._operation(operation.id), selected)
+                self.assertEqual(facade._native_operations[operation.id], operation)
+                self.assertEqual(getattr(generated, selected.input_definition).__definition__,
+                                 selected.input_definition)
                 for definition in operation.result_definitions:
                     self.assertIn(definition, generated.DEFINITION_METADATA)
 

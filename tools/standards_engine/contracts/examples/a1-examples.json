@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 38,
+  "interface_schema_version": 39,
   "examples": [
     {
       "name": "create-snapshot",
@@ -935,6 +935,320 @@
         "offset": 0,
         "total": 0,
         "items": []
+      }
+    },
+    {
+      "name": "workflow-resolve-one",
+      "definition": "ResolveWorkflowCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "submission": {
+          "kind": "impact-disposition",
+          "obligation": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "schema_version": 7
+          },
+          "result": "confirmed",
+          "rationale": "Explicit review of this example scope.",
+          "fingerprint": {
+            "decision_kind": "unmapped-normative-change",
+            "decision_contract": "decision-contract.unmapped-normative-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "example-scope",
+                "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "id": "example-evidence",
+              "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "workflow-propose-shared-evidence",
+      "definition": "AgentProposeCall",
+      "value": {
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:00000000-0000-4000-8000-000000000001",
+          "schema_version": 5
+        },
+        "change_set": {
+          "purpose": {
+            "summary": "Clarify when written plans are required",
+            "rationale": "The policy should distinguish coordination risk from file-category triggers.",
+            "evidence": [
+              {
+                "evidence_ref": "review-0"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Create a written plan when material sequencing, coordination, rollout, risk, or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Make coordination complexity, rather than file category, the deciding planning trigger."
+              }
+            }
+          ]
+        },
+        "evidence": {
+          "review-0": {
+            "id": "evidence.planning-review",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "provider_contract": "review-evidence",
+            "provider_contract_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "workflow-revise-shared-evidence",
+      "definition": "AgentReviseCall",
+      "value": {
+        "context": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "change_set": {
+          "purpose": {
+            "summary": "Clarify when written plans are required",
+            "rationale": "The policy should distinguish coordination risk from file-category triggers.",
+            "evidence": [
+              {
+                "evidence_ref": "review-0"
+              }
+            ]
+          },
+          "edits": [
+            {
+              "kind": "revise-policy-unit",
+              "policy": "workflow.planning.written-plan-applicability",
+              "title": "When A Written Plan Is Required",
+              "body": "Create a written plan when material sequencing, coordination, rollout, risk, or acceptance complexity must remain stable during implementation.",
+              "semantics": {
+                "kind": "change",
+                "accepted_semantic_revision": 1,
+                "proposed_semantic_revision": 2,
+                "intent": "Make coordination complexity, rather than file category, the deciding planning trigger."
+              }
+            }
+          ]
+        },
+        "evidence": {
+          "review-0": {
+            "id": "evidence.planning-review",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "provider_contract": "review-evidence",
+            "provider_contract_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "workflow-resolve-one-shared-evidence",
+      "definition": "AgentResolveWorkflowCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "submission": {
+          "kind": "impact-disposition",
+          "obligation": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "schema_version": 7
+          },
+          "result": "confirmed",
+          "rationale": "Explicit review of this example scope.",
+          "fingerprint": {
+            "decision_kind": "unmapped-normative-change",
+            "decision_contract": "decision-contract.unmapped-normative-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "example-scope",
+                "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+              }
+            ]
+          },
+          "evidence": [
+            {
+              "evidence_ref": "review-0"
+            }
+          ]
+        },
+        "evidence": {
+          "review-0": {
+            "id": "example-evidence",
+            "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "provider_contract": "repository-content",
+            "provider_contract_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "resolve-many-shared-evidence",
+      "definition": "AgentResolveManyCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "submissions": [
+          {
+            "kind": "impact-disposition",
+            "obligation": {
+              "kind": "analysis-child-handle",
+              "analysis": {
+                "kind": "analysis-handle",
+                "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "schema_version": 7
+              },
+              "child_kind": "obligation",
+              "child_id": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "schema_version": 7
+            },
+            "result": "confirmed",
+            "rationale": "Explicit review of this example scope.",
+            "fingerprint": {
+              "decision_kind": "unmapped-normative-change",
+              "decision_contract": "decision-contract.unmapped-normative-change.v1",
+              "schema_version": 1,
+              "dependencies": [
+                {
+                  "class": "representation",
+                  "identity": "example-scope",
+                  "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+                }
+              ]
+            },
+            "evidence": [
+              {
+                "evidence_ref": "review-0"
+              }
+            ]
+          }
+        ],
+        "evidence": {
+          "review-0": {
+            "id": "example-evidence",
+            "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "provider_contract": "repository-content",
+            "provider_contract_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "workflow-review-shared-evidence",
+      "definition": "AgentReviewCall",
+      "value": {
+        "context": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 7
+        },
+        "decisions": [
+          {
+            "owner": "consumer",
+            "decision": "accept",
+            "rationale": "Consumer obligations are satisfied.",
+            "evidence": [
+              {
+                "evidence_ref": "review-0"
+              }
+            ]
+          },
+          {
+            "owner": "impact",
+            "decision": "accept",
+            "rationale": "Policy impact obligations are satisfied.",
+            "evidence": [
+              {
+                "evidence_ref": "review-1"
+              }
+            ]
+          },
+          {
+            "owner": "audit",
+            "decision": "accept",
+            "rationale": "Audit coverage obligations are satisfied.",
+            "evidence": [
+              {
+                "evidence_ref": "review-2"
+              }
+            ]
+          }
+        ],
+        "evidence": {
+          "review-0": {
+            "id": "evidence.consumer-review",
+            "digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "provider_contract": "review-evidence",
+            "provider_contract_version": "1"
+          },
+          "review-1": {
+            "id": "evidence.impact-review",
+            "digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "provider_contract": "review-evidence",
+            "provider_contract_version": "1"
+          },
+          "review-2": {
+            "id": "evidence.audit-review",
+            "digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "provider_contract": "review-evidence",
+            "provider_contract_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "route-selected-content",
+      "definition": "RouteCall",
+      "value": {
+        "facts": {},
+        "content": {
+          "limit": 8
+        }
       }
     }
   ]

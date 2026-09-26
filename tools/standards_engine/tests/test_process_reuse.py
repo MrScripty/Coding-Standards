@@ -353,7 +353,10 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
         from tools.standards_verifier.standards_verifier import suite_input_projection_bytes
         with tempfile.TemporaryDirectory(prefix="cache-main-advance-") as tmp:
             root = Path(tmp) / "repository"
-            prepare_repository(root)
+            # This scenario commits a refreshed manifest. Start from a coherent
+            # candidate, not uncommitted interface overlays on an older Git tree.
+            from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
+            _clone_tracked_worktree(root)
             for name, value in (("user.name", "Fixture"), ("user.email", "fixture@example.invalid"), ("commit.gpgsign", "false")):
                 subprocess.run(["git", "-C", str(root), "config", name, value], check=True)
             interface = AgentToolFacade.load_interface(root)

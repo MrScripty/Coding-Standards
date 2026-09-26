@@ -132,9 +132,14 @@ class AgentToolFacade:
     def __init__(self, engine: StandardsEngine, contracts: CompiledContracts) -> None:
         self._engine = engine
         self._contracts = contracts
+        self._native_operations = {
+            operation.id: operation for operation in contracts.interface.operations
+        }
         self._operations = {
             operation.id: (operation.select_variant("application")
-                           if engine.purpose is Purpose.APPLICATION else operation)
+                           if engine.purpose is Purpose.APPLICATION
+                           else operation.select_variant("agent")
+                           if "agent" in operation.variants else operation)
             for operation in contracts.interface.operations
             if engine.purpose is Purpose.AUTHORING or "application" in operation.variants
         }
@@ -452,12 +457,24 @@ class AgentToolFacade:
         contract = self._operation(operation)
         value = self._mapping(arguments)
         self._require_supported_handle_versions(value)
+        native = self._native_operations[operation]
+        agent_evidence = self._engine.purpose is Purpose.AUTHORING and "agent" in native.variants
+        if agent_evidence and "evidence" not in value:
+            # Table-less requests use the unchanged native shape. References
+            # without a local table are invalid, never resolved from other calls.
+            return decode_contract(native.input_definition, value)
         call = decode_contract(contract.input_definition, value)
         expected_type = generated_contract.MODEL_TYPES[contract.input_definition]
         if not isinstance(call, expected_type):
             raise RuntimeError(
                 f"generated {contract.input_definition} decoder returned the wrong type"
             )
+        if agent_evidence:
+            from .request_evidence import expand_request_evidence
+
+            # Wire convenience ends here. Domain operations receive their original
+            # validated native type, with exact complete evidence references.
+            call = decode_contract(native.input_definition, expand_request_evidence(call))
         return call
 
     def _result(self, operation: str, result) -> dict[str, object]:

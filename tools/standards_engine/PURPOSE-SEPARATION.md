@@ -639,3 +639,73 @@ another analysis nor a status call. Keep explicit review, application, recovery
 and newly discovered decision rounds. Native complete diagnostic results and
 standalone paging remain supported. The schema-description client workaround
 and MCP structured/text compatibility representation are unchanged.
+
+## Agent interface efficiency (interface 39)
+
+This increment composes existing owners rather than creating new state or policy.
+Application and authoring purposes remain host-selected and separate.
+
+### Catalog presentation
+
+The MCP host selects `--schema-mode compatibility` (default) or `native`.
+Compatibility retains the supported nested-field rendering workaround. Native
+omits the additional schema text in descriptions and selects the smaller complete
+inline/reference input projection per tool. Both use the same canonical definitions
+and validator; output schemas, operations and annotations are unchanged. Runtime
+catalog identity includes the selected representation. There is no inferred client
+capability or automatic fallback. Validate the actual client's rendering before
+opting in; reconnect after replacing the implementation or mode.
+
+### Exact routed content
+
+Focused `route` optionally accepts `content` with `offset` (default 0) and `limit`
+(default 8, 1–32). Both purposes use one captured snapshot, one compiled input and
+the ordinary purpose-qualified single-read owner. Content contains whole compact
+reads for selected unique targets, in reading-plan order. The complete composed
+JSON result is limited to 2 MiB. Byte pressure ends a page before the next whole
+read; `content.next` is a complete route request with identical facts, snapshot,
+limit and the next offset. Missing applicability facts remain missing. Reading
+plan and unresolved questions are not paged or suppressed.
+
+Nonzero offsets require explicit snapshot authority before capture. An offset past
+the selected count rejects; equality returns a final empty page. A single oversized
+record or oversized route envelope yields a bounded limit rejection. The caller
+may explicitly route without content, then read a target with an adequate client.
+Selected dependency qualification is checked for the whole route, not only the
+current page. Failed reads or lifecycle checks expose no successful partial prefix.
+The existing selection-only route, native query and candidate preview contracts
+retain their previous behavior. This is paging over a request, not an authorization
+cursor: changing facts explicitly requests another route.
+
+### Request-local evidence normalization
+
+Only focused `propose`, `revise`, `resolve_workflow`, `resolve_many`, and `review`
+select generated `agent` input variants. Each permits a root `evidence` table of
+up to 128 complete native references and typed `EvidenceUse` values of the form
+`{"evidence_ref":"name"}` at evidence-reference positions. Inline references
+remain supported. Each table entry must be used; unresolved, unused or malformed
+bindings reject before dispatch. The table cannot contain further aliases.
+
+The facade validates the whole agent input, expands generated reference-use types,
+and validates the original native input before dispatch. Calls without a table
+retain the native fast path. Authored strings and arbitrary object keys never gain
+reference semantics. Native uniqueness, expanded submission-size limits, digest
+and provider checks, current authorization, immutable work bindings and publication
+guards remain with their original owners. Aliases confer no authority. Local names
+and tables are neither persisted nor used after the request; records contain only
+canonical expanded evidence. Application catalogs and advanced native inputs do not
+expose these agent variants. Generated sibling-equivalence tests require future
+native evidence changes to update the corresponding agent family atomically.
+
+### Cutover and acceptance
+
+Interface version is 39; Analysis request 6, Analysis state 7, handle, readiness,
+application, recovery and store versions are unchanged. Existing contexts remain
+usable after process replacement. Restart/reconnect and preserve retained state.
+There is no remote publication, auto-review, retry or migration in this increment.
+
+The focused suites and `agent_efficiency_trace.py` qualify schema semantics,
+selected text, explicit evidence decisions, cold stdio and serialized byte/call
+counts. These are not claims about model tokens, billed usage or client rendering.
+The plan records supported-runtime, configured-client and independent-review gates
+separately from local structural and unit evidence.

@@ -1,6 +1,12 @@
 # Standards Engine Contracts
 
-Interface 38 is the current focused workflow result contract. Pending mutations
+Interface 39 adds optional bounded route content and request-local evidence in
+focused agent input variants. Host-selected native schema presentation is opt-in;
+compatibility remains the default. Native authoring inputs and all retained state
+versions stay unchanged. See
+[the current contract](../PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39).
+
+Interface 38 introduced the focused workflow result contract. Pending mutations
 return a bounded first work page and relative continuations; status reads stay
 lightweight. The canonical schema, generated models and examples change together.
 Existing request/state/handle versions remain unchanged. Restart and reconnect

@@ -1,12 +1,13 @@
 # Standards Engine
 
-The current interface is **38**. Compact pending `propose`, `revise`, `analyze`
+The current interface is **39**. Optional routed content, request-local evidence
+reuse and host-selected schema presentation extend the existing workflow. Compact pending `propose`, `revise`, `analyze`
 and decision responses include the next bounded work page. Carry the returned
 context once, answer ready work with `resolve_many`, and retrieve only remaining
 or supporting details. `workflow_status` remains a lightweight observation;
 review and publication remain explicit. Restart the MCP process and reconnect
 the client after this result-shape update, preserving all exact handles and the
-existing store. See [the current interaction contract](PURPOSE-SEPARATION.md#actionable-workflow-results-interface-38).
+existing store. See [the current interaction contract](PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39).
 
 The versioned sections below retain implementation history.
 
@@ -200,3 +201,27 @@ The shared Router parser selects canonical table destinations independently of
 display headings. [The current contract](PURPOSE-SEPARATION.md#routing-and-review-workflow-interface-36)
 records limits, evidence, publication and restart semantics. These changes leave
 normative meaning, review authority and retained user state with their existing owners.
+
+## Agent interface efficiency
+
+Interface 39 supports `route` with `content: {}` for immediate bounded exact
+guidance, request-local evidence reuse in the five focused authoring inputs, and
+host-selected schema presentation. Compatibility remains the default; native mode
+is an opt-in lossless catalog reduction for qualified clients. Existing workflow
+results, retained contexts and explicit review/publication gates remain unchanged.
+See [the contract](PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39),
+[the implementation plan](../../docs/plans/agent-interface-efficiency/plan.md), and
+[agent setup](../../.agents/skills/standards-engine/references/environment.md).
+
+Run the focused evidence with:
+
+```bash
+PYTHONPATH=. python3 -m unittest tools.standards_engine.tests.test_schema_presentation \
+  tools.standards_engine.tests.test_route_content tools.standards_engine.tests.test_request_evidence
+PYTHONPATH=. python3 -m tools.standards_engine.tests.agent_efficiency_trace
+```
+
+The trace uses disposable repositories, real cold MCP stdio calls and explicit
+fixture-owned decisions. It compares selection-plus-read to composed routing and
+inline to shared evidence, verifies exact outcomes and stops before publication.
+Use the supported locked environment for release qualification.

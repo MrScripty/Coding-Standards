@@ -180,6 +180,7 @@ class MCPTest(unittest.TestCase):
         catalog = {t["name"]: t for t in tool_catalog(ROOT, purpose="authoring")}
         for name in ("propose", "revise", "resolve_workflow"):
             operation = next(op for op in generated["operations"] if op["id"] == name)
+            operation = {**operation, **operation.get("variants", {}).get("agent", {})}
             documented = json.loads(
                 catalog[name]["description"]
                 .split("```json\n", 1)[1]
@@ -197,7 +198,7 @@ class MCPTest(unittest.TestCase):
                 {"id", "digest", "provider_contract", "provider_contract_version"},
             )
             if name != "resolve_workflow":
-                self.assertEqual(documented["$defs"]["StandardEdit"], generated["$defs"]["StandardEdit"])
+                self.assertEqual(documented["$defs"]["AgentStandardEdit"], generated["$defs"]["AgentStandardEdit"])
             Draft202012Validator.check_schema(documented)
 
     def test_input_projection_preserves_reference_siblings(self):

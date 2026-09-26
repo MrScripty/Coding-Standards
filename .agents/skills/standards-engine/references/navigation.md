@@ -13,7 +13,9 @@ MCP tool definitions supplied by the client; invoke the tools directly.
 3. `route` selects applicable standards and required closure from explicit facts;
    `read` returns exact policy by canonical ID; `related` traverses explicitly
    selected permitted relationship groups and directions.
-4. After routing, group the selected policies into `read_many` with the returned
+4. Request `content: {}` on `route` to receive the selected exact policies directly
+   (see the bounded-content contract below). For an explicit subset instead,
+   group the selected policies into `read_many` with the returned
    snapshot and ordered `items` such as `[{"target":"core"}]`. Select up to 32
    unique read items per call. The complete result is bounded to 2 MiB and any
    unavailable item rejects the whole group; narrow the selection on a limit.
@@ -34,6 +36,29 @@ later explicit relationship edit.
 Use `find_snapshots` to resume a known lifecycle. Delete or undelete a snapshot
 only when the user requested that lifecycle change; deletion does not authorize
 standards mutation.
+
+## Bounded Content With Routing
+
+Focused `route` accepts optional `content: {"limit": 8, "offset": 0}` in both
+purposes. Omission preserves selection-only behavior; `{}` requests the first
+page with defaults. A page contains up to 32 exact compact reads in the route's
+selected, deduplicated target order. `content.total` counts all selected targets;
+`content.offset` identifies this page. Follow `content.next` as the entire next
+`route` request, preserving its facts and snapshot. Nonzero offsets require an
+explicit snapshot. Changing facts intentionally starts a different selection.
+
+The complete route result, including its plan, questions, items and continuation,
+is limited to 2 MiB. Byte pressure returns fewer whole reads. A first record that
+cannot fit returns a typed limit rejection, never clipped policy text. Request a
+selection-only route and explicitly `read` that target when the client can receive
+it. An unavailable selected dependency or a failed read rejects the result;
+partial prefixes are not returned as success. An offset equal to the selected
+count returns an empty final page; a larger offset is invalid.
+
+All content uses the same captured authority and ordinary read/qualification
+rules. Missing facts remain unresolved even when selected text is returned.
+Only the selected content is paged; the reading plan and questions remain complete.
+Native `query` and candidate previews keep their existing request contracts.
 
 ## Explicit Facts And Routing Explanations
 

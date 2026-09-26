@@ -274,6 +274,11 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
         return application_rejection("APPLICATION.INPUT_INVALID", "invalid")
     try:
         values = checked.as_contract()
+        if operation == "route":
+            from .agent_navigation import validate_route_content
+            rejection = validate_route_content(engine, values)
+            if rejection is not None:
+                return rejection
         if operation == "inspect":
             snapshot = checked.handle.snapshot
         elif "snapshot" in values:
@@ -298,7 +303,10 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
         if operation == "related":
             return view.related(values["target"], tuple(values["groups"]), values["direction"], values["transitive"])
         if operation == "route":
-            return view.route(engine, checked)
+            from .agent_navigation import with_route_content
+            routed = view.route(engine, checked)
+            return with_route_content(engine, checked, snapshot, compiled, routed,
+                                      application_view=view)
         if operation == "routing_facts":
             return view.routing_facts()
         return view.inspect(checked.handle)
@@ -317,7 +325,8 @@ def qualified_operations(contract: dict, purpose: Purpose | str) -> list[dict]:
     result = []
     for operation in contract["operations"]:
         if selected is Purpose.AUTHORING:
-            result.append(operation)
+            variant = operation.get("variants", {}).get("agent")
+            result.append({**operation, **variant} if variant is not None else operation)
             continue
         variant = operation.get("variants", {}).get("application")
         if variant is not None:

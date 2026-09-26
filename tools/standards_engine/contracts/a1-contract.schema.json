@@ -1,9 +1,24 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v34",
+  "$id": "https://coding-standards.local/contracts/standards-engine/a2-v39",
   "title": "Standards Engine A2 contract",
   "description": "Canonical typed contract for snapshot lifecycle, controlled authoring, navigation, inspection, and immutable standards-change analysis.",
   "oneOf": [
+    {
+      "$ref": "#/$defs/AgentProposeCall"
+    },
+    {
+      "$ref": "#/$defs/AgentResolveManyCall"
+    },
+    {
+      "$ref": "#/$defs/AgentResolveWorkflowCall"
+    },
+    {
+      "$ref": "#/$defs/AgentReviewCall"
+    },
+    {
+      "$ref": "#/$defs/AgentReviseCall"
+    },
     {
       "$ref": "#/$defs/AgentRouteResult"
     },
@@ -5929,6 +5944,9 @@
         },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
+        },
+        "content": {
+          "$ref": "#/$defs/RouteContentSelection"
         }
       },
       "additionalProperties": false
@@ -6203,6 +6221,9 @@
           "items": {
             "$ref": "#/$defs/RoutingRuleExplanation"
           }
+        },
+        "content": {
+          "$ref": "#/$defs/RoutedContentPage"
         }
       },
       "additionalProperties": false
@@ -7032,6 +7053,9 @@
           "items": {
             "$ref": "#/$defs/ApplicationNextOperation"
           }
+        },
+        "content": {
+          "$ref": "#/$defs/ApplicationRoutedContentPage"
         }
       }
     },
@@ -7567,7 +7591,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -7649,7 +7673,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -8511,6 +8535,806 @@
         "total",
         "request"
       ]
+    },
+    "AgentAuthoredDecisionProvenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "subject",
+        "origin",
+        "rationale",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "origin": {
+          "enum": [
+            "documented-original",
+            "reconstructed-history",
+            "current-justification",
+            "unrecorded"
+          ]
+        },
+        "rationale": {
+          "type": "string"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limits": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "reconsideration": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "AgentConsumerDispositionSubmission": {
+      "type": "object",
+      "required": [
+        "kind",
+        "obligation",
+        "result",
+        "rationale",
+        "evidence",
+        "fingerprint"
+      ],
+      "properties": {
+        "kind": {
+          "const": "consumer-disposition"
+        },
+        "obligation": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "result": {
+          "enum": [
+            "updated",
+            "reviewed-no-change",
+            "not-applicable",
+            "blocked"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          },
+          "minItems": 1
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/DecisionFingerprint"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentCoverageAttestationClaim": {
+      "type": "object",
+      "required": [
+        "requirement",
+        "conclusion",
+        "evidence",
+        "explicit_exclusions",
+        "rationale",
+        "auditor_provenance"
+      ],
+      "properties": {
+        "requirement": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "conclusion": {
+          "const": "complete"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "explicit_exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          },
+          "uniqueItems": true
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "auditor_provenance": {
+          "$ref": "#/$defs/NonEmptyString"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentCoverageAttestationSubmission": {
+      "type": "object",
+      "required": [
+        "kind",
+        "claim"
+      ],
+      "properties": {
+        "kind": {
+          "const": "coverage-attestation"
+        },
+        "claim": {
+          "$ref": "#/$defs/AgentCoverageAttestationClaim"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentImpactDispositionSubmission": {
+      "type": "object",
+      "required": [
+        "kind",
+        "obligation",
+        "result",
+        "rationale",
+        "evidence",
+        "fingerprint"
+      ],
+      "properties": {
+        "kind": {
+          "const": "impact-disposition"
+        },
+        "obligation": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "result": {
+          "enum": [
+            "confirmed",
+            "resolved-no-impact",
+            "requires-change",
+            "blocked"
+          ]
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          },
+          "minItems": 1
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/DecisionFingerprint"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentProposeCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "change_set": {
+          "$ref": "#/$defs/AgentStandardsChangeSet"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail."
+        },
+        "evidence": {
+          "$ref": "#/$defs/RequestEvidenceTable"
+        }
+      },
+      "required": [
+        "change_set"
+      ]
+    },
+    "AgentProvideFactSubmission": {
+      "type": "object",
+      "required": [
+        "kind",
+        "requirement",
+        "value",
+        "evidence"
+      ],
+      "properties": {
+        "kind": {
+          "const": "provide-fact"
+        },
+        "requirement": {
+          "$ref": "#/$defs/AnalysisChildHandle"
+        },
+        "value": {
+          "$ref": "#/$defs/FactValue"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentPutDecisionProvenanceEdit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "record"
+      ],
+      "properties": {
+        "kind": {
+          "const": "put-provenance"
+        },
+        "record": {
+          "$ref": "#/$defs/AgentAuthoredDecisionProvenance"
+        }
+      }
+    },
+    "AgentRelationshipDisposition": {
+      "type": "object",
+      "required": [
+        "relationship",
+        "disposition",
+        "rationale",
+        "evidence"
+      ],
+      "properties": {
+        "relationship": {
+          "$ref": "#/$defs/RelationshipKey"
+        },
+        "disposition": {
+          "enum": [
+            "remove",
+            "retarget"
+          ]
+        },
+        "replacement_consumer": {
+          "$ref": "#/$defs/RelationshipConsumer"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentResolveManyCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/AnalysisHandle"
+        },
+        "submissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/AgentSubmission"
+          },
+          "minItems": 1,
+          "maxItems": 128
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ]
+        },
+        "evidence": {
+          "$ref": "#/$defs/RequestEvidenceTable"
+        }
+      },
+      "required": [
+        "context",
+        "submissions"
+      ],
+      "description": "Resolve ordered decisions bound to one original analysis. Validate every item before publishing a final immutable successor; an invalid batch persists no intermediate decisions."
+    },
+    "AgentResolveWorkflowCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "submission": {
+          "$ref": "#/$defs/AgentSubmission"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail."
+        },
+        "evidence": {
+          "$ref": "#/$defs/RequestEvidenceTable"
+        }
+      },
+      "required": [
+        "context",
+        "submission"
+      ]
+    },
+    "AgentRetirePolicyUnitEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "policy",
+        "retired_semantic_revision",
+        "successors",
+        "relationship_dispositions",
+        "evidence"
+      ],
+      "properties": {
+        "kind": {
+          "const": "retire-policy-unit"
+        },
+        "policy": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "retired_semantic_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "successors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          }
+        },
+        "relationship_dispositions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentRelationshipDisposition"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentRetireStandardEdit": {
+      "type": "object",
+      "required": [
+        "kind",
+        "standard",
+        "successors",
+        "relationship_dispositions",
+        "evidence"
+      ],
+      "properties": {
+        "kind": {
+          "const": "retire-standard"
+        },
+        "standard": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "successors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/CanonicalId"
+          }
+        },
+        "relationship_dispositions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentRelationshipDisposition"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentReviewCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "decisions": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentReviewDecision"
+          }
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail."
+        },
+        "evidence": {
+          "$ref": "#/$defs/RequestEvidenceTable"
+        }
+      },
+      "required": [
+        "context",
+        "decisions"
+      ]
+    },
+    "AgentReviewDecision": {
+      "type": "object",
+      "required": [
+        "owner",
+        "decision",
+        "rationale",
+        "evidence"
+      ],
+      "properties": {
+        "owner": {
+          "enum": [
+            "consumer",
+            "impact",
+            "audit"
+          ]
+        },
+        "decision": {
+          "const": "accept"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentReviseCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "context": {
+          "$ref": "#/$defs/WorkflowContext"
+        },
+        "change_set": {
+          "$ref": "#/$defs/AgentStandardsChangeSet"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact (default) returns an exact workflow summary; full returns complete analysis detail."
+        },
+        "evidence": {
+          "$ref": "#/$defs/RequestEvidenceTable"
+        }
+      },
+      "required": [
+        "context",
+        "change_set"
+      ]
+    },
+    "AgentStandardEdit": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/CreateStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/RegisterPolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/ReviseStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/RevisePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/MovePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/AgentRetirePolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/AgentRetireStandardEdit"
+        },
+        {
+          "$ref": "#/$defs/ReplaceStandardRelationshipsEdit"
+        },
+        {
+          "$ref": "#/$defs/PutPolicyRelationshipEdit"
+        },
+        {
+          "$ref": "#/$defs/RemovePolicyRelationshipEdit"
+        },
+        {
+          "$ref": "#/$defs/PutRoutingRuleEdit"
+        },
+        {
+          "$ref": "#/$defs/RemoveRoutingRuleEdit"
+        },
+        {
+          "$ref": "#/$defs/PutRoutingFactEdit"
+        },
+        {
+          "$ref": "#/$defs/RemoveRoutingFactEdit"
+        },
+        {
+          "$ref": "#/$defs/AuditPolicyUnitEdit"
+        },
+        {
+          "$ref": "#/$defs/RewriteNavigationIndexEdit"
+        },
+        {
+          "$ref": "#/$defs/AgentPutDecisionProvenanceEdit"
+        },
+        {
+          "$ref": "#/$defs/RetireDecisionProvenanceEdit"
+        },
+        {
+          "$ref": "#/$defs/ApproveApplicationContentEdit"
+        },
+        {
+          "$ref": "#/$defs/WithdrawApplicationContentEdit"
+        },
+        {
+          "$ref": "#/$defs/ReviseOperationalArtifactEdit"
+        },
+        {
+          "$ref": "#/$defs/RegisterConsumerEdit"
+        }
+      ]
+    },
+    "AgentStandardsChangePurpose": {
+      "type": "object",
+      "required": [
+        "summary",
+        "rationale",
+        "evidence"
+      ],
+      "properties": {
+        "summary": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentEvidenceReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentStandardsChangeSet": {
+      "type": "object",
+      "required": [
+        "purpose",
+        "edits"
+      ],
+      "properties": {
+        "purpose": {
+          "$ref": "#/$defs/AgentStandardsChangePurpose"
+        },
+        "edits": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/AgentStandardEdit"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentSubmission": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/AgentProvideFactSubmission"
+        },
+        {
+          "$ref": "#/$defs/AgentConsumerDispositionSubmission"
+        },
+        {
+          "$ref": "#/$defs/AgentImpactDispositionSubmission"
+        },
+        {
+          "$ref": "#/$defs/AgentCoverageAttestationSubmission"
+        }
+      ]
+    },
+    "EvidenceUse": {
+      "type": "object",
+      "required": [
+        "evidence_ref"
+      ],
+      "properties": {
+        "evidence_ref": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Select one exact reference from the evidence table of this request only. This is not an authorization or an attestation."
+    },
+    "AgentEvidenceReference": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/EvidenceReference"
+        },
+        {
+          "$ref": "#/$defs/EvidenceUse"
+        }
+      ]
+    },
+    "RequestEvidenceTable": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/EvidenceReference"
+      },
+      "description": "At most 128 request-local named exact references. Every entry must be used; each evidence_ref must name an entry. Expanded native validation and all ordinary evidence checks still apply."
+    },
+    "RouteContentSelection": {
+      "type": "object",
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Default zero. A nonzero offset requires an explicit snapshot from the same route."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32,
+          "description": "Maximum whole policy reads in this page; default eight. Byte pressure may return fewer."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RoutedContentPage": {
+      "type": "object",
+      "required": [
+        "offset",
+        "total",
+        "items"
+      ],
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/CompactReadResult"
+              },
+              {
+                "$ref": "#/$defs/ReadResult"
+              },
+              {
+                "$ref": "#/$defs/NavigationIndexesResult"
+              },
+              {
+                "$ref": "#/$defs/ProvenanceReadResult"
+              },
+              {
+                "$ref": "#/$defs/OperationalReadResult"
+              }
+            ]
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/RouteCall"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Exact compact reads of selected targets in Router order. Total counts selected targets, not unresolved applicability. Follow next unchanged for the remaining page."
+    },
+    "ApplicationRoutedContentPage": {
+      "type": "object",
+      "required": [
+        "offset",
+        "total",
+        "items"
+      ],
+      "properties": {
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/ApplicationReadResult"
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/RouteCall"
+        }
+      },
+      "additionalProperties": false,
+      "description": "Exact compact reads of selected targets in Router order. Total counts selected targets, not unresolved applicability. Follow next unchanged for the remaining page."
     }
   }
 }

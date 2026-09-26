@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 38
+interface_schema_version = 39
 request_contract_version = 6
 result_projection_version = 7
 
@@ -152,12 +152,14 @@ id = "propose"
 input_definition = "ProposeCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability = "standards.proposal.author"
+variants = { "agent" = { "input_definition" = "AgentProposeCall", "result_definitions" = ["WorkflowResult", "RejectedResult"] } }
 
 [[operations]]
 id = "revise"
 input_definition = "ReviseCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability = "standards.proposal.author"
+variants = { "agent" = { "input_definition" = "AgentReviseCall", "result_definitions" = ["WorkflowResult", "RejectedResult"] } }
 
 [[operations]]
 id = "analyze"
@@ -170,12 +172,14 @@ id = "resolve_workflow"
 input_definition = "ResolveWorkflowCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability_by_submission = { "provide-fact" = "standards.analyze", "consumer-disposition" = "standards.review.consumer", "impact-disposition" = "standards.review.impact", "coverage-attestation" = "standards.review.audit" }
+variants = { "agent" = { "input_definition" = "AgentResolveWorkflowCall", "result_definitions" = ["WorkflowResult", "RejectedResult"] } }
 
 [[operations]]
 id = "review"
 input_definition = "ReviewCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability = "standards.proposal.review"
+variants = { "agent" = { "input_definition" = "AgentReviewCall", "result_definitions" = ["WorkflowResult", "RejectedResult"] } }
 
 [[operations]]
 id = "apply"
@@ -219,6 +223,7 @@ id = "resolve_many"
 input_definition = "ResolveManyCall"
 result_definitions = ["WorkflowResult", "RejectedResult"]
 capability_by_submission = { "provide-fact" = "standards.analyze", "consumer-disposition" = "standards.review.consumer", "impact-disposition" = "standards.review.impact", "coverage-attestation" = "standards.review.audit" }
+variants = { "agent" = { "input_definition" = "AgentResolveManyCall", "result_definitions" = ["WorkflowResult", "RejectedResult"] } }
 
 [[operations]]
 id = "workflow_details"

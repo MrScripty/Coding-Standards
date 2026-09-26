@@ -22,8 +22,9 @@ Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `route`, `read`, and `propose`).
 
 Use `routing_facts` when the registered fact vocabulary is unknown. Use
-`route` with explicit engineering facts, then `read_many` for the selected
-exact policies in one call. Use `read` for one item and `related` for relationships.
+`route` with explicit engineering facts and `content: {}` to receive selected
+exact policies immediately. Follow `content.next` when more remain. Use `read_many`
+for an explicit subset, `read` for one item, and `related` for relationships.
 Omit `snapshot` on the first call to capture
 accepted authority; reuse the returned snapshot on subsequent calls. Omission
 always captures a new snapshot, so carry the handle when continuing a task.
@@ -86,6 +87,12 @@ The default MCP catalog exposes focused tools. Native snapshot administration,
 accepted-snapshot Analysis, verification preflight, and evidence maintenance
 remain available through the explicit advanced catalog; see
 [references/environment.md](references/environment.md).
+
+Repeated exact evidence references in `propose`, `revise`, `resolve_workflow`,
+`resolve_many`, or `review` may use a request-local `evidence` table. Every typed
+`{"evidence_ref":"name"}` explicitly selects one complete reference from that
+same request. Normal inline references remain valid. Supply real evidence and
+retain each decision's own rationale and authorization; names confer neither.
 
 ## Choose The Workflow
 
