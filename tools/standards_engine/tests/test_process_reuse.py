@@ -226,13 +226,28 @@ class ProcessReuseTest(unittest.TestCase):
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
             )
             responses = [json.loads(line) for line in completed.stdout.splitlines()]
+            initialized = next(row["result"] for row in responses if row["id"] == 1)
             reads = [row["result"] for row in responses if row["id"] in (2, 3)]
             self.assertEqual(len(reads), 2)
             self.assertFalse(any(row["isError"] for row in reads), reads)
             self.assertEqual(reads[0], reads[1])
+            for read in reads:
+                self.assertEqual(read["_meta"], initialized["_meta"])
+                self.assertEqual(json.loads(read["content"][0]["text"]),
+                                 read["structuredContent"])
+                self.assertEqual(read["structuredContent"]["snapshot"],
+                                 self.original_snapshot)
             observed.append(reads[0])
-        self.assertEqual(observed[0], observed[1])
-        self.assertEqual(observed[0]["structuredContent"]["snapshot"], self.original_snapshot)
+        # A process restart changes only its instance identity. Compare every
+        # other envelope field, including both historical-result encodings and
+        # the stable implementation/interface/catalog metadata.
+        first, second = deepcopy(observed[0]), deepcopy(observed[1])
+        first_instance = first["_meta"]["standards-engine/runtime"].pop("instance_id")
+        second_instance = second["_meta"]["standards-engine/runtime"].pop("instance_id")
+        self.assertTrue(first_instance)
+        self.assertTrue(second_instance)
+        self.assertNotEqual(first_instance, second_instance)
+        self.assertEqual(first, second)
 
     def test_repository_and_purpose_are_fixed_before_opening_store(self):
         for root, purpose in ((self.root.parent, "authoring"), (self.root, "application")):

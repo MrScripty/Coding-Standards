@@ -317,6 +317,13 @@ class NavigationTest(unittest.TestCase):
         self.assertEqual(before, after)
 
     def test_proposal_query_projects_every_request_from_an_exact_revision(self) -> None:
+        accepted_corpus = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        ).corpus
+        initial_policy = accepted_corpus.resolve_policy_unit(WRITTEN_PLAN_POLICY)
+        successor_policy = accepted_corpus.resolve_policy_unit(PROJECTION_POLICY)
+        self.assertIsNotNone(initial_policy)
+        self.assertIsNotNone(successor_policy)
         initial_body = "Navigation fixture: initial policy revision."
         revised_body = "Navigation fixture: second policy revision."
         initial_content = f"## {WRITTEN_PLAN_TITLE}\n{initial_body}\n"
@@ -337,8 +344,8 @@ class NavigationTest(unittest.TestCase):
                         initial_content,
                         policy=WRITTEN_PLAN_POLICY,
                         title=WRITTEN_PLAN_TITLE,
-                        accepted_revision=1,
-                        proposed_revision=2,
+                        accepted_revision=initial_policy.semantic_revision,
+                        proposed_revision=initial_policy.semantic_revision + 1,
                     ),
                 }
             )
@@ -418,8 +425,8 @@ class NavigationTest(unittest.TestCase):
                         revised_content,
                         policy=PROJECTION_POLICY,
                         title=PROJECTION_TITLE,
-                        accepted_revision=1,
-                        proposed_revision=2,
+                        accepted_revision=successor_policy.semantic_revision,
+                        proposed_revision=successor_policy.semantic_revision + 1,
                     ),
                 }
             )

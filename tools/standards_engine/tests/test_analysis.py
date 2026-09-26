@@ -258,8 +258,38 @@ class DenyingAuthorizer:
 
 class AnalysisWorkflowTest(unittest.TestCase):
     def test_coverage_exclusions_require_exact_evidence_before_resolution(self):
-        pending = self.prepare()
+        # A current accepted certificate can satisfy same-snapshot analysis.
+        # Change an exact policy in a private proposal so this test always owns
+        # pending coverage work, independently of published review progress.
+        accepted = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        policy = accepted.corpus.resolve_policy_unit(POLICY)
+        self.assertIsNotNone(policy)
+        title = policy.heading_path[-1]
+        body = _section_body(policy.content, title)
+        created = self.engine.create_proposal(
+            CreateProposalCall.from_value({
+                "kind": "create-proposal",
+                "base_snapshot": self.snapshot.as_contract(),
+                "change_set": _policy_change_set(
+                    policy=policy.id,
+                    title=title,
+                    body=body + "\n\nCoverage fixture: review the changed requirement.",
+                    accepted_revision=policy.semantic_revision,
+                    proposed_revision=policy.semantic_revision + 1,
+                    purpose="Require coverage review of one private policy change.",
+                ),
+            })
+        )
+        self.assertIsInstance(created, CreateProposalResult)
+        pending = self.engine.analyze_proposal(AnalyzeProposalCall(created.revision))
         self.assertIsInstance(pending, PendingResult)
+        coverage_work = [
+            item for item in pending.next_operations
+            if item.request_kind == "coverage-attestation"
+        ]
+        self.assertEqual([item.target for item in coverage_work], [policy.id])
         submission = self.coverage_submission(pending, "coverage-review").as_contract()
         exclusion = _reference("excluded-consumer")
         submission["submission"]["claim"]["explicit_exclusions"] = [
@@ -281,6 +311,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
             resolved = self.engine.resolve(ResolveCall.from_value(submission))
         self.assertIsInstance(resolved, (PendingResult, CompleteResult))
         request = authorize.call_args.args[0]
+        self.assertEqual(request.action, "coverage-attestation")
         self.assertEqual(request.evidence, (_reference("coverage-review"), exclusion))
 
     @classmethod
@@ -887,6 +918,15 @@ class AnalysisWorkflowTest(unittest.TestCase):
         )
         files = {str(item.path): item.content for item in capture.files}
         planning = files["workflows/planning.md"].decode("utf-8")
+        # Bind each intent to the captured accepted policy, not a historical
+        # revision number or a later working-tree version of the standards.
+        accepted = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        ).corpus
+        initial_policy = accepted.resolve_policy_unit(POLICY)
+        successor_policy = accepted.resolve_policy_unit(PROJECTION_POLICY)
+        self.assertIsNotNone(initial_policy)
+        self.assertIsNotNone(successor_policy)
         initial_content = planning.replace(
             "Create a written plan when the change introduces material sequencing,",
             "Create an analyzed proposed plan when the change introduces material sequencing,",
@@ -905,8 +945,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         policy=POLICY,
                         title=WRITTEN_PLAN_TITLE,
                         body=_section_body(initial_content, WRITTEN_PLAN_TITLE),
-                        accepted_revision=1,
-                        proposed_revision=2,
+                        accepted_revision=initial_policy.semantic_revision,
+                        proposed_revision=initial_policy.semantic_revision + 1,
                         purpose="Analyze one exact logical policy revision.",
                     ),
                 }
@@ -931,8 +971,8 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         policy=PROJECTION_POLICY,
                         title=PROJECTION_TITLE,
                         body=_section_body(revised_content, PROJECTION_TITLE),
-                        accepted_revision=1,
-                        proposed_revision=2,
+                        accepted_revision=successor_policy.semantic_revision,
+                        proposed_revision=successor_policy.semantic_revision + 1,
                         purpose="Analyze the immutable successor proposal revision.",
                     ),
                 }
@@ -942,6 +982,10 @@ class AnalysisWorkflowTest(unittest.TestCase):
         later = self.engine.analyze_proposal(AnalyzeProposalCall(revised.revision))
         self.assertIsInstance(later, PendingResult)
         self.assertNotEqual(initial.handle, later.handle)
+        for policy in (initial_policy, successor_policy):
+            changed = next(item for item in later.changed_units if item.policy == policy.id)
+            self.assertEqual(changed.accepted_semantic_revision, policy.semantic_revision)
+            self.assertEqual(changed.proposed_semantic_revision, policy.semantic_revision + 1)
 
         historical = self.engine.inspect(InspectCall(initial.handle))
         self.assertIsInstance(historical, AnalysisInspectionResult)
