@@ -124,8 +124,12 @@ async def main(server_name, schema_mode):
                     validator.validate(fixture)
             print("Codex scripted discovery: five complete authoring input closures preserved (not a model qualification)", flush=True)
 
+            groups = await call("relationship_groups", {})
+            assert groups["kind"] == "relationship-groups-result", groups
+            assert all(item["id"] and item["traversal_directions"] for item in groups["items"])
+
             routed = await call("route", {"facts": {}})
-            assert routed["kind"] == "agent-route-result", routed
+            assert routed["kind"] == "compact-route-result", routed
             assert all(i["operation"] in toolmap for i in routed["next_operations"])
             op = next(i for i in routed["next_operations"] if i["operation"] == "read")
             read = await call(

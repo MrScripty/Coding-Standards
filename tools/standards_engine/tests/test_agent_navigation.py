@@ -35,7 +35,7 @@ class AgentNavigationTest(unittest.TestCase):
             }
         )
         self.assertNotEqual(automatic["snapshot"], self.snapshot)
-        self.assertEqual(automatic["reading_plan"], native["reading_plan"])
+        self.assertEqual(automatic["reading_plan"], [i for i in native["reading_plan"] if i["state"] == "selected"])
         self.assertEqual(
             [q["id"] for q in automatic["unresolved_questions"]],
             [q["id"] for q in native["unresolved_questions"]],
@@ -217,7 +217,7 @@ class AgentNavigationTest(unittest.TestCase):
         )
         self.assertEqual(result["facts"], router["routing"]["facts"])
         self.assertNotIn("rules", result)
-        unresolved = self.facade.route({"snapshot": self.snapshot, "facts": {}})
+        unresolved = self.facade.route({"snapshot": self.snapshot, "facts": {}, "detail": "full"})
         definitions = {fact["id"]: fact for fact in result["facts"]}
         for question in unresolved["unresolved_questions"]:
             self.assertEqual(question["fact"], definitions[question["fact"]["id"]])
@@ -294,7 +294,7 @@ class AgentNavigationTest(unittest.TestCase):
                 "test.optional": {"type": "string", "state": "known", "value": None},
                 "test.tags": {"type": "enum-set", "state": "known", "value": ["x"]},
             }
-            selected = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+            selected = self.facade.route({"snapshot": self.snapshot, "facts": facts, "detail": "full"})
             self.assertEqual(selected["unresolved_questions"], [])
             self.assertIn("test.enabled", selected["facts"])
             self.assertNotIn("test.on", selected["facts"])
@@ -312,7 +312,7 @@ class AgentNavigationTest(unittest.TestCase):
             self.assertEqual(conflict["code"], "APPLICABILITY.INVALID")
             facts["test.on"]["value"] = False
             facts["test.tags"]["value"] = []
-            negative = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+            negative = self.facade.route({"snapshot": self.snapshot, "facts": facts, "detail": "full"})
             self.assertNotIn("rule.test0", {r["id"] for r in negative["rules"]})
             self.assertNotIn("rule.test2", {r["id"] for r in negative["rules"]})
 

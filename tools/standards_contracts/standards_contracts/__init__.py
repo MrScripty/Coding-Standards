@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from .compiler import CompiledContracts, compile_contracts
-from .errors import ContractError, ContractFailure
+from .errors import ContractError, ContractFailure, InputIssue
 from .model import (
     DefinitionProjection,
     FieldProjection,
@@ -18,6 +18,8 @@ from .runtime import (
     freeze_json,
     model_as_contract,
 )
+
+from .validation_feedback import MAX_POINTER_CHARS
 
 from .schema_structure import (
     direct_schema_references,
@@ -43,6 +45,8 @@ __all__ = (
     "CompiledContracts",
     "ContractError",
     "ContractFailure",
+    "InputIssue",
+    "MAX_POINTER_CHARS",
     "ContractRuntime",
     "DefinitionProjection",
     "FieldProjection",

@@ -14,7 +14,7 @@ import uuid
 
 from tools.standards_contracts.standards_contracts import CompiledContracts, ContractError
 from . import _generated_contract as c
-from .context_projection import Purpose, application_rejection
+from .context_projection import Purpose
 
 
 INTERFACE_FILES = (
@@ -81,14 +81,10 @@ class RuntimeIdentity:
         """Decode through the installed contract, including unknown-field checks."""
         try:
             call = c.RuntimeInfoCall.from_value(arguments)
-        except (ContractError, ValueError, TypeError):
-            if self._purpose is Purpose.APPLICATION:
-                return application_rejection("APPLICATION.INPUT_INVALID", "invalid").as_contract()
-            return c.RejectedResult.from_value({
-                "kind": "rejected-result", "code": "RUNTIME.INPUT_INVALID", "outcome": "invalid",
-                "message": "Supply runtime_info arguments from the installed contract.",
-                "details": {}, "next_operations": [],
-            }).as_contract()
+        except (ContractError, ValueError, TypeError) as error:
+            from .input_feedback import invalid_input_result
+            return invalid_input_result(self._purpose.value, "runtime_info",
+                                        getattr(error, "failure", None), code="RUNTIME.INPUT_INVALID")
         expected = call.as_contract().get("expected_catalog")
         client = "unspecified" if expected is None else "matches" if expected == self._catalog else "differs"
         try:

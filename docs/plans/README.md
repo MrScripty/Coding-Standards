@@ -45,3 +45,11 @@ Standards Library Effectiveness objective.
 model-accessible path to the exact running input contracts while preserving
 compatibility mode. Its separate client/model qualification gate remains explicit;
 transport/schema checks alone do not close the reported declaration-rendering gap.
+
+
+## Agent Interaction Quality
+
+[Agent Interaction Quality](agent-interaction-quality/plan.md) implements safe field
+feedback, snapshot group vocabulary and compact focused routing. Its measured
+catalog costs and conditional compatibility retirement remain explicit. This
+code-maintenance slice does not close the parent standards-content objective.

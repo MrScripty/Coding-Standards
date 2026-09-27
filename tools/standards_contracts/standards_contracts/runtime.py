@@ -4,7 +4,8 @@ import copy
 import math
 from collections.abc import Iterator, Mapping
 from dataclasses import MISSING as DATACLASS_MISSING
-from dataclasses import fields
+from dataclasses import fields, replace
+from itertools import chain
 from typing import Protocol
 
 from jsonschema import Draft202012Validator
@@ -12,6 +13,7 @@ from referencing import Registry, Resource
 
 from .errors import ContractError, ContractFailure
 from .union_selection import compile_union_selectors
+from .validation_feedback import validation_feedback
 
 
 class GeneratedModel(Protocol):
@@ -74,9 +76,14 @@ class ContractRuntime:
         validator = self._validator.evolve(schema=node)
         wire_value = _wire(value)
         _ensure_json_value(wire_value)
-        error = next(validator.iter_errors(wire_value), None)
+        errors = validator.iter_errors(wire_value)
+        error = next(errors, None)
         if error is not None:
-            raise ContractError(_adapt_validation_error(definition, error))
+            issues, truncated = validation_feedback(chain((error,), errors), self._union_selectors)
+            raise ContractError(replace(
+                _adapt_validation_error(definition, error),
+                input_issues=issues, issues_truncated=truncated,
+            ))
 
     def decode(self, definition: str, value: object) -> object:
         self.validate(definition, value)

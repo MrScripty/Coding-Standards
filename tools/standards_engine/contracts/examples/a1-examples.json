@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 40,
+  "interface_schema_version": 41,
   "examples": [
     {
       "name": "create-snapshot",
@@ -1352,6 +1352,37 @@
               "provider_contract_version": "1"
             }
           ]
+        }
+      }
+    },
+    {
+      "name": "relationship-groups",
+      "definition": "RelationshipGroupsCall",
+      "value": {}
+    },
+    {
+      "name": "invalid-change-set-feedback",
+      "definition": "RejectedResult",
+      "value": {
+        "kind": "rejected-result",
+        "code": "INTERFACE.INVALID_ARGUMENTS",
+        "outcome": "invalid",
+        "message": "Correct the indicated fields before retrying.",
+        "details": {},
+        "next_operations": [],
+        "input_feedback": {
+          "issues": [
+            {
+              "instance_pointer": "/change_set/edits",
+              "location_exact": true,
+              "keyword": "required",
+              "message": "Supply this required field."
+            }
+          ],
+          "truncated": false,
+          "describe_input": {
+            "operation": "propose"
+          }
         }
       }
     }

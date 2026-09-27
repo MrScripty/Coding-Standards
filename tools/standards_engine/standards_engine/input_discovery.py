@@ -61,9 +61,12 @@ class InputContractDiscovery:
     def invoke(self, arguments: object) -> dict:
         try:
             value = c.DescribeInputCall.from_value(arguments).as_contract()
-        except (ContractError, ValueError, TypeError):
-            return self._reject("INVALID_ARGUMENTS", "invalid",
-                                "Use describe_input with a published operation and its returned selection fields.")
+        except (ContractError, ValueError, TypeError) as error:
+            from .input_feedback import feedback_value
+            result = self._reject("INVALID_ARGUMENTS", "invalid",
+                                  "Use describe_input with a published operation and its returned selection fields.")
+            result["input_feedback"] = feedback_value("describe_input", getattr(error, "failure", None))
+            return c.InputContractRejectedResult.from_value(result).as_contract()
         operation = value["operation"]
         root = self._roots.get(operation)
         if root is None:

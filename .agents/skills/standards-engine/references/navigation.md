@@ -57,7 +57,9 @@ count returns an empty final page; a larger offset is invalid.
 
 All content uses the same captured authority and ordinary read/qualification
 rules. Missing facts remain unresolved even when selected text is returned.
-Only the selected content is paged; the reading plan and questions remain complete.
+Only selected content is paged. Compact plans contain the complete selected closure;
+all fact questions remain present. The full explanation additionally includes
+unresolved-policy rows. Content continuations preserve the requested detail.
 Native `query` and candidate previews keep their existing request contracts.
 
 ## Explicit Facts And Routing Explanations
@@ -68,18 +70,44 @@ nullability, meaning, and prompts. Reuse its snapshot when routing. Supply a
 boolean values are booleans, and null is valid only for nullable definitions.
 An explicit empty set or `known-absent` is different from an omitted/unknown fact.
 
-Focused `route` returns canonicalized supplied `facts`, `reading_plan` causes,
-selected or unresolved `rules` with their exact expressions, and typed
-`unresolved_questions`. Each question carries its registered `fact` definition.
-A rule expression describes evaluated applicability; it is not a semantic
-explanation invented from policy prose. Required dependency reasons identify
-their exact graph edge and source. Several reasons may select the same standard.
+Focused authoring `route` defaults to `compact-route-result`: canonicalized
+supplied facts, selected reading entries and required dependencies, every typed
+`unresolved_question`, `unresolved_policy_count`, and `status` (`needs-facts` or
+`complete`). It omits the long unresolved-policy rows and rule expressions, not
+uncertainty. Follow `explanation` as an exact `route` request to obtain the full
+`agent-route-result`, or explicitly use `detail: "full"`. That read keeps the
+snapshot and known facts. Full native `query` remains unchanged.
+
+Each unanswered question carries its registered fact definition. Supply empty
+sets only when the task establishes absence, rather than to silence questions.
+Full rule expressions describe evaluated applicability, not inferred policy prose.
+Required dependency reasons identify their graph edge and source. Several reasons
+may select the same standard. Application purpose retains the same qualified
+selection and all questions even when full detail is requested; private authoring
+rule explanations are not exposed.
 
 Supply only facts supported by the task. Unknown facts remain unresolved; a
 route with unresolved questions is not proof that the selected set is complete.
 Use returned definitions to request the missing engineering information, then
 route again against the same snapshot. The advanced Router read with
 `include_routing` remains available for explicit rule authoring.
+
+## Relationship Group Vocabulary
+
+Use `relationship_groups` to discover canonical group IDs, meanings and registered
+traversal policy, without reading policy text merely to find a group name. Reuse
+its snapshot with `related`. An omitted snapshot captures accepted authority;
+nonzero page offsets require the returned snapshot. Pages contain up to 32 whole
+records (default 8), with a 16 KiB page limit; follow `next` unchanged. Application
+vocabulary comes only from its permitted graph and requires qualified Router content.
+
+An unknown focused group returns `GRAPH.UNKNOWN_GROUP` (application:
+`APPLICATION.UNKNOWN_GROUP`) and `relationship_groups`, the same bounded first
+vocabulary page. Choose a returned ID explicitly. A registered group can have no
+edges for the selected target; that is a successful empty query. Traversal directions
+and transitivity describe the group's traversal policy, not a claim of existing
+relationships. Authoring provenance groups are excluded from application vocabulary.
+Native authoring queries and draft previews keep their existing rejection contracts.
 
 ## Accepted-Snapshot Analysis
 

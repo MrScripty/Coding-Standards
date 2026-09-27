@@ -40,8 +40,8 @@ new application session after authoring. The Engine cannot erase prior context.
 
 These are separate intended audiences, not two registrations every agent should
 receive. Translate the command, arguments and environment to the client's actual
-configuration format. Restart the Engine and reconnect after the interface-38
-result-shape update.
+configuration format. Restart the Engine and reconnect after the interface-41
+focused-routing result-shape update.
 Inspect `runtime_info` to verify the actual running interface and catalog;
 files on disk do not replace a running process. Preserve installed stores and
 exact workflow handles. The update changes presentation, not retained state.
@@ -51,7 +51,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 40. No network listener,
+The current implementation is 0.2.0 and Engine interface 41. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -147,3 +147,31 @@ client/catalog pair. Preserve existing stores and handles when restarting.
 For reference CLI or direct facade discovery, the observer uses the full
 purpose-qualified compatibility catalog, matching the operations those surfaces
 expose. Use the returned catalog identity; it may differ from focused MCP.
+
+
+## Catalog Inventory and Retirement
+
+Measure the actual purpose/mode before comparing catalog overhead. From the
+repository root, use the supported locked Python:
+
+```sh
+PYTHONPATH=. python -m tools.standards_engine.tests.catalog_inventory --purpose authoring --schema-mode native
+PYTHONPATH=. python -m tools.standards_engine.tests.catalog_inventory --catalog /private/tools-list.json
+```
+
+The input file may be a raw tool array, tools/list result or its JSON-RPC envelope.
+Other host-rendered forms are rejected rather than guessed. The inventory reports
+raw description characters/UTF-8 bytes, serialized input/output-schema bytes, and
+complete catalog JSON. Its measurement hash binds that serializer's bytes; it is
+not the runtime catalog digest. These are not model token or billing measurements.
+The command does not open a store, invoke tools or reconfigure the host.
+
+Ordinary development uses application purpose; authoring sessions explicitly use
+its maintenance surface. Native removes embedded schema-description fallbacks but
+retains exact `describe_input` access. Compatibility remains the default for
+unqualified deployments. Record the concrete supported client/version set, native
+workflow evidence and preserved-trace reconciliation, plus CI and independent
+review. Retire compatibility only after those deployments have a qualified direct
+or discovery path or have been explicitly retired. Hypothetical future clients do
+not establish a permanent support obligation. Keep `describe_input` at retirement;
+remove obsolete mode/flag/description branches in a coordinated configuration cutover.

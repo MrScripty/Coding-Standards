@@ -88,3 +88,15 @@ ordinary Python names retain their spelling; invalid identifiers, names subject
 to Python lexical normalization and class-private names use a deterministic
 UTF-8 hex escape. Per-object collision checks also apply to escaped names.
 Defaults remain annotations and never inject values into decoded requests.
+
+
+## Safe input feedback
+
+Rejected runtime inputs retain the existing ContractFailure and first-error cause
+tree and add bounded InputIssue observations. The canonical jsonschema validator
+owns acceptance. `validation_feedback.py` selects relevant causes only through a
+proven disjoint tag, otherwise reporting the ambiguous union. It never chooses a
+valid branch or accepts input. Declared field pointers/constraints are projected
+without instance values or arbitrary map keys. Missing fields are deduplicated;
+item, byte and work bounds are explicit. The Engine facade owns its public rejection
+and discovery wrapper. No diagnostic work runs for a valid request.

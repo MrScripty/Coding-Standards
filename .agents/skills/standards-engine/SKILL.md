@@ -35,6 +35,8 @@ Use `routing_facts` when the registered fact vocabulary is unknown. Use
 `route` with explicit engineering facts and `content: {}` to receive selected
 exact policies immediately. Follow `content.next` when more remain. Use `read_many`
 for an explicit subset, `read` for one item, and `related` for relationships.
+Use `relationship_groups` for valid group IDs instead of guessing them. Compact
+routes retain all unanswered questions; follow `explanation` for full rule details.
 Omit `snapshot` on the first call to capture
 accepted authority; reuse the returned snapshot on subsequent calls. Omission
 always captures a new snapshot, so carry the handle when continuing a task.
@@ -103,6 +105,13 @@ Repeated exact evidence references in `propose`, `revise`, `resolve_workflow`,
 `{"evidence_ref":"name"}` explicitly selects one complete reference from that
 same request. Normal inline references remain valid. Supply real evidence and
 retain each decision's own rationale and authorization; names confer neither.
+
+Input rejections may include `input_feedback`: bounded field pointers, constraint
+messages and `describe_input` arguments for this operation. Correct the indicated
+fields before retrying. A non-exact location redacts dynamic keys; full submitted
+values are not echoed. Truncation is explicit. Rejection supplies no evidence,
+authorization, draft or decision. Explicit empty routing sets assert actual absence;
+an unanswered fact stays unknown.
 
 ## Choose The Workflow
 

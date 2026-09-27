@@ -1,8 +1,8 @@
-"""Schema-owned construction selectors, used only after root validation.
+"""Schema-owned disjoint-tag selection, not an instance validator.
 
-A required string property with disjoint const/enum values excludes every other
-branch. The root proof supplies existence and exclusivity; these tables neither
-validate instances nor interpret arbitrary JSON Schema constraints.
+Construction uses these tables only after root validation. Rejection diagnostics
+may use the same exclusion proof to focus error causes from a failed validation.
+Neither use interprets other constraints or changes which inputs are accepted.
 """
 from __future__ import annotations
 

@@ -12,7 +12,8 @@ def render_text(value: ContractValue | Mapping[str, object]) -> str:
     """Render a deterministic human projection of one typed engine result."""
     contract = value.as_contract() if hasattr(value, "as_contract") else dict(value)
     kind = str(contract.get("kind", "unknown"))
-    if kind in {"read-many-result", "application-read-many-result"}:
+    if kind in {"read-many-result", "application-read-many-result", "compact-route-result",
+                "agent-route-result", "relationship-groups-result"}:
         return json.dumps(contract) + "\n"
     if contract.get("purpose") == "application":
         return json.dumps(contract, ensure_ascii=False, indent=2) + "\n"
@@ -199,6 +200,8 @@ def _proposal_application(value: Mapping[str, object]) -> str:
 
 
 def _rejection(value: Mapping[str, object]) -> str:
+    if "input_feedback" in value or "relationship_groups" in value:
+        return json.dumps(dict(value), ensure_ascii=False, indent=2) + "\n"
     return (
         "\n".join(
             (

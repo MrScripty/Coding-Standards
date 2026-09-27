@@ -74,6 +74,9 @@
       "$ref": "#/$defs/CompactReadResult"
     },
     {
+      "$ref": "#/$defs/CompactRouteResult"
+    },
+    {
       "$ref": "#/$defs/CompleteResult"
     },
     {
@@ -192,6 +195,12 @@
     },
     {
       "$ref": "#/$defs/RelatedResult"
+    },
+    {
+      "$ref": "#/$defs/RelationshipGroupsCall"
+    },
+    {
+      "$ref": "#/$defs/RelationshipGroupsResult"
     },
     {
       "$ref": "#/$defs/ResolveCall"
@@ -5263,6 +5272,12 @@
           "items": {
             "$ref": "#/$defs/NextOperation"
           }
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        },
+        "relationship_groups": {
+          "$ref": "#/$defs/RelationshipGroupsResult"
         }
       },
       "additionalProperties": false
@@ -5956,6 +5971,13 @@
         },
         "content": {
           "$ref": "#/$defs/RouteContentSelection"
+        },
+        "detail": {
+          "enum": [
+            "compact",
+            "full"
+          ],
+          "description": "Compact authoring selection is default. Full returns the rule explanation. Application always retains its qualified projection."
         }
       },
       "additionalProperties": false
@@ -6783,7 +6805,8 @@
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
-            "APPLICATION.RESULT_LIMIT"
+            "APPLICATION.RESULT_LIMIT",
+            "APPLICATION.UNKNOWN_GROUP"
           ]
         },
         "outcome": {
@@ -6801,6 +6824,12 @@
           "items": {
             "$ref": "#/$defs/ApplicationNextOperation"
           }
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        },
+        "relationship_groups": {
+          "$ref": "#/$defs/RelationshipGroupsResult"
         }
       }
     },
@@ -9497,6 +9526,9 @@
         "message": {
           "type": "string",
           "minLength": 1
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
         }
       },
       "required": [
@@ -9505,6 +9537,218 @@
         "code",
         "outcome",
         "message"
+      ]
+    },
+    "InputIssue": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "instance_pointer": {
+          "type": "string",
+          "description": "JSON Pointer to the invalid field; non-exact locations redact dynamic keys as * or use the root."
+        },
+        "location_exact": {
+          "type": "boolean"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "instance_pointer",
+        "location_exact",
+        "keyword",
+        "message"
+      ]
+    },
+    "InputFeedback": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "issues": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "$ref": "#/$defs/InputIssue"
+          }
+        },
+        "truncated": {
+          "type": "boolean",
+          "description": "Additional diagnostic detail was omitted due to a work, item or byte bound."
+        },
+        "describe_input": {
+          "$ref": "#/$defs/DescribeInputCall"
+        }
+      },
+      "required": [
+        "issues",
+        "truncated",
+        "describe_input"
+      ]
+    },
+    "RelationshipGroupsCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Continue with the exact snapshot and offset returned by next. Nonzero offsets require a snapshot."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 32,
+          "description": "Whole records per page, default 8; byte pressure may return fewer."
+        }
+      },
+      "required": []
+    },
+    "RelationshipGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "description": {
+          "type": "string"
+        },
+        "traversal_directions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "incoming",
+              "outgoing"
+            ]
+          },
+          "description": "Directions permitted by this group for traversals; adjacency queries remain distinct."
+        },
+        "transitive": {
+          "type": "boolean",
+          "description": "Whether the group permits transitive traversal."
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "traversal_directions",
+        "transitive"
+      ]
+    },
+    "RelationshipGroupsResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "relationship-groups-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "items": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "$ref": "#/$defs/RelationshipGroup"
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/RelationshipGroupsCall"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "offset",
+        "total",
+        "items"
+      ]
+    },
+    "CompactRouteResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "compact-route-result"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "needs-facts"
+          ]
+        },
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "reading_plan": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          }
+        },
+        "unresolved_questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/RoutingQuestion"
+          }
+        },
+        "unresolved_policy_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "explanation": {
+          "$ref": "#/$defs/RouteCall"
+        },
+        "next_operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          }
+        },
+        "summary": {
+          "type": "string"
+        },
+        "content": {
+          "$ref": "#/$defs/RoutedContentPage"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "status",
+        "facts",
+        "reading_plan",
+        "unresolved_questions",
+        "unresolved_policy_count",
+        "explanation",
+        "next_operations"
       ]
     }
   }

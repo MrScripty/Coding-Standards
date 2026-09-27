@@ -49,7 +49,8 @@ def navigate(engine, operation: str, call):
         try:
             handle = contract.SnapshotHandle.from_value(snapshot)
             compiled = engine._compiled_snapshot(engine._snapshot_id(handle))
-            routed = contract.AgentRouteResult.from_value(
+            result_type = contract.CompactRouteResult if detail == "compact" else contract.AgentRouteResult
+            routed = result_type.from_value(
                 focused_continuations(
                     engine._route_value(
                         _QueryProjection.snapshot(handle),
@@ -57,11 +58,25 @@ def navigate(engine, operation: str, call):
                         contract.RouteRequest.from_value(
                             {"kind": "route", **arguments}
                         ),
-                        explain=True,
+                        explain=True, compact=detail == "compact",
                     )
                 )
             )
             return with_route_content(engine, call, handle, compiled, routed)
+        except engine._domain_errors() as error:
+            return engine._domain_rejection(error)
+    if operation == "related":
+        from tools.graph_engine.graph_engine import UnknownGroupError
+        from .relationship_vocabulary import unknown_group_result
+        try:
+            handle = contract.SnapshotHandle.from_value(snapshot)
+            compiled = engine._compiled_snapshot(engine._snapshot_id(handle))
+            try:
+                result = engine._related(handle, compiled, contract.RelatedRequest.from_value(
+                    {"kind": "related", **arguments}))
+            except UnknownGroupError:
+                return unknown_group_result(engine, handle, compiled.graph)
+            return present_read(result, detail)
         except engine._domain_errors() as error:
             return engine._domain_rejection(error)
     result = engine.query(
@@ -191,6 +206,7 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, application_
             page["next"] = {
                 "snapshot": snapshot.as_contract(), "facts": arguments["facts"],
                 "content": {"offset": end, "limit": limit},
+                **({"detail": arguments["detail"]} if "detail" in arguments else {}),
             }
         else:
             page.pop("next", None)

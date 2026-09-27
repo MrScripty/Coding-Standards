@@ -778,3 +778,55 @@ construct valid authoring requests, use single and batched decisions with real
 request-local evidence, and reach explicit readiness without publication or source
 file/schema fixture access. A recursive tail may remain `unknown` when its required
 shape is available through this qualified discovery path.
+
+
+## Agent interaction quality (interface 41)
+
+`route` adds optional `detail: compact | full`. Compact is the focused authoring
+default and returns `compact-route-result`. It preserves canonical facts, selected
+entries and their causes, all typed unanswered questions, and selected dependency
+closure. `unresolved_policy_count` counts reading-plan entries not selected; it is
+not evidence those policies do not apply. `explanation` is a complete full-route
+request anchored to the same snapshot and facts. Full focused route retains
+`agent-route-result`; native queries and candidate previews keep prior contracts.
+Application results remain qualified and never disclose private rule explanations.
+Content paging retains detail, facts and snapshot. Rule evaluation and missing vs
+known-empty semantics are unchanged; compact presentation does not build full rule
+expression output merely to discard it.
+
+`relationship_groups(snapshot?, offset?, limit?)` reads registered vocabulary in the
+selected graph. Its result records purpose, snapshot, total, offset, whole group
+items and next arguments. Each item contains id, registered meaning and traversal
+policy, not source locators, validator implementation or extension metadata. The
+application view supplies only permitted groups after Router qualification. A group
+can be registered with no relationships for a target. Default 8/max 32 records and
+16 KiB page JSON bound the result; oversized records return unsupported without
+truncation. Nonzero offsets require the exact snapshot, and final lifecycle failure
+discards the complete page. Unknown focused `related` queries return the same first
+page as optional rejection feedback (qualified targets are checked first). Native
+application queries share that behavior; native authoring and candidate queries keep
+existing authority-specific failures. No guessed alias or alternate graph is used.
+
+Contract-invalid calls retain invalid rejection semantics with optional
+`input_feedback`. The existing jsonschema validator still decides validity. The
+contracts runtime projects at most eight value-free issues with an 8 KiB issue-array
+budget, from a bounded diagnostic walk. Each issue has an instance pointer,
+location_exact, keyword and message. Known disjoint tags focus causes; ambiguous
+unions stay explicit. Dynamic instance-map keys are redacted, and excessive pointers
+are non-exact rather than silently clipped. Declared missing fields and constraint
+bounds are safe schema data; submitted values, raw validator messages and arbitrary
+keys are not emitted. Repeated required-field errors are deduplicated. The original
+first-error cause tree remains internal. Success does not construct diagnostics.
+The facade supplies an operation-specific describe_input request; standalone runtime
+and discovery observers use the same safe issue projection. Explicit request-local
+evidence binding rules produce their own safe issues without another validator.
+Input rejection occurs before any Engine proposal, decision or publication call.
+
+Interface 41 versions these public observations and the default route shape. Previous
+native/agent mutation declarations, Analysis request/state, handle, readiness,
+application/recovery and SQLite versions are unchanged. Upgrade producer/consumers and
+refresh the catalog together; preserve stores. No old-data conversion, implicit
+negative fact, automatic review, publication or remote operation is introduced.
+Compatibility remains available pending the actual client/support and integration
+evidence. Catalog inventory distinguishes descriptions from schema JSON and does not
+claim model-token savings. See the current plan for measured cost/benefit and limits.

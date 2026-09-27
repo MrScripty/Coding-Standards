@@ -1,5 +1,5 @@
 schema_version = 1
-interface_schema_version = 40
+interface_schema_version = 41
 request_contract_version = 6
 result_projection_version = 7
 
@@ -122,7 +122,7 @@ capability = "standards.verify"
 [[operations]]
 id = "route"
 input_definition = "RouteCall"
-result_definitions = ["AgentRouteResult", "RejectedResult"]
+result_definitions = ["CompactRouteResult", "AgentRouteResult", "RejectedResult"]
 capability = "standards.read"
 variants = { "application" = { "input_definition" = "RouteCall", "result_definitions" = ["ApplicationRouteResult", "ApplicationRejectedResult"] } }
 
@@ -245,3 +245,10 @@ input_definition = "DescribeInputCall"
 result_definitions = ["InputContractResult", "InputContractRejectedResult"]
 capability = "standards.read"
 variants = { "application" = { "input_definition" = "DescribeInputCall", "result_definitions" = ["InputContractResult", "InputContractRejectedResult"] } }
+
+[[operations]]
+id = "relationship_groups"
+input_definition = "RelationshipGroupsCall"
+result_definitions = ["RelationshipGroupsResult", "RejectedResult"]
+capability = "standards.read"
+variants = { "application" = { "input_definition" = "RelationshipGroupsCall", "result_definitions" = ["RelationshipGroupsResult", "ApplicationRejectedResult"] } }

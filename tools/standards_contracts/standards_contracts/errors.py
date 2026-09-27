@@ -4,6 +4,14 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True, slots=True)
+class InputIssue:
+    instance_pointer: str
+    location_exact: bool
+    keyword: str
+    message: str
+
+
+@dataclass(frozen=True, slots=True)
 class ContractFailure:
     outcome: str
     code: str
@@ -13,6 +21,8 @@ class ContractFailure:
     schema_pointer: str = ""
     keyword: str | None = None
     causes: tuple[ContractFailure, ...] = ()
+    input_issues: tuple[InputIssue, ...] = ()
+    issues_truncated: bool = False
 
 
 class ContractError(ValueError):

@@ -36,6 +36,7 @@ FOCUSED_OPERATIONS = frozenset(
         "route",
         "read",
         "read_many",
+        "relationship_groups",
         "related",
         "routing_facts",
         "inspect",
@@ -62,6 +63,7 @@ FOCUSED_OPERATIONS = frozenset(
 # type renderer. This is generated documentation, never a second validator.
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
+    "relationship_groups": "Discover registered relationship-group IDs, meanings and traversal policies in one snapshot. Omit snapshot to capture authority; reuse it for related. Default 8, maximum 32 whole records, 16 KiB per page. Follow next exactly. A registered group may have no edges for a target.",
     "describe_input": "Discover exact input fields when declarations abbreviate them as unknown. Start with operation only. Read schema_json documents; $refs name selectable definitions. Select a referenced name with selector and expected_catalog from the result. Pages contain up to 16 whole records (default 8), 16 KiB result JSON; follow next unchanged for the complete selected closure. Reuse acquired shapes while catalog_digest matches. No standards state or permissions change.",
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
     "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Serialized submissions are limited to 256 KiB. Compact pending results include the first work page. Reuse context with the next explicit batch; fetch workflow_details only for remaining or supporting material.",
@@ -86,9 +88,9 @@ DESCRIPTIONS = {
     "workflow_status": "Observe the exact context with lightweight counts and relative continuations. Use after reconnecting or an unknown outcome, rather than after every successful call. This observation omits inline work and performs no mutation.",
     "resume": "Explicitly select the current revision of the proposal identified by context. Returns a draft context; analysis is a separate next action. Recovery-required must be recovered first.",
     "routing_facts": "Discover snapshot-bound registered routing facts, meanings, types, allowed values, nullability and aliases. Supply known facts to route; missing facts remain unknown. Omit snapshot to capture new accepted authority.",
-    "route": "Route explicit registered facts to applicable standards and required closure. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Request content={} for exact selected policy text in this call (default 8, maximum 32 whole reads; 2 MiB total result). Follow content.next as route arguments. Preserve unresolved questions. Omit content for selection only; read_many accepts an explicit subset.",
+    "route": "Route explicit registered facts to applicable standards and required closure. Compact results include selected guidance, all unanswered questions and unresolved-policy counts; use the returned explanation request for full rule details. Omit snapshot to capture new accepted authority; reuse the returned snapshot for subsequent calls. Request content={} for exact selected policy text in this call (default 8, maximum 32 whole reads; 2 MiB total result). Follow content.next as route arguments. Preserve unresolved questions. Omit content for selection only; read_many accepts an explicit subset.",
     "read": "Read exact authoritative policy by canonical ID. Compact detail preserves text and essential authority; full detail includes all relationship rows. Omit snapshot to capture new authority or supply an exact returned snapshot. For navigation authoring, target navigation-indexes to discover registered entrypoint handles, then read a returned navigation ID for its exact content. Navigation results carry authority and are not normative policy.",
-    "related": "Traverse explicit permitted relationship groups against a supplied snapshot, or capture one when omitted. Preserve returned authoring-target handles.",
+    "related": "Traverse explicit permitted relationship groups in an exact snapshot. Discover IDs and meanings with relationship_groups, not guesses. Unknown groups return a bounded vocabulary page. A valid group may return no edges. Preserve authoring-target handles.",
     "create_snapshot": "Capture canonical accepted standards for stable subsequent reads. Reuse the returned snapshot handle.",
     "find_snapshots": "Find durable snapshots to resume a standards workflow.",
     "delete_snapshot": "Delete a snapshot only for an explicitly requested lifecycle change.",
@@ -113,12 +115,13 @@ DESCRIPTIONS = {
 
 
 APPLICATION_DESCRIPTIONS = {
+    "relationship_groups": DESCRIPTIONS["relationship_groups"],
     "describe_input": DESCRIPTIONS["describe_input"],
     "runtime_info": DESCRIPTIONS["runtime_info"],
     "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
     "route": "Select applicable guidance from registered facts and a complete qualified dependency closure. Request content={} for selected exact guidance in this call: default 8, maximum 32 whole reads, 2 MiB total result. Follow content.next unchanged. Missing facts remain unresolved. Omit content for selection only; read_many accepts an explicit subset.",
     "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
-    "related": "Discover selected relationships among qualified guidance and examples in one snapshot.",
+    "related": "Discover relationships among qualified guidance in one snapshot. Use relationship_groups for permitted IDs and meanings. Unknown groups return choices; an empty valid query remains successful.",
     "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",
     "query": "Route, read, or traverse qualified guidance within the supplied snapshot.",
     "inspect": "Inspect a permitted policy or relationship handle within its captured snapshot.",

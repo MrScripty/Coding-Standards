@@ -111,6 +111,7 @@ from tools.standards_snapshots.standards_snapshots import (
 
 from . import analysis_projection
 from ._generated_contract import (
+    CompactRouteResult, RelationshipGroupsCall, RelationshipGroupsResult,
     WorkflowResult,
     ResolveManyCall,
     WorkflowDetailsCall,
@@ -1069,10 +1070,15 @@ class StandardsEngine:
         return advance(self, "resume", call)
 
     @public_operation
-    def route(self, call: RouteCall) -> AgentRouteResult | RejectedResult:
+    def route(self, call: RouteCall) -> CompactRouteResult | AgentRouteResult | RejectedResult:
         from .agent_navigation import navigate
 
         return navigate(self, "route", call)
+
+    @public_operation
+    def relationship_groups(self, call: RelationshipGroupsCall) -> RelationshipGroupsResult | RejectedResult:
+        from .relationship_vocabulary import relationship_groups
+        return relationship_groups(self, call)
 
     @public_operation
     def routing_facts(self, call: RoutingFactsCall) -> RoutingFactsResult | RejectedResult:
@@ -2850,10 +2856,12 @@ class StandardsEngine:
         request: RouteRequest,
         *,
         explain: bool = False,
+        compact: bool = False,
     ) -> dict[str, object]:
         facts, rule_results, ordered, entries, unresolved = self._routing_selection(compiled, request)
         reading_plan = [
             projection.reading_plan_entry(item.as_contract()) for item in entries
+            if not compact or item.state == "selected"
         ]
         questions = [
             self._route_question(compiled.router, fact) for fact in sorted(unresolved)
@@ -2869,13 +2877,22 @@ class StandardsEngine:
                  "fact": definitions[fact]}
                 for fact in sorted(unresolved)
             ]
-            explanation = {
-                "kind": "agent-route-result",
-                "facts": {key: value.as_contract() for key, value in facts.canonical_values.items()},
-                "rules": [{"id": rule.id, "target": rule.target,
-                           "when": rule.program.as_expression(), "state": state}
-                          for rule, state in rule_results],
-            }
+            canonical_facts = {key: value.as_contract() for key, value in facts.canonical_values.items()}
+            if compact:
+                explanation = {
+                    "kind": "compact-route-result", "facts": canonical_facts,
+                    "status": "needs-facts" if unresolved else "complete",
+                    "unresolved_policy_count": sum(item.state != "selected" for item in entries),
+                    "explanation": {"snapshot": projection.authority.as_contract(),
+                                    "facts": canonical_facts, "detail": "full"},
+                }
+            else:
+                explanation = {
+                    "kind": "agent-route-result", "facts": canonical_facts,
+                    "rules": [{"id": rule.id, "target": rule.target,
+                               "when": rule.program.as_expression(), "state": state}
+                              for rule, state in rule_results],
+                }
         return {
             **projection.result("route"),
             **explanation,

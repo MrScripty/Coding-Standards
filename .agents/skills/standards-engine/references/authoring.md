@@ -339,3 +339,19 @@ in the same coherent change as applicable; the Engine binds final candidate
 content. Provenance-only maintenance retains unchanged normative revisions.
 Application eligibility starts empty and becomes active only after reviewed
 publication, not after merely creating a draft.
+
+
+## Actionable Input Rejections (Interface 41)
+
+A contract-invalid request returns the existing invalid outcome before domain
+execution, with optional `input_feedback`. Its issues identify JSON Pointer locations,
+constraint keywords and value-free messages. A missing change-set field is named;
+an empty edit list identifies `minItems`. A disjoint explicit tag selects relevant
+union errors; an ambiguous tag remains an explicit variant question.
+
+Feedback contains at most eight issues within an 8 KiB issue-array budget. It marks
+omitted diagnostics with `truncated`; this is a bounded explanation, not a complete
+proof of every invalid condition. Dynamic map keys and excessive locations are
+redacted (`location_exact: false`). Correct fields and use the included `describe_input`
+arguments when more shape detail is needed. Request-local evidence binding failures
+retain specific safe explanations; evidence and decisions remain explicit.

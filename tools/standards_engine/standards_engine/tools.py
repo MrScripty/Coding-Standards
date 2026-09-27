@@ -365,6 +365,12 @@ class AgentToolFacade:
             return call
         return self._result("route", self._engine.route(call))
 
+    def relationship_groups(self, arguments: object) -> dict[str, object]:
+        call = self._call_or_rejection("relationship_groups", arguments)
+        if isinstance(call, dict):
+            return call
+        return self._result("relationship_groups", self._engine.relationship_groups(call))
+
     def routing_facts(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("routing_facts", arguments)
         if isinstance(call, dict):
@@ -428,10 +434,12 @@ class AgentToolFacade:
             return self._rejected(
                 "INTERFACE.UNSUPPORTED_VERSION", "unsupported", str(error)
             )
-        except (ContractError, KeyError, TypeError, ValueError) as error:
-            if self._engine.purpose is Purpose.APPLICATION:
-                return application_rejection("APPLICATION.INPUT_INVALID", "invalid").as_contract()
-            return self._rejected("INTERFACE.INVALID_ARGUMENTS", "invalid", str(error))
+        except ContractError as error:
+            from .input_feedback import invalid_input_result
+            return invalid_input_result(self._engine.purpose.value, operation, error.failure)
+        except (KeyError, TypeError, ValueError):
+            from .input_feedback import invalid_input_result
+            return invalid_input_result(self._engine.purpose.value, operation)
 
     def _decode_call(self, operation: str, arguments: object):
         contract = self._operation(operation)
@@ -551,7 +559,7 @@ class AgentToolFacade:
             observed = value.get("schema_version")
             if expected is not None and observed != expected:
                 raise InterfaceVersionError(
-                    f"{kind} schema version {observed!r} is unsupported; "
+                    f"{kind} schema version is unsupported; "
                     f"expected {expected}"
                 )
             for item in value.values():

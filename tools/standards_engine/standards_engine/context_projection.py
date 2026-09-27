@@ -29,6 +29,7 @@ APPLICATION_CALLS = {
     "read_many": c.ApplicationReadManyCall,
     "related": c.RelatedCall,
     "routing_facts": c.RoutingFactsCall,
+    "relationship_groups": c.RelationshipGroupsCall,
     "query": c.ApplicationQueryCall,
     "inspect": c.ApplicationInspectCall,
 }
@@ -37,6 +38,7 @@ APPLICATION_CALLS = {
 def application_rejection(code: str = "APPLICATION.CONTENT_UNAVAILABLE", outcome: str = "unavailable"):
     messages = {
         "APPLICATION.CONTENT_UNAVAILABLE": "The requested guidance is awaiting application publication.",
+        "APPLICATION.UNKNOWN_GROUP": "Choose a permitted group from relationship_groups; no group was inferred.",
         "APPLICATION.RESULT_LIMIT": "Select fewer items or narrower policy scopes within the 2 MiB reading limit.",
         "APPLICATION.INPUT_INVALID": "Supply arguments from this interface's published contract.",
         "APPLICATION.OPERATION_UNAVAILABLE": "This interface provides application navigation operations.",
@@ -279,6 +281,11 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             rejection = validate_route_content(engine, values)
             if rejection is not None:
                 return rejection
+        if operation == "relationship_groups":
+            from .relationship_vocabulary import validate_selection
+            rejection = validate_selection(engine, values)
+            if rejection is not None:
+                return rejection
         if operation == "inspect":
             snapshot = checked.handle.snapshot
         elif "snapshot" in values:
@@ -300,8 +307,18 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             return read_many(engine, checked, compiled, application_view=view)
         if operation == "read":
             return view.read(values["target"], values.get("detail", "compact"))
+        if operation == "relationship_groups":
+            from .relationship_vocabulary import group_page, GROUP_PAGE_DEFAULT_ITEMS
+            view._require("router")
+            return group_page(engine, snapshot, view.graph, offset=values.get("offset", 0),
+                              limit=values.get("limit", GROUP_PAGE_DEFAULT_ITEMS))
         if operation == "related":
-            return view.related(values["target"], tuple(values["groups"]), values["direction"], values["transitive"])
+            from tools.graph_engine.graph_engine import UnknownGroupError
+            from .relationship_vocabulary import unknown_group_result
+            try:
+                return view.related(values["target"], tuple(values["groups"]), values["direction"], values["transitive"])
+            except UnknownGroupError:
+                return unknown_group_result(engine, snapshot, view.graph)
         if operation == "route":
             from .agent_navigation import with_route_content
             routed = view.route(engine, checked)

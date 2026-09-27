@@ -1614,8 +1614,12 @@
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
-            "APPLICATION.RESULT_LIMIT"
+            "APPLICATION.RESULT_LIMIT",
+            "APPLICATION.UNKNOWN_GROUP"
           ]
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
         },
         "kind": {
           "const": "application-rejected-result"
@@ -1638,6 +1642,9 @@
         },
         "purpose": {
           "const": "application"
+        },
+        "relationship_groups": {
+          "$ref": "#/$defs/RelationshipGroupsResult"
         }
       },
       "required": [
@@ -2809,6 +2816,69 @@
         "specializes",
         "next_operations",
         "detail"
+      ],
+      "type": "object"
+    },
+    "CompactRouteResult": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "$ref": "#/$defs/RoutedContentPage"
+        },
+        "explanation": {
+          "$ref": "#/$defs/RouteCall"
+        },
+        "facts": {
+          "$ref": "#/$defs/FactSet"
+        },
+        "kind": {
+          "const": "compact-route-result"
+        },
+        "next_operations": {
+          "items": {
+            "$ref": "#/$defs/NextOperation"
+          },
+          "type": "array"
+        },
+        "reading_plan": {
+          "items": {
+            "$ref": "#/$defs/ReadingPlanEntry"
+          },
+          "type": "array"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "needs-facts"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "unresolved_policy_count": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "unresolved_questions": {
+          "items": {
+            "$ref": "#/$defs/RoutingQuestion"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "snapshot",
+        "status",
+        "facts",
+        "reading_plan",
+        "unresolved_questions",
+        "unresolved_policy_count",
+        "explanation",
+        "next_operations"
       ],
       "type": "object"
     },
@@ -4517,6 +4587,9 @@
             "INPUT_DISCOVERY.RESULT_LIMIT"
           ]
         },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        },
         "kind": {
           "const": "input-contract-rejected-result"
         },
@@ -4612,6 +4685,56 @@
         "offset",
         "total",
         "records"
+      ],
+      "type": "object"
+    },
+    "InputFeedback": {
+      "additionalProperties": false,
+      "properties": {
+        "describe_input": {
+          "$ref": "#/$defs/DescribeInputCall"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/InputIssue"
+          },
+          "maxItems": 8,
+          "type": "array"
+        },
+        "truncated": {
+          "description": "Additional diagnostic detail was omitted due to a work, item or byte bound.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "issues",
+        "truncated",
+        "describe_input"
+      ],
+      "type": "object"
+    },
+    "InputIssue": {
+      "additionalProperties": false,
+      "properties": {
+        "instance_pointer": {
+          "description": "JSON Pointer to the invalid field; non-exact locations redact dynamic keys as * or use the root.",
+          "type": "string"
+        },
+        "keyword": {
+          "type": "string"
+        },
+        "location_exact": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "instance_pointer",
+        "location_exact",
+        "keyword",
+        "message"
       ],
       "type": "object"
     },
@@ -6828,6 +6951,9 @@
           },
           "type": "object"
         },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        },
         "kind": {
           "const": "rejected-result"
         },
@@ -6847,6 +6973,9 @@
             "unsupported",
             "unauthorized"
           ]
+        },
+        "relationship_groups": {
+          "$ref": "#/$defs/RelationshipGroupsResult"
         },
         "target": {
           "$ref": "#/$defs/NonEmptyString"
@@ -7023,6 +7152,105 @@
         "disposition",
         "rationale",
         "evidence"
+      ],
+      "type": "object"
+    },
+    "RelationshipGroup": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "$ref": "#/$defs/CanonicalId"
+        },
+        "transitive": {
+          "description": "Whether the group permits transitive traversal.",
+          "type": "boolean"
+        },
+        "traversal_directions": {
+          "description": "Directions permitted by this group for traversals; adjacency queries remain distinct.",
+          "items": {
+            "enum": [
+              "incoming",
+              "outgoing"
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "id",
+        "description",
+        "traversal_directions",
+        "transitive"
+      ],
+      "type": "object"
+    },
+    "RelationshipGroupsCall": {
+      "additionalProperties": false,
+      "properties": {
+        "limit": {
+          "description": "Whole records per page, default 8; byte pressure may return fewer.",
+          "maximum": 32,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Continue with the exact snapshot and offset returned by next. Nonzero offsets require a snapshot.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        }
+      },
+      "required": [],
+      "type": "object"
+    },
+    "RelationshipGroupsResult": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/RelationshipGroup"
+          },
+          "maxItems": 32,
+          "type": "array"
+        },
+        "kind": {
+          "const": "relationship-groups-result"
+        },
+        "next": {
+          "$ref": "#/$defs/RelationshipGroupsCall"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "snapshot": {
+          "$ref": "#/$defs/SnapshotHandle"
+        },
+        "total": {
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "snapshot",
+        "offset",
+        "total",
+        "items"
       ],
       "type": "object"
     },
@@ -7776,6 +8004,13 @@
       "properties": {
         "content": {
           "$ref": "#/$defs/RouteContentSelection"
+        },
+        "detail": {
+          "description": "Compact authoring selection is default. Full returns the rule explanation. Application always retains its qualified projection.",
+          "enum": [
+            "compact",
+            "full"
+          ]
         },
         "facts": {
           "$ref": "#/$defs/FactSet"
@@ -9238,7 +9473,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 40,
+  "interface_schema_version": 41,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -9513,6 +9748,7 @@
         "$ref": "#/$defs/RouteCall"
       },
       "result_definitions": [
+        "CompactRouteResult",
         "AgentRouteResult",
         "RejectedResult"
       ],
@@ -9887,6 +10123,30 @@
           "result_definitions": [
             "InputContractResult",
             "InputContractRejectedResult"
+          ]
+        }
+      }
+    },
+    {
+      "capability": "standards.read",
+      "id": "relationship_groups",
+      "input_definition": "RelationshipGroupsCall",
+      "input_schema": {
+        "$ref": "#/$defs/RelationshipGroupsCall"
+      },
+      "result_definitions": [
+        "RelationshipGroupsResult",
+        "RejectedResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "RelationshipGroupsCall",
+          "input_schema": {
+            "$ref": "#/$defs/RelationshipGroupsCall"
+          },
+          "result_definitions": [
+            "RelationshipGroupsResult",
+            "ApplicationRejectedResult"
           ]
         }
       }

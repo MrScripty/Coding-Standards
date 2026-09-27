@@ -1,6 +1,6 @@
 # Standards Engine
 
-The current interface is **40**. Bounded `describe_input` observations expose exact
+The current interface is **41**. Bounded `describe_input` observations expose exact
 input shapes when client declarations are abbreviated. Optional routed content, request-local evidence
 reuse and host-selected schema presentation extend the existing workflow. Compact pending `propose`, `revise`, `analyze`
 and decision responses include the next bounded work page. Carry the returned
@@ -271,3 +271,18 @@ qualification. Native request types and retained-state versions are unchanged.
 
 See [the operation contract](PURPOSE-SEPARATION.md#input-contract-discovery-interface-40)
 and [model-visible qualification](tests/INPUT-DISCOVERY-QUALIFICATION.md).
+
+
+## Agent Interaction Quality (Interface 41)
+
+Focused authoring routing defaults to `compact-route-result`: selected guidance,
+all unanswered questions, unresolved-policy count, and an exact full `explanation`
+request. Full route and native query preserve existing explanations. Relationship
+IDs/meanings are available through `relationship_groups`; unknown focused queries
+return the same bounded vocabulary page. Input-invalid requests carry safe field
+feedback and an input-discovery continuation before domain effects.
+
+See [the interface contract](PURPOSE-SEPARATION.md#agent-interaction-quality-interface-41)
+and [the implementation/qualification record](../../docs/plans/agent-interaction-quality/plan.md).
+Restart/reconnect for the coordinated catalog update. Persisted handles and mutation
+contracts are unchanged; compatibility retirement remains deployment-qualified.
