@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:7d96d75155229715a1bbcb55e9ea0189862cbefbe24d32dbd6a54947131dbe63",
+      "digest": "sha256:b45a28d60668ace2c2f5fa3accc43baa29170fb5cac5042bb6500342db79d582",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -8050,7 +8050,7 @@
       ]
     },
     {
-      "digest": "sha256:a0024cd1215473e359bcce469ff60fa6433bbf58970d6c13b13e3939ed20886f",
+      "digest": "sha256:828be47647e4332067893b79a508e85ed65ff1d524c41daf8f09fa41f6b7d2a2",
       "path": "tools/standards_snapshots/README.md",
       "state": "present",
       "uses": [
@@ -8147,7 +8147,7 @@
       ]
     },
     {
-      "digest": "sha256:75ce60863cd2e77f47bf471ba5c36963ad8427159a05396e748b748a2b8b1383",
+      "digest": "sha256:bda178630b8226af0de5c42a7da6290ace2ed1745e3d2a99057deb0bae6ac617",
       "path": "tools/standards_snapshots/standards_snapshots/store.py",
       "state": "present",
       "uses": [
@@ -13718,7 +13718,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:54f65af4478c516b71000c7e6a5023b7da35237854d4ee19533675aa5e8e4257",
+    "digest": "sha256:340c984fc091902f6cb703fb8211a4f3f378f94aa5767c5179e4e228ae445aeb",
     "uses": [
       {
         "check": "python-package-contract",

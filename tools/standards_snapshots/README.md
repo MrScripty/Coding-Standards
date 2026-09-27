@@ -50,3 +50,34 @@ Snapshot compares it with the currently loaded stored ID on every call. Omission
 keeps standalone behavior cold. The Engine uses its existing scoped, bounded process
 cache; roots, lifecycle, authority and response values are never identity-cache data.
 No identity domain, store format or persisted representation changes.
+
+## Admission and maintenance work
+
+Each open of an existing current-schema database authenticates the application,
+exact schema, and complete SQLite integrity/foreign-key state **before** persistent
+configuration. Configuration is followed by the existing exact schema check. The
+same full audit is not repeated for a store admitted at the current schema version.
+This is a point-in-time audit on every open, not cached proof that the database can
+never change. Selected content and aggregate reads retain their ordinary checks.
+
+New initialization keeps its final integrity audit and owned-file cleanup on failure.
+A store admitted as v1 keeps the pre-configuration audit, transaction-guarded
+pre/post-migration audits, and final destination audit. The final audit also applies
+when another opener finishes migration before this opener prepares the schema.
+No integrity policy, SQLite profile, supported migration or stored format changes.
+
+Maintenance remains synchronous at the same module call sites. It first performs a
+short-lived existence read for quarantined roots whose deadline is at or before the
+supplied time. No work means no maintenance writer transaction. The probe cursor is
+closed before acquiring a writer; a positive probe only justifies acquiring the slot.
+The existing transaction then re-selects the current due rows and atomically purges
+roots and dependent aggregates/heads/children, and records tombstones according to
+the schema.
+Concurrent undelete, re-quarantine or purge cannot be overridden using stale probe data.
+
+Nothing is cached about whether maintenance is due. A later observation sees newly
+due work. When purge really is required, contention still returns the ordinary BUSY
+outcome; callers do not receive success after a failed purge. Active reads can coexist
+with another RESERVED writer when no purge is due, but EXCLUSIVE locks, configuration
+changes, actual maintenance and other SQLite constraints can still block them. This
+is not a general lock-free or read-only-filesystem guarantee.

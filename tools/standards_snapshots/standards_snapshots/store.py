@@ -6,7 +6,7 @@ import os
 import sqlite3
 import stat
 from collections.abc import Iterator
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 from functools import lru_cache
 from pathlib import Path
 
@@ -293,13 +293,18 @@ class SQLiteSnapshotStore:
             self._connection = connection
             self._connection.enable_load_extension(False)
             if existed:
-                self._verify_existing_authority()
+                admitted_version = self._verify_existing_authority()
                 self._configure()
                 self._prepare_existing_schema()
+                # Current stores were fully audited before configuration. A v1
+                # admission still needs the final destination audit, including
+                # when another opener completed migration in the meantime.
+                if admitted_version != USER_VERSION:
+                    self._verify_integrity()
             else:
                 self._configure()
                 self._initialize_schema()
-            self._verify_integrity()
+                self._verify_integrity()
         except Exception as error:
             self._cleanup_failed_open(connection, created_identity)
             if isinstance(error, SnapshotError):
@@ -555,6 +560,16 @@ class SQLiteSnapshotStore:
     def purge_expired(self, now: int) -> None:
         began = False
         try:
+            # This observation only decides whether writer admission is needed.
+            # Close its cursor before acquiring the writer slot; deletion uses
+            # the fresh eligible set selected inside that transaction below.
+            with closing(self._connection.execute(
+                "SELECT 1 FROM snapshot_roots "
+                "WHERE lifecycle = 'quarantined' AND purge_deadline <= ? LIMIT 1",
+                (now,),
+            )) as due:
+                if due.fetchone() is None:
+                    return
             self._connection.execute("BEGIN IMMEDIATE")
             began = True
             expired = self._connection.execute(
@@ -1032,7 +1047,8 @@ class SQLiteSnapshotStore:
             self._migrate_version_one()
         self._verify_schema()
 
-    def _verify_existing_authority(self) -> None:
+    def _verify_existing_authority(self) -> int:
+        """Authenticate before configuration and return the admitted schema version."""
         application_id = self._connection.execute("PRAGMA application_id").fetchone()[0]
         user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
         if application_id != APPLICATION_ID:
@@ -1048,7 +1064,7 @@ class SQLiteSnapshotStore:
         if user_version == 1:
             self._verify_version_one_schema()
             self._verify_integrity()
-            return
+            return user_version
         if user_version != USER_VERSION:
             raise invalid(
                 "SNAPSHOT_STORE.INVALID_VERSION",
@@ -1056,6 +1072,7 @@ class SQLiteSnapshotStore:
             )
         self._verify_schema()
         self._verify_integrity()
+        return user_version
 
     def _migrate_version_one(self) -> None:
         with self._transaction(write=True):

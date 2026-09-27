@@ -76,3 +76,10 @@ states are recorded separately in that plan and its execution ledger.
 exact-capture identity proofs and operation-owned revision decoding. Current lifecycle,
 evidence and publication checks stay with their existing owners. It does not close
 the parent standards-content objective or introduce new public operation contracts.
+
+## Storage lifecycle
+
+[Storage lifecycle](storage-lifecycle/plan.md) owns audit F02/F03: avoid maintenance
+writer admission when no expiry is due and omit the repeated current-store integrity
+audit. Expiry, migration, corruption checks and immutable-work reuse retain their
+existing owners and semantics. This slice adds no store format or public API.
