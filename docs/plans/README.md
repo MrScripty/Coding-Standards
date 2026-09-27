@@ -92,3 +92,11 @@ bounded refinement after the completed boundary, immutable-work and storage-life
 repairs. It preserves material/public contracts while separating fact identity from
 presentation and fixing the demonstrated focused-transition cache miss. Snapshot
 capture handoff and typed edit-family work remain independently deferred.
+
+
+## Verified snapshot-capture handoff
+
+[Snapshot Capture Handoff](snapshot-capture-handoff/plan.md) implements the deferred
+post-admission reuse of the independently proved frozen compilation. It preserves
+both capture proof passes and normal durable/lifecycle checks. The prior fact-owner
+and working-set changes remain intact; typed routing-edit work is still deferred.

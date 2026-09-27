@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:b7f7fa76526d735b8b032434dfe8734e0b400543527b7521aa60d68b1b9b11e5",
+      "digest": "sha256:97dd74bc58f41b60d3da394b31dcd13cfabc5f256d26a10e3c8b2fb05409146a",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:49d57f08848a195a0b6080f608181239190ae2855e60e876cf8f6a48c823dc99",
+      "digest": "sha256:5cd144805a034a1e3e627f8cd1b138a5c49bb197fae81f07e97ce4324e050836",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7297,7 +7297,7 @@
       ]
     },
     {
-      "digest": "sha256:6a8840f70eaf614cba33d9ca086a41568f9fb1cb8d941e4064c2a4145a0abfa0",
+      "digest": "sha256:c220a0c5dbc84c60ffd8e0d47dd50839db58a1d4c75c33cc8682ad5de733ddae",
       "path": "tools/standards_engine/standards_engine/compiled_cache.py",
       "state": "present",
       "uses": [
@@ -7357,7 +7357,7 @@
       ]
     },
     {
-      "digest": "sha256:f4c1e23ddbbf48f37f0220c686dd616e8558cc7f4ea229721c893a148b0ac6ca",
+      "digest": "sha256:e483fc3b6862337ea3ed52f3d23c247bae4f73b2bc9486dc3e04e72acca98d48",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -13718,7 +13718,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:a56daa63d5140db4b729f5aeb9a726cb4e032b43e6fcac55f8b71e009ae54565",
+    "digest": "sha256:0c94eba715435a01b8336171e869a97f53b81d87c6712c3d9b906df77c10a48a",
     "uses": [
       {
         "check": "python-package-contract",

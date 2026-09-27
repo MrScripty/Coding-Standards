@@ -335,3 +335,19 @@ pin a base, add cache entries beyond either bound, or turn a cached product into
 admission/current-head/authorization evidence. Historical revisions can still be
 reconstructed and disabled/undersized caches preserve results. See the
 [implementation record](../../docs/plans/fact-ownership-and-working-set/plan.md).
+
+
+## Verified snapshot-capture handoff
+
+Successful capture still compiles the live recorded source and the frozen replay
+independently and checks both path closure and semantic signature before durable
+snapshot publication. After admission it offers that proved frozen compilation
+to the existing bounded process cache, without retaining the recording wrapper.
+The first snapshot operation can reuse the result instead of compiling it again.
+
+This is computation reuse, not a stored proof or lifecycle decision. Every later
+observation still loads and verifies durable content and applies its normal current
+lifecycle, evidence and purpose checks. Cache limits, compiler-identity matching,
+eviction and cold/restart reconstruction remain unchanged. No API, catalog, state
+format, capacity or registration flag changes. See the
+[capture-handoff plan](../../docs/plans/snapshot-capture-handoff/plan.md) and evidence.

@@ -6,7 +6,7 @@ import tempfile
 import tomllib
 from contextlib import AbstractContextManager
 from collections.abc import Iterable, Mapping
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
@@ -532,14 +532,15 @@ class StandardsEngine:
     ) -> CreateSnapshotResult | RejectedResult:
         del call
         try:
+            compiler = self._compile
             revision = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
             with self._repository.read_session(revision) as reader:
                 recording = RecordingContentSource(_GitRevisionSource(reader))
-                first = self._compile(recording)
+                first = compiler(recording)
                 frozen = recording.freeze()
             replay = RecordingContentSource(frozen)
             try:
-                second = self._compile(replay)
+                second = compiler(replay)
             except MetadataError as error:
                 if error.failure.code != "INPUT.UNAVAILABLE":
                     raise
@@ -557,18 +558,24 @@ class StandardsEngine:
                     "invalid",
                     "Frozen snapshot replay changed requested authority or canonical output.",
                 )
-            summary = self._snapshots.create_snapshot(
-                CapturedContent(
-                    revision.oid,
-                    (
-                        SnapshotFile(SnapshotPath.parse(path), content)
-                        for path, content in frozen.files
-                    ),
-                )
+            capture = CapturedContent(
+                revision.oid,
+                (SnapshotFile(SnapshotPath.parse(path), content)
+                 for path, content in frozen.files),
             )
-            return CreateSnapshotResult.from_value(
+            summary = self._snapshots.create_snapshot(capture)
+            result = CreateSnapshotResult.from_value(
                 {"kind": "create-snapshot-result", "snapshot": self._summary(summary)}
             )
+            if (self._compiled_cache is not None and isinstance(second, CompiledSnapshot)
+                    and second.source is replay):
+                # Both independent proofs and snapshot admission have succeeded.
+                # Drop the mutable recording wrapper; reuse still requires the
+                # normal durable load/identity/lifecycle checks for any handle.
+                self._compiled_cache.retain_verified(
+                    capture, compiler, replace(second, source=frozen),
+                )
+            return result
         except self._domain_errors() as error:
             return self._domain_rejection(error)
 

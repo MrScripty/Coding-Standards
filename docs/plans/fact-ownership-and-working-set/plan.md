@@ -138,3 +138,11 @@ evidence recorded in [verification](reports/verification.md). A6 remains pending
 on the supported locked environment and independent external review. Exactly one
 next slice is active for handoff: A — integration acceptance. No compatibility or
 new cache mechanism is retained/introduced to compensate for unavailable review.
+
+
+## Deferred capture work ownership
+
+The separately authorized [snapshot-capture handoff](../snapshot-capture-handoff/plan.md)
+now owns that deferred recommendation. It does not change this plan's earlier
+scope, qualification evidence or pending acceptance. Typed routing-edit work
+remains deferred and is not included in either implementation.

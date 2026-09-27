@@ -44,7 +44,9 @@ class CompiledSnapshotCache:
     Draft keys bind the complete logical revision and installed replay recipe. Equality
     distinguishes different material even after a Python hash collision. Current
     lifecycle, root and access decisions remain with the caller, which performs
-    complete durable validation before consulting this pure reuse mechanism.
+    complete durable validation before reusing material for a handle. Successful
+    capture admission may seed its independently proved compilation; retention
+    never establishes current snapshot existence or permission.
     """
 
     def __init__(
@@ -96,9 +98,31 @@ class CompiledSnapshotCache:
         result = compiler(FrozenContentSource(
             (str(item.path), item.content) for item in capture.files
         ))
-        if not self._retain(key, replace(material, compilation=(compiler, result))):
+        if not self.retain_verified(capture, compiler, result):
             self._uncached += 1
         return result
+
+    def retain_verified(
+        self, capture: CapturedContent,
+        compiler: Callable[[FrozenContentSource], CompiledSnapshot],
+        compiled: CompiledSnapshot,
+    ) -> bool:
+        """Retain a caller-proved pure compilation under the existing budget.
+
+        Ordinary compilation and the Engine's admitted live/frozen capture proof
+        use the same retention owner. The caller binds the result to this exact
+        capture and compiler, with a frozen source and no live recorder/reader.
+        No snapshot identity, existence, lifecycle or authorization is cached;
+        later handle observations must still validate their durable material.
+        """
+        if self._closed:
+            raise ValueError("Compilation cache is closed.")
+        if not isinstance(compiler, FunctionType) or compiler.__closure__:
+            return False
+        key = ("snapshot", capture)
+        entry = self._entries.get(key)
+        material = cast(_SnapshotMaterial, entry[0]) if entry is not None else _SnapshotMaterial()
+        return self._retain(key, replace(material, compilation=(compiler, compiled)))
 
     def identify_content(
         self, capture: CapturedContent, calculate: Callable[[CapturedContent], str],
@@ -124,6 +148,11 @@ class CompiledSnapshotCache:
             self._entries.move_to_end(key)
             return material.identity[1]
         self._identity_misses += 1
+        if entry is not None:
+            # Extending a proof must keep the capture already owned by this entry.
+            # A fresh equal load must not replace that key while its compilation
+            # still shares the original bytes, retaining a duplicate byte set.
+            key = next(retained for retained in self._entries if retained == key)
         identity = calculate(capture)
         if not self._retain(key, replace(material, identity=(calculate, identity))):
             self._identity_uncached += 1
