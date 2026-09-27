@@ -219,14 +219,12 @@ class ApplicationView:
         ))
 
     def routing_facts(self):
-        from .agent_navigation import fact_definitions
         self._require("router")
         return c.ApplicationRoutingFactsResult.from_value(self._result(
-            "application-routing-facts-result", facts=fact_definitions(self.compiled.router), next_operations=[],
+            "application-routing-facts-result", facts=self.compiled.router.fact_definitions(), next_operations=[],
         ))
 
     def route(self, engine, call):
-        from .agent_navigation import fact_definitions
         self._require("router")
         _facts, _rules, _ordered, entries, unresolved = engine._routing_selection(self.compiled, call)
         reading = []
@@ -236,7 +234,7 @@ class ApplicationView:
             self._require(entry.target)
             reading.append({"target": entry.target, "scope": entry.scope.as_contract(),
                             "authority": entry.authority, "state": "selected"})
-        facts = {fact["id"]: fact for fact in fact_definitions(self.compiled.router)}
+        facts = {fact["id"]: fact for fact in self.compiled.router.fact_definitions()}
         return self._decode(self._result(
             "application-route-result", status="needs-facts" if unresolved else "complete",
             reading_plan=reading, unresolved_questions=[{"fact": facts[key]} for key in sorted(unresolved)],

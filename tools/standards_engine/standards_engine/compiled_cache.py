@@ -200,6 +200,16 @@ class CompiledSnapshotCache:
         if key is None:
             self._uncached += 1
         else:
+            # Operation-local borrowing can skip a base cache lookup. Successful
+            # projection construction used that exact base, not just its prefix.
+            # Make an already retained base recent before inserting the result;
+            # this neither pins missing material nor increases either budget.
+            for base_key, (material, _) in self._entries.items():
+                if (isinstance(material, _SnapshotMaterial)
+                        and material.compilation is not None
+                        and material.compilation[1] is base):
+                    self._entries.move_to_end(base_key)
+                    break
             # Keep the retained intent independent of the cold caller's maps too.
             if not self._retain(key, replace(result, semantic_proposals=deepcopy(result.semantic_proposals))):
                 self._uncached += 1

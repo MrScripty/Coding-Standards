@@ -318,3 +318,20 @@ Restart installed MCP processes to load the optimization. All existing public sc
 input/output catalogs, flags, IDs and stores remain unchanged. No reset or migration
 is needed. Measurements and remaining qualification are in
 [the implementation record](../../docs/plans/immutable-work-reuse/reports/verification.md).
+
+
+## Fact-material ownership and revision working sets
+
+The Analysis-owned `RouterProjection` supplies canonical routing fact records to
+both supporting-material binding and agent navigation. Navigation no longer owns
+the representation that determines a router material digest. Existing records,
+bindings and external interfaces remain unchanged.
+
+The existing bounded compilation cache treats the exact accepted base as used
+when retaining a successfully constructed proposal projection, including when an
+operation borrowed that base without another cache lookup. With the normal budget,
+this favors the base and successor over a computational predecessor. It does not
+pin a base, add cache entries beyond either bound, or turn a cached product into
+admission/current-head/authorization evidence. Historical revisions can still be
+reconstructed and disabled/undersized caches preserve results. See the
+[implementation record](../../docs/plans/fact-ownership-and-working-set/plan.md).

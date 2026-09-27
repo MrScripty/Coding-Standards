@@ -94,3 +94,14 @@ Analysis representations are checked against a shared conformance corpus without
 introducing a transport dependency into Analysis. Valid syntax supplies no evidence
 of correctness: ResolvedEvidence still hashes the actual bytes and rejects a digest
 mismatch; provider and current authorization checks retain their existing owners.
+
+
+## Canonical routing fact records
+
+`RouterProjection.fact_definitions()` owns the ordered eight-field routing
+vocabulary used by review-material binding and navigation. It preserves the fact
+tuple's order and explicitly includes empty `values` and `aliases`; it is not the
+wider applicability `FactContract.as_contract()` serialization. Each call returns
+independent containers, so presentation code may project a result without mutating
+the authoritative record or determining its digest. Field/order changes are a
+canonical contract change, not a display-only adjustment.

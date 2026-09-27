@@ -83,3 +83,12 @@ the parent standards-content objective or introduce new public operation contrac
 writer admission when no expiry is due and omit the repeated current-store integrity
 audit. Expiry, migration, corruption checks and immutable-work reuse retain their
 existing owners and semantics. This slice adds no store format or public API.
+
+
+## Canonical fact ownership and focused revision working set
+
+[Fact ownership and working set](fact-ownership-and-working-set/plan.md) owns the
+bounded refinement after the completed boundary, immutable-work and storage-lifecycle
+repairs. It preserves material/public contracts while separating fact identity from
+presentation and fixing the demonstrated focused-transition cache miss. Snapshot
+capture handoff and typed edit-family work remain independently deferred.

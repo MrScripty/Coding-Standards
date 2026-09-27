@@ -243,24 +243,6 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, application_
     return type(routed).from_value(value)
 
 
-def fact_definitions(router):
-    fields = (
-        "id",
-        "semantic_revision",
-        "type",
-        "nullable",
-        "values",
-        "aliases",
-        "meaning",
-        "prompt",
-    )
-    result = []
-    for fact in router.facts:
-        value = {**fact.as_contract(), "values": list(fact.values)}
-        result.append({key: value[key] for key in fields})
-    return result
-
-
 def routing_facts(engine, call):
     snapshot = call.as_contract().get("snapshot")
     if snapshot is None:
@@ -277,7 +259,7 @@ def routing_facts(engine, call):
             {
                 "kind": "routing-facts-result",
                 "snapshot": snapshot,
-                "facts": fact_definitions(compiled.router),
+                "facts": compiled.router.fact_definitions(),
             }
         )
     except engine._domain_errors() as error:

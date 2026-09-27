@@ -42,6 +42,27 @@ class RouterProjection:
     rules: tuple[RouteRule, ...]
     fact_schema: FactSchema
 
+    def fact_definitions(self) -> list[dict[str, object]]:
+        """Canonical routing vocabulary used by material binding and navigation.
+
+        Tuple order and the eight-field projection are part of this contract.
+        Empty values/aliases are explicit, unlike the wider applicability fact
+        serialization. Return independent containers for observation callers.
+        """
+        return [
+            {
+                "id": fact.id,
+                "semantic_revision": fact.semantic_revision,
+                "type": fact.type,
+                "nullable": fact.nullable,
+                "values": list(fact.values),
+                "aliases": list(fact.aliases),
+                "meaning": fact.meaning,
+                "prompt": fact.prompt,
+            }
+            for fact in self.facts
+        ]
+
 
 def _error(message: str, *, path: str, field: str | None = None) -> AnalysisError:
     return AnalysisError(

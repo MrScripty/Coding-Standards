@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from types import MappingProxyType
 from typing import Mapping, TYPE_CHECKING
 
+from tools.standards_analysis.standards_analysis import RouterProjection
 from tools.standards_metadata.standards_metadata import (
     CanonicalStandardsCorpus, ContentSource, MetadataError, MetadataFailure,
     PolicyUnit, PolicyUnitTombstone, SupportingContent, content_digest,
@@ -34,10 +35,9 @@ def material_error(message: str) -> MetadataError:
 
 
 def build_materials(source: ContentSource, corpus: CanonicalStandardsCorpus,
-                    impact: CompiledPolicyImpactSet, router: object,
+                    impact: CompiledPolicyImpactSet, router: RouterProjection,
                     supporting: SupportingContent) -> Mapping[str, ContentMaterial]:
     """Capture complete eligible source units; policy reads inherit their module."""
-    from .agent_navigation import fact_definitions
     materials = {}
     for module in corpus.modules:
         text = source.read_bytes(module.path).decode("utf-8")
@@ -48,7 +48,7 @@ def build_materials(source: ContentSource, corpus: CanonicalStandardsCorpus,
         }
         if module.module_id == "router":
             record["routing"] = {
-                "facts": fact_definitions(router),
+                "facts": router.fact_definitions(),
                 "base_modules": list(router.base_modules),
                 "rules": [{"id": rule.id, "target": rule.target,
                            "when": rule.program.as_expression()} for rule in router.rules],

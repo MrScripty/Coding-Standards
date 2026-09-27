@@ -2882,9 +2882,7 @@ class StandardsEngine:
         ]
         explanation = {}
         if explain:
-            from .agent_navigation import fact_definitions
-
-            definitions = {item["id"]: item for item in fact_definitions(compiled.router)}
+            definitions = {item["id"]: item for item in compiled.router.fact_definitions()}
             questions = [
                 {"id": f"question.{fact}", "kind": "applicability-fact",
                  "state": "required", "prompt": definitions[fact]["prompt"],
@@ -3063,9 +3061,7 @@ class StandardsEngine:
                     "id": rule.id, "target": rule.target,
                     "when": rule.program.as_expression(), "condition": rows[0].condition,
                 })
-            from .agent_navigation import fact_definitions
-
-            facts = fact_definitions(compiled.router)
+            facts = compiled.router.fact_definitions()
             routing = {"routing": {"rules": rules, "facts": facts}}
         return {
             **projection.result("read"),
