@@ -61,3 +61,11 @@ selected smaller MCP catalog and exact paged output discovery while preserving
 canonical result validation. Acceptance and actual-host qualifications are recorded
 in its [verification](output-contract-delivery/verification.md). It does not replace
 the parent Standards Library Effectiveness effort.
+
+
+## Native-only MCP cutover
+
+[Native-only MCP](native-only-mcp/plan.md) owns retirement of input compatibility,
+its live consumers and the schema inliner. Output delivery remains independent;
+existing stores and workflow authority are preserved. Source and host qualification
+states are recorded separately in that plan and its execution ledger.

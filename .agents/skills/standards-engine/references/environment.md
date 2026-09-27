@@ -51,7 +51,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 42. No network listener,
+The current implementation is 0.2.0 and Engine interface 43. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -103,35 +103,39 @@ Engine Python supplied through `--engine-python`. The optional Codex test uses
 `--server standards-authoring` (or the actual configured authoring name) and does
 not start a model turn. These checks do not certify the content's editorial quality.
 
-## Schema presentation (interface 39)
+## Native-only input contracts (interface 43)
 
-`--schema-mode compatibility` is the default. It retains inline input schemas and
-schema text for the established nested-rendering workaround. Hosts with verified
-support for local JSON Schema references may explicitly select `--schema-mode native`.
-Native mode omits the duplicate description text and chooses the smaller complete
-inline/reference input projection per tool. It is a lossless catalog presentation;
-validation, output schemas, purpose, permissions and domain behavior are unchanged.
+Inputs use one reference-preserving projection of the canonical, purpose-qualified
+contract. There is no input presentation choice or embedded schema-description
+fallback. The `--schema-mode` option, including its former `native` value, is
+removed. Old launch arguments are configuration errors, not silently ignored aliases.
 
-Select the mode in host configuration, then restart/reconnect. There is no guessed
-client-name policy, automatic downgrade, or transport-session state. The existing
-catalog digest reflects the actual tool definitions (identical projections share
-a digest even across mode names); use `runtime_info` to detect a
-stale client catalog. Preserve all stores, proposals, readiness and recovery handles.
+Remove only the obsolete argument pair from this server's registration. Preserve
+its interpreter, repository, environment, purpose and other registrations. Keep
+`--output-schemas on-demand` on the existing Codex deployment; output delivery is
+an independent option and omission still selects eager delivery. Replace an active
+server only after its owner has settled or explicitly quiesced publication/recovery
+work. Preserve stores, locks and exact workflow contexts.
 
-Qualify the actual configured client before choosing native mode. The optional
-`codex_navigation_client.py --schema-mode native` checks the already configured
-registration; it does not reconfigure Codex or start a model turn. Passing schema
-validation alone does not establish successful model-visible rendering. Retain
-compatibility mode while that client qualification is unavailable.
+Restart the process, reconnect/refresh clients, then compare the actual running
+`runtime_info` interface and catalog with the installed candidate. Old catalog-bound
+discovery selections must be refreshed; existing workflow handles are not migrated.
+If the client abbreviates fields, use `describe_input`. Successful raw catalog
+validation alone is not model-visible qualification. The optional navigation
+harness checks the configured server without changing it or starting a model turn.
+A fresh isolated authoring qualification is described in the linked test guide.
 
+Compatibility-dependent input clients are no longer supported by this release.
+Use native declarations/discovery or the original pinned release with its matching
+configuration. The current implementation contains no old renderer or automatic
+downgrade path.
 
 ## Input discovery and qualification (interface 40)
 
-Both catalog modes expose `describe_input` with small, flat arguments. Discovery
+Both purposes expose `describe_input` with small, flat arguments. Discovery
 returns exact input definitions as ordinary tool-result content and does not rely
-on the client's schema renderer. Keep compatibility mode until each supported
-client has a qualified direct or discovery path. This release does not assert that
-native declarations no longer contain `unknown`.
+on the client's schema renderer. Qualify the actual native/discovery workflow;
+this does not claim the model's declarations no longer contain `unknown`.
 
 The existing `codex_navigation_client.py` checks catalog/schema transport and
 scripted discovery/navigation without a model turn. It is not model-visible
@@ -145,17 +149,17 @@ production publication. A passing baseline CI run is not qualification of a new
 client/catalog pair. Preserve existing stores and handles when restarting.
 
 For reference CLI or direct facade discovery, the observer uses the full
-purpose-qualified compatibility catalog, matching the operations those surfaces
+purpose-qualified catalog, matching the operations those surfaces
 expose. Use the returned catalog identity; it may differ from focused MCP.
 
 
 ## Catalog Inventory and Retirement
 
-Measure the actual purpose/mode before comparing catalog overhead. From the
+Measure the actual purpose and output delivery before comparing catalog overhead. From the
 repository root, use the supported locked Python:
 
 ```sh
-PYTHONPATH=. python -m tools.standards_engine.tests.catalog_inventory --purpose authoring --schema-mode native
+PYTHONPATH=. python -m tools.standards_engine.tests.catalog_inventory --purpose authoring --output-schemas on-demand
 PYTHONPATH=. python -m tools.standards_engine.tests.catalog_inventory --catalog /private/tools-list.json
 ```
 
@@ -167,19 +171,16 @@ not the runtime catalog digest. These are not model token or billing measurement
 The command does not open a store, invoke tools or reconfigure the host.
 
 Ordinary development uses application purpose; authoring sessions explicitly use
-its maintenance surface. Native removes embedded schema-description fallbacks but
-retains exact `describe_input` access. Compatibility remains the default for
-unqualified deployments. Record the concrete supported client/version set, native
-workflow evidence and preserved-trace reconciliation, plus CI and independent
-review. Retire compatibility only after those deployments have a qualified direct
-or discovery path or have been explicitly retired. Hypothetical future clients do
-not establish a permanent support obligation. Keep `describe_input` at retirement;
-remove obsolete mode/flag/description branches in a coordinated configuration cutover.
+its maintenance surface. Native input presentation is the only supported path;
+exact `describe_input` access remains. Record the concrete client/build/surface,
+workflow evidence, preserved-trace reconciliation, CI and independent review.
+The owner's native-only decision retires the old input-rendering promise. It does
+not retire eager output delivery or alter existing stored workflow records.
 
 ## Output schemas (interface 42)
 
 The independent host option `--output-schemas eager` remains the default. After
-qualification, `--schema-mode native --output-schemas on-demand` selects the smaller
+qualification, `--output-schemas on-demand` selects the smaller
 catalog: no eager `outputSchema` entries, but exact result contracts through
 `describe_output`. Every omitted schema is bound by its tool metadata digest and
 by the overall catalog digest. This is explicit startup configuration, never a

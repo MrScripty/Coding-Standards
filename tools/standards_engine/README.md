@@ -178,7 +178,7 @@ client versions are in the [agent interface plan](../../docs/plans/standards-age
 The optional `tests/codex_navigation_client.py` harness exercises the actual
 configured Codex app-server client without starting a model turn. Run it with
 the locked Engine Python; it requires `codex` on PATH and `standards-engine`
-configured for this checkout. It checks inline authoring fields and follows
+configured for this checkout. It checks exact reference-preserving authoring contracts and follows
 focused route/read continuations with exact snapshot reuse in an ephemeral
 client thread. It does not modify standards or apply proposals.
 
@@ -206,9 +206,9 @@ normative meaning, review authority and retained user state with their existing 
 ## Agent interface efficiency
 
 Interface 39 supports `route` with `content: {}` for immediate bounded exact
-guidance, request-local evidence reuse in the five focused authoring inputs, and
-host-selected schema presentation. Compatibility remains the default; native mode
-is an opt-in lossless catalog reduction for qualified clients. Existing workflow
+guidance and request-local evidence reuse in the five focused authoring inputs.
+Interface 43 retains those capabilities with native-only input presentation and
+explicit input/output discovery. Existing workflow
 results, retained contexts and explicit review/publication gates remain unchanged.
 See [the contract](PURPOSE-SEPARATION.md#agent-interface-efficiency-interface-39),
 [the implementation plan](../../docs/plans/agent-interface-efficiency/plan.md), and
@@ -231,26 +231,22 @@ Use the supported locked environment for release qualification.
 ## Catalog and transport ownership
 
 `mcp_catalog.tool_catalog` builds tool definitions from an already compiled
-interface plus explicit purpose, focused/advanced selection and schema mode. It
-performs no installation loading, store access or connection management. MCP and
-CLI composition load the interface; `mcp.py` owns protocol handling and stdio
-lifetime. Schema locations and reference closure belong to the contracts package;
-the catalog adapter owns client presentation, including lossless inlining.
+interface plus explicit purpose, focused/advanced selection and output delivery.
+It performs no installation loading, store access or connection management. MCP
+and CLI composition load the interface; `mcp.py` owns protocol and stdio lifetime.
+Schema locations and reference closure belong to the contracts package. Input
+schemas are the exact reference-preserving closure of the selected declaration;
+there is no recursive inliner, size-based representation selector, input-mode enum,
+or embedded schema fallback. The unused structural mapper was removed with its
+only production caller; schema traversal and validation remain independent owners.
 
-The schema-location cleanup preserves interface 39 and the current complete
-catalogs in both schema modes. It repairs literal-data handling and generated
-field names without changing existing wire definitions, handles, Analysis,
-readiness, recovery, evidence normalization or purpose filtering. Restart the
-server after replacing implementation files; preserve all user stores.
-
-Compatibility retirement remains an explicit deployment decision. Qualify each
-supported client/version, including model-visible nested inputs, then transition
-its launch configuration or explicitly retire its support. At that cutover,
-remove the workaround and obsolete mode selection together. A single
-reference-preserving presentation can be selected then; the correctness repair
-does not change clients' configured schema mode or introduce another mode.
-See [the cleanup record](../../docs/plans/schema-projection-cleanup/plan.md).
-
+Interface 43 removes `schema_mode` from Python composition APIs and `--schema-mode`
+from launch and live qualification commands. Both old flag values fail explicitly.
+Remove the argument pair before restarting the server; preserve the independent
+`--output-schemas` choice. See [native-only cutover](PURPOSE-SEPARATION.md#native-only-input-cutover-interface-43)
+and [the active implementation record](../../docs/plans/native-only-mcp/plan.md).
+The earlier [schema cleanup record](../../docs/plans/schema-projection-cleanup/plan.md)
+remains evidence of its original revision, not an alternate live configuration.
 
 ## Bounded input-contract discovery (interface 40)
 
@@ -265,9 +261,9 @@ the Engine; direct facade callers share full-catalog identity with `runtime_info
 The discovery owner uses the existing structural-reference traversal and the
 existing runtime catalog digest. The generated interface remains the schema
 source and validation authority. All public descriptions advertise discovery,
-not only the historical compatibility-workaround operations. Compatible and native
-catalog presentations remain available; removal is still gated on actual client
-qualification. Native request types and retained-state versions are unchanged.
+including every focused authoring operation. Native input presentation and
+explicit discovery are the supported path. Agent evidence-reference variants,
+native domain request types and retained-state versions remain unchanged.
 
 See [the operation contract](PURPOSE-SEPARATION.md#input-contract-discovery-interface-40)
 and [model-visible qualification](tests/INPUT-DISCOVERY-QUALIFICATION.md).
@@ -285,7 +281,8 @@ feedback and an input-discovery continuation before domain effects.
 See [the interface contract](PURPOSE-SEPARATION.md#agent-interaction-quality-interface-41)
 and [the implementation/qualification record](../../docs/plans/agent-interaction-quality/plan.md).
 Restart/reconnect for the coordinated catalog update. Persisted handles and mutation
-contracts are unchanged; compatibility retirement remains deployment-qualified.
+contracts are unchanged. The native-only cutover below changes only presentation
+and launch/composition promises.
 
 ## Output-contract delivery
 

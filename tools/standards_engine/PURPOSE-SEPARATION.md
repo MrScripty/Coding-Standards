@@ -647,14 +647,13 @@ Application and authoring purposes remain host-selected and separate.
 
 ### Catalog presentation
 
-The MCP host selects `--schema-mode compatibility` (default) or `native`.
-Compatibility retains the supported nested-field rendering workaround. Native
-omits the additional schema text in descriptions and selects the smaller complete
-inline/reference input projection per tool. Both use the same canonical definitions
-and validator; output schemas, operations and annotations are unchanged. Runtime
-catalog identity includes the selected representation. There is no inferred client
-capability or automatic fallback. Validate the actual client's rendering before
-opting in; reconnect after replacing the implementation or mode.
+Interface 43 replaces the former host-selected input presentation with one
+reference-preserving canonical schema closure. Input shapes still select the
+purpose-qualified agent variants; schemas retain constraints, literals, recursion
+and local definitions. Neither descriptions nor a second renderer carry a fallback
+schema. Use `describe_input` when the client abbreviates a required field. The
+[native-only cutover](#native-only-input-cutover-interface-43) owns launch and
+consumer replacement; existing evidence and workflow authority is unchanged.
 
 ### Exact routed content
 
@@ -715,7 +714,7 @@ separately from local structural and unit evidence.
 
 `describe_input(operation, selector?, expected_catalog?, offset?, limit?)` is a
 read-only installed-interface observation. It is available in both purposes,
-focused and advanced catalogs, and both schema modes. Arguments stay flat and
+focused and advanced catalogs, with native-only input presentation. Arguments stay flat and
 small so discovering an abbreviated input does not require another large union.
 
 The existing compiled interface selects the operation's purpose/agent input root.
@@ -763,7 +762,7 @@ Discovery failures have their own bounded `input-contract-rejected-result` algeb
 and MCP `isError: true`. Valid results have `isError: false`. Application and
 authoring results carry their purpose but expose no repository paths or private
 state. The reference CLI and direct native facade observers describe their full
-purpose-qualified compatibility catalog, matching their available operation set.
+purpose-qualified catalog, matching their available operation set.
 Their identities can differ from focused MCP; reuse selections only in matching
 catalogs. The native facade runtime_info digest now includes the actual complete
 catalog rather than a list of
@@ -772,8 +771,8 @@ operation metadata, so changed nested definitions invalidate discovery selection
 Interface 40 is an additive observation capability and catalog update. All prior
 native/agent mutation definitions, Analysis, readiness, application/recovery and
 SQLite representations are retained. Restart/reconnect without migrating or
-removing stores. The actual agent-client test—not schema or transport validation—
-controls compatibility retirement. The model must acquire the relevant shapes,
+removing stores. Actual agent-client qualification remains distinct from schema
+or transport validation. The model must acquire the relevant shapes,
 construct valid authoring requests, use single and batched decisions with real
 request-local evidence, and reach explicit readiness without publication or source
 file/schema fixture access. A recursive tail may remain `unknown` when its required
@@ -827,8 +826,8 @@ native/agent mutation declarations, Analysis request/state, handle, readiness,
 application/recovery and SQLite versions are unchanged. Upgrade producer/consumers and
 refresh the catalog together; preserve stores. No old-data conversion, implicit
 negative fact, automatic review, publication or remote operation is introduced.
-Compatibility remains available pending the actual client/support and integration
-evidence. Catalog inventory distinguishes descriptions from schema JSON and does not
+Input compatibility is retired by the interface-43 cutover below. Catalog
+inventory distinguishes descriptions from schema JSON and does not
 claim model-token savings. See the current plan for measured cost/benefit and limits.
 
 ## Output-contract delivery (interface 42)
@@ -857,7 +856,8 @@ of domain result JSON. An oversized whole record has an explicit unsupported
 outcome; no partial schema is presented as complete.
 
 The host can select `--output-schemas eager` (default) or
-`--output-schemas on-demand`, independently of `--schema-mode`. Eager catalogs retain
+`--output-schemas on-demand`. This choice is independent of the native-only input
+contract. Eager catalogs retain
 complete `outputSchema` entries for existing clients. On-demand catalogs omit that
 optional MCP field rather than replacing it with a permissive schema. Each tool
 instead includes `_meta["standards-engine/output-schema-digest"]`, binding its full
@@ -880,3 +880,39 @@ on-demand is qualified on the actual host. Do not infer model-visible size or cl
 validation behavior from serialized catalog bytes alone. The existing client and
 model qualification harnesses now accept `--output-schemas` and retain canonical
 output validation in their observer, without supplying those schemas to the model.
+
+
+## Native-only input cutover (interface 43)
+
+The owner's native-only decision retires the compatibility input-presentation
+promise. `SchemaMode`, the Python `schema_mode` arguments, `--schema-mode`, the
+embedded-schema description list, recursive inlining, and size-based selection
+are removed together. There is no one-value enum or no-op alias. A former native
+launch command is updated by removing its obsolete pair, not by selecting a new
+flag. Old options reject before installation/store work; normal startup retains
+purpose, operation scope and the existing output delivery default.
+
+Catalog projection applies `schema_closure` once to the qualified input root.
+Bounded `describe_input` and `describe_output` remain exact, no-store observers.
+Output delivery stays eager by default and on-demand when explicitly requested;
+omitted output schemas retain their existing digests and output-only invalidation.
+MCP structured content and its matching text form are unchanged.
+
+The interface edition versions launch/composition replacement, not persistence.
+Canonical schema identity, Analysis request 6/state projection 7, handles, stores,
+readiness and recovery formats are unchanged. Refresh catalog-bound selections
+when their digest changes. Observe existing workflow contexts through their usual
+operations; do not migrate or erase them because a presentation was removed.
+
+Live qualification commands have no input-mode option. Reports retain the constant
+native label only as provenance. Current-source replay accepts native recordings
+only when source/catalog requirements match; it cannot reconstruct a retired
+renderer. Keep historical files/verdicts unchanged and use their original pinned
+tooling when necessary. Private observer validation derives exact result contracts
+from canonical roots rather than constructing a duplicate eager catalog.
+
+For the known Codex deployment, keep `--output-schemas on-demand`, remove only the
+old `--schema-mode` pair, restart through the host, and verify the reconnected agent
+catalog. A fresh disposable model-authored path ends at independently verified
+readiness, not publication. Supported-runtime CI and independent material review
+remain separate evidence; earlier successful client runs do not certify new code.

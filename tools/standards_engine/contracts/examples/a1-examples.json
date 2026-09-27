@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 42,
+  "interface_schema_version": 43,
   "examples": [
     {
       "name": "create-snapshot",
@@ -1274,7 +1274,7 @@
       "value": {
         "kind": "input-contract-result",
         "purpose": "application",
-        "interface_version": 40,
+        "interface_version": 43,
         "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "operation": "runtime_info",
         "root": "RuntimeInfoCall",
@@ -1420,7 +1420,7 @@
       "value": {
         "kind": "output-contract-result",
         "purpose": "authoring",
-        "interface_version": 42,
+        "interface_version": 43,
         "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "operation": "review",
         "dialect": "https://json-schema.org/draft/2020-12/schema",

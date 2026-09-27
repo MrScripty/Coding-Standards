@@ -35,8 +35,8 @@ class OutputDeliveryTest(unittest.TestCase):
         cls.interface = AgentToolFacade.load_interface(ROOT)
         cls.examples = json.loads((ROOT/'tools/standards_engine/contracts/examples/a1-examples.json').read_text())['examples']
 
-    def server(self, purpose='authoring', mode='native', delivery='on-demand', advanced=False):
-        server = MCPServer(ROOT, purpose=purpose, schema_mode=mode,
+    def server(self, purpose='authoring', delivery='on-demand', advanced=False):
+        server = MCPServer(ROOT, purpose=purpose,
                            output_schemas=delivery, advanced=advanced)
         self.addCleanup(server.close)
         initialize(server)
@@ -69,9 +69,9 @@ class OutputDeliveryTest(unittest.TestCase):
         return first, docs
 
     def test_catalog_delivery_omits_only_output_advertisements_and_binds_them(self):
-        for purpose, mode, advanced in itertools.product(('authoring', 'application'), ('native','compatibility'), (False, True)):
-            eager = tool_catalog(self.interface, purpose=purpose, schema_mode=mode, advanced=advanced)
-            lean = tool_catalog(self.interface, purpose=purpose, schema_mode=mode, advanced=advanced, output_schemas='on-demand')
+        for purpose, advanced in itertools.product(('authoring', 'application'), (False, True)):
+            eager = tool_catalog(self.interface, purpose=purpose, advanced=advanced)
+            lean = tool_catalog(self.interface, purpose=purpose, advanced=advanced, output_schemas='on-demand')
             self.assertEqual(len(eager), len(lean))
             for before, after in zip(eager, lean):
                 self.assertEqual(before['name'], after['name'])
@@ -85,10 +85,10 @@ class OutputDeliveryTest(unittest.TestCase):
 
     def test_every_result_algebra_reconstructs_in_both_purposes_and_deliveries(self):
         validated = set()
-        for purpose, mode, delivery in itertools.product(('application','authoring'), ('native','compatibility'), ('eager','on-demand')):
-            server = self.server(purpose, mode, delivery, True)
+        for purpose, delivery in itertools.product(('application','authoring'), ('eager','on-demand')):
+            server = self.server(purpose, delivery, True)
             for op in qualified_operations(self.interface.project().agent_tools, purpose):
-                with self.subTest(purpose=purpose, mode=mode, delivery=delivery, operation=op['id']):
+                with self.subTest(purpose=purpose, delivery=delivery, operation=op['id']):
                     page, docs = self.collect(server, {'operation':op['id'], 'limit':16})
                     expected_root = {'type':'object', 'oneOf':[{'$ref':'#/$defs/'+n} for n in op['result_definitions']]}
                     self.assertEqual(json.loads(page['root_schema_json']), expected_root)
@@ -113,6 +113,7 @@ class OutputDeliveryTest(unittest.TestCase):
         self.assertLess(len(json.dumps(tool['inputSchema'])),1800)
         self.assertEqual(tool['inputSchema']['required'],['operation'])
         for field in tool['inputSchema']['properties'].values():
+            field = tool['inputSchema']['$defs'][field['$ref'].rsplit('/', 1)[-1]] if '$ref' in field else field
             self.assertIn(field.get('type'),('string','integer'))
         with patch.object(AgentToolFacade,'open_repository',side_effect=AssertionError('store opened')), \
              patch.object(Path,'read_bytes',side_effect=AssertionError('file read')):
@@ -168,8 +169,8 @@ class OutputDeliveryTest(unittest.TestCase):
         schema=deepcopy(self.interface.schema)
         schema['$defs']['RuntimeInfoResult']['description']='Output-only fixture contract change.'
         changed=compile_contracts(schema,tomllib.loads((ROOT/'tools/standards_engine/contracts/a1-interface.toml').read_text()))
-        original=tool_catalog(self.interface,purpose='authoring',schema_mode='native',output_schemas='on-demand')
-        modified=tool_catalog(changed,purpose='authoring',schema_mode='native',output_schemas='on-demand')
+        original=tool_catalog(self.interface,purpose='authoring',output_schemas='on-demand')
+        modified=tool_catalog(changed,purpose='authoring',output_schemas='on-demand')
         before={t['name']:t for t in original}; after={t['name']:t for t in modified}
         self.assertEqual(before['runtime_info']['inputSchema'],after['runtime_info']['inputSchema'])
         self.assertNotEqual(before['runtime_info']['_meta'],after['runtime_info']['_meta'])
@@ -212,7 +213,7 @@ class OutputDeliveryTest(unittest.TestCase):
             messages=[init,{'jsonrpc':'2.0','method':'notifications/initialized'},request('tools/list',identifier=2),
                       request('tools/call',{'name':'describe_output','arguments':call},identifier=3)]
             process=subprocess.run([sys.executable,'-m','tools.standards_engine.standards_engine.mcp',
-                '--repo-root',str(ROOT),'--purpose','authoring','--schema-mode','native','--output-schemas','on-demand'],
+                '--repo-root',str(ROOT),'--purpose','authoring','--output-schemas','on-demand'],
                 input=''.join(json.dumps(x)+'\n' for x in messages),capture_output=True,text=True,cwd=ROOT,check=True)
             replies=[json.loads(x) for x in process.stdout.splitlines()]
             self.assertTrue(all('outputSchema' not in t for t in replies[1]['result']['tools']))

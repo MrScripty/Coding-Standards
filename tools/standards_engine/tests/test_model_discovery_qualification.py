@@ -204,7 +204,7 @@ class SharedDiscoveryQualificationTest(unittest.TestCase):
         catalog, events, contracts = self.shared_fixture()
         result = assess_model_items(events, 'fixture', catalog, contracts)
         self.assertEqual(result['status'], 'passed', result)
-        self.assertEqual(result['observer_version'], 2)
+        self.assertEqual(result['observer_version'], 3)
         self.assertEqual(result['calls']['describe_input'], 5)
 
     def test_never_discovered_shared_definition_is_rejected_at_use(self):
@@ -309,3 +309,33 @@ class SharedDiscoveryQualificationTest(unittest.TestCase):
         result = assess_model_items(events, 'fixture', catalog, contracts)
         self.assertIn('An observed discovery record was not complete JSON.', result['failures'])
         self.assertEqual(result['status'], 'failed')
+
+
+class CanonicalObserverContractsTest(unittest.TestCase):
+    def test_private_result_validation_needs_no_second_catalog_and_preserves_scope(self):
+        from pathlib import Path
+        from unittest.mock import patch
+        from tools.standards_contracts.standards_contracts import schema_closure
+        from tools.standards_engine.standards_engine.context_projection import qualified_operations
+        from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
+        from tools.standards_engine.standards_engine.tools import AgentToolFacade
+        from tools.standards_engine.tests.codex_discovery_client import result_contracts
+        root = Path(__file__).resolve().parents[3]
+        interface = AgentToolFacade.load_interface(root)
+        projection = interface.project().agent_tools
+        for delivery in ('eager', 'on-demand'):
+            catalog = {t['name']: t for t in tool_catalog(interface, purpose='authoring', output_schemas=delivery)}
+            with patch('tools.standards_engine.tests.codex_discovery_client.tool_catalog',
+                       side_effect=AssertionError('second catalog')):
+                validators = result_contracts(interface, catalog)
+            self.assertEqual(set(validators), set(catalog))
+            for operation in qualified_operations(projection, 'authoring'):
+                if operation['id'] not in catalog:
+                    continue
+                expected = schema_closure({'type': 'object', 'oneOf': [
+                    {'$ref': '#/$defs/' + name} for name in operation['result_definitions']]}, projection['$defs'])
+                self.assertEqual(validators[operation['id']], expected)
+                if delivery == 'eager':
+                    self.assertEqual(validators[operation['id']], catalog[operation['id']]['outputSchema'])
+            self.assertEqual(result_contracts(interface, {'review': catalog['review']}),
+                             {'review': validators['review']})

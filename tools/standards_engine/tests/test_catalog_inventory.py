@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[3]
 class CatalogInventoryTest(unittest.TestCase):
     def test_on_demand_accounting_reports_digest_metadata_separately(self):
         interface = AgentToolFacade.load_interface(ROOT)
-        tools = tool_catalog(interface, purpose='authoring', schema_mode='native', output_schemas='on-demand')
+        tools = tool_catalog(interface, purpose='authoring', output_schemas='on-demand')
         report = measure_catalog(tools)
         self.assertEqual(report['output_schema_json_bytes'], 0)
         self.assertGreater(report['metadata_json_bytes'], 0)
@@ -29,13 +29,11 @@ class CatalogInventoryTest(unittest.TestCase):
 
     def test_native_omits_embedded_fallback_and_application_stays_focused(self):
         interface = AgentToolFacade.load_interface(ROOT)
-        compatible = tool_catalog(interface, purpose='authoring')
-        native = tool_catalog(interface, purpose='authoring', schema_mode='native')
-        application = tool_catalog(interface, purpose='application', schema_mode='native')
-        self.assertGreater(measure_catalog(compatible)['description_characters'],
-                           measure_catalog(native)['description_characters'] * 3)
-        self.assertFalse(any('```json' in t['description'] for t in native))
-        self.assertTrue(any('```json' in t['description'] for t in compatible))
+        native = tool_catalog(interface, purpose='authoring')
+        application = tool_catalog(interface, purpose='application')
+        self.assertFalse(any('```json' in t['description'] for t in native + application))
+        self.assertEqual(measure_catalog(native)['description_characters'],
+                         sum(len(t['description']) for t in native))
         self.assertNotIn('propose', {t['name'] for t in application})
         self.assertIn('relationship_groups', {t['name'] for t in application})
 

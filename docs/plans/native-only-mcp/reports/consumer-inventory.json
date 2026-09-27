@@ -1,0 +1,403 @@
+{
+  "scope": "Bounded runtime/contracts and direct repository/CLI/test consumers. Metadata provenance and negative tests require disposition, not blind string removal.",
+  "base_commit": "52b122683faf05ef85c86c6903a61d54870a9be4",
+  "interface42_overlay_sha256": "6b6b8ffe62c139a889315f6e31f8f1bf078230917c94af9df82ae27632198f8e",
+  "files": [
+    {
+      "path": "tools/standards_contracts/standards_contracts/__init__.py",
+      "sha256": "1be5177759c46411c0712e466f2b9def9923799cd1b72a0b230ef35d1b3ad8ed",
+      "matches": [
+        {
+          "line": 27,
+          "text": "map_schema_children,"
+        },
+        {
+          "line": 64,
+          "text": "\"map_schema_children\","
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_contracts/standards_contracts/schema_structure.py",
+      "sha256": "4bdf1141d86b56349bc876aad3e0c5b87dab692ea9d17fe8a22fe27d65c03c10",
+      "matches": [
+        {
+          "line": 55,
+          "text": "def map_schema_children("
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_contracts/tests/test_schema_structure.py",
+      "sha256": "2d35f97d8c5ddc3320145e37cce44f3e0fdadf0b0045799cc4a1e591dce30ae9",
+      "matches": [
+        {
+          "line": 9,
+          "text": "direct_schema_references, map_schema_children, referenced_definitions,"
+        },
+        {
+          "line": 36,
+          "text": "transformed = map_schema_children(root, lambda node: {\"title\": \"visited\"})"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/mcp.py",
+      "sha256": "f988bf1d26adee80c795357891005f1ac76cf9f692b3dc269bcf7eb37d6c587c",
+      "matches": [
+        {
+          "line": 23,
+          "text": "from .mcp_catalog import SchemaMode, OutputSchemaDelivery, tool_catalog"
+        },
+        {
+          "line": 38,
+          "text": "schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,"
+        },
+        {
+          "line": 43,
+          "text": "self.schema_mode = SchemaMode(schema_mode)"
+        },
+        {
+          "line": 48,
+          "text": "schema_mode=self.schema_mode, output_schemas=self.output_schemas,"
+        },
+        {
+          "line": 244,
+          "text": "\"--schema-mode\", choices=[mode.value for mode in SchemaMode],"
+        },
+        {
+          "line": 245,
+          "text": "default=SchemaMode.COMPATIBILITY.value,"
+        },
+        {
+          "line": 256,
+          "text": "schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas),"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/standards_engine/mcp_catalog.py",
+      "sha256": "a5baa6663c42018dff70d32e0bc07a9fd11803119120be649527953a24c1f56d",
+      "matches": [
+        {
+          "line": 12,
+          "text": "CompiledContracts, local_definition_name, map_schema_children,"
+        },
+        {
+          "line": 137,
+          "text": "class SchemaMode(str, Enum):"
+        },
+        {
+          "line": 153,
+          "text": "schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,"
+        },
+        {
+          "line": 161,
+          "text": "mode = SchemaMode(schema_mode)"
+        },
+        {
+          "line": 180,
+          "text": "if mode is SchemaMode.COMPATIBILITY and name in INPUT_CONTRACT_DESCRIPTIONS:"
+        },
+        {
+          "line": 200,
+          "text": "\"inputSchema\": presented_input_schema("
+        },
+        {
+          "line": 210,
+          "text": "def input_schema(root: dict, definitions: dict) -> dict:"
+        },
+        {
+          "line": 226,
+          "text": "return map_schema_children(value, lambda child: expand(child, active))"
+        },
+        {
+          "line": 232,
+          "text": "return map_schema_children(value, lambda child: expand(child, active))"
+        },
+        {
+          "line": 237,
+          "text": "def presented_input_schema(root: dict, definitions: dict, mode: SchemaMode) -> dict:"
+        },
+        {
+          "line": 245,
+          "text": "if mode is SchemaMode.COMPATIBILITY:"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/agent_efficiency_trace.py",
+      "sha256": "1780067677bd544c2240a1b63f733aa522c05fd6b3d12da1ed1042eebe2fe4ec",
+      "matches": [
+        {
+          "line": 52,
+          "text": "\"--repo-root\", str(self.root), \"--purpose\", self.purpose, \"--schema-mode\", self.mode],"
+        },
+        {
+          "line": 91,
+          "text": "return {\"purpose\": purpose, \"schema_mode\": mode, \"policy_count\": len(targets),"
+        },
+        {
+          "line": 120,
+          "text": "return {\"schema_mode\": mode, \"inline\": totals(inline_calls), \"shared\": totals(shared_calls),"
+        },
+        {
+          "line": 151,
+          "text": "catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose=purpose, schema_mode=mode)"
+        },
+        {
+          "line": 152,
+          "text": "catalogs.append({\"purpose\": purpose, \"schema_mode\": mode,"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/catalog_inventory.py",
+      "sha256": "babf1410d6bc599b5ade1f141acc2a732b6a67df35ad43d452fd7224c1b67cf5",
+      "matches": [
+        {
+          "line": 55,
+          "text": "parser.add_argument('--schema-mode', choices=('compatibility', 'native'), default='compatibility')"
+        },
+        {
+          "line": 68,
+          "text": "schema_mode=args.schema_mode, advanced=args.advanced, output_schemas=args.output_schemas))"
+        },
+        {
+          "line": 70,
+          "text": "'purpose': args.purpose, 'schema_mode': args.schema_mode, 'output_schemas': args.output_schemas, 'advanced': args.advanced}"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/codex_discovery_client.py",
+      "sha256": "6ccc704f0c682b229d7803b399ce3acef0f0624577ece8bd0a00abec717604e9",
+      "matches": [
+        {
+          "line": 403,
+          "text": "catalog = tool_catalog(interface, purpose='authoring', schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas)"
+        },
+        {
+          "line": 406,
+          "text": "interface, purpose='authoring', schema_mode=arguments.schema_mode)}"
+        },
+        {
+          "line": 417,
+          "text": "'-c', f'mcp_servers.{server}.args={json.dumps([\"-P\", \"-m\", \"tools.standards_engine.standards_engine.mcp\", \"--repo-root\", str(fixture), \"--purpose\", \"authoring\", \"--schema-mode\", arguments.schema_mode, \"--output-schemas\", arguments.output_schemas])}',"
+        },
+        {
+          "line": 421,
+          "text": "'requested_surface': arguments.surface, 'schema_mode': arguments.schema_mode, 'output_schemas': arguments.output_schemas,"
+        },
+        {
+          "line": 530,
+          "text": "parser.add_argument('--schema-mode', choices=('native', 'compatibility'), default='native')"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/codex_navigation_client.py",
+      "sha256": "45d09b466dad67ad32fd4456b984b2d7017caa1da8cfe9119d77432a8fedb04b",
+      "matches": [
+        {
+          "line": 20,
+          "text": "async def main(server_name, schema_mode, output_schemas=\"eager\"):"
+        },
+        {
+          "line": 75,
+          "text": "expected = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode, output_schemas=output_schemas)"
+        },
+        {
+          "line": 78,
+          "text": "AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode)}"
+        },
+        {
+          "line": 94,
+          "text": "print(f\"Codex catalog: exact {schema_mode} input/output schemas and descriptions preserved\", flush=True)"
+        },
+        {
+          "line": 185,
+          "text": "parser.add_argument(\"--schema-mode\", choices=(\"compatibility\", \"native\"), default=\"compatibility\","
+        },
+        {
+          "line": 190,
+          "text": "asyncio.run(main(arguments.server, arguments.schema_mode, arguments.output_schemas))"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/replay_discovery_qualification.py",
+      "sha256": "c3bce1a4fac28ce025c1205d4c31929273d42cfd37c98a21fb51a6857c54c574",
+      "matches": [
+        {
+          "line": 202,
+          "text": "mode = previous.get('schema_mode')"
+        },
+        {
+          "line": 207,
+          "text": "catalog = tool_catalog(interface, purpose='authoring', schema_mode=mode, output_schemas=delivery)"
+        },
+        {
+          "line": 208,
+          "text": "validation = {t['name']: t['outputSchema'] for t in tool_catalog(interface, purpose='authoring', schema_mode=mode)}"
+        },
+        {
+          "line": 217,
+          "text": "result['schema_mode'] = mode"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_agent_input_feedback.py",
+      "sha256": "6c6402f03865495447aba4a19b6ad28bee3dd98e7c2ce6a365c9284de51b7bd0",
+      "matches": [
+        {
+          "line": 80,
+          "text": "server = MCPServer(ROOT, purpose=purpose, schema_mode='native')"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_agent_interaction_transport.py",
+      "sha256": "c1acfc7e1d769d78bb0060c30030b5595bae62e12786aa0305666828416980e2",
+      "matches": [
+        {
+          "line": 40,
+          "text": "'--repo-root', str(self.root), '--purpose', purpose, '--schema-mode', 'native',"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_catalog_inventory.py",
+      "sha256": "4d4f3595aa42dd512cb40e6361d2436583ea6b610355904f11b0c8a6e03fcdc1",
+      "matches": [
+        {
+          "line": 15,
+          "text": "tools = tool_catalog(interface, purpose='authoring', schema_mode='native', output_schemas='on-demand')"
+        },
+        {
+          "line": 33,
+          "text": "native = tool_catalog(interface, purpose='authoring', schema_mode='native')"
+        },
+        {
+          "line": 34,
+          "text": "application = tool_catalog(interface, purpose='application', schema_mode='native')"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_discovered_workflow.py",
+      "sha256": "4ef9c26446a7f7326b9e956bd5af9a6ce0a644eeb023501be7e6760fe7c70686",
+      "matches": [
+        {
+          "line": 38,
+          "text": "server = MCPServer(self.root, purpose='authoring', schema_mode=mode, output_schemas=delivery)"
+        },
+        {
+          "line": 56,
+          "text": "'--purpose', 'authoring', '--schema-mode', mode, '--output-schemas', delivery],"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_input_discovery.py",
+      "sha256": "be5b8df24910d9e14e6963120888ddc910a2117afd11b9110b384ebd6c174869",
+      "matches": [
+        {
+          "line": 39,
+          "text": "server = MCPServer(ROOT, purpose=purpose, schema_mode=mode, advanced=advanced)"
+        },
+        {
+          "line": 257,
+          "text": "catalogs = [tool_catalog(interface, purpose='authoring', schema_mode='native')"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_output_delivery.py",
+      "sha256": "19c4a378cbe8eab4910e094911c64c97c360cc0a29f6bd1e06e553c007727375",
+      "matches": [
+        {
+          "line": 39,
+          "text": "server = MCPServer(ROOT, purpose=purpose, schema_mode=mode,"
+        },
+        {
+          "line": 73,
+          "text": "eager = tool_catalog(self.interface, purpose=purpose, schema_mode=mode, advanced=advanced)"
+        },
+        {
+          "line": 74,
+          "text": "lean = tool_catalog(self.interface, purpose=purpose, schema_mode=mode, advanced=advanced, output_schemas='on-demand')"
+        },
+        {
+          "line": 171,
+          "text": "original=tool_catalog(self.interface,purpose='authoring',schema_mode='native',output_schemas='on-demand')"
+        },
+        {
+          "line": 172,
+          "text": "modified=tool_catalog(changed,purpose='authoring',schema_mode='native',output_schemas='on-demand')"
+        },
+        {
+          "line": 215,
+          "text": "'--repo-root',str(ROOT),'--purpose','authoring','--schema-mode','native','--output-schemas','on-demand'],"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_replay_discovery_qualification.py",
+      "sha256": "61041452995baa1fab415cd693869fff1435b9837f305abf9b78b0e4ad6461d8",
+      "matches": [
+        {
+          "line": 62,
+          "text": "'fixture_main': MAIN, 'schema_mode': 'native', 'requested_model': 'synthetic-model'}"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_replay_discovery_workflow.py",
+      "sha256": "cba8093c7bcd0a79c867f953eb886671c0f2e69318a2975fb5f087e8379bf4db",
+      "matches": [
+        {
+          "line": 39,
+          "text": "server = MCPServer(fixture, purpose='authoring', schema_mode='native', output_schemas=delivery)"
+        },
+        {
+          "line": 119,
+          "text": "'fixture_main': main, 'schema_mode': 'native', 'output_schemas': delivery, 'requested_model': 'synthetic-no-model',"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_schema_locations.py",
+      "sha256": "ef426782ff128aeb986f18916b7eebae9901a31867ff8d2e161f0a219da281fb",
+      "matches": [
+        {
+          "line": 31,
+          "text": "tool = tool_catalog(compiled, purpose=purpose, schema_mode=mode)[0]"
+        },
+        {
+          "line": 52,
+          "text": "tool = tool_catalog(compiled, purpose='authoring', schema_mode=mode)[0]"
+        }
+      ]
+    },
+    {
+      "path": "tools/standards_engine/tests/test_schema_presentation.py",
+      "sha256": "c8d40a257bde68c309136504328d22cadc17de1de276839d4a56237ce203ab81",
+      "matches": [
+        {
+          "line": 26,
+          "text": "(purpose, mode): {t['name']: t for t in tool_catalog(cls.interface, purpose=purpose, advanced=True, schema_mode=mode)}"
+        },
+        {
+          "line": 85,
+          "text": "servers = [MCPServer(ROOT, purpose='authoring', schema_mode=mode)"
+        },
+        {
+          "line": 101,
+          "text": "MCPServer(ROOT, purpose='authoring', schema_mode='guessed-client')"
+        }
+      ]
+    }
+  ]
+}

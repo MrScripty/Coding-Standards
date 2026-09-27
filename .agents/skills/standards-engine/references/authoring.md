@@ -27,8 +27,8 @@ been acquired. For a complete selected schema, collect records by name under
 A single oversized record returns a typed unsupported result, never shortened data.
 
 `describe_input` covers all published inputs, including `propose`, `revise`,
-`resolve_workflow`, `resolve_many` and `review`. It is also available in native
-schema mode. Full schemas in catalog metadata are not proof of model-visible
+`resolve_workflow`, `resolve_many` and `review`. Input presentation is native-only;
+exact discovery remains available when declarations are abbreviated. Full schemas in catalog metadata are not proof of model-visible
 access; use this explicit discovery path when fields are abbreviated. Discovered
 constraints do not confer decisions, evidence sufficiency or publication authority.
 

@@ -13,11 +13,12 @@ import tempfile
 from pathlib import Path
 from jsonschema import Draft202012Validator
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
+from tools.standards_engine.tests.codex_discovery_client import result_contracts
 
 ROOT = Path(__file__).resolve().parents[3]
 
 
-async def main(server_name, schema_mode, output_schemas="eager"):
+async def main(server_name, output_schemas="eager"):
     with tempfile.TemporaryFile(mode="w+") as log:
         process = await asyncio.create_subprocess_exec(
             "codex",
@@ -72,10 +73,10 @@ async def main(server_name, schema_mode, output_schemas="eager"):
             toolmap = server["tools"]
             print("Codex tools:", sorted(toolmap), flush=True)
             from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
-            expected = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode, output_schemas=output_schemas)
+            interface = AgentToolFacade.load_interface(ROOT)
+            expected = tool_catalog(interface, purpose='authoring', output_schemas=output_schemas)
             examples = json.loads((ROOT / "tools/standards_engine/contracts/examples/a1-examples.json").read_text())["examples"]
-            validation = {t['name']: t['outputSchema'] for t in tool_catalog(
-                AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode)}
+            validation = result_contracts(interface, {tool['name']: tool for tool in expected})
             for tool in expected:
                 observed = toolmap[tool["name"]]
                 for field in ("inputSchema", "outputSchema", "description"):
@@ -91,7 +92,7 @@ async def main(server_name, schema_mode, output_schemas="eager"):
                 validator = Draft202012Validator(toolmap[name]["inputSchema"])
                 for fixture in (e["value"] for e in examples if e["definition"] == definition):
                     validator.validate(fixture)
-            print(f"Codex catalog: exact {schema_mode} input/output schemas and descriptions preserved", flush=True)
+            print(f"Codex catalog: exact native input/output schemas and descriptions preserved", flush=True)
 
             async def call(name, arguments):
                 r = await request(
@@ -182,9 +183,7 @@ async def main(server_name, schema_mode, output_schemas="eager"):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--server", default="standards-authoring", help="Configured authoring-purpose MCP registration")
-    parser.add_argument("--schema-mode", choices=("compatibility", "native"), default="compatibility",
-                        help="Expected presentation of the already configured server; does not reconfigure it")
     parser.add_argument("--output-schemas", choices=("eager", "on-demand"), default="eager",
                         help="Expected delivery of the configured server; does not reconfigure it")
     arguments = parser.parse_args()
-    asyncio.run(main(arguments.server, arguments.schema_mode, arguments.output_schemas))
+    asyncio.run(main(arguments.server, arguments.output_schemas))

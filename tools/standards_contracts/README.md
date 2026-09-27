@@ -74,8 +74,8 @@ reachability analysis, post-validation union selectors, MCP schema presentation
 and CLI inspection share that owner. Property maps are traversed through their
 values; field names such as `$ref` are ordinary names. `const`, `enum` and
 `default` payloads are copied as instance data, never dereferenced. The traversal
-also recognizes the MCP adapter's emitted `allOf` for reference siblings; this
-neither admits `allOf` in canonical contracts nor implements its evaluation.
+also recognizes `allOf` as a structural schema position; this neither admits
+`allOf` in canonical contracts nor implements its evaluation.
 Canonical admission remains closed in the compiler. Validation and reference
 semantics remain with jsonschema/referencing, including recursive validation.
 
@@ -100,3 +100,14 @@ valid branch or accepts input. Declared field pointers/constraints are projected
 without instance values or arbitrary map keys. Missing fields are deduplicated;
 item, byte and work bounds are explicit. The Engine facade owns its public rejection
 and discovery wrapper. No diagnostic work runs for a valid request.
+
+
+## Native-only catalog consumer
+
+Interface 43 consumes `schema_closure` directly for MCP inputs. The former
+`map_schema_children` export and transform-only tests are removed with their sole
+production consumer, the recursive input inliner. Structural location/reference
+APIs remain retrieval-free and preserve literals, annotations, schema-bearing
+property names and recursive closure. Recognizing `allOf` as a structural schema
+position does not admit it to the compiler's canonical vocabulary or implement
+constraint evaluation; `jsonschema` remains the independent semantics owner.

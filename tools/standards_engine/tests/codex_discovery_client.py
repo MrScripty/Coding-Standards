@@ -22,6 +22,7 @@ from jsonschema import Draft202012Validator
 
 from tools.standards_contracts.standards_contracts import schema_closure
 from tools.standards_engine.standards_engine.context_projection import qualified_operations
+from tools.standards_engine.standards_engine.contract_discovery import operation_output_schema
 
 from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.standards_engine.runtime_identity import RuntimeIdentity
@@ -31,7 +32,7 @@ from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 
 ROOT = Path(__file__).resolve().parents[3]
 AUTHORING_OPERATIONS = ('propose', 'revise', 'resolve_workflow', 'resolve_many', 'review')
-OBSERVER_VERSION = 2
+OBSERVER_VERSION = 3
 RUNTIME_FIELDS = ('instance_id', 'purpose', 'catalog_digest', 'schema_digest',
                   'implementation_digest', 'interface_version')
 
@@ -316,6 +317,14 @@ def input_contracts(interface, toolmap: dict) -> dict:
         if operation['id'] in toolmap}
 
 
+def result_contracts(interface, toolmap: dict) -> dict:
+    """Private observer validation from canonical roots, never model context."""
+    projection = interface.project().agent_tools
+    return {operation['id']: operation_output_schema(operation, projection['$defs'])
+            for operation in qualified_operations(projection, 'authoring')
+            if operation['id'] in toolmap}
+
+
 def fixture_contents(prefix: str) -> dict[str, tuple[str, str]]:
     return {**{f'{prefix}-{i}': (f'Discovery Test {i}',
                'This isolated test scope requires an explicit owner decision.') for i in range(3)},
@@ -400,10 +409,9 @@ async def run(arguments) -> dict:
     prompt = scenario(server, fixture, prefix)
     (output / 'task.txt').write_text(prompt)
     interface = AgentToolFacade.load_interface(fixture)
-    catalog = tool_catalog(interface, purpose='authoring', schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas)
+    catalog = tool_catalog(interface, purpose='authoring', output_schemas=arguments.output_schemas)
     toolmap = {tool['name']: tool for tool in catalog}
-    validation = {t['name']: t['outputSchema'] for t in tool_catalog(
-        interface, purpose='authoring', schema_mode=arguments.schema_mode)}
+    validation = result_contracts(interface, toolmap)
     contracts = input_contracts(interface, toolmap)
     identity = RuntimeIdentity(fixture, 'authoring', interface, catalog).metadata()
     original_main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
@@ -414,11 +422,11 @@ async def run(arguments) -> dict:
     # Run-owned fixture coordinates take precedence over operator surface choices.
     command.extend(['-c', 'analytics.enabled=false',
         '-c', f'mcp_servers.{server}.command={json.dumps(sys.executable)}',
-        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--schema-mode", arguments.schema_mode, "--output-schemas", arguments.output_schemas])}',
+        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--output-schemas", arguments.output_schemas])}',
         '-c', f'mcp_servers.{server}.env.PYTHONPATH={json.dumps(str(ROOT))}'])
     events = []
     report = {'observer_version': OBSERVER_VERSION, 'status': 'unavailable', 'client_version': version, 'requested_model': arguments.model,
-              'requested_surface': arguments.surface, 'schema_mode': arguments.schema_mode, 'output_schemas': arguments.output_schemas,
+              'requested_surface': arguments.surface, 'schema_mode': 'native', 'output_schemas': arguments.output_schemas,
               'catalog_digest': identity['catalog_digest'], 'fixture_main': original_main,
               'server': server, 'fixture_prefix': prefix}
     process = None
@@ -527,7 +535,6 @@ def main(argv=None) -> int:
     parser.add_argument('--surface', required=True, help='Operator-selected actual client surface, e.g. code-mode; recorded, not inferred from a catalog.')
     parser.add_argument('--evidence-dir', required=True, type=Path, help='New directory; preserves the disposable repository and private transcript.')
     parser.add_argument('--codex', default='codex')
-    parser.add_argument('--schema-mode', choices=('native', 'compatibility'), default='native')
     parser.add_argument('--output-schemas', choices=('eager', 'on-demand'), default='eager')
     parser.add_argument('--codex-config', action='append', default=[], help='Explicit current-client configuration override; never written to user configuration.')
     args = parser.parse_args(argv)

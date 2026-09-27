@@ -1,5 +1,11 @@
 # On-demand output-contract delivery
 
+> **Scoped supersession:** [Native-only MCP](../native-only-mcp/plan.md) now owns
+> input presentation and launch cutover. Its native-only decision replaces this
+> plan's compatibility-retention/mode guidance, not its other features, historical
+> measurements or outstanding evidence. Output eager/on-demand delivery remains
+> independently supported.
+
 Status: Verifying
 Acceptance: pending
 Phase: local implementation and verification complete

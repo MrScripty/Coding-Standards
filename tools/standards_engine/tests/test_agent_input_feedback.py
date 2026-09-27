@@ -77,7 +77,7 @@ class AgentInputFeedbackTest(unittest.TestCase):
 
     def test_mcp_envelope_is_error_and_metadata_observers_use_safe_feedback(self):
         for purpose in ('authoring', 'application'):
-            server = MCPServer(ROOT, purpose=purpose, schema_mode='native')
+            server = MCPServer(ROOT, purpose=purpose)
             self.addCleanup(server.close)
             initialize(server)
             for operation, arguments in (('runtime_info', {'expected_catalog': 'SECRET'}),

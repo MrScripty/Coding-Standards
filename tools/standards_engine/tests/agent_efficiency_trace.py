@@ -32,8 +32,8 @@ def encoded_bytes(value: object) -> int:
 class ColdClient:
     """Only protocol transport and measurement; decisions remain fixture-owned."""
 
-    def __init__(self, root: Path, purpose: str, mode: str):
-        self.root, self.purpose, self.mode = root, purpose, mode
+    def __init__(self, root: Path, purpose: str):
+        self.root, self.purpose = root, purpose
         self.calls: list[dict] = []
 
     def call(self, name: str, arguments: dict, *, rejected: bool = False) -> dict:
@@ -49,7 +49,7 @@ class ColdClient:
         ]
         response = subprocess.run(
             [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-             "--repo-root", str(self.root), "--purpose", self.purpose, "--schema-mode", self.mode],
+             "--repo-root", str(self.root), "--purpose", self.purpose],
             input="".join(json.dumps(item) + "\n" for item in messages),
             text=True, capture_output=True, check=True, env=os.environ.copy(),
         )
@@ -72,8 +72,8 @@ def totals(calls: list[dict]) -> dict:
             "result_bytes": sum(item["result_bytes"] for item in calls)}
 
 
-def route_trace(root: Path, snapshot: dict, purpose: str, mode: str) -> dict:
-    client = ColdClient(root, purpose, mode)
+def route_trace(root: Path, snapshot: dict, purpose: str) -> dict:
+    client = ColdClient(root, purpose)
     arguments = {"facts": {}, "snapshot": snapshot}
     selected = client.call("route", arguments)
     targets = list(dict.fromkeys(item["target"] for item in selected["reading_plan"]
@@ -88,14 +88,14 @@ def route_trace(root: Path, snapshot: dict, purpose: str, mode: str) -> dict:
     assert composed["content"]["items"] == grouped["items"]
     assert "next" not in composed["content"]
     assert composed["content"]["total"] == len(targets)
-    return {"purpose": purpose, "schema_mode": mode, "policy_count": len(targets),
+    return {"purpose": purpose, "schema_mode": "native", "policy_count": len(targets),
             "unresolved_questions": len(selected["unresolved_questions"]),
             "separate": totals(split_calls), "composed": totals(client.calls), "exact_content_equal": True}
 
 
-def evidence_trace(root: Path, mode: str) -> dict:
-    client = ColdClient(root, "authoring", mode)
-    pending = client.call("propose", {"change_set": topic_change(root, "evidence-trace-" + mode, 4)})
+def evidence_trace(root: Path) -> dict:
+    client = ColdClient(root, "authoring")
+    pending = client.call("propose", {"change_set": topic_change(root, "evidence-trace-native", 4)})
     arguments = {"context": pending["context"],
                  "submissions": [decision(root, item["obligation"]) for item in pending["work"]["items"]]}
     client.calls.clear()
@@ -117,7 +117,7 @@ def evidence_trace(root: Path, mode: str) -> dict:
     reconstructed = client.call("workflow_status", {"context": ready["context"]})
     assert reconstructed["status"] == "ready"
     assert reconstructed["context"] == ready["context"]
-    return {"schema_mode": mode, "inline": totals(inline_calls), "shared": totals(shared_calls),
+    return {"schema_mode": "native", "inline": totals(inline_calls), "shared": totals(shared_calls),
             "exact_analysis_and_readiness_equal": True, "cold_readback": True,
             "previous_request_alias_rejected": True, "final_status": "ready", "published": False}
 
@@ -139,21 +139,19 @@ def measure() -> dict:
                     SnapshotFile(SnapshotPath.parse(path), content)
                     for path, content in PurposeProjectionTest.files.items())))
                 snapshot = engine._snapshot_handle(captured.snapshot)
-            for mode in ("compatibility", "native"):
-                reports.extend(route_trace(root, snapshot, purpose, mode)
-                               for purpose in ("application", "authoring"))
-                evidence_reports.append(evidence_trace(root, mode))
+            reports.extend(route_trace(root, snapshot, purpose)
+                           for purpose in ("application", "authoring"))
+            evidence_reports.append(evidence_trace(root))
         finally:
             PurposeProjectionTest.tearDownClass()
     catalogs = []
     for purpose in ("application", "authoring"):
-        for mode in ("compatibility", "native"):
-            catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose=purpose, schema_mode=mode)
-            catalogs.append({"purpose": purpose, "schema_mode": mode,
-                             "catalog_bytes": encoded_bytes(catalog), "tool_count": len(catalog),
-                             "description_bytes": sum(len(t["description"].encode()) for t in catalog),
-                             "input_schema_bytes": sum(encoded_bytes(t["inputSchema"]) for t in catalog),
-                             "output_schema_bytes": sum(encoded_bytes(t["outputSchema"]) for t in catalog)})
+        catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose=purpose)
+        catalogs.append({"purpose": purpose, "schema_mode": "native",
+                         "catalog_bytes": encoded_bytes(catalog), "tool_count": len(catalog),
+                         "description_bytes": sum(len(t["description"].encode()) for t in catalog),
+                         "input_schema_bytes": sum(encoded_bytes(t["inputSchema"]) for t in catalog),
+                         "output_schema_bytes": sum(encoded_bytes(t["outputSchema"]) for t in catalog)})
     return {"python": sys.version, "transport": "cold-mcp-stdio", "model_turns": 0,
             "comparison": "same-build, same-snapshot and exact immutable analysis/readiness",
             "routing": reports, "evidence": evidence_reports, "catalogs": catalogs}

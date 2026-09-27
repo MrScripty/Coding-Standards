@@ -18,6 +18,9 @@ Engine request into direct file, SQL, or Git mutations.
 
 Use the `standards-authoring` MCP tools (or the host's explicitly configured authoring-purpose registration). The client supplies each operation's
 current input schema; call the named tool directly with structured arguments.
+Input presentation is native-only. Use `describe_input` for abbreviated fields;
+there is no embedded-schema fallback or input-mode launch option. Preserve the
+host's separate eager/on-demand output-delivery choice.
 Tool-name prefixes vary by client; operation names match the Engine contract
 (for example, `route`, `read`, and `propose`).
 

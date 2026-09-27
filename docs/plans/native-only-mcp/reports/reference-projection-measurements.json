@@ -1,0 +1,81 @@
+{
+  "scope": "Pure catalog substitution, no production code edited or model/client run. Current fixture agreement is not complete semantic or deployment qualification.",
+  "interface_version": 42,
+  "base_commit": "52b122683faf05ef85c86c6903a61d54870a9be4",
+  "overlay_sha256": "6b6b8ffe62c139a889315f6e31f8f1bf078230917c94af9df82ae27632198f8e",
+  "comparisons": 1040,
+  "measurements": [
+    {
+      "purpose": "authoring",
+      "advanced": false,
+      "delivery": "eager",
+      "tools": 23,
+      "before_bytes": 708288,
+      "reference_only_bytes": 712662,
+      "delta_bytes": 4374
+    },
+    {
+      "purpose": "authoring",
+      "advanced": false,
+      "delivery": "on-demand",
+      "tools": 23,
+      "before_bytes": 104285,
+      "reference_only_bytes": 108659,
+      "delta_bytes": 4374
+    },
+    {
+      "purpose": "authoring",
+      "advanced": true,
+      "delivery": "eager",
+      "tools": 40,
+      "before_bytes": 1027382,
+      "reference_only_bytes": 1034331,
+      "delta_bytes": 6949
+    },
+    {
+      "purpose": "authoring",
+      "advanced": true,
+      "delivery": "on-demand",
+      "tools": 40,
+      "before_bytes": 178268,
+      "reference_only_bytes": 185217,
+      "delta_bytes": 6949
+    },
+    {
+      "purpose": "application",
+      "advanced": false,
+      "delivery": "eager",
+      "tools": 10,
+      "before_bytes": 82266,
+      "reference_only_bytes": 83514,
+      "delta_bytes": 1248
+    },
+    {
+      "purpose": "application",
+      "advanced": false,
+      "delivery": "on-demand",
+      "tools": 10,
+      "before_bytes": 14656,
+      "reference_only_bytes": 15904,
+      "delta_bytes": 1248
+    },
+    {
+      "purpose": "application",
+      "advanced": true,
+      "delivery": "eager",
+      "tools": 11,
+      "before_bytes": 97914,
+      "reference_only_bytes": 99574,
+      "delta_bytes": 1660
+    },
+    {
+      "purpose": "application",
+      "advanced": true,
+      "delivery": "on-demand",
+      "tools": 11,
+      "before_bytes": 17700,
+      "reference_only_bytes": 19360,
+      "delta_bytes": 1660
+    }
+  ]
+}

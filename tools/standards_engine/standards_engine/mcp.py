@@ -20,7 +20,7 @@ from .compiled_cache import CompiledSnapshotCache
 from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
-from .mcp_catalog import SchemaMode, OutputSchemaDelivery, tool_catalog
+from .mcp_catalog import OutputSchemaDelivery, tool_catalog
 
 
 PROTOCOL_VERSION = "2025-11-25"
@@ -35,17 +35,15 @@ class ProtocolError(Exception):
 
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
-                 schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,
                  output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
-        self.schema_mode = SchemaMode(schema_mode)
         self.output_schemas = OutputSchemaDelivery(output_schemas)
         self._interface = AgentToolFacade.load_interface(self.root)
         self.tools = tool_catalog(
             self._interface, purpose=self.purpose, advanced=advanced,
-            schema_mode=self.schema_mode, output_schemas=self.output_schemas,
+            output_schemas=self.output_schemas,
         )
         self.names = {tool["name"] for tool in self.tools}
         self._runtime_identity = RuntimeIdentity(self.root, self.purpose, self._interface, self.tools)
@@ -241,11 +239,6 @@ def main() -> int:
         help="Expose additional operations within the configured purpose.",
     )
     parser.add_argument(
-        "--schema-mode", choices=[mode.value for mode in SchemaMode],
-        default=SchemaMode.COMPATIBILITY.value,
-        help="Use compatibility rendering (default), or native reference schemas for a qualified client.",
-    )
-    parser.add_argument(
         "--output-schemas", choices=[choice.value for choice in OutputSchemaDelivery],
         default=OutputSchemaDelivery.EAGER.value,
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
@@ -253,7 +246,7 @@ def main() -> int:
     arguments = parser.parse_args()
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
-                  schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas),
+                  output_schemas=arguments.output_schemas),
         sys.stdin,
         sys.stdout,
     )

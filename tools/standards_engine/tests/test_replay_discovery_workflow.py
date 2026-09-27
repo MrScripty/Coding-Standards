@@ -36,7 +36,7 @@ class ReplayDiscoveryWorkflowTest(unittest.TestCase):
             fixture = evidence_dir / 'repository'
             _clone_tracked_worktree(fixture)
             main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
-            server = MCPServer(fixture, purpose='authoring', schema_mode='native', output_schemas=delivery)
+            server = MCPServer(fixture, purpose='authoring', output_schemas=delivery)
             self.addCleanup(server.close)
             initialize(server)
             trace = TraceWriter()

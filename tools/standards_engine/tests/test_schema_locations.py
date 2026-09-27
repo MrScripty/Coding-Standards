@@ -9,15 +9,15 @@ from unittest.mock import patch
 
 from jsonschema import Draft202012Validator
 
-from tools.standards_contracts.standards_contracts import compile_contracts
+from tools.standards_contracts.standards_contracts import compile_contracts, schema_closure
 from tools.standards_contracts.tests.schema_location_fixtures import inputs
-from tools.standards_engine.standards_engine.mcp_catalog import input_schema, tool_catalog
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 
 ROOT = Path(__file__).resolve().parents[3]
 
 
 class CatalogSchemaLocationsTest(unittest.TestCase):
-    def test_public_catalog_preserves_literal_fields_and_constraints_in_both_modes(self):
+    def test_public_catalog_preserves_literal_fields_and_constraints_for_both_purposes(self):
         for keyword, payload in (("const", {"$ref": "#/$defs/Text"}),
                                  ("enum", [{"$ref": "#/$defs/Text"}, {"$ref": "literal"}])):
             schema, interface = inputs()
@@ -26,20 +26,19 @@ class CatalogSchemaLocationsTest(unittest.TestCase):
             before = deepcopy(schema)
             compiled = compile_contracts(schema, interface)
             for purpose in ("authoring", "application"):
-                for mode in ("compatibility", "native"):
-                    with self.subTest(keyword=keyword, purpose=purpose, mode=mode):
-                        tool = tool_catalog(compiled, purpose=purpose, schema_mode=mode)[0]
-                        projected = tool["inputSchema"]
-                        Draft202012Validator.check_schema(projected)
-                        self.assertEqual(projected["properties"]["payload"], {keyword: payload})
-                        original = Draft202012Validator({**root, "$defs": schema["$defs"]})
-                        validator = Draft202012Validator(projected)
-                        for instance, expected in (({}, True), ({"$ref": "ordinary data"}, True),
-                            ({"payload": {"$ref": "#/$defs/Text"}}, True),
-                            ({"payload": {"type": "string", "minLength": 1}}, False),
-                            ({"$ref": 1}, False), ({"unknown": True}, False)):
-                            self.assertEqual(original.is_valid(instance), expected)
-                            self.assertEqual(validator.is_valid(instance), expected)
+                with self.subTest(keyword=keyword, purpose=purpose):
+                    tool = tool_catalog(compiled, purpose=purpose)[0]
+                    projected = tool["inputSchema"]
+                    Draft202012Validator.check_schema(projected)
+                    self.assertEqual(projected["properties"]["payload"], {keyword: payload})
+                    original = Draft202012Validator({**root, "$defs": schema["$defs"]})
+                    validator = Draft202012Validator(projected)
+                    for instance, expected in (({}, True), ({"$ref": "ordinary data"}, True),
+                        ({"payload": {"$ref": "#/$defs/Text"}}, True),
+                        ({"payload": {"type": "string", "minLength": 1}}, False),
+                        ({"$ref": 1}, False), ({"unknown": True}, False)):
+                        self.assertEqual(original.is_valid(instance), expected)
+                        self.assertEqual(validator.is_valid(instance), expected)
             self.assertEqual(schema, before)
 
     def test_default_annotation_is_preserved_and_never_injects_a_value(self):
@@ -48,10 +47,9 @@ class CatalogSchemaLocationsTest(unittest.TestCase):
         root = schema["$defs"]["RuntimeInfoCall"]
         root["properties"]["payload"] = {"default": annotation}
         compiled = compile_contracts(schema, interface)
-        for mode in ("compatibility", "native"):
-            tool = tool_catalog(compiled, purpose='authoring', schema_mode=mode)[0]
-            self.assertEqual(tool["inputSchema"]["properties"]["payload"]["default"], annotation)
-            self.assertTrue(Draft202012Validator(tool["inputSchema"]).is_valid({}))
+        tool = tool_catalog(compiled, purpose='authoring')[0]
+        self.assertEqual(tool["inputSchema"]["properties"]["payload"]["default"], annotation)
+        self.assertTrue(Draft202012Validator(tool["inputSchema"]).is_valid({}))
 
     def test_cli_closure_matches_schema_locations(self):
         spec = importlib.util.spec_from_file_location("schema_cli_probe", ROOT / ".agents/skills/standards-engine/scripts/invoke.py")
@@ -68,7 +66,7 @@ class CatalogSchemaLocationsTest(unittest.TestCase):
             "$ref": {"type": "string"}, "children": {"type": "array", "items": {"$ref": "#/$defs/Node"}}},
             "additionalProperties": False, "default": {"$ref": "#/$defs/Missing"}}}
         root = {"$ref": "#/$defs/Node", "required": ["$ref"]}
-        projected = input_schema(root, definitions)
+        projected = schema_closure(root, definitions)
         validator = Draft202012Validator(projected)
         for instance, expected in (({"$ref": "a", "children": [{"$ref": "b"}]}, True),
                                    ({"$ref": "a", "children": [{}]}, True),
@@ -86,7 +84,7 @@ class CatalogSchemaLocationsTest(unittest.TestCase):
             second = tool_catalog(compiled, purpose="authoring")
         self.assertEqual(compiled.schema, before)
         self.assertEqual(second[0]["inputSchema"]["properties"]["name"],
-                         {"type": "string", "minLength": 1})
+                         {"$ref": "#/$defs/Text"})
 
     def test_literal_values_survive_each_supported_container(self):
         literal = {"$ref": "#/$defs/NotASchema", "properties": {"$id": ["literal"]}}
@@ -103,7 +101,7 @@ class CatalogSchemaLocationsTest(unittest.TestCase):
             for index, (wrap, instance) in enumerate(wrappers):
                 with self.subTest(keyword=keyword, wrapper=index):
                     original = wrap(constraint)
-                    projected = input_schema(original, {})
+                    projected = schema_closure(original, {})
                     self.assertEqual(projected, {**original, "$defs": {}})
                     for value, expected in ((instance(literal), True), (instance({"$ref": "different"}), False)):
                         self.assertEqual(Draft202012Validator(original).is_valid(value), expected)

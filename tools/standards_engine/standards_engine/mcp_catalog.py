@@ -1,16 +1,14 @@
 """Pure MCP tool-catalog projection of an already compiled Engine interface.
 
-Client rendering choices live here; loading installations, connections, domain
+Tool advertisement lives here; loading installations, connections, domain
 execution and result framing remain with their respective composition owners.
 """
 from __future__ import annotations
 
 from enum import Enum
-import json
 
 from tools.standards_contracts.standards_contracts import (
-    CompiledContracts, local_definition_name, map_schema_children,
-    referenced_definitions, schema_closure,
+    CompiledContracts, schema_closure,
 )
 from .context_projection import Purpose, qualified_operations
 from .contract_discovery import (operation_output_schema, output_schema_digest,
@@ -61,11 +59,6 @@ FOCUSED_OPERATIONS = frozenset(
         "resume",
     }
 )
-# These inputs contain nested authoring variants that supported clients may
-# abbreviate as `unknown` even after reference expansion. Preserve the exact
-# input contract in description text, which is visible independently of their
-# type renderer. This is generated documentation, never a second validator.
-INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
     "relationship_groups": "Discover registered relationship-group IDs, meanings and traversal policies in one snapshot. Omit snapshot to capture authority; reuse it for related. Default 8, maximum 32 whole records, 16 KiB per page. Follow next exactly. A registered group may have no edges for a target.",
     "describe_output": "Retrieve exact structured-result contracts only when needed. Start with operation; follow next for all records or select a referenced definition with expected_catalog. Combine root_schema_json with all records as $defs to validate a result. schema_digest binds the full output contract, not an approval. Ordinary successful results do not require this extra call.",
@@ -134,13 +127,6 @@ APPLICATION_DESCRIPTIONS = {
 }
 
 
-class SchemaMode(str, Enum):
-    """Host-selected presentation; both modes retain canonical validation."""
-
-    COMPATIBILITY = "compatibility"
-    NATIVE = "native"
-
-
 class OutputSchemaDelivery(str, Enum):
     """Host-selected transmission of an unchanged canonical result contract."""
 
@@ -150,7 +136,6 @@ class OutputSchemaDelivery(str, Enum):
 
 def tool_catalog(
     interface: CompiledContracts, *, purpose: Purpose | str, advanced: bool = False,
-    schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,
     output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
 ) -> list[dict]:
     # Loading the installation belongs to the caller; this projection is pure.
@@ -158,7 +143,6 @@ def tool_catalog(
     definitions = contract["$defs"]
     result = []
     purpose = Purpose(purpose)
-    mode = SchemaMode(schema_mode)
     delivery = OutputSchemaDelivery(output_schemas)
     for operation in qualified_operations(contract, purpose):
         name = operation["id"]
@@ -177,18 +161,6 @@ def tool_catalog(
                 "every entry must be used. Native validation, expanded size limits and current "
                 "evidence/authorization checks still apply. Names do not survive this request."
             )
-        if mode is SchemaMode.COMPATIBILITY and name in INPUT_CONTRACT_DESCRIPTIONS:
-            schema = schema_closure(
-                definitions[operation["input_definition"]], definitions
-            )
-            description += (
-                "\n\nExact input contract (JSON Schema Draft 2020-12). "
-                "Named definitions include all edit/evidence fields and recursive variants; "
-                "use these fields when the client abbreviates its type declaration.\n"
-                "```json\n"
-                + json.dumps(schema, separators=(",", ":"), sort_keys=True)
-                + "\n```"
-            )
         output = operation_output_schema(operation, definitions)
         if delivery is OutputSchemaDelivery.ON_DEMAND and name != "describe_output":
             description += f' Exact result contracts: describe_output(operation="{name}") when needed.'
@@ -197,52 +169,11 @@ def tool_catalog(
                 "name": name,
                 "description": description,
                 "annotations": {"readOnlyHint": purpose is Purpose.APPLICATION or name in READ_ONLY_OPERATIONS},
-                "inputSchema": presented_input_schema(
-                    definitions[operation["input_definition"]], definitions, mode
+                "inputSchema": schema_closure(
+                    definitions[operation["input_definition"]], definitions
                 ),
                 **({"outputSchema": output} if delivery is OutputSchemaDelivery.EAGER else
                    {"_meta": {OUTPUT_SCHEMA_DIGEST_KEY: output_schema_digest(output)}}),
             }
         )
     return result
-
-
-def input_schema(root: dict, definitions: dict) -> dict:
-    """Expose input structure inline, retaining references only at recursion.
-
-    Inline containing objects so client reference rendering is only needed at
-    recursive expression fields. Validation keywords and the remaining reference
-    closure retain their canonical semantics.
-    """
-
-    selected = referenced_definitions(root, definitions)
-
-    def expand(value, active=()):
-        if isinstance(value, bool):
-            return value
-        if "$ref" in value:
-            name = local_definition_name(value["$ref"])
-            if name in active:
-                return map_schema_children(value, lambda child: expand(child, active))
-            resolved = expand(selected[name], (*active, name))
-            siblings = {key: item for key, item in value.items() if key != "$ref"}
-            if siblings:
-                return {"allOf": [resolved, expand(siblings, active)]}
-            return resolved
-        return map_schema_children(value, lambda child: expand(child, active))
-
-    return schema_closure(expand(root), selected)
-
-
-def presented_input_schema(root: dict, definitions: dict, mode: SchemaMode) -> dict:
-    """Choose a lossless representation at discovery, never a decoding fallback.
-
-    References save repeated nested structures but cost more for small schemas.
-    Native mode selects the smaller JSON encoding of the two existing complete
-    projections. Compatibility mode preserves the qualified inline rendering.
-    """
-    inline = input_schema(root, definitions)
-    if mode is SchemaMode.COMPATIBILITY:
-        return inline
-    referenced = schema_closure(root, definitions)
-    return min((inline, referenced), key=lambda value: len(json.dumps(value).encode("utf-8")))

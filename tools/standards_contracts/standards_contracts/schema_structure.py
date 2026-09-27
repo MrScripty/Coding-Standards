@@ -3,12 +3,12 @@
 The compiler owns profile admission; jsonschema/referencing own evaluation. These
 helpers only locate schemas and same-resource definitions. Literal const, enum,
 default and other annotation payloads are data, even when they contain $ref.
-allOf is traversed for the adapter's reference-sibling output; its presence here
-neither admits it to the canonical compiler nor adds a constraint evaluator.
+The structural profile includes allOf as a schema-bearing position. Its presence
+here neither admits it to the canonical compiler nor evaluates its constraints.
 """
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator, Mapping
+from collections.abc import Iterator, Mapping
 from copy import deepcopy
 import re
 from typing import TypeAlias
@@ -50,23 +50,6 @@ def schema_nodes(root: SchemaNode) -> Iterator[Mapping[str, object]]:
         seen.add(id(node))
         yield node
         pending.extend(child for _, child in reversed(list(schema_children(node))))
-
-
-def map_schema_children(
-    node: Mapping[str, object], transform: Callable[[SchemaNode], SchemaNode],
-) -> dict[str, object]:
-    """Copy one schema, transforming its child schemas and preserving JSON data."""
-    result = {}
-    for keyword, value in node.items():
-        if keyword in _SCHEMA_MAPS and isinstance(value, Mapping):
-            result[keyword] = {name: transform(child) for name, child in value.items()}
-        elif keyword in _SCHEMA_ARRAYS and isinstance(value, list):
-            result[keyword] = [transform(child) for child in value]
-        elif keyword in _SCHEMA_VALUES and isinstance(value, (Mapping, bool)):
-            result[keyword] = transform(value)
-        else:
-            result[keyword] = deepcopy(value)
-    return result
 
 
 def direct_schema_references(root: SchemaNode) -> Iterator[str]:

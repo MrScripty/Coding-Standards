@@ -6,7 +6,7 @@ import unittest
 
 from tools.standards_contracts.standards_contracts import ContractError
 from tools.standards_contracts.standards_contracts.schema_structure import (
-    direct_schema_references, map_schema_children, referenced_definitions,
+    direct_schema_references, referenced_definitions,
     schema_children, schema_closure, schema_nodes,
 )
 
@@ -32,13 +32,6 @@ class SchemaStructureTest(unittest.TestCase):
             "#/$defs/Variant", "#/$defs/Sibling",
         ])
         self.assertEqual(len(list(schema_nodes(root))), 6)
-        before = deepcopy(root)
-        transformed = map_schema_children(root, lambda node: {"title": "visited"})
-        for keyword in ("const", "enum", "default"):
-            self.assertEqual(transformed[keyword], root[keyword])
-        self.assertEqual(transformed["properties"]["$ref"], {"title": "visited"})
-        transformed["const"]["$ref"] = "mutated copy"
-        self.assertEqual(root, before)
 
     def test_reference_closure_terminates_cycles_and_keeps_literal_data(self):
         definitions = {

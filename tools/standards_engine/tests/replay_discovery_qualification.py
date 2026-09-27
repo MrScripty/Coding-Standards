@@ -24,7 +24,7 @@ from tools.standards_engine.standards_engine.runtime_identity import RuntimeIden
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
 from tools.standards_engine.tests.codex_discovery_client import (
     OBSERVER_VERSION, ROOT, RUNTIME_FIELDS, _same_json, assess_model_items,
-    fixture_contents, fixture_failures, input_contracts, model_observations, read_recorded_json,
+    fixture_contents, fixture_failures, input_contracts, result_contracts, model_observations, read_recorded_json,
 )
 
 
@@ -189,7 +189,7 @@ def replay(evidence_dir: Path) -> dict:
     """Read-only observation; no store open, tool submission, or paid model call."""
     result = {'observer_version': OBSERVER_VERSION, 'status': 'unavailable',
               'scope': 'preserved single-session evidence replay; not a new model run',
-              'compatibility_retirement': 'requires supported-client and integration acceptance'}
+              'input_presentation': 'native-only; original source/catalog required'}
     result['observer_sources'] = {name: 'sha256:' + hashlib.sha256((Path(__file__).parent / name).read_bytes()).hexdigest()
                                   for name in ('codex_discovery_client.py', 'replay_discovery_qualification.py')}
     try:
@@ -199,22 +199,21 @@ def replay(evidence_dir: Path) -> dict:
                              (('events.jsonl', raw_trace), ('qualification.json', raw_report))}
         previous = read_recorded_json(raw_report.decode('utf-8'))
         result['previous_status'] = previous.get('status')
-        mode = previous.get('schema_mode')
-        if mode not in ('native', 'compatibility'):
-            raise ValueError('Missing recorded schema mode.')
+        if previous.get('schema_mode') != 'native':
+            raise ValueError('Only native recordings are supported; use the original pinned tooling for a retired presentation.')
         interface = AgentToolFacade.load_interface(ROOT)
         delivery = previous.get('output_schemas', 'eager')
-        catalog = tool_catalog(interface, purpose='authoring', schema_mode=mode, output_schemas=delivery)
-        validation = {t['name']: t['outputSchema'] for t in tool_catalog(interface, purpose='authoring', schema_mode=mode)}
+        catalog = tool_catalog(interface, purpose='authoring', output_schemas=delivery)
         expected = RuntimeIdentity(ROOT, 'authoring', interface, catalog).metadata()
         toolmap = {t['name']: t for t in catalog}
+        validation = result_contracts(interface, toolmap)
         calls, events = parse_trace(raw_trace.decode('utf-8'))
         current = subprocess.check_output(
             ['git', '-C', str(evidence_dir / 'repository'), 'rev-parse', '--verify', 'refs/heads/main'],
             text=True, stderr=subprocess.PIPE).strip()
         result.update(assess_recording(calls, events, previous, toolmap,
                                      input_contracts(interface, toolmap), expected, current, output_contracts=validation))
-        result['schema_mode'] = mode
+        result['schema_mode'] = 'native'
         result['output_schemas'] = delivery
         # Detect input replacement during observation instead of certifying a
         # mixture. This is hash-bound local evidence, not cryptographic attestation

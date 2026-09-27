@@ -89,7 +89,7 @@ class ReplayQualificationTest(unittest.TestCase):
         result = self.assess(*recording_fixture())
         self.assertEqual(result['status'], 'passed', result)
         self.assertEqual(result['readbacks_verified'], 4)
-        self.assertEqual(result['observer_version'], 2)
+        self.assertEqual(result['observer_version'], 3)
 
     def test_readback_and_publication_checks_remain_effective(self):
         trace, previous, catalog, contracts = recording_fixture()
@@ -183,3 +183,21 @@ class ReplayQualificationTest(unittest.TestCase):
         trace.rows.append({'direction': 'request', 'message': {'method': 'turn/interrupt', 'params': {}}})
         with self.assertRaisesRegex(ValueError, 'Unsupported client notification'):
             parse_trace(trace.text())
+
+
+class NativeReplayAdmissionTest(unittest.TestCase):
+    def test_retired_or_missing_presentation_is_unavailable_without_reconstruction(self):
+        from tools.standards_engine.standards_engine.tools import AgentToolFacade
+        for recorded in ('compatibility', None, 'invented'):
+            with self.subTest(recorded=recorded), tempfile.TemporaryDirectory() as temporary:
+                directory = Path(temporary)
+                previous = {'status': 'passed', 'schema_mode': recorded}
+                (directory / 'qualification.json').write_text(json.dumps(previous))
+                (directory / 'events.jsonl').write_text('')
+                before = {p.name: p.read_bytes() for p in directory.iterdir()}
+                with patch.object(AgentToolFacade, 'load_interface', side_effect=AssertionError('loaded')):
+                    result = replay(directory)
+                self.assertEqual(result['status'], 'unavailable')
+                self.assertEqual(result['previous_status'], 'passed')
+                self.assertIn('original pinned tooling', result['failure'])
+                self.assertEqual(before, {p.name: p.read_bytes() for p in directory.iterdir()})

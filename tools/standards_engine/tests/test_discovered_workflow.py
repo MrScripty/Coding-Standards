@@ -5,7 +5,6 @@ opt-in Codex harness observes that separate boundary with model-authored calls.
 """
 import json
 import sys
-import itertools
 from pathlib import Path
 import subprocess
 import tempfile
@@ -33,9 +32,9 @@ class DiscoveredWorkflowTest(unittest.TestCase):
         cls.temp.cleanup()
 
     def test_discovered_shapes_drive_all_five_authoring_calls_and_preserve_decisions(self):
-        for mode, delivery in itertools.product(('compatibility', 'native'), ('eager', 'on-demand')):
-            with self.subTest(mode=mode, delivery=delivery):
-                server = MCPServer(self.root, purpose='authoring', schema_mode=mode, output_schemas=delivery)
+        for delivery in ('eager', 'on-demand'):
+            with self.subTest(delivery=delivery):
+                server = MCPServer(self.root, purpose='authoring', output_schemas=delivery)
                 self.addCleanup(server.close)
                 initialize(server)
                 validators = {}
@@ -44,7 +43,7 @@ class DiscoveredWorkflowTest(unittest.TestCase):
                     if operation in validators:
                         validators[operation].validate(arguments)
                     selected = request('tools/call', {'name': operation, 'arguments': arguments})
-                    if mode == 'native' and delivery == 'on-demand':
+                    if delivery == 'on-demand':
                         # The compact catalog path crosses real stdio and replaces
                         # its process on every call; no connection cache is needed.
                         selected['id'] = 2
@@ -53,7 +52,7 @@ class DiscoveredWorkflowTest(unittest.TestCase):
                             {'jsonrpc': '2.0', 'method': 'notifications/initialized'}, selected]
                         process = subprocess.run([sys.executable, '-m',
                             'tools.standards_engine.standards_engine.mcp', '--repo-root', str(self.root),
-                            '--purpose', 'authoring', '--schema-mode', mode, '--output-schemas', delivery],
+                            '--purpose', 'authoring', '--output-schemas', delivery],
                             input=''.join(json.dumps(message) + '\n' for message in messages),
                             text=True, capture_output=True, check=True)
                         self.assertEqual(process.stderr, '')
@@ -98,13 +97,13 @@ class DiscoveredWorkflowTest(unittest.TestCase):
                               if t['name'] in validators} if delivery=='on-demand' else {page['schema_digest']}
                 self.assertEqual(schema_ids,{page['schema_digest']})
                 before = subprocess.check_output(['git', '-C', str(self.root), 'rev-parse', 'main'])
-                change = topic_change(self.root, 'discovered-' + mode + '-' + delivery, 3)
+                change = topic_change(self.root, 'discovered-' + delivery, 3)
                 original = call('propose', shared({'change_set': change}))
                 self.assertEqual(original['status'], 'needs-action', original)
                 # Add a reference artifact in a revision; the same three topic
                 # decisions remain explicit and are bound to the new Analysis.
                 revised = call('revise', shared({'context': original['context'],
-                    'change_set': reference_change(self.root, 'discovered-extra-' + mode + '-' + delivery)}))
+                    'change_set': reference_change(self.root, 'discovered-extra-' + delivery)}))
                 self.assertEqual(revised['status'], 'needs-action', revised)
                 first = decision(self.root, revised['work']['items'][0]['obligation'])
                 single = call('resolve_workflow', shared({'context': revised['context'], 'submission': first}))

@@ -32,7 +32,6 @@ PYTHONPATH=. /path/to/locked/python -m tools.standards_engine.tests.codex_discov
   --allow-model-turn \
   --model YOUR_SUPPORTED_MODEL \
   --surface YOUR_ACTUAL_CLIENT_SURFACE \
-  --schema-mode native \
   --evidence-dir /new/private/path/discovery-qualification
 ```
 
@@ -77,14 +76,15 @@ A status of passed in qualification.json is behavioral evidence for that one
 fixture/client run. It is not editorial review, a universal client certification,
 or proof that TypeScript declarations no longer contain unknown. Operator review
 must confirm the requested exposure surface and absence of outside schema sources.
-Compatibility removal requires an accepted direct or discovery path for every
-supported deployment (or explicit retirement of that deployment), plus integration
-review. Full schemas reaching the client are insufficient on their own.
+The current release supports only native declarations/discovery; the owner has
+retired compatibility-dependent input clients. Qualify the actual candidate on
+its supported client/build/surface and retain independent integration review.
+Full schemas reaching the client are insufficient on their own.
 
 
 ## Replay an existing run after observer correction
 
-Observer version 2 tracks shared definitions once per exact runtime, purpose,
+Observer version 3 tracks shared definitions once per exact runtime, purpose,
 catalog and isolated thread/turn. Each operation keeps its own input-root binding.
 Definition content must match the canonical declaration. Calls may reuse already
 retrieved definitions from another operation; repeated discovery is not required.
@@ -92,7 +92,9 @@ A definition arriving after a call starts is too late. Context compaction clears
 acquired-shape evidence because this observer cannot prove which exact definitions
 survived it. Successful output alone cannot supply missing discovery evidence.
 
-Use the matching interface-40 source checkout with the corrected observer. The
+Use the exact matching source checkout. Current-source replay supports native
+recordings only and never rebuilds a compatibility catalog. Use the original
+pinned tooling for retired presentations or mismatched source/catalog records. The
 original stock harness directory must contain `events.jsonl`, `qualification.json`
 and its retained `repository`. No model, Codex process, or Engine tool is run by
 replay. Git is used only to read the retained fixture's main ref.
@@ -100,7 +102,7 @@ replay. Git is used only to read the retained fixture's main ref.
 ```sh
 PYTHONPATH=. /path/to/locked/python -m tools.standards_engine.tests.replay_discovery_qualification \
   --evidence-dir /private/original-discovery-run \
-  --output /private/discovery-observer-v2.json
+  --output /private/discovery-observer-v3.json
 ```
 
 The output must be a new file outside the original directory. It is created with
@@ -124,8 +126,7 @@ incomplete transcripts, source/catalog drift or unavailable fixture
 state produce unavailable/failed qualification rather than inferred success. A
 source mismatch needs the exact matching checkout, not removal of the identity
 checks. Rerun the existing preserved trace first; another paid model run is needed
-only when the original evidence cannot decide the claim. The CLI does not remove
-compatibility or grant acceptance.
+only when the original evidence cannot decide the claim. The CLI does not rewrite historical contracts or grant acceptance.
 
 Additional automated checks:
 
@@ -162,7 +163,7 @@ Example actual-host navigation check (server must already be configured):
 
 ```sh
 PYTHONPATH=. /path/to/locked/python -m tools.standards_engine.tests.codex_navigation_client \
-  --server standards-authoring --schema-mode native --output-schemas on-demand
+  --server standards-authoring --output-schemas on-demand
 ```
 
 Recorded replay recognizes `output_schemas` in the preserved report, defaulting to
@@ -172,3 +173,14 @@ upgrade an old transcript to a new interface, start a model or rewrite earlier
 verdicts. Output-discovery pages describe structured domain results, not MCP's outer
 CallToolResult wrapper. Keep eager for any supported client requiring that initial
 schema until its alternative passes acceptance.
+
+
+## Interface-43 launch migration
+
+Remove `--schema-mode` and its value from live server and qualification commands.
+The native label in a report is evidence metadata, not selectable behavior. Keep
+`--output-schemas on-demand` for the known deployment; omission still selects eager.
+Changing input presentation updates catalog binding but does not migrate stores or
+workflow contexts. Preserve old recordings and verdicts verbatim. The observer's
+private result validators come from the canonical purpose-qualified contracts and
+are never injected into the model's context.

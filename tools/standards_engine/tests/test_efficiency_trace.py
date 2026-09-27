@@ -10,7 +10,11 @@ class EfficiencyTraceTest(unittest.TestCase):
     def test_cold_stdio_preserves_authority_and_reduces_targeted_interaction_costs(self):
         result = measure()
         self.assertEqual(result['model_turns'], 0)
-        self.assertEqual(len(result['routing']), 4)
+        self.assertEqual([item['purpose'] for item in result['routing']],
+                         ['application', 'authoring'])
+        self.assertEqual(len(result['evidence']), 1)
+        self.assertEqual([item['purpose'] for item in result['catalogs']],
+                         ['application', 'authoring'])
         for route in result['routing']:
             self.assertTrue(route['exact_content_equal'])
             self.assertEqual(route['separate']['call_count'], 2)

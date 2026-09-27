@@ -35,8 +35,8 @@ class InputDiscoveryTest(unittest.TestCase):
         cls.definitions = cls.interface.schema['$defs']
         cls.examples = json.loads((ROOT / 'tools/standards_engine/contracts/examples/a1-examples.json').read_text())['examples']
 
-    def server(self, purpose='authoring', mode='native', advanced=False):
-        server = MCPServer(ROOT, purpose=purpose, schema_mode=mode, advanced=advanced)
+    def server(self, purpose='authoring', advanced=False):
+        server = MCPServer(ROOT, purpose=purpose, advanced=advanced)
         self.addCleanup(server.close)
         initialize(server)
         return server
@@ -72,40 +72,39 @@ class InputDiscoveryTest(unittest.TestCase):
 
     def test_flat_discovery_schema_and_early_guidance_cover_every_published_tool(self):
         for purpose in ('application', 'authoring'):
-            for mode in ('compatibility', 'native'):
-                server = self.server(purpose, mode, True)
-                tool = next(t for t in server.tools if t['name'] == 'describe_input')
-                shape = tool['inputSchema']
-                self.assertEqual(shape['required'], ['operation'])
-                self.assertLess(len(json.dumps(shape).encode()), 1800)
-                for field in shape['properties'].values():
-                    self.assertIn(field.get('type'), ('string', 'integer'))
-                    self.assertNotIn('oneOf', field)
-                self.assertTrue(tool['annotations']['readOnlyHint'])
-                for item in server.tools:
-                    if item['name'] != 'describe_input':
-                        self.assertIn(f'describe_input(operation="{item["name"]}")', item['description'][:250])
+            server = self.server(purpose, advanced=True)
+            tool = next(t for t in server.tools if t['name'] == 'describe_input')
+            shape = tool['inputSchema']
+            self.assertEqual(shape['required'], ['operation'])
+            self.assertLess(len(json.dumps(shape).encode()), 1800)
+            for field in shape['properties'].values():
+                field = shape['$defs'][field['$ref'].rsplit('/', 1)[-1]] if '$ref' in field else field
+                self.assertIn(field.get('type'), ('string', 'integer'))
+                self.assertNotIn('oneOf', field)
+            self.assertTrue(tool['annotations']['readOnlyHint'])
+            for item in server.tools:
+                if item['name'] != 'describe_input':
+                    self.assertIn(f'describe_input(operation="{item["name"]}")', item['description'][:250])
 
     def test_every_published_input_can_be_reconstructed_and_independently_validated(self):
         for purpose in ('application', 'authoring'):
-            for mode in ('compatibility', 'native'):
-                server = self.server(purpose, mode, True)
-                operations = qualified_operations(self.interface.project().agent_tools, purpose)
-                for operation in operations:
-                    with self.subTest(purpose=purpose, mode=mode, operation=operation['id']):
-                        result, records = self.collect(server, {'operation': operation['id'], 'limit': 16})
-                        root = operation['input_definition']
-                        expected = {root: self.definitions[root], **referenced_definitions(self.definitions[root], self.definitions)}
-                        self.assertEqual(records, expected)
-                        self.assertEqual(result['root'], root)
-                        validator = Draft202012Validator({'$schema': result['dialect'], '$ref': f'#/$defs/{root}', '$defs': records})
-                        validator.check_schema(validator.schema)
-                        examples = [x['value'] for x in self.examples if x['definition'] == root]
-                        self.assertTrue(examples, root)
-                        for example in examples:
-                            validator.validate(example)
-                        # The rediscovered contract retains closed top-level fields.
-                        self.assertFalse(validator.is_valid({'unknown-fixture-field': True}))
+            server = self.server(purpose, advanced=True)
+            operations = qualified_operations(self.interface.project().agent_tools, purpose)
+            for operation in operations:
+                with self.subTest(purpose=purpose, operation=operation['id']):
+                    result, records = self.collect(server, {'operation': operation['id'], 'limit': 16})
+                    root = operation['input_definition']
+                    expected = {root: self.definitions[root], **referenced_definitions(self.definitions[root], self.definitions)}
+                    self.assertEqual(records, expected)
+                    self.assertEqual(result['root'], root)
+                    validator = Draft202012Validator({'$schema': result['dialect'], '$ref': f'#/$defs/{root}', '$defs': records})
+                    validator.check_schema(validator.schema)
+                    examples = [x['value'] for x in self.examples if x['definition'] == root]
+                    self.assertTrue(examples, root)
+                    for example in examples:
+                        validator.validate(example)
+                    # The rediscovered contract retains closed top-level fields.
+                    self.assertFalse(validator.is_valid({'unknown-fixture-field': True}))
 
     def test_first_page_reveals_choices_and_selection_avoids_unrelated_edits(self):
         server = self.server()
@@ -254,7 +253,7 @@ class InputDiscoveryTest(unittest.TestCase):
 
         configuration = tomllib.loads((ROOT/'tools/standards_engine/contracts/a1-interface.toml').read_text())
         alternative = compile_contracts(reordered(self.interface.schema), configuration)
-        catalogs = [tool_catalog(interface, purpose='authoring', schema_mode='native')
+        catalogs = [tool_catalog(interface, purpose='authoring')
                     for interface in (self.interface, alternative)]
         identities = [RuntimeIdentity(ROOT, 'authoring', interface, catalog).metadata()['catalog_digest']
                       for interface, catalog in zip((self.interface, alternative), catalogs)]

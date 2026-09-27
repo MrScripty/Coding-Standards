@@ -24,7 +24,6 @@ from .validation_feedback import MAX_POINTER_CHARS
 from .schema_structure import (
     direct_schema_references,
     local_definition_name,
-    map_schema_children,
     referenced_definitions,
     schema_closure,
 )
@@ -61,7 +60,6 @@ __all__ = (
     "freeze_json",
     "direct_schema_references",
     "local_definition_name",
-    "map_schema_children",
     "referenced_definitions",
     "schema_closure",
     "model_as_contract",

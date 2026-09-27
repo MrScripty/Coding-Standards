@@ -1,7 +1,7 @@
 """Read-only catalog accounting; raw catalog bytes are not model tokens.
 
 Run as a module. With --catalog, accept a tool array, tools/list result, or its
-JSON-RPC envelope. Otherwise inspect the installed purpose/mode without opening
+JSON-RPC envelope. Otherwise inspect the installed purpose and output delivery without opening
 an Engine store. No host configuration, tool invocation or model turn is made.
 """
 from __future__ import annotations
@@ -52,7 +52,6 @@ def main() -> int:
     parser.add_argument('--catalog', type=Path, help='Measure the supplied raw catalog rather than an installation.')
     parser.add_argument('--repo-root', type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument('--purpose', choices=('application', 'authoring'), default='application')
-    parser.add_argument('--schema-mode', choices=('compatibility', 'native'), default='compatibility')
     parser.add_argument('--output-schemas', choices=('eager', 'on-demand'), default='eager')
     parser.add_argument('--advanced', action='store_true')
     args = parser.parse_args()
@@ -64,10 +63,9 @@ def main() -> int:
             from tools.standards_engine.standards_engine.tools import AgentToolFacade
             from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
             interface = AgentToolFacade.load_interface(args.repo_root)
-            report = measure_catalog(tool_catalog(interface, purpose=args.purpose,
-                                     schema_mode=args.schema_mode, advanced=args.advanced, output_schemas=args.output_schemas))
+            report = measure_catalog(tool_catalog(interface, purpose=args.purpose, advanced=args.advanced, output_schemas=args.output_schemas))
             report['source'] = {'kind': 'installed', 'interface_version': interface.interface.interface_schema_version,
-                                'purpose': args.purpose, 'schema_mode': args.schema_mode, 'output_schemas': args.output_schemas, 'advanced': args.advanced}
+                                'purpose': args.purpose, 'schema_mode': 'native', 'output_schemas': args.output_schemas, 'advanced': args.advanced}
     except (OSError, ValueError) as error:
         parser.exit(2, f'Catalog inventory unavailable: {error}\n')
     print(json.dumps(report, indent=2, ensure_ascii=False))

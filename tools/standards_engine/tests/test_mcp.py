@@ -12,10 +12,11 @@ import unittest
 from unittest.mock import patch
 
 from jsonschema import Draft202012Validator
+from tools.standards_contracts.standards_contracts import schema_closure
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine.mcp import MCPServer, serve
-from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog, input_schema
+from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.standards_engine.tools import _contracts
 
 
@@ -137,17 +138,14 @@ class MCPTest(unittest.TestCase):
         original = {**definitions["ProposeCall"], "$defs": definitions}
         projected = catalog["propose"]["inputSchema"]
         for name in ("propose", "revise"):
-            shape = catalog[name]["inputSchema"]["properties"]["change_set"]
-            self.assertEqual(shape["type"], "object")
+            document = catalog[name]["inputSchema"]
+            reference = document["properties"]["change_set"]["$ref"]
+            self.assertEqual(reference, "#/$defs/AgentStandardsChangeSet")
+            shape = document["$defs"]["AgentStandardsChangeSet"]
             self.assertEqual(set(shape["required"]), {"purpose", "edits"})
-            self.assertEqual(shape["properties"]["purpose"]["type"], "object")
-            edits = shape["properties"]["edits"]["items"]["oneOf"]
-            self.assertEqual(len(edits), len(definitions["StandardEdit"]["oneOf"]))
-            self.assertTrue(all(edit["type"] == "object" for edit in edits))
-        self.assertEqual(
-            catalog["propose"]["inputSchema"]["properties"]["snapshot"]["type"],
-            "object",
-        )
+            self.assertEqual(shape, definitions["AgentStandardsChangeSet"])
+            self.assertEqual(document["$defs"]["AgentStandardEdit"], definitions["AgentStandardEdit"])
+        self.assertEqual(projected["properties"]["snapshot"], {"$ref": "#/$defs/SnapshotHandle"})
         for validator in (
             Draft202012Validator(original),
             Draft202012Validator(projected),
@@ -165,40 +163,24 @@ class MCPTest(unittest.TestCase):
                 validator.is_valid({"change_set": {**change, "edits": []}})
             )
 
-    def test_authoring_description_carries_exact_contract_without_type_rendering(self):
-        from tools.standards_contracts.standards_contracts import schema_closure
-
-        generated = json.loads(
-            (
-                ROOT / "tools/standards_engine/contracts/generated/agent-tools.json"
-            ).read_text()
-        )
-        catalog = {t["name"]: t for t in tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring')}
-        for name in ("propose", "revise", "resolve_workflow"):
+    def test_authoring_catalog_uses_exact_contracts_without_embedded_fallback(self):
+        interface = AgentToolFacade.load_interface(ROOT)
+        generated = interface.project().agent_tools
+        catalog = {t["name"]: t for t in tool_catalog(interface, purpose='authoring')}
+        for name in ("propose", "revise", "resolve_workflow", "resolve_many", "review"):
             operation = next(op for op in generated["operations"] if op["id"] == name)
             operation = {**operation, **operation.get("variants", {}).get("agent", {})}
-            documented = json.loads(
-                catalog[name]["description"]
-                .split("```json\n", 1)[1]
-                .split("\n```", 1)[0]
-            )
-            self.assertEqual(
-                documented,
-                schema_closure(
-                    generated["$defs"][operation["input_definition"]],
-                    generated["$defs"],
-                ),
-            )
-            self.assertEqual(
-                set(documented["$defs"]["EvidenceReference"]["required"]),
-                {"id", "digest", "provider_contract", "provider_contract_version"},
-            )
-            if name != "resolve_workflow":
-                self.assertEqual(documented["$defs"]["AgentStandardEdit"], generated["$defs"]["AgentStandardEdit"])
+            documented = catalog[name]["inputSchema"]
+            self.assertEqual(documented, schema_closure(
+                generated["$defs"][operation["input_definition"]], generated["$defs"]))
+            self.assertNotIn("```json", catalog[name]["description"])
+            self.assertIn(f'describe_input(operation="{name}")', catalog[name]["description"])
+            self.assertEqual(set(documented["$defs"]["EvidenceReference"]["required"]),
+                             {"id", "digest", "provider_contract", "provider_contract_version"})
             Draft202012Validator.check_schema(documented)
 
     def test_input_projection_preserves_reference_siblings(self):
-        schema = input_schema(
+        schema = schema_closure(
             {"$ref": "#/$defs/Name", "minLength": 3},
             {"Name": {"type": "string", "maxLength": 5}},
         )
