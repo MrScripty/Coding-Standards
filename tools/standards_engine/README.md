@@ -286,3 +286,18 @@ See [the interface contract](PURPOSE-SEPARATION.md#agent-interaction-quality-int
 and [the implementation/qualification record](../../docs/plans/agent-interaction-quality/plan.md).
 Restart/reconnect for the coordinated catalog update. Persisted handles and mutation
 contracts are unchanged; compatibility retirement remains deployment-qualified.
+
+## Output-contract delivery
+
+Interface 42 adds `describe_output` and host-selected
+`--output-schemas eager|on-demand`. Eager remains the default. A qualified client may
+select on-demand to omit repeated full output schemas from its initial catalog,
+while exact, catalog-bound output contracts remain available in bounded pages.
+Canonical request/result validation and the actual structured tool results do not
+change. There is no additional discovery call required after ordinary successes.
+
+Use the [output delivery contract](PURPOSE-SEPARATION.md#output-contract-delivery-interface-42)
+and [implementation verification](../../docs/plans/output-contract-delivery/verification.md).
+The catalog inventory reports schema and digest-metadata bytes separately. Use the
+updated no-model and opt-in model harnesses on the actual host before adopting the
+smaller catalog. Preserve stores and handles across restart/reconnect.

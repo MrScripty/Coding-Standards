@@ -53,3 +53,11 @@ transport/schema checks alone do not close the reported declaration-rendering ga
 feedback, snapshot group vocabulary and compact focused routing. Its measured
 catalog costs and conditional compatibility retirement remain explicit. This
 code-maintenance slice does not close the parent standards-content objective.
+
+## On-demand output-contract delivery
+
+[Output-contract delivery](output-contract-delivery/plan.md) adds an explicitly
+selected smaller MCP catalog and exact paged output discovery while preserving
+canonical result validation. Acceptance and actual-host qualifications are recorded
+in its [verification](output-contract-delivery/verification.md). It does not replace
+the parent Standards Library Effectiveness effort.

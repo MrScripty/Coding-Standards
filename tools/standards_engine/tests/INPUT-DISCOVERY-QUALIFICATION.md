@@ -136,3 +136,39 @@ PYTHONPATH=. python -m unittest tools.standards_engine.tests.test_model_discover
 The final suite feeds real Engine outcomes through a synthetic client event stream
 and replays them in a cold process. It is integration evidence for the observer,
 not a substitute for actual model/client qualification.
+
+## Qualifying on-demand output schemas
+
+Interface 42 adds an independent `--output-schemas eager|on-demand` choice to both
+Codex harnesses. Omission keeps eager behavior. To exercise the smaller catalog,
+add `--output-schemas on-demand` to the actual-model command above. The harness
+configures only its disposable server. The observer validates results against the
+canonical schemas, independently of what is advertised to the host/model; those
+observer schemas are never pasted into the model instructions or tool declarations.
+The model must interpret real tool results through the same proposal-to-readiness
+workflow, without mandatory per-action output-schema reads. Optional
+`describe_output` calls are accepted and their returned documents checked exactly.
+
+The no-model configured-client harness checks that `outputSchema` is actually
+absent, retrieves a complete read-output contract through `describe_output`, and
+compares it with the canonical schema. It still does not prove final model-visible
+rendering. The model harness saves `host-catalog.json` separately from the events;
+this is the host's inventory, not a captured model prompt/declaration. Obtain the
+actual model-visible export separately where supported and record unavailable
+measurements honestly. Compare eager and on-demand runs using the same task,
+client/model and surface, recording repair count, successful readback and tool calls.
+
+Example actual-host navigation check (server must already be configured):
+
+```sh
+PYTHONPATH=. /path/to/locked/python -m tools.standards_engine.tests.codex_navigation_client \
+  --server standards-authoring --schema-mode native --output-schemas on-demand
+```
+
+Recorded replay recognizes `output_schemas` in the preserved report, defaulting to
+eager for recordings created before the option existed. It still requires the
+matching source/catalog and validates every recorded result. It does not silently
+upgrade an old transcript to a new interface, start a model or rewrite earlier
+verdicts. Output-discovery pages describe structured domain results, not MCP's outer
+CallToolResult wrapper. Keep eager for any supported client requiring that initial
+schema until its alternative passes acceptance.

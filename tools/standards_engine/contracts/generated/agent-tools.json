@@ -3697,6 +3697,39 @@
       ],
       "type": "object"
     },
+    "DescribeOutputCall": {
+      "additionalProperties": false,
+      "properties": {
+        "expected_catalog": {
+          "$ref": "#/$defs/Digest"
+        },
+        "limit": {
+          "description": "Maximum whole schema records in this page; default 8. Byte pressure may return fewer.",
+          "maximum": 16,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "offset": {
+          "description": "Record offset within the selected closure. Continue with the returned next request.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "description": "An operation published in this running catalog.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "selector": {
+          "description": "A returned output definition name. Omit for the complete operation result algebra.",
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "operation"
+      ],
+      "type": "object"
+    },
     "Digest": {
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
@@ -5250,6 +5283,152 @@
         "content",
         "application_exposure",
         "next_operations"
+      ],
+      "type": "object"
+    },
+    "OutputContractRejectedResult": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "OUTPUT_DISCOVERY.INVALID_ARGUMENTS",
+            "OUTPUT_DISCOVERY.OPERATION_UNAVAILABLE",
+            "OUTPUT_DISCOVERY.CATALOG_CHANGED",
+            "OUTPUT_DISCOVERY.SELECTION_INVALID",
+            "OUTPUT_DISCOVERY.RESULT_LIMIT"
+          ]
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        },
+        "kind": {
+          "const": "output-contract-rejected-result"
+        },
+        "message": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "outcome": {
+          "enum": [
+            "invalid",
+            "unavailable",
+            "unsupported"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "code",
+        "outcome",
+        "message"
+      ],
+      "type": "object"
+    },
+    "OutputContractResult": {
+      "additionalProperties": false,
+      "properties": {
+        "catalog_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "dialect": {
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "interface_version": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "kind": {
+          "const": "output-contract-result"
+        },
+        "next": {
+          "$ref": "#/$defs/DescribeOutputCall"
+        },
+        "offset": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/OutputSchemaRecord"
+          },
+          "maxItems": 16,
+          "type": "array"
+        },
+        "root_schema_json": {
+          "description": "Exact operation result schema without $defs. Combine with all result-root definition pages for validation; schema_digest binds the full schema.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "roots": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "schema_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "selector": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "total": {
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "interface_version",
+        "catalog_digest",
+        "operation",
+        "dialect",
+        "offset",
+        "total",
+        "records",
+        "roots",
+        "root_schema_json",
+        "schema_digest"
+      ],
+      "type": "object"
+    },
+    "OutputSchemaRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "schema_json": {
+          "description": "Exact JSON Schema definition serialized as a JSON document; $refs name other returned/selectable definitions. Not a standalone validator without its closure.",
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "schema_json"
       ],
       "type": "object"
     },
@@ -9473,7 +9652,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 41,
+  "interface_schema_version": 42,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -10147,6 +10326,30 @@
           "result_definitions": [
             "RelationshipGroupsResult",
             "ApplicationRejectedResult"
+          ]
+        }
+      }
+    },
+    {
+      "capability": "standards.read",
+      "id": "describe_output",
+      "input_definition": "DescribeOutputCall",
+      "input_schema": {
+        "$ref": "#/$defs/DescribeOutputCall"
+      },
+      "result_definitions": [
+        "OutputContractResult",
+        "OutputContractRejectedResult"
+      ],
+      "variants": {
+        "application": {
+          "input_definition": "DescribeOutputCall",
+          "input_schema": {
+            "$ref": "#/$defs/DescribeOutputCall"
+          },
+          "result_definitions": [
+            "OutputContractResult",
+            "OutputContractRejectedResult"
           ]
         }
       }

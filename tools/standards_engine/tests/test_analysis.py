@@ -164,6 +164,16 @@ def _clone_tracked_worktree(destination: Path) -> None:
         check=True,
         stdout=subprocess.PIPE,
     ).stdout
+    # The clone starts at accepted HEAD. Remove only obsolete tracked files in
+    # this disposable destination before overlaying the current tracked write set.
+    # Otherwise a source rename leaves the old implementation in the fixture.
+    cloned = subprocess.run(
+        ("git", "-C", str(destination), "ls-files", "-z"),
+        check=True, stdout=subprocess.PIPE,
+    ).stdout
+    for encoded in set(cloned.split(b"\0")) - set(tracked.split(b"\0")):
+        if encoded:
+            (destination / Path(os.fsdecode(encoded))).unlink()
     for encoded in tracked.split(b"\0"):
         if not encoded:
             continue

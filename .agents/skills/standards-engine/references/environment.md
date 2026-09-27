@@ -51,7 +51,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 41. No network listener,
+The current implementation is 0.2.0 and Engine interface 42. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -175,3 +175,20 @@ review. Retire compatibility only after those deployments have a qualified direc
 or discovery path or have been explicitly retired. Hypothetical future clients do
 not establish a permanent support obligation. Keep `describe_input` at retirement;
 remove obsolete mode/flag/description branches in a coordinated configuration cutover.
+
+## Output schemas (interface 42)
+
+The independent host option `--output-schemas eager` remains the default. After
+qualification, `--schema-mode native --output-schemas on-demand` selects the smaller
+catalog: no eager `outputSchema` entries, but exact result contracts through
+`describe_output`. Every omitted schema is bound by its tool metadata digest and
+by the overall catalog digest. This is explicit startup configuration, never a
+client-name guess, silent fallback, or weaker result validator.
+
+Restart and refresh the client catalog after changing the option. A client that
+requires upfront typed/validated output schemas should continue using eager until
+its discovery-based alternative is qualified. Ordinary tools still return the
+same structured values, errors and continuations; `describe_output` is optional
+when those are already sufficient. The existing `codex_navigation_client.py`
+accepts `--output-schemas on-demand` to check an already configured registration;
+it does not change the host configuration or run a model.

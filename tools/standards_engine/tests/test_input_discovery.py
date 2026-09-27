@@ -17,9 +17,9 @@ from jsonschema import Draft202012Validator
 from tools.standards_contracts.standards_contracts import (
     compile_contracts, referenced_definitions,
 )
-from tools.standards_engine.standards_engine import input_discovery as discovery
+from tools.standards_engine.standards_engine import contract_discovery as discovery
 from tools.standards_engine.standards_engine.context_projection import qualified_operations
-from tools.standards_engine.standards_engine.input_discovery import InputContractDiscovery
+from tools.standards_engine.standards_engine.contract_discovery import ContractDiscovery
 from tools.standards_engine.standards_engine.mcp import MCPServer
 from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
@@ -57,7 +57,7 @@ class InputDiscoveryTest(unittest.TestCase):
             result = self.call(server, arguments)
             self.assertEqual(result['kind'], 'input-contract-result', result)
             first = first or result
-            self.assertLessEqual(len(json.dumps(result).encode()), discovery.INPUT_DISCOVERY_RESULT_BYTES)
+            self.assertLessEqual(len(json.dumps(result).encode()), discovery.DISCOVERY_RESULT_BYTES)
             for record in result['records']:
                 self.assertNotIn(record['name'], records)
                 records[record['name']] = json.loads(record['schema_json'])
@@ -202,13 +202,13 @@ class InputDiscoveryTest(unittest.TestCase):
         server = self.server()
         first = self.call(server, {'operation': 'propose', 'limit': 1})
         bound = len(json.dumps(first).encode())
-        with patch.object(discovery, 'INPUT_DISCOVERY_RESULT_BYTES', bound):
+        with patch.object(discovery, 'DISCOVERY_RESULT_BYTES', bound):
             result = self.call(server, {'operation': 'propose', 'limit': 1})
             self.assertEqual(result, first)
-        with patch.object(discovery, 'INPUT_DISCOVERY_RESULT_BYTES', bound - 1):
+        with patch.object(discovery, 'DISCOVERY_RESULT_BYTES', bound - 1):
             self.assertEqual(self.call(server, {'operation': 'propose', 'limit': 1})['code'], 'INPUT_DISCOVERY.RESULT_LIMIT')
         # Include an explicit continuation of the same length as the 1-record form.
-        with patch.object(discovery, 'INPUT_DISCOVERY_RESULT_BYTES', bound):
+        with patch.object(discovery, 'DISCOVERY_RESULT_BYTES', bound):
             result = self.call(server, {'operation': 'propose', 'limit': 8})
             self.assertEqual(result['records'], first['records'])
             self.assertEqual(result['next']['offset'], 1)
@@ -222,7 +222,7 @@ class InputDiscoveryTest(unittest.TestCase):
         definition['properties']['$ref'] = {'type': 'string', 'enum': ['#/$defs/AlsoLiteral']}
         configuration = tomllib.loads((ROOT/'tools/standards_engine/contracts/a1-interface.toml').read_text())
         interface = compile_contracts(schema, configuration)
-        service = InputContractDiscovery(interface, purpose='application',
+        service = ContractDiscovery(interface, purpose='application',
             operation_names=['runtime_info'], catalog_digest='sha256:'+'1'*64)
         result = service.invoke({'operation': 'runtime_info'})
         found = json.loads(result['records'][0]['schema_json'])
@@ -259,7 +259,7 @@ class InputDiscoveryTest(unittest.TestCase):
         identities = [RuntimeIdentity(ROOT, 'authoring', interface, catalog).metadata()['catalog_digest']
                       for interface, catalog in zip((self.interface, alternative), catalogs)]
         self.assertEqual(identities[0], identities[1])
-        services = [InputContractDiscovery(interface, purpose='authoring',
+        services = [ContractDiscovery(interface, purpose='authoring',
                     operation_names=[tool['name'] for tool in catalog], catalog_digest=digest)
                     for interface, catalog, digest in zip((self.interface, alternative), catalogs, identities)]
         arguments = {'operation': 'propose', 'limit': 3}

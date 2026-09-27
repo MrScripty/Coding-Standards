@@ -296,18 +296,18 @@ class AgentToolFacade:
         """Native callers observe the full purpose-qualified catalog consistently."""
         from .runtime_identity import RuntimeIdentity
         from .mcp_catalog import tool_catalog
-        from .input_discovery import InputContractDiscovery
+        from .contract_discovery import ContractDiscovery
 
         if not hasattr(self, "_runtime_identity"):
             catalog = tool_catalog(self._contracts, purpose=self._engine.purpose, advanced=True)
             self._runtime_identity = RuntimeIdentity(
                 self._engine._repository.root, self._engine.purpose, self._contracts, catalog)
-            self._input_discovery = InputContractDiscovery(
+            self._contract_discovery = ContractDiscovery(
                 self._contracts, purpose=self._engine.purpose,
                 operation_names=[tool["name"] for tool in catalog],
                 catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
             )
-        return self._runtime_identity, self._input_discovery
+        return self._runtime_identity, self._contract_discovery
 
     def runtime_info(self, arguments: object) -> dict[str, object]:
         identity, _ = self._catalog_observers()
@@ -316,6 +316,10 @@ class AgentToolFacade:
     def describe_input(self, arguments: object) -> dict[str, object]:
         _, discovery = self._catalog_observers()
         return discovery.invoke(arguments)
+
+    def describe_output(self, arguments: object) -> dict[str, object]:
+        _, discovery = self._catalog_observers()
+        return discovery.invoke(arguments, direction="output")
 
     def resolve_many(self, arguments: object) -> dict[str, object]:
         call = self._call_or_rejection("resolve_many", arguments)

@@ -36,11 +36,12 @@ def measure_catalog(value: object) -> dict:
         rows.append({'name': name, 'description_characters': len(description),
                      'description_utf8_bytes': len(description.encode('utf-8')),
                      'input_schema_json_bytes': len(_encoded(tool['inputSchema'])),
-                     'output_schema_json_bytes': len(_encoded(tool['outputSchema'])) if 'outputSchema' in tool else 0})
+                     'output_schema_json_bytes': len(_encoded(tool['outputSchema'])) if 'outputSchema' in tool else 0,
+                     'metadata_json_bytes': len(_encoded(tool['_meta'])) if '_meta' in tool else 0})
     encoded = _encoded(value)
     return {'tool_count': len(rows),
             **{key: sum(row[key] for row in rows) for key in
-               ('description_characters', 'description_utf8_bytes', 'input_schema_json_bytes', 'output_schema_json_bytes')},
+               ('description_characters', 'description_utf8_bytes', 'input_schema_json_bytes', 'output_schema_json_bytes', 'metadata_json_bytes')},
             'serialized_catalog_json_bytes': len(encoded),
             'measurement_sha256': hashlib.sha256(encoded).hexdigest(),
             'tools': rows}
@@ -52,6 +53,7 @@ def main() -> int:
     parser.add_argument('--repo-root', type=Path, default=Path(__file__).resolve().parents[3])
     parser.add_argument('--purpose', choices=('application', 'authoring'), default='application')
     parser.add_argument('--schema-mode', choices=('compatibility', 'native'), default='compatibility')
+    parser.add_argument('--output-schemas', choices=('eager', 'on-demand'), default='eager')
     parser.add_argument('--advanced', action='store_true')
     args = parser.parse_args()
     try:
@@ -63,9 +65,9 @@ def main() -> int:
             from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
             interface = AgentToolFacade.load_interface(args.repo_root)
             report = measure_catalog(tool_catalog(interface, purpose=args.purpose,
-                                     schema_mode=args.schema_mode, advanced=args.advanced))
+                                     schema_mode=args.schema_mode, advanced=args.advanced, output_schemas=args.output_schemas))
             report['source'] = {'kind': 'installed', 'interface_version': interface.interface.interface_schema_version,
-                                'purpose': args.purpose, 'schema_mode': args.schema_mode, 'advanced': args.advanced}
+                                'purpose': args.purpose, 'schema_mode': args.schema_mode, 'output_schemas': args.output_schemas, 'advanced': args.advanced}
     except (OSError, ValueError) as error:
         parser.exit(2, f'Catalog inventory unavailable: {error}\n')
     print(json.dumps(report, indent=2, ensure_ascii=False))

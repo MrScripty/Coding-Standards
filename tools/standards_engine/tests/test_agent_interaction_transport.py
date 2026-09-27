@@ -26,7 +26,7 @@ class AgentInteractionTransportTest(unittest.TestCase):
     def tearDownClass(cls):
         fixture.PurposeTransportTest.tearDownClass()
 
-    def call(self, purpose, operation, arguments, *, rejected=False):
+    def call(self, purpose, operation, arguments, *, rejected=False, delivery="eager"):
         messages = [
             {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
                 'protocolVersion': '2025-11-25', 'capabilities': {},
@@ -37,7 +37,8 @@ class AgentInteractionTransportTest(unittest.TestCase):
         ]
         process = subprocess.run(
             [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-             '--repo-root', str(self.root), '--purpose', purpose, '--schema-mode', 'native'],
+             '--repo-root', str(self.root), '--purpose', purpose, '--schema-mode', 'native',
+             '--output-schemas', delivery],
             env={**os.environ, 'PYTHONPATH': str(fixture.ROOT)}, text=True,
             input=''.join(json.dumps(value) + '\n' for value in messages),
             capture_output=True, timeout=90,
@@ -106,3 +107,24 @@ class AgentInteractionTransportTest(unittest.TestCase):
         self.assertEqual(described['root'], 'AgentProposeCall')
         self.assertEqual(described['operation'], 'propose')
         self.assertNotIn('context', invalid)
+
+    def test_on_demand_navigation_and_feedback_preserve_eager_results(self):
+        facts = {key: value for key, value in known_facts().items()
+                 if key in ('routing.activities', 'routing.applications')}
+        for purpose in ('application', 'authoring'):
+            cases = [('read', {'snapshot': self.snapshot, 'target': 'core'}, False),
+                     ('route', {'snapshot': self.snapshot, 'facts': facts,
+                                'content': {'limit': 2}}, False),
+                     ('related', {'snapshot': self.snapshot, 'target': 'core',
+                                  'groups': ['unknown-group'], 'direction': 'outgoing',
+                                  'transitive': False}, True)]
+            for operation, arguments, rejected in cases:
+                with self.subTest(purpose=purpose, operation=operation):
+                    eager = self.call(purpose, operation, arguments, rejected=rejected)
+                    deferred = self.call(purpose, operation, arguments, rejected=rejected,
+                                         delivery='on-demand')
+                    self.assertEqual(deferred, eager)
+        eager = self.call('authoring', 'propose', {'change_set': {}}, rejected=True)
+        deferred = self.call('authoring', 'propose', {'change_set': {}}, rejected=True,
+                             delivery='on-demand')
+        self.assertEqual(deferred, eager)

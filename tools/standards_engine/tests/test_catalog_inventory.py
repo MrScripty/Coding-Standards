@@ -10,6 +10,14 @@ ROOT = Path(__file__).resolve().parents[3]
 
 
 class CatalogInventoryTest(unittest.TestCase):
+    def test_on_demand_accounting_reports_digest_metadata_separately(self):
+        interface = AgentToolFacade.load_interface(ROOT)
+        tools = tool_catalog(interface, purpose='authoring', schema_mode='native', output_schemas='on-demand')
+        report = measure_catalog(tools)
+        self.assertEqual(report['output_schema_json_bytes'], 0)
+        self.assertGreater(report['metadata_json_bytes'], 0)
+        self.assertLess(report['serialized_catalog_json_bytes'], 130000)
+
     def test_counts_are_explicit_about_characters_bytes_and_framing(self):
         tools = [{'name': 'test', 'description': 'é', 'inputSchema': {'type': 'object'}}]
         report = measure_catalog(tools)

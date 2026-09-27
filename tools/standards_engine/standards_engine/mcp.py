@@ -18,9 +18,9 @@ from typing import TextIO
 from .tools import AgentToolFacade
 from .compiled_cache import CompiledSnapshotCache
 from .runtime_identity import RuntimeIdentity
-from .input_discovery import InputContractDiscovery
+from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
-from .mcp_catalog import SchemaMode, tool_catalog
+from .mcp_catalog import SchemaMode, OutputSchemaDelivery, tool_catalog
 
 
 PROTOCOL_VERSION = "2025-11-25"
@@ -35,19 +35,21 @@ class ProtocolError(Exception):
 
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
-                 schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY) -> None:
+                 schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,
+                 output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
         self.schema_mode = SchemaMode(schema_mode)
+        self.output_schemas = OutputSchemaDelivery(output_schemas)
         self._interface = AgentToolFacade.load_interface(self.root)
         self.tools = tool_catalog(
             self._interface, purpose=self.purpose, advanced=advanced,
-            schema_mode=self.schema_mode,
+            schema_mode=self.schema_mode, output_schemas=self.output_schemas,
         )
         self.names = {tool["name"] for tool in self.tools}
         self._runtime_identity = RuntimeIdentity(self.root, self.purpose, self._interface, self.tools)
-        self._input_discovery = InputContractDiscovery(
+        self._contract_discovery = ContractDiscovery(
             self._interface, purpose=self.purpose, operation_names=self.names,
             catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
         )
@@ -65,7 +67,7 @@ class MCPServer:
         self._compiled_cache.close()
         self._interface = None
         self._runtime_identity = None
-        self._input_discovery = None
+        self._contract_discovery = None
         self.tools.clear()
         self.names.clear()
         self._closed = True
@@ -127,8 +129,9 @@ class MCPServer:
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": "standards-engine", "version": self._runtime_identity.implementation_version},
                 "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
-                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. "
-                "Use describe_input for missing or abbreviated input shapes; retain its catalog-bound selections. " + (
+                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. Output schemas {self.output_schemas.value}. "
+                "Use describe_input for missing or abbreviated input shapes; retain its catalog-bound selections. "
+                "Use describe_output only when an exact result contract is needed; ordinary results remain structured and server-validated. " + (
                     "Use route with content={} to obtain applicable exact guidance; follow content.next for more. Reuse returned snapshots for consistent observations."
                     if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
@@ -155,8 +158,9 @@ class MCPServer:
         arguments = params.get("arguments", {})
         if not isinstance(arguments, dict):
             raise ProtocolError(-32602, "Tool arguments must be an object.")
-        if name == "describe_input":
-            return self._tool_result(self._input_discovery.invoke(arguments))
+        if name in {"describe_input", "describe_output"}:
+            return self._tool_result(self._contract_discovery.invoke(
+                arguments, direction="input" if name == "describe_input" else "output"))
         if name == "runtime_info":
             value = self._runtime_identity.invoke(arguments)
             return self._tool_result(value)
@@ -200,7 +204,7 @@ class MCPServer:
             "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
             "structuredContent": value,
             "content": [{"type": "text", "text": json.dumps(value)}],
-            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result", "input-contract-rejected-result"}
+            "isError": value.get("kind") in {"rejected-result", "application-rejected-result", "candidate-application-rejected-result", "input-contract-rejected-result", "output-contract-rejected-result"}
             or value.get("status") == "rejected",
         }
 
@@ -241,10 +245,15 @@ def main() -> int:
         default=SchemaMode.COMPATIBILITY.value,
         help="Use compatibility rendering (default), or native reference schemas for a qualified client.",
     )
+    parser.add_argument(
+        "--output-schemas", choices=[choice.value for choice in OutputSchemaDelivery],
+        default=OutputSchemaDelivery.EAGER.value,
+        help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
+    )
     arguments = parser.parse_args()
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
-                  schema_mode=arguments.schema_mode),
+                  schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas),
         sys.stdin,
         sys.stdout,
     )

@@ -140,13 +140,18 @@ def _arguments_visible(contract: dict, arguments: object, records: dict) -> bool
 
 
 def assess_model_items(items: list[dict], server: str, catalog: dict, contracts: dict,
-                       runtime: dict, *, started_before: dict[str, int] | None = None) -> dict:
+                       runtime: dict, *, started_before: dict[str, int] | None = None,
+                       output_contracts: dict | None = None) -> dict:
     """Assess one already isolated session against its verified runtime.
 
     Records are scoped to this invocation and exact source/purpose/catalog, not
     the operation that returned them. Direct synthetic tests use serial completion
     order; live/replay callers supply start observations for concurrent calls.
     """
+    validation = output_contracts if output_contracts is not None else {
+        name: tool['outputSchema'] for name, tool in catalog.items()}
+    if set(catalog) - set(validation):
+        raise ValueError('Qualification requires exact output contracts for every published tool.')
     failures = []
     calls = []
     discovered = set()
@@ -195,12 +200,38 @@ def assess_model_items(items: list[dict], server: str, catalog: dict, contracts:
         if not Draft202012Validator(catalog[name]['inputSchema']).is_valid(arguments):
             failures.append(f'{name}: invalid model-authored arguments.')
             continue
-        if not isinstance(value, dict) or not Draft202012Validator(catalog[name]['outputSchema']).is_valid(value):
+        if not isinstance(value, dict) or not Draft202012Validator(validation[name]).is_valid(value):
             failures.append(f'{name}: missing or invalid structured result.')
             continue
         if 'rejected' in value.get('kind', '') or value.get('status') in {'rejected', 'stale', 'recovery-required'}:
             failures.append(f'{name}: unresolved domain failure.')
             continue
+        if name == 'describe_output':
+            target = arguments['operation']
+            contract = validation.get(target)
+            from tools.standards_engine.standards_engine.contract_discovery import output_schema_digest
+            if (contract is None or value.get('schema_digest') != output_schema_digest(contract)
+                or value.get('operation') != target
+                or any(not _same_json(value.get(key), runtime[key])
+                       for key in ('purpose', 'catalog_digest', 'interface_version'))):
+                failures.append('Output discovery did not identify the expected result contract.')
+                continue
+            try:
+                root = read_recorded_json(value['root_schema_json'])
+                expected_root = {key: val for key, val in contract.items() if key != '$defs'}
+                if not _same_json(root, expected_root):
+                    failures.append('Output discovery root differed from its exact contract.')
+                    continue
+                for record in value['records']:
+                    definition = read_recorded_json(record['schema_json'])
+                    if (record['name'] not in contract['$defs'] or not _same_json(
+                            definition, contract['$defs'][record['name']])):
+                        failures.append('Output discovery definition differed from its exact contract.')
+                        continue
+                    acquired[record['name']] = definition
+                    acquired_at.setdefault(record['name'], position)
+            except (KeyError, TypeError, ValueError):
+                failures.append('Output discovery returned invalid schema documents.')
         if name == 'describe_input':
             if value.get('kind') != 'input-contract-result' or not value.get('records'):
                 failures.append('Discovery returned no input records.')
@@ -369,8 +400,10 @@ async def run(arguments) -> dict:
     prompt = scenario(server, fixture, prefix)
     (output / 'task.txt').write_text(prompt)
     interface = AgentToolFacade.load_interface(fixture)
-    catalog = tool_catalog(interface, purpose='authoring', schema_mode=arguments.schema_mode)
+    catalog = tool_catalog(interface, purpose='authoring', schema_mode=arguments.schema_mode, output_schemas=arguments.output_schemas)
     toolmap = {tool['name']: tool for tool in catalog}
+    validation = {t['name']: t['outputSchema'] for t in tool_catalog(
+        interface, purpose='authoring', schema_mode=arguments.schema_mode)}
     contracts = input_contracts(interface, toolmap)
     identity = RuntimeIdentity(fixture, 'authoring', interface, catalog).metadata()
     original_main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
@@ -381,11 +414,11 @@ async def run(arguments) -> dict:
     # Run-owned fixture coordinates take precedence over operator surface choices.
     command.extend(['-c', 'analytics.enabled=false',
         '-c', f'mcp_servers.{server}.command={json.dumps(sys.executable)}',
-        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--schema-mode", arguments.schema_mode])}',
+        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--schema-mode", arguments.schema_mode, "--output-schemas", arguments.output_schemas])}',
         '-c', f'mcp_servers.{server}.env.PYTHONPATH={json.dumps(str(ROOT))}'])
     events = []
     report = {'observer_version': OBSERVER_VERSION, 'status': 'unavailable', 'client_version': version, 'requested_model': arguments.model,
-              'requested_surface': arguments.surface, 'schema_mode': arguments.schema_mode,
+              'requested_surface': arguments.surface, 'schema_mode': arguments.schema_mode, 'output_schemas': arguments.output_schemas,
               'catalog_digest': identity['catalog_digest'], 'fixture_main': original_main,
               'server': server, 'fixture_prefix': prefix}
     process = None
@@ -435,14 +468,15 @@ async def run(arguments) -> dict:
                 raise RuntimeError('Configured fixture catalog did not match the expected tool set.')
             for name in toolmap:
                 for field in ('inputSchema', 'outputSchema', 'description'):
-                    if observed[name][field] != toolmap[name][field]:
+                    if ((field in observed[name]) != (field in toolmap[name]) or observed[name].get(field) != toolmap[name].get(field)):
                         raise RuntimeError('Configured fixture catalog content did not match.')
+            (output/'host-catalog.json').write_text(json.dumps(observed, indent=2))
             async def call(name, payload):
                 result = await rpc('mcpServer/tool/call', {'threadId': tid, 'server': server, 'tool': name, 'arguments': payload})
                 if result.get('isError'):
                     raise RuntimeError(f'{name} failed during scripted qualification observation.')
                 value = result['structuredContent']
-                Draft202012Validator(toolmap[name]['outputSchema']).validate(value)
+                Draft202012Validator(validation[name]).validate(value)
                 return value
             runtime = await call('runtime_info', {'expected_catalog': identity['catalog_digest']})
             if runtime['client_catalog_state'] != 'matches' or runtime['installation_state'] != 'current':
@@ -455,7 +489,7 @@ async def run(arguments) -> dict:
                 await receive()
             terminal = next(e['params']['turn'] for e in events if e.get('method') == 'turn/completed' and e['params']['turn']['id'] == turn_id)
             items, starts = model_observations(events, tid, turn_id)
-            report.update(assess_model_items(items, server, toolmap, contracts, runtime, started_before=starts))
+            report.update(assess_model_items(items, server, toolmap, contracts, runtime, started_before=starts, output_contracts=validation))
             if terminal.get('status') != 'completed':
                 report['failures'].append('The real model turn did not complete successfully.')
             calls = [i for i in items if i.get('type') == 'mcpToolCall' and i.get('server') == server]
@@ -494,6 +528,7 @@ def main(argv=None) -> int:
     parser.add_argument('--evidence-dir', required=True, type=Path, help='New directory; preserves the disposable repository and private transcript.')
     parser.add_argument('--codex', default='codex')
     parser.add_argument('--schema-mode', choices=('native', 'compatibility'), default='native')
+    parser.add_argument('--output-schemas', choices=('eager', 'on-demand'), default='eager')
     parser.add_argument('--codex-config', action='append', default=[], help='Explicit current-client configuration override; never written to user configuration.')
     args = parser.parse_args(argv)
     if not args.allow_model_turn:

@@ -13,6 +13,8 @@ from tools.standards_contracts.standards_contracts import (
     referenced_definitions, schema_closure,
 )
 from .context_projection import Purpose, qualified_operations
+from .contract_discovery import (operation_output_schema, output_schema_digest,
+                                 OUTPUT_SCHEMA_DIGEST_KEY)
 
 
 READ_ONLY_OPERATIONS = frozenset(
@@ -22,6 +24,7 @@ READ_ONLY_OPERATIONS = frozenset(
         "workflow_details",
         "runtime_info",
         "describe_input",
+        "describe_output",
         "resume",
         "find_snapshots",
         "find_proposals",
@@ -54,6 +57,7 @@ FOCUSED_OPERATIONS = frozenset(
         "workflow_details",
         "runtime_info",
         "describe_input",
+        "describe_output",
         "resume",
     }
 )
@@ -64,6 +68,7 @@ FOCUSED_OPERATIONS = frozenset(
 INPUT_CONTRACT_DESCRIPTIONS = frozenset({"propose", "revise", "resolve_workflow"})
 DESCRIPTIONS = {
     "relationship_groups": "Discover registered relationship-group IDs, meanings and traversal policies in one snapshot. Omit snapshot to capture authority; reuse it for related. Default 8, maximum 32 whole records, 16 KiB per page. Follow next exactly. A registered group may have no edges for a target.",
+    "describe_output": "Retrieve exact structured-result contracts only when needed. Start with operation; follow next for all records or select a referenced definition with expected_catalog. Combine root_schema_json with all records as $defs to validate a result. schema_digest binds the full output contract, not an approval. Ordinary successful results do not require this extra call.",
     "describe_input": "Discover exact input fields when declarations abbreviate them as unknown. Start with operation only. Read schema_json documents; $refs name selectable definitions. Select a referenced name with selector and expected_catalog from the result. Pages contain up to 16 whole records (default 8), 16 KiB result JSON; follow next unchanged for the complete selected closure. Reuse acquired shapes while catalog_digest matches. No standards state or permissions change.",
     "runtime_info": "Inspect this running interface, catalog and installation identity without opening the standards store. Supply expected_catalog to compare the client catalog. Restart and reconnect after implementation replacement; refresh tools when only the client catalog differs.",
     "resolve_many": "Record 1–128 explicit decisions bound to one exact Analysis context. Each decision retains its ordinary evidence and authorization checks; the final state is recorded atomically. A rejected batch records no decisions. Serialized submissions are limited to 256 KiB. Compact pending results include the first work page. Reuse context with the next explicit batch; fetch workflow_details only for remaining or supporting material.",
@@ -115,6 +120,7 @@ DESCRIPTIONS = {
 
 
 APPLICATION_DESCRIPTIONS = {
+    "describe_output": DESCRIPTIONS["describe_output"],
     "relationship_groups": DESCRIPTIONS["relationship_groups"],
     "describe_input": DESCRIPTIONS["describe_input"],
     "runtime_info": DESCRIPTIONS["runtime_info"],
@@ -135,9 +141,17 @@ class SchemaMode(str, Enum):
     NATIVE = "native"
 
 
+class OutputSchemaDelivery(str, Enum):
+    """Host-selected transmission of an unchanged canonical result contract."""
+
+    EAGER = "eager"
+    ON_DEMAND = "on-demand"
+
+
 def tool_catalog(
     interface: CompiledContracts, *, purpose: Purpose | str, advanced: bool = False,
     schema_mode: SchemaMode | str = SchemaMode.COMPATIBILITY,
+    output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
 ) -> list[dict]:
     # Loading the installation belongs to the caller; this projection is pure.
     contract = interface.project().agent_tools
@@ -145,6 +159,7 @@ def tool_catalog(
     result = []
     purpose = Purpose(purpose)
     mode = SchemaMode(schema_mode)
+    delivery = OutputSchemaDelivery(output_schemas)
     for operation in qualified_operations(contract, purpose):
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
@@ -174,6 +189,9 @@ def tool_catalog(
                 + json.dumps(schema, separators=(",", ":"), sort_keys=True)
                 + "\n```"
             )
+        output = operation_output_schema(operation, definitions)
+        if delivery is OutputSchemaDelivery.ON_DEMAND and name != "describe_output":
+            description += f' Exact result contracts: describe_output(operation="{name}") when needed.'
         result.append(
             {
                 "name": name,
@@ -182,16 +200,8 @@ def tool_catalog(
                 "inputSchema": presented_input_schema(
                     definitions[operation["input_definition"]], definitions, mode
                 ),
-                "outputSchema": schema_closure(
-                    {
-                        "type": "object",
-                        "oneOf": [
-                            {"$ref": f"#/$defs/{definition}"}
-                            for definition in operation["result_definitions"]
-                        ],
-                    },
-                    definitions,
-                ),
+                **({"outputSchema": output} if delivery is OutputSchemaDelivery.EAGER else
+                   {"_meta": {OUTPUT_SCHEMA_DIGEST_KEY: output_schema_digest(output)}}),
             }
         )
     return result

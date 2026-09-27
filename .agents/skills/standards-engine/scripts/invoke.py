@@ -122,7 +122,7 @@ def main(argv: list[str] | None = None) -> int:
                 "Engine runtime dependencies are unavailable; read "
                 ".agents/skills/standards-engine/references/environment.md"
             ) from error
-        if operation["id"] in {"runtime_info", "describe_input"}:
+        if operation["id"] in {"runtime_info", "describe_input", "describe_output"}:
             from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
             from tools.standards_engine.standards_engine.runtime_identity import RuntimeIdentity
             interface = AgentToolFacade.load_interface(root)
@@ -131,11 +131,11 @@ def main(argv: list[str] | None = None) -> int:
             if operation["id"] == "runtime_info":
                 result = identity.invoke(request)
             else:
-                from tools.standards_engine.standards_engine.input_discovery import InputContractDiscovery
-                result = InputContractDiscovery(
+                from tools.standards_engine.standards_engine.contract_discovery import ContractDiscovery
+                result = ContractDiscovery(
                     interface, purpose=arguments.purpose, operation_names=[t["name"] for t in catalog],
                     catalog_digest=identity.metadata()["catalog_digest"],
-                ).invoke(request)
+                ).invoke(request, direction="input" if operation["id"] == "describe_input" else "output")
         else:
             with AgentToolFacade.open_repository(root, purpose=arguments.purpose) as facade:
                 result = getattr(facade, str(operation["id"]))(request)

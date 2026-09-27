@@ -101,6 +101,9 @@
       "$ref": "#/$defs/DescribeInputCall"
     },
     {
+      "$ref": "#/$defs/DescribeOutputCall"
+    },
+    {
       "$ref": "#/$defs/FindProposalsCall"
     },
     {
@@ -135,6 +138,12 @@
     },
     {
       "$ref": "#/$defs/OperationalReadResult"
+    },
+    {
+      "$ref": "#/$defs/OutputContractRejectedResult"
+    },
+    {
+      "$ref": "#/$defs/OutputContractResult"
     },
     {
       "$ref": "#/$defs/PendingResult"
@@ -7629,7 +7638,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -7711,7 +7720,7 @@
         "snapshot",
         "items"
       ],
-      "description": "Read 1–32 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
+      "description": "Read 1\u201332 selected items from one explicit snapshot, preserving order. The complete JSON result is limited to 2 MiB; any failed item rejects the entire request.",
       "properties": {
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -9749,6 +9758,185 @@
         "unresolved_policy_count",
         "explanation",
         "next_operations"
+      ]
+    },
+    "DescribeOutputCall": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "operation": {
+          "type": "string",
+          "minLength": 1,
+          "description": "An operation published in this running catalog."
+        },
+        "selector": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+          "description": "A returned output definition name. Omit for the complete operation result algebra."
+        },
+        "expected_catalog": {
+          "$ref": "#/$defs/Digest"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Record offset within the selected closure. Continue with the returned next request."
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 16,
+          "description": "Maximum whole schema records in this page; default 8. Byte pressure may return fewer."
+        }
+      },
+      "required": [
+        "operation"
+      ]
+    },
+    "OutputSchemaRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "schema_json": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact JSON Schema definition serialized as a JSON document; $refs name other returned/selectable definitions. Not a standalone validator without its closure."
+        }
+      },
+      "required": [
+        "name",
+        "schema_json"
+      ]
+    },
+    "OutputContractResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "output-contract-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "interface_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "catalog_digest": {
+          "$ref": "#/$defs/Digest"
+        },
+        "operation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "selector": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dialect": {
+          "const": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "offset": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "records": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/OutputSchemaRecord"
+          }
+        },
+        "next": {
+          "$ref": "#/$defs/DescribeOutputCall"
+        },
+        "roots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "root_schema_json": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact operation result schema without $defs. Combine with all result-root definition pages for validation; schema_digest binds the full schema."
+        },
+        "schema_digest": {
+          "$ref": "#/$defs/Digest"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "interface_version",
+        "catalog_digest",
+        "operation",
+        "dialect",
+        "offset",
+        "total",
+        "records",
+        "roots",
+        "root_schema_json",
+        "schema_digest"
+      ]
+    },
+    "OutputContractRejectedResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "output-contract-rejected-result"
+        },
+        "purpose": {
+          "enum": [
+            "application",
+            "authoring"
+          ]
+        },
+        "code": {
+          "enum": [
+            "OUTPUT_DISCOVERY.INVALID_ARGUMENTS",
+            "OUTPUT_DISCOVERY.OPERATION_UNAVAILABLE",
+            "OUTPUT_DISCOVERY.CATALOG_CHANGED",
+            "OUTPUT_DISCOVERY.SELECTION_INVALID",
+            "OUTPUT_DISCOVERY.RESULT_LIMIT"
+          ]
+        },
+        "outcome": {
+          "enum": [
+            "invalid",
+            "unavailable",
+            "unsupported"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input_feedback": {
+          "$ref": "#/$defs/InputFeedback"
+        }
+      },
+      "required": [
+        "kind",
+        "purpose",
+        "code",
+        "outcome",
+        "message"
       ]
     }
   }

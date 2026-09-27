@@ -55,6 +55,43 @@ def observed_fixture():
 
 
 class ModelDiscoveryQualificationTest(unittest.TestCase):
+    def test_exact_output_definition_can_supply_shared_input_knowledge(self):
+        from tools.standards_engine.standards_engine.contract_discovery import output_schema_digest
+        catalog, items, contracts = observed_fixture()
+        for item in items:
+            if item['tool']=='describe_input':
+                item['result']['structuredContent']['records']=[r for r in item['result']['structuredContent']['records'] if r['name']!='FixtureItem']
+        root={'type':'object','properties':{'shared':{'$ref':'#/$defs/FixtureItem'}}}
+        schema={**root,'$defs':{'FixtureItem':{'type':'object'}}}
+        catalog['review']['outputSchema']=schema
+        catalog['describe_output']={'inputSchema':{'type':'object'},'outputSchema':{'type':'object'}}
+        out=deepcopy(items[0]);out.update(id='output-discovery',tool='describe_output',arguments={'operation':'review'})
+        out['result']['structuredContent']={'kind':'output-contract-result','purpose':'authoring',
+            'catalog_digest':RUNTIME['catalog_digest'],'interface_version':40,'operation':'review',
+            'schema_digest':output_schema_digest(schema),'root_schema_json':json.dumps(root),
+            'records':[{'name':'FixtureItem','schema_json':'{"type":"object"}'}]}
+        result=assess_model_items([out]+items,'fixture',catalog,contracts)
+        self.assertEqual(result['status'],'passed',result)
+        out['result']['structuredContent']['records'][0]['schema_json']='{"type":"string"}'
+        self.assertEqual(assess_model_items([out]+items,'fixture',catalog,contracts)['status'],'failed')
+
+    def test_on_demand_results_use_independent_observer_validation(self):
+        catalog, items, contracts = observed_fixture()
+        validation = {name: tool.pop('outputSchema') for name, tool in catalog.items()}
+        result = assess_model_items(items, 'fixture', catalog, contracts, output_contracts=validation)
+        self.assertEqual(result['status'], 'passed', result)
+        changed = deepcopy(items)
+        changed[-1]['result']['structuredContent'] = 'invalid-result'
+        result = assess_model_items(changed, 'fixture', catalog, contracts, output_contracts=validation)
+        self.assertEqual(result['status'], 'failed', result)
+
+    def test_on_demand_observation_requires_explicit_output_validation(self):
+        catalog, items, contracts = observed_fixture()
+        for tool in catalog.values():
+            tool.pop('outputSchema')
+        with self.assertRaises((KeyError, ValueError)):
+            assess_model_items(items, 'fixture', catalog, contracts)
+
     def test_complete_observed_sequence_passes_but_self_report_does_not(self):
         catalog, events, contracts = observed_fixture()
         result = assess_model_items(events, 'fixture', catalog, contracts)

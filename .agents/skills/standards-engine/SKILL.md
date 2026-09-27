@@ -113,6 +113,12 @@ values are not echoed. Truncation is explicit. Rejection supplies no evidence,
 authorization, draft or decision. Explicit empty routing sets assert actual absence;
 an unanswered fact stays unknown.
 
+For an exact result contract, use `describe_output` only when the returned
+structured fields are insufficient or client-side schema validation is required.
+Reuse a fully reconstructed contract across operations with the same schema digest;
+retain the current catalog binding. A selected definition page is not the whole
+output contract. Ordinary successful actions do not require another discovery call.
+
 ## Choose The Workflow
 
 - For routing, reading, relationship discovery, or accepted-snapshot Analysis,

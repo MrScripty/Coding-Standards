@@ -211,7 +211,7 @@ class PurposeProjectionTest(unittest.TestCase):
         for advanced in (False, True):
             catalog = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='application', advanced=advanced)
             names = {tool["name"] for tool in catalog}
-            self.assertLessEqual(names, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect", "runtime_info", "describe_input", "relationship_groups"})
+            self.assertLessEqual(names, {"route", "read", "read_many", "related", "routing_facts", "query", "inspect", "runtime_info", "describe_input", "describe_output", "relationship_groups"})
             serialized = json.dumps(catalog)
             for hidden in ("rationale", "ChangePurpose", "DecisionProvenanceRecord", "ProposalRevisionHandle"):
                 self.assertNotIn(hidden, serialized)

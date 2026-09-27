@@ -17,7 +17,7 @@ from tools.standards_engine.standards_engine.tools import AgentToolFacade
 ROOT = Path(__file__).resolve().parents[3]
 
 
-async def main(server_name, schema_mode):
+async def main(server_name, schema_mode, output_schemas="eager"):
     with tempfile.TemporaryFile(mode="w+") as log:
         process = await asyncio.create_subprocess_exec(
             "codex",
@@ -72,14 +72,17 @@ async def main(server_name, schema_mode):
             toolmap = server["tools"]
             print("Codex tools:", sorted(toolmap), flush=True)
             from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
-            expected = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode)
+            expected = tool_catalog(AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode, output_schemas=output_schemas)
             examples = json.loads((ROOT / "tools/standards_engine/contracts/examples/a1-examples.json").read_text())["examples"]
+            validation = {t['name']: t['outputSchema'] for t in tool_catalog(
+                AgentToolFacade.load_interface(ROOT), purpose='authoring', schema_mode=schema_mode)}
             for tool in expected:
                 observed = toolmap[tool["name"]]
                 for field in ("inputSchema", "outputSchema", "description"):
-                    assert observed[field] == tool[field], (tool["name"], field)
+                    assert (field in observed) == (field in tool) and observed.get(field) == tool.get(field), (tool["name"], field)
                 Draft202012Validator.check_schema(observed["inputSchema"])
-                Draft202012Validator.check_schema(observed["outputSchema"])
+                if "outputSchema" in observed:
+                    Draft202012Validator.check_schema(observed["outputSchema"])
             for name, definition in (("propose", "AgentProposeCall"),
                                      ("revise", "AgentReviseCall"),
                                      ("review", "AgentReviewCall"),
@@ -102,7 +105,7 @@ async def main(server_name, schema_mode):
                 )
                 assert not r.get("isError"), r
                 value = r["structuredContent"]
-                schema = toolmap[name]["outputSchema"]
+                schema = validation[name]
                 Draft202012Validator(schema).validate(value)
                 return value
 
@@ -128,6 +131,16 @@ async def main(server_name, schema_mode):
             assert groups["kind"] == "relationship-groups-result", groups
             assert all(item["id"] and item["traversal_directions"] for item in groups["items"])
 
+            output_args, documents = {"operation": "read", "limit": 16}, {}
+            while True:
+                page = await call("describe_output", output_args)
+                documents.update({r["name"]: json.loads(r["schema_json"]) for r in page["records"]})
+                if "next" not in page:
+                    break
+                output_args = page["next"]
+            reconstructed = {**json.loads(page["root_schema_json"]), "$defs": documents}
+            assert reconstructed == validation["read"]
+            print(f"Codex {output_schemas} output delivery: exact read contract rediscovered", flush=True)
             routed = await call("route", {"facts": {}})
             assert routed["kind"] == "compact-route-result", routed
             assert all(i["operation"] in toolmap for i in routed["next_operations"])
@@ -171,5 +184,7 @@ if __name__ == "__main__":
     parser.add_argument("--server", default="standards-authoring", help="Configured authoring-purpose MCP registration")
     parser.add_argument("--schema-mode", choices=("compatibility", "native"), default="compatibility",
                         help="Expected presentation of the already configured server; does not reconfigure it")
+    parser.add_argument("--output-schemas", choices=("eager", "on-demand"), default="eager",
+                        help="Expected delivery of the configured server; does not reconfigure it")
     arguments = parser.parse_args()
-    asyncio.run(main(arguments.server, arguments.schema_mode))
+    asyncio.run(main(arguments.server, arguments.schema_mode, arguments.output_schemas))

@@ -830,3 +830,53 @@ negative fact, automatic review, publication or remote operation is introduced.
 Compatibility remains available pending the actual client/support and integration
 evidence. Catalog inventory distinguishes descriptions from schema JSON and does not
 claim model-token savings. See the current plan for measured cost/benefit and limits.
+
+## Output-contract delivery (interface 42)
+
+`describe_output` is a read-only companion to `describe_input`. Both are served by
+`ContractDiscovery` over the same installed interface and actual purpose/catalog.
+Output discovery selects only the requested operation's qualified result roots.
+It does not inspect standards state, query Git or create snapshots or proposals.
+
+Start with `{"operation":"review"}`. The result provides `roots`,
+`root_schema_json`, `schema_digest`, and whole definition `records`. Read every page
+of the unselected result to reconstruct the complete operation schema:
+parse `root_schema_json` and set its `$defs` to the map of record names to parsed
+`schema_json`. `dialect` identifies Draft 2020-12. The digest binds the canonical
+JSON of that complete schema (UTF-8, ASCII escaping, sorted keys, compact separators),
+without adding other fields. It covers the structured domain result, not MCP's
+outer `content`/`structuredContent`/`isError` wrapper.
+
+An explicit `selector` names a returned/referenced output definition. Selected
+pages cover that definition's closure, not the complete result algebra. `roots`,
+`root_schema_json` and `schema_digest` still identify the complete operation result.
+Follow `next` unchanged. Selected and nonzero-offset calls require the original
+`expected_catalog`; a changed catalog rejects rather than combining contracts.
+Pages use the existing defaults: eight records, at most sixteen, and at most 16 KiB
+of domain result JSON. An oversized whole record has an explicit unsupported
+outcome; no partial schema is presented as complete.
+
+The host can select `--output-schemas eager` (default) or
+`--output-schemas on-demand`, independently of `--schema-mode`. Eager catalogs retain
+complete `outputSchema` entries for existing clients. On-demand catalogs omit that
+optional MCP field rather than replacing it with a permissive schema. Each tool
+instead includes `_meta["standards-engine/output-schema-digest"]`, binding its full
+output contract into the existing catalog digest. Output-only changes therefore
+invalidate earlier discovery selections. Input/output contract digests and operation
+capabilities are distinct: a shared schema does not grant authority to another action.
+
+Clients can retain an exact reconstructed schema by its digest and reuse it across
+operations with that digest. The Engine adds no client cache or session authority.
+Ordinary success handling requires no extra discovery call: results retain exact
+values, kinds, contexts, typed failures and continuations. Requests and generated
+results still use the same validation in both delivery choices. Matching structured
+results and JSON TextContent are preserved.
+
+No existing operation, result, handle, Analysis request/state or SQLite definition
+is replaced by this addition. Input discovery's wire contract is unchanged.
+Interface 42 adds one operation and a host catalog option; restart/reconnect to
+observe it and preserve all retained state. Eager is the supported default until
+on-demand is qualified on the actual host. Do not infer model-visible size or client
+validation behavior from serialized catalog bytes alone. The existing client and
+model qualification harnesses now accept `--output-schemas` and retain canonical
+output validation in their observer, without supplying those schemas to the model.

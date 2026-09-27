@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 41,
+  "interface_schema_version": 42,
   "examples": [
     {
       "name": "create-snapshot",
@@ -1383,6 +1383,94 @@
           "describe_input": {
             "operation": "propose"
           }
+        }
+      }
+    },
+    {
+      "name": "describe-output-root",
+      "definition": "DescribeOutputCall",
+      "value": {
+        "operation": "review"
+      }
+    },
+    {
+      "name": "describe-output-selection",
+      "definition": "DescribeOutputCall",
+      "value": {
+        "operation": "review",
+        "selector": "WorkflowResult",
+        "expected_catalog": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "limit": 16
+      }
+    },
+    {
+      "name": "output-contract-stale",
+      "definition": "OutputContractRejectedResult",
+      "value": {
+        "kind": "output-contract-rejected-result",
+        "purpose": "authoring",
+        "code": "OUTPUT_DISCOVERY.CATALOG_CHANGED",
+        "outcome": "unavailable",
+        "message": "Refresh tools and repeat discovery against the current catalog."
+      }
+    },
+    {
+      "name": "output-contract-page",
+      "definition": "OutputContractResult",
+      "value": {
+        "kind": "output-contract-result",
+        "purpose": "authoring",
+        "interface_version": 42,
+        "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "operation": "review",
+        "dialect": "https://json-schema.org/draft/2020-12/schema",
+        "offset": 0,
+        "total": 92,
+        "records": [
+          {
+            "name": "WorkflowResult",
+            "schema_json": "{\"additionalProperties\":false,\"description\":\"Exact immutable workflow context and relative action descriptors. Successful compact pending propose, revise, analyze and decision submissions include work from the already-produced Analysis. Status observations, full results, stale contexts and other outcomes omit work.\",\"properties\":{\"context\":{\"$ref\":\"#/$defs/WorkflowContext\"},\"kind\":{\"const\":\"workflow-result\"},\"next_operations\":{\"items\":{\"$ref\":\"#/$defs/WorkflowContinuation\"},\"type\":\"array\"},\"outcome\":{\"$ref\":\"#/$defs/WorkflowOutcome\"},\"proposal\":{\"$ref\":\"#/$defs/ProposalHandle\"},\"revision\":{\"$ref\":\"#/$defs/ProposalRevisionHandle\"},\"status\":{\"enum\":[\"draft\",\"needs-action\",\"complete\",\"requires-change\",\"ready\",\"recovery-required\",\"applied\",\"rejected\",\"stale\"]},\"work\":{\"oneOf\":[{\"$ref\":\"#/$defs/WorkflowWorkPage\"},{\"$ref\":\"#/$defs/WorkflowWorkDeferred\"}]}},\"required\":[\"kind\",\"context\",\"proposal\",\"revision\",\"status\",\"next_operations\"],\"type\":\"object\"}"
+          },
+          {
+            "name": "RejectedResult",
+            "schema_json": "{\"additionalProperties\":false,\"properties\":{\"code\":{\"$ref\":\"#/$defs/CanonicalId\"},\"details\":{\"additionalProperties\":{\"$ref\":\"#/$defs/ScalarValue\"},\"type\":\"object\"},\"input_feedback\":{\"$ref\":\"#/$defs/InputFeedback\"},\"kind\":{\"const\":\"rejected-result\"},\"message\":{\"$ref\":\"#/$defs/NonEmptyString\"},\"next_operations\":{\"items\":{\"$ref\":\"#/$defs/NextOperation\"},\"type\":\"array\"},\"outcome\":{\"enum\":[\"invalid\",\"unavailable\",\"unsupported\",\"unauthorized\"]},\"relationship_groups\":{\"$ref\":\"#/$defs/RelationshipGroupsResult\"},\"target\":{\"$ref\":\"#/$defs/NonEmptyString\"}},\"required\":[\"kind\",\"code\",\"outcome\",\"message\",\"details\",\"next_operations\"],\"type\":\"object\"}"
+          },
+          {
+            "name": "ProposalHandle",
+            "schema_json": "{\"additionalProperties\":false,\"properties\":{\"id\":{\"$ref\":\"#/$defs/ProposalId\"},\"kind\":{\"const\":\"proposal-handle\"},\"schema_version\":{\"const\":1}},\"required\":[\"kind\",\"id\",\"schema_version\"],\"type\":\"object\"}"
+          },
+          {
+            "name": "ProposalRevisionHandle",
+            "schema_json": "{\"additionalProperties\":false,\"properties\":{\"id\":{\"$ref\":\"#/$defs/ProposalRevisionId\"},\"kind\":{\"const\":\"proposal-revision-handle\"},\"schema_version\":{\"const\":1}},\"required\":[\"kind\",\"id\",\"schema_version\"],\"type\":\"object\"}"
+          },
+          {
+            "name": "WorkflowContext",
+            "schema_json": "{\"oneOf\":[{\"$ref\":\"#/$defs/ProposalRevisionHandle\"},{\"$ref\":\"#/$defs/AnalysisHandle\"},{\"$ref\":\"#/$defs/ReadinessHandle\"}]}"
+          },
+          {
+            "name": "WorkflowContinuation",
+            "schema_json": "{\"additionalProperties\":false,\"description\":\"Select the named operation with the enclosing WorkflowResult context and explicit required inputs. This descriptor is not an authorization grant.\",\"properties\":{\"operation\":{\"enum\":[\"revise\",\"analyze\",\"resolve_workflow\",\"review\",\"apply\",\"recover\",\"workflow_status\",\"resume\",\"resolve_many\"]},\"required_inputs\":{\"items\":{\"enum\":[\"change_set\",\"submission\",\"decisions\",\"action\",\"submissions\"]},\"type\":\"array\",\"uniqueItems\":true}},\"required\":[\"operation\",\"required_inputs\"],\"type\":\"object\"}"
+          },
+          {
+            "name": "WorkflowOutcome",
+            "schema_json": "{\"oneOf\":[{\"$ref\":\"#/$defs/CreateProposalResult\"},{\"$ref\":\"#/$defs/ReviseProposalResult\"},{\"$ref\":\"#/$defs/PendingResult\"},{\"$ref\":\"#/$defs/CompleteResult\"},{\"$ref\":\"#/$defs/ReviewProposalResult\"},{\"$ref\":\"#/$defs/ApplyProposalResult\"},{\"$ref\":\"#/$defs/ApplicationRecoveryRequiredResult\"},{\"$ref\":\"#/$defs/RecoverApplicationResult\"},{\"$ref\":\"#/$defs/RejectedResult\"},{\"$ref\":\"#/$defs/WorkflowAnalysisSummary\"}]}"
+          },
+          {
+            "name": "WorkflowWorkDeferred",
+            "schema_json": "{\"additionalProperties\":false,\"description\":\"The mutation succeeded but its first complete work record exceeds the compact page budget. Preserve the enclosing context and counts; request explicitly selects that exact full record without the compact byte cap.\",\"properties\":{\"code\":{\"const\":\"WORKFLOW.RESULT_LIMIT\"},\"kind\":{\"const\":\"workflow-work-deferred\"},\"request\":{\"$ref\":\"#/$defs/WorkflowDetailsSelection\"},\"section\":{\"enum\":[\"fact_requirements\",\"pending_obligations\"]},\"total\":{\"minimum\":0,\"type\":\"integer\"}},\"required\":[\"kind\",\"code\",\"section\",\"total\",\"request\"],\"type\":\"object\"}"
+          }
+        ],
+        "roots": [
+          "WorkflowResult",
+          "RejectedResult"
+        ],
+        "root_schema_json": "{\"oneOf\":[{\"$ref\":\"#/$defs/WorkflowResult\"},{\"$ref\":\"#/$defs/RejectedResult\"}],\"type\":\"object\"}",
+        "schema_digest": "sha256:18b7365ce549e11a850e4a1cc7da14c00db993f9e847c2252a9ab7ff163d8274",
+        "next": {
+          "operation": "review",
+          "expected_catalog": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "offset": 8,
+          "limit": 8
         }
       }
     }

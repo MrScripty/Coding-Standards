@@ -83,8 +83,10 @@ def _one(values, label):
 
 def assess_recording(calls: list[RecordedCall], events: list[tuple[int, dict]],
                      previous: dict, catalog: dict, contracts: dict,
-                     expected_runtime: dict, observed_main: str) -> dict:
+                     expected_runtime: dict, observed_main: str, *, output_contracts: dict | None = None) -> dict:
     """Reconstruct one fresh model turn and its independent scripted readbacks."""
+    validation = output_contracts if output_contracts is not None else {
+        name: tool['outputSchema'] for name, tool in catalog.items()}
     allowed_methods = {'initialize', 'thread/start', 'mcpServerStatus/list',
                        'mcpServer/tool/call', 'turn/start'}
     if any(call.method not in allowed_methods for call in calls):
@@ -105,7 +107,8 @@ def assess_recording(calls: list[RecordedCall], events: list[tuple[int, dict]],
         raise ValueError('Catalog preflight is missing or outside the selected thread.')
     for name, tool in catalog.items():
         for field in ('inputSchema', 'outputSchema', 'description'):
-            if not _same_json(server_info['tools'][name].get(field), tool[field]):
+            if ((field in server_info['tools'][name]) != (field in tool) or
+                not _same_json(server_info['tools'][name].get(field), tool.get(field))):
                 raise ValueError('Recorded catalog differs from the selected source checkout.')
     runtime_call = _one([c for c in calls if c.method == 'mcpServer/tool/call'
                          and c.params.get('tool') == 'runtime_info'], 'runtime observation')
@@ -114,7 +117,7 @@ def assess_recording(calls: list[RecordedCall], events: list[tuple[int, dict]],
         or runtime_call.received_at >= turn.requested_at or runtime_call.result.get('isError')
         or runtime.get('installation_state') != 'current' or runtime.get('client_catalog_state') != 'matches'):
         raise ValueError('Runtime preflight is not current and bound before the model turn.')
-    Draft202012Validator(catalog['runtime_info']['outputSchema']).validate(runtime)
+    Draft202012Validator(validation['runtime_info']).validate(runtime)
     for key in RUNTIME_FIELDS:
         if key != 'instance_id' and not _same_json(runtime.get(key), expected_runtime[key]):
             raise ValueError('Recorded runtime differs from the selected source checkout.')
@@ -134,7 +137,7 @@ def assess_recording(calls: list[RecordedCall], events: list[tuple[int, dict]],
             if not turn.requested_at < index < ending_at:
                 raise ValueError('Item observations fall outside the selected model turn.')
     items, starts = model_observations([e for _, e in events], tid, turn_id)
-    result = assess_model_items(items, server, catalog, contracts, runtime, started_before=starts)
+    result = assess_model_items(items, server, catalog, contracts, runtime, started_before=starts, output_contracts=validation)
     if ending['params']['turn'].get('status') != 'completed':
         result['failures'].append('The recorded model turn did not complete successfully.')
     proposed = _one([i for i in items if i.get('tool') == 'propose'], 'proposal')
@@ -165,7 +168,7 @@ def assess_recording(calls: list[RecordedCall], events: list[tuple[int, dict]],
         if any(not _same_json(meta.get(key), runtime[key]) for key in RUNTIME_FIELDS):
             raise ValueError('Independent readback changed runtime binding.')
         value = call.result['structuredContent']
-        Draft202012Validator(catalog['query_proposal']['outputSchema']).validate(value)
+        Draft202012Validator(validation['query_proposal']).validate(value)
         if value.get('revision') != params['arguments'].get('revision'):
             raise ValueError('Readback response did not bind the requested revision.')
         readbacks[target] = value
@@ -200,7 +203,9 @@ def replay(evidence_dir: Path) -> dict:
         if mode not in ('native', 'compatibility'):
             raise ValueError('Missing recorded schema mode.')
         interface = AgentToolFacade.load_interface(ROOT)
-        catalog = tool_catalog(interface, purpose='authoring', schema_mode=mode)
+        delivery = previous.get('output_schemas', 'eager')
+        catalog = tool_catalog(interface, purpose='authoring', schema_mode=mode, output_schemas=delivery)
+        validation = {t['name']: t['outputSchema'] for t in tool_catalog(interface, purpose='authoring', schema_mode=mode)}
         expected = RuntimeIdentity(ROOT, 'authoring', interface, catalog).metadata()
         toolmap = {t['name']: t for t in catalog}
         calls, events = parse_trace(raw_trace.decode('utf-8'))
@@ -208,8 +213,9 @@ def replay(evidence_dir: Path) -> dict:
             ['git', '-C', str(evidence_dir / 'repository'), 'rev-parse', '--verify', 'refs/heads/main'],
             text=True, stderr=subprocess.PIPE).strip()
         result.update(assess_recording(calls, events, previous, toolmap,
-                                     input_contracts(interface, toolmap), expected, current))
+                                     input_contracts(interface, toolmap), expected, current, output_contracts=validation))
         result['schema_mode'] = mode
+        result['output_schemas'] = delivery
         # Detect input replacement during observation instead of certifying a
         # mixture. This is hash-bound local evidence, not cryptographic attestation
         # that the caller's log was never edited before it was supplied.

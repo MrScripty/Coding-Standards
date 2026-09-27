@@ -25,12 +25,18 @@ ROOT = Path(__file__).resolve().parents[3]
 
 class ReplayDiscoveryWorkflowTest(unittest.TestCase):
     def test_cold_replay_of_real_discovered_workflow_preserves_evidence_and_main(self):
+        self.exercise_delivery('eager')
+
+    def test_on_demand_cold_replay_keeps_validation_without_eager_schemas(self):
+        self.exercise_delivery('on-demand')
+
+    def exercise_delivery(self, delivery):
         with tempfile.TemporaryDirectory(prefix='discovery-replay-integration-') as folder:
             evidence_dir = Path(folder) / 'original'; evidence_dir.mkdir()
             fixture = evidence_dir / 'repository'
             _clone_tracked_worktree(fixture)
             main = subprocess.check_output(['git', '-C', str(fixture), 'rev-parse', 'main'], text=True).strip()
-            server = MCPServer(fixture, purpose='authoring', schema_mode='native')
+            server = MCPServer(fixture, purpose='authoring', schema_mode='native', output_schemas=delivery)
             self.addCleanup(server.close)
             initialize(server)
             trace = TraceWriter()
@@ -102,6 +108,7 @@ class ReplayDiscoveryWorkflowTest(unittest.TestCase):
             batch = invoke('resolve_many', shared({'context': single['context'], 'submissions': [
                 decision(fixture, item['obligation']) for item in single['work']['items']]}))
             self.assertEqual(batch['status'], 'complete')
+            invoke('describe_output', {'operation': 'review'})
             discover('review')
             ready = invoke('review', shared({'context': batch['context'], 'decisions': decisions(fixture)}))
             self.assertEqual(ready['status'], 'ready')
@@ -109,7 +116,7 @@ class ReplayDiscoveryWorkflowTest(unittest.TestCase):
             for target in fixture_contents(prefix):
                 invoke('query_proposal', {'revision': ready['revision'], 'request': {'kind': 'read', 'target': target}}, model=False)
             previous = {'status': 'failed', 'runtime': runtime, 'catalog_digest': runtime['catalog_digest'],
-                'fixture_main': main, 'schema_mode': 'native', 'requested_model': 'synthetic-no-model',
+                'fixture_main': main, 'schema_mode': 'native', 'output_schemas': delivery, 'requested_model': 'synthetic-no-model',
                 'requested_surface': 'synthetic protocol trace', 'client_version': 'test-only; no Codex'}
             (evidence_dir / 'events.jsonl').write_text(trace.text())
             (evidence_dir / 'qualification.json').write_text(json.dumps(previous))
