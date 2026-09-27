@@ -6,7 +6,7 @@ import tempfile
 import tomllib
 from contextlib import AbstractContextManager
 from collections.abc import Iterable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from tools.graph_engine.graph_engine import Direction, Edge, EdgeRegistry, GraphError
@@ -214,6 +214,7 @@ from .authoring import (
     ProposalApplication,
     ProposalReadiness,
     ProposalRevision,
+    RevisionDecoding,
     REVIEW_CAPABILITIES,
     ProposalSummary as AuthoringProposalSummary,
     application_subject,
@@ -272,7 +273,8 @@ class _EvaluationMaterials:
     """Verified immutable inputs borrowed only by one analysis operation.
 
     Decision states, providers, authorization, and live root checks stay outside
-    this value. Publication and recovery obtain their own current observations.
+    this value. Optional pure revision decoding is cleared by the enclosing
+    operation. Publication and recovery obtain their own current observations.
     """
 
     base_snapshot: SnapshotId
@@ -281,6 +283,7 @@ class _EvaluationMaterials:
     proposed: CompiledSnapshot
     revision: ProposalRevision | None = None
     projection: LogicalProjection | None = None
+    revision_decoding: RevisionDecoding | None = field(default=None, compare=False, repr=False)
 
 
 class _GitRevisionSource:
@@ -911,7 +914,7 @@ class StandardsEngine:
 
         try:
             with ProposalMaterials(self) as materials:
-                revision = self._authoring.read_revision(call.revision.id)
+                revision = materials.read_revision(call.revision.id)
                 projection = materials.projection(revision)
                 return preview_application(self, projection.compiled, call)
         except self._domain_errors() as error:
@@ -954,10 +957,11 @@ class StandardsEngine:
                 call.expected_revision.id,
                 self._prepare_consumer_sources(
                     StandardsChangeSet.from_mapping(call.change_set.as_contract()),
-                    self._authoring.read_revision(call.expected_revision.id).base_snapshot,
+                    materials.read_revision(call.expected_revision.id).base_snapshot,
                     materials,
                 ),
                 preparation=materials,
+                decoding=materials.revision_decoding,
             )
             return ReviseProposalResult.from_value(
                 {
@@ -1186,7 +1190,7 @@ class StandardsEngine:
         self, call: AnalyzeProposalCall, materials: ProposalMaterials
     ) -> PendingResult | CompleteResult | RejectedResult:
         try:
-            revision = self._authoring.read_revision(call.revision.id)
+            revision = materials.read_revision(call.revision.id)
             accepted = materials.compiled(revision.base_snapshot)
             projection = materials.projection(revision)
             proposed = projection.compiled
@@ -1226,6 +1230,7 @@ class StandardsEngine:
                     proposed,
                     revision,
                     projection,
+                    materials.revision_decoding,
                 ),
             )
         except self._domain_errors() as error:
@@ -1904,7 +1909,7 @@ class StandardsEngine:
             return self._domain_rejection(error)
 
     def _compiled_snapshot(self, snapshot: SnapshotId) -> CompiledSnapshot:
-        capture = self._snapshots.load_content(snapshot)
+        capture = self._snapshots.load_content(snapshot, identity_reuse=self._compiled_cache)
         if self._compiled_cache is not None:
             return self._compiled_cache.compile_verified(capture, self._compile)
         return self._compile(
@@ -2019,7 +2024,10 @@ class StandardsEngine:
             return _EvaluationMaterials(
                 state.base_snapshot, proposed_ref, accepted, proposed
             )
-        revision = self._authoring.read_revision(proposed_ref.revision_id)
+        revision = (
+            self._authoring.read_revision(proposed_ref.revision_id)
+            if operation is None else operation.read_revision(proposed_ref.revision_id)
+        )
         if revision.base_snapshot != state.base_snapshot:
             raise AnalysisError(
                 AnalysisFailure(
@@ -2039,6 +2047,7 @@ class StandardsEngine:
             projection.compiled,
             revision,
             projection,
+            None if operation is None else operation.revision_decoding,
         )
 
     def _evaluate(
@@ -2067,7 +2076,9 @@ class StandardsEngine:
             if state.proposed_material.snapshot != state.base_snapshot:
                 self._snapshots.snapshot(state.proposed_material.snapshot)
         else:
-            current = self._authoring.read_revision(state.proposed_material.revision_id)
+            current = self._authoring.read_revision(
+                state.proposed_material.revision_id, decoding=materials.revision_decoding,
+            )
             if current != materials.revision:
                 raise AnalysisError(
                     AnalysisFailure(

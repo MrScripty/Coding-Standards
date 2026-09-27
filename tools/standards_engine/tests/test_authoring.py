@@ -116,9 +116,9 @@ class _FixtureAuthoring(AuthoringModule):
             base_snapshot, change_set, preparation=self.preparation
         )
 
-    def revise_proposal(self, expected_revision, change_set, *, preparation=None):
+    def revise_proposal(self, expected_revision, change_set, *, preparation=None, decoding=None):
         return super().revise_proposal(
-            expected_revision, change_set, preparation=self.preparation
+            expected_revision, change_set, preparation=self.preparation, decoding=decoding,
         )
 
 

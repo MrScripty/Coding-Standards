@@ -1,4 +1,4 @@
-"""Bounded pure compilation reuse after the caller verifies captured content.
+"""Bounded reuse of pure identity and compilation products of exact material.
 
 An MCP process owns one cache for its repository, purpose and installed code.
 Its serial calls borrow results; stores, handles, decisions and responses remain
@@ -9,7 +9,7 @@ from __future__ import annotations
 from collections import OrderedDict
 from collections.abc import Callable, Mapping
 from copy import deepcopy
-from dataclasses import replace
+from dataclasses import dataclass, replace
 from enum import Enum
 from pathlib import Path, PurePath
 import re
@@ -29,11 +29,19 @@ if TYPE_CHECKING:
     from .logical_authoring import LogicalAuthoringCompiler, LogicalProjection
 
 
+@dataclass(frozen=True, slots=True)
+class _SnapshotMaterial:
+    """Two pure products of one exact capture, charged as one retained entry."""
+
+    identity: tuple[Callable[[CapturedContent], str], str] | None = None
+    compilation: tuple[Callable[[FrozenContentSource], CompiledSnapshot], CompiledSnapshot] | None = None
+
+
 class CompiledSnapshotCache:
     """Retain a bounded mix of snapshot and exact draft material for one owner.
 
-    Snapshot keys bind the exact verified capture and compiler. Draft keys also
-    bind the complete logical revision and installed replay recipe. Equality
+    Snapshot entries bind the exact capture and check the codec/compiler identity.
+    Draft keys bind the complete logical revision and installed replay recipe. Equality
     distinguishes different material even after a Python hash collision. Current
     lifecycle, root and access decisions remain with the caller, which performs
     complete durable validation before consulting this pure reuse mechanism.
@@ -55,6 +63,7 @@ class CompiledSnapshotCache:
         self._bytes = 0
         self._closed = False
         self._hits = self._misses = self._evictions = self._uncached = 0
+        self._identity_hits = self._identity_misses = self._identity_uncached = 0
 
     def require_scope(self, root: Path, purpose: Purpose | str) -> None:
         if self._closed:
@@ -76,15 +85,49 @@ class CompiledSnapshotCache:
             return compiler(FrozenContentSource(
                 (str(item.path), item.content) for item in capture.files
             ))
-        key = ("snapshot", capture, compiler)
-        existing = self._lookup(key)
-        if existing is not None:
-            return cast("CompiledSnapshot", existing)
+        key = ("snapshot", capture)
+        entry = self._entries.get(key)
+        material = cast(_SnapshotMaterial, entry[0]) if entry is not None else _SnapshotMaterial()
+        if material.compilation is not None and material.compilation[0] is compiler:
+            self._hits += 1
+            self._entries.move_to_end(key)
+            return material.compilation[1]
+        self._misses += 1
         result = compiler(FrozenContentSource(
             (str(item.path), item.content) for item in capture.files
         ))
-        self._retain(key, result)
+        if not self._retain(key, replace(material, compilation=(compiler, result))):
+            self._uncached += 1
         return result
+
+    def identify_content(
+        self, capture: CapturedContent, calculate: Callable[[CapturedContent], str],
+    ) -> str:
+        """Reuse the Snapshot owner's codec only for exactly equal loaded material.
+
+        The caller still reads and validates durable bytes and compares this result
+        with the stored content ID. This proof is neither a lifecycle observation
+        nor evidence that a snapshot exists. Identity and compilation share one
+        capture entry, LRU and byte budget; no extra cache can outlive this owner.
+        """
+        if self._closed:
+            raise ValueError("Compilation cache is closed.")
+        if not isinstance(calculate, FunctionType) or calculate.__closure__:
+            self._identity_misses += 1
+            self._identity_uncached += 1
+            return calculate(capture)
+        key = ("snapshot", capture)
+        entry = self._entries.get(key)
+        material = cast(_SnapshotMaterial, entry[0]) if entry is not None else _SnapshotMaterial()
+        if material.identity is not None and material.identity[0] is calculate:
+            self._identity_hits += 1
+            self._entries.move_to_end(key)
+            return material.identity[1]
+        self._identity_misses += 1
+        identity = calculate(capture)
+        if not self._retain(key, replace(material, identity=(calculate, identity))):
+            self._identity_uncached += 1
+        return identity
 
     def project_verified(
         self,
@@ -158,7 +201,8 @@ class CompiledSnapshotCache:
             self._uncached += 1
         else:
             # Keep the retained intent independent of the cold caller's maps too.
-            self._retain(key, replace(result, semantic_proposals=deepcopy(result.semantic_proposals)))
+            if not self._retain(key, replace(result, semantic_proposals=deepcopy(result.semantic_proposals))):
+                self._uncached += 1
         return result
 
     def _lookup(self, key: tuple[object, ...]) -> object | None:
@@ -170,14 +214,16 @@ class CompiledSnapshotCache:
         self._entries.move_to_end(key)
         return existing[0]
 
-    def _retain(self, key: tuple[object, ...], result: object) -> None:
+    def _retain(self, key: tuple[object, ...], result: object) -> bool:
         size = (
             _retained_size((key, result), self._max_bytes)
             if self._max_entries and self._max_bytes else None
         )
         if size is None:
-            self._uncached += 1
-            return
+            return False
+        previous = self._entries.pop(key, None)
+        if previous is not None:
+            self._bytes -= previous[1]
         while self._entries and (
             len(self._entries) >= self._max_entries or self._bytes + size > self._max_bytes
         ):
@@ -186,6 +232,7 @@ class CompiledSnapshotCache:
             self._evictions += 1
         self._entries[key] = (result, size)
         self._bytes += size
+        return True
 
     @property
     def statistics(self) -> dict[str, int]:
@@ -194,6 +241,8 @@ class CompiledSnapshotCache:
             "entries": len(self._entries), "accounted_bytes": self._bytes,
             "hits": self._hits, "misses": self._misses,
             "evictions": self._evictions, "uncached": self._uncached,
+            "identity_hits": self._identity_hits, "identity_misses": self._identity_misses,
+            "identity_uncached": self._identity_uncached,
         }
 
     def close(self) -> None:

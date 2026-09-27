@@ -3,6 +3,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from .authoring import ProposalId, RevisionDecoding
+
 from tools.repository_git.repository_git import RepositoryRevision
 from tools.standards_analysis.standards_analysis import AnalysisError, AnalysisFailure
 from tools.standards_snapshots.standards_snapshots import SnapshotId
@@ -14,7 +16,7 @@ if TYPE_CHECKING:
 
 
 class ProposalMaterials:
-    """Borrow one verified base and the most recent exact proposal projection.
+    """Borrow one verified base, exact decoded revision and latest projection.
 
     Focused composition passes this value explicitly through preflight, revision
     validation and analysis. Each access observes current snapshot lifecycle;
@@ -24,6 +26,7 @@ class ProposalMaterials:
 
     def __init__(self, engine: StandardsEngine) -> None:
         self._engine = engine
+        self.revision_decoding = RevisionDecoding()
         self._base: tuple[SnapshotId, CompiledSnapshot] | None = None
         self._projection: tuple[ProposalRevision, LogicalProjection] | None = None
 
@@ -31,8 +34,19 @@ class ProposalMaterials:
         return self
 
     def __exit__(self, *_: object) -> None:
+        self.revision_decoding.clear()
         self._base = None
         self._projection = None
+
+    def read_revision(self, revision_id: str) -> ProposalRevision:
+        return self._engine._authoring.read_revision(
+            revision_id, decoding=self.revision_decoding,
+        )
+
+    def current_revision(self, proposal: ProposalId) -> ProposalRevision:
+        return self._engine._authoring.current_revision(
+            proposal, decoding=self.revision_decoding,
+        )
 
     def compiled(self, snapshot: SnapshotId) -> CompiledSnapshot:
         if self._base is None:

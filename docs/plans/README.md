@@ -69,3 +69,10 @@ the parent Standards Library Effectiveness effort.
 its live consumers and the schema inliner. Output delivery remains independent;
 existing stores and workflow authority are preserved. Source and host qualification
 states are recorded separately in that plan and its execution ledger.
+
+## Immutable-work reuse
+
+[Immutable-work reuse](immutable-work-reuse/plan.md) implements audit F01/F08: bounded
+exact-capture identity proofs and operation-owned revision decoding. Current lifecycle,
+evidence and publication checks stay with their existing owners. It does not close
+the parent standards-content objective or introduce new public operation contracts.

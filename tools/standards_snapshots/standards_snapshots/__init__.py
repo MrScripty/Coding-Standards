@@ -20,7 +20,7 @@ from .model import (
     SnapshotPath,
     SnapshotSummary,
 )
-from .module import DEFAULT_QUARANTINE_SECONDS, SnapshotModule
+from .module import DEFAULT_QUARANTINE_SECONDS, ContentIdentityReuse, SnapshotModule
 
 __all__ = (
     "DEFAULT_QUARANTINE_SECONDS",
@@ -30,6 +30,7 @@ __all__ = (
     "AggregateRoot",
     "AggregateRootPage",
     "CapturedContent",
+    "ContentIdentityReuse",
     "ChildHandle",
     "DeleteSnapshotResult",
     "FailureKind",

@@ -4,6 +4,7 @@ import time
 import uuid
 from collections.abc import Callable
 from pathlib import Path
+from typing import Protocol
 
 from tools.standards_identity.standards_identity import (
     frame_path_byte_set,
@@ -31,6 +32,19 @@ from .model import (
 from .store import SQLiteSnapshotStore
 
 DEFAULT_QUARANTINE_SECONDS = 7 * 24 * 60 * 60
+
+
+class ContentIdentityReuse(Protocol):
+    """Trusted process-owned reuse of the supplied pure content-identity codec.
+
+    An implementation returns exactly calculate(capture), retains only complete
+    exact immutable captures, and owns its bounds and lifetime. It never reuses
+    an expected stored ID, lifecycle observation or prior read authorization.
+    """
+
+    def identify_content(
+        self, capture: CapturedContent, calculate: Callable[[CapturedContent], str],
+    ) -> str: ...
 
 
 class SnapshotModule:
@@ -106,10 +120,18 @@ class SnapshotModule:
         self.maintain()
         return self._store.find(request)
 
-    def load_content(self, snapshot: SnapshotId) -> CapturedContent:
+    def load_content(
+        self, snapshot: SnapshotId, *, identity_reuse: ContentIdentityReuse | None = None,
+    ) -> CapturedContent:
         self.maintain()
         content_id, capture = self._store.load_content(snapshot)
-        if self._content_id(capture) != content_id:
+        # Reuse starts after every durable read and per-file check. A caller's
+        # expected ID is always checked here, including on a pure-computation hit.
+        actual_id = (
+            self._content_id(capture) if identity_reuse is None else
+            identity_reuse.identify_content(capture, self._content_id)
+        )
+        if actual_id != content_id:
             raise invalid(
                 "SNAPSHOT.CONTENT_ID_MISMATCH",
                 "stored path and byte material does not match its content ID",
@@ -212,4 +234,4 @@ class SnapshotModule:
         )
 
 
-__all__ = ("DEFAULT_QUARANTINE_SECONDS", "SnapshotModule")
+__all__ = ("DEFAULT_QUARANTINE_SECONDS", "ContentIdentityReuse", "SnapshotModule")

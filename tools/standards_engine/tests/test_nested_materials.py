@@ -162,9 +162,9 @@ class NestedMaterialTests(unittest.TestCase):
         competitor = self.change(revision=True)
         competitor["edits"][0]["standard"]["body"] += "Competing revision.\n"
 
-        def advance_head(expected, change_set, *, preparation):
-            revise(expected, StandardsChangeSet.from_mapping(competitor), preparation=preparation)
-            return revise(expected, change_set, preparation=preparation)
+        def advance_head(expected, change_set, *, preparation, decoding=None):
+            revise(expected, StandardsChangeSet.from_mapping(competitor), preparation=preparation, decoding=decoding)
+            return revise(expected, change_set, preparation=preparation, decoding=decoding)
 
         with patch.object(self.engine._authoring, "revise_proposal", side_effect=advance_head):
             result = self.facade.revise({"detail": "full", "context": proposed["context"], "change_set": self.change(revision=True)})

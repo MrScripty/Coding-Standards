@@ -635,6 +635,28 @@ class ProposalPreparation(Protocol):
     def validate_revision(self, revision: ProposalRevision) -> None: ...
 
 
+class RevisionDecoding:
+    """One exact decoded record borrowed within an authoring operation.
+
+    Admission is exclusively through the canonical stored-record decoder. Its
+    normalized edit values are immutable; as_contract produces independent maps.
+    Store reads, membership and current-head checks are never retained here.
+    """
+
+    def __init__(self) -> None:
+        self._entry: tuple[AggregateRecord, ProposalRevision] | None = None
+
+    def decode(self, record: AggregateRecord) -> ProposalRevision:
+        if self._entry is not None and self._entry[0] == record:
+            return self._entry[1]
+        revision = AuthoringModule._revision_from_record(record)
+        self._entry = (record, revision)
+        return revision
+
+    def clear(self) -> None:
+        self._entry = None
+
+
 class AuthoringModule:
     """Owns immutable proposal material and proposal-head coordination."""
 
@@ -695,19 +717,28 @@ class AuthoringModule:
             None if page.continuation is None else ProposalId(page.continuation),
         )
 
-    def current_revision(self, proposal: ProposalId) -> ProposalRevision:
+    def current_revision(
+        self, proposal: ProposalId, *, decoding: RevisionDecoding | None = None,
+    ) -> ProposalRevision:
         root = self._snapshots.load_aggregate_root(str(proposal))
-        summary = self._summary_from_root(root)
-        return self.read_revision(summary.head_revision)
+        # Keep both root observations and their validation, without decoding the
+        # same head merely to build a summary which is immediately discarded.
+        revision = self.read_revision(root.head_id, decoding=decoding)
+        self._validate_root_revision(root, revision)
+        return revision
 
-    def read_revision(self, revision_id: str) -> ProposalRevision:
+    def read_revision(
+        self, revision_id: str, *, decoding: RevisionDecoding | None = None,
+    ) -> ProposalRevision:
         if not _revision_id(revision_id):
             raise _invalid(
                 "AUTHORING.INVALID_REVISION_ID",
                 "proposal revision ID has an invalid domain or digest",
             )
-        revision = self._revision_from_record(
-            self._snapshots.load_aggregate(revision_id)
+        record = self._snapshots.load_aggregate(revision_id)
+        revision = (
+            self._revision_from_record(record)
+            if decoding is None else decoding.decode(record)
         )
         root = self._snapshots.load_aggregate_root(str(revision.proposal))
         self._validate_root_revision(root, revision)
@@ -719,8 +750,9 @@ class AuthoringModule:
         change_set: StandardsChangeSet,
         *,
         preparation: ProposalPreparation,
+        decoding: RevisionDecoding | None = None,
     ) -> tuple[ProposalSummary, ProposalRevision]:
-        expected = self.read_revision(expected_revision)
+        expected = self.read_revision(expected_revision, decoding=decoding)
         root = self._snapshots.load_aggregate_root(str(expected.proposal))
         if root.head_id != expected_revision:
             raise _invalid(

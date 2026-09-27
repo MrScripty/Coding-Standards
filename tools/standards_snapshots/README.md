@@ -39,3 +39,14 @@ entry point resolves the selected parent (relative parents are cwd-relative), th
 passes the final name unchanged to the store. Invalid selection never authorizes
 replacement or deletion of an existing database. These admission checks are not a
 race-free filesystem sandbox.
+
+## Exact identity proof reuse
+
+`load_content` accepts an optional trusted `ContentIdentityReuse` owner. Every call
+still performs maintenance, reloads actual content and runs the existing per-file
+checks. The reuse owner receives that complete capture and the Snapshot-owned codec;
+its contract requires the identical computed content ID, not a cached caller claim.
+Snapshot compares it with the currently loaded stored ID on every call. Omission
+keeps standalone behavior cold. The Engine uses its existing scoped, bounded process
+cache; roots, lifecycle, authority and response values are never identity-cache data.
+No identity domain, store format or persisted representation changes.

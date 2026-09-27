@@ -39,8 +39,8 @@ External authorizer/evidence observations remain ordinary per-decision effects.
             return engine._reject("WORKFLOW.INPUT_LIMIT", "invalid",
                                   "Select a smaller batch of explicit decisions.",
                                   details={"limit_bytes": INPUT_BYTES})
-        bound = bind(engine, call.context)
-        current = engine._authoring.current_revision(bound.revision.proposal)
+        bound = bind(engine, call.context, materials)
+        current = materials.current_revision(bound.revision.proposal)
         if current.revision_id != bound.revision.revision_id:
             return engine._reject("WORKFLOW.STALE_CONTEXT", "invalid",
                                   "Resume and analyze the current proposal revision.")
@@ -91,7 +91,7 @@ External authorizer/evidence observations remain ordinary per-decision effects.
             return engine._reject("WORKFLOW.STALE_CONTEXT", "invalid",
                                   "The proposal advanced before the decision batch was recorded.")
         context = c.AnalysisHandle.from_value(analysis_projection._analysis_handle(state.analysis_id))
-        return view(engine, bind(engine, context), analysis_projection._analysis_result(evaluation), materials,
+        return view(engine, bind(engine, context, materials), analysis_projection._analysis_result(evaluation), materials,
                     detail=arguments.get("detail", "compact"), include_work=True)
     except engine._domain_errors() as error:
         rejected = engine._domain_rejection(error).as_contract()

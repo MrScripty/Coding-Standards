@@ -258,9 +258,12 @@ class ProcessReuseTest(unittest.TestCase):
         with patch.object(engine_module, "compile_policy_impact", side_effect=RuntimeError("failed compiler")):
             with self.assertRaisesRegex(RuntimeError, "failed compiler"):
                 self.read()
-        self.assertEqual(self.cache.statistics["entries"], 0)
+        # The independently successful identity proof may remain; the failed
+        # compilation itself must be attempted again on the next call.
+        self.assertEqual(self.cache.statistics["entries"], 1)
         self.assertEqual(self.read()["kind"], "compact-read-result")
         self.assertEqual(self.cache.statistics["misses"], 2)
+        self.assertEqual(self.cache.statistics["identity_hits"], 1)
 
     def test_warm_cache_preserves_independent_capture_passes(self):
         self.read()

@@ -300,3 +300,21 @@ and [implementation verification](../../docs/plans/output-contract-delivery/veri
 The catalog inventory reports schema and digest-metadata bytes separately. Use the
 updated no-model and opt-in model harnesses on the actual host before adopting the
 smaller catalog. Preserve stores and handles across restart/reconnect.
+
+## Immutable-work reuse (interface unchanged: 44)
+
+The process-owned compilation cache also retains exact captured-content identity
+proofs. Identity and compilation for one capture share one LRU entry and the existing
+byte budget. The Snapshot codec still defines identity, and every read reloads actual
+bytes, verifies file integrity and checks the stored identity and current lifecycle.
+
+Focused authoring operations reuse canonical revision decoding through
+`ProposalMaterials`; the single record is released on success or exceptional exit.
+Every access still loads the aggregate and current root. Revision heads, evidence,
+authorization and publication decisions are not cached. Retained revisions are built
+only by the canonical decoder with immutable edit values; exported JSON maps are fresh.
+
+Restart installed MCP processes to load the optimization. All existing public schemas,
+input/output catalogs, flags, IDs and stores remain unchanged. No reset or migration
+is needed. Measurements and remaining qualification are in
+[the implementation record](../../docs/plans/immutable-work-reuse/reports/verification.md).

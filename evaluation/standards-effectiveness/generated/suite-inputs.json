@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:998237d6f944bc4ae2daedc589280091592ceddfa2e42478bfcfdf62d470557e",
+      "digest": "sha256:7d96d75155229715a1bbcb55e9ea0189862cbefbe24d32dbd6a54947131dbe63",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:94bf0c9336cd3e0e03ddbc12b74aeadfabf104a7d322b208e859c9377347a200",
+      "digest": "sha256:0e9546846bf1ad50090f92fa6638cd5af2b06cff5eafa3c15e68bfa5a8ee011d",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7261,7 +7261,7 @@
       ]
     },
     {
-      "digest": "sha256:f3f6de1088534c0116e33784aa5fd179c1686acd106d2d16eaee2981ca43486a",
+      "digest": "sha256:5d64103d7e5d617c180b14eb7eaf2735fb97b97198645a0be70fbe010a28e60b",
       "path": "tools/standards_engine/standards_engine/agent_workflow.py",
       "state": "present",
       "uses": [
@@ -7285,7 +7285,7 @@
       ]
     },
     {
-      "digest": "sha256:6761c6b11a3904052b873c0db8d83127bb8080f0dc73fff3c6a2d26620bcd538",
+      "digest": "sha256:e518ed0dc72e7c1f7f73a7523f620ff06cf83decb173636f5639ee51667b527e",
       "path": "tools/standards_engine/standards_engine/authoring.py",
       "state": "present",
       "uses": [
@@ -7297,7 +7297,7 @@
       ]
     },
     {
-      "digest": "sha256:c3368aaa78434e7ba12227f404c0eec501269cf74111c3e0e05adb6b822011e6",
+      "digest": "sha256:4aea918d1e3a57393f6c271fa3f8f5e9bab2cf7552dc7cc3e2e100fdb128f44b",
       "path": "tools/standards_engine/standards_engine/compiled_cache.py",
       "state": "present",
       "uses": [
@@ -7345,7 +7345,7 @@
       ]
     },
     {
-      "digest": "sha256:e75c69651cbe2d07f3600205f6ac5a7db2b636e48ebbbdfcdbb2c07e765dbde1",
+      "digest": "sha256:db3061fe87b423c7d9f58248d95df2fb5c9ecfdf1ec7343ea4396dd7d1a438d2",
       "path": "tools/standards_engine/standards_engine/decision_batch.py",
       "state": "present",
       "uses": [
@@ -7357,7 +7357,7 @@
       ]
     },
     {
-      "digest": "sha256:277084e147f5457d81d77cc0a4ba51f3847dab33af0843bef2bca62e610e0f31",
+      "digest": "sha256:d764ac51c274008bd81fd8e3e0c80a63ee8442abde9e245f002c8c56c7b2e5ca",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7451,7 +7451,7 @@
       ]
     },
     {
-      "digest": "sha256:49c87769596d165b73aa76bd280f10dd0f75902c314bc5114414d5a6033a163c",
+      "digest": "sha256:bcba59c19e69bcaf683c4266430933cb54c086d08c428ad0654c0f0db35c2881",
       "path": "tools/standards_engine/standards_engine/operation_materials.py",
       "state": "present",
       "uses": [
@@ -8050,7 +8050,7 @@
       ]
     },
     {
-      "digest": "sha256:9acae32f33d139a8759f464be91b8774d873f4572546328b32cbc7d55b92c07b",
+      "digest": "sha256:a0024cd1215473e359bcce469ff60fa6433bbf58970d6c13b13e3939ed20886f",
       "path": "tools/standards_snapshots/README.md",
       "state": "present",
       "uses": [
@@ -8079,7 +8079,7 @@
       ]
     },
     {
-      "digest": "sha256:d5cec12fd9dda00e020c541c8d3e546f524cc3f904317a4121673fa80e6d2fa6",
+      "digest": "sha256:bfb48d6fe1c8ffae55ad80a6e46e3a4ec5c78ffcc2d1d7835f3974c3b5ff89df",
       "path": "tools/standards_snapshots/standards_snapshots/__init__.py",
       "state": "present",
       "uses": [
@@ -8130,7 +8130,7 @@
       ]
     },
     {
-      "digest": "sha256:08dbecc15bf61d139044f50646d22ff8193d889aef75b1c08ae4b88eced438f5",
+      "digest": "sha256:0725a0c3a208d7e773f15feb3129aec241caec75cb758e45dfc2f7757216bff9",
       "path": "tools/standards_snapshots/standards_snapshots/module.py",
       "state": "present",
       "uses": [
@@ -13718,7 +13718,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:819490a08b7c0020e39651151d282e824ec71f5eadd069c709ce0f730a023f04",
+    "digest": "sha256:54f65af4478c516b71000c7e6a5023b7da35237854d4ee19533675aa5e8e4257",
     "uses": [
       {
         "check": "python-package-contract",

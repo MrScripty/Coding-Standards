@@ -59,7 +59,11 @@ class BoundWorkflow:
     readiness: ProposalReadiness | None = None
 
 
-def bind(engine: StandardsEngine, context: c.WorkflowContext) -> BoundWorkflow:
+def bind(
+    engine: StandardsEngine, context: c.WorkflowContext,
+    materials: ProposalMaterials | None = None,
+) -> BoundWorkflow:
+    read_revision = engine._authoring.read_revision if materials is None else materials.read_revision
     analysis = readiness = None
     if isinstance(context, c.ReadinessHandle):
         readiness = engine._authoring.read_readiness(context.id)
@@ -74,7 +78,7 @@ def bind(engine: StandardsEngine, context: c.WorkflowContext) -> BoundWorkflow:
             raise invalid(
                 "WORKFLOW.NOT_PROPOSAL", "Workflow context requires proposal analysis."
             )
-        revision = engine._authoring.read_revision(material.revision_id)
+        revision = read_revision(material.revision_id)
         if (
             analysis.base_snapshot != revision.base_snapshot
             or material.base_snapshot != revision.base_snapshot
@@ -92,7 +96,7 @@ def bind(engine: StandardsEngine, context: c.WorkflowContext) -> BoundWorkflow:
                 "Readiness and analysis refer to different proposal authority.",
             )
     elif isinstance(context, c.ProposalRevisionHandle):
-        revision = engine._authoring.read_revision(context.id)
+        revision = read_revision(context.id)
     else:
         raise invalid("WORKFLOW.CONTEXT_INVALID", "Unsupported workflow context.")
     return BoundWorkflow(context, revision, analysis, readiness)
@@ -141,7 +145,10 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         if status == "complete" and engine._review_requires_change(bound.analysis):
             status = "requires-change"
     if status not in ("recovery-required", "applied", "rejected"):
-        current = engine._authoring.current_revision(bound.revision.proposal)
+        current = (
+            engine._authoring.current_revision(bound.revision.proposal)
+            if materials is None else materials.current_revision(bound.revision.proposal)
+        )
         if current.revision_id != bound.revision.revision_id:
             status = "stale"
     result = {
@@ -178,7 +185,7 @@ def analyze_revision(engine, revision, materials: ProposalMaterials, *, detail="
         if isinstance(result, (c.PendingResult, c.CompleteResult))
         else revision
     )
-    return view(engine, bind(engine, context), result, materials, detail=detail, include_work=True)
+    return view(engine, bind(engine, context, materials), result, materials, detail=detail, include_work=True)
 
 
 def propose(engine, call, materials: ProposalMaterials):
@@ -211,7 +218,7 @@ def propose(engine, call, materials: ProposalMaterials):
 
 def advance(engine, operation, call, materials: ProposalMaterials | None = None):
     try:
-        bound = bind(engine, call.context)
+        bound = bind(engine, call.context, materials)
         detail = call.as_contract().get("detail", "compact")
         if operation == "workflow_status":
             return view(engine, bound, materials=materials, detail=detail)
@@ -224,7 +231,7 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
             context = c.ProposalRevisionHandle.from_value(
                 engine._proposal_revision_handle(revision.revision_id)
             )
-            return view(engine, bind(engine, context), detail=detail)
+            return view(engine, bind(engine, context, materials), detail=detail)
         if (
             operation not in {item.operation for item in current.next_operations}
             and not (operation == "recover" and current.status == "applied" and bound.readiness is not None)
@@ -308,7 +315,7 @@ def advance(engine, operation, call, materials: ProposalMaterials | None = None)
                 "WORKFLOW.OPERATION_INVALID", "Unsupported workflow operation."
             )
         return view(
-            engine, bound if context == call.context else bind(engine, context), result, materials,
+            engine, bound if context == call.context else bind(engine, context, materials), result, materials,
             detail=detail, include_work=True
         )
     except engine._domain_errors() as error:
