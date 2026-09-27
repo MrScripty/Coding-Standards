@@ -351,3 +351,25 @@ lifecycle, evidence and purpose checks. Cache limits, compiler-identity matching
 eviction and cold/restart reconstruction remain unchanged. No API, catalog, state
 format, capacity or registration flag changes. See the
 [capture-handoff plan](../../docs/plans/snapshot-capture-handoff/plan.md) and evidence.
+
+
+## Typed routing-edit pilot
+
+The internal logical model uses explicit immutable put/remove variants for routing
+facts and rules. `routing_edits.py` retains authored fact/rule declarations and
+derives each edit's kind and conflict facet; it stores neither a JSON payload nor
+separately writable kind/target/facet metadata. Other StructuredEdit families are
+unchanged. Nested expressions are immutable authored data, not compiled programs.
+The existing applicability compiler still validates semantics against the final
+co-edited context; construction does not normalize fact values, evaluate an operator,
+resolve a target or require dependencies to exist early.
+
+Canonical key order, authored array order, identity encoding, projection files and
+all public/persisted contracts are preserved. Each serialization returns detached
+JSON data without parsing an inner JSON string. The pilot's typed dispatch avoids
+serialization when merely classifying routing edits or attributing router scope.
+This internal refactor keeps interface 44, catalogs, configuration and stores intact.
+
+See [the pilot plan and evidence](../../docs/plans/typed-routing-edits/plan.md).
+A normal MCP process restart loads the new module; preserve existing handles/stores.
+No client setting, state migration or new schema-discovery call is required.

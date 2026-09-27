@@ -36,6 +36,10 @@ from tools.standards_verifier.standards_verifier import (
 
 from .authoring import AuthoringError, AuthoringFailure
 from .projection_continuation import ProjectionContinuation, ProjectionInputs
+from .routing_edits import (
+    ROUTING_EDIT_KINDS, PutRoutingFact, PutRoutingRule, RemoveRoutingFact,
+    RemoveRoutingRule, RoutingEdit, RoutingFactDeclaration, RoutingRuleDeclaration,
+)
 
 
 _CANONICAL_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]*$")
@@ -363,6 +367,48 @@ class ReplaceStandardRelationships:
         }
 
 
+def _edit_kind(edit: LogicalEdit) -> str:
+    return edit.kind if isinstance(edit, RoutingEdit) else str(edit.as_contract()["kind"])
+
+
+def _routing_edit(raw: Mapping[str, object]) -> RoutingEdit:
+    """Apply the existing authoring checks in their original order and scope."""
+    kind = raw['kind']
+    if kind not in ROUTING_EDIT_KINDS:
+        raise _unsupported('AUTHORING.UNSUPPORTED_EDIT', 'edit is not a routing operation')
+    field = 'rule' if kind in (PutRoutingRule.kind, RemoveRoutingRule.kind) else 'fact'
+    _exact(raw, {'kind', field, 'rationale'}, f'{kind} edit')
+    rationale = _text(raw['rationale'], 'routing change rationale')
+    value = raw[field]
+    if kind in (PutRoutingFact.kind, PutRoutingRule.kind):
+        value = _mapping(value, f'routing {field}')
+        fields = ({'id', 'target', 'when', 'condition'} if field == 'rule' else
+                  {'id', 'semantic_revision', 'type', 'nullable', 'values', 'aliases', 'meaning', 'prompt'})
+        _exact(value, fields, f'routing {field}')
+        identifier = _semantic_id(value['id'], f'routing {field} ID')
+        if kind == PutRoutingFact.kind:
+            revision = value['semantic_revision']
+            if type(revision) is not int or revision < 1:
+                raise _invalid('AUTHORING.INVALID_SEMANTIC_REVISION', 'routing fact revision must be positive')
+            meaning = _text(value['meaning'], 'routing fact meaning')
+            prompt = _text(value['prompt'], 'routing fact prompt')
+            declaration = RoutingFactDeclaration(
+                identifier, revision, value['type'], value['nullable'],
+                value['values'], value['aliases'], meaning, prompt,
+            )
+            return PutRoutingFact(declaration, rationale)
+        target = _semantic_id(value['target'], 'route target')
+        expression = _mapping(value['when'], 'route applicability')
+        condition = _text(value['condition'], 'route condition')
+        if any(character in condition for character in '\r\n'):
+            raise _invalid('AUTHORING.INVALID_ARGUMENTS', 'route condition must be one paragraph')
+        return PutRoutingRule(RoutingRuleDeclaration(identifier, target, expression, condition), rationale)
+    identifier = _semantic_id(value, f'routing {field} ID')
+    if kind == RemoveRoutingFact.kind:
+        return RemoveRoutingFact(identifier, rationale)
+    return RemoveRoutingRule(identifier, rationale)
+
+
 def _edit(value: object) -> LogicalEdit:
     raw = _mapping(value, "logical edit")
     kind = raw.get("kind")
@@ -413,57 +459,8 @@ def _edit(value: object) -> LogicalEdit:
             "policy_units": sorted(normalized_units, key=lambda item: str(item["id"])),
         }
         return _structured(normalized, target=str(standard["id"]), facet="standard")
-    if kind in {
-        "put-routing-rule",
-        "remove-routing-rule",
-        "put-routing-fact",
-        "remove-routing-fact",
-    }:
-        field = "rule" if kind.endswith("rule") else "fact"
-        _exact(raw, {"kind", field, "rationale"}, f"{kind} edit")
-        _text(raw["rationale"], "routing change rationale")
-        value = raw[field]
-        if kind.startswith("put-"):
-            value = _mapping(value, f"routing {field}")
-            fields = (
-                {"id", "target", "when", "condition"}
-                if field == "rule"
-                else {
-                    "id",
-                    "semantic_revision",
-                    "type",
-                    "nullable",
-                    "values",
-                    "aliases",
-                    "meaning",
-                    "prompt",
-                }
-            )
-            _exact(value, fields, f"routing {field}")
-            identifier = _semantic_id(value["id"], f"routing {field} ID")
-            if field == "fact":
-                if (
-                    type(value["semantic_revision"]) is not int
-                    or value["semantic_revision"] < 1
-                ):
-                    raise _invalid(
-                        "AUTHORING.INVALID_SEMANTIC_REVISION",
-                        "routing fact revision must be positive",
-                    )
-                _text(value["meaning"], "routing fact meaning")
-                _text(value["prompt"], "routing fact prompt")
-            if field == "rule":
-                _semantic_id(value["target"], "route target")
-                _mapping(value["when"], "route applicability")
-                condition = _text(value["condition"], "route condition")
-                if any(character in condition for character in "\r\n"):
-                    raise _invalid(
-                        "AUTHORING.INVALID_ARGUMENTS",
-                        "route condition must be one paragraph",
-                    )
-        else:
-            identifier = _semantic_id(value, f"routing {field} ID")
-        return _structured(raw, target=identifier, facet=f"routing-{field}")
+    if kind in ROUTING_EDIT_KINDS:
+        return _routing_edit(raw)
     if kind == "audit-policy-unit":
         _exact(raw, {"kind", "policy", "rationale"}, "coverage audit edit")
         policy = _semantic_id(raw["policy"], "policy ID")
@@ -1036,25 +1033,21 @@ class LogicalAuthoringCompiler:
             before = dict(files)
             from .supporting_authoring import SUPPORT_EDIT_KINDS, begin_edits, finish_edits
             support_edits = [edit.as_contract() for edit in change_set.edits
-                             if edit.as_contract()["kind"] in SUPPORT_EDIT_KINDS]
+                             if _edit_kind(edit) in SUPPORT_EDIT_KINDS]
             begin_edits(files, support_edits, base_compiled, base_snapshot)
-            routing_edits = [
-                edit.as_contract()
-                for edit in change_set.edits
-                if edit.as_contract()["kind"] in _ROUTING_EDITS
-            ]
+            routing_edits = [edit for edit in change_set.edits if isinstance(edit, RoutingEdit)]
             routing_applied = False
             registrations = [edit.as_contract() for edit in change_set.edits
-                             if edit.as_contract()["kind"] == "register-policy-unit"]
+                             if _edit_kind(edit) == "register-policy-unit"]
             registrations_applied = False
             for edit in sorted((edit for edit in change_set.edits
-                                if edit.as_contract()["kind"] not in SUPPORT_EDIT_KINDS), key=_projection_order):
-                if edit.as_contract()["kind"] == "register-policy-unit":
+                                if _edit_kind(edit) not in SUPPORT_EDIT_KINDS), key=_projection_order):
+                if _edit_kind(edit) == "register-policy-unit":
                     if not registrations_applied:
                         self._register_policy_units(files, registrations)
                         registrations_applied = True
                     continue
-                if edit.as_contract()["kind"] in _ROUTING_EDITS:
+                if isinstance(edit, RoutingEdit):
                     if not routing_applied:
                         _edit_routing(files, routing_edits)
                         routing_applied = True
@@ -1068,7 +1061,7 @@ class LogicalAuthoringCompiler:
                 )
             finish_edits(files, support_edits, base_compiled, base_snapshot, compile_current)
             if files == before and not any(
-                edit.as_contract()["kind"] == "audit-policy-unit"
+                _edit_kind(edit) == "audit-policy-unit"
                 for edit in change_set.edits
             ):
                 raise _invalid(
@@ -1127,13 +1120,6 @@ class LogicalAuthoringCompiler:
                     "AUTHORING.COVERAGE_CURRENT",
                     "The policy already has a current coverage certificate.",
                 )
-        elif kind in {
-            "put-routing-rule",
-            "remove-routing-rule",
-            "put-routing-fact",
-            "remove-routing-fact",
-        }:
-            _edit_routing(files, [raw])
         elif kind == "register-consumer":
             from .consumer_authoring import register_consumer
 
@@ -1811,7 +1797,7 @@ def _replace_metadata_line(text: str, field: str, value: str) -> str:
 
 
 def _projection_order(edit: LogicalEdit) -> tuple[int, str]:
-    kind = str(edit.as_contract()["kind"])
+    kind = _edit_kind(edit)
     priority = {
         "create-standard": 0,
         "put-routing-fact": 45,
@@ -2387,6 +2373,8 @@ def _analysis_policy_ids(
     selected: set[str] = set()
     for change_set in program.change_sets:
         for edit in change_set.edits:
+            if isinstance(edit, RoutingEdit):
+                continue
             raw = edit.as_contract()
             kind = raw["kind"]
             if kind == "audit-policy-unit":
@@ -2406,18 +2394,14 @@ def _analysis_module_ids(program: LogicalProgram) -> tuple[str, ...]:
     selected: set[str] = set()
     for change_set in program.change_sets:
         for edit in change_set.edits:
+            if isinstance(edit, RoutingEdit):
+                selected.add("router")
+                continue
             raw = edit.as_contract()
             kind = raw["kind"]
             if kind == "create-standard":
                 standard = _mapping(raw["standard"], "standard content")
                 selected.add(str(standard["id"]))
-            elif kind in {
-                "put-routing-rule",
-                "remove-routing-rule",
-                "put-routing-fact",
-                "remove-routing-fact",
-            }:
-                selected.add("router")
             elif kind == "revise-standard":
                 standard = _mapping(raw["standard"], "standard content")
                 selected.add(str(standard["id"]))
@@ -2436,6 +2420,8 @@ def _validate_final_standard_successors(
 ) -> None:
     for change_set in program.change_sets:
         for edit in change_set.edits:
+            if isinstance(edit, RoutingEdit):
+                continue
             raw = edit.as_contract()
             if raw["kind"] != "retire-standard":
                 continue
@@ -2623,16 +2609,6 @@ __all__ = (
 )
 
 
-_ROUTING_EDITS = frozenset(
-    {
-        "put-routing-rule",
-        "remove-routing-rule",
-        "put-routing-fact",
-        "remove-routing-fact",
-    }
-)
-
-
 def _routing_fact_signature(definition: Mapping[str, object]) -> dict[str, object]:
     """Use the fact owner's semantics, including unordered values and nonsemantic aliases."""
     schema = compile_fact_schema(
@@ -2648,31 +2624,33 @@ def _routing_fact_signature(definition: Mapping[str, object]) -> dict[str, objec
     return signature
 
 
-def _edit_routing(files: dict[str, bytes], edits: list[Mapping[str, object]]) -> None:
+def _edit_routing(files: dict[str, bytes], edits: list[RoutingEdit]) -> None:
     path = "evaluation/standards-effectiveness/router-projection.toml"
     raw = tomllib.loads(files[path].decode("utf-8"))
     guidance = []
     for edit in edits:
-        kind = str(edit["kind"])
-        field = "rule" if kind.endswith("rule") else "fact"
-        collection = "rules" if field == "rule" else "facts"
-        value = edit[field]
-        identifier = value["id"] if isinstance(value, Mapping) else value
+        if isinstance(edit, PutRoutingFact):
+            collection, identifier = "facts", edit.fact.id
+        elif isinstance(edit, RemoveRoutingFact):
+            collection, identifier = "facts", edit.fact
+        elif isinstance(edit, PutRoutingRule):
+            collection, identifier = "rules", edit.rule.id
+        else:
+            collection, identifier = "rules", edit.rule
         prior = next(
             (item for item in raw[collection] if item["id"] == identifier), None
         )
-        if kind.startswith("remove-"):
+        if isinstance(edit, (RemoveRoutingFact, RemoveRoutingRule)):
             if prior is None:
                 raise _invalid(
                     "AUTHORING.ROUTING_ENTRY_UNKNOWN", "routing entry does not exist"
                 )
             raw[collection].remove(prior)
-            if field == "rule":
+            if isinstance(edit, RemoveRoutingRule):
                 guidance.append((prior["target"], None, None))
             continue
-        assert isinstance(value, Mapping)
-        if field == "fact":
-            replacement = dict(value)
+        if isinstance(edit, PutRoutingFact):
+            replacement = edit.fact.as_declaration()
             replacement.update(
                 context_kind="task-route",
                 answer_contract="fact-value.v1",
@@ -2685,21 +2663,16 @@ def _edit_routing(files: dict[str, bytes], edits: list[Mapping[str, object]]) ->
             expected_revision = (
                 1 if prior is None else prior["semantic_revision"] + int(changed)
             )
-            if value["semantic_revision"] != expected_revision:
+            if edit.fact.semantic_revision != expected_revision:
                 raise _invalid(
                     "AUTHORING.INVALID_SEMANTIC_REVISION",
                     "routing fact revision must track its semantic change",
                 )
 
         else:
-            replacement = {key: value[key] for key in ("id", "target", "when")}
-            guidance.append(
-                (
-                    prior["target"] if prior else None,
-                    value["target"],
-                    value["condition"],
-                )
-            )
+            declaration = edit.rule.as_declaration()
+            replacement = {key: declaration[key] for key in ("id", "target", "when")}
+            guidance.append((prior["target"] if prior else None, edit.rule.target, edit.rule.condition))
         if prior is None:
             raw[collection].append(replacement)
         else:

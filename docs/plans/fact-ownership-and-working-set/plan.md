@@ -146,3 +146,11 @@ The separately authorized [snapshot-capture handoff](../snapshot-capture-handoff
 now owns that deferred recommendation. It does not change this plan's earlier
 scope, qualification evidence or pending acceptance. Typed routing-edit work
 remains deferred and is not included in either implementation.
+
+
+### Scoped continuation: typed routing edits
+
+[Typed Routing-Edit Pilot](../typed-routing-edits/plan.md) now owns the separately
+admitted routing-family experiment. It does not change the acceptance evidence
+or implementation status of this fact-ownership/working-set plan. Other edit
+families remain deferred; the capture handoff has its own plan.

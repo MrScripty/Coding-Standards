@@ -100,3 +100,11 @@ capture handoff and typed edit-family work remain independently deferred.
 post-admission reuse of the independently proved frozen compilation. It preserves
 both capture proof passes and normal durable/lifecycle checks. The prior fact-owner
 and working-set changes remain intact; typed routing-edit work is still deferred.
+
+
+## Typed Routing-Edit Pilot
+
+[Typed Routing-Edit Pilot](typed-routing-edits/plan.md) replaces the internal
+representation of put/remove routing facts and rules while retaining canonical
+serialization, validation timing, domain behavior and existing stores. Its scope
+is one edit family, not the remaining JSON-backed edit kinds.

@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:97dd74bc58f41b60d3da394b31dcd13cfabc5f256d26a10e3c8b2fb05409146a",
+      "digest": "sha256:c05dce12634ec51a2af0abbef757202032f7513b37c4f70c06877416dce25c39",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -7089,7 +7089,7 @@
       ]
     },
     {
-      "digest": "sha256:5cd144805a034a1e3e627f8cd1b138a5c49bb197fae81f07e97ce4324e050836",
+      "digest": "sha256:3e50a548bd13a59c0a6353edde89c756218fdd6db969b6b5d68970993f9e451f",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7403,7 +7403,7 @@
       ]
     },
     {
-      "digest": "sha256:54a7b06564ebcc90c8fa905293017d26223b82a33b18026688464c2dfcdafc60",
+      "digest": "sha256:bac3a3330851489f35542e775ecf61c2f04822b17d23806803b8da8d2fb4b506",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
       "uses": [
@@ -7506,6 +7506,18 @@
     {
       "digest": "sha256:48a61c2029c39f46e4bd533aba570cad4e481e35d8713d5d9365ade4d91bfc2a",
       "path": "tools/standards_engine/standards_engine/request_evidence.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:2c5ca992b532a09b4bbd343e094e3686fefac2d3e76a9accbd911be966d2b46a",
+      "path": "tools/standards_engine/standards_engine/routing_edits.py",
       "state": "present",
       "uses": [
         {
@@ -13718,7 +13730,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:0c94eba715435a01b8336171e869a97f53b81d87c6712c3d9b906df77c10a48a",
+    "digest": "sha256:f7965312de3e99df6dbd46cdd7c460bd6d69f9ba379e171bc6cb17175587d795",
     "uses": [
       {
         "check": "python-package-contract",
