@@ -258,14 +258,14 @@ class EdgeRegistry:
         canonical = self.aliases.get(requested)
         if canonical is not None:
             return canonical
+        if self._logical_artifacts is not None:
+            # The registered view owns every spelling, including bare names.
+            # Ambient files cannot add nodes to an immutable logical graph.
+            self._logical_artifact(requested)
+            raise UnknownNodeError("logical node is not registered", node=requested)
         logical = PurePosixPath(requested)
         looks_like_path = "/" in requested or logical.is_absolute() or ".." in logical.parts
         if looks_like_path:
-            if self._logical_artifacts is not None:
-                self._logical_artifact(requested)
-                raise UnknownNodeError(
-                    "logical node is not registered", node=requested
-                )
             candidate = contained_path(self.repo_root, requested, must_exist=True)
             relative = candidate.relative_to(self.repo_root).as_posix()
             return self.aliases.get(relative, relative)

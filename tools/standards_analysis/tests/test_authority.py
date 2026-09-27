@@ -147,6 +147,13 @@ class AnalysisTrustTest(unittest.TestCase):
                 construct_authorization_record(context, request)
             self.assertEqual(caught.exception.failure.code, expected)
 
+    def test_evidence_digest_requires_exact_lowercase_sha256_text(self) -> None:
+        for digest in (None, 1, b"sha256:" + b"0" * 64, "sha256:" + "g" * 64,
+                       "sha256:" + "A" * 64, "sha256:" + "0" * 64 + "\n"):
+            with self.subTest(digest=digest), self.assertRaises(AnalysisError) as caught:
+                EvidenceReference("fixture", digest, "repository-content", "1")
+            self.assertEqual(caught.exception.failure.code, "ANALYSIS.INVALID_EVIDENCE")
+
     def test_evidence_content_must_match_its_digest(self) -> None:
         with self.assertRaises(AnalysisError) as caught:
             ResolvedEvidence(_reference("expected"), b"different")

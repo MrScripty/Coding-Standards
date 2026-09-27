@@ -1,11 +1,15 @@
 from __future__ import annotations
 
 import hashlib
+import re
 from dataclasses import dataclass
 from typing import Protocol
 
 from .errors import AnalysisError, AnalysisFailure
 from .keys import analysis_identity, analysis_value_digest
+
+
+_SHA256_DIGEST = re.compile(r"sha256:[0-9a-f]{64}")
 
 
 AUTHORIZATION_DOMAIN = "coding-standards:authorization-record:v1"
@@ -48,8 +52,8 @@ class EvidenceReference:
         ):
             _nonempty(value, field)
         if (
-            not self.digest.startswith("sha256:")
-            or len(self.digest) != len("sha256:") + 64
+            type(self.digest) is not str
+            or _SHA256_DIGEST.fullmatch(self.digest) is None
         ):
             raise _error(
                 "ANALYSIS.INVALID_EVIDENCE",

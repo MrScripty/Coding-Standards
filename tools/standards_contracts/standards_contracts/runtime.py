@@ -106,16 +106,42 @@ class ContractRuntime:
 
     def _decode_node(
         self,
-        node: Mapping[str, object],
+        node: Mapping[str, object] | bool,
         value: object,
         definition: str | None = None,
     ) -> object:
+        if isinstance(node, bool):
+            return value  # A validated boolean schema declares no representation.
+        # Root validation already established the JSON value and constraints.
+        # Only a schema-constrained integer acquires Python's integral form;
+        # number/untyped/literal data retain their supplied representation.
+        value_type = node.get("type")
+        integer_only = value_type == "integer" or (
+            isinstance(value_type, list)
+            and "integer" in value_type and "number" not in value_type
+        )
+        if integer_only and type(value) is float:
+            value = int(value)
+
         reference = node.get("$ref")
+        variants = node.get("oneOf")
+        if (isinstance(reference, str) or isinstance(variants, list)) and (
+            "properties" in node or "items" in node
+            or isinstance(node.get("additionalProperties"), dict)
+        ):
+            # Sibling shape constraints apply as well as a reference/union. They
+            # normalize only their declared children before named construction;
+            # root validation already established all constraints and branches.
+            value = _wire(self._decode_container(node, value))
         if isinstance(reference, str):
+            if isinstance(variants, list):
+                # Both clauses were validated. Preserve the union's numeric
+                # representation before constructing the referenced model.
+                siblings = {key: item for key, item in node.items() if key != "$ref"}
+                value = _wire(self._decode_node(siblings, value))
             selected = reference.rsplit("/", 1)[1]
             return self._decode_node(self._definitions[selected], value, selected)
 
-        variants = node.get("oneOf")
         if isinstance(variants, list):
             selector = self._union_selectors.get(id(node))
             branch = selector.select(value) if selector is not None else None
@@ -132,11 +158,20 @@ class ContractRuntime:
                 )
             return self._decode_node(selected[0], value)
 
+        return self._decode_container(node, value, definition)
+
+    def _decode_container(
+        self, node: Mapping[str, object], value: object, definition: str | None = None,
+    ) -> object:
+        """Construct validated containers, including nullable/implicit shapes."""
         value_type = node.get("type")
-        if value_type == "array":
+        types = value_type if isinstance(value_type, list) else [value_type]
+        if isinstance(value, (list, tuple)) and ("array" in types or "items" in node):
             item_schema = node.get("items", {})
             return tuple(self._decode_node(item_schema, item) for item in value)
-        if value_type == "object":
+        if isinstance(value, Mapping) and (
+            "object" in types or "properties" in node or "additionalProperties" in node
+        ):
             properties = node.get("properties")
             if isinstance(properties, dict) and definition in self._models:
                 model_type = self._models[definition]
@@ -148,8 +183,11 @@ class ContractRuntime:
                 return self._construct_validated_model(model_type, arguments)
             additional = node.get("additionalProperties")
             item_schema = additional if isinstance(additional, dict) else {}
+            # Anonymous object variants have the same property semantics as
+            # generated records. Only map entries use additionalProperties.
+            property_schemas = properties if isinstance(properties, dict) else {}
             return FrozenMap(
-                (key, self._decode_node(item_schema, item))
+                (key, self._decode_node(property_schemas.get(key, item_schema), item))
                 for key, item in value.items()
             )
         return value

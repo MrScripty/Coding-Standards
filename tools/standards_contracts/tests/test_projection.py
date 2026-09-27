@@ -302,6 +302,18 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertTrue(self.accepts(baseline, "SemanticProposal", proposal))
         self.assertFalse(self.accepts(changed_compiled, "SemanticProposal", proposal))
 
+    def test_max_length_survives_generated_models_and_tool_projection(self) -> None:
+        schema, interface = canonical_inputs()
+        schema["$defs"]["NonEmptyString"]["maxLength"] = 2
+        compiled = compile_contracts(schema, interface)
+        artifacts = compiled.project()
+        generated = load_generated(artifacts.python_source)
+        self.assertEqual(artifacts.agent_tools["$defs"]["NonEmptyString"]["maxLength"], 2)
+        self.assertEqual(generated.decode_contract("NonEmptyString", "ab"), "ab")
+        with self.assertRaises(ContractError) as caught:
+            generated.decode_contract("NonEmptyString", "abc")
+        self.assertEqual(caught.exception.failure.keyword, "maxLength")
+
     def test_agent_tools_derive_every_operation_and_reachable_definition(self) -> None:
         schema, interface = canonical_inputs()
         tools = dict(compile_contracts(schema, interface).project().agent_tools)

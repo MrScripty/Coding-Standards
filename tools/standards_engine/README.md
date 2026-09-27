@@ -1,14 +1,16 @@
 # Standards Engine
 
-The current interface is **41**. Bounded `describe_input` observations expose exact
-input shapes when client declarations are abbreviated. Optional routed content, request-local evidence
-reuse and host-selected schema presentation extend the existing workflow. Compact pending `propose`, `revise`, `analyze`
-and decision responses include the next bounded work page. Carry the returned
-context once, answer ready work with `resolve_many`, and retrieve only remaining
-or supporting details. `workflow_status` remains a lightweight observation;
-review and publication remain explicit. Restart the MCP process and reconnect
-the client after this result-shape update, preserving all exact handles and the
-existing store. See [the current discovery contract](PURPOSE-SEPARATION.md#input-contract-discovery-interface-40).
+The current interface is **44**. Input contracts are native-only; `--schema-mode`
+is no longer accepted. Exact input/output contracts remain available through
+`describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
+smaller catalog; eager output delivery remains the default.
+
+Interface 44 aligns logical graph, store-path, integer and evidence-digest boundaries.
+The Digest scalar now excludes trailing data explicitly. Operation shapes and stored
+workflow identities are unchanged. Restart the MCP process and refresh the client
+catalog after installing the coordinated source and generated contracts; preserve
+existing stores and exact workflow handles. See the
+[boundary repair record](../../docs/plans/boundary-repairs/plan.md).
 
 The versioned sections below retain implementation history.
 

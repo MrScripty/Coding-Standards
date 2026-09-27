@@ -29,3 +29,13 @@ Closed SQLite files are the administrative movement unit. Minimal
 aggregate-root tombstones prevent an expired proposal identity from aliasing
 later state. Backup, restore, import, export, merge, open-ended migration
 machinery, immediate purge, and child deletion are outside the Interface.
+
+## Selected database path
+
+`SnapshotModule.open` requires an absolute Path and admits an existing final component
+only when it is a regular non-symlink file. Intermediate directory symlinks are
+permitted by this local operator-owned storage profile. The Engine's convenience
+entry point resolves the selected parent (relative parents are cwd-relative), then
+passes the final name unchanged to the store. Invalid selection never authorizes
+replacement or deletion of an existing database. These admission checks are not a
+race-free filesystem sandbox.

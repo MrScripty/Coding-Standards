@@ -158,6 +158,11 @@ class ContractSemanticsTest(unittest.TestCase):
         for definition, replacement, cases in scenarios:
             self.assert_agrees(definition, replacement, cases)
 
+    def test_max_length_is_validator_owned_and_counts_unicode_characters(self) -> None:
+        self.assert_agrees("NonEmptyString", {"type": "string", "maxLength": 2},
+            (("", True), ("ab", True), ("abc", False), ("\U0001f600é", True),
+             ("\U0001f600éx", False), ("ab\n", False), (12, False)))
+
     def test_adapter_rejects_values_outside_strict_json_before_validation(self) -> None:
         schema, interface = canonical_inputs()
         compiled = compile_contracts(schema, interface)

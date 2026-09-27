@@ -39,3 +39,10 @@ permits it.
 Policy-impact edges originate from policy-unit nodes. Module-level aggregation
 is a standards-navigation view provided by `standards_engine`; it is not a
 second set of generic graph edges.
+
+## Resolution authority
+
+A registry supplied with `logical_artifacts` resolves only registered logical nodes
+and aliases. Every name spelling, including bare names, is independent of ambient
+files, directories and symlinks. Merely declaring an artifact does not register a node.
+A filesystem-backed registry retains its separate containment-checked path behavior.

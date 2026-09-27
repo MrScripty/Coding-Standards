@@ -111,3 +111,20 @@ APIs remain retrieval-free and preserve literals, annotations, schema-bearing
 property names and recursive closure. Recognizing `allOf` as a structural schema
 position does not admit it to the compiler's canonical vocabulary or implement
 constraint evaluation; `jsonschema` remains the independent semantics owner.
+
+## Validated numeric representation and digest constraint
+
+After full instance validation, integer-constrained positions normalize integral
+floats to Python integers. Named and anonymous properties, map entries, arrays,
+references and selected union branches follow their own declared schemas. Integers
+already represented as Python integers retain arbitrary precision. Booleans,
+fractions and non-finite JSON numbers are rejected where invalid before construction.
+Number-only and unconstrained positions remain uncoerced, including numeric values
+inside opaque literals with no integer schema. Schema const/enum/default documents
+are never modified. Defaults do not inject values and caller-owned inputs remain
+unchanged.
+
+`maxLength` is part of the admitted projection profile; its semantics belong to
+the existing Draft 2020-12 validator. Interface 44's canonical Digest uses it with
+the lowercase SHA-256 pattern to exclude trailing data, including a final newline.
+Generated tools/models preserve this constraint without a local keyword evaluator.

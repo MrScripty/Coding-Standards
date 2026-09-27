@@ -95,7 +95,6 @@ class ContractCompilerTest(unittest.TestCase):
             ("not", {"type": "null"}),
             ("if", {"type": "string"}),
             ("contains", {"type": "string"}),
-            ("maxLength", 2),
             ("exclusiveMinimum", 0),
             ("examples", ["example"]),
             ("x-project-extension", True),

@@ -492,7 +492,10 @@ class StandardsEngine:
                 store_path = Path(temporary.name) / "snapshots.sqlite3"
         return cls(
             GitRepository(selected_root),
-            SnapshotModule.open(store_path.resolve()),
+            # Normalize the parent, but let the store inspect the selected final
+            # component before following it. Relative paths remain cwd-relative;
+            # intermediate symlinks are allowed by the local store contract.
+            SnapshotModule.open(store_path.parent.resolve() / store_path.name),
             purpose=selected_purpose,
             execution_context=execution_context,
             temporary_store=temporary,

@@ -85,3 +85,12 @@ loader, readable Engine routing and route-authoring projection consume this one
 representation. Executable applicability and target agreement remain owned by
 the existing Router projection. This narrow representation is not a general
 Markdown parsing API.
+
+## Exact evidence digests
+
+An EvidenceReference digest is exactly `sha256:` followed by 64 lowercase ASCII
+hexadecimal digits, with no trailing data. Generated transport, authoring and
+Analysis representations are checked against a shared conformance corpus without
+introducing a transport dependency into Analysis. Valid syntax supplies no evidence
+of correctness: ResolvedEvidence still hashes the actual bytes and rejects a digest
+mismatch; provider and current authorization checks retain their existing owners.

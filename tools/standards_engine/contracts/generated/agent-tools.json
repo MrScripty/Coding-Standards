@@ -3731,6 +3731,7 @@
       "type": "object"
     },
     "Digest": {
+      "maxLength": 71,
       "pattern": "^sha256:[0-9a-f]{64}$",
       "type": "string"
     },
@@ -9652,7 +9653,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 43,
+  "interface_schema_version": 44,
   "operations": [
     {
       "capability": "standards.snapshot.create",

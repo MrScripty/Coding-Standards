@@ -46,6 +46,7 @@ _SCHEMA_KEYS = frozenset(
         "maxItems",
         "uniqueItems",
         "minLength",
+        "maxLength",
         "pattern",
         "minimum",
         "maximum",
