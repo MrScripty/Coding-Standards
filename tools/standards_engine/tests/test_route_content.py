@@ -22,6 +22,13 @@ def known_facts():
                         'languages', 'frameworks', 'topics', 'details')}
 
 
+def known_assertions():
+    """Focused inputs; known_facts intentionally remains a canonical-query fixture."""
+    return {'routing.' + key: [] for key in (
+        'activities', 'workflow-profiles', 'applications', 'boundaries',
+        'languages', 'frameworks', 'topics', 'details')}
+
+
 class RouteContentTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -38,11 +45,11 @@ class RouteContentTest(unittest.TestCase):
         fixture.PurposeProjectionTest.tearDownClass()
 
     def route(self, facade, **extra):
-        return facade.route({'snapshot': self.snapshot, 'facts': known_facts(), 'content': {}, **extra})
+        return facade.route({'snapshot': self.snapshot, 'facts': known_assertions(), 'content': {}, **extra})
 
     def test_pages_equal_exact_reads_and_preserve_unknown_facts(self):
         for facade in (self.author, self.app):
-            for facts in ({}, known_facts()):
+            for facts in ({}, known_assertions()):
                 plain = facade.route({'snapshot': self.snapshot, 'facts': facts})
                 targets = list(dict.fromkeys(i['target'] for i in plain['reading_plan'] if i['state'] == 'selected'))
                 expected = [facade.read({'snapshot': self.snapshot, 'target': t}) for t in targets]
@@ -81,8 +88,8 @@ class RouteContentTest(unittest.TestCase):
             self.assertEqual(load.call_count, 1)
 
     def test_unqualified_later_target_blocks_even_a_one_item_application_page(self):
-        facts = known_facts()
-        facts['routing.activities']['value'] = ['implementation']
+        facts = known_assertions()
+        facts['routing.activities'] = ['implementation']
         value = self.route(self.app, facts=facts, content={'limit': 1})
         self.assertEqual(value['code'], 'APPLICATION.CONTENT_UNAVAILABLE')
         self.assertNotIn('content', value)
@@ -107,7 +114,7 @@ class RouteContentTest(unittest.TestCase):
             self.assertEqual(rejected['outcome'], 'unsupported')
             self.assertNotIn('content', rejected)
             # The explicit non-composed operation remains available.
-            self.assertIn('reading_plan', facade.route({'snapshot': self.snapshot, 'facts': known_facts()}))
+            self.assertIn('reading_plan', facade.route({'snapshot': self.snapshot, 'facts': known_assertions()}))
 
     def test_schema_whole_numbers_normalize_before_slicing(self):
         for facade in (self.author, self.app):

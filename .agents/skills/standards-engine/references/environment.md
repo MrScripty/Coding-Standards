@@ -193,3 +193,23 @@ same structured values, errors and continuations; `describe_output` is optional
 when those are already sufficient. The existing `codex_navigation_client.py`
 accepts `--output-schemas on-demand` to check an already configured registration;
 it does not change the host configuration or run a model.
+
+
+## Focused fact input replacement (interface 45)
+
+After integrating this coordinated wire update, restart the existing server and
+refresh/reconnect its catalog. No launch flag changes: preserve native-only input
+configuration and the current `--output-schemas on-demand` selection.
+
+Old saved focused-route requests and their continuations are interface-44 material;
+keep them for matching-source replay rather than rewriting historical artifacts.
+For a continuing task, retain its valid snapshot and construct the new raw-value
+fact map from known task information. Do not delete or migrate stores, snapshots,
+Analysis, proposals or readiness. Native queries and stored typed facts are unchanged.
+
+Run the same-version configured navigation harness for source/host conformance, and
+perform the bounded matched model comparison in
+`tools/standards_engine/tests/ROUTING-FACT-QUALIFICATION.md`. Raw JSON savings and
+scripted calls are not live-agent qualification. The host is responsible for its
+model/provider authorization; this source update does not send a review packet or
+change any external registration automatically.

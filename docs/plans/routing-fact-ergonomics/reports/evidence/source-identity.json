@@ -1,0 +1,13 @@
+{
+  "commit": "ff2e13ed31a42dbe6cc70ee76f7e7a7e58eabe76",
+  "tree": "6d1f1f8a33d4391c9ab8e315b18bfc25603e1b97",
+  "workflow_run": 36393453038,
+  "workflow_conclusion": "success",
+  "artifact_id": 10956749223,
+  "source_archive_sha256": "4b3179f85138ef92b55a2a54879c950ed78ffdd060f97ebc3c14912766c4a816",
+  "source_clean_after_probes": true,
+  "planning_only": true,
+  "production_edits": false,
+  "model_execution": false,
+  "remote_mutations": false
+}

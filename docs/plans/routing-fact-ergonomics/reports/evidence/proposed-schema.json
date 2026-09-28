@@ -1,0 +1,43 @@
+{
+  "RoutingFactAssertion": {
+    "oneOf": [
+      {
+        "type": "boolean"
+      },
+      {
+        "type": "null"
+      },
+      {
+        "type": "string"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "uniqueItems": true
+      },
+      {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "state"
+        ],
+        "properties": {
+          "state": {
+            "enum": [
+              "known-absent",
+              "unknown"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "RoutingFactAssertions": {
+    "type": "object",
+    "additionalProperties": {
+      "$ref": "#/$defs/RoutingFactAssertion"
+    }
+  }
+}

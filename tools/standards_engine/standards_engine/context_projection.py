@@ -226,7 +226,12 @@ class ApplicationView:
 
     def route(self, engine, call):
         self._require("router")
-        _facts, _rules, _ordered, entries, unresolved = engine._routing_selection(self.compiled, call)
+        facts = self.compiled.router.fact_schema.bind(call.as_contract()["facts"])
+        return self._route_bound(engine, facts)
+
+    def _route_bound(self, engine, facts):
+        """Render a route whose Router qualification and fact binding already passed."""
+        _facts, _rules, _ordered, entries, unresolved = engine._bound_routing_selection(self.compiled, facts)
         reading = []
         for entry in entries:
             if entry.state != "selected":
@@ -296,6 +301,7 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             snapshot = c.SnapshotHandle.from_value(captured.as_contract()["snapshot"]["snapshot"])
         compiled = engine._compiled_snapshot(engine._snapshot_id(snapshot))
         view = ApplicationView(compiled, snapshot)
+        focused_routing = operation == "route"
         if operation == "query":
             values = checked.request.as_contract()
             operation = values.pop("kind")
@@ -318,10 +324,21 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             except UnknownGroupError:
                 return unknown_group_result(engine, snapshot, view.graph)
         if operation == "route":
+            if not focused_routing:
+                return view.route(engine, checked)
+            from tools.standards_applicability.standards_applicability import ApplicabilityError
             from .agent_navigation import with_route_content
-            routed = view.route(engine, checked)
+            from .routing_inputs import bind_facts, binding_rejection
+            # Private vocabulary is interpreted only after Router qualification.
+            view._require("router")
+            try:
+                facts = bind_facts(compiled.router.fact_schema, values["facts"])
+            except (ApplicabilityError, ContractError) as error:
+                return binding_rejection(engine.purpose.value, compiled.router.fact_schema,
+                                         values["facts"], error)
+            routed = view._route_bound(engine, facts)
             return with_route_content(engine, checked, snapshot, compiled, routed,
-                                      application_view=view)
+                                      bound_facts=facts, application_view=view)
         if operation == "routing_facts":
             return view.routing_facts()
         return view.inspect(checked.handle)

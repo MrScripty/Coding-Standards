@@ -140,3 +140,13 @@ Completion means the requested structured result has been inspected, every
 pending or recovery state is either resolved or reported with its exact typed
 outcome, and no caller-owned standards-file, SQLite, index, object, or ref
 mutation was used.
+
+
+## Focused routing inputs (interface 45)
+
+For `route`, supply observed raw values in the required `facts` map; the selected
+snapshot supplies their declared types. Use a one-field `state` marker only for
+`unknown` or `known-absent`. Omission stays unknown; explicit empty, false and nullable
+null stay known values. Canonical native queries and Analysis still use typed facts.
+Reuse returned pagination/explanation requests exactly. See
+[the routing contract](references/navigation.md#explicit-facts-and-routing-explanations).

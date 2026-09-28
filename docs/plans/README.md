@@ -116,3 +116,11 @@ external review, and the acceptance owner's finding dispositions. See the
 [six-slice acceptance decision](typed-routing-edits/reports/acceptance-dispositions.md)
 for exact commits, CI and review reports. This bounded refactoring sequence is
 closed; no further implementation slice in it is admitted.
+
+
+## Routing-fact ergonomics
+
+[Routing-fact ergonomics](routing-fact-ergonomics/plan.md) owns the separately admitted
+focused input improvement, its consumer cutover and actual-agent qualification.
+The accepted six-slice refactoring remains closed. Review-evidence packaging and
+broader test strengthening are later, separately admitted work.

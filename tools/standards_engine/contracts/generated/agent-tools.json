@@ -586,7 +586,7 @@
           "$ref": "#/$defs/RoutedContentPage"
         },
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "kind": {
           "const": "agent-route-result"
@@ -2829,7 +2829,7 @@
           "$ref": "#/$defs/RouteCall"
         },
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "kind": {
           "const": "compact-route-result"
@@ -8193,7 +8193,7 @@
           ]
         },
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -8359,6 +8359,47 @@
         "facts",
         "rules"
       ],
+      "type": "object"
+    },
+    "RoutingFactAssertion": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "enum": [
+                "known-absent",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "state"
+          ],
+          "type": "object"
+        }
+      ]
+    },
+    "RoutingFactAssertions": {
+      "additionalProperties": {
+        "$ref": "#/$defs/RoutingFactAssertion"
+      },
       "type": "object"
     },
     "RoutingFactsCall": {
@@ -9653,7 +9694,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 44,
+  "interface_schema_version": 45,
   "operations": [
     {
       "capability": "standards.snapshot.create",

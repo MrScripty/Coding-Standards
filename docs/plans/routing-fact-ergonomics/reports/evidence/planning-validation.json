@@ -1,0 +1,42 @@
+{
+  "planning_only": true,
+  "plan_contract_validator": "tools.standards_verifier.standards_verifier.checks.plan_contract.validate_plan",
+  "plan_contract_result": "valid",
+  "all_eight_claims_pending": true,
+  "one_next_slice": true,
+  "markdown_links_checked": 6,
+  "local_links": [
+    {
+      "from": "docs/plans/routing-fact-ergonomics/plan.md",
+      "destination": "#simplicity-and-ownership-review"
+    },
+    {
+      "from": "docs/plans/routing-fact-ergonomics/plan.md",
+      "destination": "execution-ledger.md"
+    },
+    {
+      "from": "docs/plans/routing-fact-ergonomics/plan.md",
+      "destination": "issues.md"
+    },
+    {
+      "from": "docs/plans/routing-fact-ergonomics/plan.md",
+      "destination": "reports/design-comparison.md"
+    },
+    {
+      "from": "docs/plans/routing-fact-ergonomics/plan.md",
+      "destination": "reports/source-consumers.md"
+    },
+    {
+      "from": "docs/plans/routing-fact-ergonomics/reports/design-comparison.md",
+      "destination": "evidence/comparison.json"
+    }
+  ],
+  "source_clean_after_probes": true,
+  "candidate_implementation_tested": false,
+  "candidate_model_run": false,
+  "prototype_binding_cases": 126,
+  "prototype_bound": 33,
+  "prototype_rejected": 93,
+  "production_source_changed": false,
+  "historical_acceptance_records_changed": false
+}

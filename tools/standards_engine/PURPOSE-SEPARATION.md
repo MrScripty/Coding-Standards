@@ -916,3 +916,56 @@ old `--schema-mode` pair, restart through the host, and verify the reconnected a
 catalog. A fresh disposable model-authored path ends at independently verified
 readiness, not publication. Supported-runtime CI and independent material review
 remain separate evidence; earlier successful client runs do not certify new code.
+
+
+## Focused routing-fact assertions (interface 45)
+
+`RouteCall.facts` is a required `RoutingFactAssertions` map. Each value is boolean,
+null, string, a unique string array, or a closed object containing only
+`state: unknown | known-absent`. Existing six fact types determine which raw values
+are valid after exact snapshot selection. The common static schema deliberately
+cannot infer a type from a caller-controlled name. Old typed envelopes, arbitrary
+objects and numbers are rejected rather than auto-detected or coerced.
+
+`routing_inputs.py` translates a statically validated assertion to the selected
+FactSchema's declared type, preserving the supplied name/alias, and invokes its
+existing binder once. FactSchema.require owns required-name lookup and its existing
+canonical error. Canonical `FactSet`/`FactValue`, aliases, Unicode normalization,
+set membership and three-valued evaluation retain their meanings and owners.
+The focused reverse projection is also checked by its generated contract before
+selection. If different raw strings normalize to duplicate set entries, the
+focused request returns safe invalid feedback rather than violating its result
+contract. This does not redefine the canonical binder or native query semantics.
+The bound selection helper reuses the existing algorithm and program schema-digest
+checks. Native query/preview callers still bind canonical typed inputs before
+selecting; they are not a fallback for old focused requests.
+
+Application dispatch first qualifies Router and its required content. It then binds
+focused input and qualifies the complete selected content closure before returning
+a route or page. The new invalid-input adaptation is confined to that known binding
+boundary, not a general change to lifecycle/qualification errors. Authoring returns
+`ROUTE.INPUT_INVALID`; application returns `APPLICATION.INPUT_INVALID`. Both include
+bounded existing input_feedback with a route describe_input hint. Known fields may
+be named; unrecognized input keys/values are not echoed. This is one fixed-prose
+constraint issue, not a second validator. Required-name resolution happens before
+the binding pass, so an undeclared later name may precede an earlier type error in
+multi-error inputs. After resolution the canonical binder retains its order.
+
+Canonical bound facts project through one reverse function to focused authoring
+CompactRouteResult/AgentRouteResult facts and to both purposes' content.next calls.
+Canonical IDs, sorted normalized sets and explicit unknown/absence are retained.
+The full explanation is the same snapshot and fact binding, with full detail.
+Changing facts explicitly changes selection; pagination does not. Policy text,
+content bounds, current lifecycle checks and no-extra-capture/compile behavior stay.
+
+Static rejection happens before capture. With no snapshot supplied a dynamically
+invalid request may first capture accepted authority; no invalid request creates a
+proposal, decision, review, publication or successful route. This is an explicit
+failure-stage move, not a claim of identical static acceptance for different syntax.
+
+Interface 45 versions the focused wire replacement and its direct consumer cutover.
+Request contract 6, result projection 7, native route definitions, preview contracts,
+material hashes and persisted state are not migrated. Historical saved focused calls
+must use matching source/tooling; new tasks may reuse their still-valid snapshot
+with the new syntax. Output delivery, discovery bounds and all other operations are
+unchanged. The existing client/model qualification is separate from static agreement.

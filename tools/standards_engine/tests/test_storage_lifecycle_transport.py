@@ -15,7 +15,7 @@ import unittest
 from contextlib import closing
 
 from tools.standards_engine.tests import test_agent_interaction_transport as transport
-from tools.standards_engine.tests.test_route_content import known_facts
+from tools.standards_engine.tests.test_route_content import known_assertions
 from tools.standards_snapshots.standards_snapshots import (
     AggregateChild, AggregateRecord, AggregateRoot, ChildHandle,
     SnapshotError, SnapshotId, SnapshotModule,
@@ -44,7 +44,7 @@ class StorageLifecycleTransportTest(unittest.TestCase):
             ('read', {'snapshot': self.snapshot, 'target': 'core'}),
             ('read_many', {'snapshot': self.snapshot, 'items': [
                 {'target': 'core'}, {'target': 'router'}]}),
-            ('route', {'snapshot': self.snapshot, 'facts': known_facts(), 'content': {'limit': 1}}),
+            ('route', {'snapshot': self.snapshot, 'facts': known_assertions(), 'content': {'limit': 1}}),
             ('relationship_groups', {'snapshot': self.snapshot, 'limit': 1}),
         ]
         expected = {(purpose, operation): self.call(purpose, operation, arguments)

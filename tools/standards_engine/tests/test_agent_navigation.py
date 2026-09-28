@@ -49,7 +49,7 @@ class AgentNavigationTest(unittest.TestCase):
 
     def test_complete_explicit_facts_select_reviewed_modules(self):
         facts = {
-            f"routing.{name}": {"type": "enum-set", "state": "known", "value": []}
+            f"routing.{name}": []
             for name in (
                 "activities",
                 "workflow-profiles",
@@ -66,7 +66,7 @@ class AgentNavigationTest(unittest.TestCase):
             "applications": ["library"],
             "languages": ["rust"],
         }.items():
-            facts[f"routing.{name}"]["value"] = values
+            facts[f"routing.{name}"] = values
         result = self.facade.route({"facts": facts, "snapshot": self.snapshot})
         self.assertEqual(result["unresolved_questions"], [])
         self.assertTrue(
@@ -80,7 +80,9 @@ class AgentNavigationTest(unittest.TestCase):
             }.issubset({r["target"] for r in result["reading_plan"]})
         )
         native = self.facade.query(
-            {"snapshot": self.snapshot, "request": {"kind": "route", "facts": facts}}
+            {"snapshot": self.snapshot, "request": {"kind": "route", "facts": {
+                key: {"type": "enum-set", "state": "known", "value": value}
+                for key, value in facts.items()}}}
         )
         self.assertEqual(result["reading_plan"], native["reading_plan"])
         self.assertEqual(
@@ -290,9 +292,9 @@ class AgentNavigationTest(unittest.TestCase):
                 {"boolean", "string", "enum-set"},
             )
             facts = {
-                "test.on": {"type": "boolean", "state": "known", "value": True},
-                "test.optional": {"type": "string", "state": "known", "value": None},
-                "test.tags": {"type": "enum-set", "state": "known", "value": ["x"]},
+                "test.on": True,
+                "test.optional": None,
+                "test.tags": ["x"],
             }
             selected = self.facade.route({"snapshot": self.snapshot, "facts": facts, "detail": "full"})
             self.assertEqual(selected["unresolved_questions"], [])
@@ -309,26 +311,22 @@ class AgentNavigationTest(unittest.TestCase):
                     "facts": {**facts, "test.enabled": facts["test.on"]},
                 }
             )
-            self.assertEqual(conflict["code"], "APPLICABILITY.INVALID")
-            facts["test.on"]["value"] = False
-            facts["test.tags"]["value"] = []
+            self.assertEqual(conflict["code"], "ROUTE.INPUT_INVALID")
+            facts["test.on"] = False
+            facts["test.tags"] = []
             negative = self.facade.route({"snapshot": self.snapshot, "facts": facts, "detail": "full"})
             self.assertNotIn("rule.test0", {r["id"] for r in negative["rules"]})
             self.assertNotIn("rule.test2", {r["id"] for r in negative["rules"]})
 
     def test_invalid_routing_values_do_not_become_negative_facts(self):
         for facts in (
-            {"invented": {"type": "boolean", "state": "known", "value": True}},
+            {"invented": True},
             {
-                "routing.languages": {
-                    "type": "enum-set",
-                    "state": "known",
-                    "value": ["invented"],
-                }
+                "routing.languages": ["invented"]
             },
         ):
             result = self.facade.route({"snapshot": self.snapshot, "facts": facts})
-            self.assertEqual(result["code"], "APPLICABILITY.INVALID")
+            self.assertEqual(result["code"], "ROUTE.INPUT_INVALID")
 
     def test_capture_rejection_never_advances_to_query(self):
         rejected = contract.RejectedResult.from_value(

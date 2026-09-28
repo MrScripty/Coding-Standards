@@ -1,0 +1,18 @@
+{
+  "CORE-STANDARDS.md": "8d81c8b558269cf45aa768f67399e6ea120acf2318e0e4c3030b8114a083a14d",
+  "STANDARDS-ROUTER.md": "da74e345b3e6ae270dbef2f6c8d9d3d75ec0cbb2b200f0bf9beaf12e17493255",
+  "workflows/planning.md": "08c07632ce51a33073620885692d4cec4e6cc7a507bbf3c79a9127c4b2b3136f",
+  "workflows/verification.md": "798071f8beed08fca9937ad5ea9d6d6a42b99157b82a3f2dc80c46412f475f8b",
+  "topics/architecture.md": "d35471532ba216056a4a88474fac15f2aada1de866ada136efb31ce26dc06036",
+  "topics/contracts/evolution.md": "9789fccbc295188ec264a50d0e4183021e6bc136807d49eb7417b1159f0e86b8",
+  "tools/standards_applicability/standards_applicability/core.py": "06cb1223e617cac274b59e426253c53ab8fa8e1f4c53618518354a6c995bf205",
+  "tools/standards_analysis/standards_analysis/routing.py": "a0b7763d137159600b01bb3bae1c94442dbb3c160e69f7a622427977fea293f1",
+  "tools/standards_engine/standards_engine/agent_navigation.py": "ee15cdb51cb655e8c734e57cf09fb0ce0c6f363f34b17142b3717f79b9e61519",
+  "tools/standards_engine/standards_engine/context_projection.py": "139c4dd47e0d0d6609ab776b4e5828ffc4d3dfa1c722db90400c3fe3251ddcac",
+  "tools/standards_engine/standards_engine/engine.py": "e483fc3b6862337ea3ed52f3d23c247bae4f73b2bc9486dc3e04e72acca98d48",
+  "tools/standards_engine/standards_engine/tools.py": "52f6762cc0c94c40df466a632cec7612eec5fa6479b486b523835cd2c2f245b2",
+  "tools/standards_engine/contracts/a1-interface.toml": "dd1649240b718067584a272cb98a0f3dc70bbcacc93777d7980a0e8f86efde5f",
+  "tools/standards_engine/contracts/a1-contract.schema.json": "691b0bc4592e1899b254a60f0a3c25b308e4964d073c2f3c9f505158e78e3aef",
+  ".agents/skills/standards-engine/references/navigation.md": "ce484b899044f5c1faf851e42469296a6a9925f8b40b3b6240b742456dc90939",
+  ".github/workflows/purpose-separated-engine.yml": "b1d37c64f36bd1d89e98ad871612236b232323436db6c190ff66049c2f126f8e"
+}

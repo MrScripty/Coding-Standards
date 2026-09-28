@@ -148,11 +148,11 @@ class PurposeProjectionTest(unittest.TestCase):
         unknown = self.facade.route({"snapshot": self.snapshot, "facts": {}})
         self.assertEqual(unknown["status"], "needs-facts", unknown)
         self.assertTrue(unknown["unresolved_questions"])
-        facts = {"routing."+key: {"type": "enum-set", "state": "known", "value": []}
+        facts = {"routing."+key: []
                  for key in ("activities", "workflow-profiles", "applications", "boundaries", "languages", "frameworks", "topics", "details")}
         complete = self.facade.route({"snapshot": self.snapshot, "facts": facts})
         self.assertEqual(complete["status"], "complete", complete)
-        facts["routing.activities"]["value"] = ["implementation"]
+        facts["routing.activities"] = ["implementation"]
         blocked = self.facade.route({"snapshot": self.snapshot, "facts": facts})
         self.assertEqual(blocked["code"], "APPLICATION.CONTENT_UNAVAILABLE", blocked)
 

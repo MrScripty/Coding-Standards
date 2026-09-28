@@ -64,11 +64,39 @@ Native `query` and candidate previews keep their existing request contracts.
 
 ## Explicit Facts And Routing Explanations
 
-Call `routing_facts` to discover fact IDs, aliases, types, allowed values,
-nullability, meaning, and prompts. Reuse its snapshot when routing. Supply a
-`FactValue` for each known fact using the tool schema; enum-set values are arrays,
-boolean values are booleans, and null is valid only for nullable definitions.
-An explicit empty set or `known-absent` is different from an omitted/unknown fact.
+Call `routing_facts` when the fact vocabulary is needed: its selected snapshot
+owns IDs, aliases, types, allowed values, nullability and meaning. Focused `route`
+accepts one required `facts` map of known raw values or explicit state markers:
+
+```json
+{"facts":{"routing.activities":["implementation"],"routing.applications":[]}}
+```
+
+The empty set asserts that the application-profile set is known to be empty; do
+not supply it just to suppress a question. Omit a fact when it is unknown. To record explicit
+uncertainty or absence, use `{"state":"unknown"}` or `{"state":"known-absent"}`.
+The marker has exactly one field. `false` and `[]` are known values, not absence;
+`null` is a known value only for a nullable fact. The string `"unknown"` is a known
+string. Numbers and arbitrary objects are not supported fact values.
+
+Do not repeat `type`, `state: known` or `value` wrappers in focused requests; they
+are rejected by interface 45. The selected snapshot supplies each fact's type.
+The native `query` and candidate-preview interfaces retain their canonical typed
+`FactSet` contract. Those are distinct APIs, not alternate shapes of focused route.
+
+Aliases normalize to canonical names and set values normalize in the fact owner.
+Distinct Unicode spellings that normalize to duplicate set entries return invalid
+focused-input feedback rather than an unusable continuation; supply distinct
+normalized entries. Canonical query semantics remain unchanged.
+Focused `.facts`, `explanation.facts` and `content.next.facts` reflect the same bound
+values, including explicit unknown markers. Follow those returned requests directly;
+do not rebuild them from stale spellings or a different snapshot.
+
+Malformed common JSON shapes fail before capture. A vocabulary-dependent error can
+occur after capture when the snapshot was omitted; it returns invalid field feedback,
+not a successful route or authoring change. Correct the field or consult the
+snapshot-bound vocabulary. Unqualified application Router content remains unavailable
+before its vocabulary is interpreted or disclosed.
 
 Focused authoring `route` defaults to `compact-route-result`: canonicalized
 supplied facts, selected reading entries and required dependencies, every typed

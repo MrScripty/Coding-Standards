@@ -1,0 +1,1547 @@
+{
+  "basis_commit": "ff2e13ed31a42dbe6cc70ee76f7e7a7e58eabe76",
+  "prototype_only": true,
+  "deployed_candidate_tested": false,
+  "model_or_host_qualification": false,
+  "synthetic_binding_cases": 126,
+  "valid_cases": 33,
+  "shape_vs_semantic_stage_changes": 41,
+  "state_cases": [
+    {
+      "case": "omitted",
+      "input": {},
+      "exists": "unknown",
+      "canonical": {}
+    },
+    {
+      "case": "false",
+      "input": {
+        "enabled": false
+      },
+      "exists": "true",
+      "canonical": {
+        "enabled": {
+          "type": "boolean",
+          "state": "known",
+          "value": false
+        }
+      }
+    },
+    {
+      "case": "empty",
+      "input": {
+        "names": []
+      },
+      "exists": "true",
+      "canonical": {
+        "names": {
+          "type": "string-set",
+          "state": "known",
+          "value": []
+        }
+      }
+    },
+    {
+      "case": "null",
+      "input": {
+        "text": null
+      },
+      "exists": "true",
+      "canonical": {
+        "text": {
+          "type": "string",
+          "state": "known",
+          "value": null
+        }
+      }
+    },
+    {
+      "case": "absent",
+      "input": {
+        "text": {
+          "state": "known-absent"
+        }
+      },
+      "exists": "false",
+      "canonical": {
+        "text": {
+          "type": "string",
+          "state": "known-absent"
+        }
+      }
+    },
+    {
+      "case": "unknown",
+      "input": {
+        "text": {
+          "state": "unknown"
+        }
+      },
+      "exists": "unknown",
+      "canonical": {
+        "text": {
+          "type": "string",
+          "state": "unknown"
+        }
+      }
+    }
+  ],
+  "alias_cases": [
+    {
+      "input": {
+        "on": true
+      },
+      "result": {
+        "status": "bound",
+        "values": {
+          "enabled": {
+            "type": "boolean",
+            "state": "known",
+            "value": true
+          }
+        }
+      }
+    },
+    {
+      "input": {
+        "enabled": true,
+        "on": true
+      },
+      "result": {
+        "status": "rejected",
+        "failure": {
+          "code": "APPLICABILITY.INVALID",
+          "outcome": "invalid",
+          "message": "a fact and its alias cannot both be supplied",
+          "field": "enabled",
+          "observed": null
+        }
+      }
+    },
+    {
+      "input": {
+        "enabled": true,
+        "on": {
+          "state": "unknown"
+        }
+      },
+      "result": {
+        "status": "rejected",
+        "failure": {
+          "code": "APPLICABILITY.INVALID",
+          "outcome": "invalid",
+          "message": "a fact and its alias cannot both be supplied",
+          "field": "enabled",
+          "observed": null
+        }
+      }
+    }
+  ],
+  "snapshot_specific_type_binding": true,
+  "canonical_definitions_unchanged_except_focused_route": [
+    "RouteCall",
+    "CompactRouteResult",
+    "AgentRouteResult"
+  ],
+  "catalogs": {
+    "authoring/eager": {
+      "old_tool_count": 23,
+      "new_tool_count": 23,
+      "old_catalog_json_bytes": 713206,
+      "new_catalog_json_bytes": 711534,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "authoring/on-demand": {
+      "old_tool_count": 23,
+      "new_tool_count": 23,
+      "old_catalog_json_bytes": 108812,
+      "new_catalog_json_bytes": 107962,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "application/eager": {
+      "old_tool_count": 10,
+      "new_tool_count": 10,
+      "old_catalog_json_bytes": 83735,
+      "new_catalog_json_bytes": 82035,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "application/on-demand": {
+      "old_tool_count": 10,
+      "new_tool_count": 10,
+      "old_catalog_json_bytes": 15955,
+      "new_catalog_json_bytes": 15105,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    }
+  },
+  "route_examples": [
+    {
+      "input": {},
+      "old_request_json_bytes": 13,
+      "new_request_json_bytes": 13,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 8,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [
+          "implementation"
+        ],
+        "routing.applications": []
+      },
+      "old_request_json_bytes": 179,
+      "new_request_json_bytes": 81,
+      "selected_targets": [
+        "core",
+        "router",
+        "workflow.implementation"
+      ],
+      "questions": 6,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [],
+        "routing.applications": [],
+        "routing.boundaries": [],
+        "routing.details": [],
+        "routing.frameworks": [],
+        "routing.languages": [],
+        "routing.topics": [],
+        "routing.workflow-profiles": []
+      },
+      "old_request_json_bytes": 612,
+      "new_request_json_bytes": 220,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 0,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [
+          "implementation"
+        ],
+        "routing.applications": [],
+        "routing.boundaries": [
+          "ipc"
+        ],
+        "routing.details": [],
+        "routing.frameworks": [],
+        "routing.languages": [],
+        "routing.topics": [],
+        "routing.workflow-profiles": []
+      },
+      "old_request_json_bytes": 633,
+      "new_request_json_bytes": 241,
+      "selected_targets": [
+        "core",
+        "router",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.security",
+        "topic.contracts.protocols",
+        "profile.boundary.ipc",
+        "workflow.implementation"
+      ],
+      "questions": 0,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": {
+          "state": "unknown"
+        }
+      },
+      "old_request_json_bytes": 75,
+      "new_request_json_bytes": 55,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 8,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": {
+          "state": "known-absent"
+        }
+      },
+      "old_request_json_bytes": 80,
+      "new_request_json_bytes": 60,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 7,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    }
+  ],
+  "cases": [
+    {
+      "case": {
+        "enabled": true
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "enabled": false
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "enabled": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": ""
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": "x"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": "unknown"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": "known-absent"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": "x.y"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": []
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": [
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": [
+          ""
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "enabled": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "enabled": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "enabled": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "enabled": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": true
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": false
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": ""
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": "x"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "mode": "unknown"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": "known-absent"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": "x.y"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": []
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": [
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": [
+          ""
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "mode": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "mode": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "mode": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "mode": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": true
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": false
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": ""
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": "x"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": "unknown"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": "known-absent"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": "x.y"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": []
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": [
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": [
+          ""
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "text": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "text": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "text": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": true
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": false
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": ""
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": "x"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": "unknown"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": "known-absent"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": "x.y"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": []
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "names": [
+          "x"
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "names": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "names": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": [
+          ""
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "names": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "names": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "names": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "names": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": true
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": false
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": ""
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": "x"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": "unknown"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": "known-absent"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": "x.y"
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": []
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": [
+          "x"
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": [
+          ""
+        ]
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "tags": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "tags": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "tags": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": true
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": false
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": null
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": ""
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": "x"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": "unknown"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": "known-absent"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": "x.y"
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": []
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": [
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": [
+          "y",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": [
+          "x",
+          "x"
+        ]
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": [
+          ""
+        ]
+      },
+      "old_static": false,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "rejected"
+    },
+    {
+      "case": {
+        "artifact": 0
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": 1
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": 1.5
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": {}
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": {
+          "state": "known-absent"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": {
+          "state": "unknown"
+        }
+      },
+      "old_static": true,
+      "new_static": true,
+      "equivalent_final_validity": true,
+      "final_status": "bound"
+    },
+    {
+      "case": {
+        "artifact": {
+          "state": "known"
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    },
+    {
+      "case": {
+        "artifact": {
+          "state": "unknown",
+          "value": null
+        }
+      },
+      "old_static": false,
+      "new_static": false,
+      "equivalent_final_validity": true,
+      "final_status": "static-rejected"
+    }
+  ],
+  "scope": "A planning prototype delegates to current schema binding/evaluation. It is not an integrated candidate or proof of unchanged transport/error handling."
+}

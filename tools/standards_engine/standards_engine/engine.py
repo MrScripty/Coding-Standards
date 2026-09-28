@@ -69,6 +69,7 @@ from tools.standards_analysis.standards_analysis import (
 )
 from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
+    FactSet as ApplicabilityFacts,
     LANGUAGE_VERSION,
     Truth,
 )
@@ -2800,6 +2801,11 @@ class StandardsEngine:
     @staticmethod
     def _routing_selection(compiled: CompiledSnapshot, request):
         facts = compiled.router.fact_schema.bind(request.as_contract()["facts"])
+        return StandardsEngine._bound_routing_selection(compiled, facts)
+
+    @staticmethod
+    def _bound_routing_selection(compiled: CompiledSnapshot, facts: ApplicabilityFacts):
+        # Program evaluation retains the applicability owner's schema-digest guard.
         selected = set(compiled.router.base_modules)
         unresolved: set[str] = set()
         rule_results: list[tuple[object, str]] = []
@@ -2875,57 +2881,19 @@ class StandardsEngine:
         projection: _QueryProjection,
         compiled: CompiledSnapshot,
         request: RouteRequest,
-        *,
-        explain: bool = False,
-        compact: bool = False,
     ) -> dict[str, object]:
-        facts, rule_results, ordered, entries, unresolved = self._routing_selection(compiled, request)
-        reading_plan = [
-            projection.reading_plan_entry(item.as_contract()) for item in entries
-            if not compact or item.state == "selected"
-        ]
-        questions = [
-            self._route_question(compiled.router, fact) for fact in sorted(unresolved)
-        ]
-        explanation = {}
-        if explain:
-            definitions = {item["id"]: item for item in compiled.router.fact_definitions()}
-            questions = [
-                {"id": f"question.{fact}", "kind": "applicability-fact",
-                 "state": "required", "prompt": definitions[fact]["prompt"],
-                 "fact": definitions[fact]}
-                for fact in sorted(unresolved)
-            ]
-            canonical_facts = {key: value.as_contract() for key, value in facts.canonical_values.items()}
-            if compact:
-                explanation = {
-                    "kind": "compact-route-result", "facts": canonical_facts,
-                    "status": "needs-facts" if unresolved else "complete",
-                    "unresolved_policy_count": sum(item.state != "selected" for item in entries),
-                    "explanation": {"snapshot": projection.authority.as_contract(),
-                                    "facts": canonical_facts, "detail": "full"},
-                }
-            else:
-                explanation = {
-                    "kind": "agent-route-result", "facts": canonical_facts,
-                    "rules": [{"id": rule.id, "target": rule.target,
-                               "when": rule.program.as_expression(), "state": state}
-                              for rule, state in rule_results],
-                }
+        _facts, _rules, ordered, entries, unresolved = self._routing_selection(compiled, request)
+        reading_plan = [projection.reading_plan_entry(item.as_contract()) for item in entries]
+        questions = [self._route_question(compiled.router, fact) for fact in sorted(unresolved)]
         return {
             **projection.result("route"),
-            **explanation,
             "reading_plan": reading_plan,
             "unresolved_questions": questions,
             "next_operations": [
                 projection.next_operation("read", str(item["target"]))
-                for item in reading_plan
-                if item["state"] == "selected"
+                for item in reading_plan if item["state"] == "selected"
             ],
-            "summary": (
-                f"Selected {len(ordered)} standards with "
-                f"{len(questions)} unresolved fact categories."
-            ),
+            "summary": f"Selected {len(ordered)} standards with {len(questions)} unresolved fact categories.",
         }
 
     def _read(

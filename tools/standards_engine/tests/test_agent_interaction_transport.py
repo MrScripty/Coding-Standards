@@ -12,7 +12,7 @@ import sys
 import unittest
 
 from tools.standards_engine.tests import test_purpose_transport as fixture
-from tools.standards_engine.tests.test_route_content import known_facts
+from tools.standards_engine.tests.test_route_content import known_assertions
 
 
 class AgentInteractionTransportTest(unittest.TestCase):
@@ -78,7 +78,7 @@ class AgentInteractionTransportTest(unittest.TestCase):
                     self.assertNotIn('decision-provenance', [item['id'] for item in groups])
 
     def test_cold_compact_route_and_full_explanation_keep_uncertainty(self):
-        facts = {key: value for key, value in known_facts().items()
+        facts = {key: value for key, value in known_assertions().items()
                  if key in ('routing.activities', 'routing.applications')}
         for purpose in ('application', 'authoring'):
             with self.subTest(purpose=purpose):
@@ -109,7 +109,7 @@ class AgentInteractionTransportTest(unittest.TestCase):
         self.assertNotIn('context', invalid)
 
     def test_on_demand_navigation_and_feedback_preserve_eager_results(self):
-        facts = {key: value for key, value in known_facts().items()
+        facts = {key: value for key, value in known_assertions().items()
                  if key in ('routing.activities', 'routing.applications')}
         for purpose in ('application', 'authoring'):
             cases = [('read', {'snapshot': self.snapshot, 'target': 'core'}, False),

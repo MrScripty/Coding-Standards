@@ -1,6 +1,6 @@
 # Standards Engine
 
-The current interface is **44**. Input contracts are native-only; `--schema-mode`
+The current interface is **45**. Input contracts are native-only; `--schema-mode`
 is no longer accepted. Exact input/output contracts remain available through
 `describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
 smaller catalog; eager output delivery remains the default.
@@ -373,3 +373,15 @@ This internal refactor keeps interface 44, catalogs, configuration and stores in
 See [the pilot plan and evidence](../../docs/plans/typed-routing-edits/plan.md).
 A normal MCP process restart loads the new module; preserve existing handles/stores.
 No client setting, state migration or new schema-discovery call is required.
+
+
+## Smaller focused routing facts (interface 45)
+
+Focused `route` now accepts known raw values and explicit nonknown-state markers
+instead of redundant typed-state envelopes. Its output facts and continuations use
+the same normalized projection. No applicability evaluator or mutable task session
+is added; canonical queries, previews, Analysis and retained formats are unchanged.
+See [the public contract](PURPOSE-SEPARATION.md#focused-routing-fact-assertions-interface-45),
+[implementation record](../../docs/plans/routing-fact-ergonomics/plan.md) and
+[host qualification](tests/ROUTING-FACT-QUALIFICATION.md). Reload the server/catalog
+after installation without changing launch arguments or deleting stores.

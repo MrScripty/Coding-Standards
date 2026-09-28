@@ -8,7 +8,7 @@ from unittest.mock import patch
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import _generated_contract as c
-from tools.standards_engine.tests.test_route_content import known_facts
+from tools.standards_engine.tests.test_route_content import known_assertions
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -26,11 +26,12 @@ class CompactRoutingTest(unittest.TestCase):
         cls.engine.close()
 
     def test_two_known_facts_keep_all_six_questions_and_exact_selected_closure(self):
-        facts = {k: v for k, v in known_facts().items() if k in ('routing.activities', 'routing.applications')}
-        facts['routing.activities']['value'] = ['implementation']
+        facts = {k: v for k, v in known_assertions().items() if k in ('routing.activities', 'routing.applications')}
+        facts['routing.activities'] = ['implementation']
         compact = self.facade.route({'snapshot': self.snapshot, 'facts': facts})
         full = self.facade.route(compact['explanation'])
-        native = self.facade.query({'snapshot': self.snapshot, 'request': {'kind': 'route', 'facts': facts}})
+        canonical = {key: {'type': 'enum-set', 'state': 'known', 'value': value} for key, value in facts.items()}
+        native = self.facade.query({'snapshot': self.snapshot, 'request': {'kind': 'route', 'facts': canonical}})
         self.assertEqual(compact['kind'], 'compact-route-result')
         self.assertEqual(compact['status'], 'needs-facts')
         self.assertEqual(len(compact['unresolved_questions']), 6)
@@ -45,7 +46,7 @@ class CompactRoutingTest(unittest.TestCase):
 
     def test_known_empty_is_distinct_from_unknown(self):
         unknown = self.facade.route({'snapshot': self.snapshot, 'facts': {}})
-        empty = self.facade.route({'snapshot': self.snapshot, 'facts': known_facts()})
+        empty = self.facade.route({'snapshot': self.snapshot, 'facts': known_assertions()})
         self.assertEqual(unknown['status'], 'needs-facts')
         self.assertEqual(empty['status'], 'complete')
         self.assertEqual(empty['unresolved_questions'], [])
@@ -54,7 +55,7 @@ class CompactRoutingTest(unittest.TestCase):
 
     def test_full_explanation_and_content_paging_stay_on_the_original_snapshot(self):
         for detail in ('compact', 'full'):
-            first = self.facade.route({'snapshot': self.snapshot, 'facts': known_facts(),
+            first = self.facade.route({'snapshot': self.snapshot, 'facts': known_assertions(),
                                       'detail': detail, 'content': {'limit': 1}})
             second = self.facade.route(first['content']['next'])
             self.assertEqual(first['kind'], second['kind'])

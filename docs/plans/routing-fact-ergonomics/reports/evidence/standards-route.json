@@ -1,0 +1,939 @@
+{
+  "kind": "compact-route-result",
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+    "schema_version": 5
+  },
+  "status": "complete",
+  "facts": {
+    "routing.activities": {
+      "type": "enum-set",
+      "state": "known",
+      "value": [
+        "documentation",
+        "planning",
+        "uncertainty-reduction",
+        "verification"
+      ]
+    },
+    "routing.applications": {
+      "type": "enum-set",
+      "state": "known",
+      "value": [
+        "library"
+      ]
+    },
+    "routing.boundaries": {
+      "type": "enum-set",
+      "state": "known",
+      "value": [
+        "generated-contract",
+        "ipc"
+      ]
+    },
+    "routing.details": {
+      "type": "enum-set",
+      "state": "known",
+      "value": [
+        "topic.code-design",
+        "topic.contracts.evolution",
+        "topic.contracts.protocols",
+        "topic.contracts.schemas",
+        "workflow.verification.oracles"
+      ]
+    },
+    "routing.frameworks": {
+      "type": "enum-set",
+      "state": "known",
+      "value": []
+    },
+    "routing.languages": {
+      "type": "enum-set",
+      "state": "known",
+      "value": []
+    },
+    "routing.topics": {
+      "type": "enum-set",
+      "state": "known",
+      "value": [
+        "architecture",
+        "contracts",
+        "diagnostics",
+        "performance",
+        "security"
+      ]
+    },
+    "routing.workflow-profiles": {
+      "type": "enum-set",
+      "state": "known",
+      "value": []
+    }
+  },
+  "reading_plan": [
+    {
+      "target": "core",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.application.library->core",
+          "source": "profile.application.library"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->core",
+          "source": "profile.boundary.generated-contract"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.ipc->core",
+          "source": "profile.boundary.ipc"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:router->core",
+          "source": "router"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.architecture->core",
+          "source": "topic.architecture"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.code-design->core",
+          "source": "topic.code-design"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.contracts->core",
+          "source": "topic.contracts"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.dependencies->core",
+          "source": "topic.dependencies"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.diagnostics->core",
+          "source": "topic.diagnostics"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.performance->core",
+          "source": "topic.performance"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.security->core",
+          "source": "topic.security"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.build->core",
+          "source": "workflow.build"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.development-proportionality->core",
+          "source": "workflow.development-proportionality"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.documentation->core",
+          "source": "workflow.documentation"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.implementation->core",
+          "source": "workflow.implementation"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.planning->core",
+          "source": "workflow.planning"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.verification->core",
+          "source": "workflow.verification"
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "router",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-base",
+          "projection": "router.executable-projection"
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.implementation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.build->workflow.implementation",
+          "source": "workflow.build"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.development-proportionality->workflow.implementation",
+          "source": "workflow.development-proportionality"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.planning->workflow.implementation",
+          "source": "workflow.planning"
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.verification",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->workflow.verification",
+          "source": "profile.boundary.generated-contract"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.ipc->workflow.verification",
+          "source": "profile.boundary.ipc"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.contracts->workflow.verification",
+          "source": "topic.contracts"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.dependencies->workflow.verification",
+          "source": "topic.dependencies"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.diagnostics->workflow.verification",
+          "source": "topic.diagnostics"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.performance->workflow.verification",
+          "source": "topic.performance"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.security->workflow.verification",
+          "source": "topic.security"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.build->workflow.verification",
+          "source": "workflow.build"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.development-proportionality->workflow.verification",
+          "source": "workflow.development-proportionality"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.planning->workflow.verification",
+          "source": "workflow.planning"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.verification.oracles->workflow.verification",
+          "source": "workflow.verification.oracles"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.workflow.verification",
+          "facts": [
+            "routing.activities"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.dependencies",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->topic.dependencies",
+          "source": "profile.boundary.generated-contract"
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.build",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->workflow.build",
+          "source": "profile.boundary.generated-contract"
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.contracts",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->topic.contracts",
+          "source": "profile.boundary.generated-contract"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.ipc->topic.contracts",
+          "source": "profile.boundary.ipc"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.architecture->topic.contracts",
+          "source": "topic.architecture"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.contracts.evolution->topic.contracts",
+          "source": "topic.contracts.evolution"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.contracts.protocols->topic.contracts",
+          "source": "topic.contracts.protocols"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.contracts.schemas->topic.contracts",
+          "source": "topic.contracts.schemas"
+        },
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:topic.diagnostics->topic.contracts",
+          "source": "topic.diagnostics"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.topic.contracts",
+          "facts": [
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.contracts.protocols",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.ipc->topic.contracts.protocols",
+          "source": "profile.boundary.ipc"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.detail.topic.contracts.protocols",
+          "facts": [
+            "routing.boundaries",
+            "routing.details"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.contracts.schemas",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.generated-contract->topic.contracts.schemas",
+          "source": "profile.boundary.generated-contract"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.detail.topic.contracts.schemas",
+          "facts": [
+            "routing.boundaries",
+            "routing.details"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.security",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:profile.boundary.ipc->topic.security",
+          "source": "profile.boundary.ipc"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.topic.security",
+          "facts": [
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.development-proportionality",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "requires",
+          "edge": "metadata-requires:workflow.planning->workflow.development-proportionality",
+          "source": "workflow.planning"
+        },
+        {
+          "kind": "routing-rule",
+          "rule": "route.workflow.development-proportionality",
+          "facts": [
+            "routing.activities"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "profile.application.library",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.application.library",
+          "facts": [
+            "routing.applications"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.code-design",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.detail.topic.code-design",
+          "facts": [
+            "routing.details",
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.documentation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.workflow.documentation",
+          "facts": [
+            "routing.activities"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.architecture",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.topic.architecture",
+          "facts": [
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.contracts.evolution",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.detail.topic.contracts.evolution",
+          "facts": [
+            "routing.boundaries",
+            "routing.details"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "profile.boundary.generated-contract",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.boundary.generated-contract",
+          "facts": [
+            "routing.boundaries"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.diagnostics",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.topic.diagnostics",
+          "facts": [
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "topic.performance",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.topic.performance",
+          "facts": [
+            "routing.topics"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "profile.boundary.ipc",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.boundary.ipc",
+          "facts": [
+            "routing.boundaries"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.planning",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.workflow.planning",
+          "facts": [
+            "routing.activities"
+          ]
+        }
+      ],
+      "state": "selected"
+    },
+    {
+      "target": "workflow.verification.oracles",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "authority": "normative",
+      "reasons": [
+        {
+          "kind": "routing-rule",
+          "rule": "route.detail.workflow.verification.oracles",
+          "facts": [
+            "routing.details"
+          ]
+        }
+      ],
+      "state": "selected"
+    }
+  ],
+  "unresolved_questions": [],
+  "unresolved_policy_count": 0,
+  "explanation": {
+    "facts": {
+      "routing.activities": {
+        "type": "enum-set",
+        "state": "known",
+        "value": [
+          "documentation",
+          "planning",
+          "uncertainty-reduction",
+          "verification"
+        ]
+      },
+      "routing.applications": {
+        "type": "enum-set",
+        "state": "known",
+        "value": [
+          "library"
+        ]
+      },
+      "routing.boundaries": {
+        "type": "enum-set",
+        "state": "known",
+        "value": [
+          "generated-contract",
+          "ipc"
+        ]
+      },
+      "routing.details": {
+        "type": "enum-set",
+        "state": "known",
+        "value": [
+          "topic.code-design",
+          "topic.contracts.evolution",
+          "topic.contracts.protocols",
+          "topic.contracts.schemas",
+          "workflow.verification.oracles"
+        ]
+      },
+      "routing.frameworks": {
+        "type": "enum-set",
+        "state": "known",
+        "value": []
+      },
+      "routing.languages": {
+        "type": "enum-set",
+        "state": "known",
+        "value": []
+      },
+      "routing.topics": {
+        "type": "enum-set",
+        "state": "known",
+        "value": [
+          "architecture",
+          "contracts",
+          "diagnostics",
+          "performance",
+          "security"
+        ]
+      },
+      "routing.workflow-profiles": {
+        "type": "enum-set",
+        "state": "known",
+        "value": []
+      }
+    },
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+      "schema_version": 5
+    },
+    "detail": "full"
+  },
+  "next_operations": [
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "core"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "router"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.implementation"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.verification"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.dependencies"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.build"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.contracts"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.contracts.protocols"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.contracts.schemas"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.security"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.development-proportionality"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "profile.application.library"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.code-design"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.documentation"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.architecture"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.contracts.evolution"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "profile.boundary.generated-contract"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.diagnostics"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "topic.performance"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "profile.boundary.ipc"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.planning"
+    },
+    {
+      "operation": "read",
+      "request_kind": "read",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:886699e7-889a-4d5f-a956-c142e0069569",
+        "schema_version": 5
+      },
+      "target": "workflow.verification.oracles"
+    }
+  ],
+  "summary": "Selected 22 standards with 0 unresolved fact categories."
+}

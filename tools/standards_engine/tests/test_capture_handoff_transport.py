@@ -74,7 +74,7 @@ class CaptureHandoffTransportTest(unittest.TestCase):
             try:
                 initialized = call('initialize',{'protocolVersion':'2025-11-25','capabilities':{},
                     'clientInfo':{'name':'capture-handoff-fixture','version':'1'}})
-                self.assertEqual(initialized['_meta']['standards-engine/runtime']['interface_version'],44)
+                self.assertEqual(initialized['_meta']['standards-engine/runtime']['interface_version'],45)
                 process.stdin.write('{"jsonrpc":"2.0","method":"notifications/initialized"}\n')
                 process.stdin.flush()
                 def tool(name, arguments):

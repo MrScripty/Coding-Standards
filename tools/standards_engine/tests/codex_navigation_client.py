@@ -142,6 +142,26 @@ async def main(server_name, output_schemas="eager"):
             reconstructed = {**json.loads(page["root_schema_json"]), "$defs": documents}
             assert reconstructed == validation["read"]
             print(f"Codex {output_schemas} output delivery: exact read contract rediscovered", flush=True)
+            # No model turn here: verify the actual host accepts the current
+            # grammar and reuses returned facts/authority, not observer-injected types.
+            vocabulary = await call("routing_facts", {})
+            actual_facts = {item["id"]: item for item in vocabulary["facts"]}
+            category = actual_facts["routing.activities"]
+            assert "implementation" in category["values"]
+            assertions = {"routing.activities": ["implementation"]}
+            focused = await call("route", {"snapshot": vocabulary["snapshot"], "facts": assertions,
+                                          "content": {"limit": 1}})
+            assert focused["facts"] == assertions and focused["unresolved_questions"]
+            explained = await call("route", focused["explanation"])
+            assert explained["facts"] == focused["facts"]
+            if "next" in focused["content"]:
+                continuation = await call("route", focused["content"]["next"])
+                assert continuation["snapshot"] == focused["snapshot"]
+                assert continuation["facts"] == focused["facts"]
+            uncertain = await call("route", {"snapshot": vocabulary["snapshot"],
+                "facts": {"routing.activities": {"state": "unknown"}}})
+            assert uncertain["facts"] == {"routing.activities": {"state": "unknown"}}
+            print("Focused routing assertions and cold-independent continuations: host path checked; no model qualification", flush=True)
             routed = await call("route", {"facts": {}})
             assert routed["kind"] == "compact-route-result", routed
             assert all(i["operation"] in toolmap for i in routed["next_operations"])

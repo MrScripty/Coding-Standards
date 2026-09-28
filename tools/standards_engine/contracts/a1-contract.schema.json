@@ -5974,7 +5974,7 @@
       ],
       "properties": {
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "snapshot": {
           "$ref": "#/$defs/SnapshotHandle"
@@ -6255,7 +6255,7 @@
           "type": "string"
         },
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "rules": {
           "type": "array",
@@ -9715,7 +9715,7 @@
           ]
         },
         "facts": {
-          "$ref": "#/$defs/FactSet"
+          "$ref": "#/$defs/RoutingFactAssertions"
         },
         "reading_plan": {
           "type": "array",
@@ -9939,6 +9939,47 @@
         "outcome",
         "message"
       ]
+    },
+    "RoutingFactAssertion": {
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "state"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "known-absent",
+                "unknown"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "RoutingFactAssertions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/RoutingFactAssertion"
+      }
     }
   }
 }

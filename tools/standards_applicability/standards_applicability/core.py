@@ -216,15 +216,17 @@ class FactSchema:
     def resolve(self, fact_id: str) -> FactContract | None:
         return self._index.get(fact_id)
 
+    def require(self, fact_id: str) -> FactContract:
+        """Resolve a declared name or alias using the canonical binding failure."""
+        definition = self.resolve(fact_id)
+        if definition is None:
+            raise _invalid("fact is not declared by the applicability schema", field=fact_id)
+        return definition
+
     def bind(self, values: Mapping[str, object]) -> FactSet:
         selected: dict[str, FactValue] = {}
         for supplied_id, raw in values.items():
-            definition = self._index.get(supplied_id)
-            if definition is None:
-                raise _invalid(
-                    "fact is not declared by the applicability schema",
-                    field=supplied_id,
-                )
+            definition = self.require(supplied_id)
             if definition.id in selected:
                 raise _invalid(
                     "a fact and its alias cannot both be supplied",

@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import json
 
+from tools.standards_applicability.standards_applicability import ApplicabilityError
+from tools.standards_contracts.standards_contracts import ContractError
+
 from . import _generated_contract as contract
+from .routing_inputs import bind_facts, fact_assertions, binding_rejection
 
 
 # This is a serialized result bound, not a total interpreter-memory promise.
@@ -44,25 +48,16 @@ def navigate(engine, operation: str, call):
             return created
         snapshot = created.as_contract()["snapshot"]["snapshot"]
     if operation == "route":
-        from .engine import _QueryProjection
-
         try:
             handle = contract.SnapshotHandle.from_value(snapshot)
             compiled = engine._compiled_snapshot(engine._snapshot_id(handle))
-            result_type = contract.CompactRouteResult if detail == "compact" else contract.AgentRouteResult
-            routed = result_type.from_value(
-                focused_continuations(
-                    engine._route_value(
-                        _QueryProjection.snapshot(handle),
-                        compiled,
-                        contract.RouteRequest.from_value(
-                            {"kind": "route", **arguments}
-                        ),
-                        explain=True, compact=detail == "compact",
-                    )
-                )
-            )
-            return with_route_content(engine, call, handle, compiled, routed)
+            try:
+                facts = bind_facts(compiled.router.fact_schema, arguments["facts"])
+            except (ApplicabilityError, ContractError) as error:
+                return binding_rejection(engine.purpose.value, compiled.router.fact_schema,
+                                         arguments["facts"], error)
+            routed = focused_route(engine, handle, compiled, facts, detail)
+            return with_route_content(engine, call, handle, compiled, routed, bound_facts=facts)
         except engine._domain_errors() as error:
             return engine._domain_rejection(error)
     if operation == "related":
@@ -88,6 +83,39 @@ def navigate(engine, operation: str, call):
         )
     )
     return present_read(result, detail)
+
+
+def focused_route(engine, snapshot, compiled, facts, detail):
+    """Project one bound selection into the focused wire contract, not native queries."""
+    from .engine import _QueryProjection
+
+    projection = _QueryProjection.snapshot(snapshot)
+    _facts, rules, ordered, entries, unresolved = engine._bound_routing_selection(compiled, facts)
+    compact = detail == "compact"
+    reading = [projection.reading_plan_entry(item.as_contract()) for item in entries
+               if not compact or item.state == "selected"]
+    definitions = {item["id"]: item for item in compiled.router.fact_definitions()}
+    questions = [{"id": f"question.{key}", "kind": "applicability-fact", "state": "required",
+                  "prompt": definitions[key]["prompt"], "fact": definitions[key]}
+                 for key in sorted(unresolved)]
+    assertions = fact_assertions(facts)
+    value = {
+        **projection.result("route"), "facts": assertions,
+        "reading_plan": reading, "unresolved_questions": questions,
+        "next_operations": [projection.next_operation("read", str(item["target"]))
+                            for item in reading if item["state"] == "selected"],
+        "summary": f"Selected {len(ordered)} standards with {len(questions)} unresolved fact categories.",
+    }
+    if compact:
+        value.update(kind="compact-route-result", status="needs-facts" if unresolved else "complete",
+                     unresolved_policy_count=sum(item.state != "selected" for item in entries),
+                     explanation={"snapshot": snapshot.as_contract(), "facts": assertions, "detail": "full"})
+    else:
+        value.update(kind="agent-route-result", rules=[
+            {"id": rule.id, "target": rule.target, "when": rule.program.as_expression(), "state": state}
+            for rule, state in rules])
+    result_type = contract.CompactRouteResult if compact else contract.AgentRouteResult
+    return result_type.from_value(focused_continuations(value))
 
 
 def present_read(result, detail):
@@ -173,7 +201,7 @@ def validate_route_content(engine, arguments):
     return None
 
 
-def with_route_content(engine, call, snapshot, compiled, routed, *, application_view=None):
+def with_route_content(engine, call, snapshot, compiled, routed, *, bound_facts, application_view=None):
     """Compose a bounded selected read page without another capture or compile.
 
     Results remain private through the final lifecycle check. Byte pressure ends
@@ -184,6 +212,7 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, application_
     if "content" not in arguments:
         return routed
     selection = arguments["content"]
+    assertions = fact_assertions(bound_facts)
     # JSON Schema integers also admit 1.0. Validation has established whole
     # counts; normalize their Python representation before using slice indices.
     offset = int(selection.get("offset", 0))
@@ -204,7 +233,7 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, application_
         end = offset + len(page["items"])
         if end < len(targets):
             page["next"] = {
-                "snapshot": snapshot.as_contract(), "facts": arguments["facts"],
+                "snapshot": snapshot.as_contract(), "facts": assertions,
                 "content": {"offset": end, "limit": limit},
                 **({"detail": arguments["detail"]} if "detail" in arguments else {}),
             }

@@ -1,0 +1,166 @@
+{
+  "basis_commit": "ff2e13ed31a42dbe6cc70ee76f7e7a7e58eabe76",
+  "prototype_only": true,
+  "deployed_candidate_tested": false,
+  "model_or_host_qualification": false,
+  "synthetic_binding_cases": 126,
+  "valid_cases": 33,
+  "shape_vs_semantic_stage_changes": 41,
+  "snapshot_specific_type_binding": true,
+  "canonical_definitions_unchanged_except_focused_route": [
+    "RouteCall",
+    "CompactRouteResult",
+    "AgentRouteResult"
+  ],
+  "catalogs": {
+    "authoring/eager": {
+      "old_tool_count": 23,
+      "new_tool_count": 23,
+      "old_catalog_json_bytes": 713206,
+      "new_catalog_json_bytes": 711534,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "authoring/on-demand": {
+      "old_tool_count": 23,
+      "new_tool_count": 23,
+      "old_catalog_json_bytes": 108812,
+      "new_catalog_json_bytes": 107962,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "application/eager": {
+      "old_tool_count": 10,
+      "new_tool_count": 10,
+      "old_catalog_json_bytes": 83735,
+      "new_catalog_json_bytes": 82035,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    },
+    "application/on-demand": {
+      "old_tool_count": 10,
+      "new_tool_count": 10,
+      "old_catalog_json_bytes": 15955,
+      "new_catalog_json_bytes": 15105,
+      "old_route_input_json_bytes": 2475,
+      "new_route_input_json_bytes": 1625
+    }
+  },
+  "route_examples": [
+    {
+      "input": {},
+      "old_request_json_bytes": 13,
+      "new_request_json_bytes": 13,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 8,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [
+          "implementation"
+        ],
+        "routing.applications": []
+      },
+      "old_request_json_bytes": 179,
+      "new_request_json_bytes": 81,
+      "selected_targets": [
+        "core",
+        "router",
+        "workflow.implementation"
+      ],
+      "questions": 6,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [],
+        "routing.applications": [],
+        "routing.boundaries": [],
+        "routing.details": [],
+        "routing.frameworks": [],
+        "routing.languages": [],
+        "routing.topics": [],
+        "routing.workflow-profiles": []
+      },
+      "old_request_json_bytes": 612,
+      "new_request_json_bytes": 220,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 0,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": [
+          "implementation"
+        ],
+        "routing.applications": [],
+        "routing.boundaries": [
+          "ipc"
+        ],
+        "routing.details": [],
+        "routing.frameworks": [],
+        "routing.languages": [],
+        "routing.topics": [],
+        "routing.workflow-profiles": []
+      },
+      "old_request_json_bytes": 633,
+      "new_request_json_bytes": 241,
+      "selected_targets": [
+        "core",
+        "router",
+        "workflow.verification",
+        "topic.contracts",
+        "topic.security",
+        "topic.contracts.protocols",
+        "profile.boundary.ipc",
+        "workflow.implementation"
+      ],
+      "questions": 0,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": {
+          "state": "unknown"
+        }
+      },
+      "old_request_json_bytes": 75,
+      "new_request_json_bytes": 55,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 8,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    },
+    {
+      "input": {
+        "routing.activities": {
+          "state": "known-absent"
+        }
+      },
+      "old_request_json_bytes": 80,
+      "new_request_json_bytes": 60,
+      "selected_targets": [
+        "core",
+        "router"
+      ],
+      "questions": 7,
+      "normalized_facts_preserved": true,
+      "same_current_engine_result_on_roundtrip": true
+    }
+  ],
+  "scope": "A planning prototype delegates to current schema binding/evaluation. It is not an integrated candidate or proof of unchanged transport/error handling."
+}
