@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "scope": "proposed request shape only; not packet-code or cross-reference validation",
+  "example_valid": true,
+  "negative_shapes_rejected": [
+    "old-version",
+    "branch-in-place-of-oid",
+    "arbitrary-command",
+    "mixed-evidence-origin",
+    "extra-top-level-policy"
+  ]
+}

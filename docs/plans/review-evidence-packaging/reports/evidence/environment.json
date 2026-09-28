@@ -1,0 +1,6 @@
+{
+  "python": "3.13.5",
+  "jsonschema": "4.26.0",
+  "scope": "planning probes and plan-shape validation, not candidate CI",
+  "supported_runtime_execution_claimed": false
+}

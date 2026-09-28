@@ -1,0 +1,87 @@
+{
+  "kind": "planning-source-selection-probe",
+  "requested_change_paths": 49,
+  "extra_context_paths": 5,
+  "selected_source_paths": 54,
+  "source_objects": 87,
+  "selected_uncompressed_bytes": 4526413,
+  "largest_blob_bytes": 599254,
+  "full_primary_patch_bytes": 1083975,
+  "supplemental_revision_comparisons": [
+    {
+      "role": "ci",
+      "exact_revision_equal": false,
+      "tools_subtree_equal": true,
+      "other_changed_paths": [
+        [
+          "M",
+          ".gitignore"
+        ],
+        [
+          "D",
+          "Coding-Standards-agent-workflow-simplification.zip"
+        ],
+        [
+          "M",
+          "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        ]
+      ],
+      "claim_acceptance_inferred": false
+    },
+    {
+      "role": "records",
+      "exact_revision_equal": false,
+      "tools_subtree_equal": true,
+      "other_changed_paths": [
+        [
+          "M",
+          ".gitignore"
+        ],
+        [
+          "D",
+          "Coding-Standards-agent-workflow-simplification.zip"
+        ],
+        [
+          "M",
+          "docs/plans/README.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/execution-ledger.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/issues.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/plan.md"
+        ],
+        [
+          "A",
+          "docs/plans/routing-fact-ergonomics/reports/external-review.md"
+        ],
+        [
+          "A",
+          "docs/plans/routing-fact-ergonomics/reports/r2-live-agent.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/reports/verification.md"
+        ],
+        [
+          "M",
+          "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        ]
+      ],
+      "claim_acceptance_inferred": false
+    }
+  ],
+  "isolated_fixture": {
+    "exact_read_ignores_worktree": true,
+    "dirty_untracked_preserved": true,
+    "index_unchanged_during_read": true,
+    "archive_omits_export_ignored_source": true,
+    "not_packet_generator_test": true
+  }
+}

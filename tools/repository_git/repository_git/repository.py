@@ -66,6 +66,7 @@ def git_command(
     *,
     input_bytes: bytes | None = None,
     max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
+    local_only: bool = False,
 ) -> GitCommandResult:
     if not isinstance(root, Path) or not root.is_absolute():
         raise invalid(
@@ -86,12 +87,15 @@ def git_command(
             "REPOSITORY_GIT.INVALID_COMMAND",
             "Git command arguments or bound are invalid",
         )
+    environment = sanitized_git_environment()
+    if local_only:
+        environment["GIT_NO_LAZY_FETCH"] = "1"
     return _run_bounded(
         ("git", "-C", str(root), *arguments),
         input_bytes=input_bytes,
         stdout_limit=max_output_bytes,
         stderr_limit=ERROR_OUTPUT_LIMIT,
-        environment=sanitized_git_environment(),
+        environment=environment,
     )
 
 
@@ -101,12 +105,14 @@ def git_output(
     *,
     input_bytes: bytes | None = None,
     max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
+    local_only: bool = False,
 ) -> bytes:
     result = git_command(
         root,
         arguments,
         input_bytes=input_bytes,
         max_output_bytes=max_output_bytes,
+        local_only=local_only,
     )
     if result.returncode != 0:
         raise _failed_command(arguments, result)
@@ -273,6 +279,44 @@ class GitRepository:
             "Git revision path output",
         )
         return tuple(sorted(RepositoryPath.parse(path) for path in fields))
+
+    def revision_entries(
+        self, revision: RepositoryRevision, *, local_only: bool = False
+    ) -> dict[RepositoryPath, tuple[str, str]]:
+        """Return exact leaf modes and object IDs from a retained commit tree."""
+        if type(revision) is not RepositoryRevision:
+            raise invalid("REPOSITORY_GIT.INVALID_REVISION", "exact revision required")
+        kind = git_output(
+            self._repository, ("cat-file", "-t", revision.oid),
+            max_output_bytes=32, local_only=local_only,
+        )
+        if kind != b"commit\n":
+            raise invalid("REPOSITORY_GIT.INVALID_REVISION", "revision is not a commit")
+        raw = git_output(
+            self._repository,
+            ("ls-tree", "--full-tree", "-r", "-z", revision.oid),
+            local_only=local_only,
+        )
+        entries: dict[RepositoryPath, tuple[str, str]] = {}
+        for field in raw.split(b"\0")[:-1]:
+            metadata, separator, raw_path = field.partition(b"\t")
+            parts = metadata.split(b" ")
+            if not separator or len(parts) != 3:
+                raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "invalid tree entry")
+            try:
+                mode, kind, oid = (part.decode("ascii") for part in parts)
+                path = RepositoryPath.parse(raw_path.decode("utf-8"))
+            except (UnicodeError, ValueError) as error:
+                raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", "tree path encoding is unsupported") from error
+            if kind not in {"blob", "commit"} or len(oid) != len(revision.oid):
+                raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "invalid tree entry identity")
+            RepositoryRevision(oid)
+            if path in entries:
+                raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "duplicate tree path")
+            entries[path] = (mode, oid)
+        if raw and not raw.endswith(b"\0"):
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "unterminated tree output")
+        return entries
 
     @contextmanager
     def materialize_candidate(
@@ -730,6 +774,7 @@ class GitRepository:
         *,
         max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
         max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+        local_only: bool = False,
     ) -> RevisionReadSession:
         """Own bounded verified-object reuse for one exact revision read."""
         return RevisionReadSession(
@@ -737,6 +782,7 @@ class GitRepository:
             revision,
             max_cached_bytes=max_cached_bytes,
             max_cached_objects=max_cached_objects,
+            local_only=local_only,
         )
 
     def read_file(self, revision: RepositoryRevision, path: RepositoryPath) -> bytes:
@@ -856,12 +902,14 @@ class RevisionReadSession:
         self, repository: GitRepository, revision: RepositoryRevision, *,
         max_cached_bytes: int = DEFAULT_REVISION_CACHE_BYTES,
         max_cached_objects: int = DEFAULT_REVISION_CACHE_OBJECTS,
+        local_only: bool = False,
     ) -> None:
         if type(revision) is not RepositoryRevision:
             raise invalid("REPOSITORY_GIT.INVALID_REVISION", "read session requires an exact revision")
         if any(type(value) is not int or value < 0 for value in (max_cached_bytes, max_cached_objects)):
             raise invalid("REPOSITORY_GIT.INVALID_BOUND", "cache bounds must be nonnegative integers")
         self._repository, self._revision = repository, revision
+        self._local_only = local_only
         self._max_bytes, self._max_objects = max_cached_bytes, max_cached_objects
         self._objects: OrderedDict[tuple[Path, str, str, str], _RetainedObject] = OrderedDict()
         self._cached_bytes = 0
@@ -914,9 +962,12 @@ class RevisionReadSession:
             previous, self._reader = self._reader, None
             previous[1].close()
         if self._reader is None:
+            environment = sanitized_git_environment()
+            if self._local_only:
+                environment["GIT_NO_LAZY_FETCH"] = "1"
             self._reader = (repository, VerifiedBatchReader(
                 ("git", "-C", str(repository), "cat-file", "--batch"),
-                environment=sanitized_git_environment(),
+                environment=environment,
                 object_limit=self._repository._max_object_bytes,
                 stderr_limit=ERROR_OUTPUT_LIMIT, timeout=COMMAND_TIMEOUT_SECONDS,
             ))

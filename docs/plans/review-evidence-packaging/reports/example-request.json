@@ -1,0 +1,172 @@
+{
+  "format_version": 1,
+  "repository_label": "MrScripty/Coding-Standards",
+  "label": "routing-fact-source-and-closure-material",
+  "review_question": "Inspect the selected routing change and its evidence. This is an assembly example, not a request to reopen accepted work or change a plan status.",
+  "revisions": {
+    "baseline": "ff2e13ed31a42dbe6cc70ee76f7e7a7e58eabe76",
+    "candidate": "09d7829df79d2e0c25b8fb9add4b7c47d6368684",
+    "ci": "39d44f007c36684e1ebc546f31a19e20e2e660e5",
+    "records": "32e78530096f2884d4c77e0a5a02a0de2ff869fe"
+  },
+  "plan": {
+    "revision": "candidate",
+    "path": "docs/plans/routing-fact-ergonomics/plan.md"
+  },
+  "context": [
+    "tools/standards_contracts/standards_contracts/runtime.py",
+    "tools/standards_contracts/standards_contracts/validation_feedback.py",
+    "tools/standards_engine/standards_engine/tools.py",
+    "tools/standards_engine/standards_engine/contract_discovery.py",
+    "tools/standards_analysis/standards_analysis/routing.py"
+  ],
+  "comparisons": [
+    {
+      "revision": "ci",
+      "scopes": [
+        "tools"
+      ]
+    },
+    {
+      "revision": "records",
+      "scopes": [
+        "tools"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "accepted-plan",
+      "role": "acceptance-record",
+      "subject": "candidate",
+      "origin": {
+        "kind": "git-file",
+        "revision": "records",
+        "path": "docs/plans/routing-fact-ergonomics/plan.md"
+      }
+    },
+    {
+      "id": "verification",
+      "role": "verification-report",
+      "subject": "candidate",
+      "origin": {
+        "kind": "git-file",
+        "revision": "records",
+        "path": "docs/plans/routing-fact-ergonomics/reports/verification.md"
+      }
+    },
+    {
+      "id": "external-review",
+      "role": "review-recommendation",
+      "subject": "candidate",
+      "origin": {
+        "kind": "git-file",
+        "revision": "records",
+        "path": "docs/plans/routing-fact-ergonomics/reports/external-review.md"
+      }
+    },
+    {
+      "id": "live-observation",
+      "role": "live-observation",
+      "subject": "candidate",
+      "origin": {
+        "kind": "git-file",
+        "revision": "records",
+        "path": "docs/plans/routing-fact-ergonomics/reports/r2-live-agent.md"
+      }
+    },
+    {
+      "id": "dispositions",
+      "role": "issue-dispositions",
+      "subject": "candidate",
+      "origin": {
+        "kind": "git-file",
+        "revision": "records",
+        "path": "docs/plans/routing-fact-ergonomics/issues.md"
+      }
+    },
+    {
+      "id": "ci-log",
+      "role": "ci-log",
+      "subject": "ci",
+      "origin": {
+        "kind": "local-file",
+        "path": "ci/36465019273/job.log"
+      }
+    },
+    {
+      "id": "ci-run-reference",
+      "role": "ci-reference",
+      "subject": "ci",
+      "origin": {
+        "kind": "reference",
+        "label": "Previously reported routing candidate CI; this example includes only its URL",
+        "url": "https://github.com/MrScripty/Coding-Standards/actions/runs/36465019273"
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "R-A1",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A2",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A3",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A4",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A5",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A6",
+      "artifacts": [
+        "verification",
+        "ci-log",
+        "ci-run-reference"
+      ]
+    },
+    {
+      "id": "R-A7",
+      "artifacts": [
+        "live-observation"
+      ]
+    },
+    {
+      "id": "R-A8",
+      "artifacts": [
+        "external-review",
+        "dispositions",
+        "accepted-plan"
+      ]
+    }
+  ]
+}

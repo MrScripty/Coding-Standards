@@ -1,0 +1,9 @@
+{
+  "commit": "32e78530096f2884d4c77e0a5a02a0de2ff869fe",
+  "tree": "08759cc18fd2973c105743e050746996fbb67308",
+  "artifact_id": 10992151447,
+  "artifact_sha256": "bad4bd4b5de4a227113c1729652a1aad298a4d51591280089ec1c61d25579992",
+  "source_workflow_run": 36472002507,
+  "workflow_status_at_read": "in_progress",
+  "candidate_implementation_test_claim": false
+}

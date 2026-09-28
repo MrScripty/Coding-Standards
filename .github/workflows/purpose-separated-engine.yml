@@ -67,6 +67,7 @@ jobs:
           "$python" -m unittest discover -s tools/standards_graph/tests
           "$python" -m unittest discover -s tools/standards_snapshots/tests
           "$python" -m unittest discover -s tools/repository_git/tests
+          "$python" -m unittest discover -s tools/review_evidence/tests
           "$python" -m unittest discover -s tools/standards_metadata/tests
           "$python" -m unittest discover -s tools/standards_policy_impact/tests
           "$python" -m unittest discover -s tools/standards_contracts/tests

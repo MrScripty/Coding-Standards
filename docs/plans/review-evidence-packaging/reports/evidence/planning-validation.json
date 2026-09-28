@@ -1,0 +1,64 @@
+{
+  "status": "passed",
+  "plan_contract_error": null,
+  "local_markdown_links_checked": 13,
+  "links": [
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "#simplicity-and-ownership-review"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "execution-ledger.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "issues.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "reports/design-evidence.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "reports/source-consumers.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/plan.md",
+      "link": "reports/packet-contract.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/packet-contract.md",
+      "link": "../plan.md"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/packet-contract.md",
+      "link": "example-request.json"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/source-consumers.md",
+      "link": "evidence/design-probe.json"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/design-evidence.md",
+      "link": "evidence/probe.py"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/design-evidence.md",
+      "link": "evidence/example-source-identities.json"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/design-evidence.md",
+      "link": "evidence/design-probe.json"
+    },
+    {
+      "from": "docs/plans/review-evidence-packaging/reports/design-evidence.md",
+      "link": "evidence/design-probe.log"
+    }
+  ],
+  "head": "32e78530096f2884d4c77e0a5a02a0de2ff869fe",
+  "source_worktree_clean": true,
+  "next_slice": "P1",
+  "candidate_implementation_executed": false,
+  "scope": "planning structure, links, proposed request shape and read-only feasibility only"
+}

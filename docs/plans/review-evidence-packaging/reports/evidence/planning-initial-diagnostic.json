@@ -1,0 +1,1 @@
+{"status":"formatting-corrected","initial_plan_validator_diagnostic":"invalid composed-design Applicability applicable because the artifact packages independently owned","repair":"Use the exact standalone Applicability field and eight named artifact-probe labels required by the existing validator; no runtime/validator source change."}

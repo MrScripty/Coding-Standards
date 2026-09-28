@@ -1,0 +1,785 @@
+{
+  "kind": "planning-source-selection-probe",
+  "requested_change_paths": 49,
+  "extra_context_paths": 5,
+  "selected_source_paths": 54,
+  "source_objects": 87,
+  "selected_uncompressed_bytes": 4526413,
+  "largest_blob_bytes": 599254,
+  "full_primary_patch_bytes": 1083975,
+  "rows": [
+    {
+      "revision_role": "baseline",
+      "path": ".agents/skills/standards-engine/SKILL.md",
+      "mode": "100644",
+      "oid": "9d14cc01fe3c14ade260f78c9fbebe4a31d8107d",
+      "bytes": 8597,
+      "sha256": "2d328755b8d69fc9ebeb1ec3d6a14bf4d6b066baffddcdf7c59de51b50c8ca5b"
+    },
+    {
+      "revision_role": "baseline",
+      "path": ".agents/skills/standards-engine/references/environment.md",
+      "mode": "100644",
+      "oid": "cc93a87eccd6c76711011a4e83e18a56b942d105",
+      "bytes": 10529,
+      "sha256": "a9202d5aac2c5117763f3802fcd3c3a42a685c101d59eebed72c69e9e68ff2b5"
+    },
+    {
+      "revision_role": "baseline",
+      "path": ".agents/skills/standards-engine/references/navigation.md",
+      "mode": "100644",
+      "oid": "35f225290eaab93d9395bc6af565890876b55021",
+      "bytes": 8624,
+      "sha256": "ce484b899044f5c1faf851e42469296a6a9925f8b40b3b6240b742456dc90939"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "docs/plans/README.md",
+      "mode": "100644",
+      "oid": "c1499f783e9088f84876706a1de09a243fcc2449",
+      "bytes": 6130,
+      "sha256": "b184cfc3bdf03b176f4c50eb1fea68616b07d30ae076e53843ea85720ddb3212"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "evaluation/standards-effectiveness/generated/suite-inputs.json",
+      "mode": "100644",
+      "oid": "270f24812c068a35e4026686470b8a131282ae44",
+      "bytes": 421461,
+      "sha256": "fd998fc27a4a2e030495a01161e8008132792ed22f3bb7809b3ca43e617b42bf"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_analysis/standards_analysis/routing.py",
+      "mode": "100644",
+      "oid": "a64405e1199ac30d922439944e84040b4cb34874",
+      "bytes": 7979,
+      "sha256": "a0b7763d137159600b01bb3bae1c94442dbb3c160e69f7a622427977fea293f1"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_applicability/standards_applicability/core.py",
+      "mode": "100644",
+      "oid": "af3c32e8ee1d620f5fe80dfc019c9f6d24f8963a",
+      "bytes": 24909,
+      "sha256": "06cb1223e617cac274b59e426253c53ab8fa8e1f4c53618518354a6c995bf205"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_contracts/standards_contracts/runtime.py",
+      "mode": "100644",
+      "oid": "1b915789290e205a6036a3b6378e9bfad3011bd4",
+      "bytes": 11837,
+      "sha256": "3e612692b20c98b502b07d1eba52efc4cf2269eaf64bd37c0509767503f36722"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_contracts/standards_contracts/validation_feedback.py",
+      "mode": "100644",
+      "oid": "649047df2d3ad9d94e39aaff08f12129123aef5b",
+      "bytes": 5033,
+      "sha256": "a801fcd89046dfb1d8c126bcf97afa617cf4a62bc7736dc78a9a1097c782b976"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/PURPOSE-SEPARATION.md",
+      "mode": "100644",
+      "oid": "415f8897b737b8620757aaa2368cd1c3a626d848",
+      "bytes": 58433,
+      "sha256": "3dd631628407bb3de98ea20fef4be9fc5a3d40beba90fc2d83b40dde21dd43e7"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/README.md",
+      "mode": "100644",
+      "oid": "0e45ac26153b45ec8b8bc92e1574b2b6e700ed5e",
+      "bytes": 23089,
+      "sha256": "3e50a548bd13a59c0a6353edde89c756218fdd6db969b6b5d68970993f9e451f"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/contracts/a1-contract.schema.json",
+      "mode": "100644",
+      "oid": "1d5b6eb496d842ddd3563b02f4509dec4b4dc57d",
+      "bytes": 229757,
+      "sha256": "691b0bc4592e1899b254a60f0a3c25b308e4964d073c2f3c9f505158e78e3aef"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/contracts/a1-interface.toml",
+      "mode": "100644",
+      "oid": "213704caf62c120dbc365723eb355d0ba5ab9f5c",
+      "bytes": 10213,
+      "sha256": "dd1649240b718067584a272cb98a0f3dc70bbcacc93777d7980a0e8f86efde5f"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/contracts/examples/a1-examples.json",
+      "mode": "100644",
+      "oid": "310870313a11026946e5c13cc10e5187559651a1",
+      "bytes": 51615,
+      "sha256": "26bb116182c310e7d4797e726396d83dd192143557d7a2fb25250859a8634179"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/contracts/generated/agent-tools.json",
+      "mode": "100644",
+      "oid": "f047c0961cce2c052683e871b6d15702e0dc4f86",
+      "bytes": 242463,
+      "sha256": "400458ae6e53a9ecfa853b9b6edec71aedfc8723ebb3d6ebc8cab1f0a8577682"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/_generated_contract.py",
+      "mode": "100644",
+      "oid": "081706458a62d43307ba64ff51022ee1d474e1de",
+      "bytes": 598325,
+      "sha256": "f22a3791b1e3ee80f9846273f7dea3c2b169a556f029a10c2ba0c6b2afa7c6d8"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/agent_navigation.py",
+      "mode": "100644",
+      "oid": "49ce36283f68ff3b29592916c307d79339d3805b",
+      "bytes": 11348,
+      "sha256": "ee15cdb51cb655e8c734e57cf09fb0ce0c6f363f34b17142b3717f79b9e61519"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/context_projection.py",
+      "mode": "100644",
+      "oid": "59a0f052dd40444cb1ff4fd3a44309cbb72ff5a1",
+      "bytes": 17965,
+      "sha256": "139c4dd47e0d0d6609ab776b4e5828ffc4d3dfa1c722db90400c3fe3251ddcac"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/contract_discovery.py",
+      "mode": "100644",
+      "oid": "7627e3fc86092b439fbbc52e1f57c2fd6cbba809",
+      "bytes": 8846,
+      "sha256": "9b6b18cc2da3e1d3dd473322108a07cc0b0315bbfd1614dd7157c045397ceb3b"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/engine.py",
+      "mode": "100644",
+      "oid": "44e2e5f6090109115e92826f0e4e86b586055936",
+      "bytes": 145858,
+      "sha256": "e483fc3b6862337ea3ed52f3d23c247bae4f73b2bc9486dc3e04e72acca98d48"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/mcp_catalog.py",
+      "mode": "100644",
+      "oid": "e4a076b7d34089a2dd6a78498c8d454dc6059980",
+      "bytes": 15153,
+      "sha256": "8896af6f2fe4a483621aeb5e6dbbfe03cd96786d78367e11456e84e599951d8b"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/standards_engine/tools.py",
+      "mode": "100644",
+      "oid": "ca40b5746bea9b01bfdc9f0898e3ad18c10eab66",
+      "bytes": 24835,
+      "sha256": "52f6762cc0c94c40df466a632cec7612eec5fa6479b486b523835cd2c2f245b2"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/codex_navigation_client.py",
+      "mode": "100644",
+      "oid": "3eb7e512eb1ef4fe7777f8f2cb2645962a6a8250",
+      "bytes": 9447,
+      "sha256": "0301a64258d3185a72ee9fd669b3dbb50fd6984acd20e5847b0a71bb9aa14a1e"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_agent_interaction_transport.py",
+      "mode": "100644",
+      "oid": "e8702e89580dbbc76b16419a9db2b42d01ad6983",
+      "bytes": 7560,
+      "sha256": "a9bc554d805aa37590948ab6058a95b10e115b7ce90be4dc48a9470dd80df6e7"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_agent_navigation.py",
+      "mode": "100644",
+      "oid": "dd997c188e61fb35eb92b4eba995b9d4cb46fb74",
+      "bytes": 14841,
+      "sha256": "9bcb6b6a46bc1cf95cfaaa2c7b12700b243c0ab4453abb2c548422a53566c18d"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_capture_handoff_transport.py",
+      "mode": "100644",
+      "oid": "f797a3c229e13b1b06f3ad024dbd503777556f2c",
+      "bytes": 5617,
+      "sha256": "10035d832d78afc2bf93e00d73be0bfb6a3dec70a4bd18c75ff890d530d41b88"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_compact_routing.py",
+      "mode": "100644",
+      "oid": "43007d24e5160fd954c488ab318e0b5a7dbe7e9b",
+      "bytes": 4446,
+      "sha256": "08e0c611c66d3a1170f9e23e84c77449817b56c7d555d7af7fcee8106ed80629"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_consumer_publication.py",
+      "mode": "100644",
+      "oid": "10f2d7452de7744d6259e389a920d95ae9ab869e",
+      "bytes": 12889,
+      "sha256": "028062414b9a6ce7676b4a90ce5516563cf0090942f28c28fe584bf3c6d930f2"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_purpose_projection.py",
+      "mode": "100644",
+      "oid": "ad1d76abfbf91871332b45bb6e835d747503d102",
+      "bytes": 15577,
+      "sha256": "c77c9eb7f6775b7bbf72cae820abce7c170f1a6d5f679347adb0f21b4e44a309"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_route_content.py",
+      "mode": "100644",
+      "oid": "20df884696b6996ccb9f90b6a77c360befb9eb9d",
+      "bytes": 9631,
+      "sha256": "3cab1819288bc5b4b1c33140a908e39b30c5c0f96400626eb69f7607869cc345"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_runtime_identity.py",
+      "mode": "100644",
+      "oid": "f4ad6a14a5733c3b442d87597b9db424af6b7b48",
+      "bytes": 7890,
+      "sha256": "b063b3e47efc64bbef3f0820c1685bde587af99443a3e6d2943f27e4dc3b28be"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_schema_presentation.py",
+      "mode": "100644",
+      "oid": "16847dad6edf36320e9fcefda07d2694a301cea3",
+      "bytes": 9100,
+      "sha256": "dd122006ac81b016632fa0cf6ea662a9c49700efb65d3c58f1867f44fa354c0d"
+    },
+    {
+      "revision_role": "baseline",
+      "path": "tools/standards_engine/tests/test_storage_lifecycle_transport.py",
+      "mode": "100644",
+      "oid": "ab6cff93c1f8fd8705aabcef215c5649f29323a9",
+      "bytes": 7418,
+      "sha256": "c75ebabb0da137d7b735ac355a712e9baeee0e046f434cb4bc231f8ac5cfc43a"
+    },
+    {
+      "revision_role": "candidate",
+      "path": ".agents/skills/standards-engine/SKILL.md",
+      "mode": "100644",
+      "oid": "a072f79d78b534fbaee38376505dd46d5e3066cc",
+      "bytes": 9126,
+      "sha256": "9509bcaacf357fddc3c9391301dbd7d6100632931d7583b465b82d341dc2cc19"
+    },
+    {
+      "revision_role": "candidate",
+      "path": ".agents/skills/standards-engine/references/environment.md",
+      "mode": "100644",
+      "oid": "9b2b9524de60a87ed27d1c6f46dd086e3ea80fe5",
+      "bytes": 11656,
+      "sha256": "418191d37a77028f7e287b165f9ee69eee20f8207af5a4f5ba7f792f0fcfae06"
+    },
+    {
+      "revision_role": "candidate",
+      "path": ".agents/skills/standards-engine/references/navigation.md",
+      "mode": "100644",
+      "oid": "e05bdf5800c3d4d718acac37413d8a5c1472ca5d",
+      "bytes": 10306,
+      "sha256": "bbd28897e2d4bf48209d2c66f4bbb46ed055d687d8629c73318bd4b706f5506f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/README.md",
+      "mode": "100644",
+      "oid": "450d4d1262fe8f3b592e7d1be629511b77598eec",
+      "bytes": 6473,
+      "sha256": "83b13e045605c6466a193599754da4fda55975dcf0ff4d1581136f6c996d5636"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/execution-ledger.md",
+      "mode": "100644",
+      "oid": "37f534ff1cb13e1840c623befc480326c0c2fb0c",
+      "bytes": 8231,
+      "sha256": "546deae7aed857454cffab4b2e9a006e367bd82644e935503fff22f44da56948"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/issues.md",
+      "mode": "100644",
+      "oid": "c2ab55c5427d19ba434d6d0145e750f66fc29cb4",
+      "bytes": 6043,
+      "sha256": "bba855d1fd8d0e1713b0f43b272675062f7e0a8133a64b139a7f025b17a3a07d"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/plan.md",
+      "mode": "100644",
+      "oid": "71645098f4d683c83cfb7439b7fa0853c4b1cde6",
+      "bytes": 27329,
+      "sha256": "b23481eb045c699aab9ec05146959ea599cd194a3af80c68f2c311af4fd22690"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/design-comparison.md",
+      "mode": "100644",
+      "oid": "75ebff2abae9109bd2ec2b69b334269e2f935f76",
+      "bytes": 7259,
+      "sha256": "de9f54621ad0d57ea3cc14e9b42af20a584887c716afa6a26b7adb2e77d2997c"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/compare_inputs.py",
+      "mode": "100644",
+      "oid": "932f94f2c8dfcba125ae2385f8ca5c75d33f6d63",
+      "bytes": 11207,
+      "sha256": "70fb50432e50abb9b83782d077acb44d9de84a2d2b65588e40af12c1225f9a9f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/comparison.json",
+      "mode": "100644",
+      "oid": "c1f418e70de2f8f921a94bcd1d1ba1ec8c99f93b",
+      "bytes": 32544,
+      "sha256": "609b28ee3b69f404ebd22997ab1f8172a3d6d38442e2d0c069e735fb3a4ff144"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/comparison.log",
+      "mode": "100644",
+      "oid": "d660f0002b65b141aa33ebeef5c17b5d86e575f8",
+      "bytes": 4535,
+      "sha256": "3e0a76666c05fdf47b6ea301218d50ee115adbb18761e50c4a1424c3b9cbcf1c"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/environment.json",
+      "mode": "100644",
+      "oid": "13ed412f6de1d1de66cf000bcc5689f4490c81f6",
+      "bytes": 266,
+      "sha256": "b2f76e4797c3e87fb7bac2466a82ee374a57ed4436de06764bddbb7a4da5b6be"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/inspected-source-hashes.json",
+      "mode": "100644",
+      "oid": "8ff5d3214c0d0ca75c499152e578822b2aad90bd",
+      "bytes": 1860,
+      "sha256": "3c673ccd8fc81eeec53ef35e121e90bdab6e24321e73a20a0e9b70bc943e8155"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/planning-validation.json",
+      "mode": "100644",
+      "oid": "ad038557a91371b391eada017147c2e10928860b",
+      "bytes": 1320,
+      "sha256": "204d7ff9c831db0d0fb54344162506634b33e75ecaf52cce1a1e63a807b73aca"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/proposed-schema.json",
+      "mode": "100644",
+      "oid": "44d9a1550643a572c1db38ecae50253830c014d2",
+      "bytes": 735,
+      "sha256": "bae1a8a7e3c1ace713ef62ebf8cdbdbcbe1ce3c3b09b8cd0c3dfce8e35722d7f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/source-identity.json",
+      "mode": "100644",
+      "oid": "c1fcc2c1e869676f689b64bacb7bb338385b72e6",
+      "bytes": 453,
+      "sha256": "e000f180ceb193303d6b535b1cbb4e6e2b635d279cccf0833c17ec0e612a9a36"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/standards-readback.json",
+      "mode": "100644",
+      "oid": "6ef4b88d6b32edb192b0da5f886cb4cd588f58ba",
+      "bytes": 232377,
+      "sha256": "3790bd2fc22f8eff597a42a9fd8db7e5b3f9de5958b026322c747fa2f4bfcaee"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/evidence/standards-route.json",
+      "mode": "100644",
+      "oid": "eb2cbf90f84c35b6f5b72139fdd935490c05583e",
+      "bytes": 24336,
+      "sha256": "1e17c8556ca272660878e63637ea91a12a7cb45b10761b4cd202ca32be0a34e3"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/source-consumers.md",
+      "mode": "100644",
+      "oid": "d6f2066c7afdc3eec07bb44f4f332bed5316d6ec",
+      "bytes": 9895,
+      "sha256": "56ac8ccc7f5de39d961e57472d4b6016c62bd6e848b6890ce77b5235d648cc75"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "docs/plans/routing-fact-ergonomics/reports/verification.md",
+      "mode": "100644",
+      "oid": "69d45ac0556076d4c8fa3ab7cb833095a5798919",
+      "bytes": 12926,
+      "sha256": "97a47dd0a4e70544e7a110dce0c67edfd63aa60b8fcf07a11cb0d0d614d00387"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "evaluation/standards-effectiveness/generated/suite-inputs.json",
+      "mode": "100644",
+      "oid": "6e68ac99f8328089a8dbbd69d1b35109ab9aabd4",
+      "bytes": 421840,
+      "sha256": "15cf7b71ee95bb3ef9bdb3b6104707ca84b0a51573253347116916c5cebe0870"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_analysis/standards_analysis/routing.py",
+      "mode": "100644",
+      "oid": "a64405e1199ac30d922439944e84040b4cb34874",
+      "bytes": 7979,
+      "sha256": "a0b7763d137159600b01bb3bae1c94442dbb3c160e69f7a622427977fea293f1"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_applicability/standards_applicability/core.py",
+      "mode": "100644",
+      "oid": "13c83f28293798a2e317e51efa4696cdf6b4b065",
+      "bytes": 25042,
+      "sha256": "9ebd97a04b6db1439d40f21b9796e85066bbef9ffe183453cab4b2870d14207a"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_applicability/tests/test_required_fact_lookup.py",
+      "mode": "100644",
+      "oid": "52a8864a2ea3aeb6432d5ea4aa82d7346201183b",
+      "bytes": 1422,
+      "sha256": "e1a2ed70b3acd6d73926c78105d8bc4e988280f55d27ba97377c09c428b79333"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_contracts/standards_contracts/runtime.py",
+      "mode": "100644",
+      "oid": "1b915789290e205a6036a3b6378e9bfad3011bd4",
+      "bytes": 11837,
+      "sha256": "3e612692b20c98b502b07d1eba52efc4cf2269eaf64bd37c0509767503f36722"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_contracts/standards_contracts/validation_feedback.py",
+      "mode": "100644",
+      "oid": "649047df2d3ad9d94e39aaff08f12129123aef5b",
+      "bytes": 5033,
+      "sha256": "a801fcd89046dfb1d8c126bcf97afa617cf4a62bc7736dc78a9a1097c782b976"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/PURPOSE-SEPARATION.md",
+      "mode": "100644",
+      "oid": "a13c2cad3bda298c194d65bd9bf96771fe9219da",
+      "bytes": 62054,
+      "sha256": "bb595f479800650af87cd7952be46c1331d190dfe474d4a3fb5ed258955c0c38"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/README.md",
+      "mode": "100644",
+      "oid": "96db526f4c28dbd6d65b89e0565f5445b36dd48d",
+      "bytes": 23802,
+      "sha256": "1830c10093341b407f8568296c0b7a964f4733323f05947f6a072607c20f2050"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/contracts/a1-contract.schema.json",
+      "mode": "100644",
+      "oid": "1f9cea61a4aefd1eb2eb16b9d3ae375b7deb0979",
+      "bytes": 230613,
+      "sha256": "21be68f7b275a63d5de852d2590b1449f69259bc0b77f8df1cb3bb1eac5e7ace"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/contracts/a1-interface.toml",
+      "mode": "100644",
+      "oid": "a2ae86739396b8949a268320a6904ba1251c7eef",
+      "bytes": 10213,
+      "sha256": "28f918a1f70e3bfe7d001f3fc1fde3259954c3369ec13f5479aa92637b45546e"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/contracts/examples/a1-examples.json",
+      "mode": "100644",
+      "oid": "1ec6eaa5fa2282d32bbff3c8b47f716d630d0c09",
+      "bytes": 51615,
+      "sha256": "ed74ce3a5fabd8fb3aed0b1cb89993f8062ed1eda351819cbfe3c6031bcb1b28"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/contracts/generated/agent-tools.json",
+      "mode": "100644",
+      "oid": "e63f72ab3ee15ae1d24e89a030f1ef37c9c70279",
+      "bytes": 243319,
+      "sha256": "329ae7ac6a0f7363c8f9266b6608ebfef882432e9d2e0083d2a839b19e90383b"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/_generated_contract.py",
+      "mode": "100644",
+      "oid": "acc2018be5557e64c52c34cdb6bb0326c89969bb",
+      "bytes": 599254,
+      "sha256": "af70a74f6f00ffccffcb378dfe9aad4c30626edecc27c1ad408f7d1afc135797"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/agent_navigation.py",
+      "mode": "100644",
+      "oid": "c494c338ad6ce78849a7dccf06adc4590b322b2f",
+      "bytes": 13394,
+      "sha256": "e545029d0c37b3256c810a849c6fa3af8bfe4bf11415d208c4277c7e7a26b9fe"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/context_projection.py",
+      "mode": "100644",
+      "oid": "a26f8ecd62fdfda48fe2f0c09da070614f45c14c",
+      "bytes": 18998,
+      "sha256": "7d2a0b4d4c6529d403a943caf0bcd5c98e5b33ef1dc33f141679fe78b027a437"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/contract_discovery.py",
+      "mode": "100644",
+      "oid": "7627e3fc86092b439fbbc52e1f57c2fd6cbba809",
+      "bytes": 8846,
+      "sha256": "9b6b18cc2da3e1d3dd473322108a07cc0b0315bbfd1614dd7157c045397ceb3b"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/engine.py",
+      "mode": "100644",
+      "oid": "679f0bd5b357b332a203e3308958441d14d062e9",
+      "bytes": 144510,
+      "sha256": "983b8c6c2a0e97eba000a80568ecb2277240f282b61061d996b4f0e4b0425bcb"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/mcp_catalog.py",
+      "mode": "100644",
+      "oid": "e90fed33ea01b888f991da4151dc196cfb47d364",
+      "bytes": 15527,
+      "sha256": "0627c1b5d957f264d7e925fcb134c30470fd0a9af743cdbc7734c05e124b8f2b"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/routing_inputs.py",
+      "mode": "100644",
+      "oid": "257f4e74b9e332cbaf10a2054f3a331d716ca7a3",
+      "bytes": 3987,
+      "sha256": "24393890b46a4f56ba0a4f59e724f924e842eb0aa764b8c9f104672e9e995fdd"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/standards_engine/tools.py",
+      "mode": "100644",
+      "oid": "ca40b5746bea9b01bfdc9f0898e3ad18c10eab66",
+      "bytes": 24835,
+      "sha256": "52f6762cc0c94c40df466a632cec7612eec5fa6479b486b523835cd2c2f245b2"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/ROUTING-FACT-QUALIFICATION.md",
+      "mode": "100644",
+      "oid": "bf67a20c61d6b32fb3988c1924976d922b81165c",
+      "bytes": 4097,
+      "sha256": "783e47bb60c4d0f255a9c58dc3291ceb3676136d400e4c8b43c6b731ca44b5f1"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/codex_navigation_client.py",
+      "mode": "100644",
+      "oid": "ab4419d87cdf8d89fca421f698ddcbd9b48ff151",
+      "bytes": 10948,
+      "sha256": "827dd86e0f727a8fff2b00752857832d484a180a34364b62899dec842e8415a4"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_agent_interaction_transport.py",
+      "mode": "100644",
+      "oid": "03970523267e491262d8967f7324d4a54287dab9",
+      "bytes": 7575,
+      "sha256": "ce288e9d617cff34bd51b24872d845bb28e46fdea98ed9dc8bf5698a0df5731f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_agent_navigation.py",
+      "mode": "100644",
+      "oid": "d937b0180b12ace8fc69198fb4c498e40932ae21",
+      "bytes": 14562,
+      "sha256": "5633b53bc7d8d3009378455ecc5fe387ffa569598dca8f91cf665bb0c2becf77"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_capture_handoff_transport.py",
+      "mode": "100644",
+      "oid": "faa096047078c2a36f15413d3d4a0f317468de88",
+      "bytes": 5617,
+      "sha256": "937416fcfedaecadffe3e5c0fb8e68d96b979ddb4f7f2b70ac1e23f67013fed0"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_compact_routing.py",
+      "mode": "100644",
+      "oid": "316083649827a0595249494e284117b3482e28cc",
+      "bytes": 4575,
+      "sha256": "1a0499c6acf5091b5118c2bc1e8afe3b89d7fe54d35e55aff3e50c28e518540e"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_consumer_publication.py",
+      "mode": "100644",
+      "oid": "69873d0ee59cb3df6c765a4409b54f408f0256cb",
+      "bytes": 12889,
+      "sha256": "8cd53b36cc02fd5327936ffd352eb8ed14e9ff6146561d990a19222a446ee040"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_purpose_projection.py",
+      "mode": "100644",
+      "oid": "1dbde1c7ee7fa199949c86ec1128322237b93357",
+      "bytes": 15519,
+      "sha256": "08a8d3704c80217bd0da388c69d49de614c1413314aaf6e8091456bafc844a5f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_route_content.py",
+      "mode": "100644",
+      "oid": "12571987a85161531ba9e394571c99145dbbfe2c",
+      "bytes": 9931,
+      "sha256": "d13182d4b21d3c1353faf6056c1901a44214ab89e07b5280b629581d048e259f"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_routing_fact_inputs.py",
+      "mode": "100644",
+      "oid": "355222ecda49d83c4cfdeeb93638c810998d87d6",
+      "bytes": 11266,
+      "sha256": "fe879824efe503fa1a64f858221d4e11e7b8447fccef169593d487990e484488"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_routing_fact_transport.py",
+      "mode": "100644",
+      "oid": "0cf4c9c7c744ef2596f787db89fe4faf43a8fbc3",
+      "bytes": 14604,
+      "sha256": "6ae66aed1a492cf3d3715ce23a410244f18c869e3772479f942d185b0d0bb34a"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_runtime_identity.py",
+      "mode": "100644",
+      "oid": "97e7b909318d7ca3252ebfc436c123649791fcb6",
+      "bytes": 7890,
+      "sha256": "8cf9a3f6c2da2a563a7a549a1dcd87f2c2cb8d97dba949015624db4a415800df"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_schema_presentation.py",
+      "mode": "100644",
+      "oid": "4619a932cac76a3255e04e2461347c51e4335057",
+      "bytes": 9100,
+      "sha256": "b960b6465dfaf1adc64336331010238939452e03b76526fc220d6831b8a5e3b9"
+    },
+    {
+      "revision_role": "candidate",
+      "path": "tools/standards_engine/tests/test_storage_lifecycle_transport.py",
+      "mode": "100644",
+      "oid": "a9b5eb4737a5f3a5885b3c9e9f43d92e4f312bd8",
+      "bytes": 7428,
+      "sha256": "140298ea73e9d536754fe30e03f8b476036a270b3388b5a70ccfbc47162c588a"
+    }
+  ],
+  "supplemental_revision_comparisons": [
+    {
+      "role": "ci",
+      "exact_revision_equal": false,
+      "tools_subtree_equal": true,
+      "other_changed_paths": [
+        [
+          "M",
+          ".gitignore"
+        ],
+        [
+          "D",
+          "Coding-Standards-agent-workflow-simplification.zip"
+        ],
+        [
+          "M",
+          "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        ]
+      ],
+      "claim_acceptance_inferred": false
+    },
+    {
+      "role": "records",
+      "exact_revision_equal": false,
+      "tools_subtree_equal": true,
+      "other_changed_paths": [
+        [
+          "M",
+          ".gitignore"
+        ],
+        [
+          "D",
+          "Coding-Standards-agent-workflow-simplification.zip"
+        ],
+        [
+          "M",
+          "docs/plans/README.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/execution-ledger.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/issues.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/plan.md"
+        ],
+        [
+          "A",
+          "docs/plans/routing-fact-ergonomics/reports/external-review.md"
+        ],
+        [
+          "A",
+          "docs/plans/routing-fact-ergonomics/reports/r2-live-agent.md"
+        ],
+        [
+          "M",
+          "docs/plans/routing-fact-ergonomics/reports/verification.md"
+        ],
+        [
+          "M",
+          "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        ]
+      ],
+      "claim_acceptance_inferred": false
+    }
+  ],
+  "isolated_fixture": {
+    "exact_read_ignores_worktree": true,
+    "dirty_untracked_preserved": true,
+    "index_unchanged_during_read": true,
+    "archive_omits_export_ignored_source": true,
+    "not_packet_generator_test": true
+  }
+}

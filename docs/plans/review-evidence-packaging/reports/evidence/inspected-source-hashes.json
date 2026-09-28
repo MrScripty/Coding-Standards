@@ -1,0 +1,16 @@
+{
+  "CORE-STANDARDS.md": "8d81c8b558269cf45aa768f67399e6ea120acf2318e0e4c3030b8114a083a14d",
+  "workflows/planning.md": "08c07632ce51a33073620885692d4cec4e6cc7a507bbf3c79a9127c4b2b3136f",
+  "workflows/verification.md": "798071f8beed08fca9937ad5ea9d6d6a42b99157b82a3f2dc80c46412f475f8b",
+  "topics/architecture.md": "d35471532ba216056a4a88474fac15f2aada1de866ada136efb31ce26dc06036",
+  "tools/repository_git/repository_git/repository.py": "7581d06ea4d98c8d687a446c7f6357bd26ee1f5778317331d08b0d7caceac360",
+  "tools/repository_git/repository_git/model.py": "9705fdbfd512b38a62772028bd1ff5809a6af1038753ff3547a2c4c8b30ee4f7",
+  "tools/repository_git/repository_git/__init__.py": "18e319b80913da723351b6135aa0e24da3df461803fd8d40a530eef343e40c11",
+  "tools/repository_git/README.md": "0fca7443576b994cb6266ef35dfebc5f5fb89006d964553e64dc59dc3cfef79d",
+  "tools/standards_verifier/standards_verifier/checks/plan_contract.py": "c7266c0564b9ee02944fc4eb12d66cc20d604fd4ddb7f051ed77d01e9fe4466e",
+  "tools/standards_verifier/standards_verifier/python_packages.py": "717bc3fe807cd00a6da5b147a0a7923c009ac594157a76ed43e18feabb8413d7",
+  ".github/workflows/purpose-separated-engine.yml": "b1d37c64f36bd1d89e98ad871612236b232323436db6c190ff66049c2f126f8e",
+  "docs/plans/routing-fact-ergonomics/reports/external-review.md": "7be5c8ac8e9ac70a75d1051788b4bd0390177710bca3fab3d3ba07411c6418b6",
+  "docs/plans/routing-fact-ergonomics/reports/verification.md": "64625a0f4e8ff221cc93bc98986050f01667ce22ce7fd526b649d6e2ba01c802",
+  "docs/plans/routing-fact-ergonomics/plan.md": "0cb5254e13401eaf6c4de6f28ac1ce2387560eccc6928e360691cbaa55498da0"
+}

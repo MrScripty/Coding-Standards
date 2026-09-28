@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:682383b82f436e0ff72bf658c691d5d539be153a44c94c9c19aa363a0a770a9c",
+      "digest": "sha256:4b1abddc4ef46e61ce4a64e979ab2caf5d78a8237e4af067909690e0ff0800ef",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -6578,7 +6578,7 @@
       ]
     },
     {
-      "digest": "sha256:7581d06ea4d98c8d687a446c7f6357bd26ee1f5778317331d08b0d7caceac360",
+      "digest": "sha256:5596e82d6319c466d80c30a81d6a4bb3a08cd02a4b5c55d01976f2f6312c8010",
       "path": "tools/repository_git/repository_git/repository.py",
       "state": "present",
       "uses": [
@@ -6603,6 +6603,54 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:af0d55266eb9e970e0c7c4dd4dbdf9b2e1fe4aa12d4438144604788ceef1f523",
+      "path": "tools/review_evidence/pyproject.toml",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:a718c911806d3594e4d23df7b4a7cd7fcf8d452ad1e45bd21b7dc5b075afdab3",
+      "path": "tools/review_evidence/review_evidence/__init__.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7",
+      "path": "tools/review_evidence/review_evidence/__main__.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:1dcaac1a00ff164643df50921c6a4eddc90c750da186f495aeb41bc375b4bea1",
+      "path": "tools/review_evidence/review_evidence/cli.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
         }
       ]
     },
@@ -13742,7 +13790,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:36261a1ccb51ddbf32e7c7b3659f5c32f45bd49b386a69fc891ed8e4b2f42289",
+    "digest": "sha256:abb30b0572c3e9b064f7141edf5d41b7cf8674a8e71963898a2b1745d7f534f0",
     "uses": [
       {
         "check": "python-package-contract",

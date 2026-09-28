@@ -125,3 +125,9 @@ focused input improvement, its consumer cutover and actual-agent qualification.
 It is Accepted after locked CI, independent review and connected interface-45
 qualification. The accepted six-slice refactoring remains closed. Review-evidence
 packaging and broader test strengthening are later, separately admitted work.
+
+## Review-evidence packaging
+
+[Review-evidence packaging](review-evidence-packaging/plan.md) owns the local
+review packet builder. Its implementation is in progress. Developer handoff ZIPs
+are external artifacts and are not repository content.
