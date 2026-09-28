@@ -52,3 +52,32 @@ edit dispatch only; schema validation and applicability remain at existing owner
   slice, T2 locked CI and independent review. Current docs and verification inputs
   are finalized, followed by a focused rerun and structural/freshness checks.
   No public interface, store, operator configuration or remote ref changed.
+
+2026-09-27, T2 integration reconciliation: the exact pilot commit is
+`7d563f032267d8d96fd45675147b9de7206a7cac`, tree
+`fa5722c82a2cb6cd260e5cef8001137bbd1e412b`, directly after `cbf9cdd2`.
+GitHub `main` contains that commit; there is no pilot PR or task branch. The
+repository's Python 3.12 hash-locked [CI run 36358571883](https://github.com/MrScripty/Coding-Standards/actions/runs/36358571883)
+passed on the exact commit: all twelve package selections and the complete
+structural verifier. A separate clean-checkout run on the same tree used Python
+3.12.3 with all six runtime packages at the unchanged lock's versions. It passed
+589 Engine and 570 supporting tests, with no skips, plus 73 structural suites
+and 121 checks. These are repeated executions of the same tests, not additional
+distinct tests; the earlier Python 3.13 campaign remains separate. A fresh
+read-only internal reviewer found no A1–A5 blocker and one
+non-blocking float-zero advisory. This is not the required external review;
+acceptance remains blocked pending that reviewer and finding disposition.
+
+The five preceding source slices are integrated, each has a successful
+exact-source GitHub workflow run, and each still records an external material
+review requirement. Their plans are not silently marked Accepted. The
+[sequence reconciliation](reports/verification.md#sequence-reconciliation) binds
+their commit/run pairs. No additional implementation slice is admitted; the
+sequence's acceptance closure waits for the outstanding reviews.
+
+Documentation-only closure check: changing `docs/plans/README.md` made its
+generated suite-input digest stale. Recompiled the manifest in an isolated
+copy of the exact candidate plus the planned record edits; the resulting diff
+changes only that index digest. The complete structural checkpoint then passed
+73 suites / 121 checks. This record update does not change the source revision
+covered by the successful hosted CI run.

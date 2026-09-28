@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:c05dce12634ec51a2af0abbef757202032f7513b37c4f70c06877416dce25c39",
+      "digest": "sha256:926d6a57c4de14512677c3c1d8802bf5e8578aaffb95597892946d2840fb1180",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [

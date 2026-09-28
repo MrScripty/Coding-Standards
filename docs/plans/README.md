@@ -91,7 +91,8 @@ existing owners and semantics. This slice adds no store format or public API.
 bounded refinement after the completed boundary, immutable-work and storage-lifecycle
 repairs. It preserves material/public contracts while separating fact identity from
 presentation and fixing the demonstrated focused-transition cache miss. Snapshot
-capture handoff and typed edit-family work remain independently deferred.
+capture handoff and the typed routing-edit pilot now have separate plans and
+acceptance gates.
 
 
 ## Verified snapshot-capture handoff
@@ -99,7 +100,8 @@ capture handoff and typed edit-family work remain independently deferred.
 [Snapshot Capture Handoff](snapshot-capture-handoff/plan.md) implements the deferred
 post-admission reuse of the independently proved frozen compilation. It preserves
 both capture proof passes and normal durable/lifecycle checks. The prior fact-owner
-and working-set changes remain intact; typed routing-edit work is still deferred.
+and working-set changes remain intact. The later typed routing-edit pilot has its
+own plan and acceptance gates.
 
 
 ## Typed Routing-Edit Pilot
@@ -107,4 +109,9 @@ and working-set changes remain intact; typed routing-edit work is still deferred
 [Typed Routing-Edit Pilot](typed-routing-edits/plan.md) replaces the internal
 representation of put/remove routing facts and rules while retaining canonical
 serialization, validation timing, domain behavior and existing stores. Its scope
-is one edit family, not the remaining JSON-backed edit kinds.
+is one edit family, not the remaining JSON-backed edit kinds. The source sequence
+from boundary repairs through this pilot is integrated on `main`; its individual
+acceptance records remain separate. See the pilot's
+[sequence reconciliation](typed-routing-edits/reports/verification.md#sequence-reconciliation)
+for exact commits, CI and outstanding external review gates. No further
+implementation slice in this sequence is admitted.

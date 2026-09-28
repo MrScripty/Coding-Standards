@@ -1,11 +1,13 @@
 # Typed routing-edit pilot
 
 **Plan status:** Verifying
-**Acceptance status:** pending
+**Acceptance status:** blocked — independent external review remains unavailable.
 **Admission:** `start`, user-authorized implementation of the typed routing-edit pilot.
 **Base:** `cbf9cdd2d7627d2c45f0001486a8872ab6b5206d`, interface 44.
-**Current phase:** T1 implemented and locally verified; external acceptance pending.
-**Next slice:** T2 — exact-diff supported-runtime CI and independent review.
+**Current phase:** T2; the source candidate is integrated on GitHub `main` at
+`7d563f03`, with locked CI passed and external review outstanding.
+**Next slice:** T2 — obtain and disposition independent external review of the
+exact pilot; no implementation expansion is admitted.
 
 ## Outcome and boundaries
 
@@ -95,9 +97,12 @@ representation and maintenance benefits are reviewed; expansion is not part of T
 
 ## Implementation disposition
 
-T1 is Implemented. A1–A5 have local representative and differential evidence;
-A6 has local test/static/packaging evidence with supported-runtime CI and independent
-review remaining required. See [verification](reports/verification.md) for exact
-counts, the stopped initial campaign, final-source boundary and limitations. No
-claim of acceptance, whole-operation speedup or actual model qualification is made.
-T2 is the only next slice; another edit-family conversion requires new admission.
+T1 is Implemented and integrated. A1–A5 have local representative and differential
+evidence plus a fresh internal read-only architecture review with no demonstrated
+blocker. A6 has local test/static/packaging evidence and passing exact-commit
+supported locked CI. Independent **external** review remains required. See
+[verification](reports/verification.md) for the candidate identity, passed CI,
+review dispositions, stopped initial campaign and limitations. Neither internal
+review nor successful earlier-slice CI grants acceptance. No claim of Accepted
+status, whole-operation speedup or actual model qualification is made. T2 is the
+only next acceptance slice; another edit-family conversion requires new admission.

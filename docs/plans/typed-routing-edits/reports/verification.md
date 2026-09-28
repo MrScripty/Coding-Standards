@@ -179,3 +179,103 @@ is needed. No remote push or production standards publication occurred.
 The final report/status updates and generated input refresh occur after the full
 frozen-source test run. Final focused/freshness/structural results, per-file hashes,
 base preflight and complete-tree patch reconstruction are recorded under DELIVERY.
+
+## Sequence reconciliation
+
+This section records the later integration state; the earlier delivery evidence
+above remains scoped to its original local environment. The typed pilot is one
+commit, `7d563f032267d8d96fd45675147b9de7206a7cac` (tree
+`fa5722c82a2cb6cd260e5cef8001137bbd1e412b`), directly after the pre-pilot
+baseline `cbf9cdd2d7627d2c45f0001486a8872ab6b5206d`. Both local and GitHub
+`main` pointed to the pilot commit at inspection. There is no pilot task branch or
+PR; the only repository PR found was an older, unrelated merged PR. The production
+delta remains exactly `logical_authoring.py` and `routing_edits.py`, with the
+tests, generated verification-input manifest and records named in the commit.
+
+The preceding source slices are also integrated on `main`. Their GitHub Actions
+runs used each exact source revision and completed successfully:
+
+| Slice | Source commit | Workflow run | Recorded acceptance |
+| --- | --- | --- | --- |
+| Boundary repairs | `e384fffd` | [36334749196](https://github.com/MrScripty/Coding-Standards/actions/runs/36334749196) | Verifying; external review pending |
+| Immutable-work reuse | `0f24bac9` | [36340163409](https://github.com/MrScripty/Coding-Standards/actions/runs/36340163409) | Verifying; external review pending |
+| Storage lifecycle | `87873de5` | [36342508184](https://github.com/MrScripty/Coding-Standards/actions/runs/36342508184) | Verifying; external review pending |
+| Fact ownership and working set | `6fa41c31` | [36347662551](https://github.com/MrScripty/Coding-Standards/actions/runs/36347662551) | Verifying; external review pending |
+| Snapshot-capture handoff | `cbf9cdd2` | [36350106138](https://github.com/MrScripty/Coding-Standards/actions/runs/36350106138) | Verifying; external review pending |
+
+These runs resolve the previously unavailable exact-source CI observations for
+the five earlier commits. They do not supply those plans' separately required
+independent external material reviews or retroactively change their recorded
+verdicts. Each plan's current owner must disposition its review gate before
+marking it Accepted. The implementation sequence is complete and no next code
+slice is admitted; the acceptance sequence is not closed while those required
+reviews remain open. Optional routing-fact ergonomics, additional typed families
+and scale tuning require a new evidence-based admission.
+
+## Current pilot acceptance review
+
+A fresh read-only architecture reviewer inspected the coherent pilot against
+`cbf9cdd2`, including both production files, direct consumers, tests and
+identity/persistence boundaries. No A1–A5 implementation blocker was found:
+authored values remain immutable declarations, parse and semantic owners keep
+their stages, the atomic routing batch and canonical identity paths retain their
+existing authority, and no new public or stored representation was introduced.
+The reviewer did not edit, stage, commit or repair code. This is supplemental
+internal review, **not** the independent external review required by Q2.
+
+One low-severity advisory concerns the private same-type float comparison in
+`routing_edits.py`: Python considers negative and positive zero equal although
+their JSON spellings differ. The identity codec rejects floats and applicability
+has no numeric operand path, so no valid-workflow failure was demonstrated.
+Record it as a deferred candidate, not an acceptance blocker or reason to widen
+this pilot. No production repair was justified by the review.
+
+The actual workflow at `.github/workflows/purpose-separated-engine.yml` requires
+Ubuntu 24.04's Python 3.12, hash-locked binary installation from the unchanged
+`tools/standards_contracts/requirements.lock`, all twelve package test selections
+and the complete structural verifier. The package and lock also support Python
+3.11, but the current workflow has no 3.11 matrix entry. The exact-commit
+[run 36358571883](https://github.com/MrScripty/Coding-Standards/actions/runs/36358571883)
+completed successfully. Its logs show exact public-source retrieval, Python 3.12
+hash-locked installation, **589 Engine and 570 supporting tests with no skips**,
+and **73 structural suites / 121 checks** passed. The supporting selections
+include contracts and generated freshness, structural checkpoint and verification
+input manifest checks. The 20 added routing-edit tests are included in the 589;
+the recorded 23-case differential and retained-history readback are distinct
+earlier evidence, not additional CI tests.
+
+A separate isolated checkout of the same commit/tree ran the identical twelve
+package commands and complete structural verifier with Python 3.12.3. All six
+installed runtime-package versions matched the unchanged lock; `pip check`
+found no broken requirements. It independently passed 589 Engine and 570
+supporting tests without skips and 73 structural suites / 121 checks. This
+local environment was preinstalled; only the hosted CI run proves this turn's
+hash-locked installation. Local results, hosted results and the earlier Python
+3.13 campaign are repeated executions of the same selections, not additive
+test counts. Python 3.11 was not run because the actual CI workflow requires
+only 3.12; no claim of 3.11 behavior is inferred from that result.
+
+For this documentation-only reconciliation, an isolated copy of the candidate
+with only the five planned record/index edits initially failed the complete
+structural checkpoint at `policy-semantic-impact`: the plans index's digest in
+the generated suite-input manifest was stale. Regenerating the manifest from
+that isolated source changed only the `docs/plans/README.md` digest. The same
+complete checkpoint then passed 73/73 suites and 121 checks. After the final
+record text was copied into the isolated checkout, the affected verifier suite
+passed 168 tests and the complete checkpoint passed again with the same counts.
+The refreshed manifest and records are one closure write set; this check does
+not relabel the source revision tested by run 36358571883 as the later
+documentation commit.
+
+The connected authoring MCP process reported interface 43 and
+`restart-required` after the source update. A fresh process with the saved
+registration started at interface 44, retained the expected catalog digest,
+and completed an explicit-fact route with zero unresolved questions. This
+confirms fresh-process navigation, not a live-model authoring qualification or
+the outcome of the stale connected process. A normal host reconnect is needed
+to replace the latter; it is outside this internal representation acceptance.
+
+No independent external review report is available for the pilot. Its owner
+must inspect the coherent `cbf9cdd2..7d563f03` slice, record each finding with
+severity/evidence/disposition, and verify any necessary repair before A6 and
+Q2 can be accepted. The fresh internal review above is supporting evidence only.
