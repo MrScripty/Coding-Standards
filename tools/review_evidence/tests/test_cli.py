@@ -121,6 +121,29 @@ class PacketBuildTests(unittest.TestCase):
                 {item["name"] for item in manifest["members"]},
                 set(archive.namelist()) - {"manifest.json"},
             )
+            self.assertEqual(
+                manifest["revisions"]["candidate"],
+                {
+                    "commit": self.candidate,
+                    "tree": self.git("rev-parse", "HEAD^{tree}").strip(),
+                },
+            )
+            index = archive.read("INDEX.md").decode()
+            self.assertIn("Changed primary files (3)", index)
+            self.assertIn("Explicit context files (1)", index)
+            self.assertIn(
+                f"ZIP file members, including index and manifest: {len(archive.namelist())}",
+                index,
+            )
+            payload_bytes = sum(
+                item.file_size
+                for item in archive.infolist()
+                if item.filename not in {"INDEX.md", "manifest.json"}
+            )
+            self.assertIn(
+                f"Included payload bytes, excluding index and manifest: {payload_bytes}",
+                index,
+            )
 
     def test_references_and_missing_file_are_gaps(self) -> None:
         self.request["artifacts"] = [
@@ -324,6 +347,32 @@ class PacketBuildTests(unittest.TestCase):
         self.request["revisions"]["candidate"] = "HEAD"
         with self.assertRaises(PacketError):
             self.build()
+        self.request["revisions"]["candidate"] = self.candidate
+        self.request["format_version"] = 2
+        with self.assertRaises(PacketError) as raised:
+            self.build()
+        self.assertEqual(raised.exception.kind, "unsupported")
+        self.request["format_version"] = 1
+        self.request["context"] = ["/".join(["x" * 250] * 300)]
+        with self.assertRaises(PacketError) as raised:
+            self.build()
+        self.assertEqual(raised.exception.kind, "unsupported")
+
+    def test_roles_may_share_commit_and_empty_primary_diff(self) -> None:
+        self.request["revisions"]["baseline"] = self.candidate
+        self.request["revisions"]["ci"] = self.candidate
+        self.request["comparisons"] = [{"revision": "ci", "scopes": ["plan.md"]}]
+        self.build()
+        with zipfile.ZipFile(self.out) as archive:
+            self.assertEqual(archive.read("changes/baseline-candidate.patch"), b"")
+            manifest = json.loads(archive.read("manifest.json"))
+            self.assertFalse(any(item["changed"] for item in manifest["primary"]))
+            self.assertEqual(
+                manifest["revisions"]["candidate"], manifest["revisions"]["ci"]
+            )
+            self.assertIn(
+                "Changed primary files (0)", archive.read("INDEX.md").decode()
+            )
 
     def test_foreign_evidence_identity_is_recorded_without_inheritance(self) -> None:
         (self.evidence / "foreign.log").write_bytes(b"foreign raw material")

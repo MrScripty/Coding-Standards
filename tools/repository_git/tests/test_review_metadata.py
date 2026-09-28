@@ -33,7 +33,12 @@ class ReviewMetadataTests(unittest.TestCase):
             git("add", ".")
             git("commit", "-qm", "fixture")
             revision = RepositoryRevision(git("rev-parse", "HEAD"))
-            entries = GitRepository(root).revision_entries(revision, local_only=True)
+            repository = GitRepository(root)
+            entries = repository.revision_entries(revision, local_only=True)
+            self.assertEqual(
+                repository.revision_tree(revision, local_only=True),
+                git("rev-parse", "HEAD^{tree}"),
+            )
             self.assertEqual(entries[RepositoryPath.parse("regular.txt")][0], "100644")
             self.assertEqual(entries[RepositoryPath.parse("script.sh")][0], "100755")
             self.assertEqual(

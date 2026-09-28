@@ -28,7 +28,8 @@ repository may be dirty because neither index nor worktree supplies source bytes
   request, not a review outcome.
 - `revisions` maps `baseline`, `candidate` and optional explicit named roles to full
   local object IDs. The caller may name `ci` and `records`; neither is implicitly
-  current or newer. IDs are resolved/checked as commits by the Git owner.
+  current or newer. IDs are resolved/checked as commits by the Git owner. Roles
+  may share one commit; an empty primary change is reported as such.
 - `plan` identifies one path at a named revision. The exact document is included.
 - `context` names literal files to include at both primary revisions when present,
   with absence recorded. These supplement all primary changed files. A context

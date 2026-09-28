@@ -325,6 +325,31 @@ class GitRepository:
             raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "unterminated tree output")
         return entries
 
+    def revision_tree(
+        self, revision: RepositoryRevision, *, local_only: bool = False
+    ) -> str:
+        """Return the exact tree object ID selected by a commit revision."""
+        if type(revision) is not RepositoryRevision:
+            raise invalid("REPOSITORY_GIT.INVALID_REVISION", "exact revision required")
+        kind = git_output(
+            self._repository, ("cat-file", "-t", revision.oid),
+            max_output_bytes=32, local_only=local_only,
+        )
+        if kind != b"commit\n":
+            raise invalid("REPOSITORY_GIT.INVALID_REVISION", "revision is not a commit")
+        raw = git_output(
+            self._repository, ("rev-parse", f"{revision.oid}^{{tree}}"),
+            max_output_bytes=80, local_only=local_only,
+        )
+        try:
+            tree_oid = raw.decode("ascii").rstrip("\n")
+        except UnicodeError as error:
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "invalid tree identity") from error
+        if len(tree_oid) != len(revision.oid):
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "invalid tree identity")
+        RepositoryRevision(tree_oid)
+        return tree_oid
+
     @contextmanager
     def materialize_candidate(
         self,

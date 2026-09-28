@@ -70,7 +70,7 @@ selection and feasibility observations, not tests of an implemented packet build
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | P-A1 | One explicit versioned request describes exact local revisions, selected context/records, evidence origins and caller-supplied claim associations; malformed or contradictory selections cannot become a packet. | contract | supported locked runtime | automated | pending | Closed request fixtures and failure oracles |
-| P-A2 | The packet includes every primary changed file version that exists, full primary diff and selected context with exact bytes/modes/identities; baseline, candidate, CI subject and record revisions remain distinct. | integration | real local Git repositories | automated | pending | Independent Git/literal oracles, moves/deletions and drift cases |
+| P-A2 | The packet includes every primary changed file version that exists, full primary diff and selected context with exact bytes/modes/identities; baseline, candidate, CI subject and record roles retain their own explicit identities even when commits coincide. | integration | real local Git repositories | automated | pending | Independent Git/literal oracles, moves/deletions and drift cases |
 | P-A3 | Included, referenced and missing evidence are distinguished; captured bytes and caller-reported provenance do not become authenticated CI results, exhaustive claim coverage or acceptance decisions. | contract + negative | local imported evidence | automated | pending | Exact status/provenance fixtures and contradictory inputs |
 | P-A4 | Build is local and non-mutating toward source/index/refs/configuration/evidence; it follows no source symlinks, executes no source/evidence commands and contacts no network/provider. | system + security | supported Linux and real subprocesses | automated | pending | Dirty-tree preservation, hostile Git configuration, unsafe-file and network-negative tests |
 | P-A5 | Publication is bounded, no-clobber and complete; the builder validates its staged inventory before publication. | release-artifact | real filesystem and ZIP files | automated | pending | Publication race, limits, malformed staging and inventory checks |
@@ -130,7 +130,8 @@ The request may list claim IDs, their governing plan artifact and evidence IDs.
 These are **operator-supplied associations**. Include the exact plan as the actual
 claim source; do not duplicate its criteria/status as authoritative new fields or
 parse Markdown prose to grant a verdict. Reject unknown evidence IDs, duplicate
-request identities and inconsistent revision aliases. A missing declared claim
+request identities and inconsistent revision aliases. Distinct roles may name the
+same exact commit when their source identities coincide. A missing declared claim
 association is visibly unassociated, not satisfied. The recipient checks whether
 the operator's claim selection is complete; a packet generator cannot infer that
 from available bytes.

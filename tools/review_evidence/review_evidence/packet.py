@@ -194,6 +194,7 @@ def _validate_staged(path: Path) -> dict:
 
 def render_index(
     request: dict,
+    identities: dict[str, dict[str, str]],
     primary: list[dict],
     artifacts: list[dict],
     gaps: list[dict],
@@ -209,8 +210,10 @@ def render_index(
         "## Revisions",
         "",
     ]
-    for role, oid in request["revisions"].items():
-        lines.append(f"- {markdown(role)}: `{oid}`")
+    for role, identity in identities.items():
+        lines.append(
+            f"- {markdown(role)}: commit `{identity['commit']}`; tree `{identity['tree']}`"
+        )
     lines += [
         "",
         "## Governing plan and change",
@@ -218,10 +221,11 @@ def render_index(
         f"- [Exact governing plan]({quote(plan_member, safe='/')})",
         "- [Complete baseline to candidate patch](changes/baseline-candidate.patch)",
         "",
-        "## Primary files and selected context",
+        f"## Changed primary files ({sum(item['changed'] for item in primary)})",
         "",
     ]
-    for item in primary:
+
+    def append_versions(item: dict) -> None:
         path = item["path"]
         for role in ("baseline", "candidate"):
             member = item.get(role, {}).get("member")
@@ -231,6 +235,14 @@ def render_index(
                 )
             else:
                 lines.append(f"- {role} {markdown(path)}: absent")
+
+    for item in primary:
+        if item["changed"]:
+            append_versions(item)
+    lines += ["", f"## Explicit context files ({len(request['context'])})", ""]
+    primary_by_path = {item["path"]: item for item in primary}
+    for path in request["context"]:
+        append_versions(primary_by_path[path])
     lines += ["", "## Evidence", ""]
     for item in artifacts:
         member = item.get("member")
@@ -250,7 +262,8 @@ def render_index(
         )
     lines += [
         "",
-        f"Included file members: {len(members) + 1}",
+        f"ZIP file members, including index and manifest: {len(members) + 2}",
+        f"Included payload bytes, excluding index and manifest: {sum(map(len, members.values()))}",
         f"Declared gaps: {len(gaps)}",
         "",
     ]
@@ -314,6 +327,13 @@ def build(
             fail("output overlaps an input root")
     revisions = {
         role: RepositoryRevision(oid) for role, oid in request["revisions"].items()
+    }
+    identities = {
+        role: {
+            "commit": revision.oid,
+            "tree": git.revision_tree(revision, local_only=True),
+        }
+        for role, revision in revisions.items()
     }
     entries = {
         role: git.revision_entries(revision, local_only=True)
@@ -474,7 +494,14 @@ def build(
     add(
         "INDEX.md",
         render_index(
-            request, primary, artifacts, gaps, members, plan_member, comparisons
+            request,
+            identities,
+            primary,
+            artifacts,
+            gaps,
+            members,
+            plan_member,
+            comparisons,
         ),
     )
     check_names([*members, "manifest.json"])
@@ -489,7 +516,7 @@ def build(
         "repository_label": request["repository_label"],
         "label": request["label"],
         "review_question": request["review_question"],
-        "revisions": request["revisions"],
+        "revisions": identities,
         "plan": {**request["plan"], "member": plan_member},
         "primary": primary,
         "context": request["context"],

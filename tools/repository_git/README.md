@@ -44,6 +44,7 @@ bounded metadata/diff commands and revision read sessions: it disables lazy
 promisor fetching and replace-object interpretation for that call. Callers still
 select fixed read-only Git arguments; the option does not authorize helpers,
 filters, checkout, or repository mutation.
+`revision_tree` returns the exact tree object ID for a selected commit.
 For a commit-to-commit patch, `git_output(..., attribute_source=revision)` pins
 Git attribute lookup to the selected commit, so dirty worktree attributes cannot
 change how its complete binary patch is represented.

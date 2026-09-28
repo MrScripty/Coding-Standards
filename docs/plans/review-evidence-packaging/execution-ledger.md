@@ -102,3 +102,24 @@ while files and the generated input projection were still changing; it showed
 failures and was interrupted, so no pass is claimed from it. A new locked-runtime
 suite has been started from the staged candidate. P1 and P2 remain open for that
 result, exact-source CI, separate review and owner disposition.
+
+## 2026-09-28 — Two-axis review corrections
+
+The read-only Standards and Spec reviews of the committed candidate found four
+concrete issues, recorded in `issues.md`. All four are corrected in the next
+candidate source: unsupported future versions, shared revision IDs, selected
+tree identities, and index counts/scope/bytes. The corrected routing packet was
+rebuilt outside the repository and opened with only standard ZIP tooling. It has
+98 members, 96 resolving index links and the same two explicit evidence gaps;
+its new exact digest and tree identities are in `reports/recipient-observation.md`.
+This review is evidence for correction, not owner acceptance or remote CI.
+
+Both reviewers inspected the corrections and reported no remaining concrete
+finding in their respective axes. The final local broad run passed 11 suites
+(432 tests), including Repository Git and Review Evidence. It was stopped while
+the larger Standards Engine suite was still running; no complete broad-suite
+pass is claimed. The focused affected checks pass: Review Evidence 28 tests,
+Repository Git 33 tests, Ruff lint on changed Python, and Ruff format on the
+new package and changed review-metadata test. The authoring-purpose Engine
+repository verification passes 121 checks across 73 suites with refreshed
+generated inputs. Full exact-source CI and owner disposition remain pending.

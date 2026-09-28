@@ -42,6 +42,12 @@ def load_request(path: Path) -> tuple[dict, bytes]:
         request = json.loads(
             raw, object_pairs_hook=unique_pairs, parse_constant=reject_constant
         )
+        if (
+            type(request) is dict
+            and type(request.get("format_version")) is int
+            and request["format_version"] != 1
+        ):
+            fail("request format version is unsupported", "unsupported")
         schema = json.loads(
             Path(__file__).with_name("request-schema.json").read_bytes()
         )
@@ -65,8 +71,6 @@ def load_request(path: Path) -> tuple[dict, bytes]:
 
     require_scalar(request)
     revisions = request["revisions"]
-    if len(set(revisions.values())) != len(revisions):
-        fail("revision aliases must identify distinct commits")
     if request["plan"]["revision"] not in revisions:
         fail("plan revision alias is unknown")
     safe_name(request["plan"]["path"])

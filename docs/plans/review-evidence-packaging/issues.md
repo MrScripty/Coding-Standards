@@ -22,3 +22,17 @@ Implementation note (2026-09-28): the owner removed the standalone checker.
 RP-05 now concerns the builder's staged integrity validation and honest manifest
 semantics. Any references here to checker-specific tests are superseded by the
 plan's scope amendment.
+
+## Candidate review findings — 2026-09-28
+
+Two read-only review axes inspected the committed `32e78530...HEAD` change.
+The Standards axis found that a well-formed future request version was reported
+as `invalid` rather than `unsupported`; request decoding now distinguishes it,
+with a focused test. The Spec axis found three gaps: valid revision roles sharing
+one commit were rejected, tree IDs were absent, and `INDEX.md` understated ZIP
+members while combining changed/context scope without byte totals. The builder
+now permits shared exact IDs and empty diffs, records each commit/tree pair, and
+prints separate changed/context sections with honest member and payload-byte
+counts. Focused tests and the refreshed offline recipient observation exercise
+those corrections. These are implementation finding dispositions; the acceptance
+owner has not accepted P1 or P2.

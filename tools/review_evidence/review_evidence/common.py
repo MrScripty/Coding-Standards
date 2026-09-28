@@ -55,6 +55,8 @@ def safe_name(name: str) -> str:
         path = RepositoryPath.parse(name)
     except GitRepositoryError:
         fail("unsafe portable member name", "unsupported")
+    if len(name.encode("utf-8")) > 65535:
+        fail("portable member name exceeds ZIP limit", "unsupported")
     for component in path.components:
         if component.endswith((" ", ".")) or any(
             ord(c) < 32 or ord(c) == 127 or c in '<>:"|?*' for c in component
