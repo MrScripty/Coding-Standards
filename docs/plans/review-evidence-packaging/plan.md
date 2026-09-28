@@ -24,11 +24,9 @@ or new review verdict is supplied by this planning package.
 ## Implementation scope amendment
 
 The owner directed on 2026-09-28 that a standalone ZIP checker is unnecessary.
-P1 implements `build` only. The builder still validates its completed staging archive
-before no-clobber publication. References below to a recipient-side `check` command,
-expected manifest digest input, checker exit statuses, and altered-copy checker
-tests are superseded by this direction; packet recipients can inspect the manifest
-and members with ordinary ZIP tools.
+P1 implements `build` only. The builder validates its completed staging archive
+before no-clobber publication. Recipients inspect the manifest and members with
+ordinary ZIP tools. Handoff ZIPs stay outside repository content.
 
 ## Objective
 
@@ -75,7 +73,7 @@ selection and feasibility observations, not tests of an implemented packet build
 | P-A2 | The packet includes every primary changed file version that exists, full primary diff and selected context with exact bytes/modes/identities; baseline, candidate, CI subject and record revisions remain distinct. | integration | real local Git repositories | automated | pending | Independent Git/literal oracles, moves/deletions and drift cases |
 | P-A3 | Included, referenced and missing evidence are distinguished; captured bytes and caller-reported provenance do not become authenticated CI results, exhaustive claim coverage or acceptance decisions. | contract + negative | local imported evidence | automated | pending | Exact status/provenance fixtures and contradictory inputs |
 | P-A4 | Build is local and non-mutating toward source/index/refs/configuration/evidence; it follows no source symlinks, executes no source/evidence commands and contacts no network/provider. | system + security | supported Linux and real subprocesses | automated | pending | Dirty-tree preservation, hostile Git configuration, unsafe-file and network-negative tests |
-| P-A5 | Publication is bounded, no-clobber and complete; the builder validates its staged inventory before publication. | release-artifact | real filesystem and ZIP files | automated | pending | Failure injection, limits, tampered archive and reconstruction checks |
+| P-A5 | Publication is bounded, no-clobber and complete; the builder validates its staged inventory before publication. | release-artifact | real filesystem and ZIP files | automated | pending | Publication race, limits, malformed staging and inventory checks |
 | P-A6 | A real routing-fact review example is navigable offline with both source versions, complete generated files and available later records; unavailable raw evidence stays explicit. | user-workflow | separately opened local packet | either | pending | Recipient inspection of the new output, not prior review relabeled |
 | P-A7 | Existing Git/Engine contracts and accepted records are preserved; new package and existing affected selections, lock-qualified CI, generated freshness and structural checks pass. | integration | current Python 3.12 hash-locked CI | automated | pending | Exact candidate checks and preservation diff |
 | P-A8 | Independent material review and owner disposition establish bounded ownership, useful evidence and supported cutover; only this new slice is accepted. | review | independent reviewer and owner | manual | pending | Source review, issue dispositions and final ledger |
@@ -159,6 +157,8 @@ diff drivers, textconv, rename heuristics and lazy fetching; use explicit
 commit-to-commit arguments and stable raw/NUL path output. Do not run `git archive`
 as the byte oracle because export attributes may omit or rewrite blobs. Never
 fall back to checkout bytes, shallow diffs, text-only excerpts or permission guesses.
+Pin patch attribute lookup to the candidate commit so dirty worktree attributes
+cannot change the representation of the selected committed patch.
 
 Implementation must prove that its selected Git invocation cannot invoke a
 promisor remote or external helper. If the installed Git/adapter cannot provide
@@ -268,7 +268,7 @@ Reuse the current 64 MiB object bound for Git objects and adopt a named per-memb
 4,096 file members and 1 MiB request JSON, including metadata. The real planning
 sample uses about 4.53 MB of source plus a 1.08 MB patch; these bounds leave room for
 explicit verification logs while preventing accidental unlimited exports. Keep the
-bounds with the packet owner, validate them in build/check, and test edges using
+bounds with the packet owner, validate them during build and staging, and test edges using
 small injected limits. No unexplained hardcoded truncation or unlimited setting.
 
 Copy complete records or fail with a bounded limit outcome. A source/diff/required
@@ -301,8 +301,8 @@ filters, network calls, tests, acceptance mutations or agent runs occur during b
 
 ### D7 — Observable results and implementation footprint
 
-Proposed commands are `build --repo-root ... --request ... --evidence-root ...
---output ...zip` and `check --packet ...zip` through one CLI. The evidence root is
+The command is `build --repo-root ... --request ... --evidence-root ...
+--output ...zip`. The evidence root is
 required only for selected local inputs; it is not inferred from the request's
 location. Command names/flags are provisional until implementation admission.
 
@@ -350,7 +350,7 @@ records across a filesystem boundary.
 - Representative change paths and forced owners: a new artifact changes the request, not a
    validator registry; a different source candidate changes bound IDs and derived
    comparisons; a CI provider changes imported records, not a network adapter;
-   a new packet format requires versioned build/check coordination only.
+   a new packet format requires versioned builder/manifest coordination only.
 - Stable Interfaces versus hidden knowledge: exact object paths, revision roles,
    availability and declared associations are explicit. Filename recency, branch
    names, historical prose, neighboring files or embedded URLs supply no authority.
@@ -363,9 +363,9 @@ records across a filesystem boundary.
 - Deletion and cumulative machinery result: deleting the package would push precise two-version copying,
    evidence association, no-clobber publication and integrity handling back into
    every review preparation script. A new provider registry or generic plan parser
-   would disappear without losing this objective, so neither is admitted. The
-   checker adds deciding value for actual packet transfer/truncation/tampering,
-   not a competing implementation of source/test correctness.
+   would disappear without losing this objective, so neither is admitted. Staged
+   validation prevents an incomplete or malformed builder output from being
+   published; recipients retain the inventory for their own inspection.
 - Necessary complexity and containment: source and record versions differ; some evidence is
    unavailable; filesystem/archive inputs can be unsafe. Keep these few concerns in
    one bounded package over the existing Git adapter. No new service, mutable
@@ -394,7 +394,7 @@ selection; the existing generated verification-input manifest; link-only pointer
 in `docs/plans/README.md` and `.agents/skills/standards-engine/references/environment.md`;
 and this plan's current records. Do not write previous accepted plans/reports.
 
-**Work:** confirm source and boundaries, implement closed request/manifest and both
+**Work:** confirm source and boundaries, implement closed request/manifest and the build
 command, reuse exact Git read ownership, add deterministic real-Git/file/archive
 negative tests, update consumers and CI selection, and generate owned derived inputs.
 Do not create sample CI conclusions when no evidence file exists.
@@ -439,12 +439,12 @@ external/textconv/promisor configuration; and full primary scope despite unrelat
 working-tree files. Existing Repository Git object verification is reused rather
 than replicated in packet tests.
 
-Use exact member sets and independently computed digest/mode expectations, not
-only build→check self-comparison. Tamper with a payload, inventory, duplicate member,
-traversal name, compression-size declaration or selected-revision link. A changed
-manifest with no trusted external digest can be self-consistent; document that
-limit instead of calling the format authenticated. Exercise output-exists races,
-write/read failures, interrupt cleanup and positive/negative budget boundaries.
+Use exact member sets and independently computed digest/mode expectations. Inject
+malformed staging archives with duplicate or traversal names and incomplete member
+inventories. A changed manifest with no trusted external digest can be
+self-consistent; document that limit instead of calling the format authenticated.
+Exercise output-exists races, write/read failures, cleanup and positive/negative
+budget boundaries.
 
 For evidence, test included Git records and external files, explicit references,
 missing files, unknown associations, wrong expected hashes, unsafe roots, changed
@@ -479,7 +479,7 @@ the same invariant is added to the write set, not an automatic wider redesign.
 ## Final Acceptance
 
 This plan is `Planned`. Source inspection, ordinary planning probes and plan-schema
-validation do not qualify an unimplemented builder, checker or recipient workflow.
+validation do not qualify an unimplemented builder or recipient workflow.
 Preserve original failures and successful candidate evidence at their exact source
 identities. Use current Python 3.12 hash-locked CI; do not change the matrix or claim
 3.11 observations without running them. Independent review remains separate from

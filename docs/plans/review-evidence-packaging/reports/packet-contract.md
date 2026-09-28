@@ -40,6 +40,9 @@ repository may be dirty because neither index nor worktree supplies source bytes
   and one origin. `git-file` names a revision/path; `local-file` names a relative
   path below `--evidence-root`, optionally with an expected SHA-256; `reference`
   carries a label and optional URL that is never fetched. Locators are not authority.
+  Optional `reported_repository` and `reported_subject_revision` retain a
+  caller-reported foreign source identity without assigning it the primary
+  candidate's revision.
 - `claims` maps caller-supplied claim IDs to selected artifact IDs. Claim meaning
   remains in `plan`; the association is not independently evaluated by the builder.
   Both an empty mapping and a partial mapping are allowed and labelled as such.

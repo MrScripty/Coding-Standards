@@ -77,3 +77,28 @@ reference gap. P1 is in progress; P2 and owner acceptance remain pending until t
 qualified. The new focused tests and Repository Git tests pass, and an
 authoring-purpose Engine `verify_repository` refresh reported 121 checks, 73
 suites and no failures. This entry is not a review or acceptance decision.
+
+## 2026-09-28 — P1 candidate and offline example
+
+The builder now pins Git diff attributes to the selected candidate commit in
+addition to disabling lazy fetching, replacement objects, external diff drivers
+and textconv. Real Git tests cover a missing promisor blob, replace ref, dirty
+attributes, mode change, rename-as-delete/add, binary source, export attributes,
+symlink/gitlink rejection and unsupported path encoding. Local evidence and
+publication tests cover exact imported bytes, foreign reported identities,
+missing/reference gaps, symlink and portable path rejection, limits, a competing
+output, staging failure and cleanup after interruption. The documented `python -B`
+entry point preserves source index, refs, configuration, dirty files and evidence.
+
+The separate recipient-only ZIP inspection is recorded in
+[recipient-observation.md](reports/recipient-observation.md). It found all selected
+source versions, a complete generated file, 96 resolving local links, five later
+records and two declared raw-material gaps. This is a material observation, not
+an independent review or acceptance. The new ZIP remains outside the repository.
+
+The focused builder suite, Repository Git suite, Ruff checks and authoring-purpose
+Engine structural verification pass locally. A first broad local suite was run
+while files and the generated input projection were still changing; it showed
+failures and was interrupted, so no pass is claimed from it. A new locked-runtime
+suite has been started from the staged candidate. P1 and P2 remain open for that
+result, exact-source CI, separate review and owner disposition.

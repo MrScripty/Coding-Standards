@@ -38,6 +38,16 @@ The Adapter can also return the exact sorted path observation for a retained
 commit tree; callers persist that observation when later deterministic
 projections must survive worktree or branch replacement.
 
+`revision_entries(revision, local_only=True)` returns leaf paths with exact Git
+modes and object IDs for packet selection. The local-only option also applies to
+bounded metadata/diff commands and revision read sessions: it disables lazy
+promisor fetching and replace-object interpretation for that call. Callers still
+select fixed read-only Git arguments; the option does not authorize helpers,
+filters, checkout, or repository mutation.
+For a commit-to-commit patch, `git_output(..., attribute_source=revision)` pins
+Git attribute lookup to the selected commit, so dirty worktree attributes cannot
+change how its complete binary patch is represented.
+
 Write-capable callers provide one exact base revision, path-component-safe file
 values with explicit executable decisions, exact removals, and one validated
 conventional commit message. The Adapter creates a private local clone, writes

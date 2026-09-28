@@ -1,5 +1,6 @@
 """Local, offline review evidence packaging."""
 
-from .cli import build, main
+from .packet import build
+from .cli import main
 
 __all__ = ("build", "main")

@@ -67,6 +67,7 @@ def git_command(
     input_bytes: bytes | None = None,
     max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
     local_only: bool = False,
+    attribute_source: RepositoryRevision | None = None,
 ) -> GitCommandResult:
     if not isinstance(root, Path) or not root.is_absolute():
         raise invalid(
@@ -82,6 +83,7 @@ def git_command(
             for argument in arguments
         )
         or (input_bytes is not None and type(input_bytes) is not bytes)
+        or (attribute_source is not None and type(attribute_source) is not RepositoryRevision)
     ):
         raise invalid(
             "REPOSITORY_GIT.INVALID_COMMAND",
@@ -90,6 +92,9 @@ def git_command(
     environment = sanitized_git_environment()
     if local_only:
         environment["GIT_NO_LAZY_FETCH"] = "1"
+        environment["GIT_NO_REPLACE_OBJECTS"] = "1"
+    if attribute_source is not None:
+        environment["GIT_ATTR_SOURCE"] = attribute_source.oid
     return _run_bounded(
         ("git", "-C", str(root), *arguments),
         input_bytes=input_bytes,
@@ -106,6 +111,7 @@ def git_output(
     input_bytes: bytes | None = None,
     max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
     local_only: bool = False,
+    attribute_source: RepositoryRevision | None = None,
 ) -> bytes:
     result = git_command(
         root,
@@ -113,6 +119,7 @@ def git_output(
         input_bytes=input_bytes,
         max_output_bytes=max_output_bytes,
         local_only=local_only,
+        attribute_source=attribute_source,
     )
     if result.returncode != 0:
         raise _failed_command(arguments, result)
@@ -965,6 +972,7 @@ class RevisionReadSession:
             environment = sanitized_git_environment()
             if self._local_only:
                 environment["GIT_NO_LAZY_FETCH"] = "1"
+                environment["GIT_NO_REPLACE_OBJECTS"] = "1"
             self._reader = (repository, VerifiedBatchReader(
                 ("git", "-C", str(repository), "cat-file", "--batch"),
                 environment=environment,

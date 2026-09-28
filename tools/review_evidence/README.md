@@ -26,6 +26,9 @@ The JSON result has `built` (exit 0), `built-with-gaps` (exit 1), or a failure
 records assembly and byte hashes, not CI authenticity, claim satisfaction, or
 acceptance. The builder validates its own completed staging archive before
 publishing with a no-replace operation. There is no separate ZIP check command.
+Imported evidence from another repository can carry a caller-reported repository
+label and subject object ID; those fields never inherit the primary candidate's
+identity or authenticate the external source.
 
 Selected source uses exact commit IDs, Git object reads, and local-only Git
 commands. Dirty worktrees, staged changes, and untracked ZIPs are ignored as
