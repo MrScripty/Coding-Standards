@@ -4,6 +4,9 @@
 __pycache__/
 *.py[cod]
 
+# Applied update archives are disposable delivery artifacts.
+*.zip
+
 # Generated Standards Engine authority state and recovery artifacts.
 /.standards-engine/*.sqlite3
 /.standards-engine/*.sqlite3-*
