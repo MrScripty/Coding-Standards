@@ -1,5 +1,7 @@
 # Execution ledger
 
+> **Current disposition (2026-09-27): Accepted.** Acceptance owner reconciled the exact-source CI, preserved external verdict and plan-specific evidence. The slice is Accepted; implementation-stage pending notes below remain historical. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 ## 2026-09-27 — admitted implementation
 
 User authorized the next step of the current refinement review. Bound to

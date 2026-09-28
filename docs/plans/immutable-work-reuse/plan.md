@@ -1,15 +1,19 @@
 # Immutable work reuse
 
-**Plan status:** Verifying
-**Acceptance status:** partial
+**Plan status:** Accepted
+**Acceptance status:** satisfied
 **Canonical plan:** `docs/plans/immutable-work-reuse/plan.md`
 **Operation:** verify; user-authorized implementation of audit F01/F08
-**Current phase:** U1 — Integration qualification; source and local checks complete
-**Next slice:** U1 — Qualify the integrated candidate in locked CI and independent review
+**Current phase:** Accepted; exact-source CI and independent material review dispositioned.
+**Next slice:** none — this bounded slice is Accepted.
 **Base:** `e384fffdcf73e43b2f784619f4812e135f5f3393` (interface 44)
 **Ledger:** [execution-ledger.md](execution-ledger.md)
 **Issues:** [issues.md](issues.md)
 **Evidence:** [reports/verification.md](reports/verification.md)
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** U1–U8 are satisfied for exact source `0f24bac9b5bf773e9981bc027d6afd409607e89e`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36340163409) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends this slice as satisfied. The acceptance owner dispositioned its non-blocking observations in the [six-slice decision](../typed-routing-edits/reports/acceptance-dispositions.md). The earlier local-only or pending statements below document the implementation-stage state; this decision supersedes those status statements. No further implementation slice is admitted here.
 
 ## Objective, admission and scope
 
@@ -128,14 +132,14 @@ independent review remain required for acceptance.
 
 | ID | Criterion | Kind | Environment | Mode | Status |
 | --- | --- | --- | --- | --- | --- |
-| U1 | Same capture/codec proof reused; all durable reads still execute; wrong stored IDs, altered bytes, hash collisions, quarantine/purge and replaced stores never become false hits | integration | representative | automated | pending |
-| U2 | Identity and compilation share original LRU/byte bounds; replacement, disabled/oversized retention, failure, implementation changes and close preserve outputs | focused | representative | automated | pending |
-| U3 | Analysis-context status decodes one exact revision per operation, while every aggregate/root read and stale-head/lifecycle/evidence check remains; changed records and mutable exports cannot poison reuse | integration | representative | automated | pending |
-| U4 | Real MCP processes and baseline-created records retain exact read/status/readiness/review behavior; no production publication or migration | system | representative | automated | pending |
+| U1 | Same capture/codec proof reused; all durable reads still execute; wrong stored IDs, altered bytes, hash collisions, quarantine/purge and replaced stores never become false hits | integration | representative | automated | satisfied |
+| U2 | Identity and compilation share original LRU/byte bounds; replacement, disabled/oversized retention, failure, implementation changes and close preserve outputs | focused | representative | automated | satisfied |
+| U3 | Analysis-context status decodes one exact revision per operation, while every aggregate/root read and stale-head/lifecycle/evidence check remains; changed records and mutable exports cannot poison reuse | integration | representative | automated | satisfied |
+| U4 | Real MCP processes and baseline-created records retain exact read/status/readiness/review behavior; no production publication or migration | system | representative | automated | satisfied |
 | U5 | Warm complete MCP read/batch/status requests improve versus unchanged source on same fixture; raw samples, medians/range and response equality are recorded; cold costs and retained bytes reported | integration | required-real | automated | satisfied |
 | U6 | Generated freshness, affected package/structural checks and patch reconstruction succeed; public schemas/catalogs remain unchanged | release-artifact | not-applicable | automated | satisfied |
-| U7 | Existing locked Python 3.11/3.12 CI passes for the exact integrated candidate | integration | representative | automated | pending |
-| U8 | Independent material review dispositions preserve proof/live-state separation, source and user data | focused | not-applicable | manual | pending |
+| U7 | Existing locked Python 3.11/3.12 CI passes for the exact integrated candidate | integration | representative | automated | satisfied |
+| U8 | Independent material review dispositions preserve proof/live-state separation, source and user data | focused | not-applicable | manual | satisfied |
 
 Deciding oracles: the unchanged identity codec on exact material, canonical stored
 record decoder, actual SQLite/Git observations, complete public requests, and exact
@@ -147,8 +151,7 @@ budget is invented; paired samples and retained correctness decide the improveme
 
 Local evidence for U1–U6: [implementation verification](reports/verification.md), with
 raw commands, samples, logs and exact package reconstruction in the delivery evidence.
-U1–U4 have passing local evidence but retain `pending` because their representative
-supported-runtime qualification is not yet supplied; U7 owns that integration run.
+U1–U4 also have representative supported-runtime qualification through U7's exact-source CI.
 U5's required-real environment is the specifically recorded local measurement container,
 not a performance promise for the deployment. U6's artifact-equality claim is independent
 of the deployment interpreter. U8 independently reviews the material source. No extra
@@ -156,19 +159,13 @@ client/model qualification is introduced for unchanged tools and wire contracts.
 
 ## Boundaries, blockers and completion
 
-Source branch `implementation/immutable-work-reuse` is a private working-container clone
-for review/delivery; accepted main remains at the baseline. Integrator owns adoption;
-retain the clone through package verification, with no remote push/history rewrite or
-user-worktree removal. Use serial implementation of shared lifecycle/cache code.
+The implementation branch and handoff described the pre-integration stage. This source slice is integrated on `main` at the exact candidate linked above.
 
-No implementation blocker is known. Supported locked Python and independent review
-may remain unavailable locally; that blocks only the respective acceptance claims.
+No implementation blocker was found. The supported locked CI and independent external review requirements are now satisfied.
 Ordinary failed checks are repaired within this scope. Re-plan for changed authority,
 record interpretation, support promises, cache lifetime/bounds or material propagation
 beyond this invariant family. Preserve other audit findings as separate work.
 
-Final state is Accepted only when every claim is satisfied and evidence is linked.
-Until then name the remaining integration slice rather than treating local tests as
-proof of the user's runtime. Packaging includes updated files, exact base patch and
+Final state is Accepted because every claim is satisfied and its evidence is linked. Local tests remain separate from supported-runtime CI. Packaging includes updated files, exact base patch and
 manifest, verification results and unmodified baseline identity. No production store,
 standards content, evidence approval, remote ref or dependency lock is edited.

@@ -1,5 +1,7 @@
 # Execution ledger
 
+> **Current disposition (2026-09-27): Accepted.** Acceptance owner reconciled the exact-source CI, preserved external verdict and plan-specific evidence. The slice is Accepted; implementation-stage pending notes below remain historical. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 ## 2026-09-27 — U1 admitted and implemented for local verification
 
 - User selected immutable-work reuse after the boundary repairs. Remote main is

@@ -1,5 +1,7 @@
 # Execution ledger
 
+> **Current disposition (2026-09-27): Accepted.** Acceptance owner reconciled the exact-source CI, preserved external verdict and pilot claims. The pilot is Accepted; implementation-stage pending notes below remain historical. See the [acceptance-owner decision](reports/acceptance-dispositions.md).
+
 2026-09-27: admitted `start` against the latest main commit `cbf9cdd2`. Its capture
 handoff is already integrated. Verified source tree and Actions archive digest;
 created independent baseline and candidate checkouts. The Router returned 24

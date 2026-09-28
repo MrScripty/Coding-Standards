@@ -1,5 +1,7 @@
 # Execution ledger
 
+> **Current disposition (2026-09-27): Accepted.** Acceptance owner reconciled the exact-source CI, preserved external verdict and plan-specific evidence. The slice is Accepted; implementation-stage pending notes below remain historical. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 - Inspected latest upstream `6fa41c31` and verified its Actions source ZIP SHA-256
   and complete tree. Created a clean owned branch; no remote writes performed.
 - Routed the task with explicit facts; all 24 selected standards were read. The

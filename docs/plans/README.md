@@ -110,8 +110,9 @@ own plan and acceptance gates.
 representation of put/remove routing facts and rules while retaining canonical
 serialization, validation timing, domain behavior and existing stores. Its scope
 is one edit family, not the remaining JSON-backed edit kinds. The source sequence
-from boundary repairs through this pilot is integrated on `main`; its individual
-acceptance records remain separate. See the pilot's
-[sequence reconciliation](typed-routing-edits/reports/verification.md#sequence-reconciliation)
-for exact commits, CI and outstanding external review gates. No further
-implementation slice in this sequence is admitted.
+from boundary repairs through this pilot is integrated on `main`. Each of its
+six slices is `Accepted` after exact-source locked CI, separate independent
+external review, and the acceptance owner's finding dispositions. See the
+[six-slice acceptance decision](typed-routing-edits/reports/acceptance-dispositions.md)
+for exact commits, CI and review reports. This bounded refactoring sequence is
+closed; no further implementation slice in it is admitted.

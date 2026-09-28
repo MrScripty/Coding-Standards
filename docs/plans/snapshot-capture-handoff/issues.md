@@ -1,5 +1,7 @@
 # Findings and acceptance gates
 
+> **Current disposition (2026-09-27): Accepted.** The former environment and reviewer gates are resolved by the exact-source CI and independent review linked in the acceptance decision. All external observations are deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 - Q1 — integration: local runtime is Python 3.13.5 / rpds-py 2026.5.1, not the
   supported locked Python 3.11/3.12 environment. Preserve the lock and obtain CI
   evidence for the exact diff; baseline CI does not certify these changes.

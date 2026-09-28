@@ -1,5 +1,7 @@
 # Immutable-work reuse: implementation verification
 
+> **Current disposition (2026-09-27): Accepted.** The exact-source locked Python 3.12 workflow passed, the independent external reviewer recommended this slice as satisfied, and the acceptance owner dispositioned its findings. The earlier local-only/pending status below is historical. See the [acceptance-owner decision](../../typed-routing-edits/reports/acceptance-dispositions.md).
+
 **Status: Verifying; acceptance partial.** Source implementation and local checks are
 complete. Supported locked-runtime CI and independent material review remain pending.
 Base: `e384fffdcf73e43b2f784619f4812e135f5f3393`; Engine interface **44**, unchanged.

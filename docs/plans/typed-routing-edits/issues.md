@@ -1,5 +1,7 @@
 # Issues and gates
 
+> **Current disposition (2026-09-27): Accepted.** The former reviewer gate is resolved by the preserved external review. All observations are explicitly deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](reports/acceptance-dispositions.md).
+
 - Q1 — resolved: the pilot is integrated at `7d563f03` on GitHub `main`.
   Exact-commit [workflow run 36358571883](https://github.com/MrScripty/Coding-Standards/actions/runs/36358571883)
   passed the repository's Python 3.12 hash-locked installation, all twelve

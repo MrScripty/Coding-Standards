@@ -1,5 +1,7 @@
 # Issues and dispositions
 
+> **Current disposition (2026-09-27): Accepted.** The former environment and reviewer gates are resolved by the exact-source CI and independent review linked in the acceptance decision. All external observations are deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 - **L-E1 / environment:** local Python 3.13.5 and rpds-py 2026.5.1 are outside the repository's locked Python 3.11/3.12 environment. DNS prevented provisioning. Owner: integrator. Disposition: run the unchanged locked CI before acceptance; local evidence is not relabeled.
 - **L-E2 / review:** independent material review is not available locally. Owner: integrator/reviewer. Disposition: review exact source and lifecycle/race evidence before acceptance.
 - **L-D1 / scope:** a no-work purge result is never cached and does not authorize deletion. Recheck after writer admission; actual due work retains BUSY. Owner: Snapshots. Disposition: fix now with real race/lock tests.

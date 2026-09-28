@@ -1,11 +1,15 @@
 # Canonical fact ownership and focused revision working set
 
-**Plan status:** Verifying
-**Acceptance status:** pending
+**Plan status:** Accepted
+**Acceptance status:** satisfied
 **Admission:** `start`, user-authorized implementation of the next refinement from the review.
 **Base:** `87873de5e1405590209dad389f7010a6b61f0bbe` (interface 44).
-**Current phase:** local integrated verification complete; external acceptance pending.
-**Next slice:** A — supported-runtime integration and independent acceptance review.
+**Current phase:** Accepted; exact-source CI and independent material review dispositioned.
+**Next slice:** none — this bounded slice is Accepted.
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** A1–A6 are satisfied for exact source `6fa41c3105a6d1d4a49230ad367ae83d3afc472c`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36347662551) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends this slice as satisfied. The acceptance owner dispositioned its non-blocking observations in the [six-slice decision](../typed-routing-edits/reports/acceptance-dispositions.md). The earlier local-only or pending statements below document the implementation-stage state; this decision supersedes those status statements. No further implementation slice is admitted here.
 
 ## Objective and scope
 
@@ -133,10 +137,7 @@ if another owner must change the same invariant. Record independent future work 
 
 ## Current acceptance disposition
 
-A1–A5 have local source, independent-oracle, complete-suite and reconstruction
-evidence recorded in [verification](reports/verification.md). A6 remains pending
-on the supported locked environment and independent external review. Exactly one
-next slice is active for handoff: A — integration acceptance. No compatibility or
+A1–A5 retain local source, independent-oracle, complete-suite and reconstruction evidence in [verification](reports/verification.md). A6 is satisfied by exact-source locked CI and independent external review. There is no remaining integration slice. No compatibility or
 new cache mechanism is retained/introduced to compensate for unavailable review.
 
 
@@ -144,7 +145,7 @@ new cache mechanism is retained/introduced to compensate for unavailable review.
 
 The separately authorized [snapshot-capture handoff](../snapshot-capture-handoff/plan.md)
 now owns that deferred recommendation. It does not change this plan's earlier
-scope, qualification evidence or pending acceptance. Typed routing-edit work
+scope or qualification evidence; this plan's acceptance is recorded above. Typed routing-edit work
 remains deferred and is not included in either implementation.
 
 

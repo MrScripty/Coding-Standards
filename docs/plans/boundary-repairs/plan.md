@@ -1,15 +1,19 @@
 # Boundary repairs from the interface-43 audit
 
-**Plan status:** Verifying
-**Acceptance status:** partial
+**Plan status:** Accepted
+**Acceptance status:** satisfied
 **Canonical plan:** `docs/plans/boundary-repairs/plan.md`
 **Operation:** verify (user-authorized boundary repairs)
-**Current phase:** Candidate verification
-**Next slice:** B1 — Complete locked-runtime verification and independent review
+**Current phase:** Accepted; exact-source CI and independent material review dispositioned.
+**Next slice:** none — this bounded slice is Accepted.
 **Base:** `af6b829aae7beba98c7aa523c51c832011587d12`
 **Ledger:** [execution-ledger.md](execution-ledger.md)
 **Issues:** [issues.md](issues.md)
 **Report:** [reports/verification.md](reports/verification.md)
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** A1–A6 are satisfied for exact source `e384fffdcf73e43b2f784619f4812e135f5f3393`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36334749196) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends this slice as satisfied. The acceptance owner dispositioned its non-blocking observations in the [six-slice decision](../typed-routing-edits/reports/acceptance-dispositions.md). The earlier local-only or pending statements below document the implementation-stage state; this decision supersedes those status statements. No further implementation slice is admitted here.
 
 ## Objective and bounded scope
 
@@ -124,7 +128,7 @@ package a base-checked patch and complete changed files. No deployed host work i
 | A3 | Integer normalization reaches real proposals; generic numeric/literal data and input immutability remain; negatives reject without effects | contract + system / representative / automated | satisfied |
 | A4 | Generated, Analysis and authoring digest representations agree; real mismatched bytes still reject | contract / representative / automated | satisfied |
 | A5 | CI includes six direct suites; exact commands, affected tests, structural/freshness and reconstruction pass locally | integration + artifact / representative / automated | satisfied |
-| A6 | Material review is dispositioned and supported locked-runtime qualification is recorded | contract / representative / either | pending |
+| A6 | Material review is dispositioned and supported locked-runtime qualification is recorded | contract / representative / either | satisfied |
 
 ## Evidence and completion
 
@@ -137,11 +141,9 @@ for its intended reason. Do not count later reruns as earlier passes.
 Supported runtime: locked Python 3.11/3.12. This container currently has Python 3.13.5;
 a supported-interpreter installation attempt failed because DNS/network access is
 unavailable. Continue deterministic implementation and record that limitation; preserve
-the dependency lock. Candidate CI and independent review remain acceptance evidence,
-not authority to change existing semantics.
+the dependency lock. Exact-source candidate CI and independent review are linked in the acceptance decision; they verify the unchanged semantics.
 
 Re-plan for changed domain meaning, persisted formats, new client obligations, new
 runtime dependencies, or a failing proof that invalidates this composition. Ordinary
-regressions remain in B1. Mark Verifying while required external checks remain open;
-accept only with all required evidence. The performance and architecture audit stages
+regressions remain in B1. The required external checks are complete; this plan is Accepted on the linked evidence. The performance and architecture audit stages
 remain separate and are not implicitly authorized by this patch.

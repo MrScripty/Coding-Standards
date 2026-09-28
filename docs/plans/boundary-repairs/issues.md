@@ -1,5 +1,7 @@
 # Findings and dispositions
 
+> **Current disposition (2026-09-27): Accepted.** The former environment and reviewer gates are resolved by the exact-source CI and independent review linked in the acceptance decision. All external observations are deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 | ID | Boundary / owner | Disposition | Required evidence |
 |---|---|---|---|
 | F04 | Graph logical resolution | fix in B1 | Bare/path spellings independent of ambient filesystem |

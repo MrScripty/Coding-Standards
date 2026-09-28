@@ -875,7 +875,7 @@
       ]
     },
     {
-      "digest": "sha256:926d6a57c4de14512677c3c1d8802bf5e8578aaffb95597892946d2840fb1180",
+      "digest": "sha256:b184cfc3bdf03b176f4c50eb1fea68616b07d30ae076e53843ea85720ddb3212",
       "path": "docs/plans/README.md",
       "state": "present",
       "uses": [
@@ -13730,7 +13730,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:f7965312de3e99df6dbd46cdd7c460bd6d69f9ba379e171bc6cb17175587d795",
+    "digest": "sha256:9111361e4d1d2a283ddac8fc8350aba8f4e65f2e15c85497cec4717e76dbc7dd",
     "uses": [
       {
         "check": "python-package-contract",

@@ -1,5 +1,7 @@
 # Boundary repairs — verification and delivery
 
+> **Current disposition (2026-09-27): Accepted.** The exact-source locked Python 3.12 workflow passed, the independent external reviewer recommended this slice as satisfied, and the acceptance owner dispositioned its findings. The earlier local-only/pending status below is historical. See the [acceptance-owner decision](../../typed-routing-edits/reports/acceptance-dispositions.md).
+
 **Source baseline:** `af6b829aae7beba98c7aa523c51c832011587d12` (interface 43).
 
 **Candidate:** interface **44**. **State:** source implemented; Verifying pending

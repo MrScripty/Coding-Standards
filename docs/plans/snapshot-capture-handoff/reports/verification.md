@@ -1,5 +1,7 @@
 # Verified snapshot-capture handoff — implementation verification
 
+> **Current disposition (2026-09-27): Accepted.** The exact-source locked Python 3.12 workflow passed, the independent external reviewer recommended this slice as satisfied, and the acceptance owner dispositioned its findings. The earlier local-only/pending status below is historical. See the [acceptance-owner decision](../../typed-routing-edits/reports/acceptance-dispositions.md).
+
 **Status: Verifying.** Source implementation and local evidence are complete.
 Supported locked-runtime CI for the exact diff and independent external material
 review remain acceptance requirements. Baseline:

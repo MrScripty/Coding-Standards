@@ -1,5 +1,7 @@
 # Typed routing-edit pilot — verification
 
+> **Current disposition (2026-09-27): Accepted.** The exact-source locked Python 3.12 workflow passed, the independent external reviewer recommended this slice as satisfied, and the acceptance owner dispositioned its findings. Earlier pending status below is historical. See the [acceptance-owner decision](acceptance-dispositions.md).
+
 **Status: Verifying.** Source implementation and local behavioral evidence are
 complete. Supported locked-runtime CI on this exact diff and independent external
 review remain acceptance requirements. No live model qualification is claimed.

@@ -1,5 +1,7 @@
 # Findings and disposition
 
+> **Current disposition (2026-09-27): Accepted.** The former environment and reviewer gates are resolved by the exact-source CI and independent review linked in the acceptance decision. All external observations are deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 - R1 — resolved locally: RouterProjection now owns the exact canonical fact records;
   navigation and material binding consume it. Baseline records/digests are preserved.
 - R2 — resolved locally: successful construction records actual retained-base use,

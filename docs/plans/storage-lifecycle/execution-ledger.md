@@ -1,5 +1,7 @@
 # Execution ledger
 
+> **Current disposition (2026-09-27): Accepted.** Acceptance owner reconciled the exact-source CI, preserved external verdict and plan-specific evidence. The slice is Accepted; implementation-stage pending notes below remain historical. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 ## 2026-09-27 — Admission
 
 User selected audit stage Storage lifecycle. Admitted `start` at `docs/plans/storage-lifecycle/plan.md`. Verified GitHub head `0f24bac9b5bf773e9981bc027d6afd409607e89e` and Actions source ZIP SHA-256 `bf2d8b356ca8cd7be6b1eb3f730bd0f107d83ee2e856a204644804777adbf454`. The source clone is clean, on private branch `implementation/storage-lifecycle`, with main held at the verified source. No operator store/configuration is mounted.

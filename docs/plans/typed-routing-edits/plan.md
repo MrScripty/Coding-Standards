@@ -1,13 +1,15 @@
 # Typed routing-edit pilot
 
-**Plan status:** Verifying
-**Acceptance status:** blocked — independent external review remains unavailable.
+**Plan status:** Accepted
+**Acceptance status:** satisfied
 **Admission:** `start`, user-authorized implementation of the typed routing-edit pilot.
 **Base:** `cbf9cdd2d7627d2c45f0001486a8872ab6b5206d`, interface 44.
-**Current phase:** T2; the source candidate is integrated on GitHub `main` at
-`7d563f03`, with locked CI passed and external review outstanding.
-**Next slice:** T2 — obtain and disposition independent external review of the
-exact pilot; no implementation expansion is admitted.
+**Current phase:** Accepted; integrated production candidate reviewed and qualified.
+**Next slice:** none — this bounded slice is Accepted.
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** A1–A6 are satisfied for exact source `7d563f032267d8d96fd45675147b9de7206a7cac`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36358571883) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends the pilot as satisfied. The acceptance owner dispositioned non-blocking observations in the [six-slice decision](reports/acceptance-dispositions.md). Earlier pending statements below document the implementation-stage state and are superseded by this decision. No further implementation slice is admitted here.
 
 ## Outcome and boundaries
 
@@ -97,12 +99,6 @@ representation and maintenance benefits are reviewed; expansion is not part of T
 
 ## Implementation disposition
 
-T1 is Implemented and integrated. A1–A5 have local representative and differential
-evidence plus a fresh internal read-only architecture review with no demonstrated
-blocker. A6 has local test/static/packaging evidence and passing exact-commit
-supported locked CI. Independent **external** review remains required. See
+T1 is Accepted and integrated. A1–A5 retain local representative and differential evidence plus internal architecture review. A6 has local test/static/packaging evidence, passing exact-commit supported locked CI, and a separate independent external review. See
 [verification](reports/verification.md) for the candidate identity, passed CI,
-review dispositions, stopped initial campaign and limitations. Neither internal
-review nor successful earlier-slice CI grants acceptance. No claim of Accepted
-status, whole-operation speedup or actual model qualification is made. T2 is the
-only next acceptance slice; another edit-family conversion requires new admission.
+review dispositions, stopped initial campaign and limitations. Acceptance is based on this exact source candidate's CI, independent external review and the owner's dispositions, not earlier-slice CI. No whole-operation speedup or actual model qualification is claimed. Another edit-family conversion requires new admission.

@@ -1,13 +1,17 @@
 # Plan: Storage lifecycle admission without redundant work
 
-**Plan status:** Verifying
-**Acceptance status:** partial
-**Current phase:** Integration qualification; source and local verification complete
-**Next slice:** S2 — supported-runtime qualification and independent material review
+**Plan status:** Accepted
+**Acceptance status:** satisfied
+**Current phase:** Accepted; exact-source CI and independent material review dispositioned.
+**Next slice:** none — this bounded slice is Accepted.
 **Canonical plan / operation:** `docs/plans/storage-lifecycle/plan.md` / `verify`; source implementation admitted under the user's storage-lifecycle instruction.
 **Execution ledger:** [execution-ledger.md](execution-ledger.md)
 **Issues:** [issues.md](issues.md)
 **Report:** [reports/verification.md](reports/verification.md)
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** L1–L7 are satisfied for exact source `87873de5e1405590209dad389f7010a6b61f0bbe`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36342508184) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends this slice as satisfied. The acceptance owner dispositioned its non-blocking observations in the [six-slice decision](../typed-routing-edits/reports/acceptance-dispositions.md). The earlier local-only or pending statements below document the implementation-stage state; this decision supersedes those status statements. No further implementation slice is admitted here.
 
 ## Objective and scope
 
@@ -81,16 +85,16 @@ Additional directly affected tests may be admitted in the ledger without widenin
 | L4 | Actual MCP reads/status and retained baseline workflow outcomes, evidence failures and publication targets preserve meaning | system | representative | automated | satisfied (local) | [Verification](reports/verification.md) |
 | L5 | Recorded paired open measurements show reduced duplicate scan work with unchanged successful results and no weaker integrity algorithm | focused | required-real (named local benchmark environment) | automated | satisfied (local) | [Verification](reports/verification.md) |
 | L6 | Public contracts/catalogs/schema are unchanged; generated inputs are fresh; complete affected tests/checkpoint and fresh-base reconstruction pass | release-artifact | not-applicable | automated | satisfied (local) | [Verification](reports/verification.md) |
-| L7 | Supported locked-runtime CI and independent material review of this candidate pass before acceptance | integration | representative | either | pending | pending |
+| L7 | Supported locked-runtime CI and independent material review of this candidate pass before acceptance | integration | representative | either | satisfied | [Acceptance decision](../typed-routing-edits/reports/acceptance-dispositions.md) |
 
 Deciding oracles are real SQLite lock/content observations, the existing full PRAGMA integrity/foreign-key checks, exact metadata/row/readback comparisons, existing public schemas, and file/hash reconstruction. Tests may inject a lifecycle change at a deterministic scheduling point through test-only instrumentation; they must perform it on a separate real SQLite connection and preserve error evidence. No sleeps decide a race and no timing threshold substitutes for behavior. Local benchmarks prove only their recorded workload, not model latency or deployment performance.
 
 ## Blockers and re-plan conditions
 
-No implementation blocker. Supported Python 3.11/3.12 is not installed locally; provisioning was attempted but failed due to unavailable DNS. Use the existing local interpreter for explicitly scoped evidence and retain locked CI as a required acceptance gate. Independent external review is not available in this execution.
+No implementation blocker. The original implementation container lacked a supported interpreter; the later exact-source Python 3.12 locked CI and independent external review satisfied the acceptance gate.
 
 Re-plan for any change to expiry meaning, data authority, supported schema/identity, corruption guarantees, cross-operation connection lifetime, or evidence showing that the probe weakens observation. Fix ordinary test/manifest errors inside S1. Additional scale/index/audit scheduling changes require a separately recorded decision.
 
-One serial integration owner works in a private container clone/branch; accepted main remains the source baseline. No user's branches, stores, configuration, unrelated files, or remote refs are changed. Retain the clone for review and package reconstruction; no destructive cleanup authority is granted over user resources.
+The private implementation clone and source baseline described the delivery stage. The exact source slice is integrated on `main` at the candidate linked above; no operator store, configuration or standards content was changed.
 
-**Final acceptance:** partial; L1–L6 have local evidence and L7 remains pending. **Deferred:** broader audit scheduling/indexing, cache working-set and domain/API redesign. Accept only with every required claim satisfied; final next slice then becomes none.
+**Final acceptance:** satisfied; L1–L6 retain their local evidence and L7 is satisfied by exact-source locked CI and independent review. **Deferred:** broader audit scheduling/indexing, cache working-set and domain/API redesign. Accept only with every required claim satisfied; final next slice then becomes none.

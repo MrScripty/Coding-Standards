@@ -1,11 +1,15 @@
 # Verified snapshot-capture handoff
 
-**Plan status:** Verifying
-**Acceptance status:** pending — A6 exact-diff CI and independent review
+**Plan status:** Accepted
+**Acceptance status:** satisfied
 **Admission:** `verify`, source implementation and local qualification complete.
 **Base:** `6fa41c3105a6d1d4a49230ad367ae83d3afc472c`, interface 44.
-**Current phase:** C1 Implemented; integration acceptance pending.
-**Next slice:** C2 — exact-diff supported-runtime CI and independent review.
+**Current phase:** Accepted; exact-source CI and independent material review dispositioned.
+**Next slice:** none — this bounded slice is Accepted.
+
+## Acceptance-owner closure — 2026-09-27
+
+**Accepted.** A1–A6 are satisfied for exact source `cbf9cdd2d7627d2c45f0001486a8872ab6b5206d`. [Exact-source Python 3.12 CI](https://github.com/MrScripty/Coding-Standards/actions/runs/36350106138) passed under the unchanged lock and current complete workflow; [independent external review](reports/external-review.md) recommends this slice as satisfied. The acceptance owner dispositioned its non-blocking observations in the [six-slice decision](../typed-routing-edits/reports/acceptance-dispositions.md). The earlier local-only or pending statements below document the implementation-stage state; this decision supersedes those status statements. No further implementation slice is admitted here.
 
 ## Objective and scope
 
@@ -91,14 +95,11 @@ changes public/domain meaning, or makes capture success depend on cache retentio
 
 ## Implementation disposition
 
-C1 is **Implemented**. Local evidence satisfies A1–A5 at the representative boundaries
-described in [verification](reports/verification.md); A6 remains pending at its
-integration/reviewer owners. Fourteen new methods and the complete 569-test Engine
+C1 is **Accepted**. Local evidence satisfies A1–A5 at the representative boundaries described in [verification](reports/verification.md); A6 is satisfied by exact-source locked CI and independent external review. Fourteen new methods and the complete 569-test Engine
 selection passed, along with the supporting packages, contract preservation and
 actual cold transport/state comparisons. The final delivery records its own focused,
 structural, patch and file-hash checks. No live model run is inferred.
 
-There is one next slice, C2. Run the unchanged supported lock on this exact diff and
-obtain independent material review before Accepted status. Restart the normal MCP
+There is no next slice. The unchanged supported lock passed on the exact source and the independent external material review is dispositioned. Restart the normal MCP
 process only to load new code, preserving arguments, catalogs, stores and handles.
 Typed routing-edit work remains a separate deferred recommendation.

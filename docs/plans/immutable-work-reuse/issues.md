@@ -1,5 +1,7 @@
 # Issues and dispositions
 
+> **Current disposition (2026-09-27): Accepted.** The former environment and reviewer gates are resolved by the exact-source CI and independent review linked in the acceptance decision. All external observations are deferred as non-blocking; no production repair was required. See the [acceptance-owner decision](../typed-routing-edits/reports/acceptance-dispositions.md).
+
 - U-E1 — Environment qualification. Local Python 3.13.5/rpds-py 2026.5.1 differs
   from supported locked 3.11/3.12. Integration owner runs unchanged locked CI before
   acceptance. No substitution or dependency-pin edit is authorized.
