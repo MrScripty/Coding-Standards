@@ -64,6 +64,11 @@ blocker. The acceptance owner dispositions its two findings as non-blocking:
   and the reviewer found no reachable trigger; RF-10 and cold-transport tests
   exercise the known risk. Defer until a concrete valid-workflow failure exists.
 
-The source-review recommendation is preserved as evidence for R-A8, not a final
-acceptance verdict. [Connected-agent qualification](reports/r2-live-agent.md)
-remains the open gate; exact-head locked CI has since passed separately.
+The source-review recommendation remains reviewer evidence, not unilateral
+acceptance authority. The owner accepted R-A8 after the separate exact-head CI
+and [connected-agent qualification](reports/r2-live-agent.md) passed. Neither
+advisory opens another implementation slice.
+
+The production fact registry has no aliases, boolean facts or nullable facts.
+Their negative and state distinctions remain covered by disposable-fixture tests
+in the supported CI. They were not fabricated in the live production snapshot.

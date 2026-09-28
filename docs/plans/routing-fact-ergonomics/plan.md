@@ -1,12 +1,12 @@
 # Routing-Fact Ergonomics
 
-**Plan status:** `Verifying`
+**Plan status:** `Accepted`
 
-**Current phase:** R2 exact-head CI and source review complete; connected interface-45 qualification pending
+**Current phase:** R2 accepted; no active implementation or integration slice
 
-**Next slice:** **R2 — Live agent comparison and accepted cutover**
+**Next slice:** `none`
 
-**Acceptance status:** `partial`
+**Acceptance status:** `satisfied`
 
 **Composed-design review:** `applicable`; see [the composed-design admission](#simplicity-and-ownership-review).
 
@@ -17,8 +17,8 @@
 **Admission:** this plan owns priority 2 of the user's new sequence **2 → 4 → 3**:
 routing-fact ergonomics, review-evidence packaging, then broader test strengthening.
 The prior six-slice refactoring is Accepted and closed. This plan does not reopen it.
-The user admitted `start` against this path; R1 is now implemented. The next
-admission is `verify` for the R2/integration evidence after checking current state.
+The user admitted `start` and then `verify` against this path. R1 and R2 are
+accepted; later priorities require separate admission.
 
 ## Objective
 
@@ -89,12 +89,12 @@ Analysis, native queries and stored contracts. It is not a retired renderer.
 | --- | --- | --- | --- | --- | --- | --- |
 | R-A1 | The new focused input and output fact grammar is explicit, generated, discoverable, and has no old-envelope fallback. | contract | supported locked runtime | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
 | R-A2 | Equivalent supported inputs produce identical canonical fact bindings, rule truth/unknown sets, selected dependencies, ordering and qualified content. | focused + differential | supported locked runtime | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
-| R-A3 | Static and snapshot-dependent failures are bounded, useful typed input rejections; no invalid value becomes success, a transport exception or fabricated absence. | contract + negative | both MCP purposes | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
-| R-A4 | Fact binding uses the selected snapshot after qualification; content and full-explanation continuations round-trip that binding without additional capture or compilation. | integration | real SQLite and replacement stdio | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
-| R-A5 | Native query/preview, evidence-backed Analysis, authoring, stored identities/handles and prior retained workflows preserve their contracts and results. | compatibility/retention | baseline producer and candidate consumers | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
+| R-A3 | Static and snapshot-dependent failures are bounded, useful typed input rejections; no invalid value becomes success, a transport exception or fabricated absence. | contract + negative | both MCP purposes | automated | satisfied | [Verification](reports/verification.md) |
+| R-A4 | Fact binding uses the selected snapshot after qualification; content and full-explanation continuations round-trip that binding without additional capture or compilation. | integration | real SQLite and replacement stdio | automated | satisfied | [Verification](reports/verification.md) |
+| R-A5 | Native query/preview, evidence-backed Analysis, authoring, stored identities/handles and prior retained workflows preserve their contracts and results. | compatibility/retention | baseline producer and candidate consumers | automated | satisfied | [Verification](reports/verification.md) |
 | R-A6 | All actual affected producers, consumers, generated examples and live guidance are coordinated; complete required CI and structural checks pass on the relevant material. | integration | current hash-locked CI | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
-| R-A7 | The supported live agent can construct and refine routing facts with the smaller format, use discovery as needed and preserve unknowns, without new repair loops or a required extra call. | user workflow | actual authorized client/model/surface | observed | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
-| R-A8 | Independent review and acceptance-owner disposition establish the exact candidate's invariants and proportionality; unrelated work and previous acceptance are preserved. | review | independent reviewer and owner | manual | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
+| R-A7 | The supported live agent can construct and refine routing facts with the smaller format, use discovery as needed and preserve unknowns, without new repair loops or a required extra call. | user workflow | actual authorized client/model/surface | observed | satisfied | [Connected interface-45 navigation and paired comparison](reports/r2-live-agent.md) |
+| R-A8 | Independent review and acceptance-owner disposition establish the exact candidate's invariants and proportionality; unrelated work and previous acceptance are preserved. | review | independent reviewer and owner | manual | satisfied | [External review](reports/external-review.md), [owner findings](issues.md), [final verification](reports/verification.md) |
 
 No production standards proposal or publication is necessary for the navigation
 workflow qualification. Required existing authoring regressions and retained-state
@@ -308,7 +308,7 @@ its snapshot-dependent binding and multiple continuation producers.
 
 ### R1 — Coordinated focused contract and consumers
 
-**Status:** `Implemented`
+**Status:** `Accepted`
 
 **Goal:** implement the single smaller focused route representation with semantic
 and authority equivalence and useful error behavior.
@@ -341,7 +341,7 @@ current locked CI and generated freshness. Old focused input must fail usefully.
 
 ### R2 — Live agent comparison and accepted cutover
 
-**Status:** `Planned`; depends on the coherent R1 candidate.
+**Status:** `Accepted`; completed against the coherent R1 candidate.
 
 **Goal:** establish the externally meaningful reduction in construction burden and
 complete review/acceptance without a new feature slice.
@@ -393,10 +393,8 @@ priority 3 only defers broader unrelated test hardening.
 
 ## Blockers
 
-The source candidate is locally verified. Supported-runtime CI and actual host/model
-behavior and independent review remain unqualified; their owner and procedure are
-R2/integration. The missing environment cannot be
-silently marked passed. Source and static planning checks do not claim R-A7.
+No acceptance blocker remains. The supported-runtime CI, independent review and
+actual connected interface-45 agent check are recorded under their own evidence.
 
 ## Re-Plan Triggers
 
@@ -411,17 +409,18 @@ meaning and uncertainty rather than shipping a permissive fallback.
 
 ## Final Acceptance
 
-Source implementation and local verification are complete. R-A3–R-A5 have the
-requested local/real-process evidence. R-A1/R-A2/R-A6 still require supported locked
-CI; R-A7/R-A8 require actual host/model evidence and independent review/owner
-disposition. See the verification report rather than substituting baseline CI or
-planning probes. Preserve original failures and repaired candidate evidence.
-Use ordinary repository branching/commit/review rules; no prescribed commit count,
-retrospective PR or history rewrite is part of this plan.
+R-A1–R-A8 are satisfied. Exact-source Python 3.12 locked CI covers the integrated
+production candidate; the independent source reviewer found no blocker; the owner
+deferred two advisories with triggers; and the refreshed connected agent completed
+construction, refinement, continuation and supported error cases on interface 45.
+The [verification](reports/verification.md), [live-agent record](reports/r2-live-agent.md),
+[review](reports/external-review.md), [issues](issues.md) and [ledger](execution-ledger.md)
+retain the separate evidence. No authoring boundary changed, so no new proposal
+lifecycle run was required. The earlier accepted six-slice sequence remains closed.
 
 After R1/R2 acceptance, the user's next priority is **review-evidence packaging**;
 then **targeted test strengthening**. Neither is implemented or admitted as a source
 slice here, and neither reopens the closed six-slice refactoring.
 
-- Acceptance status: `partial`
-- Final status: `Verifying`
+- Acceptance status: `satisfied`
+- Final status: `Accepted`

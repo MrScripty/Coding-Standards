@@ -1,10 +1,9 @@
 # Routing-Fact Ergonomics — Verification
 
-**Status: Verifying.** R1 source implementation and local evidence are complete;
-the integrated exact-head locked CI and independent source review now pass. The
-actual connected client still needs interface-45 qualification before acceptance.
-R2 is the next slice. This change does
-not reopen the accepted six-slice refactoring or implement later priorities.
+**Status: Accepted.** R1 source implementation, exact-head locked CI, independent
+source review and actual connected interface-45 navigation qualification passed.
+The acceptance owner recorded both review advisories as non-blocking. This change
+does not reopen the accepted six-slice refactoring or implement later priorities.
 
 ## Baseline and scope
 
@@ -162,8 +161,8 @@ facts with empty sets. The route input schema changes from **2,475 to 1,625 byte
 
 All purpose/breadth/delivery variants were measured; operation names, counts and
 output-delivery choices remain. These are raw catalog/request bytes, not model
-context, billing, latency or a measured reduction in model repairs. The supported
-live agent comparison is still required before closing R-A7.
+context, billing, latency or a measured reduction in model repairs. The later
+paired and connected agent observations are recorded in the R2 live report.
 
 Of the previous **326** canonical definitions, **323 are unchanged**. Only
 `RouteCall`, `CompactRouteResult` and `AgentRouteResult` change their facts reference;
@@ -192,15 +191,17 @@ selection passed (608 tests), and `verify.py --complete` reported 73 selected,
 This is supported-environment candidate evidence for R-A1, R-A2 and R-A6. The
 earlier local full-selection failure and affected rerun remain recorded above;
 the CI run is a distinct all-green execution, not a relabeling of that local run.
-The uncommitted R2 record additions and unrelated output-contract documentation
-edits are outside the tested source tree.
+The later R2 acceptance records, generated suite-input index and unrelated
+output-contract documentation edits are outside the tested source tree.
 
 The [read-only external source review](external-review.md) found no blocking source
 defect and made two advisory observations dispositioned in `issues.md`. It did not
-claim CI or live-agent evidence. The [paired fresh-model comparison and current
-connected-session state](r2-live-agent.md) remain distinct: the disposable model
-comparison succeeded, but this session's connected catalog still reports 44 and
-must be refreshed before R-A7 can be decided.
+claim CI or live-agent evidence. The [paired fresh-model comparison and actual
+connected-session qualification](r2-live-agent.md) remain distinct. After restart,
+the connected catalog and `runtime_info` both reported interface 45, and the live
+route, refinement, returned continuations and supported mistake cases succeeded.
+R-A7 and the source-review/owner portion of R-A8 are satisfied without an authoring
+lifecycle run because no authoring boundary changed.
 
 At the R1 handoff, local runtime was CPython 3.13.5 with jsonschema 4.26.0 and
 rpds-py 2026.5.1. The existing supported hash-locked CI selects Python 3.12 and
@@ -210,20 +211,21 @@ The baseline CI success is not candidate CI. No Python 3.11 result is claimed.
 
 At that handoff, no authenticated Codex/model turn, independent external review,
 provider transfer, operator configuration edit, remote push, or production standards
-publication was performed. The existing configured-client navigation harness has been updated but
-was not executed on the operator's host. Its observation is distinct from a fresh
+publication was performed. The configured-client navigation harness had been updated
+but not executed on the operator's host. Its observation is distinct from a fresh
 model task; the new qualification guide describes both without requiring artificial
 standards mutations or the future review-packet generator.
 
-Apply the base-checked patch and generated outputs as one coordinated source change.
-Restart the Engine and refresh/reconnect the actual client catalog for interface 45.
-No registration flags change; preserve purpose and on-demand output selection.
+The R1 handoff called for a coordinated source update and a restart/reconnect of the
+actual client catalog to interface 45. That restart is now observed above. No
+registration flag changed; purpose and on-demand output selection were preserved.
 Existing valid snapshot/workflow handles and canonical stored facts remain valid.
 Old focused calls/continuations require their original interface/source or explicit
 reconstruction in the new grammar against the retained snapshot. Do not migrate or
 erase stores to update an input representation.
 
-R1 is Implemented and the plan is Verifying. Required locked-runtime and actual
-host/review claims remain pending at R2/integration; no global Accepted verdict is
-fabricated from local tests. The next priorities remain review-evidence packaging,
-then broader test strengthening, only after this scope's normal completion.
+At R2 completion, all R-A1–R-A8 claims have their named evidence. Production source
+remains the CI-tested integrated candidate; the acceptance records and generated
+suite-input manifest are documentation changes checked by the complete structural
+verifier. Review-evidence packaging and broader test strengthening remain separate
+priorities requiring their own admission.

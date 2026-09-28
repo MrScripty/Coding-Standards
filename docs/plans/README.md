@@ -122,5 +122,6 @@ closed; no further implementation slice in it is admitted.
 
 [Routing-fact ergonomics](routing-fact-ergonomics/plan.md) owns the separately admitted
 focused input improvement, its consumer cutover and actual-agent qualification.
-The accepted six-slice refactoring remains closed. Review-evidence packaging and
-broader test strengthening are later, separately admitted work.
+It is Accepted after locked CI, independent review and connected interface-45
+qualification. The accepted six-slice refactoring remains closed. Review-evidence
+packaging and broader test strengthening are later, separately admitted work.

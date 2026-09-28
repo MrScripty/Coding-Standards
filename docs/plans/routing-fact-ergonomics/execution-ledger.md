@@ -148,3 +148,31 @@ in `reports/r2-live-agent.md`. These disposable client runs do not substitute fo
 the actual connected-session check: that connection still reports interface 44 and
 `restart-and-reconnect`. Keep R-A7 and overall acceptance pending until the host
 refreshes the catalog and the connected tools exercise the changed surface.
+
+## R2 acceptance and closure
+
+After the session restart, both the connected native tool declarations and
+`runtime_info` reported interface 45, with `installation_state: current` and
+on-demand output delivery unchanged. Against one actual snapshot, the agent
+constructed a compact route from known values, answered the unresolved boundary
+question, and used the returned content-page and full-explanation requests
+directly. Three invalid calls returned bounded typed feedback; explicit unknown
+and a justified empty enum set retained their distinct meanings. Other unanswered
+facts remained unanswered. Production has no alias, boolean or nullable facts,
+so those cases retain the disposable-fixture CI evidence without fabricated live
+assertions. The [R2 live report](reports/r2-live-agent.md) records the connected
+observations separately from the paired fresh-model comparison.
+
+The acceptance owner reconciled R-A1–R-A8: exact-source locked Python 3.12 CI
+run `36465019273` covers the integrated production candidate `09d7829d` through
+HEAD `39d44f00` (tree `ca0e6c21`); independent review found no blocker, and
+RF-R1/RF-R2 have explicit non-blocking dispositions. The evidence and manifest
+commits `56303b79` and `e305c760` changed only documentation and the generated
+repository-index digest. The final acceptance records likewise change no
+production source or output-delivery configuration. The complete structural
+checkpoint passed 73/73 after regenerating the suite-input manifest for the
+updated plan-index digest; manifest freshness passed. An identical full Engine
+campaign is not required for documentation-only changes. R1 and R2
+are Accepted, the plan acceptance status is satisfied, and no further slice is
+admitted under this plan. Review-evidence packaging and broader test strengthening
+remain separate priorities requiring new admission.
