@@ -2,7 +2,7 @@
 
 **Plan status:** `Verifying`
 
-**Current phase:** R1 source complete and locally verified; R2/integration acceptance evidence pending
+**Current phase:** R2 exact-head CI and source review complete; connected interface-45 qualification pending
 
 **Next slice:** **R2 — Live agent comparison and accepted cutover**
 
@@ -87,12 +87,12 @@ Analysis, native queries and stored contracts. It is not a retired renderer.
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| R-A1 | The new focused input and output fact grammar is explicit, generated, discoverable, and has no old-envelope fallback. | contract | supported locked runtime | automated | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
-| R-A2 | Equivalent supported inputs produce identical canonical fact bindings, rule truth/unknown sets, selected dependencies, ordering and qualified content. | focused + differential | supported locked runtime | automated | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
+| R-A1 | The new focused input and output fact grammar is explicit, generated, discoverable, and has no old-envelope fallback. | contract | supported locked runtime | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
+| R-A2 | Equivalent supported inputs produce identical canonical fact bindings, rule truth/unknown sets, selected dependencies, ordering and qualified content. | focused + differential | supported locked runtime | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
 | R-A3 | Static and snapshot-dependent failures are bounded, useful typed input rejections; no invalid value becomes success, a transport exception or fabricated absence. | contract + negative | both MCP purposes | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
 | R-A4 | Fact binding uses the selected snapshot after qualification; content and full-explanation continuations round-trip that binding without additional capture or compilation. | integration | real SQLite and replacement stdio | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
 | R-A5 | Native query/preview, evidence-backed Analysis, authoring, stored identities/handles and prior retained workflows preserve their contracts and results. | compatibility/retention | baseline producer and candidate consumers | automated | satisfied | [Verification and remaining environment/host/review claims](reports/verification.md) |
-| R-A6 | All actual affected producers, consumers, generated examples and live guidance are coordinated; complete required CI and structural checks pass on the relevant material. | integration | current hash-locked CI | automated | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
+| R-A6 | All actual affected producers, consumers, generated examples and live guidance are coordinated; complete required CI and structural checks pass on the relevant material. | integration | current hash-locked CI | automated | satisfied | [Verification and exact-head locked CI](reports/verification.md) |
 | R-A7 | The supported live agent can construct and refine routing facts with the smaller format, use discovery as needed and preserve unknowns, without new repair loops or a required extra call. | user workflow | actual authorized client/model/surface | observed | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
 | R-A8 | Independent review and acceptance-owner disposition establish the exact candidate's invariants and proportionality; unrelated work and previous acceptance are preserved. | review | independent reviewer and owner | manual | pending | [Verification and remaining environment/host/review claims](reports/verification.md) |
 

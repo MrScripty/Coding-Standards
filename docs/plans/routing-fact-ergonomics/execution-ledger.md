@@ -128,3 +128,23 @@ and independent-review claims. The operator's connection and configuration were
 not changed, no external provider was invoked, and no remote commit/push or
 production standards publication occurred. Final documentation/input-manifest,
 scoped tests and fresh patch reconstruction are checked separately in the delivery.
+
+## R2 integration evidence in progress
+
+The integrated interface-45 source is production commit `09d7829d`, and the
+current tested HEAD is `39d44f00` (tree `ca0e6c21`). GitHub Actions run
+`36465019273`, job `109072809297`, passed under Python 3.12 with the unchanged
+hash lock: 571 supporting-package tests, 608 Engine tests and all 73 selected
+structural suites, with no reported skips. The read-only external source report
+recommended no blocker; its two advisories have owner dispositions in `issues.md`.
+This review covers the routing-fact change, not the already accepted six-slice
+sequence.
+
+Matched fresh baseline-44/candidate-45 model navigation completed initial route,
+same-snapshot refinement, one returned content page and full explanation without
+construction errors or route repair. The baseline made two input-discovery calls;
+the candidate made none. Request bytes and repeated reads are recorded separately
+in `reports/r2-live-agent.md`. These disposable client runs do not substitute for
+the actual connected-session check: that connection still reports interface 44 and
+`restart-and-reconnect`. Keep R-A7 and overall acceptance pending until the host
+refreshes the catalog and the connected tools exercise the changed surface.

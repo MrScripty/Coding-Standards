@@ -47,3 +47,23 @@ proof assertions. Both are included in the final affected rerun. No runtime code
 was changed to satisfy these tests.
 The supported locked environment and actual live model have not been run here;
 independent review and acceptance remain with their identified owners.
+
+## R2 independent source-review disposition (2026-09-28)
+
+The [read-only external report](reports/external-review.md) inspected the integrated
+interface-45 routing slice against `ff2e13ed..09d7829d` and recommended no source
+blocker. The acceptance owner dispositions its two findings as non-blocking:
+
+- **RF-R1 / advisory:** a private direct `bind_facts` call could supply a `type`
+  member that overrides the inferred type before the existing binder rejects a
+  mismatch. Generated `RouteCall` validation excludes that shape at both public
+  entry points; no invalid public success was demonstrated. Defer defensive
+  hardening to a separately admitted change if a direct caller appears.
+- **RF-R2 / advisory:** a future result-construction `ContractError` could escape
+  the authoring navigation catch. The current fact projection is prevalidated,
+  and the reviewer found no reachable trigger; RF-10 and cold-transport tests
+  exercise the known risk. Defer until a concrete valid-workflow failure exists.
+
+The source-review recommendation is preserved as evidence for R-A8, not a final
+acceptance verdict. [Connected-agent qualification](reports/r2-live-agent.md)
+remains the open gate; exact-head locked CI has since passed separately.

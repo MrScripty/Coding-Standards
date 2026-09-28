@@ -1,8 +1,9 @@
 # Routing-Fact Ergonomics — Verification
 
 **Status: Verifying.** R1 source implementation and local evidence are complete;
-current locked-runtime CI, actual client/model comparison and independent review
-remain separate acceptance requirements. R2 is the next slice. This change does
+the integrated exact-head locked CI and independent source review now pass. The
+actual connected client still needs interface-45 qualification before acceptance.
+R2 is the next slice. This change does
 not reopen the accepted six-slice refactoring or implement later priorities.
 
 ## Baseline and scope
@@ -177,14 +178,39 @@ authoring, identity, store, cache, lock and CI owners.
 
 ## Qualification and integration
 
-Local runtime is CPython 3.13.5 with jsonschema 4.26.0 and rpds-py 2026.5.1. The
-existing supported hash-locked CI selects Python 3.12 and rpds-py 2026.6.3. A bounded
-attempt to provision Python 3.12 failed due to DNS; no pin or CI matrix was changed.
+### Integrated exact-head CI (R2)
+
+GitHub Actions run `36465019273`, job `109072809297`, completed successfully on
+integrated commit `39d44f007c36684e1ebc546f31a19e20e2e660e5`, tree
+`ca0e6c212003fff0d8be2c3d73f2a07b3897bfdd`, which contains the production
+pilot commit `09d7829df79d2e0c25b8fb9add4b7c47d6368684`. The workflow fetched
+that exact public source, created its Python 3.12 environment, and installed the
+unchanged `tools/standards_contracts/requirements.lock` with `--require-hashes`.
+All eleven supporting-package selections passed (571 tests), the complete Engine
+selection passed (608 tests), and `verify.py --complete` reported 73 selected,
+73 passed, zero failed or blocked. The completed test summaries report no skips.
+This is supported-environment candidate evidence for R-A1, R-A2 and R-A6. The
+earlier local full-selection failure and affected rerun remain recorded above;
+the CI run is a distinct all-green execution, not a relabeling of that local run.
+The uncommitted R2 record additions and unrelated output-contract documentation
+edits are outside the tested source tree.
+
+The [read-only external source review](external-review.md) found no blocking source
+defect and made two advisory observations dispositioned in `issues.md`. It did not
+claim CI or live-agent evidence. The [paired fresh-model comparison and current
+connected-session state](r2-live-agent.md) remain distinct: the disposable model
+comparison succeeded, but this session's connected catalog still reports 44 and
+must be refreshed before R-A7 can be decided.
+
+At the R1 handoff, local runtime was CPython 3.13.5 with jsonschema 4.26.0 and
+rpds-py 2026.5.1. The existing supported hash-locked CI selects Python 3.12 and
+rpds-py 2026.6.3. A bounded attempt to provision Python 3.12 failed due to DNS;
+no pin or CI matrix was changed.
 The baseline CI success is not candidate CI. No Python 3.11 result is claimed.
 
-No authenticated Codex/model turn, independent external review, provider transfer,
-operator configuration edit, remote push, or production standards publication was
-performed. The existing configured-client navigation harness has been updated but
+At that handoff, no authenticated Codex/model turn, independent external review,
+provider transfer, operator configuration edit, remote push, or production standards
+publication was performed. The existing configured-client navigation harness has been updated but
 was not executed on the operator's host. Its observation is distinct from a fresh
 model task; the new qualification guide describes both without requiring artificial
 standards mutations or the future review-packet generator.
