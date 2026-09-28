@@ -4,8 +4,9 @@ from __future__ import annotations
 
 import json
 import os
-import stat
-import tempfile
+import secrets
+from contextlib import ExitStack
+from typing import BinaryIO
 import zipfile
 from pathlib import Path
 from urllib.parse import quote
@@ -33,53 +34,7 @@ from .common import (
     safe_name,
 )
 from .request import load_request
-
-
-def safe_file(root: Path, relative: str) -> bytes | None:
-    """Read one regular local file beneath a directory without following links."""
-    components = RepositoryPath.parse(relative).components
-    descriptor = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
-    try:
-        for component in components[:-1]:
-            try:
-                next_descriptor = os.open(
-                    component,
-                    os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
-                    dir_fd=descriptor,
-                )
-            except FileNotFoundError:
-                return None
-            os.close(descriptor)
-            descriptor = next_descriptor
-        try:
-            leaf = os.open(
-                components[-1],
-                os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
-                dir_fd=descriptor,
-            )
-        except FileNotFoundError:
-            return None
-        try:
-            before = os.fstat(leaf)
-            if not stat.S_ISREG(before.st_mode):
-                fail("local evidence is not regular", "unsupported")
-            if before.st_size > MEMBER_LIMIT:
-                fail("local evidence exceeds member limit", "unsupported")
-            with os.fdopen(os.dup(leaf), "rb") as stream:
-                data = stream.read(MEMBER_LIMIT + 1)
-            after = os.fstat(leaf)
-            if (
-                len(data) > MEMBER_LIMIT
-                or (before.st_size, before.st_mtime_ns, before.st_ctime_ns)
-                != (after.st_size, after.st_mtime_ns, after.st_ctime_ns)
-                or len(data) != after.st_size
-            ):
-                fail("local evidence changed or exceeds limit", "unavailable")
-            return data
-        finally:
-            os.close(leaf)
-    finally:
-        os.close(descriptor)
+from .local_files import LocalDirectory, read_regular
 
 
 def zip_info(name: str) -> zipfile.ZipInfo:
@@ -90,7 +45,7 @@ def zip_info(name: str) -> zipfile.ZipInfo:
     return info
 
 
-def _validate_staged(path: Path) -> dict:
+def _validate_staged(path: Path | BinaryIO) -> dict:
     """Check this builder's completed staging file before publication."""
     try:
         with zipfile.ZipFile(path) as archive:
@@ -277,54 +232,46 @@ def build(
     repo_root = repo_root.absolute()
     output = output.absolute()
     no_symlink_ancestors(repo_root)
-    no_symlink_ancestors(output.parent)
-    if (
-        output.suffix.lower() != ".zip"
-        or not output.parent.is_dir()
-        or output.exists()
-        or output.is_symlink()
+    if output.suffix.lower() != ".zip" or not repo_root.is_dir():
+        fail("output must be a new ZIP and source a directory")
+    if evidence_root is None and any(
+        item["origin"]["kind"] == "local-file" for item in request["artifacts"]
     ):
-        fail("output must be a new ZIP in an existing directory")
-    if output.parent.is_symlink() or repo_root.is_symlink() or not repo_root.is_dir():
-        fail("unsafe repository or output path")
-    if evidence_root is not None:
-        evidence_root = evidence_root.absolute()
-        no_symlink_ancestors(evidence_root)
-        if evidence_root.is_symlink() or not evidence_root.is_dir():
-            fail("evidence root is unavailable or unsafe")
-    elif any(item["origin"]["kind"] == "local-file" for item in request["artifacts"]):
         fail("local evidence requires an evidence root")
     git = GitRepository(repo_root)
-    top_level = Path(
-        git_output(
-            repo_root,
-            ("rev-parse", "--show-toplevel"),
-            max_output_bytes=4096,
-            local_only=True,
-        )
-        .decode("utf-8")
-        .rstrip("\n")
-    )
+    top_level = Path(git_output(
+        repo_root, ("rev-parse", "--show-toplevel"),
+        max_output_bytes=4096, local_only=True,
+    ).decode("utf-8").rstrip("\n"))
     if top_level.resolve() != repo_root.resolve():
         fail("repo-root must identify the Git worktree root")
-    git_directory = Path(
-        git_output(
-            repo_root,
-            ("rev-parse", "--absolute-git-dir"),
-            max_output_bytes=4096,
-            local_only=True,
-        )
-        .decode("utf-8")
-        .rstrip("\n")
-    )
-    resolved_output = output.resolve(strict=False)
-    for root in (repo_root, git_directory, evidence_root):
-        if root is not None and (
-            resolved_output == root.resolve()
-            or root.resolve() in resolved_output.parents
-            or resolved_output in root.resolve().parents
-        ):
-            fail("output overlaps an input root")
+    protected = (repo_root, *git.control_directories(local_only=True), evidence_root)
+    with ExitStack() as lifetime:
+        destination = lifetime.enter_context(LocalDirectory(output.parent))
+        evidence = (lifetime.enter_context(LocalDirectory(evidence_root))
+                    if evidence_root is not None else None)
+        resolved_output = output.resolve(strict=False)
+        for root in protected:
+            if root is not None and (
+                resolved_output == root.resolve()
+                or root.resolve() in resolved_output.parents
+                or resolved_output in root.resolve().parents
+            ):
+                fail("output overlaps an input root")
+        try:
+            os.stat(output.name, dir_fd=destination.descriptor, follow_symlinks=False)
+        except FileNotFoundError:
+            pass
+        else:
+            fail("output must be a new ZIP")
+        destination.assert_current()
+        return _build(git, request, request_bytes, evidence, destination, output)
+
+
+def _build(
+    git: GitRepository, request: dict, request_bytes: bytes,
+    evidence_root: LocalDirectory | None, destination: LocalDirectory, output: Path,
+) -> dict:
     revisions = {
         role: RepositoryRevision(oid) for role, oid in request["revisions"].items()
     }
@@ -382,24 +329,8 @@ def build(
                 add(member, data)
                 item[role] = {"mode": mode, "blob": oid, "member": member}
         primary.append(item)
-    patch = git_output(
-        repo_root,
-        (
-            "diff",
-            "--no-ext-diff",
-            "--no-textconv",
-            "--no-renames",
-            "--binary",
-            "--full-index",
-            "--no-color",
-            revisions["baseline"].oid,
-            revisions["candidate"].oid,
-            "--",
-        ),
-        max_output_bytes=MEMBER_LIMIT,
-        local_only=True,
-        attribute_source=revisions["candidate"],
-    )
+    patch = git.revision_patch(revisions["baseline"], revisions["candidate"],
+                               max_output_bytes=MEMBER_LIMIT)
     add("changes/baseline-candidate.patch", patch)
     plan_role = request["plan"]["revision"]
     plan_path = RepositoryPath.parse(request["plan"]["path"])
@@ -470,7 +401,7 @@ def build(
             item["mode"], item["blob"] = entries[role][path]
         else:
             assert evidence_root is not None
-            data = safe_file(evidence_root, origin["path"])
+            data = read_regular(evidence_root, origin["path"], MEMBER_LIMIT)
             item["availability"] = "included" if data is not None else "missing"
             if (
                 data is not None
@@ -535,25 +466,55 @@ def build(
         or sum(map(len, members.values())) + len(raw_manifest) > TOTAL_LIMIT
     ):
         fail("manifest exceeds packet limit", "unsupported")
-    descriptor, staged = tempfile.mkstemp(
-        prefix=".review-evidence-", suffix=".zip", dir=output.parent
-    )
+    if evidence_root is not None:
+        evidence_root.assert_current()
+    return _publish(destination, output, members, raw_manifest)
+
+
+def _publish(destination: LocalDirectory, output: Path,
+             members: dict[str, bytes], raw_manifest: bytes) -> dict:
+    """Keep validation, linking and cleanup anchored to the admitted directory."""
+    destination.assert_current()
+    staged = ".review-evidence-" + secrets.token_hex(16) + ".zip"
+    descriptor = os.open(staged, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                         0o600, dir_fd=destination.descriptor)
+    observed = os.fstat(descriptor)
+    identity = observed.st_dev, observed.st_ino
     published = False
+    result: dict = {}
     try:
-        with os.fdopen(descriptor, "wb") as stream:
+        with os.fdopen(descriptor, "w+b") as stream:
+            destination.assert_current()
             os.fchmod(stream.fileno(), 0o600)
             with zipfile.ZipFile(stream, "w") as archive:
                 for name, data in sorted(members.items()):
                     archive.writestr(zip_info(name), data)
                 archive.writestr(zip_info("manifest.json"), raw_manifest)
-        result = _validate_staged(Path(staged))
-        os.link(staged, output, follow_symlinks=False)
-        published = True
+            stream.flush()
+            stream.seek(0)
+            result = _validate_staged(stream)
+            destination.assert_current()
+            if not destination.matches_file(staged, identity):
+                fail("owned staging file changed", "unavailable")
+            os.link(staged, output.name, src_dir_fd=destination.descriptor,
+                    dst_dir_fd=destination.descriptor, follow_symlinks=False)
+            published = True
+            destination.assert_current()
+            if not destination.matches_file(output.name, identity):
+                fail("published packet changed", "unavailable")
         result["packet"] = str(output)
         return result
+    except BaseException:
+        if published and destination.matches_file(output.name, identity):
+            os.unlink(output.name, dir_fd=destination.descriptor)
+        published = False
+        raise
     finally:
         try:
-            os.unlink(staged)
+            if destination.matches_file(staged, identity):
+                os.unlink(staged, dir_fd=destination.descriptor)
+            else:
+                fail("owned staging file changed before cleanup", "unavailable")
         except OSError:
             if published:
                 result["cleanup_warning"] = "owned staging file cleanup failed"

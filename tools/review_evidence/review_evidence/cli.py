@@ -34,7 +34,13 @@ def main(argv: list[str] | None = None) -> int:
             json.dumps(
                 {
                     "status": error.failure.kind,
-                    "message": "Git material unavailable or unsupported",
+                    # This owner's configuration failures contain fixed, safe text;
+                    # arbitrary Git stderr still stays outside the public result.
+                    "message": (
+                        error.failure.message
+                        if error.failure.code == "REPOSITORY_GIT.PATCH_CONFIGURATION"
+                        else "Git material unavailable or unsupported"
+                    ),
                 },
                 sort_keys=True,
             )

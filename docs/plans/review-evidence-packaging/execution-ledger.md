@@ -123,3 +123,59 @@ Repository Git 33 tests, Ruff lint on changed Python, and Ruff format on the
 new package and changed review-metadata test. The authoring-purpose Engine
 repository verification passes 121 checks across 73 suites with refreshed
 generated inputs. Full exact-source CI and owner disposition remain pending.
+
+
+## F1–F4 repair admission
+
+User requested the four code-review repairs. Current connected main remains
+`6be1d7a081ef43d87126bbaa7ae59335dc3c6126` (tree
+`fee9f21058847ef36731390407532fa44af6d61a`). The Actions source ZIP matched recorded
+SHA-256 `04e50bde604b11da9090a6731dea362dab02ba44104307e96d7aa30b7bcd0503`.
+A clean disposable branch owns this work; no user checkout or remote ref is edited.
+The executable Router selected 25 applicable standards with no unanswered facts.
+Build-only remains the current owner amendment. The repair concerns filesystem
+admission/publication, portable names and exact patch interpretation only.
+
+
+## Local repair evidence and bounded namespace follow-up
+
+The original five repair tests demonstrated nine failed assertions on 6be1d7a0.
+The first coherent repaired candidate passed the original 28 builder tests and
+24 new boundary tests. The complete 12 supporting-package selections and 29 Engine
+capture/generated-contract tests passed with the environment skips recorded in
+the delivery evidence. No original failed test was relabeled as passing.
+
+Final source review replaced a prefix-tuple implementation of portable-name
+checking with an iterative component trie. This retains the collision semantics
+without quadratic prefix copying for deeply nested valid names. A call-count
+regression demonstrates linear component normalization. A further real multiline
+Git test proves local context/quoting preferences would change an ordinary diff
+while the exact patch policy stays fixed. These are within F3/F4, not priority 3.
+The affected package/Git selections are rerun on this final implementation.
+
+The real routing packet was reopened by a separate stdlib-only recipient script.
+All 98 members, 96 index links, exact payload hashes, 49 changed paths, 54 selected
+paths and the 1,083,975-byte patch match the prior example. Only the per-file
+implementation digest changed in its manifest; raw CI remains missing and its URL
+remains referenced. This is fresh recipient evidence, not acceptance of the tool.
+
+
+## Repair implementation outcome
+
+P1 is Implemented; P2 remains Verifying. Final package selections pass: 48 review-
+evidence tests, 39 Repository Git passes plus one existing skip; the other ten
+complete support packages pass 538 tests with one existing skip, and the Engine
+capture/stdio/generated-contract selection passes 29. Total final selected coverage
+is 654 passes and two skips. Twenty-seven new regressions are included in those counts.
+The late trie/context-oracle changes were followed by fresh affected package runs.
+Final direct-consumer review also found that the new fixed-text Git configuration
+rejection would be hidden by the CLI's generic Git error message. The CLI now
+forwards only this named safe diagnostic; arbitrary Git stderr remains private.
+This adds `cli.py` to the concrete production write set, within the admitted package
+owner. A new real CLI regression and the complete 48-test builder suite passed;
+this is an F4 usability correction, not a new error framework or feature.
+
+Exact-current-source locked CI and independent repair review remain pending; the
+plan is not Accepted. Final structural/generator checks and artifact reconstruction
+are retained with the delivery after record/manifest finalization. No source push
+or user configuration edit is made by this task.

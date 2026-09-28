@@ -75,13 +75,24 @@ def safe_name(name: str) -> str:
 
 
 def check_names(names: list[str]) -> None:
-    folded: set[str] = set()
+    # A trie validates each component once without materializing every full
+    # prefix (quadratic space for a deep but otherwise valid portable path).
+    namespace: dict[str, tuple[str, bool, dict]] = {}
     for name in names:
-        safe_name(name)
-        key = unicodedata.normalize("NFC", name).casefold()
-        if key in folded:
-            fail("duplicate or case-colliding packet member")
-        folded.add(key)
+        components = safe_name(name).split("/")
+        level = namespace
+        for index, component in enumerate(components):
+            key = unicodedata.normalize("NFC", component).casefold()
+            is_file = index == len(components) - 1
+            previous = level.get(key)
+            if previous is not None:
+                spelling, was_file, children = previous
+                if spelling != component or was_file or is_file:
+                    fail("duplicate or conflicting portable packet path")
+            else:
+                children = {}
+                level[key] = component, is_file, children
+            level = children
 
 
 def no_symlink_ancestors(path: Path) -> None:

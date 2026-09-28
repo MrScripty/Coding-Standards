@@ -36,3 +36,31 @@ prints separate changed/context sections with honest member and payload-byte
 counts. Focused tests and the refreshed offline recipient observation exercise
 those corrections. These are implementation finding dispositions; the acceptance
 owner has not accepted P1 or P2.
+
+## Follow-up code review F1–F4
+
+| ID | Demonstrated boundary | Repair and evidence |
+| --- | --- | --- |
+| F1 | Output parent could be replaced after pathname admission; analogous evidence-root acquisition used a reopened root path. | Open and hold directory chains; descriptor-relative evidence reads, staging, validation, linking and cleanup. Revalidate requested identities and roll back only the attempt's final link on detected post-link replacement. Deterministic interleavings cover before-create, after-validation, inside-link and evidence-root/ancestor replacement. |
+| F2 | A linked worktree's common Git directory was not excluded from output. | Repository Git exposes private/common directories; packet output excludes both. Real linked and separate-Git-dir fixtures exercise positive external output and non-mutating rejection. |
+| F3 | Full-name folding missed file/directory and prefix-spelling collisions. | One component-wise namespace check serves collection and staged validation; tests cover both orders, shared directories, case differences and Unicode-equivalent prefixes. |
+| F4 | Untracked attributes and local diff settings altered the primary patch. | Opt-in Repository Git exact patch policy fixes formatting, neutralizes configured/global/system attributes and rejects info attributes/custom driver semantics. Tests preserve configuration bytes and prove either identical packet bytes or explicit unsupported rejection. |
+
+All four were reproduced on 6be1d7a0 before repair (five test methods; nine failed
+assertions including subcases). Their candidate regression and package outcomes
+are in `reports/repair-verification.md`; the original failure log is retained.
+No change to the standalone-checker amendment, provider permissions, Engine schema
+or the accepted previous work is part of these repairs. The lower-priority
+single-module implementation-hash observation is clarified in README; no new
+fingerprinting system or performance cache is admitted.
+
+Source implementation now exists; RP-08's planning-era absence is historical, not
+the current state. Required exact-candidate locked CI, independent review of the
+repairs and owner acceptance remain pending. Original plan/source-review records
+are retained rather than relabeled as completed candidate evidence.
+
+F4 direct-consumer completion: `cli.py` now exposes only the new Git owner's fixed
+`PATCH_CONFIGURATION` message, retaining its existing result shape and keeping
+arbitrary Git stderr private. The actual CLI test verifies the useful rejection,
+unchanged source configuration and no output creation. This narrow consumer repair
+and its added regression are included in the final 48-test builder pass.

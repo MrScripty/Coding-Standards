@@ -94,3 +94,31 @@ or implement retry policy. Expected-target publication retains this observation
 when update-ref fails and the branch remains unchanged. Callers own explicit
 recovery intent and durable application identity; the adapter continues to accept
 only active candidates issued by its own materialization scope.
+
+## Exact local review patches
+
+`control_directories(local_only=True)` returns the private and common Git
+administrative roots, deduplicated only when they coincide. A linked worktree's
+private root is not a substitute for its common root. Callers excluding writes
+from repository state must protect both along with the selected worktree.
+
+`revision_patch(baseline, candidate, max_output_bytes=...)` is an opt-in, bounded,
+read-only operation over exact commits. It returns a complete binary-capable
+patch with fixed prefixes, context, ordering, quoting and algorithm. It pins
+attributes to the candidate and disables external diff/textconv, replacement
+objects and lazy fetching. Configured/global/system attribute files are disabled.
+Because info attributes outrank committed attributes, an administrative
+`info/attributes` file or symlinked `info` directory is rejected with
+`REPOSITORY_GIT.PATCH_CONFIGURATION`. Local custom driver semantics are rejected;
+ignored external-command/textconv settings are not executed. Configuration is
+rechecked after the command and must remain stable for the observation. No
+configuration file is rewritten, source checked out, or alternate object store
+created. These choices do not change existing capture or publication defaults.
+
+The patch policy fixes algorithm (Myers with indent heuristic), three context
+lines, zero inter-hunk context, `a/`/`b/` prefixes, no line prefix, default line
+indicators, byte-path quoting, raw file ordering, short submodule format and the
+512 MiB Git binary-detection threshold (above the object safety bound). It preserves
+committed attribute choices; it does not replace binary patches with text excerpts.
+Different Git implementations may produce different binary encodings; byte identity
+is qualified within the recorded implementation/environment, not across versions.

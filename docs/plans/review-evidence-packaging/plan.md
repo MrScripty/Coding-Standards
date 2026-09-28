@@ -1,12 +1,12 @@
 # Review-Evidence Packaging
 
-**Plan status:** `Planned`
+**Plan status:** `Verifying`
 
-**Current phase:** P1 builder implementation started; qualification pending
+**Current phase:** P1 repairs implemented and locally verified; P2 CI/review acceptance pending
 
-**Next slice:** **P1 — Build one local, immutable review packet**
+**Next slice:** **P2 — Offline recipient example and acceptance**
 
-**Acceptance status:** `pending`
+**Acceptance status:** `partial`
 
 **Composed-design review:** `applicable`; see [Simplicity and Ownership Review](#simplicity-and-ownership-review).
 
@@ -16,10 +16,9 @@
 
 **Admission:** priority **4** in the user's selected **2 → 4 → 3** sequence.
 Routing-fact ergonomics is Accepted; the earlier six-slice refactor is closed.
-This new plan does not reopen either acceptance. The selected task is planning;
-next implementation admission is `start` against this exact repository-relative
-plan path after checking the current integrated source. No generator implementation
-or new review verdict is supplied by this planning package.
+This new plan does not reopen either acceptance. The user has authorized repair of the four demonstrated review findings at this
+exact plan path. The admitted `start` is implemented; `verify` continues its P2 qualification; it does not
+reopen prior acceptance or admit priority 3. This candidate is based on `6be1d7a0`.
 
 ## Implementation scope amendment
 
@@ -69,14 +68,14 @@ selection and feasibility observations, not tests of an implemented packet build
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| P-A1 | One explicit versioned request describes exact local revisions, selected context/records, evidence origins and caller-supplied claim associations; malformed or contradictory selections cannot become a packet. | contract | supported locked runtime | automated | pending | Closed request fixtures and failure oracles |
-| P-A2 | The packet includes every primary changed file version that exists, full primary diff and selected context with exact bytes/modes/identities; baseline, candidate, CI subject and record roles retain their own explicit identities even when commits coincide. | integration | real local Git repositories | automated | pending | Independent Git/literal oracles, moves/deletions and drift cases |
-| P-A3 | Included, referenced and missing evidence are distinguished; captured bytes and caller-reported provenance do not become authenticated CI results, exhaustive claim coverage or acceptance decisions. | contract + negative | local imported evidence | automated | pending | Exact status/provenance fixtures and contradictory inputs |
-| P-A4 | Build is local and non-mutating toward source/index/refs/configuration/evidence; it follows no source symlinks, executes no source/evidence commands and contacts no network/provider. | system + security | supported Linux and real subprocesses | automated | pending | Dirty-tree preservation, hostile Git configuration, unsafe-file and network-negative tests |
-| P-A5 | Publication is bounded, no-clobber and complete; the builder validates its staged inventory before publication. | release-artifact | real filesystem and ZIP files | automated | pending | Publication race, limits, malformed staging and inventory checks |
-| P-A6 | A real routing-fact review example is navigable offline with both source versions, complete generated files and available later records; unavailable raw evidence stays explicit. | user-workflow | separately opened local packet | either | pending | Recipient inspection of the new output, not prior review relabeled |
-| P-A7 | Existing Git/Engine contracts and accepted records are preserved; new package and existing affected selections, lock-qualified CI, generated freshness and structural checks pass. | integration | current Python 3.12 hash-locked CI | automated | pending | Exact candidate checks and preservation diff |
-| P-A8 | Independent material review and owner disposition establish bounded ownership, useful evidence and supported cutover; only this new slice is accepted. | review | independent reviewer and owner | manual | pending | Source review, issue dispositions and final ledger |
+| P-A1 | One explicit versioned request describes exact local revisions, selected context/records, evidence origins and caller-supplied claim associations; malformed or contradictory selections cannot become a packet. | contract | supported locked runtime | automated | pending | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A2 | The packet includes every primary changed file version that exists, full primary diff and selected context with exact bytes/modes/identities; baseline, candidate, CI subject and record roles retain their own explicit identities even when commits coincide. | integration | real local Git repositories | automated | satisfied | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A3 | Included, referenced and missing evidence are distinguished; captured bytes and caller-reported provenance do not become authenticated CI results, exhaustive claim coverage or acceptance decisions. | contract + negative | local imported evidence | automated | satisfied | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A4 | Build is local and non-mutating toward source/index/refs/configuration/evidence; it follows no source symlinks, executes no source/evidence commands and contacts no network/provider. | system + security | supported Linux and real subprocesses | automated | satisfied | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A5 | Publication is bounded, no-clobber and complete; the builder validates its staged inventory before publication. | release-artifact | real filesystem and ZIP files | automated | satisfied | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A6 | A real routing-fact review example is navigable offline with both source versions, complete generated files and available later records; unavailable raw evidence stays explicit. | user-workflow | separately opened local packet | either | satisfied | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A7 | Existing Git/Engine contracts and accepted records are preserved; new package and existing affected selections, lock-qualified CI, generated freshness and structural checks pass. | integration | current Python 3.12 hash-locked CI | automated | pending | [Repair verification and remaining gates](reports/repair-verification.md) |
+| P-A8 | Independent material review and owner disposition establish bounded ownership, useful evidence and supported cutover; only this new slice is accepted. | review | independent reviewer and owner | manual | pending | [Repair verification and remaining gates](reports/repair-verification.md) |
 
 All packet status fields concern material availability or byte consistency. They
 are not projections of plan acceptance statuses. A reviewer inspecting the packet
@@ -159,7 +158,10 @@ commit-to-commit arguments and stable raw/NUL path output. Do not run `git archi
 as the byte oracle because export attributes may omit or rewrite blobs. Never
 fall back to checkout bytes, shallow diffs, text-only excerpts or permission guesses.
 Pin patch attribute lookup to the candidate commit so dirty worktree attributes
-cannot change the representation of the selected committed patch.
+cannot change the representation of the selected committed patch. Disable global,
+system and configured attributes; reject info attributes and local custom diff
+semantics that would override committed input. Fix ordinary diff formatting at the
+existing Git owner and observe stable configuration before/after the command.
 
 Implementation must prove that its selected Git invocation cannot invoke a
 promisor remote or external helper. If the installed Git/adapter cannot provide
@@ -285,8 +287,9 @@ modes, not lossy normalized paths. Escape untrusted names and text in the genera
 index; evidence content is untrusted data, never executable instructions to the tool.
 No claim of automatic secret detection or upload approval is made.
 
-Use a private same-directory temporary file with exclusive creation and restrictive
-permissions. Close all readers, finish the archive and perform inventory validation
+Hold the admitted output directory identity through an open descriptor. Use a
+private same-directory temporary file with descriptor-relative exclusive creation
+and restrictive permissions; keep its handle for writing and validation. Close all readers, finish the archive and perform inventory validation
 before no-replace publication. For the supported Linux filesystem, an exclusive
 hard-link publication from the completed staging file is a possible existing OS
 primitive; use a tested equivalent if needed, never check-then-replacing rename.
@@ -381,7 +384,7 @@ from its producer. This satisfies the current Architecture authority-scope admis
 
 ### P1 — Local packet construction and staged integrity validation
 
-**Status:** `In progress`
+**Status:** `Implemented`
 
 **Goal:** implement D1–D7, as amended above, as one coherent vertical path over existing Git reads.
 
@@ -407,7 +410,7 @@ may silently change evidence or acceptance meaning.
 
 ### P2 — Offline recipient example and acceptance
 
-**Status:** `Planned`; depends on P1.
+**Status:** `Verifying`; local recipient evidence exists, CI/review claims remain pending.
 
 **Goal:** demonstrate a useful, independently navigable review artifact and close
 this new plan through normal verification and review.
@@ -460,9 +463,8 @@ checks concern the new packet, not requalification of prior accepted production.
 
 ## Blockers
 
-No source-design blocker is currently demonstrated. A local-only metadata/diff
-adapter and atomic filesystem publication must be qualified in implementation;
-they are not assumed tested by this plan. The actual operator's uncommitted
+The implemented F1–F4 repairs are undergoing local verification. Exact-candidate
+locked CI and independent material review remain separate acceptance requirements. The actual operator's uncommitted
 output-contract edits are not accessible and are not a source input. Raw historical
 CI/delivery logs may be unavailable; that is an explicit first-example material gap,
 not a reason to invent them or to reopen acceptance.
@@ -479,13 +481,42 @@ the same invariant is added to the write set, not an automatic wider redesign.
 
 ## Final Acceptance
 
-This plan is `Planned`. Source inspection, ordinary planning probes and plan-schema
-validation do not qualify an unimplemented builder or recipient workflow.
+P1 and F1–F4 are implemented. The current local source, regression and recipient
+evidence is recorded in [repair verification](reports/repair-verification.md).
+P-A1/P-A7 require exact-candidate supported locked CI; P-A8 requires independent
+material repair review and acceptance-owner disposition. Existing planning/source
+review or byte integrity does not substitute for those observations.
 Preserve original failures and successful candidate evidence at their exact source
 identities. Use current Python 3.12 hash-locked CI; do not change the matrix or claim
 3.11 observations without running them. Independent review remains separate from
 self-checking the archive. After normal acceptance, priority **3 — targeted test
 strengthening** is next; no other improvement is admitted here.
 
-- Acceptance status: `pending`
-- Final status: `Planned`
+- Acceptance status: `partial`
+- Final status: `Verifying`
+
+
+## Current repair admission — F1–F4
+
+The 6be1d7a0 code review demonstrated output-parent replacement, output inside a
+linked worktree's shared Git directory, portable file/directory namespace conflict,
+and ambient diff representation changes. Repair these at the current packet/file
+and Repository Git owners; preserve build-only, exact source/evidence contracts,
+output bounds, no-overwrite publication and Engine interface 45. The scoped source
+write set is `packet.py`, `common.py`, `cli.py` for safe owner-diagnostic projection,
+and a packet-private `local_files.py` holding
+opened directory lifetimes, Repository Git `repository.py`, their direct tests,
+README guidance and this plan's records/generated verification inputs.
+
+Descriptor-relative output and local-evidence reads are admitted as one filesystem
+concern, not a general filesystem framework. Reject changed requested directory
+identity; use held handles for effects and cleanup even after pathname replacement.
+Protect both common and private Git administrative roots. Validate every portable
+path component and file/directory role. A dedicated opt-in exact patch method may
+fix Git formatting and disable global/system attributes; unsupported info-attribute
+or custom diff-semantic configurations must fail explicitly rather than use hidden
+inputs. No production repository configuration is modified by construction.
+
+Reproduce each negative before repair, then rerun package/Git, shared consumers,
+recipient example and structural checks. Retain exact original logs; actual locked
+CI and independent repair review remain acceptance requirements when unavailable.

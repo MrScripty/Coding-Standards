@@ -6578,7 +6578,7 @@
       ]
     },
     {
-      "digest": "sha256:1766c5fcd44588ca08a328c8f7dbb56a02fb5b04d3dbec8492bc2b087dafc853",
+      "digest": "sha256:4ef1153a4609ba5c1f50d9b2039291b76fafe8b16ca9147ced03eb550a0aac86",
       "path": "tools/repository_git/repository_git/repository.py",
       "state": "present",
       "uses": [
@@ -6643,7 +6643,7 @@
       ]
     },
     {
-      "digest": "sha256:8f3a8e6f09dbae597233fabe984aa40032288a461efe6503f18365d9161a1374",
+      "digest": "sha256:d39c9fbaf00aacdb3c1d08b23d9b645fe72c98ac121bbd7143d2a7fe8bb0d250",
       "path": "tools/review_evidence/review_evidence/cli.py",
       "state": "present",
       "uses": [
@@ -6655,7 +6655,7 @@
       ]
     },
     {
-      "digest": "sha256:2caf6a1f153a4c0d3311431059b59df9cb1b326e776521c23e8dcaf654d23311",
+      "digest": "sha256:2d84851dc497ecdae01eafcaf90aae12abda13a428eefa064517909af31711e2",
       "path": "tools/review_evidence/review_evidence/common.py",
       "state": "present",
       "uses": [
@@ -6667,7 +6667,19 @@
       ]
     },
     {
-      "digest": "sha256:c76843abc8b52bf46065d8382a7e4c5a01088508c398ee4ee899a2185ef70029",
+      "digest": "sha256:62e5177be158a1d94304414bf4664739bd804cf5725e53e1d8178f004bba5a21",
+      "path": "tools/review_evidence/review_evidence/local_files.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
+      "digest": "sha256:0b7cfc5e12238513ad89628a063fb993003b6a93cbda4d8204ec0a1e2bd83bb6",
       "path": "tools/review_evidence/review_evidence/packet.py",
       "state": "present",
       "uses": [
@@ -13826,7 +13838,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:7274294a6273516ffcecfcaf36c32770f2f46b6df59eee23691f06b2d115fa3d",
+    "digest": "sha256:0b1e103a4ea4291c6d86d0e0c7cde7a5feace5de5032dc255016455f371176b7",
     "uses": [
       {
         "check": "python-package-contract",

@@ -350,6 +350,94 @@ class GitRepository:
         RepositoryRevision(tree_oid)
         return tree_oid
 
+    def control_directories(self, *, local_only: bool = False) -> tuple[Path, ...]:
+        """Private and common Git administrative roots, independently of worktree.
+
+        A linked worktree's private directory does not contain the common one.
+        Callers protecting repository state must exclude both resolved roots.
+        """
+        roots: list[Path] = []
+        for selector in ("--git-dir", "--git-common-dir"):
+            raw = git_output(
+                self._repository, ("rev-parse", "--path-format=absolute", selector),
+                max_output_bytes=4096, local_only=local_only,
+            )
+            try:
+                value = raw.decode("utf-8")
+            except UnicodeError as error:
+                raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", "Git directory encoding is unsupported") from error
+            if not value.endswith("\n") or "\n" in value[:-1] or "\0" in value:
+                raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", "Git directory path is unsupported")
+            path = Path(value[:-1])
+            if not path.is_absolute():
+                raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "Git directory must be absolute")
+            if path not in roots:
+                roots.append(path)
+        return tuple(roots)
+
+    def revision_patch(
+        self, baseline: RepositoryRevision, candidate: RepositoryRevision, *,
+        max_output_bytes: int = DEFAULT_OUTPUT_LIMIT,
+    ) -> bytes:
+        """Complete local patch with committed attributes and fixed formatting.
+
+        This is an opt-in observation, not a change to ordinary Git capture or
+        publication. User/global/system attributes are suppressed. Git gives
+        info/attributes higher precedence than GIT_ATTR_SOURCE, so that override
+        is explicitly unsupported rather than silently trusted or edited.
+        Custom local diff-driver semantics are likewise rejected; external and
+        textconv commands are disabled and never invoked. Admission is repeated
+        after the command; configuration must remain stable for the observation.
+        """
+        if type(max_output_bytes) is not int or max_output_bytes < 1:
+            raise invalid("REPOSITORY_GIT.INVALID_BOUND", "patch bound must be positive")
+        self.revision_tree(baseline, local_only=True)
+        self.revision_tree(candidate, local_only=True)
+        controls = self.control_directories(local_only=True)
+
+        def admit_configuration() -> None:
+            for directory in controls:
+                info = directory / "info"
+                if info.is_symlink() or os.path.lexists(info / "attributes"):
+                    raise unsupported("REPOSITORY_GIT.PATCH_CONFIGURATION", "exact patch does not admit info attributes")
+            configured = git_command(
+                self._repository, ("config", "--null", "--name-only", "--get-regexp", r"^diff\..*\."),
+                max_output_bytes=ERROR_OUTPUT_LIMIT, local_only=True,
+            )
+            if configured.returncode not in (0, 1):
+                raise _failed_command(("config",), configured)
+            # Disabled execution settings cannot affect the built-in patch. A
+            # driver's binary/algorithm/function-pattern settings still can.
+            for key in configured.stdout.split(b"\0"):
+                if key and key.rsplit(b".", 1)[-1].lower() not in {
+                    b"command", b"textconv", b"cachetextconv", b"trustexitcode",
+                }:
+                    raise unsupported("REPOSITORY_GIT.PATCH_CONFIGURATION", "exact patch does not admit custom diff semantics")
+
+        admit_configuration()
+        environment = sanitized_git_environment()
+        environment.update({"GIT_NO_LAZY_FETCH": "1", "GIT_NO_REPLACE_OBJECTS": "1",
+                            "GIT_ATTR_NOSYSTEM": "1", "GIT_ATTR_SOURCE": candidate.oid})
+        settings = (
+            "core.attributesFile=" + os.devnull, "core.quotePath=true",
+            "core.bigFileThreshold=512m", "core.fsmonitor=false",
+            "diff.suppressBlankEmpty=false",
+        )
+        configuration = tuple(part for setting in settings for part in ("-c", setting))
+        output = _git_output_with_environment(
+            self._repository,
+            (*configuration, "diff", "--patch", "--no-ext-diff", "--no-textconv",
+             "--no-renames", "--binary", "--full-index", "--no-color", "--no-relative",
+             "--src-prefix=a/", "--dst-prefix=b/", "--line-prefix=",
+             "--output-indicator-new=+", "--output-indicator-old=-", "--output-indicator-context= ",
+             "--unified=3", "--inter-hunk-context=0", "--diff-algorithm=myers",
+             "--indent-heuristic", "--submodule=short", "--ignore-submodules=none",
+             "-O", os.devnull, baseline.oid, candidate.oid, "--"),
+            environment, max_output_bytes=max_output_bytes,
+        )
+        admit_configuration()
+        return output
+
     @contextmanager
     def materialize_candidate(
         self,
