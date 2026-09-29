@@ -64,3 +64,18 @@ F4 direct-consumer completion: `cli.py` now exposes only the new Git owner's fix
 arbitrary Git stderr private. The actual CLI test verifies the useful rejection,
 unchanged source configuration and no output creation. This narrow consumer repair
 and its added regression are included in the final 48-test builder pass.
+
+## Residual F4-C1 — committed attribute case matching
+
+The follow-up review of `143c8de1` found that `*.TXT -diff` changes the patch for
+`data.txt` when the same repository is configured with `core.ignoreCase=true`.
+The scoped repair fixes case-sensitive matching in the existing opt-in
+`revision_patch` command, without rewriting configuration, renaming paths, or
+changing ordinary capture/publication. Exact-case matching still selects binary
+patches. The original F1–F3 repairs are unchanged.
+
+Two new real-Git/CLI tests first failed at the intended textual-hunk assertion on
+the unchanged production baseline; the repaired candidate rerun, package checks
+and packet comparison are recorded in [case-policy verification](reports/attribute-case-verification.md).
+F4-C1 is implemented; candidate CI and independent review/owner disposition remain
+required before the packaging slice is Accepted. This adds no new API or mode.

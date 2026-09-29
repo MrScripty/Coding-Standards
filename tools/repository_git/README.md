@@ -119,6 +119,11 @@ The patch policy fixes algorithm (Myers with indent heuristic), three context
 lines, zero inter-hunk context, `a/`/`b/` prefixes, no line prefix, default line
 indicators, byte-path quoting, raw file ordering, short submodule format and the
 512 MiB Git binary-detection threshold (above the object safety bound). It preserves
-committed attribute choices; it does not replace binary patches with text excerpts.
+committed attribute choices with case-sensitive matching over exact Git paths.
+The owned patch command sets `core.ignoreCase=false` only for that invocation;
+repository filesystem settings remain untouched. Thus `*.TXT -diff` does not match
+`data.txt` but still selects a binary patch for `MATCH.TXT`, regardless of the
+repository's `core.ignoreCase` value. It does not replace binary patches with text
+excerpts or change ordinary reads, worktree operations or publication behavior.
 Different Git implementations may produce different binary encodings; byte identity
 is qualified within the recorded implementation/environment, not across versions.

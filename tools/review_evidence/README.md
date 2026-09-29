@@ -57,7 +57,10 @@ without renaming source files or dropping members.
 
 The primary patch is acquired through Repository Git's `revision_patch` boundary.
 It keeps the candidate's committed attributes and exact binary/mode changes but
-fixes patch formatting. Configured/global/system attribute files are excluded;
+fixes patch formatting and matches committed attribute patterns case-sensitively
+against exact Git paths. A repository's `core.ignoreCase` setting is not changed
+and cannot select a different review-patch interpretation. Configured/global/system
+attribute files are excluded;
 `info/attributes`, symlinked administrative `info` directories and local custom
 diff-driver semantics are explicitly unsupported. These higher-precedence inputs
 cannot be silently interpreted as committed source. Admission is checked before

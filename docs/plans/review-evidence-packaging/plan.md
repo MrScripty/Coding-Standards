@@ -2,7 +2,7 @@
 
 **Plan status:** `Verifying`
 
-**Current phase:** P1 repairs implemented and locally verified; P2 CI/review acceptance pending
+**Current phase:** P1 repairs including F4 case policy locally verified; P2 CI/review acceptance pending
 
 **Next slice:** **P2 — Offline recipient example and acceptance**
 
@@ -16,9 +16,11 @@
 
 **Admission:** priority **4** in the user's selected **2 → 4 → 3** sequence.
 Routing-fact ergonomics is Accepted; the earlier six-slice refactor is closed.
-This new plan does not reopen either acceptance. The user has authorized repair of the four demonstrated review findings at this
-exact plan path. The admitted `start` is implemented; `verify` continues its P2 qualification; it does not
-reopen prior acceptance or admit priority 3. This candidate is based on `6be1d7a0`.
+This new plan does not reopen either acceptance. The user authorized the original four repairs and the follow-up F4 case-policy
+correction at this exact plan path. The admitted `start` is implemented; `verify`
+continues P2 qualification without reopening prior acceptance or admitting priority 3.
+The case-policy repair is based on integrated source `143c8de1`; earlier repair
+evidence remains in its original records. See [case-policy verification](reports/attribute-case-verification.md).
 
 ## Implementation scope amendment
 
@@ -158,7 +160,10 @@ commit-to-commit arguments and stable raw/NUL path output. Do not run `git archi
 as the byte oracle because export attributes may omit or rewrite blobs. Never
 fall back to checkout bytes, shallow diffs, text-only excerpts or permission guesses.
 Pin patch attribute lookup to the candidate commit so dirty worktree attributes
-cannot change the representation of the selected committed patch. Disable global,
+cannot change the representation of the selected committed patch. Match those
+patterns case-sensitively over exact committed paths with a command-local
+`core.ignoreCase=false`; preserve the repository's filesystem configuration and
+all ordinary Git operations. Disable global,
 system and configured attributes; reject info attributes and local custom diff
 semantics that would override committed input. Fix ordinary diff formatting at the
 existing Git owner and observe stable configuration before/after the command.

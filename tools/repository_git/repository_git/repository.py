@@ -386,8 +386,10 @@ class GitRepository:
         info/attributes higher precedence than GIT_ATTR_SOURCE, so that override
         is explicitly unsupported rather than silently trusted or edited.
         Custom local diff-driver semantics are likewise rejected; external and
-        textconv commands are disabled and never invoked. Admission is repeated
-        after the command; configuration must remain stable for the observation.
+        textconv commands are disabled and never invoked. Attribute matching is
+        case-sensitive over committed paths, independent of filesystem case
+        settings. Admission is repeated after the command; configuration must
+        remain stable for the observation.
         """
         if type(max_output_bytes) is not int or max_output_bytes < 1:
             raise invalid("REPOSITORY_GIT.INVALID_BOUND", "patch bound must be positive")
@@ -420,7 +422,7 @@ class GitRepository:
                             "GIT_ATTR_NOSYSTEM": "1", "GIT_ATTR_SOURCE": candidate.oid})
         settings = (
             "core.attributesFile=" + os.devnull, "core.quotePath=true",
-            "core.bigFileThreshold=512m", "core.fsmonitor=false",
+            "core.bigFileThreshold=512m", "core.fsmonitor=false", "core.ignoreCase=false",
             "diff.suppressBlankEmpty=false",
         )
         configuration = tuple(part for setting in settings for part in ("-c", setting))

@@ -89,6 +89,7 @@ class ExactPatchTests(unittest.TestCase):
         self.assertNotIn('GIT_EXTERNAL_DIFF', env)
         self.assertNotIn('GIT_DIFF_OPTS', env)
         self.assertIn('core.attributesFile=' + os.devnull, args)
+        self.assertIn('core.ignoreCase=false', args)
 
     def test_info_attributes_appearing_during_patch_rejects_result(self):
         original = implementation._git_output_with_environment
@@ -132,3 +133,39 @@ class ExactPatchTests(unittest.TestCase):
                                           '--full-index', baseline.oid, candidate.oid])
         self.assertNotEqual(ambient, expected)
         self.assertEqual(self.repository.revision_patch(baseline, candidate), expected)
+
+
+    def test_attribute_case_policy_is_fixed_without_reconfiguring_repository(self):
+        (self.root / '.gitattributes').write_bytes(b'*.TXT -diff\n')
+        names = ('data.txt', 'MATCH.TXT')
+        for name in names:
+            (self.root / name).write_bytes(b'before\n')
+        self.git('add', '.gitattributes', *names)
+        self.git('commit', '-qm', 'case-policy baseline')
+        baseline = RepositoryRevision(self.git('rev-parse', 'HEAD').strip())
+        for name in names:
+            (self.root / name).write_bytes(b'after\n')
+        self.git('commit', '-qam', 'case-policy candidate')
+        candidate = RepositoryRevision(self.git('rev-parse', 'HEAD').strip())
+        before_blob = self.git('rev-parse', baseline.oid + ':data.txt').strip()
+        after_blob = self.git('rev-parse', candidate.oid + ':data.txt').strip()
+        expected_text = (f'diff --git a/data.txt b/data.txt\n'
+                         f'index {before_blob}..{after_blob} 100644\n'
+                         '--- a/data.txt\n+++ b/data.txt\n@@ -1 +1 @@\n-before\n+after\n').encode()
+        observed = []
+        for configured in ('false', 'true'):
+            self.git('config', 'core.ignoreCase', configured)
+            protected = ('.git/config', '.git/index', '.git/HEAD', '.gitattributes', *names)
+            original = {name: (self.root / name).read_bytes() for name in protected}
+            refs = self.git('show-ref')
+            value = self.repository.revision_patch(baseline, candidate)
+            self.assertEqual({name: (self.root / name).read_bytes() for name in protected}, original)
+            self.assertEqual(self.git('show-ref'), refs)
+            self.assertEqual(self.git('config', '--get', 'core.ignoreCase').strip(), configured)
+            binary, text = value.split(b'diff --git a/data.txt b/data.txt\n', 1)
+            self.assertEqual(b'diff --git a/data.txt b/data.txt\n' + text, expected_text)
+            self.assertTrue(binary.startswith(b'diff --git a/MATCH.TXT b/MATCH.TXT\n'))
+            self.assertIn(b'GIT binary patch\n', binary)
+            self.assertNotIn(b'@@', binary)
+            observed.append(value)
+        self.assertEqual(observed[0], observed[1])

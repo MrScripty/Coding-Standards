@@ -348,3 +348,70 @@ class ReviewRepairTests(unittest.TestCase):
         self.assertNotIn(str(self.repo), process.stdout)
         self.assertFalse(self.out.exists())
         self.assertEqual(attributes.read_text(), '*.txt -diff\n')
+
+
+    def test_cli_packet_case_policy_preserves_material_and_repository_configuration(self):
+        import json
+        import subprocess
+        import sys
+        from pathlib import Path
+
+        (self.repo / '.gitattributes').write_bytes(b'*.TXT -diff\n')
+        for name in ('data.txt', 'MATCH.TXT'):
+            (self.repo / name).write_bytes(b'before\n')
+        self.git('add', '.gitattributes', 'data.txt', 'MATCH.TXT')
+        self.git('commit', '-qm', 'case-policy baseline')
+        baseline = self.git('rev-parse', 'HEAD').strip()
+        for name in ('data.txt', 'MATCH.TXT'):
+            (self.repo / name).write_bytes(b'after\n')
+        self.git('commit', '-qam', 'case-policy candidate')
+        candidate = self.git('rev-parse', 'HEAD').strip()
+        self.request['revisions'] = {'baseline': baseline, 'candidate': candidate}
+        self.request['context'].append('.gitattributes')
+        self.write_request()
+        request_bytes = self.request_path.read_bytes()
+        source_root = Path(__file__).resolve().parents[3]
+        text_header = b'diff --git a/data.txt b/data.txt\n'
+        before_blob = self.git('rev-parse', baseline + ':data.txt').strip()
+        after_blob = self.git('rev-parse', candidate + ':data.txt').strip()
+        expected_text = (text_header + f'index {before_blob}..{after_blob} 100644\n'.encode()
+                         + b'--- a/data.txt\n+++ b/data.txt\n@@ -1 +1 @@\n-before\n+after\n')
+        packets = []
+        manifests = []
+        protected = ('.git/config', '.git/index', '.git/HEAD', 'plan.md', 'changed.bin',
+                     'new.txt', '.gitattributes', 'data.txt', 'MATCH.TXT')
+        for configured in ('false', 'true'):
+            self.git('config', 'core.ignoreCase', configured)
+            original = {name: (self.repo / name).read_bytes() for name in protected}
+            refs = self.git('show-ref')
+            output = self.repo.parent / ('case-' + configured + '.zip')
+            process = subprocess.run(
+                [sys.executable, '-B', '-m', 'tools.review_evidence.review_evidence', 'build',
+                 '--repo-root', str(self.repo), '--request', str(self.request_path),
+                 '--output', str(output)], cwd=source_root,
+                env={**os.environ, 'PYTHONPATH': str(source_root)}, capture_output=True, text=True,
+            )
+            self.assertEqual(process.returncode, 0, process.stdout + process.stderr)
+            self.assertEqual(process.stderr, '')
+            result = json.loads(process.stdout)
+            self.assertEqual(result['status'], 'built')
+            self.assertEqual(self.request_path.read_bytes(), request_bytes)
+            self.assertEqual({name: (self.repo / name).read_bytes() for name in protected}, original)
+            self.assertEqual(self.git('show-ref'), refs)
+            self.assertEqual(self.git('config', '--get', 'core.ignoreCase').strip(), configured)
+            self.assertEqual(list(self.repo.parent.glob('.review-evidence-*')), [])
+            with zipfile.ZipFile(output) as archive:
+                self.assertIsNone(archive.testzip())
+                for name in ('data.txt', 'MATCH.TXT'):
+                    self.assertEqual(archive.read('source/baseline/' + name), b'before\n')
+                    self.assertEqual(archive.read('source/candidate/' + name), b'after\n')
+                self.assertEqual(archive.read('source/candidate/.gitattributes'), b'*.TXT -diff\n')
+                binary, text = archive.read('changes/baseline-candidate.patch').split(text_header, 1)
+                self.assertEqual(text_header + text, expected_text)
+                self.assertTrue(binary.startswith(b'diff --git a/MATCH.TXT b/MATCH.TXT\n'))
+                self.assertIn(b'GIT binary patch\n', binary)
+                self.assertNotIn(b'@@', binary)
+                manifests.append(archive.read('manifest.json'))
+            packets.append(output.read_bytes())
+        self.assertEqual(manifests[0], manifests[1])
+        self.assertEqual(packets[0], packets[1])

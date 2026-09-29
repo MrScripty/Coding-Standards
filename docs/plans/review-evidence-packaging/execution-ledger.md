@@ -179,3 +179,45 @@ Exact-current-source locked CI and independent repair review remain pending; the
 plan is not Accepted. Final structural/generator checks and artifact reconstruction
 are retained with the delivery after record/manifest finalization. No source push
 or user configuration edit is made by this task.
+
+## Residual F4 case-policy repair — 2026-09-28
+
+The user authorized the remaining repair under this existing plan. Admission is
+`verify` from Verifying: the repair stays inside P2's P1-boundary repair allowance.
+The source baseline is `143c8de1706ccf4b82b5c78aeed644c071ed999a`, confirmed as main;
+its Actions source archive and tree were verified in an isolated task checkout.
+No user working tree, production configuration or remote ref is a write target.
+
+Exact write set: `tools/repository_git/repository_git/repository.py`, its existing
+`tests/test_exact_patch.py` and README; the direct builder's existing
+`tools/review_evidence/tests/test_repair_boundaries.py` and README; this plan's
+plan/issues/ledger plus `reports/attribute-case-verification.md`; and the owning
+generated suite-input manifest. No other production owner or public type changes.
+
+The deciding regression uses committed `*.TXT -diff`, a nonmatching `data.txt` and
+an exact-matching `MATCH.TXT`, with the same revision pair under each local case
+setting. Literal text-hunk and binary-marker oracles complement equality of the
+actual CLI's complete packet bytes. Each invocation must preserve source, index,
+refs, request and repository configuration. Both tests are first run against the
+unmodified production method. Required supported-runtime CI and independent review
+remain distinct from local evidence; no broader test-hardening slice is admitted.
+
+### F4 case-policy local verification
+
+The two final baseline regressions failed exactly where a lowercase path became
+binary under `core.ignoreCase=true`; they passed after the command-local override.
+The complete builder/Git/metadata selections and shared Engine selection total
+161 passes and one permission-dependent skip (162 run), with no failures. Both
+source-preservation assertions and positive exact-case binary behavior passed.
+The real routing packet is byte-identical to the prior inspected output, including
+its manifest and two material gaps. A separate stdlib recipient verified all 98
+members, hashes/modes and 96 links without source access or extraction.
+
+The production change remains one Git setting plus its docstring. No normal Git
+behavior, user configuration, Engine interface, packet schema or earlier safety
+repair changed. Final records and generated inputs receive their own freshness and
+structural checks. Supported locked CI, independent narrow review and acceptance
+owner disposition remain P2 gates; source is not marked Accepted. Detailed evidence
+and the initial test-draft failures are preserved in the case-policy report and
+delivery logs. The task-owned branch/workspace is retained for delivery, not pushed
+or represented as a production source commit.
