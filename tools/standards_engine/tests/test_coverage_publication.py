@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 import hashlib
+import json
+import os
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -43,9 +47,10 @@ class EngineAuditPublicationTest(unittest.TestCase):
             repository = root / "repository"
             _clone_tracked_worktree(repository)
             context = AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(repository))
+            store_path = repository / ".standards-engine" / "snapshots-v1.sqlite3"
             with StandardsEngine.open_repository(
                 repository,
-                store_path=root / "engine.sqlite3",
+                store_path=store_path,
                 execution_context=context,
                 purpose="authoring",
             ) as engine:
@@ -432,7 +437,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
             # Reopening the original database proves applied status survives restart.
             with StandardsEngine.open_repository(
                 repository,
-                store_path=root / "engine.sqlite3",
+                store_path=store_path,
                 execution_context=context,
                 purpose="authoring",
             ) as cold:
@@ -497,6 +502,62 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         "needs-reconciliation",
                         recovered_unknown,
                     )
+            project_root = Path(__file__).resolve().parents[3]
+            messages = (
+                {
+                    "jsonrpc": "2.0",
+                    "id": 1,
+                    "method": "initialize",
+                    "params": {
+                        "protocolVersion": "2025-11-25",
+                        "capabilities": {},
+                        "clientInfo": {"name": "publication-restart", "version": "1"},
+                    },
+                },
+                {"jsonrpc": "2.0", "method": "notifications/initialized"},
+                {
+                    "jsonrpc": "2.0",
+                    "id": 2,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "workflow_status",
+                        "arguments": {"context": reviewed["readiness"]},
+                    },
+                },
+            )
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-P",
+                    "-m",
+                    "tools.standards_engine.standards_engine.mcp",
+                    "--repo-root",
+                    str(repository),
+                    "--purpose",
+                    "authoring",
+                ],
+                input="".join(json.dumps(message) + "\n" for message in messages),
+                text=True,
+                capture_output=True,
+                check=True,
+                timeout=60,
+                cwd=root,
+                env={**os.environ, "PYTHONPATH": str(project_root)},
+            )
+            responses = [
+                json.loads(line) for line in completed.stdout.splitlines()
+            ]
+            status_response = next(row for row in responses if row.get("id") == 2)
+            self.assertNotIn("error", status_response, status_response)
+            restarted_status = status_response["result"]["structuredContent"]
+            self.assertEqual(restarted_status["kind"], "workflow-result")
+            self.assertEqual(restarted_status["status"], "applied")
+            self.assertEqual(
+                restarted_status["publication"]["durable_state"], "applied"
+            )
+            self.assertEqual(
+                restarted_status["checkout"]["status"], "needs-reconciliation"
+            )
             with StandardsEngine.open_repository(
                 repository, durable=False, purpose="authoring"
             ) as authoring_engine:

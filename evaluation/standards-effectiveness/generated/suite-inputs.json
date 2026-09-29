@@ -7771,7 +7771,7 @@
       ]
     },
     {
-      "digest": "sha256:ab29a54ad934f61b8327099bd3e9e768b4bebf52874a4b2b7490a2679b7ec1f6",
+      "digest": "sha256:dfc9f79ed4a0fb5ed7b727ce89f410f42dafa58504ee89ff0586620cfd7af345",
       "path": "tools/standards_engine/tests/test_coverage_publication.py",
       "state": "present",
       "uses": [
