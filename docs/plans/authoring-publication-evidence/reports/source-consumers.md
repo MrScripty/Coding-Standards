@@ -43,9 +43,15 @@ EvidenceReference currently has exactly id/digest/provider_contract/provider_con
 Local facade resolution is working-tree repository-content@1; coverage publication
 and published receipt replay independently demand destination bytes. Proposal
 readiness schema1 and application schema1 are retained records, not display DTOs.
-Authoring contract2, request contract6 and result projection7 must not be bumped or
-rewritten simply because public reporting improves. Public interface45 is the
-reviewed installed contract and changes when new operations/results are deployed.
+Authoring contract2 and request contract6 are retained. Result projection7 remains
+the request side of the current protocol; this release adds result projection8.
+Public interface46 is the reviewed candidate edition; installed interface45 clients
+must reconnect and reload the interface46 schema after deployment. There is no
+interface45 output compatibility mode. In-repository generated contracts, examples,
+tests, and configured harnesses are updated together. The running MCP instance
+remains on interface45 because it is bound to the separately dirty main checkout;
+it was not restarted or served A1 source. Application/readiness persistence schemas
+are unchanged and the cold status read remains covered.
 
 Bound bundles deliberately add independent material rather than change old reference
 meaning. New aggregate kinds must explicitly declare identity, retention, root

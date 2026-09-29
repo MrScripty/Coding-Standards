@@ -1572,6 +1572,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    readiness.expected_target,
                 ),
             ),
             mock.patch.object(
@@ -1625,6 +1626,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    RepositoryRevision("e" * 40),
                     RepositoryRevision("e" * 40),
                 ),
             ),
@@ -1681,6 +1683,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    unavailable_observation,
                     unavailable_observation,
                 ),
             ),
@@ -1853,7 +1856,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(outcome.candidate, candidate.revision)
 
         with mock.patch.object(
-            self.engine._repository, "branch_revision"
+            self.engine._repository,
+            "branch_revision",
+            return_value=candidate.revision,
         ) as completed_observation:
             repeated_recovery = RecoverApplicationResult.from_value(
                 facade.recover_application(
@@ -1863,7 +1868,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     }
                 )
             )
-        completed_observation.assert_not_called()
+        completed_observation.assert_called_once_with("main")
         self.assertEqual(repeated_recovery.application, recovered.application)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(

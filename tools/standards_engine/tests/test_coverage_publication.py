@@ -401,7 +401,35 @@ class EngineAuditPublicationTest(unittest.TestCase):
                 self.assertEqual(
                     recovered["checkout"]["status"], "needs-reconciliation"
                 )
-            # A new store proves the repository carries the receipt and authority.
+            # A new database proves the repository carries the published receipt.
+            with StandardsEngine.open_repository(
+                repository,
+                store_path=root / "independent.sqlite3",
+                execution_context=context,
+                purpose="authoring",
+            ) as independent:
+                facade = AgentToolFacade(independent, _contracts(repository))
+                captured = facade.create_snapshot({"kind": "create-snapshot"})
+                self.assertEqual(captured["kind"], "create-snapshot-result", captured)
+                read = facade.query(
+                    {
+                        "snapshot": captured["snapshot"]["snapshot"],
+                        "request": {
+                            "kind": "read",
+                            "target": policy,
+                            "include_coverage": True,
+                        },
+                    }
+                )
+                self.assertEqual(read["kind"], "read-result", read)
+                self.assertEqual(
+                    [
+                        (item["subject"], item["status"])
+                        for item in read["coverage"]["subjects"]
+                    ],
+                    [(policy, "current-attestation")],
+                )
+            # Reopening the original database proves applied status survives restart.
             with StandardsEngine.open_repository(
                 repository,
                 store_path=root / "engine.sqlite3",
@@ -469,25 +497,51 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         "needs-reconciliation",
                         recovered_unknown,
                     )
-                captured = facade.create_snapshot({"kind": "create-snapshot"})
-                self.assertEqual(captured["kind"], "create-snapshot-result", captured)
-                read = facade.query(
-                    {
-                        "snapshot": captured["snapshot"]["snapshot"],
-                        "request": {
-                            "kind": "read",
-                            "target": policy,
-                            "include_coverage": True,
-                        },
-                    }
-                )
-                self.assertEqual(read["kind"], "read-result", read)
+            with StandardsEngine.open_repository(
+                repository, durable=False, purpose="authoring"
+            ) as authoring_engine:
+                legacy_failure = AnalysisError(AnalysisFailure(
+                    "ANALYSIS.EVIDENCE_UNAVAILABLE",
+                    "invalid",
+                    "The evidence source is unavailable.",
+                    path="evaluation/standards-effectiveness/attestation-sources.toml",
+                    field="engine_sources",
+                    observed="legacy-source",
+                ))
+                legacy_details = authoring_engine._domain_rejection(
+                    legacy_failure
+                ).details
                 self.assertEqual(
-                    [
-                        (item["subject"], item["status"])
-                        for item in read["coverage"]["subjects"]
-                    ],
-                    [(policy, "current-attestation")],
+                    legacy_details,
+                    {
+                        "path": "evaluation/standards-effectiveness/attestation-sources.toml",
+                        "field": "engine_sources",
+                        "observed": "legacy-source",
+                    },
+                )
+                unsafe_failure = AnalysisError(AnalysisFailure(
+                    "ANALYSIS.EVIDENCE_UNAVAILABLE",
+                    "invalid",
+                    "The evidence source is unavailable.",
+                    path="/private/credentials.txt",
+                    field="engine_sources",
+                    observed="line one\nline two",
+                ))
+                self.assertEqual(
+                    authoring_engine._domain_rejection(unsafe_failure).details,
+                    {"field": "engine_sources"},
+                )
+                traversal_failure = AnalysisError(AnalysisFailure(
+                    "ANALYSIS.EVIDENCE_UNAVAILABLE",
+                    "invalid",
+                    "The evidence source is unavailable.",
+                    path="private\\..\\credentials.txt",
+                    field="engine_sources",
+                    observed="safe-observation",
+                ))
+                self.assertEqual(
+                    authoring_engine._domain_rejection(traversal_failure).details,
+                    {"field": "engine_sources", "observed": "safe-observation"},
                 )
             with StandardsEngine.open_repository(
                 repository, durable=False, purpose="application"
@@ -500,6 +554,9 @@ class EngineAuditPublicationTest(unittest.TestCase):
                     evidence_reference="private/internal/evidence.md",
                     expected_digest="sha256:" + "a" * 64,
                     observed_digest="sha256:" + "b" * 64,
+                    path="/private/internal/evidence.md",
+                    field="engine_sources",
+                    observed="private-value",
                 ))
                 redacted = application_engine._domain_rejection(private_failure)
                 self.assertEqual(redacted.details, {})

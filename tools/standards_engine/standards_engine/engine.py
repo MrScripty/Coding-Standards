@@ -3746,6 +3746,45 @@ class StandardsEngine:
             raise error
         outcome = getattr(failure, "outcome", getattr(failure, "kind", "invalid"))
         details: dict[str, object] = {}
+        if self._purpose is Purpose.AUTHORING and isinstance(
+            failure, AnalysisFailure
+        ):
+            for key, value, max_length, allowed_punctuation in (
+                ("path", failure.path, 512, "._:/- []"),
+                ("field", failure.field, 128, "._:/-[]"),
+                ("observed", failure.observed, 128, "._:/-|"),
+            ):
+                if (
+                    type(value) is not str
+                    or not value
+                    or len(value) > max_length
+                    or not value[0].isascii()
+                    or not value[0].isalnum()
+                    or any(
+                        not character.isascii()
+                        or not (
+                            character.isalnum()
+                            or character in allowed_punctuation
+                        )
+                        for character in value
+                    )
+                ):
+                    continue
+                if key == "path" and (
+                    value.startswith(("/", "\\"))
+                    or (
+                        len(value) >= 3
+                        and value[0].isalpha()
+                        and value[1:3] in {":/", ":\\"}
+                    )
+                    or any(
+                        part in {"", ".", ".."}
+                        for part in value.replace("\\", "/").split("/")
+                    )
+                ):
+                    continue
+                details[key] = value
+
         if (
             self._purpose is Purpose.AUTHORING
             and isinstance(failure, AnalysisFailure)

@@ -433,10 +433,13 @@ those schemas. Store selection must remain unchanged if the installed host used
 a nondefault store. Handoff data is the exact readiness/context, not a fabricated
 handle assembled from a truncated identifier.
 
-Authoring failure details carry the Git operation, exit code and recognized
-fixed stderr phrase when available. Raw stderr can contain sensitive paths or
-hook output and stays in the private Git exception, not the MCP response. Earlier
-uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
+Authoring analysis failures retain legacy `path`, `field` and `observed` context
+only when each value is bounded and matches its safe character and path rules.
+Absolute and traversal paths and multiline observations are omitted. Application
+purpose omits these details. Git failure details carry the operation, exit code
+and recognized fixed stderr phrase when available. Raw stderr can contain sensitive
+paths or hook output and stays in the private Git exception, not the MCP response.
+Earlier uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
 observation from the supported operation on the correct host. Ordinary application
 interfaces still cannot call either recovery operation or read its diagnostics.
 

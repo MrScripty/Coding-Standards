@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import errno
 import os
 import shutil
 import subprocess
@@ -446,6 +447,141 @@ class GitRepositoryTests(unittest.TestCase):
                         if original.exists():
                             shutil.rmtree(administrative_root)
                             original.rename(administrative_root)
+
+    def test_publication_checkout_owns_initial_descriptor_allocation_failures(self) -> None:
+        for failed_allocation in ("duplicate", "first-root-open", "second-root-open"):
+            with self.subTest(allocation=failed_allocation), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary)
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                repository = GitRepository(root)
+                expected = repository.branch_revision("main")
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                    commit=_COMMIT,
+                ) as candidate:
+                    original_open = os.open
+                    original_close = os.close
+                    original_dup = os.dup
+                    opened: set[int] = set()
+                    root_opens = 0
+                    allocation_failed = False
+
+                    def open_directory(path, flags, *args, **kwargs):
+                        nonlocal root_opens, allocation_failed
+                        if flags & os.O_DIRECTORY and kwargs.get("dir_fd") is None:
+                            root_opens += 1
+                            if (
+                                (failed_allocation == "first-root-open" and root_opens == 1)
+                                or (failed_allocation == "second-root-open" and root_opens == 2)
+                            ):
+                                allocation_failed = True
+                                raise OSError(errno.EMFILE, "injected descriptor exhaustion")
+                        descriptor = original_open(path, flags, *args, **kwargs)
+                        if flags & os.O_DIRECTORY:
+                            opened.add(descriptor)
+                        return descriptor
+
+                    def duplicate_directory(descriptor):
+                        nonlocal allocation_failed
+                        if failed_allocation == "duplicate":
+                            allocation_failed = True
+                            raise OSError(errno.EMFILE, "injected descriptor exhaustion")
+                        duplicate = original_dup(descriptor)
+                        opened.add(duplicate)
+                        return duplicate
+
+                    def close_directory(descriptor):
+                        original_close(descriptor)
+                        opened.discard(descriptor)
+
+                    with (
+                        mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                        mock.patch.object(repository_module.os, "open", side_effect=open_directory),
+                        mock.patch.object(repository_module.os, "dup", side_effect=duplicate_directory),
+                        mock.patch.object(repository_module.os, "close", side_effect=close_directory),
+                    ):
+                        with self.assertRaises(GitRepositoryError) as observed:
+                            repository.observe_publication_checkout(expected, candidate.revision)
+                    self.assertTrue(allocation_failed)
+                    self.assertEqual(observed.exception.failure.kind, "unavailable")
+                    self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.WORKTREE_UNAVAILABLE")
+                    self.assertIsInstance(observed.exception.__cause__, OSError)
+                    self.assertEqual(observed.exception.__cause__.errno, errno.EMFILE)
+                    self.assertEqual(opened, set())
+
+    def test_publication_checkout_closes_descriptors_on_cancellation(self) -> None:
+        original_open = os.open
+        original_dup = os.dup
+        original_fstat = os.fstat
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            (root / "nested").mkdir()
+            opened: list[int] = []
+
+            def cancel_during_component_open(path, flags, *args, **kwargs):
+                if kwargs.get("dir_fd") is not None:
+                    raise KeyboardInterrupt
+                descriptor = original_open(path, flags, *args, **kwargs)
+                opened.append(descriptor)
+                return descriptor
+
+            with (
+                mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                mock.patch.object(repository_module.os, "open", side_effect=cancel_during_component_open),
+            ):
+                with self.assertRaises(KeyboardInterrupt):
+                    repository_module._open_absolute_directory(root / "nested")
+            self.assertEqual(len(opened), 1)
+            for descriptor in opened:
+                with self.assertRaises(OSError):
+                    original_fstat(descriptor)
+
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "nested").mkdir()
+            (root / "nested/value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("nested/value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                opened_directories: list[int] = []
+
+                def track_directory_open(path, flags, *args, **kwargs):
+                    descriptor = original_open(path, flags, *args, **kwargs)
+                    if flags & os.O_DIRECTORY:
+                        opened_directories.append(descriptor)
+                    return descriptor
+
+                def track_directory_duplicate(descriptor):
+                    duplicate = original_dup(descriptor)
+                    opened_directories.append(duplicate)
+                    return duplicate
+
+                def cancel_on_directory_inspection(_descriptor):
+                    raise KeyboardInterrupt
+
+                with (
+                    mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                    mock.patch.object(repository_module.os, "open", side_effect=track_directory_open),
+                    mock.patch.object(repository_module.os, "dup", side_effect=track_directory_duplicate),
+                    mock.patch.object(repository_module.os, "fstat", side_effect=cancel_on_directory_inspection),
+                ):
+                    with self.assertRaises(KeyboardInterrupt):
+                        repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertGreaterEqual(len(opened_directories), 4)
+                for descriptor in opened_directories:
+                    with self.assertRaises(OSError):
+                        original_fstat(descriptor)
 
     def test_publication_checkout_rechecks_target_ref_after_path_observation(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:

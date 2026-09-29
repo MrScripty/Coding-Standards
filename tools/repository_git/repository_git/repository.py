@@ -1615,7 +1615,10 @@ def _worktree_entry_matches(
     """Compare one path through pinned directory descriptors and no-follow opens."""
     if not _supports_safe_dirfd_observation():
         raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PLATFORM", "safe directory-relative observation is unavailable")
-    descriptors = [os.dup(root_fd)]
+    try:
+        descriptors = [os.dup(root_fd)]
+    except OSError as error:
+        raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree descriptor could not be retained") from error
     bindings: list[tuple[int, bytes, os.stat_result]] = []
     try:
         parent_fd = descriptors[0]
@@ -1634,17 +1637,18 @@ def _worktree_entry_matches(
                         "publication observation does not follow symbolic-link ancestors",
                     ) from error
                 raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "publication directory could not be opened safely") from error
-            child_info = os.fstat(child_fd)
+            descriptors.append(child_fd)
+            try:
+                child_info = os.fstat(child_fd)
+            except OSError as error:
+                raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "publication directory could not be inspected safely") from error
             try:
                 visible = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
             except OSError as error:
-                os.close(child_fd)
                 raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory moved during observation") from error
             if not stat.S_ISDIR(visible.st_mode) or not _same_file_identity(child_info, visible):
-                os.close(child_fd)
                 raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory changed during observation")
             bindings.append((parent_fd, name, child_info))
-            descriptors.append(child_fd)
             parent_fd = child_fd
 
         leaf = os.fsencode(path.components[-1])
@@ -1733,16 +1737,28 @@ def _open_absolute_directory(path: Path) -> int:
     if not path.is_absolute() or any(part in {".", ".."} for part in path.parts):
         raise unsupported("REPOSITORY_GIT.UNSUPPORTED_LAYOUT", "worktree root is not a canonical absolute path")
     flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
-    descriptor = os.open(os.fsencode(path.anchor), flags)
+    try:
+        descriptor = os.open(os.fsencode(path.anchor), flags)
+    except OSError as error:
+        raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree directory could not be opened safely") from error
+    owned_descriptors = [descriptor]
     try:
         for component in path.parts[1:]:
             next_descriptor = os.open(os.fsencode(component), flags, dir_fd=descriptor)
+            owned_descriptors.append(next_descriptor)
             os.close(descriptor)
+            owned_descriptors.remove(descriptor)
             descriptor = next_descriptor
+        owned_descriptors.remove(descriptor)
         return descriptor
     except OSError as error:
-        os.close(descriptor)
         raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree directory could not be opened safely") from error
+    finally:
+        for owned_descriptor in reversed(owned_descriptors):
+            try:
+                os.close(owned_descriptor)
+            except OSError:
+                pass
 
 
 def _verify_absolute_directory_binding(path: Path, descriptor: int) -> None:
