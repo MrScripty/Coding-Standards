@@ -24,3 +24,26 @@ review workers did not use MCP; their work used the isolated repository source,
 tests, and the admitted plan. Local Engine verification was performed through the
 owner's `verify_repository(refresh_verification_inputs=True)` operation and did
 not restart or replace the live MCP process.
+
+## 2026-09-29 — final A1 routing check
+
+The integration owner reused the same snapshot for the final A1 obligations check.
+`routing_facts(snapshot)` made the registered fact vocabulary and allowed values
+available without capturing another view. The first `route` call returned
+`needs-facts` because the owner had omitted the framework fact; supplying the
+observed empty framework set produced a complete route with no unresolved
+questions or policy items. The explicit missing-fact result was useful and the
+correction was small.
+
+The complete route selected 30 standards. A broad `read_many` page for eight
+selected standards returned more source text than the caller window could retain.
+Reading a smaller, named subset is the safer way to inspect obligations; the
+route selection itself remained useful. A concise per-standard summary or a
+caller-selectable content budget would reduce truncation while preserving exact
+source reads on demand.
+
+Only the integration owner reports Standards Engine MCP use. The GPT-6.1 Sol
+fixture writer, Astra architecture and standards reviewers, Luna spec reviewer,
+observer reviewers, and archive/plan discovery workers reported no MCP calls;
+their source and acceptance findings are recorded in the execution ledger. Their
+MCP usability experience is therefore not inferred from the owner's calls.
