@@ -12,6 +12,7 @@ from tools.standards_engine.tests.test_agent_workflow import prepare_repository,
 from tools.standards_metadata.standards_metadata import load_canonical_standards_corpus
 
 RULE = "topic.purpose-fixture"
+UNEXPOSED = "topic.purpose-fixture-unexposed"
 REFERENCE = "reference.testing.purpose-fixture"
 REASON = "provenance.purpose-fixture"
 PRIVATE = "PRIVATE_DECISION_RECORD_506187"
@@ -77,7 +78,14 @@ class SupportingWorkflowTest(unittest.TestCase):
 
     def test_coordinated_publication_and_provenance_only_revision(self):
         snapshot = self.author.create_snapshot({"kind": "create-snapshot"})["snapshot"]["snapshot"]
-        empty = self.app.read({"snapshot": snapshot, "target": "topic.security"})
+        # Own the negative fixture independently of application exposure in the
+        # accepted corpus, and publish it without an application approval.
+        self.publish(self.author.propose({"detail": "full", "snapshot": snapshot,
+                                         "change_set": self.change([standard(UNEXPOSED)])}))
+        snapshot = self.author.create_snapshot({"kind": "create-snapshot"})["snapshot"]["snapshot"]
+        unexposed = self.author.read({"snapshot": snapshot, "target": UNEXPOSED, "detail": "full"})
+        self.assertIn(PUBLIC, unexposed["content"], unexposed)
+        empty = self.app.read({"snapshot": snapshot, "target": UNEXPOSED})
         self.assertEqual(empty["code"], "APPLICATION.CONTENT_UNAVAILABLE", empty)
         aids = []
         for target in ("prompts/planning.md", "templates/PLAN-TEMPLATE.md"):
@@ -110,6 +118,8 @@ class SupportingWorkflowTest(unittest.TestCase):
         # Reads in this interval observe the same accepted publication.
         published_snapshot = first["snapshot"]
         self.assertNotEqual(published_snapshot, snapshot)
+        unexposed_after = self.app.read({"snapshot": published_snapshot, "target": UNEXPOSED})
+        self.assertEqual(unexposed_after["code"], "APPLICATION.CONTENT_UNAVAILABLE", unexposed_after)
         self.assertEqual(self.app.read({"snapshot": published_snapshot, "target": REFERENCE})["kind"], "application-read-result")
         for aid in aids:
             exposed = self.app.read({"snapshot": published_snapshot, "target": aid["canonical_id"]})
