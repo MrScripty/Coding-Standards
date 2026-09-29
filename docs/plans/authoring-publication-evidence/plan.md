@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** A1 — explicit publication observations and early evidence failures
+**Current phase:** A2 — explicit evidence bindings and portable artifacts
 
-**Next slice:** **A1 — Explicit publication observations and early evidence failures**
+**Next slice:** **A2 — Explicit evidence bindings and portable artifacts**
 
 **Acceptance status:** `pending`
 
@@ -55,20 +55,18 @@ reproduced the reported publication/index mismatch, late candidate-evidence fail
 generic exposure rejection and avoidable renewed Analysis work. In-memory reuse
 and real Git two-tree trials establish bounded feasibility, not implementation.
 
-Current exact-source CI is **failed**: 611 Engine executions ended with two errors
-in the same supporting-workflow scenario, whose initial test assumes Security is
-unexposed although the new publication exposes it. Supporting packages
-passed. Local complete structural verification passes. Fix the demonstrated fixture
-assumption without undoing the user's accepted standards change; do not claim the
-reviewed baseline has a green Engine run or conflate that CI failure with the
-publication/evidence defects. See issue B0.
+The historical baseline CI run failed in two cases of the same supporting-workflow
+scenario because its negative assertion depended on accepted Security exposure.
+A1 replaced that assumption with a test-owned unexposed standard, without changing
+Security exposure. The direct and warm-cache cases pass on the A1 candidate. No
+hosted exact-candidate CI run is claimed. See issue B0.
 
 ## Objective Acceptance
 
 | ID | Observable criterion | Kind | Environment | Mode | Status | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| A-C1 | Apply, recovery and later status distinguish durable publication identity from a fresh checkout/index observation, including unknown outcomes. | contract + integration | real Git and SQLite, replacement processes | automated | pending | A1 publication matrix |
-| A-C2 | Already-incompatible evidence is identified before readiness, with exact phase/reference/digest/source context; later changes still reject at the final boundary. | negative + lifecycle | real authority/evidence, both wire entrypoints | automated | pending | A1/A2 evidence matrix |
+| A-C1 | Apply, recovery and later status distinguish durable publication identity from a fresh checkout/index observation, including unknown outcomes. | contract + integration | real Git and SQLite, replacement processes | automated | satisfied | A1 publication/recovery integration, including a new MCP process reading the retained applied result |
+| A-C2 | Already-incompatible evidence is identified before readiness, with exact phase/reference/digest/source context; later changes still reject at the final boundary. | negative + lifecycle | real authority/evidence, both wire entrypoints | automated | pending | A1 covers repository-content@1; A2 must extend the matrix to bound references and both entrypoints |
 | A-C3 | Explicit baseline, candidate and imported-local acquisitions retain exact bytes and provenance, never switch sources silently, and remain distinct from the decision's subject and authority. | contract + persistence | real Git, snapshot/projection and bounded local inputs | automated | pending | A2 capture/export oracles |
 | A-C4 | Published bound evidence and coverage remain verifiable in a cold clone without the original worktree, capture store or external file; genuine legacy evidence retains its original meaning. | retained-history | old producer/new consumer and new exported candidate | automated | pending | A2 legacy/new receipt fixtures |
 | A-C5 | Explicit reconciliation preserves unrelated staged, unstaged and untracked work; overlaps, stale observations and partial failures have owned outcomes without republishing. | lifecycle + concurrency | supported Linux/Git, real index/files and injected interleavings | automated | pending | A3 reconciliation matrix |
@@ -417,7 +415,7 @@ rewriting of accepted receipts, or automatic conversion of old evidence into bun
 
 ### A1 — Explicit publication observations and early evidence failures
 
-**Status:** `Active`
+**Status:** `Complete`
 
 **Goal:** make existing success/failure truthful before extending evidence capability.
 
@@ -432,10 +430,14 @@ receipt/fresh checkout observation; share side-effect-free evidence preflight be
 readiness; expose bounded authoring phase/reference context; retain all final checks.
 Create one planned coherent interface update, with exact old-consumer dispositions.
 
-**Gate:** A-C1/A-C2 representative tests, no checkout writes from apply/recover/status,
-changed evidence still invalid at final apply, successful target plus observation
-failure remains unambiguous, and old applied status can be inspected after restart.
-No global source-binding migration or new reconciliation write is hidden in A1.
+**Gate:** Passed on the committed A1 candidate. Publication and recovery preserve
+checkout/index state; durable receipts remain distinct from fresh checkout
+observations, including unknown outcomes and a replacement MCP process. Evidence
+preflight rejects incompatible destination bytes before readiness and the final
+apply boundary still rejects later mutation. No global source-binding migration or
+new reconciliation write is hidden in A1. See the implementation result in the
+[execution ledger](execution-ledger.md). A2 extends the evidence matrix to bound
+references.
 
 ### A2 — Explicit evidence bindings and portable artifacts
 

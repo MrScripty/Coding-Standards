@@ -85,3 +85,69 @@ and merged it into A1 with `e1e72671 merge: observe publication checkout` after
 the branch had advanced; `test_process_reuse.py` did not need an edit. The writer
 did not invoke the Standards Engine MCP. The A1 plan remains Active and its claims
 and gates remain pending.
+
+## 2026-09-29 — A1 implementation result
+
+A1 was implemented on the admitted isolated branch at `/tmp/cs-authoring-publication-evidence-a1`.
+The original dirty main checkout remains on `149ba317` with its existing staged,
+unstaged, and untracked changes; no A1 files were committed there. Implementation
+and integration commits are authored as MrScripty. The current source candidate is
+`20261782`; the A1 contract edition is interface 46, request contract 6, and result
+projection 8. Generated contracts, catalogs, examples, and affected fixtures are
+updated together. Application and readiness persistence schemas remain unchanged.
+
+The A1 source now separates the durable publication receipt from fresh target and
+checkout/index observations on apply, recovery, and later status. Observation stays
+read-only, treats conflicted and unsupported index layouts explicitly, pins and
+revalidates checkout and administrative directory identities, and returns owned
+`unavailable` failures when descriptor allocation or cancellation interrupts the
+observation. Evidence destination preparation runs before readiness and again at
+the final boundary. Authoring analysis failures retain bounded safe legacy
+`path`/`field`/`observed` details and phase/reference/digest/source context; the
+application purpose continues to redact them. A1 adds a real MCP subprocess read
+of applied status after restart. No A2 evidence-binding or A3 checkout-reconciliation
+write was added.
+
+The B0 fixture now owns its unexposed standard and preserves the accepted Security
+exposure. A1 satisfies A-C1 with Git/SQLite and replacement-process evidence.
+A-C2 remains pending for A2's bound-reference matrix; A1 covers the existing
+repository-content@1 acquisition path and final revalidation.
+
+### Independent reviews
+
+- GPT-6 Astra Medium completed the composed architecture review, read-only. It
+  identified observer race and cancellation cleanup gaps during integration; both
+  were corrected and its final follow-up found no remaining architecture or scope
+  findings.
+- GPT-6 Astra Medium completed the Standards review. It identified the lost
+  independent-store persistence assertion and untyped descriptor-allocation
+  failures. The test now covers both independent-store reconstruction and same-store
+  restart, the allocation errors are typed, and the reviewer found no remaining
+  findings on follow-up.
+- GPT-6 Luna High completed the Spec/reference review. The safe legacy diagnostic
+  projection and interface 45-to-46 consumer/persistence dispositions were added;
+  its follow-up found no remaining gap on those points.
+- The requested Passeur MCP review was not submitted. Current Pumas status is bound
+  to Pumas-Library and Tuldok status names an unrelated project with service state
+  `not_checked`; neither server is bound to this repository. No review request was
+  sent to the wrong project. A Passeur security/lifecycle review remains pending.
+
+### Validation
+
+- `tools.repository_git.tests.test_repository`: 31 passed in 2.7 seconds, including
+  race substitution, typed descriptor exhaustion, and cancellation cleanup.
+- `tools.standards_engine.tests.test_analysis`: 21 passed in 77.2 seconds.
+- A1 acceptance modules (`test_coverage_publication`, `test_agent_workflow`,
+  `test_publication_recovery`, `test_registration_contract`, and
+  `test_supporting_workflow`): 30 passed in 204.0 seconds.
+- Direct and warm-cache B0 fixture cases: 2 passed in 91.2 seconds.
+- Exact-candidate `verify_repository(refresh_verification_inputs=False)`: 73
+  suites and 121 checks passed. The owner-generated suite input manifest is current.
+- `git diff --check` passed. The exact-candidate hosted CI was not run.
+
+Standards Engine MCP usability observations are captured separately in
+[mcp-usability-feedback.md](reports/mcp-usability-feedback.md). It confirmed the
+live process at interface 45, but was left running against the dirty main checkout;
+it was not pointed at or restarted with the A1 worktree. A broad route response was
+truncated and targeted `read_many` calls were useful. No remote push or hosted PR was
+created; a ready-to-post PR draft is recorded separately.

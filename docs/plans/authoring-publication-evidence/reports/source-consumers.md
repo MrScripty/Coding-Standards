@@ -43,8 +43,8 @@ EvidenceReference currently has exactly id/digest/provider_contract/provider_con
 Local facade resolution is working-tree repository-content@1; coverage publication
 and published receipt replay independently demand destination bytes. Proposal
 readiness schema1 and application schema1 are retained records, not display DTOs.
-Authoring contract2 and request contract6 are retained. Result projection7 remains
-the request side of the current protocol; this release adds result projection8.
+Authoring contract2 and request contract6 are retained. Result projection7 is the
+previous output edition; this release adds result projection8.
 Public interface46 is the reviewed candidate edition; installed interface45 clients
 must reconnect and reload the interface46 schema after deployment. There is no
 interface45 output compatibility mode. In-repository generated contracts, examples,
