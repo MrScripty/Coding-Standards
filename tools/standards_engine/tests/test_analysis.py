@@ -267,6 +267,64 @@ class DenyingAuthorizer:
 
 
 class AnalysisWorkflowTest(unittest.TestCase):
+    def test_publication_projection_uses_local_target_and_bounds_unavailable_observation(self):
+        application = mock.Mock(
+            application_id="application:sha256:" + "a" * 64,
+            expected_target=RepositoryRevision("b" * 40),
+            candidate=RepositoryRevision("c" * 40),
+        )
+        unavailable = GitRepositoryError(GitRepositoryFailure(
+            "unavailable", "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+            "/tmp/private-publication/secret: " + "x" * 4096,
+        ))
+        with (
+            mock.patch.object(
+                self.engine._authoring, "application_outcome", return_value=None
+            ) as outcome,
+            mock.patch.object(
+                self.engine._repository, "branch_revision", side_effect=unavailable
+            ) as target,
+            mock.patch.object(
+                self.engine._repository, "revision_tree", return_value="d" * 40
+            ) as tree,
+            mock.patch.object(
+                self.engine._repository, "observe_publication_checkout",
+                side_effect=unavailable,
+            ) as checkout,
+        ):
+            projection = self.engine._application_publication_projection(application)
+        outcome.assert_called_once_with(application)
+        target.assert_called_once_with("main", local_only=True)
+        tree.assert_called_once_with(application.candidate, local_only=True)
+        checkout.assert_called_once_with(
+            application.expected_target, application.candidate, target_ref="refs/heads/main"
+        )
+        self.assertEqual(projection, {
+            "publication": {
+                "kind": "application-publication-receipt",
+                "application": {
+                    "kind": "application-handle", "id": application.application_id,
+                    "schema_version": 1,
+                },
+                "candidate_commit": "c" * 40,
+                "candidate_tree": "d" * 40,
+                "target_ref": "refs/heads/main",
+                "expected_predecessor": "b" * 40,
+                "durable_state": "admitted",
+                "target_observation": {
+                    "kind": "publication-target-observation",
+                    "status": "unavailable", "revision": None,
+                },
+            },
+            "checkout": {
+                "kind": "publication-checkout-observation", "status": "unavailable",
+                "worktree_id": None, "symbolic_branch": None, "head": None,
+                "index_observation": None, "publication_path_count": None,
+                "index_paths": {"predecessor": None, "candidate": None, "conflicted": None},
+                "worktree_paths": {"predecessor": None, "candidate": None, "conflicted": None},
+            },
+        })
+
     def test_coverage_exclusions_require_exact_evidence_before_resolution(self):
         # A current accepted certificate can satisfy same-snapshot analysis.
         # Change an exact policy in a private proposal so this test always owns
@@ -1868,7 +1926,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     }
                 )
             )
-        completed_observation.assert_called_once_with("main")
+        completed_observation.assert_called_once_with("main", local_only=True)
         self.assertEqual(repeated_recovery.application, recovered.application)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(

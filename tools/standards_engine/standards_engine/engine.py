@@ -3615,7 +3615,9 @@ class StandardsEngine:
             durable_state = "unknown"
 
         try:
-            target = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+            target = self._repository.branch_revision(
+                CANONICAL_TARGET_BRANCH, local_only=True
+            )
             target_status = (
                 "candidate" if target == application.candidate
                 else "expected" if target == application.expected_target
