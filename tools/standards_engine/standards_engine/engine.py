@@ -287,6 +287,22 @@ class _EvaluationMaterials:
     revision_decoding: RevisionDecoding | None = field(default=None, compare=False, repr=False)
 
 
+@dataclass(frozen=True, slots=True)
+class _CoveragePublicationPreparation:
+    """Exact destination evidence inputs validated without publication authority."""
+
+    subjects: tuple[str, ...]
+    analysis_id: str
+    claims: Mapping[str, Mapping[str, object]]
+    authorizations: Mapping[str, Mapping[str, object]]
+    registry: Mapping[str, object]
+    receipt_paths: frozenset[str]
+    source_files: Mapping[str, bytes]
+    source_paths: frozenset[str]
+    base_files: Mapping[str, bytes]
+    original_captured_paths: frozenset[str]
+
+
 class _GitRevisionSource:
     def __init__(self, reader: RevisionReadSession) -> None:
         self._reader = reader
@@ -1275,7 +1291,9 @@ class StandardsEngine:
                     "Proposal review requires analysis of an immutable proposal revision.",
                 )
             revision = self._authoring.read_revision(proposed.revision_id)
-            target = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+            target = self._repository.branch_revision(
+                CANONICAL_TARGET_BRANCH, local_only=True
+            )
             base = self._snapshots.snapshot(revision.base_snapshot)
             if target.oid != base.source_revision:
                 return self._reject(
@@ -1283,6 +1301,12 @@ class StandardsEngine:
                     "unavailable",
                     "The configured main branch no longer matches the proposal base.",
                 )
+            self._preflight_proposal_coverage(
+                state,
+                revision,
+                target,
+                phase="readiness-preflight",
+            )
             decisions = tuple(item.as_contract() for item in call.decisions)
             authorizations = tuple(
                 construct_authorization_record(
@@ -1399,6 +1423,7 @@ class StandardsEngine:
                             application.application_id
                         ),
                         "status": "applied",
+                        **self._application_publication_projection(application),
                     }
                 )
         except self._domain_errors() as error:
@@ -1545,14 +1570,140 @@ class StandardsEngine:
         )
         from .logical_authoring import _refresh_suite_input_projection
 
+        preparation = self._prepare_coverage_publication(
+            readiness.analysis_id,
+            revision,
+            projection,
+            readiness.expected_target,
+            base_files,
+            proposed_files,
+            proposed_paths,
+            phase="candidate-evidence",
+        )
+        if preparation is None:
+            return
+        proposed_files.clear()
+        proposed_files.update(preparation.source_files)
+        proposed_paths.update(preparation.source_paths)
+        base_files.clear()
+        base_files.update(preparation.base_files)
+        registry = dict(preparation.registry)
+        receipt_paths = set(preparation.receipt_paths)
+        for subject in preparation.subjects:
+            claim = preparation.claims[subject]
+            authorization = preparation.authorizations[claim["authorization_id"]]
+            receipt = render_engine_coverage_receipt(
+                FrozenContentSource(preparation.source_files),
+                projection.compiled.coverage,
+                subject,
+                claim,
+                authorization,
+                preparation.analysis_id,
+                self._execution_context,
+                phase="candidate-evidence",
+                source_kind="repository-content",
+                material_identity=revision.revision_id,
+            )
+            path = self._engine_coverage_receipt_path(subject)
+            if path in proposed_paths and path not in proposed_files:
+                raise AnalysisError(
+                    AnalysisFailure(
+                        "COVERAGE.PUBLICATION_PATH_CONFLICT",
+                        "invalid",
+                        "The Engine receipt path is occupied outside captured authority.",
+                    )
+                )
+            proposed_files[path] = receipt
+            proposed_paths.add(path)
+            receipt_paths.add(path)
+        registry["schema_version"] = 3
+        registry["engine_sources"] = sorted(receipt_paths)
+        proposed_files["evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"] = (
+            "schema_version = 3\n"
+            + "\n".join(
+                key
+                + " = [\n"
+                + "".join(
+                    "  " + json.dumps(path, ensure_ascii=False) + ",\n"
+                    for path in registry[key]
+                )
+                + "]\n"
+                for key in ("sources", "engine_sources")
+            )
+        ).encode("utf-8")
+        proposed_paths.update(
+            _refresh_suite_input_projection(
+                proposed_files,
+                preparation.original_captured_paths,
+                revision.base_repository_paths,
+            )
+        )
+        final = self._compile(FrozenContentSource(proposed_files))
+        if not set(preparation.subjects) <= final.repository_coverage.covered_subjects:
+            raise AnalysisError(
+                AnalysisFailure(
+                    "COVERAGE.PUBLICATION_STALE",
+                    "invalid",
+                    "Publication changed the reviewed coverage requirement; a fresh review is required.",
+                )
+            )
+
+    def _preflight_proposal_coverage(
+        self,
+        state: DomainAnalysisState,
+        revision: ProposalRevision,
+        expected_target: RepositoryRevision,
+        *,
+        phase: str,
+    ) -> None:
+        if not self._coverage_audit_subjects(revision):
+            return
+        projection = self._proposal_projection(revision)
+        capture = self._snapshots.load_content(revision.base_snapshot)
+        base_files = {str(item.path): item.content for item in capture.files}
+        base_files.update(projection.captured_consumer_files)
+        proposed_files = dict(projection.source.files)
+        proposed_paths = set(projection.repository_paths)
+        self._prepare_coverage_publication(
+            state.analysis_id,
+            revision,
+            projection,
+            expected_target,
+            base_files,
+            proposed_files,
+            proposed_paths,
+            phase=phase,
+            state=state,
+        )
+
+    def _prepare_coverage_publication(
+        self,
+        analysis_id: str,
+        revision: ProposalRevision,
+        projection: LogicalProjection,
+        expected_target: RepositoryRevision,
+        base_files: Mapping[str, bytes],
+        proposed_files: Mapping[str, bytes],
+        proposed_paths: set[str],
+        *,
+        phase: str,
+        state: DomainAnalysisState | None = None,
+    ) -> _CoveragePublicationPreparation | None:
+        """Validate one exact destination source without writing or authorizing."""
+        from tools.standards_analysis.standards_analysis import (
+            validate_engine_coverage_receipt_evidence,
+        )
+
         subjects = self._coverage_audit_subjects(revision)
         if not subjects:
-            return
-        state = self._load_analysis(
-            AnalysisHandle.from_value(self._analysis_handle(readiness.analysis_id))
-        )
+            return None
+        if state is None:
+            state = self._load_analysis(
+                AnalysisHandle.from_value(self._analysis_handle(analysis_id))
+            )
         if (
-            not isinstance(state.proposed_material, ProjectedRevisionMaterialRef)
+            state.analysis_id != analysis_id
+            or not isinstance(state.proposed_material, ProjectedRevisionMaterialRef)
             or state.proposed_material.revision_id != revision.revision_id
             or state.base_snapshot != revision.base_snapshot
         ):
@@ -1572,7 +1723,7 @@ class StandardsEngine:
                     "Coverage publication requires a complete reviewed Analysis.",
                 )
             )
-        claims = {
+        claims_by_requirement = {
             self._plain(item)["requirement_id"]: self._plain(item)
             for item in state.coverage_attestations
         }
@@ -1580,16 +1731,28 @@ class StandardsEngine:
             self._plain(item)["reference"]["id"]: self._plain(item)
             for item in state.authorization_records
         }
-        registry_path = "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
-        registry = tomllib.loads(proposed_files[registry_path].decode("utf-8"))
-        receipt_paths = set(registry.get("engine_sources", []))
+        source_files = dict(proposed_files)
+        source_paths = set(proposed_paths)
+        destination_base_files = dict(base_files)
         original_captured_paths = frozenset(base_files)
+        registry_path = "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
+        try:
+            registry = tomllib.loads(source_files[registry_path].decode("utf-8"))
+        except (KeyError, UnicodeDecodeError, tomllib.TOMLDecodeError) as error:
+            raise AnalysisError(AnalysisFailure(
+                "COVERAGE.PUBLICATION_REGISTRY_INVALID",
+                "invalid",
+                "The destination coverage source registry is unavailable or invalid.",
+            )) from error
+        receipt_paths = frozenset(registry.get("engine_sources", []))
+        claims: dict[str, Mapping[str, object]] = {}
+        subjects_for_claim: dict[str, str] = {}
         for subject in subjects:
             requirement = coverage_requirement_id(
                 projection.compiled.coverage.requirements[subject],
                 projection.compiled.coverage.views[subject],
             )
-            claim = claims.get(requirement)
+            claim = claims_by_requirement.get(requirement)
             if claim is None or claim["authorization_id"] not in authorizations:
                 raise AnalysisError(
                     AnalysisFailure(
@@ -1600,76 +1763,88 @@ class StandardsEngine:
                 )
             for reference in (*claim["evidence"], *claim["explicit_exclusions"]):
                 path = reference["id"]
-                if path not in proposed_files:
-                    if path not in proposed_paths:
-                        raise AnalysisError(
-                            AnalysisFailure(
-                                "COVERAGE.PUBLICATION_EVIDENCE_UNCOMMITTED",
-                                "unavailable",
-                                "Published review evidence must exist in the destination repository.",
-                            )
-                        )
-                    content = self._repository.read_file(
-                        readiness.expected_target, RepositoryPath.parse(path)
+                if path in source_files:
+                    continue
+                if path not in source_paths:
+                    removed_from_candidate = path in revision.base_repository_paths
+                    failure = AnalysisFailure(
+                        "COVERAGE.PUBLICATION_EVIDENCE_REMOVED"
+                        if removed_from_candidate
+                        else "COVERAGE.PUBLICATION_EVIDENCE_UNCOMMITTED",
+                        "unavailable",
+                        "Published review evidence is absent from the destination candidate.",
+                        validation_phase=phase,
+                        evidence_reference=path,
+                        provider_contract=reference["provider_contract"],
+                        provider_contract_version=reference["provider_contract_version"],
+                        source_kind="repository-content",
+                        material_identity=revision.revision_id,
+                        expected_digest=reference["digest"],
+                        next_action=(
+                            "restore-reference-to-candidate"
+                            if removed_from_candidate
+                            else "include-reference-in-proposal"
+                        ),
                     )
-                    base_files[path] = content
-                    proposed_files[path] = content
-            receipt = render_engine_coverage_receipt(
-                FrozenContentSource(proposed_files),
+                    raise AnalysisError(failure)
+                try:
+                    content = (
+                        base_files[path]
+                        if path in base_files
+                        else self._repository.read_file(
+                            expected_target, RepositoryPath.parse(path)
+                        )
+                    )
+                except GitRepositoryError as error:
+                    raise AnalysisError(AnalysisFailure(
+                        "COVERAGE.PUBLICATION_EVIDENCE_UNAVAILABLE",
+                        "unavailable",
+                        "The selected destination evidence could not be read.",
+                        validation_phase=phase,
+                        evidence_reference=path,
+                        provider_contract=reference["provider_contract"],
+                        provider_contract_version=reference["provider_contract_version"],
+                        source_kind="repository-content",
+                        material_identity=expected_target.oid,
+                        expected_digest=reference["digest"],
+                        next_action="restore-or-rebind-evidence",
+                    )) from error
+                source_files[path] = content
+                if path in revision.base_repository_paths:
+                    destination_base_files[path] = content
+            validate_engine_coverage_receipt_evidence(
+                FrozenContentSource(source_files),
                 projection.compiled.coverage,
                 subject,
                 claim,
                 authorizations[claim["authorization_id"]],
-                state.analysis_id,
-                self._execution_context,
+                analysis_id,
+                phase=phase,
+                source_kind="repository-content",
+                material_identity=revision.revision_id,
+                next_action="refresh-review-evidence",
             )
-            path = (
-                "evaluation/standards-effectiveness/policy-coverage/engine/"
-                + analysis_value_digest(subject).removeprefix("sha256:")
-                + ".json"
-            )
-            if path in proposed_paths and path not in proposed_files:
-                raise AnalysisError(
-                    AnalysisFailure(
-                        "COVERAGE.PUBLICATION_PATH_CONFLICT",
-                        "invalid",
-                        "The Engine receipt path is occupied outside captured authority.",
-                    )
-                )
-            proposed_files[path] = receipt
-            proposed_paths.add(path)
-            receipt_paths.add(path)
-        registry["schema_version"] = 3
-        registry["engine_sources"] = sorted(receipt_paths)
-        proposed_files[registry_path] = (
-            "schema_version = 3\n"
-            + "\n".join(
-                key
-                + " = [\n"
-                + "".join(
-                    "  " + json.dumps(path, ensure_ascii=False) + ",\n"
-                    for path in registry[key]
-                )
-                + "]\n"
-                for key in ("sources", "engine_sources")
-            )
-        ).encode("utf-8")
-        proposed_paths.update(
-            _refresh_suite_input_projection(
-                proposed_files,
-                original_captured_paths,
-                revision.base_repository_paths,
-            )
+            claims[subject] = claim
+        return _CoveragePublicationPreparation(
+            subjects=subjects,
+            analysis_id=analysis_id,
+            claims=claims,
+            authorizations=authorizations,
+            registry=registry,
+            receipt_paths=receipt_paths,
+            source_files=source_files,
+            source_paths=frozenset(source_paths),
+            base_files=destination_base_files,
+            original_captured_paths=original_captured_paths,
         )
-        final = self._compile(FrozenContentSource(proposed_files))
-        if not set(subjects) <= final.repository_coverage.covered_subjects:
-            raise AnalysisError(
-                AnalysisFailure(
-                    "COVERAGE.PUBLICATION_STALE",
-                    "invalid",
-                    "Publication changed the reviewed coverage requirement; a fresh review is required.",
-                )
-            )
+
+    @staticmethod
+    def _engine_coverage_receipt_path(subject: str) -> str:
+        return (
+            "evaluation/standards-effectiveness/policy-coverage/engine/"
+            + analysis_value_digest(subject).removeprefix("sha256:")
+            + ".json"
+        )
 
     @staticmethod
     def _coverage_audit_subjects(revision: ProposalRevision) -> tuple[str, ...]:
@@ -1708,7 +1883,16 @@ class StandardsEngine:
             application = self._authoring.read_selected_application(
                 readiness.readiness_id
             )
-            if self._authoring.application_outcome(application) is not None:
+            try:
+                prior_outcome = self._authoring.application_outcome(application)
+            except self._domain_errors() as error:
+                return self._application_recovery_required(
+                    application,
+                    "APPLICATION.OUTCOME_OBSERVATION_UNAVAILABLE",
+                    "The durable application outcome could not be observed during recovery.",
+                    details=_recovery_failure_details(error),
+                )
+            if prior_outcome is not None:
                 return self._recovered_application(application)
             try:
                 observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
@@ -3387,9 +3571,8 @@ class StandardsEngine:
             "schema_version": 1,
         }
 
-    @classmethod
     def _application_recovery_required(
-        cls,
+        self,
         application: ProposalApplication,
         code: str,
         message: str,
@@ -3399,26 +3582,113 @@ class StandardsEngine:
         return ApplicationRecoveryRequiredResult.from_value(
             {
                 "kind": "application-recovery-required-result",
-                "application": cls._application_handle(application.application_id),
+                "application": self._application_handle(application.application_id),
                 "status": "recovery-required",
                 "code": code,
                 "outcome": "unavailable",
                 "message": message,
+                **self._application_publication_projection(application),
                 **({"details": dict(details)} if details is not None else {}),
             }
         )
 
-    @classmethod
     def _recovered_application(
-        cls, application: ProposalApplication
+        self, application: ProposalApplication
     ) -> RecoverApplicationResult:
         return RecoverApplicationResult.from_value(
             {
                 "kind": "recover-application-result",
-                "application": cls._application_handle(application.application_id),
+                "application": self._application_handle(application.application_id),
                 "status": "applied",
+                **self._application_publication_projection(application),
             }
         )
+
+    def _application_publication_projection(
+        self, application: ProposalApplication,
+    ) -> dict[str, object]:
+        """Return durable publication identity plus fresh, bounded observations."""
+        try:
+            outcome = self._authoring.application_outcome(application)
+            durable_state = "applied" if outcome is not None else "admitted"
+        except Exception:
+            durable_state = "unknown"
+
+        try:
+            target = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
+            target_status = (
+                "candidate" if target == application.candidate
+                else "expected" if target == application.expected_target
+                else "diverged"
+            )
+            target_revision: str | None = target.oid
+        except GitRepositoryError:
+            target_status = "unavailable"
+            target_revision = None
+
+        try:
+            candidate_tree: str | None = self._repository.revision_tree(
+                application.candidate, local_only=True
+            )
+        except GitRepositoryError:
+            candidate_tree = None
+
+        publication = {
+            "kind": "application-publication-receipt",
+            "application": self._application_handle(application.application_id),
+            "candidate_commit": application.candidate.oid,
+            "candidate_tree": candidate_tree,
+            "target_ref": "refs/heads/" + CANONICAL_TARGET_BRANCH,
+            "expected_predecessor": application.expected_target.oid,
+            "durable_state": durable_state,
+            "target_observation": {
+                "kind": "publication-target-observation",
+                "status": target_status,
+                "revision": target_revision,
+            },
+        }
+        try:
+            observation = self._repository.observe_publication_checkout(
+                application.expected_target, application.candidate,
+                target_ref="refs/heads/" + CANONICAL_TARGET_BRANCH,
+            )
+        except Exception:
+            checkout: dict[str, object] = {
+                "kind": "publication-checkout-observation",
+                "status": "unavailable",
+                "worktree_id": None,
+                "symbolic_branch": None,
+                "head": None,
+                "index_observation": None,
+                "publication_path_count": None,
+                "index_paths": {
+                    "predecessor": None, "candidate": None, "conflicted": None,
+                },
+                "worktree_paths": {
+                    "predecessor": None, "candidate": None, "conflicted": None,
+                },
+            }
+        else:
+            checkout = {
+                "kind": "publication-checkout-observation",
+                "status": observation.status,
+                "worktree_id": "sha256:" + observation.worktree_id,
+                "symbolic_branch": observation.symbolic_branch,
+                "head": observation.head.oid,
+                "index_observation": "sha256:" + observation.index_digest,
+                "publication_path_count": observation.publication_path_count,
+                "index_paths": {
+                    "predecessor": observation.index_predecessor_count,
+                    "candidate": observation.index_candidate_count,
+                    "conflicted": observation.index_conflict_count,
+                },
+                "worktree_paths": {
+                    "predecessor": observation.worktree_predecessor_count,
+                    "candidate": observation.worktree_candidate_count,
+                    "conflicted": observation.worktree_conflict_count,
+                },
+            }
+        return {"publication": publication, "checkout": checkout}
 
     @classmethod
     def _proposal_summary(cls, summary: AuthoringProposalSummary) -> dict[str, object]:
@@ -3457,17 +3727,16 @@ class StandardsEngine:
             VerificationError,
         )
 
-    @classmethod
-    def _domain_rejection(cls, error: Exception) -> RejectedResult:
+    def _domain_rejection(self, error: Exception) -> RejectedResult:
         if isinstance(error, VerificationError):
             diagnostic = error.diagnostic
-            return cls._reject(
+            return self._reject(
                 diagnostic.code, diagnostic.outcome, diagnostic.message,
                 details={key: value for key, value in diagnostic.as_dict().items()
                          if key not in {"code", "outcome", "message"}},
             )
         if isinstance(error, GitRepositoryError) and error.failure.command is not None:
-            return cls._reject(
+            return self._reject(
                 error.failure.code, error.failure.kind,
                 "The Git command failed; inspect the bounded command observation.",
                 details=_recovery_failure_details(error),
@@ -3476,7 +3745,28 @@ class StandardsEngine:
         if failure is None:
             raise error
         outcome = getattr(failure, "outcome", getattr(failure, "kind", "invalid"))
-        return cls._reject(failure.code, outcome, failure.message)
+        details: dict[str, object] = {}
+        if (
+            self._purpose is Purpose.AUTHORING
+            and isinstance(failure, AnalysisFailure)
+            and failure.validation_phase is not None
+        ):
+            for key, value in (
+                ("validation_phase", failure.validation_phase),
+                ("evidence_reference", failure.evidence_reference),
+                ("provider_contract", failure.provider_contract),
+                ("provider_contract_version", failure.provider_contract_version),
+                ("source_kind", failure.source_kind),
+                ("material_identity", failure.material_identity),
+                ("expected_digest", failure.expected_digest),
+                ("observed_digest", failure.observed_digest),
+                ("next_action", failure.next_action),
+            ):
+                if value is not None:
+                    details[key] = value
+        return self._reject(
+            failure.code, outcome, failure.message, details=details or None
+        )
 
     @classmethod
     def _analysis_unavailable(cls) -> RejectedResult:

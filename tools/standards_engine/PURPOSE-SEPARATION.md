@@ -969,3 +969,27 @@ material hashes and persisted state are not migrated. Historical saved focused c
 must use matching source/tooling; new tasks may reuse their still-valid snapshot
 with the new syntax. Output delivery, discovery bounds and all other operations are
 unchanged. The existing client/model qualification is separate from static agreement.
+
+
+## Publication evidence (interface 46)
+
+Native apply and recovery results retain the durable application handle, exact
+candidate commit and tree, target ref, expected predecessor, and whether the
+application outcome is recorded, merely admitted, or unavailable. They also
+include a fresh observation of the target ref and selected checkout. Recovery
+re-reads both observations, including when the durable applied outcome already
+exists after a process restart. `workflow_status` supplies the same observations
+for an admitted application without duplicating them when its outcome already
+contains them.
+
+Checkout observation is read-only. It reports whether the selected checkout is
+the target branch, agrees with the predecessor or candidate on changed
+publication paths, needs reconciliation, or has conflicts. Path counts are
+reported separately for the index and worktree; unrelated changes do not count.
+An unavailable observation carries null observation fields rather than guessed
+values. Its failure never changes or hides a successful durable application.
+
+This interface does not stage or repair a checkout, retry publication, or infer
+that an unrelated checkout was updated. Request contract 6, result state and
+persisted application/workflow identities remain unchanged. Generated contracts
+and the client catalog must be refreshed together with interface 46.

@@ -6,15 +6,34 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
-from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
+from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    AnalysisExecutionContext,
+    AnalysisFailure,
+    coverage_requirement_id,
+    validate_engine_coverage_receipt_evidence,
+)
+from tools.standards_metadata.standards_metadata import FrozenContentSource
+from tools.standards_engine.standards_engine import (
+    AgentToolFacade,
+    AnalysisHandle,
+    StandardsEngine,
+)
+from tools.standards_engine.standards_engine.authoring import (
+    AuthoringError,
+    AuthoringFailure,
+)
 from tools.standards_engine.standards_engine.tools import (
     LocalAlwaysAllowAuthorizer,
     _contracts,
 )
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
-from tools.standards_snapshots.standards_snapshots import SnapshotError, SnapshotFailure
-from tools.repository_git.repository_git import git_output
+from tools.repository_git.repository_git import (
+    RepositoryPath,
+    RepositoryRevision,
+    git_output,
+)
+from tools.standards_snapshots.standards_snapshots import SnapshotId
 
 
 class EngineAuditPublicationTest(unittest.TestCase):
@@ -59,16 +78,41 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         "test: refresh fixture verification inputs",
                     ),
                 )
-                evidence_path = repository / "CORE-STANDARDS.md"
-                evidence_bytes = evidence_path.read_bytes()
+                snapshot = facade.create_snapshot({"kind": "create-snapshot"})
+                self.assertEqual(snapshot["kind"], "create-snapshot-result", snapshot)
+                snapshot_id = SnapshotId(snapshot["snapshot"]["snapshot"]["id"])
+                base_capture = engine._snapshots.load_content(snapshot_id)
+                captured_paths = {str(item.path) for item in base_capture.files}
+                expected_target = engine._repository.branch_revision("main")
+                uncaptured_markdown = sorted(
+                    str(path)
+                    for path in engine._repository.revision_paths(expected_target)
+                    if str(path) not in captured_paths
+                    and str(path).endswith(".md")
+                    and str(path)[0].isalnum()
+                    and all(
+                        character.isascii()
+                        and (character.isalnum() or character in "._:/-")
+                        for character in str(path)
+                    )
+                    and len(
+                        engine._repository.read_file(
+                            expected_target, path
+                        )
+                    ) <= 128 * 1024
+                )
+                self.assertTrue(uncaptured_markdown)
+                evidence_id = uncaptured_markdown[0]
+                evidence_path = repository / evidence_id
+                evidence_bytes = engine._repository.read_file(
+                    expected_target, RepositoryPath.parse(evidence_id)
+                )
                 reference = {
-                    "id": "CORE-STANDARDS.md",
+                    "id": evidence_id,
                     "digest": "sha256:" + hashlib.sha256(evidence_bytes).hexdigest(),
                     "provider_contract": "repository-content",
                     "provider_contract_version": "1",
                 }
-                snapshot = facade.create_snapshot({"kind": "create-snapshot"})
-                self.assertEqual(snapshot["kind"], "create-snapshot-result", snapshot)
                 policy = "workflow.commit.commit-message"
                 proposal = facade.create_proposal(
                     {
@@ -90,7 +134,10 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         },
                     }
                 )
-                self.assertEqual(proposal["kind"], "create-proposal-result", proposal)
+                self.assertEqual(
+                    proposal["kind"], "create-proposal-result",
+                    {"evidence_id": evidence_id, **proposal},
+                )
                 revision = proposal["revision"]
                 unreviewed = facade.verify_proposal(
                     {"kind": "verify-proposal", "revision": revision}
@@ -148,6 +195,152 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         {"analysis": result["handle"], "submission": submission}
                     )
                 self.assertEqual(result["kind"], "complete-result", result)
+                revision_record = engine._authoring.read_revision(revision["id"])
+                projection = engine._proposal_projection(revision_record)
+                state = engine._load_analysis(
+                    AnalysisHandle.from_value(result["handle"])
+                )
+                claim = engine._plain(state.coverage_attestations[0])
+                subject = next(
+                    selected
+                    for selected, view in projection.compiled.coverage.views.items()
+                    if coverage_requirement_id(
+                        projection.compiled.coverage.requirements[selected], view
+                    ) == claim["requirement_id"]
+                )
+                authorization = next(
+                    engine._plain(item)
+                    for item in state.authorization_records
+                    if engine._plain(item)["reference"]["id"] == claim["authorization_id"]
+                )
+                evidence_id = claim["evidence"][0]["id"]
+                destination_base = {
+                    str(item.path): item.content
+                    for item in engine._snapshots.load_content(
+                        revision_record.base_snapshot
+                    ).files
+                }
+                destination_base.update(projection.captured_consumer_files)
+                expected_target = RepositoryRevision(
+                    engine._snapshots.snapshot(
+                        revision_record.base_snapshot
+                    ).source_revision
+                )
+                self.assertNotIn(evidence_id, dict(projection.source.files))
+                removed_files = dict(projection.source.files)
+                removed_paths = set(projection.repository_paths)
+                self.assertIn(evidence_id, revision_record.base_repository_paths)
+                self.assertNotIn(evidence_id, destination_base)
+                removed_files.pop(evidence_id, None)
+                removed_paths.remove(evidence_id)
+                with self.assertRaises(AnalysisError) as removed_preflight:
+                    engine._prepare_coverage_publication(
+                        state.analysis_id,
+                        revision_record,
+                        projection,
+                        expected_target,
+                        destination_base,
+                        removed_files,
+                        removed_paths,
+                        phase="readiness-preflight",
+                        state=state,
+                    )
+                self.assertEqual(
+                    removed_preflight.exception.failure.code,
+                    "COVERAGE.PUBLICATION_EVIDENCE_REMOVED",
+                )
+                self.assertEqual(
+                    removed_preflight.exception.failure.next_action,
+                    "restore-reference-to-candidate",
+                )
+                changed_destination = dict(projection.source.files)
+                changed_destination[evidence_id] = b"changed destination evidence\n"
+                with mock.patch(
+                    "tools.standards_analysis.standards_analysis.coverage_publication.resolve_authorization"
+                ) as resolve_authorization:
+                    with self.assertRaises(AnalysisError) as failed_preflight:
+                        validate_engine_coverage_receipt_evidence(
+                            FrozenContentSource(changed_destination),
+                            projection.compiled.coverage,
+                            subject,
+                            claim,
+                            authorization,
+                            state.analysis_id,
+                        phase="readiness-preflight",
+                        source_kind="repository-content",
+                            material_identity=revision_record.revision_id,
+                            next_action="refresh-review-evidence",
+                        )
+                resolve_authorization.assert_not_called()
+                failure = failed_preflight.exception.failure
+                self.assertEqual(failure.code, "ANALYSIS.EVIDENCE_DIGEST_MISMATCH")
+                self.assertEqual(failure.validation_phase, "readiness-preflight")
+                self.assertEqual(failure.evidence_reference, evidence_id)
+                self.assertEqual(failure.expected_digest, claim["evidence"][0]["digest"])
+                self.assertTrue(failure.observed_digest.startswith("sha256:"))
+                projected_failure = engine._domain_rejection(
+                    failed_preflight.exception
+                ).as_contract()
+                self.assertEqual(
+                    projected_failure["details"]["validation_phase"],
+                    "readiness-preflight",
+                )
+                self.assertEqual(
+                    projected_failure["details"]["evidence_reference"],
+                    evidence_id,
+                )
+                self.assertEqual(
+                    projected_failure["details"]["expected_digest"],
+                    claim["evidence"][0]["digest"],
+                )
+                self.assertTrue(
+                    projected_failure["details"]["observed_digest"].startswith(
+                        "sha256:"
+                    )
+                )
+                self.assertEqual(
+                    projected_failure["details"]["source_kind"],
+                    "repository-content",
+                )
+                self.assertEqual(
+                    projected_failure["details"]["material_identity"],
+                    revision_record.revision_id,
+                )
+                self.assertEqual(
+                    projected_failure["details"]["next_action"],
+                    "refresh-review-evidence",
+                )
+                with (
+                    mock.patch.object(
+                        engine, "_preflight_proposal_coverage",
+                        side_effect=failed_preflight.exception,
+                    ),
+                    mock.patch.object(engine._authoring, "review_proposal") as record_readiness,
+                    mock.patch(
+                        "tools.standards_engine.standards_engine.engine.construct_authorization_record"
+                    ) as issue_review_authorization,
+                ):
+                    rejected_review = facade.review_proposal(
+                        {
+                            "kind": "review-proposal",
+                            "analysis": result["handle"],
+                            "decisions": [
+                                {
+                                    "owner": owner,
+                                    "decision": "accept",
+                                    "rationale": "Explicit fixture review decision.",
+                                    "evidence": [reference],
+                                }
+                                for owner in ("consumer", "impact", "audit")
+                            ],
+                        }
+                    )
+                self.assertEqual(
+                    rejected_review["code"], "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
+                    rejected_review,
+                )
+                record_readiness.assert_not_called()
+                issue_review_authorization.assert_not_called()
                 reviewed = facade.review_proposal(
                     {
                         "kind": "review-proposal",
@@ -183,34 +376,99 @@ class EngineAuditPublicationTest(unittest.TestCase):
                 self.assertEqual(engine._repository.branch_revision("main"), before)
                 evidence_path.write_bytes(evidence_bytes)
                 with mock.patch.object(
-                    engine._authoring,
-                    "record_applied",
-                    side_effect=SnapshotError(
-                        SnapshotFailure(
-                            "unavailable",
-                            "TEST.INTERRUPTED",
-                            "Fixture interruption after publication.",
-                        )
-                    ),
+                    engine._repository,
+                    "observe_publication_checkout",
+                    side_effect=RuntimeError("fixture observation interruption"),
                 ):
                     applied = facade.apply_proposal(apply)
                 self.assertEqual(
-                    applied["kind"], "application-recovery-required-result", applied
+                    applied["kind"], "apply-proposal-result", applied
                 )
+                self.assertEqual(applied["publication"]["durable_state"], "applied")
+                self.assertEqual(
+                    applied["publication"]["target_observation"]["status"],
+                    "candidate",
+                )
+                self.assertEqual(applied["checkout"]["status"], "unavailable")
+                self.assertIsNone(applied["checkout"]["publication_path_count"])
                 recovered = facade.recover_application(
                     {"kind": "recover-application", "readiness": reviewed["readiness"]}
                 )
                 self.assertEqual(
                     recovered["kind"], "recover-application-result", recovered
                 )
+                self.assertEqual(recovered["publication"]["durable_state"], "applied")
+                self.assertEqual(
+                    recovered["checkout"]["status"], "needs-reconciliation"
+                )
             # A new store proves the repository carries the receipt and authority.
             with StandardsEngine.open_repository(
                 repository,
-                store_path=root / "independent.sqlite3",
+                store_path=root / "engine.sqlite3",
                 execution_context=context,
                 purpose="authoring",
             ) as cold:
                 facade = AgentToolFacade(cold, _contracts(repository))
+                status = facade.workflow_status(
+                    {"context": reviewed["readiness"]}
+                )
+                self.assertEqual(status["kind"], "workflow-result", status)
+                self.assertEqual(status["status"], "applied", status)
+                self.assertNotIn("outcome", status)
+                self.assertEqual(status["publication"]["durable_state"], "applied")
+                self.assertEqual(status["checkout"]["status"], "needs-reconciliation")
+                unavailable_outcome = AuthoringError(AuthoringFailure(
+                    "TEST.OUTCOME_UNAVAILABLE",
+                    "unavailable",
+                    "The fixture cannot read the durable application outcome.",
+                ))
+                with mock.patch.object(
+                    cold._authoring,
+                    "application_outcome",
+                    side_effect=unavailable_outcome,
+                ):
+                    unknown_status = facade.workflow_status(
+                        {"context": reviewed["readiness"]}
+                    )
+                    self.assertEqual(
+                        unknown_status["status"], "recovery-required", unknown_status
+                    )
+                    self.assertEqual(
+                        unknown_status["publication"]["durable_state"],
+                        "unknown",
+                        unknown_status,
+                    )
+                    self.assertEqual(
+                        unknown_status["checkout"]["status"],
+                        "needs-reconciliation",
+                        unknown_status,
+                    )
+                    recovered_unknown = facade.recover_application(
+                        {
+                            "kind": "recover-application",
+                            "readiness": reviewed["readiness"],
+                        }
+                    )
+                    self.assertEqual(
+                        recovered_unknown["kind"],
+                        "application-recovery-required-result",
+                        recovered_unknown,
+                    )
+                    self.assertEqual(
+                        recovered_unknown["code"],
+                        "APPLICATION.OUTCOME_OBSERVATION_UNAVAILABLE",
+                        recovered_unknown,
+                    )
+                    self.assertEqual(
+                        recovered_unknown["publication"]["durable_state"],
+                        "unknown",
+                        recovered_unknown,
+                    )
+                    self.assertEqual(
+                        recovered_unknown["checkout"]["status"],
+                        "needs-reconciliation",
+                        recovered_unknown,
+                    )
                 captured = facade.create_snapshot({"kind": "create-snapshot"})
                 self.assertEqual(captured["kind"], "create-snapshot-result", captured)
                 read = facade.query(
@@ -231,6 +489,20 @@ class EngineAuditPublicationTest(unittest.TestCase):
                     ],
                     [(policy, "current-attestation")],
                 )
+            with StandardsEngine.open_repository(
+                repository, durable=False, purpose="application"
+            ) as application_engine:
+                private_failure = AnalysisError(AnalysisFailure(
+                    "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
+                    "invalid",
+                    "Resolved evidence bytes do not match the declared digest.",
+                    validation_phase="readiness-preflight",
+                    evidence_reference="private/internal/evidence.md",
+                    expected_digest="sha256:" + "a" * 64,
+                    observed_digest="sha256:" + "b" * 64,
+                ))
+                redacted = application_engine._domain_rejection(private_failure)
+                self.assertEqual(redacted.details, {})
 
 
 if __name__ == "__main__":

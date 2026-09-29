@@ -45,6 +45,17 @@ promisor fetching and replace-object interpretation for that call. Callers still
 select fixed read-only Git arguments; the option does not authorize helpers,
 filters, checkout, or repository mutation.
 `revision_tree` returns the exact tree object ID for a selected commit.
+
+`observe_publication_checkout(expected, candidate)` compares the selected
+checkout's symbolic branch, HEAD, index and worktree against only the paths that
+differ between the two exact commits. It returns separate predecessor, candidate
+and conflict counts for index and worktree paths, a bounded index observation
+digest, and one of `not-target-checkout`, `current`, `needs-reconciliation`, or
+`conflicted`. Unrelated changes are excluded from the path counts. The operation
+uses local-only Git reads, no-follow filesystem inspection, and does not write the
+checkout, index, refs, or object database. Unsupported index or file layouts and
+stale observations fail explicitly for the caller to report as unavailable.
+
 For a commit-to-commit patch, `git_output(..., attribute_source=revision)` pins
 Git attribute lookup to the selected commit, so dirty worktree attributes cannot
 change how its complete binary patch is represented.

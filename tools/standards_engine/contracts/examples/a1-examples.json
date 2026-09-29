@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "interface_schema_version": 45,
+  "interface_schema_version": 46,
   "examples": [
     {
       "name": "create-snapshot",
@@ -1274,7 +1274,7 @@
       "value": {
         "kind": "input-contract-result",
         "purpose": "application",
-        "interface_version": 45,
+        "interface_version": 46,
         "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "operation": "runtime_info",
         "root": "RuntimeInfoCall",
@@ -1420,7 +1420,7 @@
       "value": {
         "kind": "output-contract-result",
         "purpose": "authoring",
-        "interface_version": 45,
+        "interface_version": 46,
         "catalog_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
         "operation": "review",
         "dialect": "https://json-schema.org/draft/2020-12/schema",
@@ -1471,6 +1471,143 @@
           "expected_catalog": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
           "offset": 8,
           "limit": 8
+        }
+      }
+    },
+    {
+      "name": "apply-proposal-publication-receipt",
+      "definition": "ApplyProposalResult",
+      "value": {
+        "kind": "apply-proposal-result",
+        "application": {
+          "kind": "application-handle",
+          "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "status": "applied",
+        "publication": {
+          "kind": "application-publication-receipt",
+          "application": {
+            "kind": "application-handle",
+            "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "schema_version": 1
+          },
+          "candidate_commit": "1111111111111111111111111111111111111111",
+          "candidate_tree": "2222222222222222222222222222222222222222",
+          "target_ref": "refs/heads/main",
+          "expected_predecessor": "3333333333333333333333333333333333333333",
+          "durable_state": "applied",
+          "target_observation": {
+            "kind": "publication-target-observation",
+            "status": "candidate",
+            "revision": "1111111111111111111111111111111111111111"
+          }
+        },
+        "checkout": {
+          "kind": "publication-checkout-observation",
+          "status": "needs-reconciliation",
+          "worktree_id": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "symbolic_branch": "refs/heads/main",
+          "head": "1111111111111111111111111111111111111111",
+          "index_observation": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "publication_path_count": 2,
+          "index_paths": {
+            "predecessor": 2,
+            "candidate": 0,
+            "conflicted": 0
+          },
+          "worktree_paths": {
+            "predecessor": 2,
+            "candidate": 0,
+            "conflicted": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "recover-application-publication-observation",
+      "definition": "RecoverApplicationResult",
+      "value": {
+        "kind": "recover-application-result",
+        "application": {
+          "kind": "application-handle",
+          "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "status": "applied",
+        "publication": {
+          "kind": "application-publication-receipt",
+          "application": {
+            "kind": "application-handle",
+            "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "schema_version": 1
+          },
+          "candidate_commit": "1111111111111111111111111111111111111111",
+          "candidate_tree": "2222222222222222222222222222222222222222",
+          "target_ref": "refs/heads/main",
+          "expected_predecessor": "3333333333333333333333333333333333333333",
+          "durable_state": "applied",
+          "target_observation": {
+            "kind": "publication-target-observation",
+            "status": "candidate",
+            "revision": "1111111111111111111111111111111111111111"
+          }
+        },
+        "checkout": {
+          "kind": "publication-checkout-observation",
+          "status": "current",
+          "worktree_id": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "symbolic_branch": "refs/heads/main",
+          "head": "1111111111111111111111111111111111111111",
+          "index_observation": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "publication_path_count": 2,
+          "index_paths": {"predecessor": 0, "candidate": 2, "conflicted": 0},
+          "worktree_paths": {"predecessor": 0, "candidate": 2, "conflicted": 0}
+        }
+      }
+    },
+    {
+      "name": "application-recovery-unavailable-observations",
+      "definition": "ApplicationRecoveryRequiredResult",
+      "value": {
+        "kind": "application-recovery-required-result",
+        "application": {
+          "kind": "application-handle",
+          "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "schema_version": 1
+        },
+        "status": "recovery-required",
+        "code": "APPLICATION.PUBLICATION_UNAVAILABLE",
+        "outcome": "unavailable",
+        "message": "The publication target could not be observed.",
+        "publication": {
+          "kind": "application-publication-receipt",
+          "application": {
+            "kind": "application-handle",
+            "id": "application:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "schema_version": 1
+          },
+          "candidate_commit": "1111111111111111111111111111111111111111",
+          "candidate_tree": null,
+          "target_ref": "refs/heads/main",
+          "expected_predecessor": "3333333333333333333333333333333333333333",
+          "durable_state": "admitted",
+          "target_observation": {
+            "kind": "publication-target-observation",
+            "status": "unavailable",
+            "revision": null
+          }
+        },
+        "checkout": {
+          "kind": "publication-checkout-observation",
+          "status": "unavailable",
+          "worktree_id": null,
+          "symbolic_branch": null,
+          "head": null,
+          "index_observation": null,
+          "publication_path_count": null,
+          "index_paths": {"predecessor": null, "candidate": null, "conflicted": null},
+          "worktree_paths": {"predecessor": null, "candidate": null, "conflicted": null}
         }
       }
     }

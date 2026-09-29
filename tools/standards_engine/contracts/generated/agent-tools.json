@@ -1315,6 +1315,58 @@
       ],
       "type": "object"
     },
+    "ApplicationPublicationReceipt": {
+      "additionalProperties": false,
+      "description": "Durable application identity and exact candidate facts, separate from the fresh target observation.",
+      "properties": {
+        "application": {
+          "$ref": "#/$defs/ApplicationHandle"
+        },
+        "candidate_commit": {
+          "$ref": "#/$defs/GitObjectId"
+        },
+        "candidate_tree": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GitObjectId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "durable_state": {
+          "enum": [
+            "applied",
+            "admitted",
+            "unknown"
+          ]
+        },
+        "expected_predecessor": {
+          "$ref": "#/$defs/GitObjectId"
+        },
+        "kind": {
+          "const": "application-publication-receipt"
+        },
+        "target_observation": {
+          "$ref": "#/$defs/PublicationTargetObservation"
+        },
+        "target_ref": {
+          "const": "refs/heads/main"
+        }
+      },
+      "required": [
+        "kind",
+        "application",
+        "candidate_commit",
+        "candidate_tree",
+        "target_ref",
+        "expected_predecessor",
+        "durable_state",
+        "target_observation"
+      ],
+      "type": "object"
+    },
     "ApplicationQueryCall": {
       "additionalProperties": false,
       "properties": {
@@ -1565,10 +1617,14 @@
         "application": {
           "$ref": "#/$defs/ApplicationHandle"
         },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
+        },
         "code": {
           "enum": [
             "APPLICATION.PUBLICATION_UNAVAILABLE",
             "APPLICATION.OBSERVATION_UNAVAILABLE",
+            "APPLICATION.OUTCOME_OBSERVATION_UNAVAILABLE",
             "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
             "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
             "APPLICATION.RECOVERY_TARGET_DIVERGED",
@@ -1590,6 +1646,9 @@
         "outcome": {
           "const": "unavailable"
         },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
+        },
         "status": {
           "const": "recovery-required"
         }
@@ -1600,7 +1659,9 @@
         "status",
         "code",
         "outcome",
-        "message"
+        "message",
+        "publication",
+        "checkout"
       ],
       "type": "object"
     },
@@ -1889,8 +1950,14 @@
         "application": {
           "$ref": "#/$defs/ApplicationHandle"
         },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
+        },
         "kind": {
           "const": "apply-proposal-result"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
         },
         "status": {
           "const": "applied"
@@ -1899,7 +1966,9 @@
       "required": [
         "kind",
         "application",
-        "status"
+        "status",
+        "publication",
+        "checkout"
       ],
       "type": "object"
     },
@@ -4512,6 +4581,18 @@
       ],
       "type": "object"
     },
+    "GitObjectId": {
+      "oneOf": [
+        {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      ]
+    },
     "ImpactDispositionSubmission": {
       "additionalProperties": false,
       "properties": {
@@ -6389,6 +6470,155 @@
       ],
       "type": "object"
     },
+    "PublicationCheckoutObservation": {
+      "additionalProperties": false,
+      "description": "Fresh read-only observation of one selected checkout. Unavailable observations use null for every fact that could not be established.",
+      "properties": {
+        "head": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GitObjectId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index_observation": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "index_paths": {
+          "$ref": "#/$defs/PublicationPathCounts"
+        },
+        "kind": {
+          "const": "publication-checkout-observation"
+        },
+        "publication_path_count": {
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "enum": [
+            "not-observed",
+            "unavailable",
+            "not-target-checkout",
+            "current",
+            "needs-reconciliation",
+            "conflicted"
+          ]
+        },
+        "symbolic_branch": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/NonEmptyString"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "worktree_id": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/Digest"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "worktree_paths": {
+          "$ref": "#/$defs/PublicationPathCounts"
+        }
+      },
+      "required": [
+        "kind",
+        "status",
+        "worktree_id",
+        "symbolic_branch",
+        "head",
+        "index_observation",
+        "publication_path_count",
+        "index_paths",
+        "worktree_paths"
+      ],
+      "type": "object"
+    },
+    "PublicationPathCounts": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate": {
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "conflicted": {
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "predecessor": {
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "predecessor",
+        "candidate",
+        "conflicted"
+      ],
+      "type": "object"
+    },
+    "PublicationTargetObservation": {
+      "additionalProperties": false,
+      "description": "Fresh bounded observation of the configured target ref; an unavailable revision is null.",
+      "properties": {
+        "kind": {
+          "const": "publication-target-observation"
+        },
+        "revision": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/GitObjectId"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "enum": [
+            "candidate",
+            "expected",
+            "diverged",
+            "unavailable"
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "status",
+        "revision"
+      ],
+      "type": "object"
+    },
     "PutDecisionProvenanceEdit": {
       "additionalProperties": false,
       "properties": {
@@ -7019,8 +7249,14 @@
         "application": {
           "$ref": "#/$defs/ApplicationHandle"
         },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
+        },
         "kind": {
           "const": "recover-application-result"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
         },
         "status": {
           "const": "applied"
@@ -7029,7 +7265,9 @@
       "required": [
         "kind",
         "application",
-        "status"
+        "status",
+        "publication",
+        "checkout"
       ],
       "type": "object"
     },
@@ -9506,6 +9744,9 @@
       "additionalProperties": false,
       "description": "Exact immutable workflow context and relative action descriptors. Successful compact pending propose, revise, analyze and decision submissions include work from the already-produced Analysis. Status observations, full results, stale contexts and other outcomes omit work.",
       "properties": {
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
+        },
         "context": {
           "$ref": "#/$defs/WorkflowContext"
         },
@@ -9523,6 +9764,9 @@
         },
         "proposal": {
           "$ref": "#/$defs/ProposalHandle"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
         },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
@@ -9694,7 +9938,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 45,
+  "interface_schema_version": 46,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -10398,6 +10642,6 @@
     }
   ],
   "request_contract_version": 6,
-  "result_projection_version": 7,
+  "result_projection_version": 8,
   "schema_version": 1
 }

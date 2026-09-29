@@ -71,5 +71,17 @@ is inferred from the archive's feasibility probes.
   positive exposed-content and negative unexposed-content assertions without
   relying on the real `topic.security` exposure state; run the focused tests when
   the locked Python environment is available and report exact commands/results.
-- Handoff: proposed diff and evidence to the integration owner for review; no
-  independent commit or merge.
+- Handoff requirement for the writer: proposed diff and evidence to the integration
+  owner for review; no writer-owned commit or merge.
+
+### B0 supporting fixture result
+
+The writer handed off the isolated diff without committing. The integration owner
+reviewed it, confirmed the only write was the permitted supporting-workflow test,
+and ran the direct and warm-cache fixture cases. Both passed (`2 tests`, `81.5s`)
+using the locked Python 3.12 environment. The primary author then committed the
+accepted patch as `9e7f88f5 test(standards): own unexposed publication fixture`
+and merged it into A1 with `e1e72671 merge: observe publication checkout` after
+the branch had advanced; `test_process_reuse.py` did not need an edit. The writer
+did not invoke the Standards Engine MCP. The A1 plan remains Active and its claims
+and gates remain pending.

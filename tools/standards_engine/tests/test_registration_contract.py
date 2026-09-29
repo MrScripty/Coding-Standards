@@ -127,7 +127,7 @@ class RegistrationContractTests(unittest.TestCase):
         self.assertEqual(generated_tools.read_text(), self.artifacts.agent_tools_json)
         self.assertEqual(self.artifacts.agent_tools["interface_schema_version"], self.interface["interface_schema_version"])
         self.assertEqual(self.interface["request_contract_version"], 6)
-        self.assertEqual(self.interface["result_projection_version"], 7)
+        self.assertEqual(self.interface["result_projection_version"], 8)
 
     def test_authored_contract_examples_match_the_current_interface(self) -> None:
         examples = json.loads((CONTRACTS / "examples/a1-examples.json").read_text())

@@ -228,12 +228,39 @@ class AgentWorkflowTest(unittest.TestCase):
             "id": "application:sha256:" + "a" * 64,
             "schema_version": 1,
         }
+        publication = {
+            "kind": "application-publication-receipt",
+            "application": application,
+            "candidate_commit": "1" * 40,
+            "candidate_tree": "2" * 40,
+            "target_ref": "refs/heads/main",
+            "expected_predecessor": "3" * 40,
+            "durable_state": "applied",
+            "target_observation": {
+                "kind": "publication-target-observation",
+                "status": "candidate",
+                "revision": "1" * 40,
+            },
+        }
+        checkout = {
+            "kind": "publication-checkout-observation",
+            "status": "current",
+            "worktree_id": "sha256:" + "d" * 64,
+            "symbolic_branch": "refs/heads/main",
+            "head": "1" * 40,
+            "index_observation": "sha256:" + "e" * 64,
+            "publication_path_count": 1,
+            "index_paths": {"predecessor": 0, "candidate": 1, "conflicted": 0},
+            "worktree_paths": {"predecessor": 0, "candidate": 1, "conflicted": 0},
+        }
         outcomes = [
             c.ApplyProposalResult.from_value(
                 {
                     "kind": "apply-proposal-result",
                     "application": application,
                     "status": "applied",
+                    "publication": publication,
+                    "checkout": checkout,
                 }
             ),
             c.RecoverApplicationResult.from_value(
@@ -241,6 +268,8 @@ class AgentWorkflowTest(unittest.TestCase):
                     "kind": "recover-application-result",
                     "application": application,
                     "status": "applied",
+                    "publication": publication,
+                    "checkout": checkout,
                 }
             ),
             c.ApplicationRecoveryRequiredResult.from_value(
@@ -251,6 +280,8 @@ class AgentWorkflowTest(unittest.TestCase):
                     "code": "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
                     "outcome": "unavailable",
                     "message": "Fixture interrupted outcome recording",
+                    "publication": {**publication, "durable_state": "admitted"},
+                    "checkout": checkout,
                 }
             ),
         ]

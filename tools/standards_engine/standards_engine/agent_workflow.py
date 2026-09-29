@@ -110,7 +110,11 @@ def publication_status(engine, readiness):
         if error.failure.code != "APPLICATION.NOT_ADMITTED":
             raise
         return "ready"
-    return "applied" if engine._authoring.application_outcome(application) is not None else "recovery-required"
+    try:
+        outcome = engine._authoring.application_outcome(application)
+    except Exception:
+        return "recovery-required"
+    return "applied" if outcome is not None else "recovery-required"
 
 
 def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None, *, detail="compact", include_work=False):
@@ -151,12 +155,35 @@ def view(engine, bound, outcome=None, materials: ProposalMaterials | None = None
         )
         if current.revision_id != bound.revision.revision_id:
             status = "stale"
+    publication_fields = {}
+    if (
+        bound.readiness is not None
+        and status in ("recovery-required", "applied")
+        and not isinstance(
+            outcome,
+            (
+                c.ApplyProposalResult,
+                c.RecoverApplicationResult,
+                c.ApplicationRecoveryRequiredResult,
+            ),
+        )
+    ):
+        try:
+            application = engine._authoring.read_selected_application(
+                bound.readiness.readiness_id
+            )
+        except AuthoringError as error:
+            if error.failure.code != "APPLICATION.NOT_ADMITTED":
+                raise
+        else:
+            publication_fields = engine._application_publication_projection(application)
     result = {
         "kind": "workflow-result",
         "context": context,
         "proposal": engine._proposal_handle(bound.revision.proposal),
         "revision": engine._proposal_revision_handle(bound.revision.revision_id),
         "status": status,
+        **publication_fields,
         "next_operations": [
             {
                 "operation": operation,
