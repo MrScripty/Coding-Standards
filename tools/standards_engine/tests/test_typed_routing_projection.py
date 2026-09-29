@@ -10,7 +10,7 @@ from unittest.mock import patch
 from tools.standards_engine.standards_engine import logical_authoring as logical
 from tools.standards_engine.standards_engine.engine import StandardsEngine
 from tools.standards_engine.standards_engine.authoring import AuthoringError
-from tools.standards_analysis.standards_analysis import AnalysisError
+from tools.standards_analysis.standards_analysis import AnalysisError, AnalysisFailure
 from tools.standards_engine.tests import test_logical_authoring as fixtures
 
 
@@ -79,8 +79,14 @@ class TypedRoutingProjectionTest(unittest.TestCase):
         with patch.object(logical, 'compile_fact_schema', side_effect=AssertionError('early fact compile')):
             change = self.fixture.change_set([self.put_rule(rule)])
         original = self.base.files
-        with self.assertRaises(AnalysisError):
+        with self.assertRaises(AnalysisError) as caught:
             self.compile([change])
+        self.assertEqual(caught.exception.failure, AnalysisFailure(
+            'ROUTER_PROJECTION.INVALID', 'invalid',
+            'expression references an undeclared fact',
+            'evaluation/standards-effectiveness/router-projection.toml',
+            observed='routing.unbound-typed',
+        ))
         self.assertEqual(self.base.files, original)
 
     def test_fact_semantic_revision_and_invalid_type_still_fail_at_projection(self):
@@ -92,8 +98,13 @@ class TypedRoutingProjectionTest(unittest.TestCase):
         self.assertEqual(caught.exception.failure.code, 'AUTHORING.INVALID_SEMANTIC_REVISION')
         bad = self.fact(); bad['type'] = 'unknown-type'
         parsed = self.fixture.change_set([self.put_fact(bad)])
-        with self.assertRaises(AnalysisError):
+        with self.assertRaises(AnalysisError) as caught:
             self.compile([parsed])
+        self.assertEqual(caught.exception.failure, AnalysisFailure(
+            'ROUTER_PROJECTION.INVALID', 'invalid', 'fact type is unsupported',
+            'evaluation/standards-effectiveness/router-projection.toml',
+            field=bad['id'], observed='unknown-type',
+        ))
 
     def test_typed_edits_and_nonrouting_edits_keep_their_projection_order(self):
         standard = self.fixture.new_standard_edit()
@@ -112,6 +123,14 @@ class TypedRoutingProjectionTest(unittest.TestCase):
         with self.assertRaises(AuthoringError) as error:
             self.compile([self.fixture.change_set([self.put_rule(rule)])])
         self.assertEqual(error.exception.failure.code, 'AUTHORING.DUPLICATE_ROUTE_TARGET')
-        with self.assertRaises(AnalysisError):
-            self.compile([self.fixture.change_set([{'kind':'remove-routing-fact',
-                'fact':self.router['facts'][0]['id'],'rationale':'Remove referenced field.'}])])
+        removed_fact = self.router['facts'][0]['id']
+        parsed = self.fixture.change_set([{'kind': 'remove-routing-fact',
+            'fact': removed_fact, 'rationale': 'Remove referenced field.'}])
+        with self.assertRaises(AnalysisError) as caught:
+            self.compile([parsed])
+        self.assertEqual(caught.exception.failure, AnalysisFailure(
+            'ROUTER_PROJECTION.INVALID', 'invalid',
+            'expression references an undeclared fact',
+            'evaluation/standards-effectiveness/router-projection.toml',
+            observed=removed_fact,
+        ))

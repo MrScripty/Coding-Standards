@@ -1,6 +1,7 @@
 """Canonical routing records are domain data, not a navigation rendering choice."""
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import replace
 from pathlib import Path
 import json
@@ -51,10 +52,18 @@ class CanonicalRoutingRecordsTest(unittest.TestCase):
 
     def test_returned_records_do_not_mutate_the_canonical_projection(self):
         projection = load_router_projection(ROOT, load_canonical_module_corpus(ROOT))
-        expected = projection.fact_definitions()
+        untouched = projection.fact_definitions()
+        # Expected bytes/containers must not move with a faulty shared return.
+        expected = deepcopy(untouched)
         changed = projection.fact_definitions()
+        self.assertIsNot(changed, untouched)
+        for original, returned in zip(untouched, changed):
+            self.assertIsNot(returned, original)
+            self.assertIsNot(returned['values'], original['values'])
+            self.assertIsNot(returned['aliases'], original['aliases'])
+            returned['meaning'] = 'presentation only'
+            returned['values'].append('not-a-domain-value')
+            returned['aliases'].append('not-a-domain-alias')
         changed.reverse()
-        changed[0]['meaning'] = 'presentation only'
-        changed[0]['values'].append('not-a-domain-value')
-        changed[0]['aliases'].append('not-a-domain-alias')
+        self.assertEqual(untouched, expected)
         self.assertEqual(projection.fact_definitions(), expected)

@@ -258,6 +258,30 @@ class RevisionDecodingTest(unittest.TestCase):
             self.assertEqual(raised.exception.failure.code, "AUTHORING.INVALID_STORED_REVISION")
         self.assertEqual(self.decoding.decode(record), self.revision)
 
+    def test_changed_aggregate_id_cannot_reuse_decoded_material(self):
+        record = self.revision.aggregate()
+        cached = self.decoding.decode(record)
+        _, successor = self.author.revise_proposal(
+            self.revision.revision_id, _change_set("distinct identity"),
+        )
+        # Use an actual well-formed revision ID; only the aggregate's claimed
+        # identity changes, not its canonical payload, kind or relationships.
+        altered = replace(record, aggregate_id=successor.aggregate().aggregate_id)
+        self.assertNotEqual(altered.aggregate_id, record.aggregate_id)
+        self.assertEqual(replace(altered, aggregate_id=record.aggregate_id), record)
+        with patch.object(AuthoringModule, "_revision_from_record",
+                          wraps=AuthoringModule._revision_from_record) as decode:
+            with self.assertRaises(AuthoringError) as caught:
+                self.decoding.decode(altered)
+            self.assertEqual(caught.exception.failure.code, "AUTHORING.INVALID_STORED_REVISION")
+            self.assertEqual(caught.exception.failure.outcome, "invalid")
+            self.assertEqual(caught.exception.failure.message,
+                             "stored proposal revision authority disagrees with its identity")
+            self.assertEqual(decode.call_count, 1)
+            self.assertIs(self.decoding.decode(record), cached)
+            self.assertEqual(decode.call_count, 1)
+        self.assertEqual(self.snapshots.load_aggregate(record.aggregate_id), record)
+
     def test_current_root_membership_is_not_reused(self):
         self.author.read_revision(self.revision.revision_id, decoding=self.decoding)
         root = self.snapshots.load_aggregate_root(str(self.revision.proposal))

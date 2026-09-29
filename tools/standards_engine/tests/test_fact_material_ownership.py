@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import ast
 from dataclasses import replace
+from importlib.util import resolve_name
 import json
 from pathlib import Path
 import tempfile
@@ -17,6 +18,70 @@ from tools.standards_engine.standards_engine._generated_contract import Snapshot
 from tools.standards_metadata.standards_metadata import FrozenContentSource, content_digest
 
 ROOT = Path(__file__).resolve().parents[3]
+
+
+def _presentation_imports(source: str) -> tuple[str, ...]:
+    """Guard this material owner's static dependencies, not a general import graph.
+
+    Resolve relative spellings with Python's owner so aliases do not conceal a
+    navigation dependency. Dynamic loading and attribute access are out of scope.
+    """
+    package = supporting.__package__
+    forbidden = {'agent_navigation', 'context_projection'}
+    forbidden.update(f'{package}.{name}' for name in tuple(forbidden))
+    found: set[str] = set()
+    for node in ast.walk(ast.parse(source)):
+        if isinstance(node, ast.Import):
+            names = [item.name for item in node.names]
+        elif isinstance(node, ast.ImportFrom):
+            module = node.module or ''
+            if node.level:
+                module = resolve_name('.' * node.level + module, package)
+            names = [module, *(f'{module}.{item.name}' for item in node.names)]
+        else:
+            continue
+        found.update(name for name in names if any(
+            name == boundary or name.startswith(boundary + '.')
+            for boundary in forbidden
+        ))
+    return tuple(sorted(found))
+
+
+class FactOwnershipImportGuardTest(unittest.TestCase):
+    def test_guard_rejects_equivalent_static_navigation_dependencies(self):
+        package = supporting.__package__
+        for name in ('agent_navigation', 'context_projection'):
+            spellings = (
+                f'import {name}',
+                f'import {name} as view',
+                f'import json, {package}.{name} as view',
+                f'from {name} import route as select',
+                f'from {package}.{name} import route',
+                f'from .{name} import route as select',
+                f'from .{name} import *',
+                f'from . import {name}',
+                f'from . import {name} as view',
+                f'from {package} import {name} as view',
+                f'from ..standards_engine import {name} as view',
+                f'from ..standards_engine.{name} import route',
+            )
+            for statement in spellings:
+                with self.subTest(statement=statement):
+                    self.assertTrue(_presentation_imports(statement))
+
+    def test_guard_allows_unrelated_modules_aliases_and_non_import_text(self):
+        source = """import json as agent_navigation
+from tools.standards_analysis.standards_analysis import RouterProjection
+from . import authoring as context_projection
+from .authoring import ProposalRevision
+from unrelated import agent_navigation
+from unrelated.context_projection import value
+from tools.standards_engine.standards_engine import agent_navigation_helpers
+from .context_projection_helpers import value
+text = 'import agent_navigation'
+# from . import context_projection
+"""
+        self.assertEqual(_presentation_imports(source), ())
 
 
 class FactMaterialOwnershipTest(unittest.TestCase):
@@ -92,9 +157,7 @@ class FactMaterialOwnershipTest(unittest.TestCase):
         self.assertFalse(hasattr(agent_navigation,'fact_definitions'))
         # This bound dependency regression enforces the specific review finding,
         # not a generic package-layout convention or a file-size threshold.
-        tree = ast.parse(Path(supporting.__file__).read_text())
-        self.assertFalse(any(isinstance(n,ast.ImportFrom) and n.module in
-                             ('agent_navigation','context_projection') for n in ast.walk(tree)))
+        self.assertEqual(_presentation_imports(Path(supporting.__file__).read_text()), ())
         canonical = self.compiled.router.fact_definitions()
         facts = self.facade.routing_facts({'snapshot':self.snapshot})
         self.assertEqual(facts['facts'],canonical)

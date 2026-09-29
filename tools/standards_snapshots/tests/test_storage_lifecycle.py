@@ -126,6 +126,45 @@ class StorageLifecycleTest(unittest.TestCase):
         self.assertNotIn('BEGIN IMMEDIATE', statements)
         self.assertEqual(module._store.counts()['purged_root_tombstones'], 0)
 
+    def test_exclusive_writer_blocks_probe_with_busy_and_no_maintenance_effects(self):
+        module = self.module()
+        snapshot, head, root = self.seed(module)
+        connection = module._store._connection
+        self.assertEqual(connection.execute('PRAGMA journal_mode').fetchone(), ('delete',))
+        before = module._store.counts()
+        timeout = connection.execute('PRAGMA busy_timeout').fetchone()[0]
+        # Shorten only the owned fixture connection; no wall-clock oracle or sleep.
+        connection.execute('PRAGMA busy_timeout=1')
+        statements = []
+        connection.set_trace_callback(statements.append)
+        writer = self.connection()
+        try:
+            writer.execute('BEGIN EXCLUSIVE')
+            self.assertTrue(writer.in_transaction)
+            with self.assertRaises(SnapshotError) as caught:
+                module.maintain()
+            self.assertEqual(caught.exception.failure.code, 'SNAPSHOT_STORE.BUSY')
+            self.assertEqual(caught.exception.failure.kind, 'unavailable')
+            self.assertIsInstance(caught.exception.__cause__, sqlite3.OperationalError)
+            self.assertEqual(caught.exception.__cause__.sqlite_errorcode, sqlite3.SQLITE_BUSY)
+            # The real read was attempted. No writer admission or rollback was
+            # attempted by the maintenance connection after its failed probe.
+            self.assertEqual(len(statements), 1, statements)
+            self.assertTrue(statements[0].startswith('SELECT 1 FROM snapshot_roots '), statements)
+            self.assertFalse(connection.in_transaction)
+            self.assertTrue(writer.in_transaction)
+        finally:
+            if writer.in_transaction:
+                writer.execute('ROLLBACK')
+            connection.set_trace_callback(None)
+            connection.execute(f'PRAGMA busy_timeout={timeout}')
+        self.assertEqual(module._store.counts(), before)
+        module.maintain()
+        self.assertEqual(module._store.counts(), before)
+        self.assertEqual(module.load_content(snapshot), capture())
+        self.assertEqual(module.load_aggregate(head.aggregate_id), head)
+        self.assertEqual(module.load_aggregate_root(root.aggregate_id), root)
+
     def test_reopening_current_store_can_read_alongside_reserved_writer(self):
         with SnapshotModule.open(self.path, now=lambda: self.now) as initial:
             snapshot = initial.create_snapshot(capture()).snapshot

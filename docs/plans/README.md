@@ -131,3 +131,9 @@ packaging and broader test strengthening are later, separately admitted work.
 [Review-evidence packaging](review-evidence-packaging/plan.md) owns the local
 review packet builder. Its implementation is in progress. Developer handoff ZIPs
 are external artifacts and are not repository content.
+
+## Targeted Test Strengthening
+
+[Targeted Test Strengthening](targeted-test-strengthening/plan.md) prepares the five
+selected regression-oracle improvements without product changes. Its integration
+follows packaging acceptance; neither earlier accepted sequence is reopened.
