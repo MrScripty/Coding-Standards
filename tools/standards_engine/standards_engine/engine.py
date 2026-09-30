@@ -3871,6 +3871,14 @@ def _bounded_analysis_diagnostic(field: str, value: object) -> bool:
     }
     if type(value) is not str or not 0 < len(value) <= limits[field]:
         return False
+    if field == "evidence_reference":
+        return (
+            value.isprintable()
+            and not value.startswith("/")
+            and "\\" not in value
+            and not (len(value) >= 2 and value[1] == ":")
+            and all(part not in {"", ".", ".."} for part in value.split("/"))
+        )
     if field in {"expected_digest", "observed_digest"}:
         return (
             value.startswith("sha256:")
@@ -3886,11 +3894,6 @@ def _bounded_analysis_diagnostic(field: str, value: object) -> bool:
         and all(character.isalnum() or character in punctuation for character in value)
     ):
         return False
-    if field == "evidence_reference":
-        return not (
-            (len(value) >= 3 and value[1:3] == ":/")
-            or any(part in {"", ".", ".."} for part in value.split("/"))
-        )
     return True
 
 

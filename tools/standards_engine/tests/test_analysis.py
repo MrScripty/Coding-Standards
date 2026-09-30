@@ -42,6 +42,7 @@ from tools.standards_engine.standards_engine import (
     InspectCall,
     PendingResult,
     PrepareCall,
+    Purpose,
     RejectedResult,
     RecoverApplicationResult,
     ResolveCall,
@@ -2244,6 +2245,19 @@ finally:
             ))).details
 
         self.assertEqual(project(normal), normal)
+        for reference in (
+            "reports/review notes.md",
+            "reports/évidence.md",
+            ".evidence/review.md",
+            "reports/.review.md",
+            "reports/审查.md",
+            "r" * 1024,
+        ):
+            with self.subTest(reference=reference):
+                values = {**normal, "evidence_reference": reference}
+                self.assertEqual(project(values), values)
+                with mock.patch.object(self.engine, "_purpose", Purpose.APPLICATION):
+                    self.assertEqual(project(values), {})
         for field in normal:
             for invalid in ("a" * 4096, "line one\nline two", "", 17):
                 with self.subTest(field=field, invalid=repr(invalid)[:40]):
@@ -2255,6 +2269,24 @@ finally:
             ("evidence_reference", "/private/credentials.txt"),
             ("evidence_reference", "C:/private/credentials.txt"),
             ("evidence_reference", "private//credentials.txt"),
+            ("evidence_reference", "private/./credentials.txt"),
+            ("evidence_reference", "private/credentials.txt/"),
+            ("evidence_reference", "."),
+            ("evidence_reference", ".."),
+            ("evidence_reference", "./reports/review.md"),
+            ("evidence_reference", "C:private/credentials.txt"),
+            ("evidence_reference", "C:\\private\\credentials.txt"),
+            ("evidence_reference", "\\\\server\\share\\credentials.txt"),
+            ("evidence_reference", "private\\..\\credentials.txt"),
+            ("evidence_reference", "reports/review\x00.md"),
+            ("evidence_reference", "reports/review\t.md"),
+            ("evidence_reference", "reports/review\x7f.md"),
+            ("evidence_reference", "reports/review\x85.md"),
+            ("evidence_reference", "reports/review\u202e.md"),
+            ("evidence_reference", "r" * 1025),
+            ("validation_phase", "préflight"),
+            ("provider_contract", "repository content"),
+            ("next_action", ".refresh-review-evidence"),
             ("provider_contract", "repository/content"),
             ("provider_contract_version", "1:secret"),
             ("expected_digest", "sha256:" + "z" * 64),
