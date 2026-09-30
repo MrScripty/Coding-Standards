@@ -188,3 +188,35 @@ until A1 is accepted and merged to `main`. The second read-only Astra candidate
 review and Passeur security/lifecycle review remain pending. The available
 Passeur service is bound to Pumas-Library, so no Coding-Standards review was
 submitted through the wrong repository context.
+
+
+### Final local acceptance and architecture review
+
+The committed source candidate `033dde3623a6bd917d3def5c75b9c748d6cd4f27`
+passed the seven-module A1 acceptance command in the hash-locked offline Python
+3.12 environment: 83 tests passed in 264.677 seconds. The modules were
+`tools.repository_git.tests.test_repository`,
+`tools.standards_engine.tests.test_analysis`,
+`tools.standards_engine.tests.test_coverage_publication`,
+`tools.standards_engine.tests.test_agent_workflow`,
+`tools.standards_engine.tests.test_publication_recovery`,
+`tools.standards_engine.tests.test_registration_contract`, and
+`tools.standards_engine.tests.test_supporting_workflow`. The command includes
+local test-owned Git repositories and mocked boundary/failure cases; it does not
+qualify live remote or hosted-service behavior. `verify_repository` with
+`refresh_verification_inputs=false` passed 73 suites and 121 checks on the same
+source candidate. `git diff --check` passed.
+
+GPT-6 Astra Medium completed a read-only architecture review of exact candidate
+`033dde3623a6bd917d3def5c75b9c748d6cd4f27` against accepted base
+`149ba317e9397519bc181a048ecf76aef129a69c` and found no new actionable findings.
+It confirmed that commit `7d8904a9` resolves the local-only target observation
+finding and the plan now defers A2 until accepted A1 integration. The review notes
+that the regression is a mocked boundary assertion and does not qualify real
+partial-clone behavior.
+
+At this point, PR #2 still publishes the earlier `78a69fbb` head; the updated A1
+candidate has passed local acceptance and is awaiting a normal fast-forward push.
+Exact-candidate hosted checks are still pending. The PR remains draft, the Passeur
+security/lifecycle review remains unavailable because its service is bound to
+Pumas-Library, and maintainer-authorized merge to `main` remains outstanding.

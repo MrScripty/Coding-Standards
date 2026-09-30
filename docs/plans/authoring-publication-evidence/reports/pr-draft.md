@@ -2,7 +2,15 @@
 
 **Title:** feat(standards): clarify publication and preflight evidence
 
-## Summary
+## Owning plan and milestone
+
+- Plan: `docs/plans/authoring-publication-evidence/plan.md`
+- Milestone: A1 — Explicit publication observations and early evidence failures
+- Target: `main`; accepted base: `149ba317e9397519bc181a048ecf76aef129a69c`
+- Local candidate tested: `033dde3623a6bd917d3def5c75b9c748d6cd4f27`
+- Draft PR: [#2](https://github.com/MrScripty/Coding-Standards/pull/2)
+
+## Intended outcome
 
 - Report durable publication receipts separately from fresh, read-only target,
   worktree, and index observations across apply, recovery, and later status.
@@ -14,37 +22,62 @@
   application/readiness persistence schemas.
 - Make publication observation own descriptor exhaustion, path/root races, and
   cancellation cleanup, including a local-only read of the canonical target ref.
-  Keep reconciliation writes and evidence bundle acquisition for later milestones.
-- Replace the supporting-workflow test's dependency on accepted Security exposure
-  with a test-owned unexposed standard.
+- Keep reconciliation writes and evidence bundle acquisition for later milestones.
+
+## Prerequisites and exclusions
+
+The branch starts from accepted `main` at `149ba317e9397519bc181a048ecf76aef129a69c`.
+A1 adds no dependency on the unaccepted Pumas coordinated plans or acquisition
+contract. It does not implement A2 evidence bindings, durable evidence-bundle
+acquisition, reconciliation writes, a Pumas consumer, or a migration of existing
+application/readiness persistence formats.
+
+## Ownership, persistence, security, and lifecycle
+
+Repository Git owns fresh checkout/index observation and descriptor lifecycle;
+the Engine owns publication projection; Analysis owns evidence validation. Durable
+receipts and existing authorization remain the publication authority. The change
+does not alter request contract 6 or application/readiness persistence schemas and
+requires no retained-state migration. Descriptor exhaustion, filesystem races, and
+cancellation release observation resources. Application-facing diagnostics remain
+bounded and redact private exception text.
 
 ## Validation
 
-- Before the final review repair, Repository Git observer tests: 31 passed;
-  Analysis tests: 21 passed; A1 acceptance modules: 30 passed; direct and
-  warm-cache supporting-workflow cases: 2 passed; Repository verification: 73
-  suites, 121 checks passed.
-- The final local-only target-read regression and adjacent recovery assertion
-  passed: 2 tests in 9.977 seconds.
-- One post-repair combined run encountered stale suite-input digests for
-  `engine.py` in temporary fixture repositories. The integration owner refreshed
-  the generated suite-input manifest; the full post-refresh acceptance rerun is
-  pending.
-- `git diff --check` passed for the source repair.
+On the committed source candidate `033dde3623a6bd917d3def5c75b9c748d6cd4f27`,
+Python 3.12 with the hash-locked requirements, offline:
 
-## Review notes
+- The complete A1 acceptance command ran seven modules (`test_repository`,
+  `test_analysis`, `test_coverage_publication`, `test_agent_workflow`,
+  `test_publication_recovery`, `test_registration_contract`, and
+  `test_supporting_workflow`): **83 tests passed in 264.677 seconds**.
+- `verify_repository(refresh_verification_inputs=False)`: **73 suites and 121
+  checks passed**.
+- `git diff --check` passed.
 
-GPT-6 Astra architecture and Standards reviews and GPT-6 Luna Spec review found no
-remaining findings after follow-up. The final Astra review found one local-only
-target-read omission and one plan-state sequencing error. The target read is fixed
-in `7d8904a9`; the plan now keeps A1 in final verification and defers A2 until A1
-is accepted and merged. A second final architecture review is pending. Passeur
-review remains pending because its available service is bound to Pumas-Library;
-no review was sent to that unrelated project.
+The suite exercises test-owned temporary Git repositories and controlled failure,
+race, and cancellation cases. It does not qualify a live remote repository or live
+MCP publication. Mocked boundary assertions are unit evidence, not real partial
+clone or hosted-service evidence. Exact-candidate hosted CI is pending for the
+updated PR head; run `36646667390` and CodeRabbit status applied only to the older
+`78a69fbb` head.
 
-Draft PR [#2](https://github.com/MrScripty/Coding-Standards/pull/2) is open against
-`main` at `149ba317e9397519bc181a048ecf76aef129a69c`. The published head is still
-`78a69fbb`; the local A1 branch includes the reviewed repair at `7d8904a9` and
-awaits its push. Hosted run `36646667390` is for the older `78a69fbb` head and is
-not candidate evidence for `7d8904a9`. The PR remains draft; no merge is requested
-or performed, and the separately dirty main checkout is unchanged.
+## Independent review and outstanding acceptance
+
+GPT-6 Astra Medium's final read-only architecture review of candidate `033dde36`
+reported no actionable findings. It confirmed the earlier local-only target-read
+finding and premature A2 sequencing finding are resolved. The reviewer noted that
+the regression for `local_only=True` is mocked boundary evidence and does not by
+itself demonstrate real partial-clone behavior.
+
+Earlier Standards Engine routing selected 30 applicable standards with no
+unresolved questions; the result was checked against the implemented obligations.
+GPT-6 Luna High completed bounded spec/reference discovery and found no remaining
+gap in the reviewed A1 contracts. The independent Passeur security/lifecycle review
+remains outstanding: the available Passeur service is bound to Pumas-Library, so
+no Coding-Standards review was submitted through that unrelated repository context.
+
+PR #2 remains draft. Its published head must be updated to the tested A1 source
+candidate before exact-head hosted checks can qualify. No merge is requested or
+performed. Maintainer-authorized integration to `main` remains required before A1
+is accepted and A2 implementation begins.
