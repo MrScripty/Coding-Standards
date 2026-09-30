@@ -151,3 +151,40 @@ live process at interface 45, but was left running against the dirty main checko
 it was not pointed at or restarted with the A1 worktree. A broad route response was
 truncated and targeted `read_many` calls were useful. No remote push or hosted PR was
 created; a ready-to-post PR draft is recorded separately.
+
+## 2026-09-29 — A1 PR and final-review repair
+
+Opened draft PR [#2](https://github.com/MrScripty/Coding-Standards/pull/2) from
+`implementation/authoring-publication-evidence-a1` to `main`. Its base is accepted
+`149ba317e9397519bc181a048ecf76aef129a69c`; initial published head was
+`78a69fbb4adaee386baf1c8503d337c42bbd5db4`. The PR remains draft.
+
+GPT-6 Astra Medium's read-only final review of that head found that
+`_application_publication_projection` read the canonical target branch without
+`local_only=True`, and that the plan advanced to A2 before A1's hosted checks,
+independent review, and main integration. GPT-6 Luna High confirmed that no test
+asserted the target read's local-only option or unavailable projection shape.
+
+GPT-6.1 Sol medium was assigned the exact write set
+`engine.py` and `test_analysis.py` in a separate worktree, starting from
+`78a69fbb`. It updated the target observation to use a local-only read and added
+a regression for the exact keyword, candidate-tree and checkout reads, and bounded
+unavailable output. It also updated the repeated-recovery mock expectation. The
+focused regression and adjacent recovery case passed (2 tests, 9.977 seconds).
+The worker commit `7d8904a9d4c3cc1528d0e0e0fe388d5fd2882b8c` is authored by
+MrScripty and was integrated into A1 by fast-forward; no cherry-pick or history
+rewrite was used.
+
+The first full post-repair run (77 tests) exposed stale `suite-inputs.json`
+digests for `engine.py` in test-owned Git snapshots. The integration owner
+refreshed the generated manifest on A1; local repository verification then passed
+(73 suites, 121 checks). The full post-refresh acceptance rerun is pending. The
+source fix has not yet been pushed to PR #2. Hosted run `36646667390` and its
+CodeRabbit status are for the older `78a69fbb` head; the workflow was in progress
+and does not qualify the current source candidate.
+
+The plan and plan index now keep A1 in `Verifying` and defer A2 implementation
+until A1 is accepted and merged to `main`. The second read-only Astra candidate
+review and Passeur security/lifecycle review remain pending. The available
+Passeur service is bound to Pumas-Library, so no Coding-Standards review was
+submitted through the wrong repository context.

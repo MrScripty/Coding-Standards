@@ -21,9 +21,10 @@ Completed prerequisites do not close the parent objective. See the
 [Authoring Publication and Evidence Clarity](authoring-publication-evidence/plan.md)
 owns publication receipts, fresh checkout observations, early evidence failures,
 explicit evidence binding, guarded reconciliation, and focused blocker/reuse
-explanations. It is Active at A1; later milestones remain Planned with their
-separate gates. The plan preserves existing publication authorization and records
-all acceptance claims as pending until candidate evidence passes.
+explanations. A1 implementation is complete and in final verification; later
+milestones remain Planned with their separate gates. Begin A2 only after A1 is
+accepted and merged to `main`. The plan preserves existing publication
+authorization and records each acceptance claim at its current evidence state.
 
 ## Accepted Agent Interface Work
 

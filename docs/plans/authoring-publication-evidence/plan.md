@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** A2 — explicit evidence bindings and portable artifacts
+**Current phase:** A1 implementation is complete; final acceptance and main-targeted PR review are in progress.
 
-**Next slice:** **A2 — Explicit evidence bindings and portable artifacts**
+**Next slice:** Complete A1's exact-candidate hosted checks and required independent review. Begin A2 only after A1 is accepted and merged to `main`.
 
 **Acceptance status:** `pending`
 
@@ -415,7 +415,7 @@ rewriting of accepted receipts, or automatic conversion of old evidence into bun
 
 ### A1 — Explicit publication observations and early evidence failures
 
-**Status:** `Complete`
+**Status:** `Verifying` — implementation and local A1 gate are complete; hosted PR checks, final independent review, and main integration remain pending.
 
 **Goal:** make existing success/failure truthful before extending evidence capability.
 
@@ -430,14 +430,16 @@ receipt/fresh checkout observation; share side-effect-free evidence preflight be
 readiness; expose bounded authoring phase/reference context; retain all final checks.
 Create one planned coherent interface update, with exact old-consumer dispositions.
 
-**Gate:** Passed on the committed A1 candidate. Publication and recovery preserve
+**Gate:** The local A1 gate passed on the committed candidate. Publication and recovery preserve
 checkout/index state; durable receipts remain distinct from fresh checkout
 observations, including unknown outcomes and a replacement MCP process. Evidence
 preflight rejects incompatible destination bytes before readiness and the final
 apply boundary still rejects later mutation. No global source-binding migration or
-new reconciliation write is hidden in A1. See the implementation result in the
-[execution ledger](execution-ledger.md). A2 extends the evidence matrix to bound
-references.
+new reconciliation write is hidden in A1. Exact-candidate hosted checks and the
+required independent security/lifecycle review remain outstanding. Do not begin
+A2's dependent implementation until A1 is accepted and merged to `main`. See the
+implementation result in the [execution ledger](execution-ledger.md). A2 extends
+the evidence matrix to bound references.
 
 ### A2 — Explicit evidence bindings and portable artifacts
 
