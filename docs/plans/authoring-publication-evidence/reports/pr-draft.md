@@ -7,7 +7,7 @@
 - Plan: `docs/plans/authoring-publication-evidence/plan.md`
 - Milestone: A1 — Explicit publication observations and early evidence failures
 - Target: `main`; accepted base: `149ba317e9397519bc181a048ecf76aef129a69c`
-- Repaired source candidate tested: `b0d36338f5799a30e82ed8755e4560c0b27007be`
+- Repaired source candidate tested: `ecbf25cdcd8218b44e68b6adb359c7efaeea765d`
 - Draft PR: [#2](https://github.com/MrScripty/Coding-Standards/pull/2)
 
 ## Intended outcome
@@ -51,7 +51,7 @@ that publication will overwrite; final candidate validation remains intact.
 
 ## Validation
 
-On integrated candidate `b0d36338f5799a30e82ed8755e4560c0b27007be`, Python 3.12
+On integrated candidate `ecbf25cdcd8218b44e68b6adb359c7efaeea765d`, Python 3.12
 with the hash-locked requirements, offline:
 
 - The seven existing A1 modules (`test_repository`, `test_analysis`,
@@ -60,8 +60,10 @@ with the hash-locked requirements, offline:
   current-interface consumer modules (`test_capture_handoff_transport`,
   `test_consumer_publication`, `test_routing_fact_transport`,
   `test_runtime_identity`, and `test_schema_presentation`) passed **108 tests in
-  470.795 seconds**. The five consumer modules independently passed 24 tests in
-  165.995 seconds.
+  427.181 seconds**. The five consumer modules independently passed 24 tests in
+  165.995 seconds. The diagnostics regression retains valid bounded spaced,
+  Unicode, and dot-prefixed repository references while preserving application
+  redaction.
 - `verify_repository(refresh_verification_inputs=true)` and the subsequent
   `refresh_verification_inputs=false` run each passed **73 suites and 121 checks**;
   refresh produced no manifest change. `tools/standards_verifier/verify.py
@@ -93,11 +95,20 @@ GPT-6.1 Sol high classified all nine failures on the earlier candidate's hosted
 run as stale current-interface expectations, not intentional interface-45 client
 fixtures. GPT-6.1 Sol medium changed exactly five installed-interface assertions
 to 46 in the reviewed commit above; all other lifecycle, disclosure, and legacy
-client checks remain intact.
+client checks remain intact. Sol High's read-only architecture review then found
+that authoring diagnostics dropped otherwise valid spaced, Unicode, and
+dot-prefixed evidence paths. Sol medium fixed the bounded authoring projection in
+`e6da2e5f` with focused coverage for supported and unsafe paths and application
+redaction; Sol High's follow-up confirmed closure with no further architecture
+findings. The generated suite-input digests were refreshed and committed in
+`ecbf25cd`.
 
 Hosted run `36648831399` failed on the stale assertions after 612 tests and did not
 reach its structural-verifier step. Prior exact PR-head run `36651259589` is for
-`95b13802`, not the corrected candidate; a fresh successful exact-head hosted run
-is pending. PR #2 remains draft. No merge is requested or performed.
+`95b13802` and also failed on those stale assertions. Run `36653728027` is for
+`6921489c` and remained in progress at the time of this report; it predates the
+path-diagnostic fix and refreshed digests. A fresh successful exact-head hosted
+run for the current candidate is pending. PR #2 remains draft. No merge is
+requested or performed.
 Maintainer-authorized main integration remains required before A1 is accepted and
 A2 implementation begins.

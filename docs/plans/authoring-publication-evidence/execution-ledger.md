@@ -283,9 +283,42 @@ suites with zero failures or blocked checks.
 
 Hosted run `36648831399` for an earlier synthetic merge ref failed on those stale
 interface assertions after 612 tests; it did not reach `verify.py --complete`.
-Exact PR-head run `36651259589` targeted `95b13802` and was still in progress when
-the corrected test commit was integrated. Neither run qualifies the corrected
+Exact PR-head run `36651259589` targeted `95b13802` and later completed with the
+same stale interface-45 expectations. Neither run qualifies the corrected
 candidate. A fresh exact-head hosted run is required after this candidate is
 published. The PR stays draft, the plan stays `Verifying`, A-C10's Passeur review
 is outstanding because the available service remains bound to Pumas-Library, and
 A2 remains deferred until A1 acceptance and main integration.
+
+## 2026-09-29 — preserve valid evidence paths in authoring diagnostics
+
+GPT-6.1 Sol high's read-only final architecture review found that the bounded
+authoring projection dropped supported `repository-content@1` paths containing
+spaces, printable Unicode, or a dot-prefixed name. These names are valid under the
+repository-relative path resolver; omitting them lost the exact evidence identity
+from an authoring failure. The application-purpose projection remains redacted.
+
+GPT-6.1 Sol medium fixed only `engine.py` and `test_analysis.py` in isolated worker
+commit `e6da2e5fa2ba4b32ae9edb5cb49e4b2ed6ddf2c3`. The bounded path case now admits
+printable relative paths up to 1,024 characters and rejects control characters,
+absolute/drive/backslash paths, empty/dot/traversal segments, and overlong values.
+Tests cover spaces, Unicode, leading-dot names, invalid forms, strict ASCII fields,
+and application-purpose redaction. Sol high's read-only follow-up confirmed the
+finding closed and reported no other architecture issue.
+
+The first integration-owner rerun before committing generated suite-input digests
+reported 15 failures and two errors, all from test-owned Git snapshots seeing a
+stale `engine.py` digest. `verify_repository(refresh_verification_inputs=true)`
+passed 73 suites and 121 checks and refreshed the declared `engine.py` and
+`test_analysis.py` inputs; commit `ecbf25cdcd8218b44e68b6adb359c7efaeea765d`
+records those generated hashes. On that exact source/manifest candidate, the
+combined twelve-module A1 and interface-consumer command passed **108 tests in
+427.181 seconds**. `verify_repository(refresh_verification_inputs=false)` passed
+73 suites and 121 checks; `verify.py --complete` passed 73 suites with zero
+failures or blocked checks; `git diff --check` passed.
+
+At the time of this entry, hosted run `36653728027` for preceding head `6921489c`
+was still in progress. It predates this path fix and generated manifest update, so
+it cannot qualify the current source. The next exact-head hosted result, Passeur
+security/lifecycle review, and accepted main integration remain outstanding. A1
+stays `Verifying`; A2 remains deferred.
