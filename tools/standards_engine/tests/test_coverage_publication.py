@@ -90,7 +90,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
                 base_capture = engine._snapshots.load_content(snapshot_id)
                 captured_paths = {str(item.path) for item in base_capture.files}
                 expected_target = engine._repository.branch_revision("main")
-                uncaptured_markdown = sorted(
+                eligible_markdown = sorted(
                     str(path)
                     for path in engine._repository.revision_paths(expected_target)
                     if str(path) not in captured_paths
@@ -101,18 +101,18 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         and (character.isalnum() or character in "._:/-")
                         for character in str(path)
                     )
-                    and len(
-                        engine._repository.read_file(
-                            expected_target, path
-                        )
-                    ) <= 128 * 1024
                 )
+                uncaptured_markdown = []
+                for candidate in eligible_markdown:
+                    evidence_bytes = engine._repository.read_file(
+                        expected_target, RepositoryPath.parse(candidate)
+                    )
+                    if len(evidence_bytes) <= 128 * 1024:
+                        uncaptured_markdown.append(candidate)
+                        break
                 self.assertTrue(uncaptured_markdown)
                 evidence_id = uncaptured_markdown[0]
                 evidence_path = repository / evidence_id
-                evidence_bytes = engine._repository.read_file(
-                    expected_target, RepositoryPath.parse(evidence_id)
-                )
                 reference = {
                     "id": evidence_id,
                     "digest": "sha256:" + hashlib.sha256(evidence_bytes).hexdigest(),
