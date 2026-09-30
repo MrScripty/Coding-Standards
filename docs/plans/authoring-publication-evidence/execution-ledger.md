@@ -256,3 +256,36 @@ this candidate. Exact-head hosted CI and the Passeur review remain pending; the
 published PR head still needs the repair pushed and the draft body updated. Main
 integration remains maintainer-controlled, so the plan stays `Verifying` and A2
 has not started.
+
+## 2026-09-29 — current-interface consumer assertions
+
+The exact hosted workflow for an earlier candidate failed nine assertions across
+five test modules because they expected interface 45 from the current interface-46
+Engine. The failures inspect the installed Engine's runtime identity, discovery
+metadata, or instructions; they are not legacy client-v45 compatibility fixtures.
+The review confirmed that legacy upgrade dispositions and surrounding lifecycle
+and disclosure assertions should remain unchanged.
+
+GPT-6.1 Sol high performed this read-only classification against the five current
+test modules. GPT-6.1 Sol medium updated only the five corresponding
+installed-interface expectations to 46 in commit
+`b0d36338f5799a30e82ed8755e4560c0b27007be`, then ran those modules in the locked
+offline Python 3.12 environment: **24 tests passed in 165.995 seconds**. The
+integration owner reviewed the exact five-line diff and fast-forwarded that commit
+into the isolated A1 branch.
+
+On the integrated candidate, the seven existing A1 modules plus those five
+consumer modules passed together: **108 tests in 470.795 seconds**. Both
+`verify_repository` with `refresh_verification_inputs=true` and the subsequent
+read-only verification passed **73 suites and 121 checks**. Refresh produced no
+manifest delta. `tools/standards_verifier/verify.py --complete` also passed all 73
+suites with zero failures or blocked checks.
+
+Hosted run `36648831399` for an earlier synthetic merge ref failed on those stale
+interface assertions after 612 tests; it did not reach `verify.py --complete`.
+Exact PR-head run `36651259589` targeted `95b13802` and was still in progress when
+the corrected test commit was integrated. Neither run qualifies the corrected
+candidate. A fresh exact-head hosted run is required after this candidate is
+published. The PR stays draft, the plan stays `Verifying`, A-C10's Passeur review
+is outstanding because the available service remains bound to Pumas-Library, and
+A2 remains deferred until A1 acceptance and main integration.

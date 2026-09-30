@@ -7,7 +7,7 @@
 - Plan: `docs/plans/authoring-publication-evidence/plan.md`
 - Milestone: A1 — Explicit publication observations and early evidence failures
 - Target: `main`; accepted base: `149ba317e9397519bc181a048ecf76aef129a69c`
-- Repaired source candidate tested: `fab920f4`
+- Repaired source candidate tested: `b0d36338f5799a30e82ed8755e4560c0b27007be`
 - Draft PR: [#2](https://github.com/MrScripty/Coding-Standards/pull/2)
 
 ## Intended outcome
@@ -28,8 +28,9 @@
 
 The branch starts from accepted `main` at
 `149ba317e9397519bc181a048ecf76aef129a69c`. The local A1 gate passed on the
-repaired source candidate; the plan remains `Verifying` until exact-head hosted
-checks, the required Passeur review, and accepted main integration are complete.
+repaired source candidate. The plan remains `Verifying` until a successful
+exact-head hosted run, the required Passeur review, and accepted main integration
+are complete.
 Pumas-Library acquisition/runtime plans are separate; Q1/AQ-HTTP is not ready and
 is not an A1 dependency.
 
@@ -50,15 +51,21 @@ that publication will overwrite; final candidate validation remains intact.
 
 ## Validation
 
-On repaired candidate `fab920f4`, Python 3.12 with the hash-locked requirements,
-offline:
+On integrated candidate `b0d36338f5799a30e82ed8755e4560c0b27007be`, Python 3.12
+with the hash-locked requirements, offline:
 
-- The seven-module A1 acceptance command (`test_repository`, `test_analysis`,
+- The seven existing A1 modules (`test_repository`, `test_analysis`,
   `test_coverage_publication`, `test_agent_workflow`, `test_publication_recovery`,
-  `test_registration_contract`, and `test_supporting_workflow`) passed **84 tests
-  in 274.047 seconds**.
-- `verify_repository(refresh_verification_inputs=false)` passed **73 suites and
-  121 checks**. The manifest refresh also passed 73 suites and 121 checks.
+  `test_registration_contract`, and `test_supporting_workflow`) plus five
+  current-interface consumer modules (`test_capture_handoff_transport`,
+  `test_consumer_publication`, `test_routing_fact_transport`,
+  `test_runtime_identity`, and `test_schema_presentation`) passed **108 tests in
+  470.795 seconds**. The five consumer modules independently passed 24 tests in
+  165.995 seconds.
+- `verify_repository(refresh_verification_inputs=true)` and the subsequent
+  `refresh_verification_inputs=false` run each passed **73 suites and 121 checks**;
+  refresh produced no manifest change. `tools/standards_verifier/verify.py
+  --complete` passed all 73 suites with zero failures or blocked checks.
 - `git diff --check` passed.
 
 The suite exercises test-owned local Git repositories and controlled failure,
@@ -82,8 +89,15 @@ reviewed A1 contracts. The required Passeur security/lifecycle review remains
 outstanding because the available service is bound to Pumas-Library; no review was
 sent through that unrelated repository context.
 
-PR #2 remains draft. The repaired local source candidate must be pushed before
-exact-head hosted checks can qualify. The local run on the old `f676cfaf` PR head
-is not evidence for `fab920f4`. No merge is requested or performed.
+GPT-6.1 Sol high classified all nine failures on the earlier candidate's hosted
+run as stale current-interface expectations, not intentional interface-45 client
+fixtures. GPT-6.1 Sol medium changed exactly five installed-interface assertions
+to 46 in the reviewed commit above; all other lifecycle, disclosure, and legacy
+client checks remain intact.
+
+Hosted run `36648831399` failed on the stale assertions after 612 tests and did not
+reach its structural-verifier step. Prior exact PR-head run `36651259589` is for
+`95b13802`, not the corrected candidate; a fresh successful exact-head hosted run
+is pending. PR #2 remains draft. No merge is requested or performed.
 Maintainer-authorized main integration remains required before A1 is accepted and
 A2 implementation begins.
