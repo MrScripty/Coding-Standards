@@ -7,7 +7,7 @@
 - Plan: `docs/plans/authoring-publication-evidence/plan.md`
 - Milestone: A1 — Explicit publication observations and early evidence failures
 - Target: `main`; accepted base: `149ba317e9397519bc181a048ecf76aef129a69c`
-- Local candidate tested: `033dde3623a6bd917d3def5c75b9c748d6cd4f27`
+- Repaired source candidate tested: `fab920f4`
 - Draft PR: [#2](https://github.com/MrScripty/Coding-Standards/pull/2)
 
 ## Intended outcome
@@ -26,58 +26,64 @@
 
 ## Prerequisites and exclusions
 
-The branch starts from accepted `main` at `149ba317e9397519bc181a048ecf76aef129a69c`.
-A1 adds no dependency on the unaccepted Pumas coordinated plans or acquisition
-contract. It does not implement A2 evidence bindings, durable evidence-bundle
-acquisition, reconciliation writes, a Pumas consumer, or a migration of existing
-application/readiness persistence formats.
+The branch starts from accepted `main` at
+`149ba317e9397519bc181a048ecf76aef129a69c`. The local A1 gate passed on the
+repaired source candidate; the plan remains `Verifying` until exact-head hosted
+checks, the required Passeur review, and accepted main integration are complete.
+Pumas-Library acquisition/runtime plans are separate; Q1/AQ-HTTP is not ready and
+is not an A1 dependency.
+
+A1 excludes A2 evidence binding, durable evidence-bundle acquisition, reconciliation
+writes, Pumas consumers, and migration of existing application/readiness persistence
+formats.
 
 ## Ownership, persistence, security, and lifecycle
 
 Repository Git owns fresh checkout/index observation and descriptor lifecycle;
-the Engine owns publication projection; Analysis owns evidence validation. Durable
-receipts and existing authorization remain the publication authority. The change
+Analysis owns evidence validation; the Engine owns publication projection. Durable
+receipts and existing publication authorization remain authoritative. The change
 does not alter request contract 6 or application/readiness persistence schemas and
 requires no retained-state migration. Descriptor exhaustion, filesystem races, and
 cancellation release observation resources. Application-facing diagnostics remain
-bounded and redact private exception text.
+bounded and redact private exception text. Readiness preflight rejects references
+that publication will overwrite; final candidate validation remains intact.
 
 ## Validation
 
-On the committed source candidate `033dde3623a6bd917d3def5c75b9c748d6cd4f27`,
-Python 3.12 with the hash-locked requirements, offline:
+On repaired candidate `fab920f4`, Python 3.12 with the hash-locked requirements,
+offline:
 
-- The complete A1 acceptance command ran seven modules (`test_repository`,
-  `test_analysis`, `test_coverage_publication`, `test_agent_workflow`,
-  `test_publication_recovery`, `test_registration_contract`, and
-  `test_supporting_workflow`): **83 tests passed in 264.677 seconds**.
-- `verify_repository(refresh_verification_inputs=False)`: **73 suites and 121
-  checks passed**.
+- The seven-module A1 acceptance command (`test_repository`, `test_analysis`,
+  `test_coverage_publication`, `test_agent_workflow`, `test_publication_recovery`,
+  `test_registration_contract`, and `test_supporting_workflow`) passed **84 tests
+  in 274.047 seconds**.
+- `verify_repository(refresh_verification_inputs=false)` passed **73 suites and
+  121 checks**. The manifest refresh also passed 73 suites and 121 checks.
 - `git diff --check` passed.
 
-The suite exercises test-owned temporary Git repositories and controlled failure,
-race, and cancellation cases. It does not qualify a live remote repository or live
-MCP publication. Mocked boundary assertions are unit evidence, not real partial
-clone or hosted-service evidence. Exact-candidate hosted CI is pending for the
-updated PR head; run `36646667390` and CodeRabbit status applied only to the older
-`78a69fbb` head.
+The suite exercises test-owned local Git repositories and controlled failure,
+race, cancellation, readiness, and destination-overwrite cases. Mocked boundary
+assertions are unit evidence, not evidence of real partial-clone or hosted-service
+behavior. No live remote repository or hosted MCP publication was qualified.
 
 ## Independent review and outstanding acceptance
 
-GPT-6 Astra Medium's final read-only architecture review of candidate `033dde36`
-reported no actionable findings. It confirmed the earlier local-only target-read
-finding and premature A2 sequencing finding are resolved. The reviewer noted that
-the regression for `local_only=True` is mocked boundary evidence and does not by
-itself demonstrate real partial-clone behavior.
+GPT-6.1 Sol high's read-only review of `f676cfaf` found two P2 gaps: unbounded
+phase-specific evidence diagnostics and acceptance of evidence at paths publication
+would overwrite. GPT-6.1 Sol medium repaired both in `01bb2d03`; Sol high's
+read-only follow-up confirmed both findings closed and found no new actionable
+issue. The regression tests bound diagnostics and reject overwritten evidence and
+exclusions before readiness or candidate publication.
 
 Earlier Standards Engine routing selected 30 applicable standards with no
-unresolved questions; the result was checked against the implemented obligations.
-GPT-6 Luna High completed bounded spec/reference discovery and found no remaining
-gap in the reviewed A1 contracts. The independent Passeur security/lifecycle review
-remains outstanding: the available Passeur service is bound to Pumas-Library, so
-no Coding-Standards review was submitted through that unrelated repository context.
+unresolved questions; the resulting obligations were checked against the source.
+GPT-6 Luna High's bounded spec/reference review found no remaining gap in the
+reviewed A1 contracts. The required Passeur security/lifecycle review remains
+outstanding because the available service is bound to Pumas-Library; no review was
+sent through that unrelated repository context.
 
-PR #2 remains draft. Its published head must be updated to the tested A1 source
-candidate before exact-head hosted checks can qualify. No merge is requested or
-performed. Maintainer-authorized integration to `main` remains required before A1
-is accepted and A2 implementation begins.
+PR #2 remains draft. The repaired local source candidate must be pushed before
+exact-head hosted checks can qualify. The local run on the old `f676cfaf` PR head
+is not evidence for `fab920f4`. No merge is requested or performed.
+Maintainer-authorized main integration remains required before A1 is accepted and
+A2 implementation begins.

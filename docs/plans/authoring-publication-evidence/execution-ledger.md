@@ -184,13 +184,13 @@ CodeRabbit status are for the older `78a69fbb` head; the workflow was in progres
 and does not qualify the current source candidate.
 
 The plan and plan index now keep A1 in `Verifying` and defer A2 implementation
-until A1 is accepted and merged to `main`. The second read-only Astra candidate
-review and Passeur security/lifecycle review remain pending. The available
+until A1 is accepted and merged to `main`. At the time of this entry, a second read-only candidate review and Passeur
+security/lifecycle review remained pending. The available
 Passeur service is bound to Pumas-Library, so no Coding-Standards review was
 submitted through the wrong repository context.
 
 
-### Final local acceptance and architecture review
+### Local acceptance before the Sol High final review (superseded)
 
 The committed source candidate `033dde3623a6bd917d3def5c75b9c748d6cd4f27`
 passed the seven-module A1 acceptance command in the hash-locked offline Python
@@ -220,3 +220,39 @@ candidate has passed local acceptance and is awaiting a normal fast-forward push
 Exact-candidate hosted checks are still pending. The PR remains draft, the Passeur
 security/lifecycle review remains unavailable because its service is bound to
 Pumas-Library, and maintainer-authorized merge to `main` remains outstanding.
+
+
+## 2026-09-29 — Sol High final review repairs
+
+GPT-6.1 Sol high's read-only review of `f676cfaf` found two A1 acceptance gaps:
+phase-specific authoring diagnostics copied canonical evidence strings without
+field-specific size/shape bounds; and readiness preflight accepted evidence from
+Engine receipts, the attestation registry, or suite-input manifest that coverage
+publication would replace. Final validation prevented unsafe publication, but the
+preflight did not reject the mismatch early.
+
+GPT-6.1 Sol medium implemented both repairs in worker commit
+`01bb2d031028858e6c6d53bbb2e8d37c453fb972`, starting from exact `f676cfaf`, with
+write set `engine.py`, `test_analysis.py`, and `test_coverage_publication.py`.
+The primary owner reviewed the diff and integrated it into A1 with a fast-forward.
+Sol High's read-only follow-up found both findings closed and no new actionable
+issue. Diagnostics now enforce field-specific bounds and shapes; preflight rejects
+evidence and exclusions that reference the selected receipt, registry, or manifest
+paths before readiness or candidate publication proceeds. Existing final
+validation remains.
+
+The worker's focused publication lifecycle regression passed (1 test, 57.058
+seconds), and its focused diagnostic regression passed. Its first five-module run
+reported 69 passes and two failures caused only by stale suite-input digests for
+the edited `engine.py`; it did not modify generated files. The primary owner
+refreshed and committed those declared digests as `fab920f4`.
+
+On committed candidate `fab920f4`, the complete seven-module A1 acceptance command
+passed **84 tests in 274.047 seconds** in the locked offline Python 3.12
+environment. `verify_repository(refresh_verification_inputs=false)` passed 73
+suites and 121 checks; the preceding manifest refresh also passed those 73 suites
+and 121 checks. `git diff --check` passed. The final local gate is satisfied for
+this candidate. Exact-head hosted CI and the Passeur review remain pending; the
+published PR head still needs the repair pushed and the draft body updated. Main
+integration remains maintainer-controlled, so the plan stays `Verifying` and A2
+has not started.
