@@ -15,6 +15,7 @@ from tools.standards_analysis.standards_analysis import (
     AnalysisExecutionContext,
     AnalysisFailure,
     coverage_requirement_id,
+    render_engine_coverage_receipt,
     validate_engine_coverage_receipt_evidence,
 )
 from tools.standards_metadata.standards_metadata import FrozenContentSource
@@ -231,6 +232,80 @@ class EngineAuditPublicationTest(unittest.TestCase):
                         revision_record.base_snapshot
                     ).source_revision
                 )
+                # Reusing the previous receipt must fail before it can be replaced.
+                receipt_path = engine._engine_coverage_receipt_path(subject)
+                prior_receipt = render_engine_coverage_receipt(
+                    FrozenContentSource({**dict(projection.source.files), evidence_id: evidence_bytes}),
+                    projection.compiled.coverage, subject, claim, authorization,
+                    state.analysis_id, context,
+                    phase="candidate-evidence", source_kind="repository-content",
+                    material_identity=revision_record.revision_id,
+                )
+                publication_files = {**dict(projection.source.files), receipt_path: prior_receipt}
+                publication_paths = {*projection.repository_paths, receipt_path}
+                publication_projection = mock.Mock(
+                    source=FrozenContentSource(publication_files),
+                    repository_paths=publication_paths,
+                    captured_consumer_files=projection.captured_consumer_files,
+                    compiled=projection.compiled,
+                )
+                complete_evaluation = engine._evaluate(state)
+                for overwritten_path in (
+                    receipt_path,
+                    "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml",
+                    "evaluation/standards-effectiveness/generated/suite-inputs.json",
+                ):
+                    for reference_field in ("evidence", "explicit_exclusions"):
+                        with self.subTest(path=overwritten_path, field=reference_field):
+                            overwrite_reference = {
+                                **reference,
+                                "id": overwritten_path,
+                                "digest": "sha256:" + hashlib.sha256(
+                                    publication_files[overwritten_path]
+                                ).hexdigest(),
+                            }
+                            overwritten_claim = {
+                                **claim, reference_field: [overwrite_reference],
+                            }
+                            overwritten_state = state.with_decisions(
+                                coverage_attestations=[overwritten_claim],
+                            )
+                            with (
+                                mock.patch.object(engine, "_load_analysis", return_value=overwritten_state),
+                                mock.patch.object(engine, "_evaluate", return_value=complete_evaluation),
+                                mock.patch.object(engine, "_proposal_projection", return_value=publication_projection),
+                                mock.patch.object(engine._authoring, "review_proposal") as record_readiness,
+                                mock.patch("tools.standards_engine.standards_engine.engine.construct_authorization_record") as issue_authorization,
+                                mock.patch("tools.standards_analysis.standards_analysis.validate_engine_coverage_receipt_evidence") as validate_evidence,
+                            ):
+                                rejected_overwrite = facade.review_proposal({
+                                    "kind": "review-proposal", "analysis": result["handle"],
+                                    "decisions": [{
+                                        "owner": owner, "decision": "accept",
+                                        "rationale": "Explicit fixture review decision.",
+                                        "evidence": [reference],
+                                    } for owner in ("consumer", "impact", "audit")],
+                                })
+                                self.assertEqual(
+                                    rejected_overwrite["code"],
+                                    "COVERAGE.PUBLICATION_EVIDENCE_OVERWRITTEN",
+                                    rejected_overwrite,
+                                )
+                                self.assertEqual(rejected_overwrite["details"]["validation_phase"], "readiness-preflight")
+                                self.assertEqual(rejected_overwrite["details"]["evidence_reference"], overwritten_path)
+                                record_readiness.assert_not_called()
+                                issue_authorization.assert_not_called()
+                                validate_evidence.assert_not_called()
+                                with self.assertRaises(AnalysisError) as candidate_failure:
+                                    engine._prepare_coverage_publication(
+                                        overwritten_state.analysis_id, revision_record,
+                                        publication_projection, expected_target, destination_base,
+                                        publication_files, publication_paths,
+                                        phase="candidate-evidence", state=overwritten_state,
+                                    )
+                                self.assertEqual(candidate_failure.exception.failure.code, "COVERAGE.PUBLICATION_EVIDENCE_OVERWRITTEN")
+                                self.assertEqual(candidate_failure.exception.failure.validation_phase, "candidate-evidence")
+                self.assertEqual(publication_files[receipt_path], prior_receipt)
                 self.assertNotIn(evidence_id, dict(projection.source.files))
                 removed_files = dict(projection.source.files)
                 removed_paths = set(projection.repository_paths)

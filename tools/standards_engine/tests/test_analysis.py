@@ -13,6 +13,8 @@ from pathlib import Path
 from unittest import mock
 
 from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    AnalysisFailure,
     AnalysisState as DomainAnalysisState,
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
@@ -2221,6 +2223,45 @@ finally:
         self.assertEqual(len(sources), 2)
         self.assertIsNot(sources[0], sources[1])
         self.assertEqual(sources[0].requested_paths, sources[1].requested_paths)
+
+    def test_authoring_evidence_diagnostics_are_bounded_and_shaped(self) -> None:
+        normal = {
+            "validation_phase": "readiness-preflight",
+            "evidence_reference": "evaluation/review/evidence.md",
+            "provider_contract": "repository-content",
+            "provider_contract_version": "1",
+            "source_kind": "repository-content",
+            "material_identity": "revision:" + "a" * 64,
+            "expected_digest": "sha256:" + "a" * 64,
+            "observed_digest": "sha256:" + "b" * 64,
+            "next_action": "refresh-review-evidence",
+        }
+
+        def project(values):
+            return self.engine._domain_rejection(AnalysisError(AnalysisFailure(
+                "ANALYSIS.EVIDENCE_DIGEST_MISMATCH", "invalid",
+                "The selected evidence does not match.", **values,
+            ))).details
+
+        self.assertEqual(project(normal), normal)
+        for field in normal:
+            for invalid in ("a" * 4096, "line one\nline two", "", 17):
+                with self.subTest(field=field, invalid=repr(invalid)[:40]):
+                    values = {**normal, field: invalid}
+                    expected = {key: value for key, value in normal.items() if key != field}
+                    self.assertEqual(project(values), expected)
+        for field, invalid in (
+            ("evidence_reference", "private/../credentials.txt"),
+            ("evidence_reference", "/private/credentials.txt"),
+            ("evidence_reference", "C:/private/credentials.txt"),
+            ("evidence_reference", "private//credentials.txt"),
+            ("provider_contract", "repository/content"),
+            ("provider_contract_version", "1:secret"),
+            ("expected_digest", "sha256:" + "z" * 64),
+            ("observed_digest", "sha256:" + "A" * 64),
+        ):
+            with self.subTest(field=field, invalid=invalid):
+                self.assertNotIn(field, project({**normal, field: invalid}))
 
     def prepare(self, *, prior: dict[str, object] | None = None,
                 proposed: dict[str, object] | None = None):

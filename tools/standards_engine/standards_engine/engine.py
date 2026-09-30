@@ -1745,6 +1745,11 @@ class StandardsEngine:
                 "The destination coverage source registry is unavailable or invalid.",
             )) from error
         receipt_paths = frozenset(registry.get("engine_sources", []))
+        overwritten_paths = {
+            registry_path,
+            "evaluation/standards-effectiveness/generated/suite-inputs.json",
+            *(self._engine_coverage_receipt_path(subject) for subject in subjects),
+        }
         claims: dict[str, Mapping[str, object]] = {}
         subjects_for_claim: dict[str, str] = {}
         for subject in subjects:
@@ -1763,6 +1768,20 @@ class StandardsEngine:
                 )
             for reference in (*claim["evidence"], *claim["explicit_exclusions"]):
                 path = reference["id"]
+                if path in overwritten_paths:
+                    raise AnalysisError(AnalysisFailure(
+                        "COVERAGE.PUBLICATION_EVIDENCE_OVERWRITTEN",
+                        "invalid",
+                        "Selected review evidence would be overwritten by coverage publication.",
+                        validation_phase=phase,
+                        evidence_reference=path,
+                        provider_contract=reference["provider_contract"],
+                        provider_contract_version=reference["provider_contract_version"],
+                        source_kind="repository-content",
+                        material_identity=revision.revision_id,
+                        expected_digest=reference["digest"],
+                        next_action="select-stable-review-evidence",
+                    ))
                 if path in source_files:
                     continue
                 if path not in source_paths:
@@ -3803,7 +3822,7 @@ class StandardsEngine:
                 ("observed_digest", failure.observed_digest),
                 ("next_action", failure.next_action),
             ):
-                if value is not None:
+                if _bounded_analysis_diagnostic(key, value):
                     details[key] = value
         return self._reject(
             failure.code, outcome, failure.message, details=details or None
@@ -3835,6 +3854,44 @@ class StandardsEngine:
                 "next_operations": [],
             }
         )
+
+
+def _bounded_analysis_diagnostic(field: str, value: object) -> bool:
+    """Admit complete useful values; never expose unbounded or partial identities."""
+    limits = {
+        "validation_phase": 64,
+        "evidence_reference": 1024,
+        "provider_contract": 128,
+        "provider_contract_version": 64,
+        "source_kind": 64,
+        "material_identity": 256,
+        "expected_digest": 71,
+        "observed_digest": 71,
+        "next_action": 128,
+    }
+    if type(value) is not str or not 0 < len(value) <= limits[field]:
+        return False
+    if field in {"expected_digest", "observed_digest"}:
+        return (
+            value.startswith("sha256:")
+            and len(value) == 71
+            and all(character in "0123456789abcdef" for character in value[7:])
+        )
+    punctuation = "._-" if field in {
+        "validation_phase", "provider_contract", "provider_contract_version",
+        "source_kind", "next_action",
+    } else "._:/-"
+    if not (
+        value.isascii() and value[0].isalnum()
+        and all(character.isalnum() or character in punctuation for character in value)
+    ):
+        return False
+    if field == "evidence_reference":
+        return not (
+            (len(value) >= 3 and value[1:3] == ":/")
+            or any(part in {"", ".", ".."} for part in value.split("/"))
+        )
+    return True
 
 
 def _recovery_failure_details(error: Exception) -> dict[str, object]:
