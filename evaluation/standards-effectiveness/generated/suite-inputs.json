@@ -7511,7 +7511,7 @@
       ]
     },
     {
-      "digest": "sha256:fb3f24d0ddcf24508f5d073bf5482cc99d3d31603b46f473427b878c7807f420",
+      "digest": "sha256:02e5bb8cbef1cbcd836a0f707d4db495b3f42a211fe140b8a04d01da268aded4",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7759,7 +7759,7 @@
       ]
     },
     {
-      "digest": "sha256:1eb2132e31c87cc834f8aae128dff0be6d393364e44c2f8cd9de6bde8b45272d",
+      "digest": "sha256:c463c48d95bcbc5b5bfd3690668198897a251c5000e59db71f2cbc5f983d71af",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [
