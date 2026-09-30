@@ -210,7 +210,7 @@ class RoutingFactTransportTest(unittest.TestCase):
             self.assertIn('RoutingFactAssertion',records)
             self.assertNotIn('FactValue',records)
             self.assertNotIn('FactSet',records)
-            self.assertEqual(page['interface_version'],45)
+            self.assertEqual(page['interface_version'],46)
 
     def test_schema_digest_guard_and_final_lifecycle_checks_still_apply(self):
         author=self.engines['authoring']
