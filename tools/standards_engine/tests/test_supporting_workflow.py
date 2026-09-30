@@ -78,15 +78,6 @@ class SupportingWorkflowTest(unittest.TestCase):
 
     def test_coordinated_publication_and_provenance_only_revision(self):
         snapshot = self.author.create_snapshot({"kind": "create-snapshot"})["snapshot"]["snapshot"]
-        # Own the negative fixture independently of application exposure in the
-        # accepted corpus, and publish it without an application approval.
-        self.publish(self.author.propose({"detail": "full", "snapshot": snapshot,
-                                         "change_set": self.change([standard(UNEXPOSED)])}))
-        snapshot = self.author.create_snapshot({"kind": "create-snapshot"})["snapshot"]["snapshot"]
-        unexposed = self.author.read({"snapshot": snapshot, "target": UNEXPOSED, "detail": "full"})
-        self.assertIn(PUBLIC, unexposed["content"], unexposed)
-        empty = self.app.read({"snapshot": snapshot, "target": UNEXPOSED})
-        self.assertEqual(empty["code"], "APPLICATION.CONTENT_UNAVAILABLE", empty)
         aids = []
         for target in ("prompts/planning.md", "templates/PLAN-TEMPLATE.md"):
             aid = self.author.read({"snapshot": snapshot, "target": target})
@@ -95,7 +86,7 @@ class SupportingWorkflowTest(unittest.TestCase):
         record = {"id": REASON, "subject": RULE, "origin": "current-justification", "rationale": PRIVATE, "evidence": [evidence(self.root)]}
         edits = [{"kind": "approve-application-content", "target": RULE},
                  {"kind": "put-provenance", "record": record},
-                 standard(REFERENCE, reference=True), standard(RULE),
+                 standard(REFERENCE, reference=True), standard(RULE), standard(UNEXPOSED),
                  {"kind": "approve-application-content", "target": REFERENCE}]
         for aid in aids:
             lines = aid["content"].splitlines()
@@ -118,8 +109,12 @@ class SupportingWorkflowTest(unittest.TestCase):
         # Reads in this interval observe the same accepted publication.
         published_snapshot = first["snapshot"]
         self.assertNotEqual(published_snapshot, snapshot)
-        unexposed_after = self.app.read({"snapshot": published_snapshot, "target": UNEXPOSED})
-        self.assertEqual(unexposed_after["code"], "APPLICATION.CONTENT_UNAVAILABLE", unexposed_after)
+        # Own the negative fixture independently of application exposure in the
+        # accepted corpus, and publish it without an application approval.
+        unexposed = self.author.read({"snapshot": published_snapshot, "target": UNEXPOSED, "detail": "full"})
+        self.assertIn(PUBLIC, unexposed["content"], unexposed)
+        empty = self.app.read({"snapshot": published_snapshot, "target": UNEXPOSED})
+        self.assertEqual(empty["code"], "APPLICATION.CONTENT_UNAVAILABLE", empty)
         self.assertEqual(self.app.read({"snapshot": published_snapshot, "target": REFERENCE})["kind"], "application-read-result")
         for aid in aids:
             exposed = self.app.read({"snapshot": published_snapshot, "target": aid["canonical_id"]})
