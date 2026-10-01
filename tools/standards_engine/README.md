@@ -1,6 +1,6 @@
 # Standards Engine
 
-The current interface is **45**. Input contracts are native-only; `--schema-mode`
+The current interface is **46**. Input contracts are native-only; `--schema-mode`
 is no longer accepted. Exact input/output contracts remain available through
 `describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
 smaller catalog; eager output delivery remains the default.
@@ -11,6 +11,13 @@ workflow identities are unchanged. Restart the MCP process and refresh the clien
 catalog after installing the coordinated source and generated contracts; preserve
 existing stores and exact workflow handles. See the
 [boundary repair record](../../docs/plans/boundary-repairs/plan.md).
+
+Interface 46 returns durable publication identity and a fresh, read-only checkout
+observation from native apply/recover results. `workflow_status` also observes
+both when an application has been admitted. Checkout observation failures are
+reported as unavailable and do not change an already successful publication
+result. Request contract 6 and persisted workflow identities are unchanged.
+See [the publication evidence contract](PURPOSE-SEPARATION.md#publication-evidence-interface-46).
 
 The versioned sections below retain implementation history.
 

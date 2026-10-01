@@ -1,8 +1,11 @@
 # Active Repository Work
 
 [Standards Library Effectiveness Restructure](standards-library-effectiveness/plan.md)
-is the explicitly active plan. Remaining work includes manual semantic-ownership
-reviews D001–D010, downstream pilots, migration publication, and final acceptance.
+remains active for manual semantic-ownership reviews D001–D010, downstream pilots,
+migration publication, and final acceptance. [Authoring Publication and Evidence
+Clarity](authoring-publication-evidence/plan.md) is also active, beginning with its
+A1 publication-observation and early-evidence slice. These plans own separate
+objectives; neither changes the other's acceptance state.
 
 - [Current plan and next slice](standards-library-effectiveness/plan.md)
 - [Execution ledger](standards-library-effectiveness/execution-ledger.md)
@@ -12,6 +15,16 @@ reviews D001–D010, downstream pilots, migration publication, and final accepta
 Completed prerequisites do not close the parent objective. See the
 [archive](../archive/README.md) for accepted and superseded plans, and the
 [decision index](../decisions/README.md) for current architecture.
+
+## Authoring Publication and Evidence Clarity
+
+[Authoring Publication and Evidence Clarity](authoring-publication-evidence/plan.md)
+owns publication receipts, fresh checkout observations, early evidence failures,
+explicit evidence binding, guarded reconciliation, and focused blocker/reuse
+explanations. A1 implementation is complete and in final verification; later
+milestones remain Planned with their separate gates. Begin A2 only after A1 is
+accepted and merged to `main`. The plan preserves existing publication
+authorization and records each acceptance claim at its current evidence state.
 
 ## Accepted Agent Interface Work
 

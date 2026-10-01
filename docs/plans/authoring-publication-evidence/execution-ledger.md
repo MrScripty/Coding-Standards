@@ -1,0 +1,324 @@
+# Authoring Publication and Evidence Clarity — execution ledger
+
+## 2026-09-29 — review and planning admission
+
+The user requested review of current Coding-Standards code and a standards-aligned
+implementation plan after sharing a standards-authoring agent's experience.
+No production implementation, configuration change, canonical standards publication,
+remote push or acceptance update was authorized or performed by this planning task.
+
+GitHub main resolved to `149ba317e9397519bc181a048ecf76aef129a69c`, tree
+`fdd40edc1eea85398e97b740a595a42631614d0b`. The exact Actions bundle was verified and
+checked out in an owned review workspace. It has a local main ref for existing test
+fixtures; that is not a remote ref mutation. The current scope inspected publication,
+coverage/evidence, workflow composition, exposure, consumers and governing guidance.
+
+The current Router executed with explicit planning/review/public-contract/persistence
+facts and selected 25 standards without unresolved questions. Exact texts were read
+through the local facade into a disposable store. No current external MCP registration
+or original authoring-session private handles was accessed. The historical attached
+source reviews were not relabeled as reviews of this candidate.
+
+Actual-facade fixture observations reproduced four reported mechanisms. The code
+itself remained unchanged. Two initial fixture drafts had lookup/type errors; one
+publication-follow-up probe selected an already used evidence directory. Corrected
+scripts used fresh owned fixtures and recorded the deciding outputs. Original draft
+errors remain separate from product findings.
+
+The existing native retained-decision helper successfully reused one unaffected
+real successor disposition in memory without publishing a new Analysis. A Git
+two-tree feasibility trial synchronized only publication work while preserving user
+staged/unstaged/untracked content; a conflicting-path trial refused and preserved
+state. Neither is a production reconciliation or evidence-binding implementation.
+
+Selected tests: 22 Engine + 125 Analysis + 41 Git executions; 187 passed, one
+permission-dependent skip. Local complete structure: 73/73 suites, 121 checks.
+Current hosted source CI failed in the two documented fixture-dependent Engine
+entries; it is not relabeled green. Source checkout stayed clean.
+
+Plan is Planned; next implementation admission is `start` against
+`docs/plans/authoring-publication-evidence/plan.md`. Exactly one next slice is A1.
+All objective acceptance claims remain pending. Standards/composed-design validation
+and artifact integrity are planning evidence only.
+
+## 2026-09-29 — A1 implementation admission
+
+The user admitted implementation with operation `start` against the canonical
+`docs/plans/authoring-publication-evidence/plan.md` path. The implementation branch
+is `implementation/authoring-publication-evidence-a1`, created at accepted
+`149ba317e9397519bc181a048ecf76aef129a69c`, matching local `origin/main` at
+admission. Work is isolated at `/tmp/cs-authoring-publication-evidence-a1`; the
+pre-existing dirty `main` worktree was not carried into this branch or modified.
+
+The archive manifest was checked before copying only the five files in this plan's
+directory. A1 is Active; all ten objective claims and A1 gates remain pending until
+their exact candidate evidence is produced. No implementation or acceptance claim
+is inferred from the archive's feasibility probes.
+
+### Writing assignment — B0 supporting-workflow fixture
+
+- Parent milestone: A1.
+- Writer: GPT-6.1 Sol medium, branch
+  `implementation/authoring-publication-evidence-a1-b0-fixture`, worktree
+  `/tmp/cs-a1-b0-fixture`.
+- Starting revision: `149ba317e9397519bc181a048ecf76aef129a69c`.
+- Primary write set: `tools/standards_engine/tests/test_supporting_workflow.py`.
+- Permitted adjacent file: `tools/standards_engine/tests/test_process_reuse.py`
+  only if required to keep its direct cache-enabled call valid.
+- Shared/forbidden files: production code, canonical/generated contracts,
+  generated suite inputs, plan status, and every other test file.
+- Required evidence: both direct and cache-enabled supporting-workflow cases keep
+  positive exposed-content and negative unexposed-content assertions without
+  relying on the real `topic.security` exposure state; run the focused tests when
+  the locked Python environment is available and report exact commands/results.
+- Handoff requirement for the writer: proposed diff and evidence to the integration
+  owner for review; no writer-owned commit or merge.
+
+### B0 supporting fixture result
+
+The writer handed off the isolated diff without committing. The integration owner
+reviewed it, confirmed the only write was the permitted supporting-workflow test,
+and ran the direct and warm-cache fixture cases. Both passed (`2 tests`, `81.5s`)
+using the locked Python 3.12 environment. The primary author then committed the
+accepted patch as `9e7f88f5 test(standards): own unexposed publication fixture`
+and merged it into A1 with `e1e72671 merge: observe publication checkout` after
+the branch had advanced; `test_process_reuse.py` did not need an edit. The writer
+did not invoke the Standards Engine MCP. The A1 plan remains Active and its claims
+and gates remain pending.
+
+## 2026-09-29 — A1 implementation result
+
+A1 was implemented on the admitted isolated branch at `/tmp/cs-authoring-publication-evidence-a1`.
+The original dirty main checkout remains on `149ba317` with its existing staged,
+unstaged, and untracked changes; no A1 files were committed there. Implementation
+and integration commits are authored as MrScripty. The current source candidate is
+`20261782`; the A1 contract edition is interface 46, request contract 6, and result
+projection 8. Generated contracts, catalogs, examples, and affected fixtures are
+updated together. Application and readiness persistence schemas remain unchanged.
+
+The A1 source now separates the durable publication receipt from fresh target and
+checkout/index observations on apply, recovery, and later status. Observation stays
+read-only, treats conflicted and unsupported index layouts explicitly, pins and
+revalidates checkout and administrative directory identities, and returns owned
+`unavailable` failures when descriptor allocation or cancellation interrupts the
+observation. Evidence destination preparation runs before readiness and again at
+the final boundary. Authoring analysis failures retain bounded safe legacy
+`path`/`field`/`observed` details and phase/reference/digest/source context; the
+application purpose continues to redact them. A1 adds a real MCP subprocess read
+of applied status after restart. No A2 evidence-binding or A3 checkout-reconciliation
+write was added.
+
+The B0 fixture now owns its unexposed standard and preserves the accepted Security
+exposure. A1 satisfies A-C1 with Git/SQLite and replacement-process evidence.
+A-C2 remains pending for A2's bound-reference matrix; A1 covers the existing
+repository-content@1 acquisition path and final revalidation.
+
+### Independent reviews
+
+- GPT-6 Astra Medium completed the composed architecture review, read-only. It
+  identified observer race and cancellation cleanup gaps during integration; both
+  were corrected and its final follow-up found no remaining architecture or scope
+  findings.
+- GPT-6 Astra Medium completed the Standards review. It identified the lost
+  independent-store persistence assertion and untyped descriptor-allocation
+  failures. The test now covers both independent-store reconstruction and same-store
+  restart, the allocation errors are typed, and the reviewer found no remaining
+  findings on follow-up.
+- GPT-6 Luna High completed the Spec/reference review. The safe legacy diagnostic
+  projection and interface 45-to-46 consumer/persistence dispositions were added;
+  its follow-up found no remaining gap on those points.
+- The requested Passeur MCP review was not submitted. Current Pumas status is bound
+  to Pumas-Library and Tuldok status names an unrelated project with service state
+  `not_checked`; neither server is bound to this repository. No review request was
+  sent to the wrong project. A Passeur security/lifecycle review remains pending.
+
+### Validation
+
+- `tools.repository_git.tests.test_repository`: 31 passed in 2.7 seconds, including
+  race substitution, typed descriptor exhaustion, and cancellation cleanup.
+- `tools.standards_engine.tests.test_analysis`: 21 passed in 77.2 seconds.
+- A1 acceptance modules (`test_coverage_publication`, `test_agent_workflow`,
+  `test_publication_recovery`, `test_registration_contract`, and
+  `test_supporting_workflow`): 30 passed in 204.0 seconds.
+- Direct and warm-cache B0 fixture cases: 2 passed in 91.2 seconds.
+- Exact-candidate `verify_repository(refresh_verification_inputs=False)`: 73
+  suites and 121 checks passed. The owner-generated suite input manifest is current.
+- `git diff --check` passed. The exact-candidate hosted CI was not run.
+
+Standards Engine MCP usability observations are captured separately in
+[mcp-usability-feedback.md](reports/mcp-usability-feedback.md). It confirmed the
+live process at interface 45, but was left running against the dirty main checkout;
+it was not pointed at or restarted with the A1 worktree. A broad route response was
+truncated and targeted `read_many` calls were useful. No remote push or hosted PR was
+created; a ready-to-post PR draft is recorded separately.
+
+## 2026-09-29 — A1 PR and final-review repair
+
+Opened draft PR [#2](https://github.com/MrScripty/Coding-Standards/pull/2) from
+`implementation/authoring-publication-evidence-a1` to `main`. Its base is accepted
+`149ba317e9397519bc181a048ecf76aef129a69c`; initial published head was
+`78a69fbb4adaee386baf1c8503d337c42bbd5db4`. The PR remains draft.
+
+GPT-6 Astra Medium's read-only final review of that head found that
+`_application_publication_projection` read the canonical target branch without
+`local_only=True`, and that the plan advanced to A2 before A1's hosted checks,
+independent review, and main integration. GPT-6 Luna High confirmed that no test
+asserted the target read's local-only option or unavailable projection shape.
+
+GPT-6.1 Sol medium was assigned the exact write set
+`engine.py` and `test_analysis.py` in a separate worktree, starting from
+`78a69fbb`. It updated the target observation to use a local-only read and added
+a regression for the exact keyword, candidate-tree and checkout reads, and bounded
+unavailable output. It also updated the repeated-recovery mock expectation. The
+focused regression and adjacent recovery case passed (2 tests, 9.977 seconds).
+The worker commit `7d8904a9d4c3cc1528d0e0e0fe388d5fd2882b8c` is authored by
+MrScripty and was integrated into A1 by fast-forward; no cherry-pick or history
+rewrite was used.
+
+The first full post-repair run (77 tests) exposed stale `suite-inputs.json`
+digests for `engine.py` in test-owned Git snapshots. The integration owner
+refreshed the generated manifest on A1; local repository verification then passed
+(73 suites, 121 checks). The full post-refresh acceptance rerun is pending. The
+source fix has not yet been pushed to PR #2. Hosted run `36646667390` and its
+CodeRabbit status are for the older `78a69fbb` head; the workflow was in progress
+and does not qualify the current source candidate.
+
+The plan and plan index now keep A1 in `Verifying` and defer A2 implementation
+until A1 is accepted and merged to `main`. At the time of this entry, a second read-only candidate review and Passeur
+security/lifecycle review remained pending. The available
+Passeur service is bound to Pumas-Library, so no Coding-Standards review was
+submitted through the wrong repository context.
+
+
+### Local acceptance before the Sol High final review (superseded)
+
+The committed source candidate `033dde3623a6bd917d3def5c75b9c748d6cd4f27`
+passed the seven-module A1 acceptance command in the hash-locked offline Python
+3.12 environment: 83 tests passed in 264.677 seconds. The modules were
+`tools.repository_git.tests.test_repository`,
+`tools.standards_engine.tests.test_analysis`,
+`tools.standards_engine.tests.test_coverage_publication`,
+`tools.standards_engine.tests.test_agent_workflow`,
+`tools.standards_engine.tests.test_publication_recovery`,
+`tools.standards_engine.tests.test_registration_contract`, and
+`tools.standards_engine.tests.test_supporting_workflow`. The command includes
+local test-owned Git repositories and mocked boundary/failure cases; it does not
+qualify live remote or hosted-service behavior. `verify_repository` with
+`refresh_verification_inputs=false` passed 73 suites and 121 checks on the same
+source candidate. `git diff --check` passed.
+
+GPT-6 Astra Medium completed a read-only architecture review of exact candidate
+`033dde3623a6bd917d3def5c75b9c748d6cd4f27` against accepted base
+`149ba317e9397519bc181a048ecf76aef129a69c` and found no new actionable findings.
+It confirmed that commit `7d8904a9` resolves the local-only target observation
+finding and the plan now defers A2 until accepted A1 integration. The review notes
+that the regression is a mocked boundary assertion and does not qualify real
+partial-clone behavior.
+
+At this point, PR #2 still publishes the earlier `78a69fbb` head; the updated A1
+candidate has passed local acceptance and is awaiting a normal fast-forward push.
+Exact-candidate hosted checks are still pending. The PR remains draft, the Passeur
+security/lifecycle review remains unavailable because its service is bound to
+Pumas-Library, and maintainer-authorized merge to `main` remains outstanding.
+
+
+## 2026-09-29 — Sol High final review repairs
+
+GPT-6.1 Sol high's read-only review of `f676cfaf` found two A1 acceptance gaps:
+phase-specific authoring diagnostics copied canonical evidence strings without
+field-specific size/shape bounds; and readiness preflight accepted evidence from
+Engine receipts, the attestation registry, or suite-input manifest that coverage
+publication would replace. Final validation prevented unsafe publication, but the
+preflight did not reject the mismatch early.
+
+GPT-6.1 Sol medium implemented both repairs in worker commit
+`01bb2d031028858e6c6d53bbb2e8d37c453fb972`, starting from exact `f676cfaf`, with
+write set `engine.py`, `test_analysis.py`, and `test_coverage_publication.py`.
+The primary owner reviewed the diff and integrated it into A1 with a fast-forward.
+Sol High's read-only follow-up found both findings closed and no new actionable
+issue. Diagnostics now enforce field-specific bounds and shapes; preflight rejects
+evidence and exclusions that reference the selected receipt, registry, or manifest
+paths before readiness or candidate publication proceeds. Existing final
+validation remains.
+
+The worker's focused publication lifecycle regression passed (1 test, 57.058
+seconds), and its focused diagnostic regression passed. Its first five-module run
+reported 69 passes and two failures caused only by stale suite-input digests for
+the edited `engine.py`; it did not modify generated files. The primary owner
+refreshed and committed those declared digests as `fab920f4`.
+
+On committed candidate `fab920f4`, the complete seven-module A1 acceptance command
+passed **84 tests in 274.047 seconds** in the locked offline Python 3.12
+environment. `verify_repository(refresh_verification_inputs=false)` passed 73
+suites and 121 checks; the preceding manifest refresh also passed those 73 suites
+and 121 checks. `git diff --check` passed. The final local gate is satisfied for
+this candidate. Exact-head hosted CI and the Passeur review remain pending; the
+published PR head still needs the repair pushed and the draft body updated. Main
+integration remains maintainer-controlled, so the plan stays `Verifying` and A2
+has not started.
+
+## 2026-09-29 — current-interface consumer assertions
+
+The exact hosted workflow for an earlier candidate failed nine assertions across
+five test modules because they expected interface 45 from the current interface-46
+Engine. The failures inspect the installed Engine's runtime identity, discovery
+metadata, or instructions; they are not legacy client-v45 compatibility fixtures.
+The review confirmed that legacy upgrade dispositions and surrounding lifecycle
+and disclosure assertions should remain unchanged.
+
+GPT-6.1 Sol high performed this read-only classification against the five current
+test modules. GPT-6.1 Sol medium updated only the five corresponding
+installed-interface expectations to 46 in commit
+`b0d36338f5799a30e82ed8755e4560c0b27007be`, then ran those modules in the locked
+offline Python 3.12 environment: **24 tests passed in 165.995 seconds**. The
+integration owner reviewed the exact five-line diff and fast-forwarded that commit
+into the isolated A1 branch.
+
+On the integrated candidate, the seven existing A1 modules plus those five
+consumer modules passed together: **108 tests in 470.795 seconds**. Both
+`verify_repository` with `refresh_verification_inputs=true` and the subsequent
+read-only verification passed **73 suites and 121 checks**. Refresh produced no
+manifest delta. `tools/standards_verifier/verify.py --complete` also passed all 73
+suites with zero failures or blocked checks.
+
+Hosted run `36648831399` for an earlier synthetic merge ref failed on those stale
+interface assertions after 612 tests; it did not reach `verify.py --complete`.
+Exact PR-head run `36651259589` targeted `95b13802` and later completed with the
+same stale interface-45 expectations. Neither run qualifies the corrected
+candidate. A fresh exact-head hosted run is required after this candidate is
+published. The PR stays draft, the plan stays `Verifying`, A-C10's Passeur review
+is outstanding because the available service remains bound to Pumas-Library, and
+A2 remains deferred until A1 acceptance and main integration.
+
+## 2026-09-29 — preserve valid evidence paths in authoring diagnostics
+
+GPT-6.1 Sol high's read-only final architecture review found that the bounded
+authoring projection dropped supported `repository-content@1` paths containing
+spaces, printable Unicode, or a dot-prefixed name. These names are valid under the
+repository-relative path resolver; omitting them lost the exact evidence identity
+from an authoring failure. The application-purpose projection remains redacted.
+
+GPT-6.1 Sol medium fixed only `engine.py` and `test_analysis.py` in isolated worker
+commit `e6da2e5fa2ba4b32ae9edb5cb49e4b2ed6ddf2c3`. The bounded path case now admits
+printable relative paths up to 1,024 characters and rejects control characters,
+absolute/drive/backslash paths, empty/dot/traversal segments, and overlong values.
+Tests cover spaces, Unicode, leading-dot names, invalid forms, strict ASCII fields,
+and application-purpose redaction. Sol high's read-only follow-up confirmed the
+finding closed and reported no other architecture issue.
+
+The first integration-owner rerun before committing generated suite-input digests
+reported 15 failures and two errors, all from test-owned Git snapshots seeing a
+stale `engine.py` digest. `verify_repository(refresh_verification_inputs=true)`
+passed 73 suites and 121 checks and refreshed the declared `engine.py` and
+`test_analysis.py` inputs; commit `ecbf25cdcd8218b44e68b6adb359c7efaeea765d`
+records those generated hashes. On that exact source/manifest candidate, the
+combined twelve-module A1 and interface-consumer command passed **108 tests in
+427.181 seconds**. `verify_repository(refresh_verification_inputs=false)` passed
+73 suites and 121 checks; `verify.py --complete` passed 73 suites with zero
+failures or blocked checks; `git diff --check` passed.
+
+At the time of this entry, hosted run `36653728027` for preceding head `6921489c`
+was still in progress. It predates this path fix and generated manifest update, so
+it cannot qualify the current source. The next exact-head hosted result, Passeur
+security/lifecycle review, and accepted main integration remain outstanding. A1
+stays `Verifying`; A2 remains deferred.

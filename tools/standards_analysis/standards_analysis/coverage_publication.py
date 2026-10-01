@@ -26,6 +26,7 @@ from .trust import (
     construct_authorization_record,
     resolve_authorization,
 )
+from .errors import AnalysisError
 from .keys import analysis_identity
 
 
@@ -121,6 +122,64 @@ def _resolved_value(evidence: ResolvedEvidence) -> dict[str, object]:
     }
 
 
+def _with_evidence_context(
+    error: AnalysisError,
+    *,
+    phase: str,
+    source_kind: str,
+    material_identity: str | None,
+    next_action: str,
+) -> AnalysisError:
+    return AnalysisError(replace(
+        error.failure,
+        validation_phase=phase,
+        source_kind=source_kind,
+        material_identity=material_identity,
+        next_action=next_action,
+    ))
+
+
+def validate_engine_coverage_receipt_evidence(
+    source: ContentSource,
+    definitions: CoverageDefinitionIndex,
+    subject: str,
+    claim: Mapping[str, object],
+    review_authorization: Mapping[str, object],
+    analysis_id: str,
+    *,
+    phase: str,
+    source_kind: str,
+    material_identity: str | None,
+    next_action: str,
+) -> tuple[ResolvedEvidence, ...]:
+    """Validate destination evidence without issuing publication authority."""
+    try:
+        _bound_claim(subject, claim, definitions)
+        _text(analysis_id, path="Engine receipt", field="analysis_id")
+        resolved = tuple(
+            ResolvedEvidence(reference, source.read_bytes(reference.id))
+            for reference in _request(claim).evidence
+        )
+        authorization_reference = review_authorization.get("reference")
+        if (
+            type(authorization_reference) is not dict
+            or claim["authorization_id"] != authorization_reference.get("id")
+        ):
+            raise _error(
+                "COVERAGE.PUBLICATION_AUTHORITY_CHANGED",
+                "Publication requires the exact Engine authority that authorized the review.",
+            )
+        return resolved
+    except AnalysisError as error:
+        raise _with_evidence_context(
+            error,
+            phase=phase,
+            source_kind=source_kind,
+            material_identity=material_identity,
+            next_action=next_action,
+        ) from error
+
+
 def render_engine_coverage_receipt(
     source: ContentSource,
     definitions: CoverageDefinitionIndex,
@@ -129,14 +188,36 @@ def render_engine_coverage_receipt(
     review_authorization: Mapping[str, object],
     analysis_id: str,
     context: AnalysisExecutionContext,
+    *,
+    phase: str = "candidate-evidence",
+    source_kind: str = "repository-content",
+    material_identity: str | None = None,
 ) -> bytes:
     """Reauthorize an exact reviewed claim and retain its current authority proof."""
-    _bound_claim(subject, claim, definitions)
+    validate_engine_coverage_receipt_evidence(
+        source,
+        definitions,
+        subject,
+        claim,
+        review_authorization,
+        analysis_id,
+        phase=phase,
+        source_kind=source_kind,
+        material_identity=material_identity,
+        next_action="refresh-review-evidence",
+    )
     request = _request(claim)
     # The destination bytes, not the authorizer's working tree, must match too.
-    for reference in request.evidence:
-        ResolvedEvidence(reference, source.read_bytes(reference.id))
-    resolved = resolve_authorization(context, request)
+    try:
+        resolved = resolve_authorization(context, request)
+    except AnalysisError as error:
+        raise _with_evidence_context(
+            error,
+            phase="decision-authorization",
+            source_kind="authorization-evidence",
+            material_identity=None,
+            next_action="refresh-authorization-evidence",
+        ) from error
     authorization = resolved.record.as_contract()
     if (
         authorization != review_authorization
@@ -146,9 +227,18 @@ def render_engine_coverage_receipt(
             "COVERAGE.PUBLICATION_AUTHORITY_CHANGED",
             "Publication requires the exact Engine authority that authorized the review.",
         )
-    publication = resolve_authorization(
-        context, _publication_request(subject, claim, analysis_id, authorization)
-    )
+    try:
+        publication = resolve_authorization(
+            context, _publication_request(subject, claim, analysis_id, authorization)
+        )
+    except AnalysisError as error:
+        raise _with_evidence_context(
+            error,
+            phase="candidate-evidence",
+            source_kind="authorization-evidence",
+            material_identity=None,
+            next_action="refresh-publication-authorization",
+        ) from error
     value = {
         "schema_version": 1,
         "subject": subject,

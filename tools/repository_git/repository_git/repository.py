@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import errno
 import hashlib
 import os
 import stat
@@ -40,6 +41,29 @@ COMMAND_TIMEOUT_SECONDS = 30
 # payload and entry overhead separately from the existing per-object safety cap.
 DEFAULT_REVISION_CACHE_BYTES = 8 * 1024 * 1024
 DEFAULT_REVISION_CACHE_OBJECTS = 1024
+
+
+@dataclass(frozen=True, slots=True)
+class PublicationCheckoutObservation:
+    """Read-only observation of one checkout against an admitted publication."""
+
+    worktree_id: str
+    symbolic_branch: str | None
+    head: RepositoryRevision
+    index_digest: str
+    publication_path_count: int
+    index_predecessor_count: int
+    index_candidate_count: int
+    index_conflict_count: int
+    worktree_predecessor_count: int
+    worktree_candidate_count: int
+    worktree_conflict_count: int
+    status: Literal[
+        "not-target-checkout", "current", "needs-reconciliation", "conflicted"
+    ]
+
+
+_PublicationEntry = tuple[str, str] | None
 
 
 def sanitized_git_environment() -> dict[str, str]:
@@ -226,6 +250,7 @@ class GitRepository:
         self._gitlinks = {item.prefix.components: item.repository for item in selected}
         self._max_object_bytes = max_object_bytes
         self._active_candidates: set[int] = set()
+        self._candidate_roots: dict[int, MaterializedCandidate] = {}
 
     @property
     def root(self) -> Path:
@@ -235,7 +260,9 @@ class GitRepository:
     def current_revision(self) -> RepositoryRevision:
         return self._revision("HEAD^{commit}")
 
-    def branch_revision(self, branch: str) -> RepositoryRevision:
+    def branch_revision(
+        self, branch: str, *, local_only: bool = False
+    ) -> RepositoryRevision:
         if (
             type(branch) is not str
             or not branch
@@ -259,7 +286,218 @@ class GitRepository:
                 "REPOSITORY_GIT.INVALID_BRANCH",
                 "branch name is not canonical",
             )
-        return self._revision(f"refs/heads/{branch}^{{commit}}")
+        return self._revision(
+            f"refs/heads/{branch}^{{commit}}", local_only=local_only
+        )
+
+    def observe_publication_checkout(
+        self,
+        expected: RepositoryRevision,
+        candidate: RepositoryRevision,
+        target_ref: str = "refs/heads/main",
+    ) -> PublicationCheckoutObservation:
+        """Observe publication paths in this checkout without changing Git state.
+
+        Only paths whose exact tree entries differ between ``expected`` and
+        ``candidate`` contribute to the agreement counts. Unrelated index,
+        worktree, and untracked changes remain outside those counts.
+        """
+        if type(expected) is not RepositoryRevision or type(candidate) is not RepositoryRevision:
+            raise invalid(
+                "REPOSITORY_GIT.INVALID_REVISION",
+                "publication observation requires exact predecessor and candidate revisions",
+            )
+        if (
+            type(target_ref) is not str
+            or not target_ref
+            or "\0" in target_ref
+            or any(0xD800 <= ord(character) <= 0xDFFF for character in target_ref)
+        ):
+            raise invalid("REPOSITORY_GIT.INVALID_REF", "target ref must be a full canonical Git ref")
+        checked_ref = git_command(
+            self._repository, ("check-ref-format", target_ref),
+            max_output_bytes=256, local_only=True,
+        )
+        if checked_ref.returncode != 0:
+            raise invalid("REPOSITORY_GIT.INVALID_REF", "target ref is not canonical")
+        target_revision = self._revision(
+            f"{target_ref}^{{commit}}", local_only=True
+        )
+
+        initial_bindings = self._publication_checkout_bindings()
+        worktree, git_directory, common_directory = initial_bindings
+        administrative_descriptors: list[tuple[Path, int]] = []
+        try:
+            # Pin both administrative roots before reading HEAD, trees, or the
+            # index: matching paths and Git contents cannot prove inode identity.
+            for directory in dict.fromkeys((git_directory, common_directory)):
+                descriptor = _open_absolute_directory(directory)
+                administrative_descriptors.append((directory, descriptor))
+            identity = hashlib.sha256(
+                b"coding-standards:publication-worktree:v1\0"
+                + b"\0".join(os.fsencode(path) for path in (worktree, git_directory, common_directory))
+            ).hexdigest()
+
+            symbolic_branch = self._symbolic_head()
+            head = self._revision("HEAD^{commit}", local_only=True)
+            if symbolic_branch == target_ref and head != target_revision:
+                raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "target ref and HEAD differed at observation start")
+
+            predecessor_entries = self.revision_entries(expected, local_only=True)
+            try:
+                candidate_entries = self.revision_entries(candidate, local_only=True)
+            except GitRepositoryError as error:
+                if error.failure.kind != "unavailable":
+                    raise
+                active = next(
+                    (item for item in self._candidate_roots.values() if item.revision == candidate),
+                    None,
+                )
+                if active is None:
+                    raise
+                candidate_entries = GitRepository(
+                    active.root, max_object_bytes=self._max_object_bytes
+                ).revision_entries(candidate, local_only=True)
+            paths = tuple(sorted(
+                path for path in predecessor_entries.keys() | candidate_entries.keys()
+                if predecessor_entries.get(path) != candidate_entries.get(path)
+            ))
+            changed_entries = tuple(
+                entry
+                for path in paths
+                for entry in (predecessor_entries.get(path), candidate_entries.get(path))
+                if entry is not None
+            )
+            for entry in changed_entries:
+                if entry[0] not in {"100644", "100755", "120000"}:
+                    if entry[0] == "160000":
+                        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PUBLICATION_MODE", "publication observation does not inspect gitlinks")
+                    raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PUBLICATION_MODE", "publication tree contains an unsupported mode")
+
+            index_entries, unmerged, index_digest = _publication_index_observation(self._repository)
+            if any(mode in {"040000", "40000"} for mode, _ in index_entries.values()) or _index_has_skipped_paths(self._repository):
+                raise unsupported(
+                    "REPOSITORY_GIT.UNSUPPORTED_INDEX_LAYOUT",
+                    "publication observation does not support sparse or skip-worktree indexes",
+                )
+            index_predecessor = index_candidate = index_conflicts = 0
+            worktree_predecessor = worktree_candidate = worktree_conflicts = 0
+            worktree_fd = _open_absolute_directory(worktree)
+            retained_descriptors: list[int] = []
+            retained_bindings: list[tuple[int, bytes, os.stat_result]] = []
+            try:
+                for path in paths:
+                    key = str(path)
+                    if key in unmerged:
+                        index_conflicts += 1
+                    else:
+                        observed_index = index_entries.get(key)
+                        if observed_index == predecessor_entries.get(path):
+                            index_predecessor += 1
+                        elif observed_index == candidate_entries.get(path):
+                            index_candidate += 1
+                        else:
+                            index_conflicts += 1
+                    if _worktree_entry_matches(
+                        worktree_fd, path, predecessor_entries.get(path), self._max_object_bytes,
+                        retained_descriptors=retained_descriptors, retained_bindings=retained_bindings,
+                    ):
+                        worktree_predecessor += 1
+                    elif _worktree_entry_matches(
+                        worktree_fd, path, candidate_entries.get(path), self._max_object_bytes,
+                        retained_descriptors=retained_descriptors, retained_bindings=retained_bindings,
+                    ):
+                        worktree_candidate += 1
+                    else:
+                        worktree_conflicts += 1
+                # An unmerged entry outside the publication paths still makes the
+                # selected index conflicted, even though it does not inflate counts.
+                target_checkout = symbolic_branch == target_ref
+                if unmerged:
+                    status = "conflicted"
+                elif not target_checkout:
+                    status = "not-target-checkout"
+                elif index_conflicts > 0 or worktree_conflicts > 0:
+                    status = "conflicted"
+                elif (
+                    (head == expected and index_predecessor == len(paths) and worktree_predecessor == len(paths))
+                    or (head == candidate and index_candidate == len(paths) and worktree_candidate == len(paths))
+                ):
+                    status = "current"
+                else:
+                    status = "needs-reconciliation"
+
+                # Reject a torn observation if HEAD or the index moved while paths were
+                # being inspected. This remains read-only and gives callers a retryable
+                # unavailable outcome rather than mixed facts.
+                if self._symbolic_head() != symbolic_branch:
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "symbolic HEAD changed during publication observation")
+                if self._revision("HEAD^{commit}", local_only=True) != head:
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "HEAD changed during publication observation")
+                if self._revision(f"{target_ref}^{{commit}}", local_only=True) != target_revision:
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "target ref changed during publication observation")
+                _, after_unmerged, after_digest = _publication_index_observation(self._repository)
+                if after_digest != index_digest or after_unmerged != unmerged:
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "index changed during publication observation")
+
+                if self._publication_checkout_bindings() != initial_bindings:
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "checkout directories changed during publication observation")
+                for directory, descriptor in administrative_descriptors:
+                    _verify_absolute_directory_binding(directory, descriptor)
+                _verify_absolute_directory_binding(worktree, worktree_fd)
+                _verify_directory_chain(retained_bindings)
+
+                return PublicationCheckoutObservation(
+                    identity, symbolic_branch, head, index_digest, len(paths),
+                    index_predecessor, index_candidate, index_conflicts,
+                    worktree_predecessor, worktree_candidate, worktree_conflicts, status,
+                )
+
+            finally:
+                for descriptor in reversed(retained_descriptors):
+                    os.close(descriptor)
+                os.close(worktree_fd)
+
+        finally:
+            for _, descriptor in reversed(administrative_descriptors):
+                os.close(descriptor)
+
+    def _publication_checkout_bindings(self) -> tuple[Path, Path, Path]:
+        controls = self.control_directories(local_only=True)
+        if not controls:
+            raise unsupported("REPOSITORY_GIT.UNSUPPORTED_LAYOUT", "Git did not report administrative directories")
+        git_directory, common_directory = controls[0], controls[-1]
+        top_output = git_output(
+            self._repository, ("rev-parse", "--show-toplevel"),
+            max_output_bytes=4096, local_only=True,
+        )
+        worktree = _decode_absolute_git_path(top_output, "worktree root")
+        try:
+            worktree = worktree.resolve(strict=True)
+            git_directory = git_directory.resolve(strict=True)
+            common_directory = common_directory.resolve(strict=True)
+        except OSError as error:
+            raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree identity could not be observed") from error
+        return worktree, git_directory, common_directory
+
+    def _symbolic_head(self) -> str | None:
+        symbolic = git_command(
+            self._repository,
+            ("symbolic-ref", "--quiet", "HEAD"),
+            max_output_bytes=4096,
+            local_only=True,
+        )
+        if symbolic.returncode == 0:
+            try:
+                value = symbolic.stdout.decode("utf-8").removesuffix("\n")
+            except UnicodeError as error:
+                raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", "symbolic branch encoding is unsupported") from error
+            if not value or "\n" in value or "\0" in value:
+                raise unsupported("REPOSITORY_GIT.UNSUPPORTED_LAYOUT", "symbolic HEAD is not one branch ref")
+            return value
+        if symbolic.returncode == 1:
+            return None
+        raise _failed_command(("symbolic-ref",), symbolic)
 
     def revision_paths(
         self, revision: RepositoryRevision
@@ -623,10 +861,12 @@ class GitRepository:
             self._validate_candidate(candidate)
             identity = id(candidate)
             self._active_candidates.add(identity)
+            self._candidate_roots[identity] = candidate
             try:
                 yield candidate
             finally:
                 self._active_candidates.discard(identity)
+                self._candidate_roots.pop(identity, None)
 
     def publish_candidate(
         self,
@@ -864,11 +1104,14 @@ class GitRepository:
                     f"candidate path {path!r} differs from its object",
                 )
 
-    def _revision(self, revision: str) -> RepositoryRevision:
+    def _revision(
+        self, revision: str, *, local_only: bool = False
+    ) -> RepositoryRevision:
         output = git_output(
             self._repository,
             ("rev-parse", "--verify", "--end-of-options", revision),
             max_output_bytes=256,
+            local_only=local_only,
         )
         try:
             oid = output.decode("ascii").strip()
@@ -1304,6 +1547,258 @@ def _index_entries(root: Path) -> dict[str, tuple[str, str]]:
             )
         entries[path] = (mode, oid)
     return entries
+
+
+def _decode_absolute_git_path(raw: bytes, description: str) -> Path:
+    try:
+        value = raw.decode("utf-8")
+    except UnicodeError as error:
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", f"{description} encoding is unsupported") from error
+    if not value.endswith("\n") or "\n" in value[:-1] or "\0" in value:
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PATH", f"{description} is not one canonical path")
+    path = Path(value[:-1])
+    if not path.is_absolute():
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_LAYOUT", f"{description} is not absolute")
+    return path
+
+
+def _publication_index_observation(
+    root: Path,
+) -> tuple[dict[str, tuple[str, str]], frozenset[str], str]:
+    """Read every index stage without asking Git to write or normalize a tree."""
+    raw = git_output(root, ("ls-files", "--stage", "-z"), local_only=True)
+    entries: dict[str, tuple[str, str]] = {}
+    unmerged: set[str] = set()
+    for field in raw.split(b"\0"):
+        if not field:
+            continue
+        header, separator, raw_path = field.partition(b"\t")
+        parts = header.split(b" ")
+        if not separator or len(parts) != 3:
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "Git index observation is malformed")
+        try:
+            mode = parts[0].decode("ascii")
+            oid = parts[1].decode("ascii")
+            stage = int(parts[2])
+            path = raw_path.decode("utf-8")
+            RepositoryPath.parse(path)
+            RepositoryRevision(oid)
+        except (UnicodeError, ValueError, GitRepositoryError) as error:
+            raise unsupported("REPOSITORY_GIT.UNSUPPORTED_INDEX", "Git index entry is not supported") from error
+        if stage not in (0, 1, 2, 3):
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "Git index stage is outside the supported range")
+        if stage:
+            unmerged.add(path)
+        elif path in entries:
+            raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "Git index repeats a stage-zero path")
+        else:
+            entries[path] = (mode, oid)
+    if raw and not raw.endswith(b"\0"):
+        raise invalid("REPOSITORY_GIT.INVALID_OUTPUT", "Git index observation is unterminated")
+    digest = hashlib.sha256(b"coding-standards:git-index-observation:v1\0" + raw).hexdigest()
+    return entries, frozenset(unmerged), digest
+
+
+def _index_has_skipped_paths(root: Path) -> bool:
+    raw = git_output(root, ("ls-files", "-t", "-z"), local_only=True)
+    for field in raw.split(b"\0"):
+        if field and field[:2] == b"S ":
+            return True
+    return False
+
+
+def _worktree_entry_matches(
+    root_fd: int, path: RepositoryPath, entry: _PublicationEntry, max_object_bytes: int,
+    *, retained_descriptors: list[int],
+    retained_bindings: list[tuple[int, bytes, os.stat_result]],
+) -> bool:
+    """Compare one path through pinned directory descriptors and no-follow opens."""
+    if not _supports_safe_dirfd_observation():
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PLATFORM", "safe directory-relative observation is unavailable")
+    try:
+        descriptors = [os.dup(root_fd)]
+    except OSError as error:
+        raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree descriptor could not be retained") from error
+    bindings: list[tuple[int, bytes, os.stat_result]] = []
+    try:
+        parent_fd = descriptors[0]
+        directory_flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+        for component in path.components[:-1]:
+            name = os.fsencode(component)
+            try:
+                child_fd = os.open(name, directory_flags, dir_fd=parent_fd)
+            except FileNotFoundError:
+                _verify_directory_chain(bindings)
+                return entry is None
+            except OSError as error:
+                if error.errno in {errno.ELOOP, errno.ENOTDIR}:
+                    raise unsupported(
+                        "REPOSITORY_GIT.UNSUPPORTED_WORKTREE_LAYOUT",
+                        "publication observation does not follow symbolic-link ancestors",
+                    ) from error
+                raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "publication directory could not be opened safely") from error
+            descriptors.append(child_fd)
+            try:
+                child_info = os.fstat(child_fd)
+            except OSError as error:
+                raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "publication directory could not be inspected safely") from error
+            try:
+                visible = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+            except OSError as error:
+                raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory moved during observation") from error
+            if not stat.S_ISDIR(visible.st_mode) or not _same_file_identity(child_info, visible):
+                raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory changed during observation")
+            bindings.append((parent_fd, name, child_info))
+            parent_fd = child_fd
+
+        leaf = os.fsencode(path.components[-1])
+        try:
+            before = os.stat(leaf, dir_fd=parent_fd, follow_symlinks=False)
+        except FileNotFoundError:
+            _verify_directory_chain(bindings)
+            return entry is None
+        except OSError as error:
+            raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "publication path could not be observed") from error
+        if entry is None:
+            _verify_directory_chain(bindings)
+            return False
+        mode, oid = entry
+        if mode == "120000":
+            if not stat.S_ISLNK(before.st_mode):
+                _verify_directory_chain(bindings)
+                return False
+            try:
+                content = os.readlink(leaf, dir_fd=parent_fd)
+                after = os.stat(leaf, dir_fd=parent_fd, follow_symlinks=False)
+            except OSError as error:
+                raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication symlink changed during observation") from error
+            _verify_directory_chain(bindings)
+            if len(content) > max_object_bytes:
+                raise unsupported("REPOSITORY_GIT.PUBLICATION_OBJECT_LIMIT", "publication symlink exceeds the observation bound")
+            return _same_file_observation(before, after) and hashlib.new(
+                _algorithm(oid), f"blob {len(content)}\0".encode("ascii") + content
+            ).hexdigest() == oid
+        if mode not in {"100644", "100755"} or not stat.S_ISREG(before.st_mode):
+            _verify_directory_chain(bindings)
+            return False
+        if bool(before.st_mode & 0o111) != (mode == "100755"):
+            _verify_directory_chain(bindings)
+            return False
+        flags = os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0) | getattr(os, "O_NONBLOCK", 0)
+        try:
+            descriptor = os.open(leaf, flags, dir_fd=parent_fd)
+            try:
+                opened = os.fstat(descriptor)
+                if not stat.S_ISREG(opened.st_mode):
+                    raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication file type changed during observation")
+                if opened.st_size > max_object_bytes:
+                    raise unsupported("REPOSITORY_GIT.PUBLICATION_OBJECT_LIMIT", "publication file exceeds the observation bound")
+                digest = hashlib.new(_algorithm(oid))
+                digest.update(f"blob {opened.st_size}\0".encode("ascii"))
+                size = 0
+                while True:
+                    chunk = os.read(descriptor, 1024 * 1024)
+                    if not chunk:
+                        break
+                    size += len(chunk)
+                    if size > max_object_bytes:
+                        raise unsupported("REPOSITORY_GIT.PUBLICATION_OBJECT_LIMIT", "publication file exceeds the observation bound")
+                    digest.update(chunk)
+            finally:
+                os.close(descriptor)
+            after = os.stat(leaf, dir_fd=parent_fd, follow_symlinks=False)
+        except OSError as error:
+            raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication file changed during observation") from error
+        _verify_directory_chain(bindings)
+        if not _same_file_observation(before, opened) or not _same_file_observation(before, after):
+            raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication file changed during observation")
+        return size == before.st_size and digest.hexdigest() == oid
+    finally:
+        # Keep every touched ancestor pinned until the observer finishes its
+        # Git rechecks and validates all directory bindings together.
+        retained_descriptors.extend(descriptors)
+        retained_bindings.extend(bindings)
+
+
+def _supports_safe_dirfd_observation() -> bool:
+    return (
+        hasattr(os, "O_DIRECTORY")
+        and hasattr(os, "O_NOFOLLOW")
+        and os.open in os.supports_dir_fd
+        and os.stat in os.supports_dir_fd
+        and os.readlink in os.supports_dir_fd
+        and os.stat in os.supports_follow_symlinks
+    )
+
+
+def _open_absolute_directory(path: Path) -> int:
+    if not _supports_safe_dirfd_observation():
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_PLATFORM", "safe directory-relative observation is unavailable")
+    if not path.is_absolute() or any(part in {".", ".."} for part in path.parts):
+        raise unsupported("REPOSITORY_GIT.UNSUPPORTED_LAYOUT", "worktree root is not a canonical absolute path")
+    flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+    try:
+        descriptor = os.open(os.fsencode(path.anchor), flags)
+    except OSError as error:
+        raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree directory could not be opened safely") from error
+    owned_descriptors = [descriptor]
+    try:
+        for component in path.parts[1:]:
+            next_descriptor = os.open(os.fsencode(component), flags, dir_fd=descriptor)
+            owned_descriptors.append(next_descriptor)
+            os.close(descriptor)
+            owned_descriptors.remove(descriptor)
+            descriptor = next_descriptor
+        owned_descriptors.remove(descriptor)
+        return descriptor
+    except OSError as error:
+        raise unavailable("REPOSITORY_GIT.WORKTREE_UNAVAILABLE", "worktree directory could not be opened safely") from error
+    finally:
+        for owned_descriptor in reversed(owned_descriptors):
+            try:
+                os.close(owned_descriptor)
+            except OSError:
+                pass
+
+
+def _verify_absolute_directory_binding(path: Path, descriptor: int) -> None:
+    try:
+        replacement = _open_absolute_directory(path)
+    except GitRepositoryError as error:
+        if error.failure.kind != "unavailable":
+            raise
+        raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "checkout directory moved during observation") from error
+    try:
+        if not _same_file_identity(os.fstat(descriptor), os.fstat(replacement)):
+            raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "checkout directory changed during observation")
+    finally:
+        os.close(replacement)
+
+
+def _verify_directory_chain(bindings: list[tuple[int, bytes, os.stat_result]]) -> None:
+    for parent_fd, name, opened in bindings:
+        try:
+            current = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+        except OSError as error:
+            raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory moved during observation") from error
+        if not stat.S_ISDIR(current.st_mode) or not _same_file_identity(opened, current):
+            raise unavailable("REPOSITORY_GIT.OBSERVATION_STALE", "publication directory changed during observation")
+
+
+def _same_file_identity(left: os.stat_result, right: os.stat_result) -> bool:
+    return (
+        left.st_dev, left.st_ino, stat.S_IFMT(left.st_mode)
+    ) == (
+        right.st_dev, right.st_ino, stat.S_IFMT(right.st_mode)
+    )
+
+
+def _same_file_observation(left: os.stat_result, right: os.stat_result) -> bool:
+    return (
+        left.st_dev, left.st_ino, left.st_mode, left.st_size, left.st_mtime_ns
+    ) == (
+        right.st_dev, right.st_ino, right.st_mode, right.st_size, right.st_mtime_ns
+    )
 
 
 def _validate_candidate_topology(

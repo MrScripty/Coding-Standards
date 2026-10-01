@@ -82,10 +82,16 @@ class ResolvedEvidence:
             )
         digest = "sha256:" + hashlib.sha256(self.content).hexdigest()
         if digest != self.reference.digest:
-            raise _error(
+            raise AnalysisError(AnalysisFailure(
                 "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
+                "invalid",
                 "Resolved evidence bytes do not match the declared digest.",
-            )
+                evidence_reference=self.reference.id,
+                provider_contract=self.reference.provider_contract,
+                provider_contract_version=self.reference.provider_contract_version,
+                expected_digest=self.reference.digest,
+                observed_digest=digest,
+            ))
 
 
 @dataclass(frozen=True, slots=True)

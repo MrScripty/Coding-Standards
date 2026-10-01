@@ -13,6 +13,8 @@ from pathlib import Path
 from unittest import mock
 
 from tools.standards_analysis.standards_analysis import (
+    AnalysisError,
+    AnalysisFailure,
     AnalysisState as DomainAnalysisState,
     AnalysisExecutionContext,
     AuthorizationAuthorityContract,
@@ -40,6 +42,7 @@ from tools.standards_engine.standards_engine import (
     InspectCall,
     PendingResult,
     PrepareCall,
+    Purpose,
     RejectedResult,
     RecoverApplicationResult,
     ResolveCall,
@@ -267,6 +270,64 @@ class DenyingAuthorizer:
 
 
 class AnalysisWorkflowTest(unittest.TestCase):
+    def test_publication_projection_uses_local_target_and_bounds_unavailable_observation(self):
+        application = mock.Mock(
+            application_id="application:sha256:" + "a" * 64,
+            expected_target=RepositoryRevision("b" * 40),
+            candidate=RepositoryRevision("c" * 40),
+        )
+        unavailable = GitRepositoryError(GitRepositoryFailure(
+            "unavailable", "REPOSITORY_GIT.COMMAND_UNAVAILABLE",
+            "/tmp/private-publication/secret: " + "x" * 4096,
+        ))
+        with (
+            mock.patch.object(
+                self.engine._authoring, "application_outcome", return_value=None
+            ) as outcome,
+            mock.patch.object(
+                self.engine._repository, "branch_revision", side_effect=unavailable
+            ) as target,
+            mock.patch.object(
+                self.engine._repository, "revision_tree", return_value="d" * 40
+            ) as tree,
+            mock.patch.object(
+                self.engine._repository, "observe_publication_checkout",
+                side_effect=unavailable,
+            ) as checkout,
+        ):
+            projection = self.engine._application_publication_projection(application)
+        outcome.assert_called_once_with(application)
+        target.assert_called_once_with("main", local_only=True)
+        tree.assert_called_once_with(application.candidate, local_only=True)
+        checkout.assert_called_once_with(
+            application.expected_target, application.candidate, target_ref="refs/heads/main"
+        )
+        self.assertEqual(projection, {
+            "publication": {
+                "kind": "application-publication-receipt",
+                "application": {
+                    "kind": "application-handle", "id": application.application_id,
+                    "schema_version": 1,
+                },
+                "candidate_commit": "c" * 40,
+                "candidate_tree": "d" * 40,
+                "target_ref": "refs/heads/main",
+                "expected_predecessor": "b" * 40,
+                "durable_state": "admitted",
+                "target_observation": {
+                    "kind": "publication-target-observation",
+                    "status": "unavailable", "revision": None,
+                },
+            },
+            "checkout": {
+                "kind": "publication-checkout-observation", "status": "unavailable",
+                "worktree_id": None, "symbolic_branch": None, "head": None,
+                "index_observation": None, "publication_path_count": None,
+                "index_paths": {"predecessor": None, "candidate": None, "conflicted": None},
+                "worktree_paths": {"predecessor": None, "candidate": None, "conflicted": None},
+            },
+        })
+
     def test_coverage_exclusions_require_exact_evidence_before_resolution(self):
         # A current accepted certificate can satisfy same-snapshot analysis.
         # Change an exact policy in a private proposal so this test always owns
@@ -1572,6 +1633,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    readiness.expected_target,
                 ),
             ),
             mock.patch.object(
@@ -1625,6 +1687,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    RepositoryRevision("e" * 40),
                     RepositoryRevision("e" * 40),
                 ),
             ),
@@ -1681,6 +1744,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 side_effect=(
                     readiness.expected_target,
                     readiness.expected_target,
+                    unavailable_observation,
                     unavailable_observation,
                 ),
             ),
@@ -1853,7 +1917,9 @@ class AnalysisWorkflowTest(unittest.TestCase):
         self.assertEqual(outcome.candidate, candidate.revision)
 
         with mock.patch.object(
-            self.engine._repository, "branch_revision"
+            self.engine._repository,
+            "branch_revision",
+            return_value=candidate.revision,
         ) as completed_observation:
             repeated_recovery = RecoverApplicationResult.from_value(
                 facade.recover_application(
@@ -1863,7 +1929,7 @@ class AnalysisWorkflowTest(unittest.TestCase):
                     }
                 )
             )
-        completed_observation.assert_not_called()
+        completed_observation.assert_called_once_with("main", local_only=True)
         self.assertEqual(repeated_recovery.application, recovered.application)
 
     def test_equal_transition_is_idempotent_and_different_evidence_branches(
@@ -2158,6 +2224,76 @@ finally:
         self.assertEqual(len(sources), 2)
         self.assertIsNot(sources[0], sources[1])
         self.assertEqual(sources[0].requested_paths, sources[1].requested_paths)
+
+    def test_authoring_evidence_diagnostics_are_bounded_and_shaped(self) -> None:
+        normal = {
+            "validation_phase": "readiness-preflight",
+            "evidence_reference": "evaluation/review/evidence.md",
+            "provider_contract": "repository-content",
+            "provider_contract_version": "1",
+            "source_kind": "repository-content",
+            "material_identity": "revision:" + "a" * 64,
+            "expected_digest": "sha256:" + "a" * 64,
+            "observed_digest": "sha256:" + "b" * 64,
+            "next_action": "refresh-review-evidence",
+        }
+
+        def project(values):
+            return self.engine._domain_rejection(AnalysisError(AnalysisFailure(
+                "ANALYSIS.EVIDENCE_DIGEST_MISMATCH", "invalid",
+                "The selected evidence does not match.", **values,
+            ))).details
+
+        self.assertEqual(project(normal), normal)
+        for reference in (
+            "reports/review notes.md",
+            "reports/évidence.md",
+            ".evidence/review.md",
+            "reports/.review.md",
+            "reports/审查.md",
+            "r" * 1024,
+        ):
+            with self.subTest(reference=reference):
+                values = {**normal, "evidence_reference": reference}
+                self.assertEqual(project(values), values)
+                with mock.patch.object(self.engine, "_purpose", Purpose.APPLICATION):
+                    self.assertEqual(project(values), {})
+        for field in normal:
+            for invalid in ("a" * 4096, "line one\nline two", "", 17):
+                with self.subTest(field=field, invalid=repr(invalid)[:40]):
+                    values = {**normal, field: invalid}
+                    expected = {key: value for key, value in normal.items() if key != field}
+                    self.assertEqual(project(values), expected)
+        for field, invalid in (
+            ("evidence_reference", "private/../credentials.txt"),
+            ("evidence_reference", "/private/credentials.txt"),
+            ("evidence_reference", "C:/private/credentials.txt"),
+            ("evidence_reference", "private//credentials.txt"),
+            ("evidence_reference", "private/./credentials.txt"),
+            ("evidence_reference", "private/credentials.txt/"),
+            ("evidence_reference", "."),
+            ("evidence_reference", ".."),
+            ("evidence_reference", "./reports/review.md"),
+            ("evidence_reference", "C:private/credentials.txt"),
+            ("evidence_reference", "C:\\private\\credentials.txt"),
+            ("evidence_reference", "\\\\server\\share\\credentials.txt"),
+            ("evidence_reference", "private\\..\\credentials.txt"),
+            ("evidence_reference", "reports/review\x00.md"),
+            ("evidence_reference", "reports/review\t.md"),
+            ("evidence_reference", "reports/review\x7f.md"),
+            ("evidence_reference", "reports/review\x85.md"),
+            ("evidence_reference", "reports/review\u202e.md"),
+            ("evidence_reference", "r" * 1025),
+            ("validation_phase", "préflight"),
+            ("provider_contract", "repository content"),
+            ("next_action", ".refresh-review-evidence"),
+            ("provider_contract", "repository/content"),
+            ("provider_contract_version", "1:secret"),
+            ("expected_digest", "sha256:" + "z" * 64),
+            ("observed_digest", "sha256:" + "A" * 64),
+        ):
+            with self.subTest(field=field, invalid=invalid):
+                self.assertNotIn(field, project({**normal, field: invalid}))
 
     def prepare(self, *, prior: dict[str, object] | None = None,
                 proposed: dict[str, object] | None = None):

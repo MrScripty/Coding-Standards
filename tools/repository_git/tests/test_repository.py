@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+import errno
 import os
+import shutil
 import subprocess
 import tempfile
 import unittest
@@ -106,6 +108,516 @@ class GitRepositoryTests(unittest.TestCase):
 
             self.assertNotEqual(repository.current_revision().oid, main)
             self.assertEqual(repository.branch_revision("main").oid, main)
+
+    def test_publication_checkout_observes_ref_advance_without_checkout_writes(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                objects_before = self._git(root, "count-objects", "-v")
+                ref_before = self._git(root, "rev-parse", "refs/heads/main")
+                index_before = self._git(root, "ls-files", "--stage", "-z")
+                before = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(before.status, "current")
+                self.assertEqual(before.symbolic_branch, "refs/heads/main")
+                self.assertEqual(before.head, expected)
+                self.assertEqual(before.publication_path_count, 1)
+                self.assertEqual(before.index_predecessor_count, 1)
+                self.assertEqual(before.worktree_predecessor_count, 1)
+                self.assertRegex(before.worktree_id, r"[0-9a-f]{64}")
+                self.assertEqual(before.worktree_id, repository.observe_publication_checkout(
+                    expected, candidate.revision
+                ).worktree_id)
+                self.assertEqual(self._git(root, "count-objects", "-v"), objects_before)
+                self.assertEqual(self._git(root, "rev-parse", "refs/heads/main"), ref_before)
+                self.assertEqual(self._git(root, "ls-files", "--stage", "-z"), index_before)
+                self.assertEqual((root / "value.txt").read_bytes(), b"predecessor\n")
+
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+                after_ref = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(after_ref.status, "needs-reconciliation")
+                self.assertEqual(after_ref.head, candidate.revision)
+                self.assertEqual(after_ref.index_predecessor_count, 1)
+                self.assertEqual(after_ref.worktree_predecessor_count, 1)
+                self.assertEqual((root / "value.txt").read_bytes(), b"predecessor\n")
+                self.assertEqual(self._git(root, "ls-files", "-s"),
+                                 "100644 " + self._git(root, "rev-parse", "HEAD^:value.txt").strip()
+                                 + " 0\tvalue.txt\n")
+
+                self._git(root, "reset", "--hard", candidate.revision.oid)
+                after_checkout = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(after_checkout.status, "current")
+                self.assertEqual(after_checkout.index_candidate_count, 1)
+                self.assertEqual(after_checkout.worktree_candidate_count, 1)
+
+    def test_publication_checkout_ignores_and_preserves_unrelated_changes(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            (root / "other.txt").write_bytes(b"committed\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+                (root / "staged.txt").write_bytes(b"unrelated staged\n")
+                self._git(root, "add", "staged.txt")
+                (root / "other.txt").write_bytes(b"unrelated unstaged\n")
+                (root / "untracked.txt").write_bytes(b"unrelated untracked\n")
+                index_before = self._git(root, "ls-files", "--stage", "-z")
+                status_before = subprocess.run(
+                    ("git", "-C", str(root), "status", "--porcelain=v1", "-z"),
+                    check=True, stdout=subprocess.PIPE,
+                ).stdout
+                observation = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(observation.status, "needs-reconciliation")
+                self.assertEqual(observation.publication_path_count, 1)
+                self.assertEqual(observation.index_predecessor_count, 1)
+                self.assertEqual(observation.worktree_predecessor_count, 1)
+                self.assertEqual(self._git(root, "ls-files", "--stage", "-z"), index_before)
+                status_after = subprocess.run(
+                    ("git", "-C", str(root), "status", "--porcelain=v1", "-z"),
+                    check=True, stdout=subprocess.PIPE,
+                ).stdout
+                self.assertEqual(status_after, status_before)
+                self.assertEqual((root / "other.txt").read_bytes(), b"unrelated unstaged\n")
+                self.assertEqual((root / "untracked.txt").read_bytes(), b"unrelated untracked\n")
+
+    def test_publication_checkout_reports_other_branch_and_detached_head(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+                self._git(root, "switch", "-qc", "other")
+                other = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(other.status, "not-target-checkout")
+                self.assertEqual(other.symbolic_branch, "refs/heads/other")
+                self._git(root, "checkout", "--detach", expected.oid)
+                detached = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(detached.status, "not-target-checkout")
+                self.assertIsNone(detached.symbolic_branch)
+
+    def test_publication_checkout_reports_unmerged_index_as_conflicted(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"base\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                self._git(root, "switch", "-qc", "other")
+                (root / "value.txt").write_bytes(b"other branch\n")
+                self._commit(root, "other edit")
+                self._git(root, "switch", "main")
+                (root / "value.txt").write_bytes(b"main branch\n")
+                self._commit(root, "main edit")
+                merged = subprocess.run(
+                    ("git", "-C", str(root), "merge", "other"),
+                    stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                )
+                self.assertNotEqual(merged.returncode, 0)
+                observation = repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertEqual(observation.status, "conflicted")
+
+    def test_publication_checkout_does_not_follow_ancestor_swapped_to_symlink(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary) / "repository"
+            outside = Path(temporary) / "outside"
+            (root / "nested").mkdir(parents=True)
+            outside.mkdir()
+            self._initialize(root)
+            (root / "nested" / "value.txt").write_bytes(b"predecessor\n")
+            (outside / "value.txt").write_bytes(b"external bait\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("nested/value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                original_open = os.open
+                opened_leaf: list[bytes | str] = []
+                swapped = False
+
+                def swap_after_parent_open(path, flags, *args, **kwargs):
+                    nonlocal swapped
+                    descriptor = original_open(path, flags, *args, **kwargs)
+                    if kwargs.get("dir_fd") is not None and os.fsdecode(path) == "nested" and not swapped:
+                        swapped = True
+                        (root / "nested").rename(root / "nested-original")
+                        (root / "nested").symlink_to(outside, target_is_directory=True)
+                    if kwargs.get("dir_fd") is not None and os.fsdecode(path) == "value.txt":
+                        opened_leaf.append(path)
+                    return descriptor
+
+                try:
+                    with (
+                        mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                        mock.patch.object(repository_module.os, "open", side_effect=swap_after_parent_open),
+                    ):
+                        with self.assertRaises(GitRepositoryError) as observed:
+                            repository.observe_publication_checkout(expected, candidate.revision)
+                    self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.OBSERVATION_STALE")
+                    self.assertTrue(swapped)
+                    self.assertEqual(opened_leaf, [])
+                    self.assertEqual((outside / "value.txt").read_bytes(), b"external bait\n")
+                finally:
+                    if (root / "nested").is_symlink():
+                        (root / "nested").unlink()
+                    if (root / "nested-original").exists():
+                        (root / "nested-original").rename(root / "nested")
+
+    def test_publication_checkout_rechecks_ancestors_after_final_git_reads(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary) / "repository"
+            outside = Path(temporary) / "outside"
+            (root / "nested").mkdir(parents=True)
+            outside.mkdir()
+            self._initialize(root)
+            (root / "nested" / "value.txt").write_bytes(b"predecessor\n")
+            (outside / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("nested/value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                original_index = repository_module._publication_index_observation
+                index_reads = 0
+
+                def swap_after_final_index_read(*args, **kwargs):
+                    nonlocal index_reads
+                    result = original_index(*args, **kwargs)
+                    index_reads += 1
+                    if index_reads == 2:
+                        (root / "nested").rename(root / "nested-original")
+                        (root / "nested").symlink_to(outside, target_is_directory=True)
+                    return result
+
+                try:
+                    with mock.patch.object(
+                        repository_module, "_publication_index_observation",
+                        side_effect=swap_after_final_index_read,
+                    ):
+                        with self.assertRaises(GitRepositoryError) as observed:
+                            repository.observe_publication_checkout(expected, candidate.revision)
+                    self.assertEqual(index_reads, 2)
+                    self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.OBSERVATION_STALE")
+                    self.assertEqual((outside / "value.txt").read_bytes(), b"predecessor\n")
+                finally:
+                    if (root / "nested").is_symlink():
+                        (root / "nested").unlink()
+                    if (root / "nested-original").exists():
+                        (root / "nested-original").rename(root / "nested")
+
+    def test_publication_checkout_rechecks_git_roots_after_persistent_substitution(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary) / "repository"
+            replacement = Path(temporary) / "replacement"
+            alias = Path(temporary) / "checkout"
+            root.mkdir()
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            alias.symlink_to(root, target_is_directory=True)
+            repository = GitRepository(alias)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                shutil.copytree(root, replacement)
+                original_observer = repository_module._worktree_entry_matches
+                substituted = False
+
+                def substitute_after_path_check(*args, **kwargs):
+                    nonlocal substituted
+                    result = original_observer(*args, **kwargs)
+                    if not substituted:
+                        substituted = True
+                        alias.unlink()
+                        alias.symlink_to(replacement, target_is_directory=True)
+                    return result
+
+                with (
+                    mock.patch.object(repository_module, "_worktree_entry_matches", side_effect=substitute_after_path_check),
+                    mock.patch.object(repository_module, "git_command", wraps=repository_module.git_command) as commands,
+                ):
+                    with self.assertRaises(GitRepositoryError) as observed:
+                        repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertTrue(substituted)
+                self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.OBSERVATION_STALE")
+                self.assertEqual(self._git(root, "rev-parse", "HEAD"), self._git(replacement, "rev-parse", "HEAD"))
+                self.assertEqual(self._git(root, "ls-files", "--stage", "-z"), self._git(replacement, "ls-files", "--stage", "-z"))
+                self.assertTrue(all(call.kwargs.get("local_only") is True for call in commands.call_args_list))
+                for selector in ("--show-toplevel", "--git-dir", "--git-common-dir"):
+                    self.assertEqual(sum(selector in call.args[1] for call in commands.call_args_list), 2)
+
+    def test_publication_checkout_rejects_administrative_root_replaced_at_same_path(self) -> None:
+        for selected_directory in ("private", "common"):
+            with self.subTest(directory=selected_directory), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary) / "repository"
+                linked = Path(temporary) / "linked"
+                replacement = Path(temporary) / "replacement"
+                original = Path(temporary) / "original"
+                root.mkdir()
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                self._git(root, "worktree", "add", "-b", "observed", str(linked), "HEAD")
+                repository = GitRepository(linked)
+                expected = repository.branch_revision("main")
+                initial_bindings = repository._publication_checkout_bindings()
+                administrative_root = initial_bindings[1 if selected_directory == "private" else 2]
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                    commit=_COMMIT,
+                ) as candidate:
+                    head_before = self._git(linked, "rev-parse", "HEAD")
+                    ref_before = self._git(linked, "rev-parse", "refs/heads/main")
+                    index_before = self._git(linked, "ls-files", "--stage", "-z")
+                    identity_before = administrative_root.stat()
+                    shutil.copytree(administrative_root, replacement)
+                    original_observer = repository_module._worktree_entry_matches
+                    substituted = False
+
+                    def substitute_after_path_check(*args, **kwargs):
+                        nonlocal substituted
+                        result = original_observer(*args, **kwargs)
+                        if not substituted:
+                            substituted = True
+                            administrative_root.rename(original)
+                            replacement.rename(administrative_root)
+                        return result
+
+                    try:
+                        with mock.patch.object(
+                            repository_module, "_worktree_entry_matches", side_effect=substitute_after_path_check,
+                        ):
+                            with self.assertRaises(GitRepositoryError) as observed:
+                                repository.observe_publication_checkout(expected, candidate.revision)
+                        self.assertTrue(substituted)
+                        self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.OBSERVATION_STALE")
+                        self.assertEqual(repository._publication_checkout_bindings(), initial_bindings)
+                        self.assertFalse(repository_module._same_file_identity(identity_before, administrative_root.stat()))
+                        self.assertEqual(self._git(linked, "rev-parse", "HEAD"), head_before)
+                        self.assertEqual(self._git(linked, "rev-parse", "refs/heads/main"), ref_before)
+                        self.assertEqual(self._git(linked, "ls-files", "--stage", "-z"), index_before)
+                    finally:
+                        if original.exists():
+                            shutil.rmtree(administrative_root)
+                            original.rename(administrative_root)
+
+    def test_publication_checkout_owns_initial_descriptor_allocation_failures(self) -> None:
+        for failed_allocation in ("duplicate", "first-root-open", "second-root-open"):
+            with self.subTest(allocation=failed_allocation), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary)
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                repository = GitRepository(root)
+                expected = repository.branch_revision("main")
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                    commit=_COMMIT,
+                ) as candidate:
+                    original_open = os.open
+                    original_close = os.close
+                    original_dup = os.dup
+                    opened: set[int] = set()
+                    root_opens = 0
+                    allocation_failed = False
+
+                    def open_directory(path, flags, *args, **kwargs):
+                        nonlocal root_opens, allocation_failed
+                        if flags & os.O_DIRECTORY and kwargs.get("dir_fd") is None:
+                            root_opens += 1
+                            if (
+                                (failed_allocation == "first-root-open" and root_opens == 1)
+                                or (failed_allocation == "second-root-open" and root_opens == 2)
+                            ):
+                                allocation_failed = True
+                                raise OSError(errno.EMFILE, "injected descriptor exhaustion")
+                        descriptor = original_open(path, flags, *args, **kwargs)
+                        if flags & os.O_DIRECTORY:
+                            opened.add(descriptor)
+                        return descriptor
+
+                    def duplicate_directory(descriptor):
+                        nonlocal allocation_failed
+                        if failed_allocation == "duplicate":
+                            allocation_failed = True
+                            raise OSError(errno.EMFILE, "injected descriptor exhaustion")
+                        duplicate = original_dup(descriptor)
+                        opened.add(duplicate)
+                        return duplicate
+
+                    def close_directory(descriptor):
+                        original_close(descriptor)
+                        opened.discard(descriptor)
+
+                    with (
+                        mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                        mock.patch.object(repository_module.os, "open", side_effect=open_directory),
+                        mock.patch.object(repository_module.os, "dup", side_effect=duplicate_directory),
+                        mock.patch.object(repository_module.os, "close", side_effect=close_directory),
+                    ):
+                        with self.assertRaises(GitRepositoryError) as observed:
+                            repository.observe_publication_checkout(expected, candidate.revision)
+                    self.assertTrue(allocation_failed)
+                    self.assertEqual(observed.exception.failure.kind, "unavailable")
+                    self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.WORKTREE_UNAVAILABLE")
+                    self.assertIsInstance(observed.exception.__cause__, OSError)
+                    self.assertEqual(observed.exception.__cause__.errno, errno.EMFILE)
+                    self.assertEqual(opened, set())
+
+    def test_publication_checkout_closes_descriptors_on_cancellation(self) -> None:
+        original_open = os.open
+        original_dup = os.dup
+        original_fstat = os.fstat
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            (root / "nested").mkdir()
+            opened: list[int] = []
+
+            def cancel_during_component_open(path, flags, *args, **kwargs):
+                if kwargs.get("dir_fd") is not None:
+                    raise KeyboardInterrupt
+                descriptor = original_open(path, flags, *args, **kwargs)
+                opened.append(descriptor)
+                return descriptor
+
+            with (
+                mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                mock.patch.object(repository_module.os, "open", side_effect=cancel_during_component_open),
+            ):
+                with self.assertRaises(KeyboardInterrupt):
+                    repository_module._open_absolute_directory(root / "nested")
+            self.assertEqual(len(opened), 1)
+            for descriptor in opened:
+                with self.assertRaises(OSError):
+                    original_fstat(descriptor)
+
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "nested").mkdir()
+            (root / "nested/value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("nested/value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                opened_directories: list[int] = []
+
+                def track_directory_open(path, flags, *args, **kwargs):
+                    descriptor = original_open(path, flags, *args, **kwargs)
+                    if flags & os.O_DIRECTORY:
+                        opened_directories.append(descriptor)
+                    return descriptor
+
+                def track_directory_duplicate(descriptor):
+                    duplicate = original_dup(descriptor)
+                    opened_directories.append(duplicate)
+                    return duplicate
+
+                def cancel_on_directory_inspection(_descriptor):
+                    raise KeyboardInterrupt
+
+                with (
+                    mock.patch.object(repository_module, "_supports_safe_dirfd_observation", return_value=True),
+                    mock.patch.object(repository_module.os, "open", side_effect=track_directory_open),
+                    mock.patch.object(repository_module.os, "dup", side_effect=track_directory_duplicate),
+                    mock.patch.object(repository_module.os, "fstat", side_effect=cancel_on_directory_inspection),
+                ):
+                    with self.assertRaises(KeyboardInterrupt):
+                        repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertGreaterEqual(len(opened_directories), 4)
+                for descriptor in opened_directories:
+                    with self.assertRaises(OSError):
+                        original_fstat(descriptor)
+
+    def test_publication_checkout_rechecks_target_ref_after_path_observation(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                self.assertEqual(repository.publish_candidate(candidate, expected), "updated")
+                self._git(root, "switch", "-qc", "other")
+                original_observer = repository_module._worktree_entry_matches
+                changed = False
+
+                def advance_observed_paths(*args, **kwargs):
+                    nonlocal changed
+                    result = original_observer(*args, **kwargs)
+                    if not changed:
+                        changed = True
+                        self._git(root, "update-ref", "refs/heads/main", expected.oid)
+                    return result
+
+                with mock.patch.object(
+                    repository_module, "_worktree_entry_matches", side_effect=advance_observed_paths
+                ):
+                    with self.assertRaises(GitRepositoryError) as observed:
+                        repository.observe_publication_checkout(expected, candidate.revision)
+                self.assertTrue(changed)
+                self.assertEqual(observed.exception.failure.code, "REPOSITORY_GIT.OBSERVATION_STALE")
+
 
     def test_candidate_is_isolated_and_published_by_expected_target(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:

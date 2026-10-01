@@ -433,10 +433,13 @@ those schemas. Store selection must remain unchanged if the installed host used
 a nondefault store. Handoff data is the exact readiness/context, not a fabricated
 handle assembled from a truncated identifier.
 
-Authoring failure details carry the Git operation, exit code and recognized
-fixed stderr phrase when available. Raw stderr can contain sensitive paths or
-hook output and stays in the private Git exception, not the MCP response. Earlier
-uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
+Authoring analysis failures retain legacy `path`, `field` and `observed` context
+only when each value is bounded and matches its safe character and path rules.
+Absolute and traversal paths and multiline observations are omitted. Application
+purpose omits these details. Git failure details carry the operation, exit code
+and recognized fixed stderr phrase when available. Raw stderr can contain sensitive
+paths or hook output and stays in the private Git exception, not the MCP response.
+Earlier uncaptured stderr cannot be recovered retrospectively. Obtain a new bounded
 observation from the supported operation on the correct host. Ordinary application
 interfaces still cannot call either recovery operation or read its diagnostics.
 
@@ -969,3 +972,27 @@ material hashes and persisted state are not migrated. Historical saved focused c
 must use matching source/tooling; new tasks may reuse their still-valid snapshot
 with the new syntax. Output delivery, discovery bounds and all other operations are
 unchanged. The existing client/model qualification is separate from static agreement.
+
+
+## Publication evidence (interface 46)
+
+Native apply and recovery results retain the durable application handle, exact
+candidate commit and tree, target ref, expected predecessor, and whether the
+application outcome is recorded, merely admitted, or unavailable. They also
+include a fresh observation of the target ref and selected checkout. Recovery
+re-reads both observations, including when the durable applied outcome already
+exists after a process restart. `workflow_status` supplies the same observations
+for an admitted application without duplicating them when its outcome already
+contains them.
+
+Checkout observation is read-only. It reports whether the selected checkout is
+the target branch, agrees with the predecessor or candidate on changed
+publication paths, needs reconciliation, or has conflicts. Path counts are
+reported separately for the index and worktree; unrelated changes do not count.
+An unavailable observation carries null observation fields rather than guessed
+values. Its failure never changes or hides a successful durable application.
+
+This interface does not stage or repair a checkout, retry publication, or infer
+that an unrelated checkout was updated. Request contract 6, result state and
+persisted application/workflow identities remain unchanged. Generated contracts
+and the client catalog must be refreshed together with interface 46.

@@ -305,6 +305,12 @@
       "pattern": "^sha256:[0-9a-f]{64}$",
       "maxLength": 71
     },
+    "GitObjectId": {
+      "oneOf": [
+        {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      ]
+    },
     "ObligationId": {
       "type": "string",
       "pattern": "^obligation:sha256:[0-9a-f]{64}$"
@@ -3342,7 +3348,9 @@
       "required": [
         "kind",
         "application",
-        "status"
+        "status",
+        "publication",
+        "checkout"
       ],
       "properties": {
         "kind": {
@@ -3353,6 +3361,12 @@
         },
         "status": {
           "const": "applied"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
+        },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
         }
       },
       "additionalProperties": false
@@ -3386,7 +3400,9 @@
       "required": [
         "kind",
         "application",
-        "status"
+        "status",
+        "publication",
+        "checkout"
       ],
       "properties": {
         "kind": {
@@ -3397,6 +3413,12 @@
         },
         "status": {
           "const": "applied"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
+        },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
         }
       },
       "additionalProperties": false
@@ -3409,7 +3431,9 @@
         "status",
         "code",
         "outcome",
-        "message"
+        "message",
+        "publication",
+        "checkout"
       ],
       "properties": {
         "kind": {
@@ -3425,6 +3449,7 @@
           "enum": [
             "APPLICATION.PUBLICATION_UNAVAILABLE",
             "APPLICATION.OBSERVATION_UNAVAILABLE",
+            "APPLICATION.OUTCOME_OBSERVATION_UNAVAILABLE",
             "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
             "APPLICATION.RECOVERY_TARGET_UNCERTAIN",
             "APPLICATION.RECOVERY_TARGET_DIVERGED",
@@ -3437,12 +3462,103 @@
         "message": {
           "$ref": "#/$defs/NonEmptyString"
         },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
+        },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
+        },
         "details": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/$defs/ScalarValue"
           }
         }
+      },
+      "additionalProperties": false
+    },
+    "PublicationTargetObservation": {
+      "description": "Fresh bounded observation of the configured target ref; an unavailable revision is null.",
+      "type": "object",
+      "required": ["kind", "status", "revision"],
+      "properties": {
+        "kind": {"const": "publication-target-observation"},
+        "status": {
+          "enum": ["candidate", "expected", "diverged", "unavailable"]
+        },
+        "revision": {
+          "oneOf": [
+            {"$ref": "#/$defs/GitObjectId"},
+            {"type": "null"}
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ApplicationPublicationReceipt": {
+      "description": "Durable application identity and exact candidate facts, separate from the fresh target observation.",
+      "type": "object",
+      "required": [
+        "kind", "application", "candidate_commit", "candidate_tree",
+        "target_ref", "expected_predecessor", "durable_state", "target_observation"
+      ],
+      "properties": {
+        "kind": {"const": "application-publication-receipt"},
+        "application": {"$ref": "#/$defs/ApplicationHandle"},
+        "candidate_commit": {"$ref": "#/$defs/GitObjectId"},
+        "candidate_tree": {
+          "oneOf": [
+            {"$ref": "#/$defs/GitObjectId"},
+            {"type": "null"}
+          ]
+        },
+        "target_ref": {"const": "refs/heads/main"},
+        "expected_predecessor": {"$ref": "#/$defs/GitObjectId"},
+        "durable_state": {"enum": ["applied", "admitted", "unknown"]},
+        "target_observation": {"$ref": "#/$defs/PublicationTargetObservation"}
+      },
+      "additionalProperties": false
+    },
+    "PublicationPathCounts": {
+      "type": "object",
+      "required": ["predecessor", "candidate", "conflicted"],
+      "properties": {
+        "predecessor": {"type": ["integer", "null"], "minimum": 0},
+        "candidate": {"type": ["integer", "null"], "minimum": 0},
+        "conflicted": {"type": ["integer", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "PublicationCheckoutObservation": {
+      "description": "Fresh read-only observation of one selected checkout. Unavailable observations use null for every fact that could not be established.",
+      "type": "object",
+      "required": [
+        "kind", "status", "worktree_id", "symbolic_branch", "head",
+        "index_observation", "publication_path_count", "index_paths", "worktree_paths"
+      ],
+      "properties": {
+        "kind": {"const": "publication-checkout-observation"},
+        "status": {
+          "enum": [
+            "not-observed", "unavailable", "not-target-checkout", "current",
+            "needs-reconciliation", "conflicted"
+          ]
+        },
+        "worktree_id": {
+          "oneOf": [{"$ref": "#/$defs/Digest"}, {"type": "null"}]
+        },
+        "symbolic_branch": {
+          "oneOf": [{"$ref": "#/$defs/NonEmptyString"}, {"type": "null"}]
+        },
+        "head": {
+          "oneOf": [{"$ref": "#/$defs/GitObjectId"}, {"type": "null"}]
+        },
+        "index_observation": {
+          "oneOf": [{"$ref": "#/$defs/Digest"}, {"type": "null"}]
+        },
+        "publication_path_count": {"type": ["integer", "null"], "minimum": 0},
+        "index_paths": {"$ref": "#/$defs/PublicationPathCounts"},
+        "worktree_paths": {"$ref": "#/$defs/PublicationPathCounts"}
       },
       "additionalProperties": false
     },
@@ -6568,6 +6684,12 @@
         },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
+        },
+        "publication": {
+          "$ref": "#/$defs/ApplicationPublicationReceipt"
+        },
+        "checkout": {
+          "$ref": "#/$defs/PublicationCheckoutObservation"
         },
         "status": {
           "enum": [

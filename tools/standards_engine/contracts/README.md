@@ -1,5 +1,11 @@
 # Standards Engine Contracts
 
+Interface 46 adds a durable application publication receipt and a fresh,
+read-only observation of the selected Git checkout to apply/recover results and
+workflow status. Observation failures return bounded unavailable fields without
+changing an already successful mutation. Request contract 6 and persisted state
+versions remain unchanged. See [the interface-46 contract](../PURPOSE-SEPARATION.md#publication-evidence-interface-46).
+
 Interface 40 adds `describe_input` for bounded, catalog-bound input-contract
 discovery. Both purposes use the same observation algebra; only actually published
 operations and their input closure are visible. Mutation/state/handle contracts

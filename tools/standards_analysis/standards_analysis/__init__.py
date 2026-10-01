@@ -108,12 +108,16 @@ from .trust import (
     construct_authorization_record,
 )
 
-from .coverage_publication import render_engine_coverage_receipt
+from .coverage_publication import (
+    render_engine_coverage_receipt,
+    validate_engine_coverage_receipt_evidence,
+)
 from .router_guidance import RouterGuidance, RoutingSelectionRow, parse_router_guidance
 
 
 __all__ = (
     "render_engine_coverage_receipt",
+    "validate_engine_coverage_receipt_evidence",
     "RouterGuidance",
     "RoutingSelectionRow",
     "parse_router_guidance",
