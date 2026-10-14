@@ -3,11 +3,11 @@
 ## I1 — baseline proposal-analysis fixture (medium, deferred)
 
 `test_analysis.AnalysisWorkflowTest.test_proposal_analysis_uses_one_projection_and_one_verified_base`
-hardcodes accepted semantic revision1/proposed2. Both the candidate and a clean
+hardcodes accepted semantic revision 1/proposed 2. Both the candidate and a clean
 Git clone of baseline `188beda1fa477d21d576c233dd8c7f4c4c267d23` return
 `AUTHORING.INVALID_SEMANTIC_REVISION` before the test reaches its projection-count
-assertions. Independent one-test baseline run:1 test,1 failure,1.397s; candidate:
-1 test,1 failure,1.606s. This source test is unchanged by issue3.
+assertions. Independent one-test baseline run:1 test, 1 failure, 1.397 s; candidate:
+1 test, 1 failure, 1.606 s. This source test is unchanged by issue3.
 
 Owner: existing analysis test/standards-content maintainers. Disposition: defer
 outside the recorder write set; do not edit normative standards or weaken the
@@ -25,3 +25,12 @@ content. See reports/independent-review.md for source-bound evidence.
 
 Actual model/client traces are outside this task: synthetic process evidence does
 not certify model intent or acquisition. No new model qualification is claimed.
+
+## I2 — publication authentication (blocking, external)
+
+`gh auth status` reports an invalid configured `GH_TOKEN`. Owner: parent/operator
+of the authorized GitHub connection. User has approved push+PR; no renewed
+publication approval is needed. Disposition: preserve exact local commits and
+Git bundle; do not replace credentials or bypass access failure. Revisit when a
+working authorized Git transport is available, then push/open PR. No remote
+mutation was attempted through a fallback credential or connection.

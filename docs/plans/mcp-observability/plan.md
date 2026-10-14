@@ -1,6 +1,6 @@
 # Persistent MCP interaction observability (issue 3)
 
-Status: Verifying. Acceptance: pending broader-suite disposition. Operation: start. Owner: implementation agent;
+Status: Blocked (publication authentication). Local acceptance: satisfied; I1 baseline fixture deferred. Publication acceptance: unavailable (I2). Operation: start. Owner: implementation agent;
 publication and merge authority remain with the parent/operator. Baseline:
 `188beda1fa477d21d576c233dd8c7f4c4c267d23` (interface 46).
 Canonical plan: `docs/plans/mcp-observability/plan.md`.
@@ -115,17 +115,17 @@ privacy, failure and outcome-preservation tests.
 C Accepted: operator report, configuration and operational documentation; same
 module plus `tools/standards_engine/MCP-OBSERVABILITY.md` and README link.
 Gate: bounded read-only report, catalog changes, accurate denominators.
-D Verifying: cold stdio/process replacement, exceptions/interruption, real unavailable,
+D Accepted: cold stdio/process replacement, exceptions/interruption, real unavailable,
 locked/full SQLite, concurrent processes, migration/retention/privacy. Existing MCP,
 runtime identity, discovery and observer-v3 tests plus full Engine suite and
 contract projection check. Synthetic baseline/candidate call and byte comparison.
-E Verifying: independent GPT-6.1 Sol High design/source/privacy review accepted with all seven findings resolved; staged and full branch review, local commits, authorized push and PR.
+E Blocked: independent GPT-6.1 Sol High design/source/privacy review accepted with all seven findings resolved; staged and full branch review, local commits, authorized push and PR.
 No real logs or confidential artifacts in Git. Parent owns merge. The generated
 `evaluation/standards-effectiveness/generated/suite-inputs.json` is an allowed
 adjacent write: refresh through the Engine after staging declared inputs; it
 tracks source/README digests and is not a normative standards change.
 
-Current phase: D/E. Next slice: finish the remaining module-isolated broad checks and record final evidence/publication disposition.
-Blockers: full Engine run pending; a semantic-revision fixture failure reproduces on untouched baseline (see issues). Replan on privacy/schema ownership, protocol/domain
+Current phase: E (publication blocked). Next slice: parent restores working authorized GitHub access, then publishes the retained exact branch and opens the approved PR.
+Blockers: I2 invalid GitHub CLI token. D executed all 636 Engine cases: 635 pass after environment qualification,1 unchanged baseline fixture failure I1 explicitly deferred. No full-suite-green claim is made. Replan on privacy/schema ownership, protocol/domain
 outcome change, unsupported storage invariant or insufficient acceptance evidence.
-See [ledger](execution-ledger.md), [issues](issues.md) and reports for evidence.
+See [verification](reports/verification.md), [independent review](reports/independent-review.md), [ledger](execution-ledger.md) and [issues](issues.md).
