@@ -7301,7 +7301,7 @@
       ]
     },
     {
-      "digest": "sha256:ebee8cc5b4d4e7bc2d6b6a89c6ea8d4f5b6ce5d6d135e629dbfb67cbede347a9",
+      "digest": "sha256:02fc2e17d6e4479d70fcb62caa189516db4e205ddfdc381a1b6ed721ed9ac15b",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7615,6 +7615,18 @@
       ]
     },
     {
+      "digest": "sha256:bc14652d3aa78ea400495d7f89fe9c4662c4de16acf759cac41d8279239a2a78",
+      "path": "tools/standards_engine/standards_engine/interaction_observer.py",
+      "state": "present",
+      "uses": [
+        {
+          "check": "python-package-contract",
+          "role": "package-contract-input",
+          "suite": "a1c-public-cutover"
+        }
+      ]
+    },
+    {
       "digest": "sha256:bac3a3330851489f35542e775ecf61c2f04822b17d23806803b8da8d2fb4b506",
       "path": "tools/standards_engine/standards_engine/logical_authoring.py",
       "state": "present",
@@ -7627,7 +7639,7 @@
       ]
     },
     {
-      "digest": "sha256:d6cfe64a594c017f2e3be53dc3f70c561c9fb9d24ebe98f78a7e5ca43ceaa964",
+      "digest": "sha256:3852b7531dbf53d9c3eceec5503c7544de7df48aee714f618542b57754ae8596",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [
@@ -14058,7 +14070,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:8607daad3aec322a6072b9964512416edd6688958032b1a6cb7e2217b9ab34dd",
+    "digest": "sha256:51146541dc636a1689a27f5d256465a2fd349183a54f3fd03f4ac3e26bdc0c5c",
     "uses": [
       {
         "check": "python-package-contract",

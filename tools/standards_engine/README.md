@@ -21,6 +21,10 @@ See [the publication evidence contract](PURPOSE-SEPARATION.md#publication-eviden
 
 The versioned sections below retain implementation history.
 
+Optional operator-only MCP interaction recording is documented in
+[MCP observability](MCP-OBSERVABILITY.md). It is disabled by default and preserves
+the existing qualification observer v3 and agent-visible interface.
+
 ## Purpose separation (interface 31)
 
 Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`
