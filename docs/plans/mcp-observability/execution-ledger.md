@@ -45,3 +45,26 @@ invalid GH_TOKEN (I2); no push/PR or fallback credential/connection attempted.
 Local scope is complete, publication externally blocked. Final evidence commit
 retains clean source/branch and sanitized reports for parent; bundle outside repo
 preserves exact committed ref. Parent owns subsequent publication/merge.
+
+2026-10-14: Parent approved bounded I1 repair for PR #4 after prior service failures.
+Verified real checkout read/write/fsync, clean branch/head and remote PR head
+4887b7af; no workspace recovery or duplicate push needed. Revisited I1 disposition
+under explicit follow-up authority. Fixture now resolves POLICY from its immutable
+compiled snapshot, asserts existence and selects semantic_revision and its single
+successor before the existing counting mocks. Production validator, normative
+content and both count assertions are unchanged. Failing case, analysis module,
+full Engine suite and independent review are required before the next commit/push.
+
+2026-10-15: Fixture repair qualified. Owner targeted case passed 1 test in 3.748 s;
+independent targeted case passed in 3.676 s. Refreshed the registered test input
+through public Engine verify_repository; staged the new review report membership
+and refreshed again before freezing inputs. The initial analysis/full attempts
+with stale generated input were interrupted and are not acceptance evidence.
+Final analysis module passed 23 tests in 113.275 s. One uninterrupted full serial
+Engine invocation passed all 636 tests in 2161.675 s under PYTHONPATH=.; the formerly
+failing case and all observer-v3 tests passed in that run. Independent review bound
+test_analysis.py SHA256 7f51e403f03f5c57be8b1ca5736a79bcf139c87dd9eb4703ce3f7e59f1ba3d01.
+No production, validator or normative edits; both call-count assertions unchanged.
+Final evidence retains the historical I1 failure and resolves prior I2 transport
+confusion. Reviewed bounded staged scope before committing for approved PR #4
+branch push; publication identity is the Git ref, merge remains parent-owned.

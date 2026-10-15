@@ -8,15 +8,40 @@ The following evidence commit owns this report; use `git rev-parse HEAD` for the
 final handoff OID. No normative standards, generated agent contracts, Tuldok,
 observer-v3 code/artifacts or existing installation configuration changed.
 
-## Result
+## Current fixture follow-up result (2026-10-15)
 
-Local issue3 implementation and independent source/privacy review are satisfied.
-Publication is blocked by unavailable GitHub CLI authentication: `gh auth status`
-reports that the configured `GH_TOKEN` is invalid. User authorization for push/PR
-was received; this is an authentication blocker, not a request for permission.
-No push, PR, comment, deployment, telemetry enabling or credential workaround was
-performed. Parent retains publication/merge ownership through a working authorized
-connection. The exact committed branch is preserved in a separate Git bundle.
+The bounded PR #4 fixture repair is qualified: resolve the policy from the same
+immutable snapshot, assert it exists, use semantic_revision and its successor,
+and keep setup outside the counting mocks. The real result assertions, validator,
+normative content and both count assertions are unchanged. Only test behavior and
+its registered generated-input digest changed; production observer hashes remain
+those accepted by the original source/privacy review.
+
+| Required follow-up check | Result |
+| --- | --- |
+| Formerly failing case | 1 test passed in 3.748 s |
+| Complete analysis module | 23 tests passed in 113.275 s |
+| Full serial Engine suite | 636 tests passed in 2161.675 s; one uninterrupted invocation with PYTHONPATH=. |
+| Independent fixture review | Satisfied; targeted case independently passed in 3.676 s; exact test-file SHA256 recorded |
+| Generated input verification | Public Engine refresh returned 73 suites / 121 checks passed before final frozen-source runs |
+
+See [fixture review](fixture-review.md). The first broader attempts caught the
+stale registered test-input digest and were interrupted; no partial results count
+as acceptance. After the coordinated generated-input refresh, both requested
+broader commands were restarted from zero and passed as stated above.
+
+The existing Git transport successfully published the original head 4887b7af
+without authentication changes; the parent opened draft PR #4. The invalid CLI
+token was specific to that CLI connection, not proof that Git transport failed.
+The verified fixture follow-up is packaged for the approved existing branch push;
+Git/PR refs own the actual publication identity. Parent owns hosted CI and merge.
+No existing installation was enabled and no actual interaction log is published.
+
+## Original observability qualification (before fixture repair)
+
+The evidence below preserves the initial baseline comparison and its historical
+I1 failure. That failure is now resolved by the qualified follow-up above; it has
+not been rewritten as a successful run of the old fixture.
 
 ## Evidence and limits
 
@@ -46,12 +71,13 @@ invocation was green. The CI environment sets `PYTHONPATH=.`. An initial
 and candidate; re-running each with that documented setting passed (candidate
 45.363 s, baseline 43.920 s). Its corrected pass is included in 635.
 
-The one remaining failure is
+The original remaining failure was
 `test_analysis.AnalysisWorkflowTest.test_proposal_analysis_uses_one_projection_and_one_verified_base`:
-`AUTHORING.INVALID_SEMANTIC_REVISION`. It fails identically in a clean Git clone of
+`AUTHORING.INVALID_SEMANTIC_REVISION`. It failed identically in a clean Git clone of
 the baseline, because the fixture hardcodes accepted revision 1/proposed 2. The
-recorder never participates in that test. See [I1](../issues.md). It is deferred
-to the owning fixture maintainers; the full Engine suite is not labeled green.
+recorder never participates in that test. See [I1](../issues.md). It was initially
+deferred, then repaired under explicit follow-up authority as recorded above. The
+initial qualification is not relabeled as a green full-suite run.
 
 The recorder regressions cover opt-in omission, unchanged catalog/outcomes,
 actual validation feedback, malformed envelopes/JSON, arbitrary-output exclusion,
@@ -81,7 +107,8 @@ python3 -m tools.standards_contracts.standards_contracts.projection --check
 PYTHONPATH=.:tools/standards_verifier python3 tools/standards_verifier/verify.py --complete
 ```
 
-The broad command is expected to expose I1 on this accepted-content baseline.
+The broad command exposed I1 at original head 4887b7af; after the bounded fixture
+repair the current full serial suite passes all 636 tests.
 [Cold comparison](baseline-comparison.md) gives the workload and byte totals.
 [Independent review](independent-review.md) binds final production/test/docs hashes.
 [Operating contract](../../../../tools/standards_engine/MCP-OBSERVABILITY.md) owns
@@ -96,15 +123,17 @@ reverifies any material change. Retirement follows the parent's accepted merge,
 rejection or explicit retained-resource decision; this task grants no destructive
 cleanup authority. No other mounted repository was modified.
 
-The handoff bundle is `/workspace/issue3-mcp-observability.bundle`, outside the
-repository and not staged. It requires the named baseline commit and preserves
-the exact feature ref/head. In an authorized checkout containing that baseline:
+The original `/workspace/issue3-mcp-observability.bundle` remains preserved at
+pre-fixture head 4887b7af. The qualified fixture follow-up is packaged separately
+as `/workspace/issue3-mcp-observability-fixture-repair.bundle`, outside the
+repository and not staged. It requires the named baseline and preserves its
+exact feature ref/head. In an authorized checkout containing that baseline:
 
 ```sh
-git bundle verify /workspace/issue3-mcp-observability.bundle
-git fetch /workspace/issue3-mcp-observability.bundle feat/issue3-mcp-observability:feat/issue3-mcp-observability
+git bundle verify /workspace/issue3-mcp-observability-fixture-repair.bundle
+git fetch /workspace/issue3-mcp-observability-fixture-repair.bundle feat/issue3-mcp-observability:feat/issue3-mcp-observability
 ```
 
-Parent may then review the exact branch, push it and open the approved issue3 PR
-through working authorized access. Merge and installation enablement remain
-separate decisions. No actual telemetry or qualification trace accompanies it.
+PR #4 already exists. Parent may inspect the exact qualified branch and its
+publication ref through working authorized access. Merge and installation
+enablement remain separate decisions. No actual telemetry or qualification trace accompanies it.

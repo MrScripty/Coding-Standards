@@ -1,6 +1,6 @@
 # Persistent MCP interaction observability (issue 3)
 
-Status: Blocked (publication authentication). Local acceptance: satisfied; I1 baseline fixture deferred. Publication acceptance: unavailable (I2). Operation: start. Owner: implementation agent;
+Status: Accepted (local fixture qualification). Acceptance: satisfied. Operation: verify. Owner: implementation agent;
 publication and merge authority remain with the parent/operator. Baseline:
 `188beda1fa477d21d576c233dd8c7f4c4c267d23` (interface 46).
 Canonical plan: `docs/plans/mcp-observability/plan.md`.
@@ -119,13 +119,26 @@ D Accepted: cold stdio/process replacement, exceptions/interruption, real unavai
 locked/full SQLite, concurrent processes, migration/retention/privacy. Existing MCP,
 runtime identity, discovery and observer-v3 tests plus full Engine suite and
 contract projection check. Synthetic baseline/candidate call and byte comparison.
-E Blocked: independent GPT-6.1 Sol High design/source/privacy review accepted with all seven findings resolved; staged and full branch review, local commits, authorized push and PR.
+E Accepted: independent GPT-6.1 Sol High design/source/privacy review accepted with all seven findings resolved; staged and full branch review, local commits, authorized push and PR.
 No real logs or confidential artifacts in Git. Parent owns merge. The generated
 `evaluation/standards-effectiveness/generated/suite-inputs.json` is an allowed
 adjacent write: refresh through the Engine after staging declared inputs; it
 tracks source/README digests and is not a normative standards change.
 
-Current phase: E (publication blocked). Next slice: parent restores working authorized GitHub access, then publishes the retained exact branch and opens the approved PR.
-Blockers: I2 invalid GitHub CLI token. D executed all 636 Engine cases: 635 pass after environment qualification,1 unchanged baseline fixture failure I1 explicitly deferred. No full-suite-green claim is made. Replan on privacy/schema ownership, protocol/domain
-outcome change, unsupported storage invariant or insufficient acceptance evidence.
-See [verification](reports/verification.md), [independent review](reports/independent-review.md), [ledger](execution-ledger.md) and [issues](issues.md).
+F Accepted: repair I1 using the actual policy semantic revision from the immutable
+snapshot, before entering the existing counting mocks. Write set:
+`tools/standards_engine/tests/test_analysis.py`, this plan/ledger/issues, a bounded
+fixture-review report and current verification evidence; generated verifier input
+manifest only if its compiler requires a refresh. Gate: failing case, analysis
+module and full Engine suite pass; independent review; reviewed commit/push to
+existing approved PR #4 branch. Validator, normative content and both count
+assertions remain unchanged. No telemetry activation or raw log publication.
+
+Current phase: complete local qualification. Next slice: none. Blockers: none.
+F evidence: targeted case passed; analysis module 23/23; full serial Engine suite
+636/636; independent fixture review satisfied. I1 is resolved without changing
+validator, normative content or either count assertion; historical baseline failure
+remains in issues/evidence. I2 resolved through the existing Git transport; parent
+opened PR #4. The verified follow-up is packaged for the explicitly approved branch
+push; Git/PR refs own publication identity and parent owns hosted CI/merge.
+See [verification](reports/verification.md), [fixture review](reports/fixture-review.md), [independent source/privacy review](reports/independent-review.md), [ledger](execution-ledger.md) and [issues](issues.md).

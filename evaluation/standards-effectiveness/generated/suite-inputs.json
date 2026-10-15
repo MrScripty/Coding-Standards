@@ -7829,7 +7829,7 @@
       ]
     },
     {
-      "digest": "sha256:c463c48d95bcbc5b5bfd3690668198897a251c5000e59db71f2cbc5f983d71af",
+      "digest": "sha256:7f51e403f03f5c57be8b1ca5736a79bcf139c87dd9eb4703ce3f7e59f1ba3d01",
       "path": "tools/standards_engine/tests/test_analysis.py",
       "state": "present",
       "uses": [
@@ -14070,7 +14070,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:7e6fd4988235abb92e2dd8eea14954b57f9e2b247ef7fddfac5afef2073e65c4",
+    "digest": "sha256:32d5e126dd74c0349f8b402496260d9184db813209fc2e6de80ed4259f66bef9",
     "uses": [
       {
         "check": "python-package-contract",
