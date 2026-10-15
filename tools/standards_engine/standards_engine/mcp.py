@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 import sys
 import traceback
-from typing import TextIO
+from typing import Callable, TextIO
 
 from .tools import AgentToolFacade
 from .compiled_cache import CompiledSnapshotCache
@@ -21,6 +21,10 @@ from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
 from .mcp_catalog import OutputSchemaDelivery, tool_catalog
+from .interaction_observer import (
+    DEFAULT_MAX_AGE_SECONDS, DEFAULT_MAX_BYTES, DEFAULT_MAX_CALLS,
+    InteractionRecorder, RecorderConfig, serialized_bytes,
+)
 
 
 PROTOCOL_VERSION = "2025-11-25"
@@ -35,7 +39,8 @@ class ProtocolError(Exception):
 
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
-                 output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER) -> None:
+                 output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
+                 observation: RecorderConfig | None = None) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
@@ -52,6 +57,8 @@ class MCPServer:
             catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
         )
         self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
+        self._observer = (InteractionRecorder(observation, self._runtime_identity.metadata(), self.tools)
+                          if observation is not None else None)
         self._closed = False
         self.initialized = False
         self.ready = False
@@ -62,6 +69,8 @@ class MCPServer:
 
     def close(self) -> None:
         """Release only process-owned pure resources; each call closes its store."""
+        if self._observer is not None:
+            self._observer.close()
         self._compiled_cache.close()
         self._interface = None
         self._runtime_identity = None
@@ -71,6 +80,44 @@ class MCPServer:
         self._closed = True
 
     def dispatch(self, message: object) -> dict | None:
+        return self._handle(message)
+
+    def _handle(self, message: object, *, deliver: Callable[[dict], int | None] | None = None,
+                request_bytes: int | None = None, parse_error: bool = False) -> dict | None:
+        observer = self._observer
+        ticket = None
+        if observer is not None:
+            # Measurement failures are diagnostics failures, never protocol failures.
+            if request_bytes is None and deliver is None:
+                try:
+                    request_bytes = serialized_bytes(message)
+                except Exception:
+                    pass
+            ticket = observer.begin(message, request_bytes=request_bytes,
+                                    scope='stdio-flushed' if deliver else 'constructed',
+                                    parse_error=parse_error)
+        try:
+            response = ({'jsonrpc': '2.0', 'id': None,
+                         'error': {'code': -32700, 'message': 'Invalid JSON.'}}
+                        if parse_error else self._dispatch(message))
+            response_bytes = None
+            if response is not None:
+                if deliver is not None:
+                    response_bytes = deliver(response)
+                elif observer is not None:
+                    try:
+                        response_bytes = serialized_bytes(response)
+                    except Exception:
+                        pass
+            if observer is not None:
+                observer.finish(ticket, response, response_bytes=response_bytes)
+            return response
+        except BaseException:
+            if observer is not None:
+                observer.finish(ticket, incomplete=True)
+            raise
+
+    def _dispatch(self, message: object) -> dict | None:
         identifier = None
         try:
             if not isinstance(message, dict):
@@ -208,21 +255,27 @@ class MCPServer:
 
 
 def serve(server: MCPServer, source: TextIO, destination: TextIO) -> None:
+    def deliver(response: dict) -> int | None:
+        serialized = json.dumps(response) + "\n"
+        destination.write(serialized)
+        destination.flush()
+        return len(serialized.encode('utf-8')) if server._observer is not None else None
+
     try:
         for line in source:
             try:
                 message = json.loads(line)
+                parse_error = False
             except (ValueError, RecursionError):
-                response = {
-                    "jsonrpc": "2.0",
-                    "id": None,
-                    "error": {"code": -32700, "message": "Invalid JSON."},
-                }
-            else:
-                response = server.dispatch(message)
-            if response is not None:
-                destination.write(json.dumps(response) + "\n")
-                destination.flush()
+                message, parse_error = None, True
+            request_bytes = None
+            if server._observer is not None:
+                try:
+                    request_bytes = len(line.encode('utf-8'))
+                except UnicodeError:
+                    pass
+            server._handle(message, deliver=deliver, request_bytes=request_bytes,
+                           parse_error=parse_error)
     finally:
         server.close()
 
@@ -243,10 +296,26 @@ def main() -> int:
         default=OutputSchemaDelivery.EAGER.value,
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
     )
+    parser.add_argument('--observe-database', type=Path,
+                        help='Opt in to operator-only local SQLite observations in a trusted directory.')
+    parser.add_argument('--observe-deployment', help='Required nonsensitive deployment label when recording.')
+    parser.add_argument('--observe-max-calls', type=int, default=DEFAULT_MAX_CALLS)
+    parser.add_argument('--observe-max-age-seconds', type=int, default=DEFAULT_MAX_AGE_SECONDS)
+    parser.add_argument('--observe-max-bytes', type=int, default=DEFAULT_MAX_BYTES)
     arguments = parser.parse_args()
+    if (arguments.observe_database is None) != (arguments.observe_deployment is None):
+        parser.error('--observe-database and --observe-deployment must be supplied together')
+    observation = None
+    if arguments.observe_database is not None:
+        try:
+            observation = RecorderConfig(arguments.observe_database, arguments.observe_deployment,
+                                         arguments.observe_max_calls, arguments.observe_max_age_seconds,
+                                         arguments.observe_max_bytes)
+        except ValueError as error:
+            parser.error(str(error))
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
-                  output_schemas=arguments.output_schemas),
+                  output_schemas=arguments.output_schemas, observation=observation),
         sys.stdin,
         sys.stdout,
     )

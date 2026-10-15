@@ -29,4 +29,3 @@ The standards can be read directly; there is no application to launch. For agent
 [Active work](docs/plans/README.md) · [Completed work](docs/archive/README.md) · [Architecture decisions](docs/decisions/README.md) · [Evaluation evidence](evaluation/standards-effectiveness/README.md)
 
 [CC0 1.0 Universal](LICENSE).
-
