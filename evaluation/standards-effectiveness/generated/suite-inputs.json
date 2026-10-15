@@ -14,6 +14,18 @@
       ]
     },
     {
+      "digest": "sha256:418191d37a77028f7e287b165f9ee69eee20f8207af5a4f5ba7f792f0fcfae06",
+      "path": ".agents/skills/standards-engine/references/environment.md",
+      "state": "present",
+      "uses": [
+        {
+          "check": "root-links",
+          "role": "link-target",
+          "suite": "root-index-closure"
+        }
+      ]
+    },
+    {
       "digest": "sha256:ccbee12ecf276efc4e8d54b6ca839daadb1b4f94a034efa0b745d5733e999e13",
       "path": "ARCHITECTURE-PATTERNS.md",
       "state": "present",
@@ -560,7 +572,7 @@
       ]
     },
     {
-      "digest": "sha256:f39750d097bd6477d6d2ad36595557fe4c5ab4686b661aa7db970900d26ddd5d",
+      "digest": "sha256:e27c1148994fb26d2e6052df574f6fb5b0c5cd4c9077e5331df1f53188782619",
       "path": "README.md",
       "state": "present",
       "uses": [
