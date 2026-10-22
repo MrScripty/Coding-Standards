@@ -1,0 +1,20 @@
+{
+  "applied": true,
+  "changed_files": [
+    "evaluation/standards-effectiveness/generated/suite-inputs.json",
+    "evaluation/standards-effectiveness/policy-coverage/attestation-sources.toml"
+  ],
+  "kind": "maintain-evidence-result",
+  "removed_files": [
+    "evaluation/standards-effectiveness/policy-coverage/engine/38bdf196745bddbea9088feef327268a3e88509847a051f4b6df2782155cc8c8.json",
+    "evaluation/standards-effectiveness/policy-coverage/engine/63e553cc9ece240afda9e6afc24245b2f662ed95acb4b57ca5f3da7993aef1c7.json",
+    "evaluation/standards-effectiveness/policy-coverage/engine/e0f20dd2c4e6778c28ad699115ba6a0cfc319620cba08e45826434f2483ef0b5.json"
+  ],
+  "verification": {
+    "checks": 121,
+    "exit_code": 0,
+    "failures": [],
+    "passed": true,
+    "suites": 73
+  }
+}

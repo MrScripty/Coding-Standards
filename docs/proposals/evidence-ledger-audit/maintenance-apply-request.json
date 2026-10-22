@@ -1,0 +1,41 @@
+{
+  "kind": "maintain-evidence",
+  "expected_revision": "ad564433188f57d1d73144e6e75f3614bdbea538",
+  "evidence": [
+    {
+      "id": "docs/proposals/evidence-ledger-audit/engine-retirement-review.md",
+      "digest": "sha256:45499f47c8d5ade77718cd1ef76f7dd58ffdce4a995f005fcf8aac5f2fba0ca5",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    }
+  ],
+  "plan": {
+    "retire_engine_certificates": [
+      {
+        "subject": "topic.concurrency.cessation-of-effects",
+        "requirement_id": "sha256:528a20721802b94ed34f6d81fe4ea382584a51d3d24235c4772b83a38663b088",
+        "rationale": "Explicitly retire the existing coverage certificate before editing workflows/verification.md, whose whole-file bytes are pinned as its review evidence. Preserve the policy and consumer registrations; no replacement coverage is claimed."
+      },
+      {
+        "subject": "topic.security.untrusted-execution-selection",
+        "requirement_id": "sha256:9523cf0533080e60fd3aa958dfd3a681a4bdc3a7eecf31fc1ccb6df050577708",
+        "rationale": "Explicitly retire the existing coverage certificate before editing workflows/verification.md, whose whole-file bytes are pinned as its review evidence. Preserve the policy and consumer registrations; no replacement coverage is claimed."
+      },
+      {
+        "subject": "topic.security.untrusted-execution.authority",
+        "requirement_id": "sha256:ca30ddbd95c97d071735689e3e7e21c710b8420295c20d365580e226921af501",
+        "rationale": "Explicitly retire the existing coverage certificate before editing workflows/verification.md, whose whole-file bytes are pinned as its review evidence. Preserve the policy and consumer registrations; no replacement coverage is claimed."
+      }
+    ],
+    "prune_stale_certificates": false,
+    "retire_suites": [],
+    "retire_checks": [],
+    "retire_inputs": [],
+    "suite_descriptions": [],
+    "replacement_evidence_owner": "review:consumer",
+    "replacement_evidence_rationale": "No evidence owner or policy changes; retire only the explicitly selected Engine-issued certificates.",
+    "relationship_updates": [],
+    "consumer_registrations": []
+  },
+  "apply": true
+}
