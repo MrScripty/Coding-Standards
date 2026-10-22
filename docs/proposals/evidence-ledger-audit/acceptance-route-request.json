@@ -1,0 +1,1 @@
+{"snapshot": {"id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5", "kind": "snapshot-handle", "schema_version": 5}, "facts": {"routing.activities": ["uncertainty-reduction"], "routing.applications": [], "routing.boundaries": [], "routing.details": [], "routing.frameworks": [], "routing.languages": [], "routing.topics": [], "routing.workflow-profiles": []}}

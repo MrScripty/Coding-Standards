@@ -1,0 +1,24 @@
+{
+  "kind": "verify-repository-result",
+  "refreshed_verification_inputs": true,
+  "verification": {
+    "checks": 120,
+    "exit_code": 3,
+    "failures": [
+      {
+        "check": "generated-projections",
+        "code": "CONTRACT_EXAMPLES.INVALID",
+        "message": "authored contract examples are invalid: example corpus targets another interface schema version",
+        "suite": "generated-contract-semantic-conformance"
+      },
+      {
+        "check": null,
+        "code": "SUITE.DEPENDENCY_FAILED",
+        "message": "suite dependency did not pass",
+        "suite": "a1c-public-cutover"
+      }
+    ],
+    "passed": false,
+    "suites": 73
+  }
+}

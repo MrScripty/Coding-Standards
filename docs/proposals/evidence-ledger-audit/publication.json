@@ -1,0 +1,66 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "readiness-handle",
+    "id": "readiness:sha256:d408bf6c4595f8547a6c78973a61280f68109fe096052d2ccf28f9f9d55b9d20",
+    "schema_version": 1
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:3e831cd8-3d8a-4e34-a637-5dc7045a2120",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:cb629c2b1ec3f3f75c546cdf49cc80ade09a7f982a1e5535a5454b72f7cf656c",
+    "schema_version": 1
+  },
+  "status": "applied",
+  "next_operations": [],
+  "outcome": {
+    "kind": "apply-proposal-result",
+    "application": {
+      "kind": "application-handle",
+      "id": "application:sha256:16cd545ff1b628dab34c15133c73a10d0050dbfa2521f8045dfd507a3c0df6cf",
+      "schema_version": 1
+    },
+    "status": "applied",
+    "publication": {
+      "kind": "application-publication-receipt",
+      "application": {
+        "kind": "application-handle",
+        "id": "application:sha256:16cd545ff1b628dab34c15133c73a10d0050dbfa2521f8045dfd507a3c0df6cf",
+        "schema_version": 1
+      },
+      "candidate_commit": "2e0937e6e139912e2e08c1e583862c288bfdb332",
+      "candidate_tree": "b8772c3531d90d045c49decfed643adb2f9660fe",
+      "target_ref": "refs/heads/main",
+      "expected_predecessor": "490047fcb2b7474ffcd538bc1a35d814f0471158",
+      "durable_state": "applied",
+      "target_observation": {
+        "kind": "publication-target-observation",
+        "status": "candidate",
+        "revision": "2e0937e6e139912e2e08c1e583862c288bfdb332"
+      }
+    },
+    "checkout": {
+      "kind": "publication-checkout-observation",
+      "status": "current",
+      "worktree_id": "sha256:44fd8513f64f8e88ec7f41cadedb7acfdd3b238c0b1b0dbff9e96de949e4cd02",
+      "symbolic_branch": "refs/heads/main",
+      "head": "2e0937e6e139912e2e08c1e583862c288bfdb332",
+      "index_observation": "sha256:318dbc7f3b67ef40bf552bd47bf0fad3f885be51bc221e593416755a0b460ae7",
+      "publication_path_count": 17,
+      "index_paths": {
+        "predecessor": 0,
+        "candidate": 17,
+        "conflicted": 0
+      },
+      "worktree_paths": {
+        "predecessor": 0,
+        "candidate": 17,
+        "conflicted": 0
+      }
+    }
+  }
+}

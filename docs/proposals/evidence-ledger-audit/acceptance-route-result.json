@@ -1,0 +1,100 @@
+{
+  "kind": "application-route-result",
+  "next_operations": [
+    {
+      "operation": "read",
+      "snapshot": {
+        "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "target": "core"
+    },
+    {
+      "operation": "read",
+      "snapshot": {
+        "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "target": "router"
+    },
+    {
+      "operation": "read",
+      "snapshot": {
+        "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "target": "workflow.implementation"
+    },
+    {
+      "operation": "read",
+      "snapshot": {
+        "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "target": "workflow.verification"
+    },
+    {
+      "operation": "read",
+      "snapshot": {
+        "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+        "kind": "snapshot-handle",
+        "schema_version": 5
+      },
+      "target": "workflow.development-proportionality"
+    }
+  ],
+  "purpose": "application",
+  "reading_plan": [
+    {
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "state": "selected",
+      "target": "core"
+    },
+    {
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "state": "selected",
+      "target": "router"
+    },
+    {
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "state": "selected",
+      "target": "workflow.implementation"
+    },
+    {
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "state": "selected",
+      "target": "workflow.verification"
+    },
+    {
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "state": "selected",
+      "target": "workflow.development-proportionality"
+    }
+  ],
+  "snapshot": {
+    "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+    "kind": "snapshot-handle",
+    "schema_version": 5
+  },
+  "status": "complete",
+  "unresolved_questions": []
+}

@@ -1,0 +1,76 @@
+{
+  "source_revision": "2e0937e6e139912e2e08c1e583862c288bfdb332",
+  "snapshot": {
+    "id": "snapshot:v1:5a29e347-806f-4bd7-b912-3a8ff22e47e5",
+    "kind": "snapshot-handle",
+    "schema_version": 5
+  },
+  "purpose": "application",
+  "status": "qualified",
+  "items": [
+    {
+      "id": "router",
+      "path": "STANDARDS-ROUTER.md",
+      "digest": "sha256:f7f6555598fd1ec0c7a7b6bd804a198eec5ac569854e45adf722bf8a7c8baf6f",
+      "requires": [
+        "core"
+      ],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "workflow.documentation",
+      "path": "workflows/documentation.md",
+      "digest": "sha256:90d2d712bcc686d1d84d2de5b1a325c98353d8e7e820779b7c55ca121b32ad3d",
+      "requires": [
+        "core"
+      ],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "workflow.verification",
+      "path": "workflows/verification.md",
+      "digest": "sha256:e5782006f8e871e75475490be34ffae3a1df4d97eae2947c4f4c3e6100a63b6a",
+      "requires": [
+        "core"
+      ],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "workflow.development-proportionality",
+      "path": "workflows/development-proportionality.md",
+      "digest": "sha256:558bf9e5d7715eb0256ceed076ce06db4bcd28bc4b9f7de2aaa20ed698d882fb",
+      "requires": [
+        "core",
+        "workflow.implementation",
+        "workflow.verification"
+      ],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "workflow.commit",
+      "path": "workflows/commit.md",
+      "digest": "sha256:4ad5bbad2c9d9871d804baeb7dbe5491c406dda8d224a3566a3605a238b15d69",
+      "requires": [
+        "core",
+        "workflow.implementation"
+      ],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "core",
+      "path": "CORE-STANDARDS.md",
+      "digest": "sha256:8d81c8b558269cf45aa768f67399e6ea120acf2318e0e4c3030b8114a083a14d",
+      "requires": [],
+      "matches_accepted_file": true
+    },
+    {
+      "id": "workflow.implementation",
+      "path": "workflows/implementation.md",
+      "digest": "sha256:02bc0feb1f411072b082236da5354ab44b1a4cdfe4a07afab70108631c80e532",
+      "requires": [
+        "core"
+      ],
+      "matches_accepted_file": true
+    }
+  ]
+}
