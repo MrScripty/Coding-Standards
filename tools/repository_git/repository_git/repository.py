@@ -462,6 +462,87 @@ class GitRepository:
             for _, descriptor in reversed(administrative_descriptors):
                 os.close(descriptor)
 
+    def reconcile_publication_checkout(
+        self, expected: RepositoryRevision, candidate: RepositoryRevision,
+    ) -> PublicationCheckoutObservation:
+        """Advance an unchanged main checkout after its exact publication.
+
+        Git's two-tree merge owns index locking and refusal to overwrite local
+        changes. No reset, stash, branch switch or publication retry is involved.
+        Conflicts leave the checkout alone; I/O failure may leave reconciliation
+        incomplete, without undoing the already durable standards publication.
+        """
+        observation = self.observe_publication_checkout(expected, candidate)
+        if observation.status != "needs-reconciliation" or observation.head != candidate:
+            return observation
+        try:
+            with self._publication_checkout_guard():
+                # Re-read after locking branch/HEAD; the first observation grants
+                # no authority over a checkout which has subsequently changed.
+                observation = self.observe_publication_checkout(expected, candidate)
+                if observation.status != "needs-reconciliation" or observation.head != candidate:
+                    return observation
+                git_output(
+                    self._repository,
+                    ("read-tree", "--no-sparse-checkout", "--no-recurse-submodules", "-m", "-u",
+                     expected.oid, candidate.oid),
+                    local_only=True,
+                )
+                return self.observe_publication_checkout(expected, candidate)
+        except OSError as error:
+            raise unavailable(
+                "REPOSITORY_GIT.RECONCILIATION_UNAVAILABLE",
+                "The publication checkout could not be locked or reconciled.",
+            ) from error
+
+    @contextmanager
+    def _publication_checkout_guard(self) -> Iterator[None]:
+        """Hold conventional Git HEAD/ref locks; read-tree owns the index lock."""
+        storage = git_command(
+            self._repository, ("config", "--get", "extensions.refStorage"),
+            max_output_bytes=256, local_only=True,
+        )
+        if storage.returncode not in (0, 1):
+            raise _failed_command(("config",), storage)
+        if storage.stdout.strip() not in (b"", b"files"):
+            raise unsupported(
+                "REPOSITORY_GIT.UNSUPPORTED_REF_STORAGE",
+                "Checkout reconciliation requires the files ref backend.",
+            )
+        bindings = self._publication_checkout_bindings()
+        _, private, common = bindings
+        locks: list[tuple[int, str, int]] = []
+        try:
+            for parent, name in ((private, "HEAD.lock"),
+                                 (common / "refs/heads", "main.lock")):
+                parent_fd = _open_absolute_directory(parent)
+                try:
+                    lock_fd = os.open(
+                        name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+                        0o600, dir_fd=parent_fd,
+                    )
+                except BaseException:
+                    os.close(parent_fd)
+                    raise
+                locks.append((parent_fd, name, lock_fd))
+                _verify_absolute_directory_binding(parent, parent_fd)
+            if self._publication_checkout_bindings() != bindings:
+                raise unavailable(
+                    "REPOSITORY_GIT.OBSERVATION_STALE",
+                    "Checkout directories changed before reconciliation.",
+                )
+            yield
+        finally:
+            for parent_fd, name, lock_fd in reversed(locks):
+                try:
+                    owned = os.fstat(lock_fd)
+                    selected = os.stat(name, dir_fd=parent_fd, follow_symlinks=False)
+                    if (owned.st_dev, owned.st_ino) == (selected.st_dev, selected.st_ino):
+                        os.unlink(name, dir_fd=parent_fd)
+                finally:
+                    os.close(lock_fd)
+                    os.close(parent_fd)
+
     def _publication_checkout_bindings(self) -> tuple[Path, Path, Path]:
         controls = self.control_directories(local_only=True)
         if not controls:

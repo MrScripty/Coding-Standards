@@ -43,7 +43,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(process.stderr,'')
         responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
-        self.assertIn('interface 46;',responses[1]['result']['instructions'])
+        self.assertIn('interface 47;',responses[1]['result']['instructions'])
         return responses[2]
 
     def call(self,name,arguments,purpose='authoring',error=False):
@@ -136,6 +136,9 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertTrue(verified['verification']['passed'],verified)
         published=self.call('apply',{'context':ready['context']})
         self.assertEqual(published['status'],'applied',published)
+        self.assertEqual(published['outcome']['checkout']['status'],'current',published)
+        self.assertEqual((self.root/F.doc_path).read_bytes(),
+                         subprocess.check_output(['git','show','main:'+F.doc_path],cwd=self.root))
         exposed=self.call('read',{'target':F.owner,'detail':'full'},purpose='application')
         self.assertEqual(exposed['content'],preview['content'])
         self.assertEqual(exposed['scope'],preview['scope'])
@@ -179,6 +182,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         local.write_bytes(b"independent local data\n")
         recovered = self.call("recover", {"context": ready["context"], "action": "complete-publication"})
         self.assertEqual(recovered["status"], "applied", recovered)
+        self.assertEqual(recovered["outcome"]["checkout"]["status"], "current", recovered)
         self.assertEqual(recovered["outcome"]["application"], application)
         published = subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root)
         self.assertNotEqual(published, before)
@@ -187,6 +191,7 @@ class ConsumerPublicationTest(unittest.TestCase):
             "action": "complete-publication",
         })
         self.assertEqual(again["application"], application)
+        self.assertEqual(again["checkout"]["status"], "current", again)
         self.assertEqual(subprocess.check_output(["git", "rev-parse", "main"], cwd=self.root), published)
         exposed = self.call("read", {"target": identity}, purpose="application")
         self.assertIn("isolated workflow test reference", exposed["content"])

@@ -21,6 +21,7 @@ from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
 from .mcp_catalog import OutputSchemaDelivery, tool_catalog
+from .interaction_observation import InertInteractionRecorder, SQLiteInteractionRecorder
 
 
 PROTOCOL_VERSION = "2025-11-25"
@@ -35,7 +36,8 @@ class ProtocolError(Exception):
 
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
-                 output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER) -> None:
+                 output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
+                 observation_db: Path | None = None) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
         self.advanced = advanced
@@ -55,13 +57,17 @@ class MCPServer:
         self._closed = False
         self.initialized = False
         self.ready = False
+        self._recorder = (InertInteractionRecorder() if observation_db is None
+                          else SQLiteInteractionRecorder(observation_db))
+        self._recorder.begin_session(self._runtime_identity.metadata())
 
     @property
     def purpose(self) -> Purpose:
         return self._purpose
 
     def close(self) -> None:
-        """Release only process-owned pure resources; each call closes its store."""
+        """Close process-owned capture and cache; each tool call closes its domain store."""
+        self._recorder.close()
         self._compiled_cache.close()
         self._interface = None
         self._runtime_identity = None
@@ -149,6 +155,16 @@ class MCPServer:
                     "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()}}
         if method != "tools/call":
             raise ProtocolError(-32601, "Method not found.")
+        interaction = self._recorder.record_request(params)
+        result = self._call_tool(params)
+        value = result.get("structuredContent")
+        if isinstance(value, dict):
+            metadata = _response_metadata(value)
+            if metadata:
+                self._recorder.record_response_metadata(interaction, metadata)
+        return result
+
+    def _call_tool(self, params: dict) -> dict:
         name = params.get("name")
         if not isinstance(name, str) or name not in self.names:
             raise ProtocolError(-32602, "Tool unavailable in this running catalog; inspect runtime_info and refresh tools or restart/reconnect after an upgrade.",
@@ -207,6 +223,12 @@ class MCPServer:
         }
 
 
+def _response_metadata(value: dict) -> dict:
+    """Interface-owned selection: identifiers only, never result bodies."""
+    return {key: value[key] for key in ("kind", "code", "outcome", "status")
+            if key in value and isinstance(value[key], str)}
+
+
 def serve(server: MCPServer, source: TextIO, destination: TextIO) -> None:
     try:
         for line in source:
@@ -243,10 +265,14 @@ def main() -> int:
         default=OutputSchemaDelivery.EAGER.value,
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
     )
+    parser.add_argument(
+        "--observation-db", type=Path,
+        help="Record private local interaction evidence in this SQLite file (disabled when omitted).",
+    )
     arguments = parser.parse_args()
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
-                  output_schemas=arguments.output_schemas),
+                  output_schemas=arguments.output_schemas, observation_db=arguments.observation_db),
         sys.stdin,
         sys.stdout,
     )

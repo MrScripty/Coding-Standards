@@ -150,3 +150,17 @@ are external artifacts and are not repository content.
 [Targeted Test Strengthening](targeted-test-strengthening/plan.md) prepares the five
 selected regression-oracle improvements without product changes. Its integration
 follows packaging acceptance; neither earlier accepted sequence is reopened.
+
+## Test and CI efficiency
+
+[Test and CI Efficiency](test-ci-efficiency/plan.md) retains the admitted M0 plan
+and diagnostics. Hosted candidate measurements and acceptance remain pending;
+the historical temporary candidate checkout is no longer present.
+
+## Agent interaction observation
+
+[Agent interaction observation](agent-interaction-observation/plan.md) is accepted
+for its recorded isolated source. Its implementation and qualification evidence
+are retained with the Interface 47 checkout changes. The
+[checkout reconciliation record](authoring-publication-evidence/reports/checkout-reconciliation.md)
+separates current integration checks from historical acceptance.

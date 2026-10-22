@@ -1,0 +1,522 @@
+[
+  {
+    "id": "workflow.verification.oracles",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.contracts",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.cross-platform",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "reference.recipes.tooling",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "workflow.tooling",
+      "topic.dependencies"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.boundary.generated-contract",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "workflow.build",
+      "topic.contracts",
+      "topic.dependencies",
+      "topic.contracts.schemas"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.verification.platforms",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.resilience",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.diagnostics",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.documentation",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.build",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.implementation",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.commit",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.implementation"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.release",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.release.operations",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "workflow.release"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.performance",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.contracts.schemas",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.contracts.protocols",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.contracts.evolution",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.architecture",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "topic.contracts"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.architecture.replay",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "topic.architecture"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.code-design",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.dependencies",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.licensing",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "topic.accessibility",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.boundary.persistence",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.contracts",
+      "topic.contracts.evolution"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.application.frontend",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.accessibility"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.rust",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.rust.async",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.concurrency",
+      "profile.language.rust"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.rust.api",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "topic.contracts",
+      "workflow.documentation",
+      "profile.language.rust"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.rust.security",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.security",
+      "profile.language.rust"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.typescript",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "profile.language.typescript.async",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.concurrency",
+      "profile.language.typescript"
+    ],
+    "application_dependencies_preserved": true
+  },
+  {
+    "id": "workflow.verification.gui",
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:15c67a010c50cb271e16abe4dabe2889df266ec9c201d949043af24ff06f4a45",
+      "schema_version": 1
+    },
+    "application_exposure": "current",
+    "content_unchanged": true,
+    "requires": [
+      "workflow.verification"
+    ],
+    "application_dependencies_preserved": true
+  }
+]

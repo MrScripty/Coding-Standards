@@ -1,0 +1,98 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:fddc10fafe7b821253e9f2c0065ffe10bda72cab6e5e6d89cc1ddbfe94d6a87a",
+    "schema_version": 7
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Place discovery selection in Router's Conditional Details table",
+      "rationale": "Keep the registered executable discovery rule unchanged and place its rendered row in the conditional detail table specified by the reviewed draft. The Engine's first rendering placed new rows in Additional Routing Rules; this preserves the proposal's requested packaging.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+          "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/source-draft.txt",
+          "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "router",
+          "title": "Standards Router",
+          "role": "router",
+          "level": "MUST",
+          "applies_when": "A task must select guidance from this standards library.",
+          "does_not_apply_when": "The project has not adopted this standards library.",
+          "verification": "Routing fixtures resolve expected modules, exclusions, and dependencies.",
+          "body": "Use this file after [CORE-STANDARDS.md](CORE-STANDARDS.md). Select guidance from\nobservable task conditions and retrieve the applicable required closure.\n\n## Concept Map\n\nStart with the shared decision, then follow only its affected details:\n\n- **Design:** Architecture covers responsibility and state ownership; Contracts\n  covers invariants, representations, and consumer promises; Security covers\n  trust and permission. Follow their conditional detail links when needed.\n- **Develop:** Implementation owns the change; Verification owns its evidence;\n  Documentation records durable knowledge. Specialized test techniques are\n  selected separately from an ordinary regression check.\n- **Operate and distribute:** Build owns artifact production, Release owns\n  distribution promises, and Resilience owns failure and recovery.\n\nApplication, boundary, language, and framework profiles refine these concepts.\n`Requires` loads an unconditional prerequisite. `Specializes` names the broader\nconcept refined by a page; it does not mean that the parent loads every child.\nThe tables below and each page's conditional links support further discovery.\nA reading plan orders required prerequisites. Retrieve refinements when their\nstated conditions match the task.\n\n## Routing Procedure\n\n1. State the requested outcome and affected artifact.\n2. Select workflow modules for the activities being performed. Include Planning\n   and its discovery detail when material intent or design uncertainty remains,\n   even when the proposed implementation is bounded. Keep ordinary uncertainty\n   reduction separate when the intended behavior and design are already clear.\n3. Select application, boundary, and language profiles from actual repository\n   facts.\n4. Select topics only when the concern is affected.\n5. Follow each selected module's `Requires` metadata.\n6. Confirm common exclusions.\n7. If a required fact is unknown, report unresolved routing instead of\n   selecting a convenient default.\n## Workflow Selection\n\n| Condition | Select |\n| --- | --- |\n| Change code or standards | [Implementation](workflows/implementation.md) |\n| Prove a behavior, contract, or artifact | [Verification](workflows/verification.md) |\n| Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md) |\n| Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity | [Planning Workflow](workflows/planning.md) |\n| Create commits or manage history, branches, or worktrees | [Commit](workflows/commit.md) |\n| Change durable responsibility, design, contract, or operational knowledge | [Documentation](workflows/documentation.md) |\n| Change build inputs, outputs, invalidation, native integration, or environment use | [Build](workflows/build.md) |\n| Select or configure development tools, CI, scheduling, or orchestration | [Tooling](workflows/tooling.md) |\n| Ship an artifact or change a published promise | [Release](workflows/release.md) |\n\nA bounded change with a clear objective and acceptance path needs no written\nplan solely because it crosses files or layers.\n\n## Workflow Profiles\n\n| Condition | Select |\n| --- | --- |\n| Multiple outstanding proposals can become stale before serial integration | [Concurrent Plan Integration profile](profiles/workflows/concurrent-plan-integration.md) |\n\n## Application Profiles\n\n| Condition | Select |\n| --- | --- |\n| Develop a reusable library, package, crate, or SDK | [Library](profiles/applications/library.md) |\n| Change a web interface, rendering, interactions, or frontend state | [Frontend application profile](profiles/applications/frontend.md) |\n| Change a launcher command, lifecycle, delegation, or outcome | [Launcher application profile](profiles/applications/launcher.md) |\n\n## Boundary Profiles\n\n| Condition | Select |\n| --- | --- |\n| Cross foreign memory, handles, callbacks, or FFI | [Interop boundary profile](profiles/boundaries/interop.md) |\n| Expose host APIs, wrappers, or cross-language representations | [Language Binding boundary profile](profiles/boundaries/language-bindings.md) |\n| Generate a representation consumed as a program contract | [Generated Contract boundary profile](profiles/boundaries/generated-contract.md) |\n| Exchange structured messages across processes or independently changing components | [IPC boundary profile](profiles/boundaries/ipc.md) |\n| Read, write, publish, transact, or migrate durable state | [Persistence boundary profile](profiles/boundaries/persistence.md) |\n\n## Generated Contract Profile Applicability\n\nSelect the Generated Contract profile when a schema or generator produces a\nrepresentation consumed as program behavior, including models, validators,\ntool definitions, bindings, or executable configuration. A generated text or\ndata file does not select the profile when no program consumer interprets it as\na contract.\n\nSelect Language Binding separately only when an actual native/host or\ncross-language representation exists. Select IPC separately only when the\nrepresentation crosses a process, message, plugin-host, or independently\ndeployed boundary. Select Persistence separately only when a supported\nconsumer observes the representation or state after the producing process or\noperation ends.\n\nRoute the observable task facts through the executable Router projection. Do\nnot replace unresolved boundary, consumer, deployment, or persistence facts\nwith a smaller static module list.\n\n## Language Profiles\n\n| Condition | Select |\n| --- | --- |\n| Change C# tasks, await, continuation scheduling, or thread affinity | [C# Async profile](profiles/languages/csharp/async.md) |\n| Change Rust source, Cargo metadata, or generated Rust artifacts | [Rust profile](profiles/languages/rust/README.md) |\n| Change Rust public types, conversions, errors, visibility, traits, features, or Rustdoc | [Rust API profile](profiles/languages/rust/api.md) |\n| Change Cargo dependencies, resolution, auditing, or build-cost measurement | [Rust Dependency profile](profiles/languages/rust/dependencies.md) |\n| Change Rust release toolchains, packages, publication, or evidence | [Rust Release profile](profiles/languages/rust/release.md) |\n| Change Cargo formatting, lint, test, benchmark, coverage, or build-script adapters | [Rust Tooling profile](profiles/languages/rust/tooling.md) |\n| Change Rust async APIs, backpressure, cancellation, or async resource lifetimes | [Rust Async profile](profiles/languages/rust/async.md) |\n| Change Rust targets, target-dependent behavior, or support evidence | [Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md) |\n| Change TypeScript source, compiler settings, declarations, or visible contracts | [TypeScript profile](profiles/languages/typescript.md) |\n| Change promises, overlapping calls, cancellation, or stale-result handling | [TypeScript Async profile](profiles/languages/typescript/async.md) |\n| Rust unsafe operations, unsafe contracts, or unsafe implementations change | [Rust Unsafe](profiles/languages/rust/unsafe.md) |\n| Rust untrusted paths, sizing, queues, or listeners affect security | [Rust Security](profiles/languages/rust/security.md) |\n| Rust crosses a foreign-memory, FFI, or callback boundary | [Rust Interop](profiles/languages/rust/interop.md) |\n| Rust supplies generated host APIs or cross-language representations | [Rust Language Bindings](profiles/languages/rust/language-bindings.md) |\n| No language-specific mechanism changes | No language profile |\n\nLanguage profiles specialize mechanisms only; shared policy remains in the\napplicable general owner.\n\n## Framework Profiles\n\n| Condition | Select |\n| --- | --- |\n| Change Godot object, scene, signal, resource, threading, or lifetime mechanisms | [Godot framework profile](profiles/frameworks/godot.md) |\n| No framework-specific mechanism changes | No framework profile |\n\n## Topic Selection\n\nSelect a canonical topic only when its observable condition is present:\n\n| Concern | Current owner |\n| --- | --- |\n| Accessibility outcome, user interaction semantics, modality, or conformance obligations | [Accessibility](topics/accessibility.md) |\n| Diagnostic purpose, audience, causal identity, context, propagation, retention, disclosure projection, or reporting claim | [Diagnostics](topics/diagnostics.md) |\n| Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contracts](topics/contracts.md) |\n| Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |\n| Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |\n| Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |\n| Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required, including a decision to implement difficult standardized semantics instead of adopting an established implementation | [Dependencies](topics/dependencies.md) |\n| Third-party material is selected, incorporated, adapted, generated from, redistributed, or published | [Licensing](topics/licensing.md) |\n| Performance budget, measurement, optimization, benchmark, resource use, or regression claim changes | [Performance](topics/performance.md) |\n| Module, layer, service, data/state authority, dependency direction, or runtime composition changes | [Architecture](topics/architecture.md) |\n| Untrusted input, protected operations, sensitive data, credentials, transport security, or dependency trust changes | [Security](topics/security.md) |\n\nThe presence of a topic document in the repository is not an applicability\ncondition.\n\n## Conditional Details\n\nAfter selecting broad concerns, use these conditions to narrow the reading.\nThe executable fact `routing.details` accepts the canonical IDs below. Known\nabsence is an empty set; unknown conditions remain unresolved. Generated\ncontracts, IPC, persistence, cross-language bindings, and platform verification\nalso select their corresponding details from the existing boundary and task\nfacts. Select a detail page when its corresponding specialized decision is affected.\n\n| Condition | Select |\n| --- | --- |\n| A change makes structural, abstraction, or terminology decisions | [Code Design And Ownership](topics/code-design.md) |\n| A handle promises immutable results or replay | [topic.architecture.replay](topics/architecture/replay.md) |\n| A change affects schema dialects, generated contracts, or contract version invalidation | [topic.contracts.schemas](topics/contracts/schemas.md) |\n| A change projects domain outcomes into a protocol or adapts a protocol boundary | [topic.contracts.protocols](topics/contracts/protocols.md) |\n| A change affects contract compatibility, persisted representations, or independently changing consumers | [topic.contracts.evolution](topics/contracts/evolution.md) |\n| A change creates a validator, negative fixture, property test, differential test, or other independent oracle | [workflow.verification.oracles](workflows/verification/oracles.md) |\n| A claim spans supported targets or requires platform-specific evidence | [workflow.verification.platforms](workflows/verification/platforms.md) |\n| Rust bindings adapt events, callback tasks, runtime handles, or executors | [profile.language.rust.binding-lifecycle](profiles/languages/rust/binding-lifecycle.md) |\n| A change selects maintenance channels, publication presentation, or release recovery procedures | [workflow.release.operations](workflows/release/operations.md) |\n| A graphical user workflow requires smoke evidence | [workflow.verification.gui](workflows/verification/gui.md) |\n| Material user-intent, behavior, constraint, feasibility, or design uncertainty must be resolved before implementation planning or material replanning | [Discovery And Design](workflows/planning/discovery.md) |\n\n## Additional Routing Rules\n\n| Condition | Select |\n| --- | --- |\n| Maintain this standards library through its authoring interface | [Standards Authoring Workflow](workflows/standards-authoring.md) |\n| Executed behavior has less permitted authority than its host, a protected intermediary acts for a less-trusted caller, or an execution isolation promise changes | [Untrusted Execution And Delegated Authority](topics/security/untrusted-execution.md) |\n\n## S1 Rust Library Bug-Fix Route\n\nFor a bounded Rust parser repair in a reusable library, retrieve the optional\nreference `reference.routing.bounded-rust-repair`. Its stated task facts\nillustrate conditional selection; derive each project's route from its actual facts.\n\n## Invalid Or Legacy Routing\n\nUse canonical owners for policy; legacy entrypoints are navigation only.\nReport unresolved material facts, conflicting ownership, dependency cycles,\nor a missing canonical route. Continue independently routable work and resolve\nthe missing qualification before treating the affected route as complete."
+        },
+        "scope_updates": [
+          {
+            "policy": "router.selection-procedure",
+            "heading_path": [
+              "Routing Procedure"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 2,
+              "intent": "Preserve the proposed material-uncertainty routing procedure and the executable predicates while relocating the discovery row to its intended conditional detail table."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.router.planning-discovery",
+          "subject": "router",
+          "origin": "current-justification",
+          "rationale": "Executable routing needs a registered discovery detail and conditions that select both discovery and its required Planning owner. Ordinary uncertainty reduction remains separate.",
+          "evidence": [
+            {
+              "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+              "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/planning-discovery/source-draft.txt",
+              "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "alternatives": [
+            "A separate peer discovery workflow was considered; keeping discovery under Planning preserves one transition owner.",
+            "Task size, implementation difficulty and a prior preference for visualization do not decide substantial discovery."
+          ],
+          "assumptions": [
+            "Actual uncertainty and available independent agent capability determine how discovery proceeds.",
+            "The draft is proposed policy, with independent review and adoption evidence still required."
+          ],
+          "limits": [
+            "Static review and recorded user intent do not establish improved agent behavior.",
+            "This revision does not claim executable scenario coverage or independent material review."
+          ],
+          "reconsideration": [
+            "Reconsider when downstream tasks demonstrate excessive ceremony, missed discovery entry, ambiguity in the substantial-discovery trigger, or competing decision authority."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "router"
+      }
+    ]
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:b7f1379e-508c-4e43-b261-ecbcf23f8c5a",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Add optional test fixture ownership and supported Python gate examples",
+      "rationale": "Make existing ownership, precondition, terminal-observation and mode-independent invariant rules easier to apply. The user explicitly excludes any requirement that projects sandbox themselves; all examples remain non-normative and targeted to the selected fixture or gate.",
+      "evidence": [
+        {
+          "id": "docs/proposals/coderabbit-audit/evidence.md",
+          "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "create-standard",
+        "standard": {
+          "id": "reference.recipes.verification",
+          "title": "Test Fixture And Gate Recipes",
+          "role": "reference",
+          "level": "REFERENCE",
+          "applies_when": "A project has selected a verification claim and fixture or gate procedure and wants optional examples for ownership, readiness, platform setup or supported Python execution modes.",
+          "does_not_apply_when": "The project is selecting acceptance, threat boundaries, mandatory test isolation, supported targets, enforcement policy or a test framework.",
+          "verification": "Reference authority, owner links and example correctness checks; examples supply no acceptance or security certification.",
+          "body": "This reference contains optional examples for a test procedure whose claim,\nfixture lifecycle, supported environment, and tool authority have already been\nselected. [Verification](../../workflows/verification.md) owns the claim and\nobservation. [Concurrency](../../topics/concurrency.md) owns work and shared\nresource coordination. [Contracts](../../topics/contracts.md) owns invariant\nenforcement, and [Cross-Platform](../../topics/cross-platform.md) owns target\ncapability. The examples add no obligations and select no test framework.\n\nHere, fixture ownership means that a test targets the resource it intends to\nobserve and owns or coordinates its lifecycle. It does not mean that the project\nmust sandbox itself. Containers, operating-system sandboxes, security namespaces,\nblanket environment clearing, and a separate resource for every test are not\nrequirements of these recipes. A shared fixture is suitable when its initial\nstate, coordination, and cleanup satisfy the selected claim.\n\n## Git Fixture Setup\n\nFor a test that creates a temporary Git repository, select the subprocess\nenvironment so repository-local settings cannot redirect commands into the\ninvoking repository. A Git implementation that supports listing its local\nenvironment variables can identify those settings through\n`git rev-parse --local-env-vars`. Construct a child environment, omit the selected\nrepository-local overrides, and explicitly target the fixture directory.\n\nPotential overrides include `GIT_DIR`, `GIT_WORK_TREE`, `GIT_INDEX_FILE`, and object\ndirectory settings. The list is illustrative, not an exhaustive hard-coded\ncontract. Establish fixture repository identity before mutation. When needed,\nexercise the helper with an inherited override and observe that the fixture is\nchanged while the invoking repository remains unchanged.\n\nRetain declared transport capability such as proxy and TLS trust settings when\nthe fixture needs it. Selecting relevant variables avoids erasing necessary\ncapability through blanket environment clearing. The example creates no security\nsandbox or protection claim against hostile test code.\n\n## Owned Server Readiness\n\nFor a test that starts a server, allocate an endpoint according to the server\nand harness contract and retain the started process's completion capability.\nWhen another process can answer at that endpoint, distinguish the owned instance\nthrough an instance-specific readiness response, startup channel, or another\nobservation the real server supports. A responding fixed port alone may belong\nto another service.\n\nBegin browser or client actions after the owned instance is ready. Observe\nstartup failure and reap owned child work at the selected teardown boundary.\nSelect one mechanism that proves the needed identity and lifecycle; the example\ndoes not require adding a token protocol to every server or killing unrelated\nprocesses occupying a port.\n\n## Explicit Readiness And Harness Bounds\n\nA cancellation test can wait for an admission event, worker marker, or another\nowned state transition before pausing a controllable clock or requesting\ncancellation. Select the signal that establishes the state under test. A sleep\nor scheduler yield does not alone prove admission, active work, or custody.\n\nKeep a watchdog that diagnoses a stalled test separate from the signal that\nreleases a test-controlled worker and from production deadlines. Select its bound\nfrom the harness and execution environment. On expiry, retain the failure and\nperform owned cleanup; do not turn expiry into the successful worker release or\nsilently change the production transfer contract.\n\n## Platform Fixtures And Execution Prerequisites\n\nConstruct executable fixtures for the actual target. A shell script renamed\n`python.exe` does not provide a Windows executable. Observe selected capabilities\nsuch as symlink creation before relying on their fixtures. If a required target\nclaim cannot be observed, retain it as unavailable even when a runner permits\nskipping an unsupported fixture.\n\nEstablish required built artifacts before tests launch them. A no-emit type check\ndoes not create a CLI executable. Await asynchronous actions and lookups through\nthe result the test intends to assert, and preserve each required command's\nfailure when orchestrating multiple checks. These examples select neither a\nuniversal build command nor a platform matrix.\n\n## Python Gate Checks Under Optimization\n\nFor a Python gate that owns a mandatory source-identity check, an explicit\nfailure path can preserve the check under supported optimized execution:\n\n```python\ndef check_source_identity(expected_source, observed_source):\n    if observed_source != expected_source:\n        raise ValueError(\"source identity mismatch\")\n```\n\nThe caller obtains the expected identity from its authoritative contract and\nthe observed identity from the subject. The names, exception, and identity\nrepresentation are illustrative. Use the owning gate's actual failure contract.\n\nPython `assert` statements may be removed under `-O` or `PYTHONOPTIMIZE`; they do\nnot enforce a mandatory gate whose supported execution includes that mode.\nFor such a gate, a focused negative case can present a mismatched identity under\nnormal and optimized execution and observe the intended failure in each.\nSuccessful execution of an unrelated command is not that observation.\n\nOrdinary test assertions remain suitable when their runner's execution contract\npreserves them. This example adds neither a universal assertion ban nor a\nrequirement to support optimized execution for every Python tool.\n"
+        },
+        "requires": [
+          "workflow.verification",
+          "topic.concurrency",
+          "topic.contracts",
+          "topic.cross-platform"
+        ],
+        "specializes": [],
+        "policy_units": []
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.reference.recipes.verification.coderabbit-audit-2026-10-04",
+          "subject": "reference.recipes.verification",
+          "origin": "current-justification",
+          "rationale": "CR-0068, CR-0133, CR-0089 and readiness/platform findings motivate optional fixture setup examples; CR-0100, CR-0112 and CR-0114 motivate a Python example of existing mode-independent enforcement. Preserve required proxy/TLS capability as illustrated by CR-0029.",
+          "evidence": [
+            {
+              "id": "docs/proposals/coderabbit-audit/evidence.md",
+              "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "assumptions": [
+            "The actual acceptance claim, supported execution modes and trusted authority are established by the adopting project."
+          ],
+          "limits": [
+            "Apply only to material facts and the named claim; existing construction proofs and proportionality remain valid.",
+            "No universal receipts, hashes, signing, fixture counts, sandboxing or permanent test machinery are introduced.",
+            "The reference does not select a security boundary or guarantee protection from hostile test code.",
+            "Historical reports were not independently reproduced; original standards adoption/version is unknown.",
+            "This is a draft and supplies no independent material review, consumer acceptance or publication authority."
+          ],
+          "alternatives": [
+            "Use the existing principle without additional guidance; this avoids new text but leaves recurring application mistakes less explicit."
+          ],
+          "reconsideration": [
+            "Revise or remove the explanation if downstream tasks show duplication, disproportionate machinery or misleading application."
+          ],
+          "supersedes": []
+        }
+      }
+    ]
+  }
+}

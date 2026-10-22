@@ -9938,7 +9938,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 46,
+  "interface_schema_version": 47,
   "operations": [
     {
       "capability": "standards.snapshot.create",

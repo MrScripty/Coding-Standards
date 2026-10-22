@@ -1,5 +1,23 @@
 # Standards Effectiveness Execution Ledger
 
+## 2026-09-29: Milestone 8 bounded admission
+
+The owner selected Pumas-Library and Pantograph as different downstream pilot
+repositories. Their active plans supplied bounded needed tasks and observed
+starting commit/tree identities. Both checkouts have unrelated work, so the
+pilot briefs require isolated starts. The [pilot admission](reports/milestone-8-pilot-admission.md)
+fixes the pre-execution evidence fields, existing scenario rubric, comparison
+limits, adoption/version entrypoint, and final guidance review boundary. No
+downstream task ran and A3–A5 remain pending.
+
+The [sequence reconciliation](reports/sequence-acceptance-reconciliation.md)
+retains routing acceptance, packaging's successful recorded workflow and
+favorable independent source review, and the exact pushed test candidate's
+favorable independent review. Packaging still needs an acceptance-owner
+disposition; test strengthening still needs hosted exact-candidate CI and owner
+disposition. Neither review is an automatic acceptance transition. The unrelated
+output-contract working-tree edits were preserved.
+
 ## 2026-07-28: Milestone 0 Baseline And Fixtures
 
 **Outcome:** Accepted after owner-transition contract correction.

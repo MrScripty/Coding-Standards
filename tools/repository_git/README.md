@@ -138,3 +138,21 @@ repository's `core.ignoreCase` value. It does not replace binary patches with te
 excerpts or change ordinary reads, worktree operations or publication behavior.
 Different Git implementations may produce different binary encodings; byte identity
 is qualified within the recorded implementation/environment, not across versions.
+
+## Publication checkout reconciliation
+
+`reconcile_publication_checkout(expected, candidate)` is a separate operation
+from `publish_candidate`. It acts only on the selected main checkout at the exact
+published candidate, with no conflicts on publication paths. It holds files-backend
+HEAD/ref locks and uses Git's two-tree `read-tree -m -u` update, including Git's
+index lock and overwrite checks. Changes outside the publication are retained;
+overlapping edits and untracked destinations block reconciliation. No stash or
+reset is created, and no ref is advanced by this operation.
+
+The return value is a fresh checkout observation. Other branches, detached or
+diverged heads and already-current checkouts are left alone. Existing locks are
+preserved. Unsupported ref storage/layouts and checkout failures return typed
+errors; a filesystem failure may leave a partial checkout update. Callers retain
+the already-applied publication and own explicit recovery, rather than treating
+checkout failure as a failed standards commit. The Git dependency continues to
+own tree merging, checkout and lock semantics; no custom merge engine is added.

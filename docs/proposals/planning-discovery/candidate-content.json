@@ -1,0 +1,2640 @@
+{
+  "workflow.planning.discovery": {
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+      "schema_version": 1
+    },
+    "policy": {
+      "id": "workflow.planning.discovery",
+      "authority": "projection",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Discovery And Design\n\n**Standards metadata**\n\n- ID: `workflow.planning.discovery`\n- Role: `workflow`\n- Level: `MUST`\n- Applies when: Material uncertainty about user intent, behavior, constraints, feasibility, or design must be resolved before implementation planning or material replanning.\n- Does not apply when: The intended outcome and applicable design decisions are already clear and supported; a brief confirmation may still be useful.\n- Requires: `workflow.planning`\n- Specializes: `none`\n- Verification: Focused decision fixtures and review of whether discovery produces a challengeable, evidence-backed direction without granting implementation authority.\n- Canonical owner: `workflows/planning/discovery.md`\n\n## When Discovery Is Substantial\n\nDiscovery is substantial when resolving a material decision requires developing and revising a shared understanding across multiple questions, alternatives, or constraints. A decision is material when its answer could change the intended behavior, design direction, scope, or acceptance criteria.\n\nAssess this as the discussion develops. When answers materially change other open questions or earlier design choices, use the substantial-discovery procedure.\n\n## Discover The Intended Outcome\n\nStart from the person, caller, or workflow the change serves and the result they need. Ask what a suggested mechanism is meant to enable or prevent. Establish whether it is a firm choice, a preference, an example, or a hypothesis to investigate; do not silently weaken an explicit requirement or promote a suggestion into one.\n\nChoose questions from the current uncertainty and adapt them as answers and evidence arrive. Use concrete examples, boundary cases, failure situations, and counterexamples to reveal missing invariants. Ask what would make a technically correct implementation wrong for the intended use. Reconcile contradictory answers rather than selecting whichever is easiest to implement.\n\nKeep these kinds of information distinguishable, in whatever concise representation serves the discussion:\n\n- User intent: the desired outcome, supported workflows, and behavior that must or must not occur\n- Observed behavior: what the current system demonstrably does, with relevant evidence\n- External constraints: limitations or obligations imposed by the environment, interfaces, supported consumers, or other authorities\n- Preferences: negotiable priorities whose strength and tradeoffs are understood\n- Hypotheses: unverified beliefs about needs, behavior, feasibility, or an approach\n- Decisions: choices made by the appropriate person or owner, with their scope and material reasons\n\nThese distinctions do not require six documents or a fixed schema. Keep open questions visible without making the person supply implementation details the agent can investigate.\n\n## Investigate What Can Change The Design\n\nInspect the relevant code, contracts, callers, tests, and operating conditions. Identify what is observed, what is promised, and what is merely an incumbent implementation choice. Existing code is changeable: consider refactoring, replacement, consolidation, or deletion when that better serves the intended outcome, subject to actual compatibility and lifecycle obligations.\n\nVerify material technology and API assumptions using the relevant version and authoritative documentation, plus a bounded real observation when required by [Planning's acceptance guidance](../planning.md#acceptance-claims). Report what the evidence establishes, what remains unknown, and which design decision it can change. Do not expand implementation around an untested assumption that could invalidate it.\n\n## Compare Meaningful Alternatives\n\nWhen the design is not obvious, compare materially different approaches against the same intended outcomes and constraints. Include a simpler approach, a change to the existing structure, or declining an unnecessary guarantee when any is credible. Do not create decorative alternatives or assume that the current design, a fashionable mechanism, or the smallest diff must win.\n\nConsider the consequences relevant to the task: usability for people and software agents; responsibility and state ownership; lifecycle and failure behavior; resource use; likely changes; inherent and introduced complexity; and demonstrated opportunities for reuse. Explain what each approach makes easier or harder and where the evidence is weak. Select only relevant criteria and apply the canonical [Architecture](../../topics/architecture.md),\n[Code Design](../../topics/code-design.md), [Contracts](../../topics/contracts.md),\nand other routed requirements rather than duplicating their tests here.\n\nSurface behavior implied by an approach during the discussion. Examples include new retention, recovery, compatibility, permissions, background work, or operating obligations. Distinguish behavior necessary to meet the agreed intent from an optional extension. A useful consequence is not automatically a requested requirement; bring consequential additions to the person before including them as committed plan scope.\n\n## Keep The Main Agent In The Conversation\n\nThe main agent owns the conversation, synthesis, and understanding of what is agreed. It stays responsive while research proceeds, including when the person is speaking by voice. It should ask the next useful question, explain findings, and explore implications without making the person wait for unrelated investigations.\n\nFor substantial discovery with independent research questions, delegate bounded investigations concurrently. Give each research agent its question, relevant current intent and decisions, evidence expected, scope limits, and the finding or uncertainty that ends the investigation. Apply [Planning's Concurrent Work ownership rules](../planning.md#concurrent-work); read-only research does not gain implementation or integration authority.\n\nResearch agents return useful findings promptly, with sources, limits, and implications for the current design. They do not wait to produce a comprehensive report when an earlier finding would change the conversation. The main agent need not wait for every agent before discussing a usable result. Block only the decision that genuinely depends on missing evidence and continue independent discussion or work.\n\nWhen direction changes, tell affected agents what changed. Reconcile results against the current intent before using them; an accurate finding about an abandoned direction may no longer support the decision. Bring findings that challenge an agreed decision back to the person rather than silently redefining the agreement.\n\nIf concurrent agents are unavailable or cannot operate independently, state the limitation and use bounded serial investigation while preserving conversational continuity as far as the environment permits. Do not claim concurrency that did not occur. Do not create branches, worktrees, or a concurrent-integration protocol merely because research agents participate.\n\n## Maintain A Local Visual Document\n\nFor substantial discovery, assign a separate visual-document agent as the single writer of an evolving local HTML and CSS document. Maintain it during the discussion so the person can inspect and challenge the current understanding, rather than receiving a polished visualization only after the decisions are made.\n\nThe main agent supplies the current synthesis, evidence, open questions, and decision status. The visual-document agent turns that into a readable, attractive shared picture and updates it when meaningful information changes. Research agents report to the main agent; they do not independently rewrite the shared design or its agreed status.\n\nChoose the presentation for the domain and the question. Use workflows, interaction examples, state or ownership views, comparisons, sketches, or other visual forms where they clarify the design. Show the relevant intended behavior, candidate alternatives, evidence, unresolved questions, decisions, and tradeoffs. A universal architecture diagram, fixed dashboard, or mandatory set of panels is not required.\n\nMake proposed, agreed, uncertain, and superseded material visibly distinguishable. State the document's provisional purpose and current update context. Preserve enough source links and rationale to make consequential claims traceable, without reproducing the entire research record. Do not make a visual look settled merely because its layout is complete.\n\nThe main agent owns synthesis and the record of human decisions. The visual-document agent may clarify presentation but must return substantive ambiguity or disagreement for resolution. Findings that would change an agreed design must be discussed with the person before the visual represents that change as agreed. After a direction change, reconcile or retire stale alternatives and evidence visibly.\n\nKeep the document local unless publication or sharing is separately authorized. It must remain useful to review without introducing a hosted service, backend, or persistent orchestration system solely for discovery.\n\nA small, clear task may use a concise inline explanation instead of a separate visual artifact. If a visual-document agent is unavailable, state that limitation and have the main agent maintain the local document serially when feasible. If the environment cannot create or display local HTML, provide a reviewable text or supported visual equivalent and identify the limitation. The fallback does not justify claiming that a live visual document exists.\n\n## Preserve One Source Of Decision Authority\n\nDuring discovery, the visual is a provisional discussion aid, not an implementation plan or an independent decision maker. Once an implementation plan or durable ADR owns a decision, make the visual derive from or link to that canonical source and label any remaining proposals separately. Reconcile disagreements at the owning source; do not maintain competing authoritative versions in the visual and plan.\n\nRetain or retire the visual according to its continuing review value. Keeping it does not create a new mandatory artifact lifecycle or require every future plan change to produce a separately authored visual narrative.\n\n## Explain Back And Enter Planning\n\nBefore finalizing an implementation plan, explain the proposed direction in terms the person can challenge. Cover the intended behavior and representative workflow, important invariants, material consequences that were not explicit in the original request, the selected tradeoffs, and unresolved uncertainty. Explain why the approach serves the underlying need and where evidence or a changed assumption would cause reconsideration.\n\nInvite correction on those consequential points. Use the existing conversation and explicit decisions; do not demand ritual approval of facts already settled or impose a fixed questionnaire. Resolve material misunderstandings before presenting the direction as agreed. When the person is unavailable, preserve the uncertain point and continue only work whose decisions it cannot change.\n\nIf writing the plan reveals a material new design choice or consequence, return it to the conversation before finalizing. Do not silently resolve it in plan prose or present the addition as previously agreed.\n\nApply [Planning's written-plan criteria](../planning.md#when-a-written-plan-is-required) after this discovery. If a written plan is needed, transfer the agreed outcome, constraints, decisions, acceptance claims, and meaningful development boundaries into its canonical fields. Keep detailed evidence in linked reports and durable architecture decisions in their owning ADRs. Do not turn the whole conversation into plan narration or promote tentative visual content into binding decisions.\n\nThe plan explains how its actual design satisfies applicable standards. Link to the canonical requirements and record the decisions and evidence they caused; copying a standards checklist is not a substitute for applying it. Preserve [Planning's explicit plan admission and implementation authorization\nrules](../planning.md#explicit-plan-admission).\n\nDiscovery ends when the intended behavior and chosen approach are sufficiently understood to plan or perform the bounded change, and remaining uncertainty has an explicit disposition. Do not require complete knowledge of every possible future use. Reopen the relevant discussion when new evidence changes intent, authority, scope, design, risk, or acceptance meaning.\n",
+    "requires": [
+      "workflow.planning"
+    ],
+    "specializes": [],
+    "related": [
+      {
+        "source": "workflow.planning.discovery",
+        "target": "workflow.planning",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning.discovery.alternatives",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.alternatives",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.concurrent-research",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.concurrent-research",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.decision-authority",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.decision-authority",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.investigation",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.investigation",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.outcome",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.outcome",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.planning-handoff",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.planning-handoff",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.substantial",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.substantial",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.visual-document",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.visual-document",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery",
+        "target": "provenance.workflow.planning.discovery.planning-discovery",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      }
+    ],
+    "next_operations": [
+      {
+        "operation": "query_proposal",
+        "request_kind": "related",
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+          "schema_version": 1
+        },
+        "target": "workflow.planning.discovery"
+      }
+    ],
+    "summary": "Read projected standard workflow.planning.discovery.",
+    "application_exposure": "current",
+    "provenance": [
+      "provenance.workflow.planning.discovery.planning-discovery"
+    ]
+  },
+  "workflow.planning": {
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+      "schema_version": 1
+    },
+    "policy": {
+      "id": "workflow.planning",
+      "authority": "projection",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Planning Workflow\n\n**Standards metadata**\n\n- ID: `workflow.planning`\n- Role: `workflow`\n- Level: `MUST`\n- Applies when: Material uncertainty about intended behavior or design must be resolved, or work requires sequencing, shared decisions, migration, delegation, or acceptance across multiple boundaries.\n- Does not apply when: A bounded local change has a clear agreed outcome, an obvious write set, a regression check, and an acceptance path, with no material uncertainty that could change those decisions.\n- Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`\n- Specializes: `none`\n- Verification: Active-plan structure fixtures and objective-level acceptance review.\n- Canonical owner: `workflows/planning.md`\n\n## Discovery Before Implementation Planning\n\nBegin with the intended outcome and the facts needed to choose a suitable design. When material intent, behavior, constraints, or design choices remain unresolved, use [Discovery And Design](planning/discovery.md) before writing the implementation plan. Discovery is the opening phase of this workflow; it is not an approved implementation direction.\n\nUse an adaptive conversation supported by bounded investigation. Establish what the person is trying to achieve, distinguish firm requirements from suggestions and hypotheses, inspect current behavior and technical feasibility, and make consequential alternatives and implied behavior visible. Explain the emerging design back to the person before converting it into implementation work.\n\nDo not treat a suggested mechanism, the current code, or the first plausible architecture as the objective. Apply the routed standards to the actual design decisions; a plan that merely lists standards does not establish that its design meets them.\n\nKeep the effort proportionate. A small, clear task may need only a brief exchange and a concise explanation. Do not manufacture uncertainty, a questionnaire, a written plan, or an approval ceremony when the outcome and acceptance path are already clear. Conversely, the bounded-local exclusion does not apply merely because a proposed patch is small when its intended behavior remains materially unclear.\n\nFor substantial discovery, keep the main agent available for conversation while research agents investigate independent questions and a separate visual-document agent maintains the local shared picture. Follow the detailed procedure for ownership, unavailable capabilities, and the transition to canonical planning artifacts.\n\n## When A Written Plan Is Required\n\nAfter resolving material intent and design uncertainty through discovery, apply\nthe bounded-local exclusion before the written-plan triggers. A change\nwith a clear objective, exact write set, regression check, and acceptance path\nmay proceed directly even when it touches a public, generated, persistence,\nprocess, language, or user-interface boundary. State its write set inline; an\nexact write set does not require a plan artifact.\n\nCreate a written plan when the change introduces material sequencing,\nindependently owned contract, migration, coordination, rollout, risk, or\nacceptance complexity that must remain stable during implementation. A boundary\nor file category alone does not satisfy this condition. Parallel work requires\na plan only when ownership, dependency, integration, or stale-state coordination\nis material.\n\n## Artifact Model\n\nStore a planned effort under one directory:\n\n```text\ndocs/plans/<plan-slug>/\n  plan.md\n  execution-ledger.md\n  issues.md\n  reports/\n```\n\n- `plan.md` owns current objective, binding decisions, status, milestones,\n  blockers, and exactly one next slice.\n- `execution-ledger.md` owns dated slice, verification, deviation, and commit\n  summaries.\n- `issues.md` owns discovered issues and their dispositions.\n- `reports/` owns investigations and detailed evidence.\n- ADRs own durable architecture decisions that outlive the plan.\n\nGive each current decision one active owner and link to it from consumers.\n\n## Required Active-Plan Fields\n\nAn active plan states:\n\n- plan status;\n- objective and scope;\n- objective acceptance claims;\n- current acceptance status;\n- constraints and assumptions that affect decisions;\n- binding decisions and owners;\n- composed-design review applicability and, when applicable, the complete\n  Architecture-owned artifact probe;\n- current phase;\n- exactly one next slice or `none` for terminal status;\n- milestones with goals, write sets, gates, and lifecycle states;\n- blockers;\n- re-plan triggers; and\n- links to ledger, issues, reports, and ADRs.\n\nUse [the plan template](../templates/PLAN-TEMPLATE.md).\n\nEvery nonterminal written plan governed by this revision records the\ncomposed-design review as `applicable` or `not-applicable`. When applicable,\nanswer every artifact probe in\n[Architecture](../topics/architecture.md#composed-design-admission). When not\napplicable, record the concrete reason. Historical terminal plans are not\nrewritten solely to add this field.\n\n## Lifecycle\n\nDiscovery notes, candidate designs, and visual documents are provisional and do not acquire Planned status by being written. Planned continues to mean approved direction. Do not authorize implementation from a discovery artifact or add a discovery state to the implementation-plan lifecycle solely to store a discussion.\n\n| State | Meaning |\n| --- | --- |\n| `Planned` | Approved direction; implementation has not started. |\n| `Active` | The current phase or slice is being implemented. |\n| `Blocked` | A named dependency or required fact prevents progress. |\n| `Implemented` | Source work is complete; objective acceptance is pending. |\n| `Verifying` | Objective-level acceptance is running or awaiting environment. |\n| `Accepted` | The named acceptance evidence passed. |\n| `Deferred` | Work is intentionally excluded with owner and revisit trigger. |\n| `Superseded` | A newer binding decision or plan replaces this item. |\n\n`Implemented` is not complete. `Accepted` requires every objective acceptance\nclaim to be satisfied.\n\nExactly one current phase is identified. Multiple independent milestones may be\nimplemented, but the active plan still names one next integration slice.\n\n## Explicit Plan Admission\n\nBind planned implementation to one canonical repository-relative `plan.md`\npath and one operation. A human follow-up may reuse an unambiguous selection\nalready established in the conversation after checking current repository state,\nplan lifecycle, and authority. Obtain clarification when either selection is\nmissing or ambiguous. Repository location, recency, and a next-slice field alone\ndo not establish the selection or authorize execution.\n\nMachine interfaces retain their declared explicit path and operation arguments.\nConversational reuse supplies task context; it does not relax an API contract.\n\nPlanning owns these admission decisions:\n\n- `start` accepts only `Planned` and transitions it to `Active`;\n- `continue` accepts only `Active` without changing that state; and\n- `verify` accepts `Implemented` or `Verifying`, transitioning `Implemented` to\n  `Verifying` when objective verification begins.\n\n`Blocked` and `Deferred` are `unavailable`; report the blocker or revisit\nauthority. `Accepted`, `Superseded`, and operation/state contradictions are\n`invalid`. Missing plan identity, operation, lifecycle facts, or required linked\nartifacts are `unavailable`. Security owns containment and traversal or symlink\nescape rejection; unsupported filesystem representation routes conditionally\nthrough Cross-Platform. Establish the operation and its authority through the\nbinding rules above before implementation.\n\n## Concurrent Integration Routing\n\nOrdinary planning does not require a revision digest, transition envelope, or\nreconciliation identity. Apply the\n[Concurrent Plan Integration profile](../profiles/workflows/concurrent-plan-integration.md)\nonly when two or more proposals may be prepared from the same mutable plan\nrevision before integration and correctness depends on detecting whether plan\nor shared-authority state changed before a proposal is integrated.\n\nDo not select the profile merely because several people or agents participate.\nSerial collaboration, read-only investigations, non-authorizing reports,\nindependent work whose admission facts cannot become stale, and one integration\nowner working from current state with no outstanding proposals remain under\nthis workflow alone.\n\nWhen the profile applies, it owns proposal revision checks, stale-state\nclassification, compatibility, and reconciliation. This workflow continues to\nown plan lifecycle and artifact boundaries. Shared authority remains a serial\nintegration-owner write in either case.\n\n## Repository Isolation In Written Plans\n\nA written plan does not require a branch or worktree by default. When material\nreview, concurrency, experimentation, release maintenance, risk containment,\nor repository controls make isolation part of the accepted approach, record\nthe branch or worktree purpose, responsible owner, target branch, integration\nowner, visibility or long-lived status, and expected terminal disposition.\nWhen the plan authorizes worktree removal or registration pruning, also record\nthe head-reachability and commit-disposition evidence required by Commit.\nRecord an admitted base or revision only when stale-state coordination makes it\nrelevant.\n\nCommit owns ordinary branch selection, integration mechanism, history, and\nterminal cleanup. This workflow records only plan-level facts needed to keep\nscope, ownership, sequencing, or acceptance stable. File count, commit count,\nplan existence, delegation, and participant count do not independently require\nrepository isolation.\n\n\nDiscuss material development and integration boundaries before implementation. Explain what coherent outcome each boundary makes visible or reviewable, what evidence supports it, and which findings would reopen the design. Where branches or merges serve that purpose, identify their intended role and integration points using Commit's [Branch And Worktree Applicability](commit.md#branch-and-worktree-applicability),\n[Governed Branch Context](commit.md#governed-branch-context), and\n[Integration Mechanism Selection](commit.md#integration-mechanism-selection) rules.\n\nThese boundaries provide visibility into development and useful opportunities to reconsider direction. They do not require a branch per milestone, a merge per slice, a fixed commit count, or a particular history topology. If one serial change provides sufficient visibility and acceptance, say so. Commit retains authority over the actual branch, worktree, merge, history, and cleanup mechanics.\n\n## Policy Projection Completeness\n\nA normative change updates every materially affected distribution and enforcement\nsurface. Identify its canonical owner, declared semantic consumers, and review\ncoverage. Review the returned consumers and explicitly declare missing actual\nrelationships. An incomplete inventory remains an evidence need.\n\nKeep one canonical requirement owner. Prompts, templates, examples, and automation\nproject that owner's contract. When a rule prescribes a machine protocol,\nrepresentation, or automated gate, bring its applicable consumers into agreement\nbefore the rule becomes mandatory. Select those surfaces from actual use.\n\nKeep current relationships with their canonical authority and change-specific\ndispositions in the change record. Preserve the distinction between normative\ndependencies, descriptive support, optional references, and semantic impact.\nUse owned, distinguishable diagnostic outcomes; manual processes can record\nthem in prose or tables, and tools use their declared contracts.\n\nStandards-maintenance-specific declaration and publication procedures belong to\nthe normative authoring owner `workflow.standards-authoring`, retrieved through\nthe authoring interface when maintaining the library.\n\n## Acceptance Claims\n\nResolve an external-interface or environment assumption that could invalidate\nthe design through the smallest adequate real observation before expanding\nimplementation around it. Name the decision the observation can change and\nits stopping condition. Continue bounded independently useful work when the\nunavailable observation cannot change that work's decisions.\n\nDistinguish this design observation from final acceptance evidence. For a\nremaining environment-qualified claim, name its owner and executable procedure;\nrequire hardware, credentials, or a vendor service only when the claim depends\non them. Identify real producers, consumers, and the complete observable result.\n\nFollow [the verification workflow](verification.md). Record each required claim\nwith:\n\n- stable identifier and observable criterion;\n- evidence kind;\n- required environment;\n- execution mode;\n- `pending`, `blocked`, or `satisfied` status; and\n- evidence link when satisfied.\n\nThe plan-level acceptance status is:\n\n| Status | Meaning |\n| --- | --- |\n| `pending` | No required claim is satisfied yet. |\n| `partial` | Some claims are satisfied and at least one remains pending. |\n| `blocked` | At least one required claim cannot currently be run. |\n| `satisfied` | Every required claim is satisfied. |\n\nEvidence kinds, environment requirements, and execution modes are independent.\nDo not treat manual, environment-qualified, or artifact evidence as higher\npositions in one hierarchy.\n\n## Milestones And Slices\n\nOrder milestones by dependency. For each milestone record:\n\n- one goal;\n- one coherent implementation unit;\n- exact allowed write set;\n- semantics or contracts preserved/replaced;\n- focused tests or fixtures;\n- objective-relevant verification gate;\n- re-plan conditions; and\n- lifecycle state.\n\nSelect one coherent implementation unit. Split it only when separation\nmaterially improves independent acceptance, risk containment, dependency\nordering, conflict isolation, rollback, or feedback. A bounded change that can\nbe understood and verified as a whole is one slice regardless of how many files\nor layers it touches. Do not split work merely to minimize diff size or satisfy\na preferred commit cadence.\n\nA written plan may contain one milestone and one implementation slice, and the\ncomplete requested change may be that slice. Prefer thin vertical milestones\nonly when separation produces useful acceptance, risk reduction, or dependency\nordering. For cross-layer work that benefits from separation, prefer a real\nvertical path before horizontal expansion. Do not substitute a headless path\nwhen the objective is user-facing. File count, layer count, line count, and\ncommit cadence do not decide slice count.\n\nPlans define semantic work, dependencies, evidence, and lifecycle; they do not\nown Git commit topology. Do not prescribe commit count, parentage, direct-child\nchains, exact-HEAD admission, or standalone lifecycle commits. Bind review to\nthe identified material content or candidate revision, and require re-review\nonly when that reviewed meaning changes. Adding review evidence or recording an\nunchanged lifecycle result does not invalidate the reviewed subject. Collect a\nreview round's findings before revising material plan semantics. Record\nlifecycle changes with the coherent implementation, re-plan, accepted boundary,\nor final evidence that caused them; Commit owns the resulting commit boundary.\n\n## Current Plan State\n\nKeep `plan.md` concise and current:\n\n- replace old binding decisions when re-planning;\n- mark the old decision `Superseded` in the ledger or ADR history;\n- move dated implementation detail and command output to the ledger/report;\n- remove completed task narration when milestone state and evidence link are\n  sufficient; and\n- compact the plan when history obscures objective, blockers, or next slice.\n\nAutomated verification may inspect current plan structure and current authority.\nIt must not use accepted historical narration in an active plan as migration,\nbehavior, or lifecycle authority. Canonical package, disposition, lifecycle,\nand evidence records own those claims; the ledger and reports retain history.\nPerform this ownership review at completed-wave boundaries without using an\narbitrary line-count trigger.\n\nKeep one current interpretation and preserve superseded reasoning in history.\n\n## Re-Planning\n\nRepair failed checks within the current slice while its objective, authority,\nownership, contract, risk, and acceptance meaning remain valid. Add an affected\nfile to the write set when it remains inside that boundary. Replan when evidence\nchanges those decisions or shows that the admitted slice cannot deliver its\noutcome.\n\nStop and re-plan when:\n\n- objective, authority, ownership, or constraints change;\n- required facts invalidate a decision;\n- gate evidence shows that the admitted slice cannot deliver its outcome;\n- compatibility, migration, security, data, or lifecycle risk changes;\n- a directly affected file outside the stated write set changes objective,\n  ownership, contract, risk, or acceptance scope;\n- a lower-fidelity check was being used for a higher-fidelity objective; or\n- a new dependency changes sequencing;\n- a replacement design changes the admitted composition; or\n- cumulative machinery or observed change propagation materially exceeds the\n  composed-design admission.\n\nRe-planning must:\n\n1. record the trigger and evidence in the ledger;\n2. replace the binding decision in the active plan;\n3. mark the prior decision or milestone `Superseded`;\n4. update downstream milestones, gates, and next slice; and\n5. re-run the composed-design artifact probe when its composition changed; and\n6. obtain clarification when no standards-compliant decision is supported.\n\nDo not inherit a prior design's composed-design review after a material\nreplacement. The replacement owns a current applicability decision and, when\napplicable, current answers.\n\nRetain fallback behavior only for a real contract permitted by the routed\ncontract guidance.\n\n## Systemic-Finding Re-Planning\n\nTreat a finding as systemic when it reveals duplicated semantic authority,\nincomplete projection, ambient authority, a public/internal boundary leak, an\ninvalid evidence oracle, or another defect that can recur across an owning\nsemantic family. Do not admit another local example-by-example repair until\nthe owning invariant and its consumers are bounded.\n\nSystemic re-planning must:\n\n1. identify the invariant family and canonical owner;\n2. bound every authority, representation, and reachable consumer whose behavior\n   can violate the class-level claim;\n3. inspect sibling operations and equivalent representations only where they\n   share that authority, reachable failure, or consumer promise;\n4. replace local acceptance examples with a class-level acceptance claim and\n   independent evidence appropriate to that claim; and\n5. give every selected consumer a non-blocked disposition;\n6. consider deletion, consolidation, a smaller Interface, stronger\n   construction or type proof, and replacement of overlapping evidence before\n   adding machinery; and\n7. compare the repaired composition with the original objective and any\n   applicable composed-design admission before implementation resumes.\n\nExpand the bounded population when evidence reveals a new semantic owner,\nreachable consumer, material risk, or public or persistence promise. Finding\nanother implementation file inside an already bounded owner does not by itself\nexpand the design or restart the search. Stop when the canonical owner and the\nreachable consumer population have evidence-backed dispositions; do not search\nevery file, type, test, or historical representation merely because it can be\nenumerated.\n\nRecord whether the original finding was isolated or systemic and the evidence\nsupporting that classification. An empty impact result is not proof of no\nconsumers unless current audited coverage establishes completeness. Missing\nownership, inventory, or coverage is `unavailable`; contradictory authorities\nor incomplete dispositions are `invalid`. Stop implementation rather than\ncontinuing a narrow repair under either condition.\n\n## Findings\n\nRecord each discovered issue in `issues.md` with:\n\n- ID, severity, and evidence;\n- relationship to the objective;\n- owner and affected boundary;\n- fix-now, defer, or re-plan disposition;\n- verification needed; and\n- revisit trigger when deferred.\n\nFix an issue in the current slice only when it is inside the write set and\nrequired for that slice's acceptance. Otherwise defer it explicitly.\n\n## Concurrent Work\n\nDelegate only independent work with non-overlapping primary write sets. Record:\n\n- owner;\n- primary and allowed-adjacent write sets;\n- read-only context;\n- forbidden/shared files;\n- output and verification contract;\n- report path;\n- escalation rule; and\n- serial integration order.\n\nCore contracts, schemas, generated artifacts, lockfiles, shared fixtures,\nworkflow files, and active plans remain serial unless assigned to one explicit\nowner.\n\nWorkers may not delete branches, worktrees, user changes, or shared history\noutside their declared ownership. The serial integration owner may perform\npredeclared terminal cleanup for clean branches and worktrees created by the\ngoverned task after Commit-required terminal evidence is recorded. This does\nnot grant general destructive authority or permit force-removing unknown,\ndirty, locked, user-owned, or uniquely committed resources.\n\n## Completion\n\nA plan is accepted only when:\n\n- all non-deferred milestones are `Accepted` or `Superseded`;\n- plan acceptance status is `satisfied`;\n- every objective acceptance claim has matching evidence;\n- unresolved follow-ups have owners and triggers;\n- implementation files are resolved;\n- the ledger contains final verification and commit summaries; and\n- the active plan links to the final evidence.\n\nAfter acceptance, retain the plan as a concise decision/result index. The\nledger and reports preserve history.\n",
+    "requires": [
+      "core",
+      "workflow.implementation",
+      "workflow.verification",
+      "workflow.development-proportionality"
+    ],
+    "specializes": [],
+    "related": [
+      {
+        "source": "profile.workflow.concurrent-plan-integration",
+        "target": "workflow.planning",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "core",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "workflow.development-proportionality",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "workflow.verification",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning.discovery",
+        "target": "workflow.planning",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "profile.workflow.concurrent-plan-integration",
+        "target": "workflow.planning",
+        "relation": "specializes",
+        "groups": [
+          "standards-specializes",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "topic.architecture.composed-design-admission",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.contracts.invariant-contracts",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.contracts.validation-proof-lifetime",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.dependencies.implementation-versus-dependency",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.commit.worktree-lifecycle",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.active-plan-fields",
+        "target": "planning-consolidation",
+        "relation": "enforcement-suite-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.active-plan-fields",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.active-plan-fields",
+        "target": "templates/PLAN-TEMPLATE.md",
+        "relation": "template-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery-entry",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery-entry",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery-entry",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.alternatives",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.concurrent-research",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.decision-authority",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.investigation",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.outcome",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.planning-handoff",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.substantial",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery.visual-document",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.lifecycle-authority",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.plan-admission",
+        "target": "profile.workflow.concurrent-plan-integration",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.plan-admission",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.plan-admission",
+        "target": "prompts/implement-plan.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.projection-completeness",
+        "target": "policy-semantic-impact",
+        "relation": "enforcement-suite-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.projection-completeness",
+        "target": "tools/standards_engine/tests/test_evidence_maintenance.py",
+        "relation": "fixture-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.projection-completeness",
+        "target": "tools/standards_engine/standards_engine/evidence_maintenance.py",
+        "relation": "implementation-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.projection-completeness",
+        "target": "workflow.standards-authoring",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.replanning",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.replanning",
+        "target": "prompts/implement-plan.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.replanning",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.replanning",
+        "target": "templates/PLAN-TEMPLATE.md",
+        "relation": "template-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.repository-isolation",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "s1-routing",
+        "relation": "enforcement-suite-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv",
+        "relation": "fixture-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "prompts/full-codebase-standards-refactor.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.verification.acceptance-claims",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.verification.acceptance-paths",
+        "target": "workflow.planning",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "provenance.workflow.planning.planning-discovery",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "provenance.workflow.planning.positive-guidance",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      }
+    ],
+    "next_operations": [
+      {
+        "operation": "query_proposal",
+        "request_kind": "related",
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+          "schema_version": 1
+        },
+        "target": "workflow.planning"
+      }
+    ],
+    "summary": "Read projected standard workflow.planning.",
+    "application_exposure": "current",
+    "provenance": [
+      "provenance.workflow.planning.planning-discovery",
+      "provenance.workflow.planning.positive-guidance"
+    ]
+  },
+  "workflow.implementation": {
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+      "schema_version": 1
+    },
+    "policy": {
+      "id": "workflow.implementation",
+      "authority": "projection",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Implementation Workflow\n\n**Standards metadata**\n\n- ID: `workflow.implementation`\n- Role: `workflow`\n- Level: `MUST`\n- Applies when: Source, tests, standards, configuration, or generated artifacts will change.\n- Does not apply when: The task is read-only analysis.\n- Requires: `core`\n- Specializes: `none`\n- Verification: Focused slice checks, staged-scope review, and objective acceptance.\n- Canonical owner: `workflows/implementation.md`\n\n## Before Editing\n\n1. Inspect repository status and preserve unrelated work.\n2. Identify one coherent behavior or contract change.\n3. Declare the exact write set and acceptance evidence.\n4. Resolve overlapping dirty work or ambiguous verification before editing.\n5. Read routed standards and directly affected source context.\n\nBefore choosing implementation work, resolve material uncertainty about intended\nbehavior, constraints, feasibility, or design through Planning's\n[Discovery And Design](planning/discovery.md). A small proposed patch does not\nestablish a clear outcome. Discovery may conclude with a bounded change and an\ninline write set; it does not itself require a written plan or authorize\nimplementation.\n\nWhen a written plan governs the change, consume\n[Planning's admission decision](planning.md#explicit-plan-admission). Bind the\ntask to one canonical repository-relative `plan.md` path and operation.\nA human follow-up may reuse an unambiguous prior selection after current\nrepository state, plan lifecycle, and authority are checked. Obtain clarification\nwhen that selection is missing or ambiguous. Machine interfaces retain their\nexplicit argument requirements.\n\nUse the Concurrent Plan Integration profile's revision, stale-state,\ncompatibility, and reconciliation decisions when its actual applicability\nconditions hold. Follow Planning's written-plan applicability: material sequencing,\nindependently owned contracts, migration, coordination, rollout, risk, or\nacceptance complexity requires a plan when it cannot be held unambiguously in\nthe task. A bounded coherent change can state its exact write set inline.\n## Slice Contract\n\nEach slice must deliver one usable behavior, contract, or information-architecture\noutcome; preserve the requested objective and canonical owners; provide the\ndeclared outcomes when material facts cannot support a decision; include\nfocused regression or acceptance evidence; and leave coherent repository state.\nAdd compatibility, fallback, or duplicate-state mechanisms only for an actual\nsupported contract.\n\nKeep a coherent change together. Split when separation materially improves\nindependent acceptance, risk containment, dependency ordering, conflict isolation,\nrollback, or feedback. Add a directly affected file to the write set when the\nobjective, ownership, contract, risk, and acceptance meaning remain valid.\nRecord other relevant findings with severity, evidence, owner, and disposition.\n\nRepair failed checks within the current slice while those decisions remain valid.\nReplan when evidence changes them or shows that the slice cannot deliver its\noutcome. For a shared invariant finding, bound the owner and reachable consumers\nunder [Planning](planning.md#systemic-finding-re-planning), disposition that\npopulation, and resume at the supported decision boundary.\n\n## Composed-Design Fidelity\n\nPreserve the plan's admitted composition when its composed-design review applies.\nReport observed caller knowledge, change propagation, or retained machinery that\ncontradicts the admission. Replan when that evidence changes the composition and\nreview the replacement against its current objective and acceptance.\n\n## Editing\n\n- Preserve unrelated changes.\n- Update source and its focused evidence together.\n- Regenerate derived artifacts from their source in the same slice.\n- Remove superseded behavior once its replacement is accepted, with actual\n  compatibility, retained-state, and cutover obligations dispositioned.\n- Focus comments on non-obvious invariants, safety, and ownership.\n- Establish explicit authority before destructive or permission-sensitive work.\n\n## Disabled And Incomplete Behavior\n\nClassify unavailable behavior before editing:\n\n- remove deliberately unsupported capability from affected advertised and\n  registered surfaces;\n- represent temporary disablement explicitly at the owning boundary; or\n- keep incomplete implementation unreachable from production consumers.\n\nTemporary disablement identifies its owner, affected surfaces, reason, tracking\nauthority, re-enable or removal conditions, and a review or expiration trigger\nwhen indefinite disablement is outside the product contract. Make that authority\ndiscoverable to maintainers and affected consumers.\n\nKeep flags, configuration, routes, commands, controls, and published capability\nconsistent with the selected lifecycle. Requested capability returns the owning\nboundary's typed `unavailable`, `unsupported`, or `invalid` outcome when it\ncannot be provided. Isolate test placeholders at the test boundary. Classify missing lifecycle ownership, tracking authority, or re-enable/removal\ncriteria as `unavailable` and resolve them before accepting the capability.\n\n## Verification\n\nUse [Verification](verification.md). Cover changed behavior and each affected\ncontract at its selected acceptance boundary and fidelity. Interpret build,\nstartup, and local checks within the properties they actually observe.\n\n## Change-Description Evidence\n\nSelect reviewer and integrator context from affected risk, contracts, accepted\ndecisions, material alternatives, behavior, migration/operation consequences, and\nVerification claims. Identify the owned artifact for each required fact and link\ndurable rationale.\n\nUse the project's appropriate plan, change request, review, commit, issue, or\nother owned artifact. Choose a review mechanism that can represent or link the\nselected evidence. Require each item because it informs the affected decision;\nkeep routine context proportionate.\n\nClassify contradictory evidence or ownership as `invalid`, missing required\ncontext, rationale, evidence or owner as `unavailable`, and a mechanism unable\nto convey the evidence as `unsupported`. Template completion proves only that\nthe template was completed.\n\n## State And Findings\n\nFor an active plan, follow [Planning](planning.md). Keep objective, current\ndecisions, lifecycle, blockers, acceptance, and exactly one next slice current.\nUpdate the ledger at accepted-slice boundaries and for material deviations or\nverification results. Record findings in `issues.md`; replace superseded\ndecisions in current authority and preserve their history in the ledger.\n\nTransition through `Implemented`, `Verifying`, and `Accepted` according to\nthe named evidence. Update planning artifacts when these facts change. Replan\nfor changed scope, ownership, objective, risk, or acceptance meaning.\n\nWithout an active plan, record out-of-scope issues in the normal repository\nissue or review artifact.\n\n## Commit Boundary\n\nFollow [Commit](commit.md) for staging, branch/worktree applicability, integration,\nhistory review, terminal lifecycle, cleanup, and rewrite authority. Implementation\nowns the coherent slice. Preserve shared history and establish the explicit\nauthority required for history maintenance.\n",
+    "requires": [
+      "core"
+    ],
+    "specializes": [],
+    "related": [
+      {
+        "source": "reference.recipes.implementation",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.build",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.commit",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.development-proportionality",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.implementation",
+        "target": "core",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.planning",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.standards-authoring",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.tooling",
+        "target": "workflow.implementation",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "topic.architecture.composed-design-admission",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.contracts.invariant-contracts",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.contracts.validation-proof-lifetime",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.dependencies.implementation-versus-dependency",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.commit.worktree-lifecycle",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.implementation.admission",
+        "target": "prompts/implement-plan.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery-entry",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.plan-admission",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.replanning",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.verification.acceptance-claims",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.verification.acceptance-paths",
+        "target": "workflow.implementation",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.implementation",
+        "target": "provenance.workflow.implementation.planning-discovery",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "workflow.implementation",
+        "target": "provenance.workflow.implementation.positive-guidance",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      }
+    ],
+    "next_operations": [
+      {
+        "operation": "query_proposal",
+        "request_kind": "related",
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+          "schema_version": 1
+        },
+        "target": "workflow.implementation"
+      }
+    ],
+    "summary": "Read projected standard workflow.implementation.",
+    "application_exposure": "current",
+    "provenance": [
+      "provenance.workflow.implementation.planning-discovery",
+      "provenance.workflow.implementation.positive-guidance"
+    ]
+  },
+  "router": {
+    "kind": "proposal-read-result",
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+      "schema_version": 1
+    },
+    "policy": {
+      "id": "router",
+      "authority": "projection",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Standards Router\n\n**Standards metadata**\n\n- ID: `router`\n- Role: `router`\n- Level: `MUST`\n- Applies when: A task must select guidance from this standards library.\n- Does not apply when: The project has not adopted this standards library.\n- Requires: `core`\n- Specializes: `none`\n- Verification: Routing fixtures resolve expected modules, exclusions, and dependencies.\n- Canonical owner: `STANDARDS-ROUTER.md`\n\nUse this file after [CORE-STANDARDS.md](CORE-STANDARDS.md). Select guidance from\nobservable task conditions and retrieve the applicable required closure.\n\n## Concept Map\n\nStart with the shared decision, then follow only its affected details:\n\n- **Design:** Architecture covers responsibility and state ownership; Contracts\n  covers invariants, representations, and consumer promises; Security covers\n  trust and permission. Follow their conditional detail links when needed.\n- **Develop:** Implementation owns the change; Verification owns its evidence;\n  Documentation records durable knowledge. Specialized test techniques are\n  selected separately from an ordinary regression check.\n- **Operate and distribute:** Build owns artifact production, Release owns\n  distribution promises, and Resilience owns failure and recovery.\n\nApplication, boundary, language, and framework profiles refine these concepts.\n`Requires` loads an unconditional prerequisite. `Specializes` names the broader\nconcept refined by a page; it does not mean that the parent loads every child.\nThe tables below and each page's conditional links support further discovery.\nA reading plan orders required prerequisites. Retrieve refinements when their\nstated conditions match the task.\n\n## Routing Procedure\n\n1. State the requested outcome and affected artifact.\n2. Select workflow modules for the activities being performed. Include Planning\n   and its discovery detail when material intent or design uncertainty remains,\n   even when the proposed implementation is bounded. Keep ordinary uncertainty\n   reduction separate when the intended behavior and design are already clear.\n3. Select application, boundary, and language profiles from actual repository\n   facts.\n4. Select topics only when the concern is affected.\n5. Follow each selected module's `Requires` metadata.\n6. Confirm common exclusions.\n7. If a required fact is unknown, report unresolved routing instead of\n   selecting a convenient default.\n## Workflow Selection\n\n| Condition | Select |\n| --- | --- |\n| Change code or standards | [Implementation](workflows/implementation.md) |\n| Prove a behavior, contract, or artifact | [Verification](workflows/verification.md) |\n| Investigation or evidence work may delay a sufficient implementation | [Development Proportionality](workflows/development-proportionality.md) |\n| Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity | [Planning Workflow](workflows/planning.md) |\n| Create commits or manage history, branches, or worktrees | [Commit](workflows/commit.md) |\n| Change durable responsibility, design, contract, or operational knowledge | [Documentation](workflows/documentation.md) |\n| Change build inputs, outputs, invalidation, native integration, or environment use | [Build](workflows/build.md) |\n| Select or configure development tools, CI, scheduling, or orchestration | [Tooling](workflows/tooling.md) |\n| Ship an artifact or change a published promise | [Release](workflows/release.md) |\n\nA bounded change with a clear objective and acceptance path needs no written\nplan solely because it crosses files or layers.\n\n## Workflow Profiles\n\n| Condition | Select |\n| --- | --- |\n| Multiple outstanding proposals can become stale before serial integration | [Concurrent Plan Integration profile](profiles/workflows/concurrent-plan-integration.md) |\n\n## Application Profiles\n\n| Condition | Select |\n| --- | --- |\n| Develop a reusable library, package, crate, or SDK | [Library](profiles/applications/library.md) |\n| Change a web interface, rendering, interactions, or frontend state | [Frontend application profile](profiles/applications/frontend.md) |\n| Change a launcher command, lifecycle, delegation, or outcome | [Launcher application profile](profiles/applications/launcher.md) |\n\n## Boundary Profiles\n\n| Condition | Select |\n| --- | --- |\n| Cross foreign memory, handles, callbacks, or FFI | [Interop boundary profile](profiles/boundaries/interop.md) |\n| Expose host APIs, wrappers, or cross-language representations | [Language Binding boundary profile](profiles/boundaries/language-bindings.md) |\n| Generate a representation consumed as a program contract | [Generated Contract boundary profile](profiles/boundaries/generated-contract.md) |\n| Exchange structured messages across processes or independently changing components | [IPC boundary profile](profiles/boundaries/ipc.md) |\n| Read, write, publish, transact, or migrate durable state | [Persistence boundary profile](profiles/boundaries/persistence.md) |\n\n## Generated Contract Profile Applicability\n\nSelect the Generated Contract profile when a schema or generator produces a\nrepresentation consumed as program behavior, including models, validators,\ntool definitions, bindings, or executable configuration. A generated text or\ndata file does not select the profile when no program consumer interprets it as\na contract.\n\nSelect Language Binding separately only when an actual native/host or\ncross-language representation exists. Select IPC separately only when the\nrepresentation crosses a process, message, plugin-host, or independently\ndeployed boundary. Select Persistence separately only when a supported\nconsumer observes the representation or state after the producing process or\noperation ends.\n\nRoute the observable task facts through the executable Router projection. Do\nnot replace unresolved boundary, consumer, deployment, or persistence facts\nwith a smaller static module list.\n\n## Language Profiles\n\n| Condition | Select |\n| --- | --- |\n| Change C# tasks, await, continuation scheduling, or thread affinity | [C# Async profile](profiles/languages/csharp/async.md) |\n| Change Rust source, Cargo metadata, or generated Rust artifacts | [Rust profile](profiles/languages/rust/README.md) |\n| Change Rust public types, conversions, errors, visibility, traits, features, or Rustdoc | [Rust API profile](profiles/languages/rust/api.md) |\n| Change Cargo dependencies, resolution, auditing, or build-cost measurement | [Rust Dependency profile](profiles/languages/rust/dependencies.md) |\n| Change Rust release toolchains, packages, publication, or evidence | [Rust Release profile](profiles/languages/rust/release.md) |\n| Change Cargo formatting, lint, test, benchmark, coverage, or build-script adapters | [Rust Tooling profile](profiles/languages/rust/tooling.md) |\n| Change Rust async APIs, backpressure, cancellation, or async resource lifetimes | [Rust Async profile](profiles/languages/rust/async.md) |\n| Change Rust targets, target-dependent behavior, or support evidence | [Rust Cross-Platform profile](profiles/languages/rust/cross-platform.md) |\n| Change TypeScript source, compiler settings, declarations, or visible contracts | [TypeScript profile](profiles/languages/typescript.md) |\n| Change promises, overlapping calls, cancellation, or stale-result handling | [TypeScript Async profile](profiles/languages/typescript/async.md) |\n| Rust unsafe operations, unsafe contracts, or unsafe implementations change | [Rust Unsafe](profiles/languages/rust/unsafe.md) |\n| Rust untrusted paths, sizing, queues, or listeners affect security | [Rust Security](profiles/languages/rust/security.md) |\n| Rust crosses a foreign-memory, FFI, or callback boundary | [Rust Interop](profiles/languages/rust/interop.md) |\n| Rust supplies generated host APIs or cross-language representations | [Rust Language Bindings](profiles/languages/rust/language-bindings.md) |\n| No language-specific mechanism changes | No language profile |\n\nLanguage profiles specialize mechanisms only; shared policy remains in the\napplicable general owner.\n\n## Framework Profiles\n\n| Condition | Select |\n| --- | --- |\n| Change Godot object, scene, signal, resource, threading, or lifetime mechanisms | [Godot framework profile](profiles/frameworks/godot.md) |\n| No framework-specific mechanism changes | No framework profile |\n\n## Topic Selection\n\nSelect a canonical topic only when its observable condition is present:\n\n| Concern | Current owner |\n| --- | --- |\n| Accessibility outcome, user interaction semantics, modality, or conformance obligations | [Accessibility](topics/accessibility.md) |\n| Diagnostic purpose, audience, causal identity, context, propagation, retention, disclosure projection, or reporting claim | [Diagnostics](topics/diagnostics.md) |\n| Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes | [Contracts](topics/contracts.md) |\n| Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown | [Concurrency](topics/concurrency.md) |\n| Dependency or service failure, retry, degradation, startup resilience, or recovery semantics | [Resilience](topics/resilience.md) |\n| Filesystem path construction, identity, comparison, or supported-filesystem behavior | [Cross-platform](topics/cross-platform.md) |\n| Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required, including a decision to implement difficult standardized semantics instead of adopting an established implementation | [Dependencies](topics/dependencies.md) |\n| Third-party material is selected, incorporated, adapted, generated from, redistributed, or published | [Licensing](topics/licensing.md) |\n| Performance budget, measurement, optimization, benchmark, resource use, or regression claim changes | [Performance](topics/performance.md) |\n| Module, layer, service, data/state authority, dependency direction, or runtime composition changes | [Architecture](topics/architecture.md) |\n| Untrusted input, protected operations, sensitive data, credentials, transport security, or dependency trust changes | [Security](topics/security.md) |\n\nThe presence of a topic document in the repository is not an applicability\ncondition.\n\n## Conditional Details\n\nAfter selecting broad concerns, use these conditions to narrow the reading.\nThe executable fact `routing.details` accepts the canonical IDs below. Known\nabsence is an empty set; unknown conditions remain unresolved. Generated\ncontracts, IPC, persistence, cross-language bindings, and platform verification\nalso select their corresponding details from the existing boundary and task\nfacts. Select a detail page when its corresponding specialized decision is affected.\n\n| Condition | Select |\n| --- | --- |\n| A change makes structural, abstraction, or terminology decisions | [Code Design And Ownership](topics/code-design.md) |\n| A handle promises immutable results or replay | [topic.architecture.replay](topics/architecture/replay.md) |\n| A change affects schema dialects, generated contracts, or contract version invalidation | [topic.contracts.schemas](topics/contracts/schemas.md) |\n| A change projects domain outcomes into a protocol or adapts a protocol boundary | [topic.contracts.protocols](topics/contracts/protocols.md) |\n| A change affects contract compatibility, persisted representations, or independently changing consumers | [topic.contracts.evolution](topics/contracts/evolution.md) |\n| A change creates a validator, negative fixture, property test, differential test, or other independent oracle | [workflow.verification.oracles](workflows/verification/oracles.md) |\n| A claim spans supported targets or requires platform-specific evidence | [workflow.verification.platforms](workflows/verification/platforms.md) |\n| Rust bindings adapt events, callback tasks, runtime handles, or executors | [profile.language.rust.binding-lifecycle](profiles/languages/rust/binding-lifecycle.md) |\n| A change selects maintenance channels, publication presentation, or release recovery procedures | [workflow.release.operations](workflows/release/operations.md) |\n| A graphical user workflow requires smoke evidence | [workflow.verification.gui](workflows/verification/gui.md) |\n| Material user-intent, behavior, constraint, feasibility, or design uncertainty must be resolved before implementation planning or material replanning | [Discovery And Design](workflows/planning/discovery.md) |\n\n## Additional Routing Rules\n\n| Condition | Select |\n| --- | --- |\n| Maintain this standards library through its authoring interface | [Standards Authoring Workflow](workflows/standards-authoring.md) |\n| Executed behavior has less permitted authority than its host, a protected intermediary acts for a less-trusted caller, or an execution isolation promise changes | [Untrusted Execution And Delegated Authority](topics/security/untrusted-execution.md) |\n\n## S1 Rust Library Bug-Fix Route\n\nFor a bounded Rust parser repair in a reusable library, retrieve the optional\nreference `reference.routing.bounded-rust-repair`. Its stated task facts\nillustrate conditional selection; derive each project's route from its actual facts.\n\n## Invalid Or Legacy Routing\n\nUse canonical owners for policy; legacy entrypoints are navigation only.\nReport unresolved material facts, conflicting ownership, dependency cycles,\nor a missing canonical route. Continue independently routable work and resolve\nthe missing qualification before treating the affected route as complete.\n",
+    "requires": [
+      "core"
+    ],
+    "specializes": [],
+    "related": [
+      {
+        "source": "reference.routing.bounded-rust-repair",
+        "target": "router",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "router",
+        "target": "core",
+        "relation": "requires",
+        "groups": [
+          "standards-requires",
+          "standards-dependencies"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "core.application-guidance",
+        "target": "router",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "profile.boundary.generated-contract.applicability",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "s1-routing",
+        "relation": "enforcement-suite-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "consumer.analysis.routing-tests",
+        "relation": "fixture-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "consumer.engine.navigation-tests",
+        "relation": "fixture-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "tools/standards_engine/standards_engine/engine.py",
+        "relation": "implementation-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "topic.cross-platform",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "workflow.release",
+        "relation": "normative-consumer",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "prompts/full-codebase-standards-refactor.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "prompts/implement-plan.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "prompts/planning.md",
+        "relation": "prompt-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router.selection-procedure",
+        "target": "reference.routing.bounded-rust-repair",
+        "relation": "reference-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.contracts.generated-semantic-conformance",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.dependencies.implementation-versus-dependency",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "topic.security.untrusted-execution-selection",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.commit.per-commit-boundary",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.commit.worktree-lifecycle",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.discovery-entry",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "workflow.planning.written-plan-applicability",
+        "target": "router",
+        "relation": "router-projection",
+        "groups": [
+          "policy-impact",
+          "semantic"
+        ],
+        "direction": "incoming",
+        "traversal_eligible": true,
+        "applicability": "unknown"
+      },
+      {
+        "source": "router",
+        "target": "provenance.router.planning-discovery",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      },
+      {
+        "source": "router",
+        "target": "provenance.router.positive-guidance",
+        "relation": "justified-by",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "traversal_eligible": true,
+        "applicability": "not-declared"
+      }
+    ],
+    "next_operations": [
+      {
+        "operation": "query_proposal",
+        "request_kind": "related",
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+          "schema_version": 1
+        },
+        "target": "router"
+      }
+    ],
+    "summary": "Read projected standard router.",
+    "routing": {
+      "facts": [
+        {
+          "id": "routing.activities",
+          "semantic_revision": 2,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "build",
+            "commit",
+            "documentation",
+            "implementation",
+            "planning",
+            "release",
+            "tooling",
+            "uncertainty-reduction",
+            "verification"
+          ],
+          "aliases": [],
+          "meaning": "The development activities performed by the requested work.",
+          "prompt": "Which development activities are part of the requested work?"
+        },
+        {
+          "id": "routing.applications",
+          "semantic_revision": 1,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "frontend",
+            "launcher",
+            "library"
+          ],
+          "aliases": [],
+          "meaning": "Application forms affected by the requested work.",
+          "prompt": "Which application forms are affected?"
+        },
+        {
+          "id": "routing.boundaries",
+          "semantic_revision": 2,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "generated-contract",
+            "interop",
+            "ipc",
+            "language-bindings",
+            "persistence"
+          ],
+          "aliases": [],
+          "meaning": "Authority or representation boundaries crossed by the requested work.",
+          "prompt": "Which authority or representation boundaries are crossed?"
+        },
+        {
+          "id": "routing.details",
+          "semantic_revision": 4,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "profile.language.rust.binding-lifecycle",
+            "topic.architecture.replay",
+            "topic.code-design",
+            "topic.contracts.evolution",
+            "topic.contracts.protocols",
+            "topic.contracts.schemas",
+            "topic.security.untrusted-execution",
+            "workflow.planning.discovery",
+            "workflow.release.operations",
+            "workflow.standards-authoring",
+            "workflow.verification.gui",
+            "workflow.verification.oracles",
+            "workflow.verification.platforms"
+          ],
+          "aliases": [],
+          "meaning": "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns.",
+          "prompt": "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change? Must material user-intent, behavior, constraint, feasibility, or design uncertainty be resolved before implementation planning or material replanning?"
+        },
+        {
+          "id": "routing.frameworks",
+          "semantic_revision": 1,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "godot"
+          ],
+          "aliases": [],
+          "meaning": "Framework-specific mechanisms affected by the requested work.",
+          "prompt": "Which framework-specific mechanisms are affected?"
+        },
+        {
+          "id": "routing.languages",
+          "semantic_revision": 2,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "csharp-async",
+            "rust",
+            "rust-api",
+            "rust-async",
+            "rust-cross-platform",
+            "rust-dependencies",
+            "rust-interop",
+            "rust-language-bindings",
+            "rust-release",
+            "rust-security",
+            "rust-tooling",
+            "rust-unsafe",
+            "typescript",
+            "typescript-async"
+          ],
+          "aliases": [],
+          "meaning": "Language-specific mechanisms affected by the requested work.",
+          "prompt": "Which language-specific mechanisms are affected?"
+        },
+        {
+          "id": "routing.topics",
+          "semantic_revision": 1,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "accessibility",
+            "architecture",
+            "concurrency",
+            "contracts",
+            "cross-platform",
+            "dependencies",
+            "diagnostics",
+            "licensing",
+            "performance",
+            "resilience",
+            "security"
+          ],
+          "aliases": [],
+          "meaning": "Cross-cutting concerns affected by the requested work.",
+          "prompt": "Which cross-cutting concerns are affected?"
+        },
+        {
+          "id": "routing.workflow-profiles",
+          "semantic_revision": 1,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "concurrent-plan-integration"
+          ],
+          "aliases": [],
+          "meaning": "Workflow profiles selected by observable coordination conditions.",
+          "prompt": "Can multiple outstanding proposals become stale before serial integration?"
+        }
+      ],
+      "rules": [
+        {
+          "id": "route.application.frontend",
+          "target": "profile.application.frontend",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.applications",
+            "value": "frontend"
+          },
+          "condition": "Change a web interface, rendering, interactions, or frontend state"
+        },
+        {
+          "id": "route.application.launcher",
+          "target": "profile.application.launcher",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.applications",
+            "value": "launcher"
+          },
+          "condition": "Change a launcher command, lifecycle, delegation, or outcome"
+        },
+        {
+          "id": "route.application.library",
+          "target": "profile.application.library",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.applications",
+            "value": "library"
+          },
+          "condition": "Develop a reusable library, package, crate, or SDK"
+        },
+        {
+          "id": "route.boundary.generated-contract",
+          "target": "profile.boundary.generated-contract",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.boundaries",
+            "value": "generated-contract"
+          },
+          "condition": "Generate a representation consumed as a program contract"
+        },
+        {
+          "id": "route.boundary.interop",
+          "target": "profile.boundary.interop",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.boundaries",
+            "value": "interop"
+          },
+          "condition": "Cross foreign memory, handles, callbacks, or FFI"
+        },
+        {
+          "id": "route.boundary.ipc",
+          "target": "profile.boundary.ipc",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.boundaries",
+            "value": "ipc"
+          },
+          "condition": "Exchange structured messages across processes or independently changing components"
+        },
+        {
+          "id": "route.boundary.language-bindings",
+          "target": "profile.boundary.language-bindings",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.boundaries",
+            "value": "language-bindings"
+          },
+          "condition": "Expose host APIs, wrappers, or cross-language representations"
+        },
+        {
+          "id": "route.boundary.persistence",
+          "target": "profile.boundary.persistence",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.boundaries",
+            "value": "persistence"
+          },
+          "condition": "Read, write, publish, transact, or migrate durable state"
+        },
+        {
+          "id": "route.detail.profile.language.rust.binding-lifecycle",
+          "target": "profile.language.rust.binding-lifecycle",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "profile.language.rust.binding-lifecycle"
+              },
+              {
+                "operator": "all",
+                "expressions": [
+                  {
+                    "operator": "any",
+                    "expressions": [
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-api"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-dependencies"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-release"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-tooling"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-async"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-cross-platform"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-unsafe"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-security"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-interop"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-language-bindings"
+                      }
+                    ]
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.boundaries",
+                    "value": "language-bindings"
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.languages",
+                    "value": "rust-async"
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "Rust bindings adapt events, callback tasks, runtime handles, or executors"
+        },
+        {
+          "id": "route.detail.topic.architecture.replay",
+          "target": "topic.architecture.replay",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "topic.architecture.replay"
+          },
+          "condition": "A handle promises immutable results or replay"
+        },
+        {
+          "id": "route.detail.topic.code-design",
+          "target": "topic.code-design",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "topic.code-design"
+              },
+              {
+                "operator": "contains",
+                "fact": "routing.topics",
+                "value": "architecture"
+              }
+            ]
+          },
+          "condition": "A change makes structural, abstraction, or terminology decisions"
+        },
+        {
+          "id": "route.detail.topic.contracts.evolution",
+          "target": "topic.contracts.evolution",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "topic.contracts.evolution"
+              },
+              {
+                "operator": "any",
+                "expressions": [
+                  {
+                    "operator": "contains",
+                    "fact": "routing.boundaries",
+                    "value": "persistence"
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.boundaries",
+                    "value": "language-bindings"
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "A change affects contract compatibility, persisted representations, or independently changing consumers"
+        },
+        {
+          "id": "route.detail.topic.contracts.protocols",
+          "target": "topic.contracts.protocols",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "topic.contracts.protocols"
+              },
+              {
+                "operator": "contains",
+                "fact": "routing.boundaries",
+                "value": "ipc"
+              }
+            ]
+          },
+          "condition": "A change projects domain outcomes into a protocol or adapts a protocol boundary"
+        },
+        {
+          "id": "route.detail.topic.contracts.schemas",
+          "target": "topic.contracts.schemas",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "topic.contracts.schemas"
+              },
+              {
+                "operator": "contains",
+                "fact": "routing.boundaries",
+                "value": "generated-contract"
+              }
+            ]
+          },
+          "condition": "A change affects schema dialects, generated contracts, or contract version invalidation"
+        },
+        {
+          "id": "route.detail.topic.security.untrusted-execution",
+          "target": "topic.security.untrusted-execution",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "topic.security.untrusted-execution"
+          },
+          "condition": "Executed behavior has less permitted authority than its host, a protected intermediary acts for a less-trusted caller, or an execution isolation promise changes"
+        },
+        {
+          "id": "route.detail.workflow.planning.discovery",
+          "target": "workflow.planning.discovery",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.planning.discovery"
+          },
+          "condition": "Material user-intent, behavior, constraint, feasibility, or design uncertainty must be resolved before implementation planning or material replanning"
+        },
+        {
+          "id": "route.detail.workflow.release.operations",
+          "target": "workflow.release.operations",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.release.operations"
+          },
+          "condition": "A change selects maintenance channels, publication presentation, or release recovery procedures"
+        },
+        {
+          "id": "route.detail.workflow.standards-authoring",
+          "target": "workflow.standards-authoring",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.standards-authoring"
+          },
+          "condition": "Maintain this standards library through its authoring interface"
+        },
+        {
+          "id": "route.detail.workflow.verification.gui",
+          "target": "workflow.verification.gui",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.verification.gui"
+          },
+          "condition": "A graphical user workflow requires smoke evidence"
+        },
+        {
+          "id": "route.detail.workflow.verification.oracles",
+          "target": "workflow.verification.oracles",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.verification.oracles"
+          },
+          "condition": "A change creates a validator, negative fixture, property test, differential test, or other independent oracle"
+        },
+        {
+          "id": "route.detail.workflow.verification.platforms",
+          "target": "workflow.verification.platforms",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "workflow.verification.platforms"
+              },
+              {
+                "operator": "all",
+                "expressions": [
+                  {
+                    "operator": "contains",
+                    "fact": "routing.activities",
+                    "value": "verification"
+                  },
+                  {
+                    "operator": "any",
+                    "expressions": [
+                      {
+                        "operator": "contains",
+                        "fact": "routing.topics",
+                        "value": "cross-platform"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-cross-platform"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "A claim spans supported targets or requires platform-specific evidence"
+        },
+        {
+          "id": "route.framework.godot",
+          "target": "profile.framework.godot",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.frameworks",
+            "value": "godot"
+          },
+          "condition": "Change Godot object, scene, signal, resource, threading, or lifetime mechanisms"
+        },
+        {
+          "id": "route.language.csharp-async",
+          "target": "profile.language.csharp.async",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "csharp-async"
+          },
+          "condition": "Change C# tasks, await, continuation scheduling, or thread affinity"
+        },
+        {
+          "id": "route.language.rust",
+          "target": "profile.language.rust",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust"
+          },
+          "condition": "Change Rust source, Cargo metadata, or generated Rust artifacts"
+        },
+        {
+          "id": "route.language.rust-api",
+          "target": "profile.language.rust.api",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-api"
+          },
+          "condition": "Change Rust public types, conversions, errors, visibility, traits, features, or Rustdoc"
+        },
+        {
+          "id": "route.language.rust-async",
+          "target": "profile.language.rust.async",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-async"
+          },
+          "condition": "Change Rust async APIs, backpressure, cancellation, or async resource lifetimes"
+        },
+        {
+          "id": "route.language.rust-cross-platform",
+          "target": "profile.language.rust.cross-platform",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-cross-platform"
+          },
+          "condition": "Change Rust targets, target-dependent behavior, or support evidence"
+        },
+        {
+          "id": "route.language.rust-dependencies",
+          "target": "profile.language.rust.dependencies",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-dependencies"
+          },
+          "condition": "Change Cargo dependencies, resolution, auditing, or build-cost measurement"
+        },
+        {
+          "id": "route.language.rust-interop",
+          "target": "profile.language.rust.interop",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.languages",
+                "value": "rust-interop"
+              },
+              {
+                "operator": "all",
+                "expressions": [
+                  {
+                    "operator": "any",
+                    "expressions": [
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-api"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-dependencies"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-release"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-tooling"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-async"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-cross-platform"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-unsafe"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-security"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-interop"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-language-bindings"
+                      }
+                    ]
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.boundaries",
+                    "value": "interop"
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "Rust crosses a foreign-memory, FFI, or callback boundary"
+        },
+        {
+          "id": "route.language.rust-language-bindings",
+          "target": "profile.language.rust.language-bindings",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.languages",
+                "value": "rust-language-bindings"
+              },
+              {
+                "operator": "all",
+                "expressions": [
+                  {
+                    "operator": "any",
+                    "expressions": [
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-api"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-dependencies"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-release"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-tooling"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-async"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-cross-platform"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-unsafe"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-security"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-interop"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-language-bindings"
+                      }
+                    ]
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.boundaries",
+                    "value": "language-bindings"
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "Rust supplies generated host APIs or cross-language representations"
+        },
+        {
+          "id": "route.language.rust-release",
+          "target": "profile.language.rust.release",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-release"
+          },
+          "condition": "Change Rust release toolchains, packages, publication, or evidence"
+        },
+        {
+          "id": "route.language.rust-security",
+          "target": "profile.language.rust.security",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.languages",
+                "value": "rust-security"
+              },
+              {
+                "operator": "all",
+                "expressions": [
+                  {
+                    "operator": "any",
+                    "expressions": [
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-api"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-dependencies"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-release"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-tooling"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-async"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-cross-platform"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-unsafe"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-security"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-interop"
+                      },
+                      {
+                        "operator": "contains",
+                        "fact": "routing.languages",
+                        "value": "rust-language-bindings"
+                      }
+                    ]
+                  },
+                  {
+                    "operator": "contains",
+                    "fact": "routing.topics",
+                    "value": "security"
+                  }
+                ]
+              }
+            ]
+          },
+          "condition": "Rust untrusted paths, sizing, queues, or listeners affect security"
+        },
+        {
+          "id": "route.language.rust-tooling",
+          "target": "profile.language.rust.tooling",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-tooling"
+          },
+          "condition": "Change Cargo formatting, lint, test, benchmark, coverage, or build-script adapters"
+        },
+        {
+          "id": "route.language.rust-unsafe",
+          "target": "profile.language.rust.unsafe",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "rust-unsafe"
+          },
+          "condition": "Rust unsafe operations, unsafe contracts, or unsafe implementations change"
+        },
+        {
+          "id": "route.language.typescript",
+          "target": "profile.language.typescript",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "typescript"
+          },
+          "condition": "Change TypeScript source, compiler settings, declarations, or visible contracts"
+        },
+        {
+          "id": "route.language.typescript-async",
+          "target": "profile.language.typescript.async",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.languages",
+            "value": "typescript-async"
+          },
+          "condition": "Change promises, overlapping calls, cancellation, or stale-result handling"
+        },
+        {
+          "id": "route.profile.concurrent-plan-integration",
+          "target": "profile.workflow.concurrent-plan-integration",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.workflow-profiles",
+            "value": "concurrent-plan-integration"
+          },
+          "condition": "Multiple outstanding proposals can become stale before serial integration"
+        },
+        {
+          "id": "route.topic.accessibility",
+          "target": "topic.accessibility",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "accessibility"
+          },
+          "condition": "Accessibility outcome, user interaction semantics, modality, or conformance obligations"
+        },
+        {
+          "id": "route.topic.architecture",
+          "target": "topic.architecture",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "architecture"
+          },
+          "condition": "Module, layer, service, data/state authority, dependency direction, or runtime composition changes"
+        },
+        {
+          "id": "route.topic.concurrency",
+          "target": "topic.concurrency",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "concurrency"
+          },
+          "condition": "Shared mutable state, overlapping work, async failure ownership, cancellation, or shutdown"
+        },
+        {
+          "id": "route.topic.contracts",
+          "target": "topic.contracts",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "contracts"
+          },
+          "condition": "Runtime decoding, contract evolution, persistence compatibility, version overlap, or degraded outcomes"
+        },
+        {
+          "id": "route.topic.cross-platform",
+          "target": "topic.cross-platform",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "cross-platform"
+          },
+          "condition": "Filesystem path construction, identity, comparison, or supported-filesystem behavior"
+        },
+        {
+          "id": "route.topic.dependencies",
+          "target": "topic.dependencies",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "dependencies"
+          },
+          "condition": "Dependency requirement, ownership, selection, resolution, provisioning, update, or removal policy is required, including a decision to implement difficult standardized semantics instead of adopting an established implementation"
+        },
+        {
+          "id": "route.topic.diagnostics",
+          "target": "topic.diagnostics",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "diagnostics"
+          },
+          "condition": "Diagnostic purpose, audience, causal identity, context, propagation, retention, disclosure projection, or reporting claim"
+        },
+        {
+          "id": "route.topic.licensing",
+          "target": "topic.licensing",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "licensing"
+          },
+          "condition": "Third-party material is selected, incorporated, adapted, generated from, redistributed, or published"
+        },
+        {
+          "id": "route.topic.performance",
+          "target": "topic.performance",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "performance"
+          },
+          "condition": "Performance budget, measurement, optimization, benchmark, resource use, or regression claim changes"
+        },
+        {
+          "id": "route.topic.resilience",
+          "target": "topic.resilience",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "resilience"
+          },
+          "condition": "Dependency or service failure, retry, degradation, startup resilience, or recovery semantics"
+        },
+        {
+          "id": "route.topic.security",
+          "target": "topic.security",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.topics",
+            "value": "security"
+          },
+          "condition": "Untrusted input, protected operations, sensitive data, credentials, transport security, or dependency trust changes"
+        },
+        {
+          "id": "route.workflow.build",
+          "target": "workflow.build",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "build"
+          },
+          "condition": "Change build inputs, outputs, invalidation, native integration, or environment use"
+        },
+        {
+          "id": "route.workflow.commit",
+          "target": "workflow.commit",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "commit"
+          },
+          "condition": "Create commits or manage history, branches, or worktrees"
+        },
+        {
+          "id": "route.workflow.development-proportionality",
+          "target": "workflow.development-proportionality",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "uncertainty-reduction"
+          },
+          "condition": "Investigation or evidence work may delay a sufficient implementation"
+        },
+        {
+          "id": "route.workflow.documentation",
+          "target": "workflow.documentation",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "documentation"
+          },
+          "condition": "Change durable responsibility, design, contract, or operational knowledge"
+        },
+        {
+          "id": "route.workflow.implementation",
+          "target": "workflow.implementation",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "implementation"
+          },
+          "condition": "Change code or standards"
+        },
+        {
+          "id": "route.workflow.planning",
+          "target": "workflow.planning",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.activities",
+                "value": "planning"
+              },
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "workflow.planning.discovery"
+              }
+            ]
+          },
+          "condition": "Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity"
+        },
+        {
+          "id": "route.workflow.release",
+          "target": "workflow.release",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "release"
+          },
+          "condition": "Ship an artifact or change a published promise"
+        },
+        {
+          "id": "route.workflow.tooling",
+          "target": "workflow.tooling",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "tooling"
+          },
+          "condition": "Select or configure development tools, CI, scheduling, or orchestration"
+        },
+        {
+          "id": "route.workflow.verification",
+          "target": "workflow.verification",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "verification"
+          },
+          "condition": "Prove a behavior, contract, or artifact"
+        }
+      ]
+    },
+    "application_exposure": "current",
+    "provenance": [
+      "provenance.router.planning-discovery",
+      "provenance.router.positive-guidance"
+    ]
+  },
+  "prompts/planning.md": {
+    "kind": "operational-read-result",
+    "authority": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+      "schema_version": 1
+    },
+    "target": {
+      "kind": "authoring-target-handle",
+      "snapshot": {
+        "kind": "snapshot-handle",
+        "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+        "schema_version": 5
+      },
+      "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+      "schema_version": 5
+    },
+    "canonical_id": "prompts/planning.md",
+    "role": "prompt",
+    "content": "# Planning Prompt\n\nEstablish or revise an implementation direction under [Planning](../workflows/planning.md).\nBegin with its discovery phase when material intent or design questions remain.\nCreate or revise a written plan only when Planning's applicability criteria require\none. Keep this operation within planning scope.\n\n1. Read Core and route the task's actual facts through Router.\n2. Establish the intended outcome and distinguish firm choices, preferences, and hypotheses. Follow [Discovery And Design](../workflows/planning/discovery.md) for unresolved intent, behavior, constraints, feasibility, or design questions. Keep the main agent responsive to the person while bounded research agents investigate independent questions; for substantial discovery, use a separate visual-document agent to maintain the provisional local HTML and CSS view.\n3. Inspect repository state, affected code and contracts, and material technology or API assumptions. Compare meaningful alternatives when warranted, including changing the existing structure. Surface implied behavior and explain the proposed outcome, consequences, tradeoffs, and uncertainty back to the person before treating the direction as agreed.\n4. Select observable acceptance claims from that understanding. Apply Planning's written-plan criteria and use the [Plan template](../templates/PLAN-TEMPLATE.md) when a written plan is needed. Keep provisional discovery separate from approved plan lifecycle and implementation authority.\n5. Identify an early real observation for any external-interface or environment\n   assumption that could invalidate the design. Separate that design decision\n   from final acceptance, and name the owner/procedure for remaining evidence.\n6. Discuss meaningful development and integration boundaries up front; link\n   branch and merge choices to [Commit](../workflows/commit.md). When a written\n   plan is required, select coherent milestones and slices. Split for material\n   acceptance, risk, dependency, conflict, rollback, or feedback value.\n7. Bind review to material content. When a written plan governs the work, record\n   lifecycle changes with their causing outcome or evidence. Commit owns Git\n   topology and commit boundaries.\n8. Bound delegation, concurrency, and repository isolation by their actual\n   applicability; preserve the owning workflows' authority and cleanup evidence.\n9. Identify the deciding oracle for each claim. Use established dependencies\n   for difficult semantics when they satisfy the affected requirements.\n10. Record composed-design review applicability and, when applicable, the\n    current Architecture-owned artifact probe. Review a material replacement anew.\n11. Set replanning triggers for changed objective, ownership, contract, risk,\n    sequencing, or acceptance meaning. Keep ordinary repairs inside a valid slice.\n12. For systemic findings, bound the canonical owner and reachable consumers;\n    record dispositions and a stopping condition under Planning.\n13. When a written plan is required, put current decisions in the plan, findings\n    in issues, and detailed evidence and history in their linked reports and\n    ledger. Otherwise, retain the agreed outcome, consequential decisions, and\n    acceptance path in the conversation or existing task record.\n\nKeep current-format, identity, compatibility, migration, and allocation authority\nwith their actual owners. Follow the applicable Contracts and Architecture\nrequirements for independent change and invalidation.\n\nResolve missing or contradictory authoritative facts before admitting dependent\nwork. Continue bounded independent work where that uncertainty cannot change\nits decisions.\n",
+    "application_exposure": "current",
+    "next_operations": []
+  }
+}

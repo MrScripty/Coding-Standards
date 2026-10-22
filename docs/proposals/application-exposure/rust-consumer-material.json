@@ -1,0 +1,667 @@
+[
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.async",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Async Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.async`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: Rust code changes an asynchronous API, suspension boundary, concurrent I/O contract, stream, backpressure, cancellation-aware operation, or async resource lifetime.\n- Does not apply when: The affected Rust behavior is synchronous and does not select or change an asynchronous contract or mechanism.\n- Requires: `core`, `workflow.verification`, `topic.concurrency`, `profile.language.rust`\n- Specializes: `topic.concurrency`, `profile.language.rust`\n- Verification: Rust async-boundary, lifecycle, blocking-isolation, and synchronization decisions plus affected API, cancellation, integration, and shutdown tests.\n- Canonical owner: `profiles/languages/rust/async.md`\n\n## Select The Execution Contract\n\nSelect synchronous or asynchronous behavior from:\n\n- whether the operation suspends for I/O or scheduling;\n- whether concurrent I/O, streaming, or backpressure is part of the contract;\n- caller and consumer deployment/API constraints;\n- cancellation and lifecycle obligations; and\n- supported execution capabilities.\n\nDo not add `async` merely because a caller is asynchronous. Do not remove\n`async` merely to satisfy a blanket synchronous-core preference.\n\n## Keep Non-Suspending Logic Synchronous\n\nParsing, validation, transformation, policy, and other pure logic remain\nsynchronous when they have no suspension, concurrency, cancellation, or async\nresource-lifetime contract. An async shell may call that synchronous logic\nwithout making the inner operation asynchronous.\n\nA function with no suspension point requires an explicit contract reason to be\nasync. Caller convenience alone is not sufficient.\n\n## Preserve Genuine Async Contracts\n\nAn async core or library API is valid when concurrent I/O, streaming,\nbackpressure, cancellation, or an async resource lifetime is part of its\nobservable contract. Record that contract and verify it through the real\nsupported execution path.\n\nLibrary ownership does not imply synchronous or asynchronous behavior by\ndefault. Public API shape follows the library's consumer and lifecycle\ncontract.\n\n## Runtime Composition\n\nThe adopting application's composition root owns runtime construction,\nconfiguration, sharing, and shutdown. A library consumes an injected runtime\ncapability or exposes an async contract to its caller; it does not create a\nprocess-global or alternate runtime to make an operation execute.\n\nThe composition owner records supported runtime capabilities and makes them\navailable to all operations that share that runtime. A request, task, binding,\nor library call may use the selected capability without becoming the runtime\nowner.\n\n## Own Spawned Work\n\nEvery spawned task is registered with one lifecycle owner before it can outlive\nits spawning scope. That owner:\n\n- retains the task's completion capability;\n- observes success, failure, panic, and cancellation;\n- defines whether and when restart is valid;\n- includes the task in shutdown; and\n- releases tracking only after a terminal outcome is observed.\n\nThe concrete task set or handle type follows the selected runtime. Returning\nfrom a spawn call, logging inside the task, or discarding a handle does not\nestablish ownership.\n\n## Coordinate Shutdown\n\nAn owned shutdown sequence:\n\n1. makes repeated shutdown requests idempotent or returns the same typed\n   terminal outcome;\n2. closes admission for new owned work;\n3. signals cancellation through the selected mechanism;\n4. drains and observes tracked work; and\n5. reports complete, incomplete, or failed shutdown through typed outcomes.\n\nA time limit does not itself authorize abort. Force-abort is permitted only\nwhen the lifecycle owner has abort authority and the operation contract proves\nthat interruption cannot violate required consistency, durability, or release\nobligations. Otherwise an incomplete drain remains a typed incomplete or\nunavailable outcome for the owning operation.\n\n## Isolate Blocking Work\n\nClassify whether an operation can block its executing thread or consume\nsustained CPU before placing it on an async execution path. Use a supported\nasync capability only when it preserves the operation's I/O, cancellation,\nresource-lifetime, ordering, and failure contract.\n\nThe runtime composition and lifecycle boundary owns the isolation capability\nfor unavoidable blocking or CPU-heavy work. That capability defines admission,\ncapacity, completion observation, cancellation/shutdown behavior, and resource\naccounting. Isolation without a bounded or otherwise governed capacity contract\nis not sufficient.\n\nDo not execute blocking work inline on an async request or lifecycle path. Do\nnot invoke or await blocking work while holding a synchronization guard.\nPreserve related invariants through an appropriate ownership, coordination, or\ntransaction design rather than splitting the protected operation for\nconvenience.\n\n## Select Synchronization From Contract\n\nSelect synchronization from:\n\n- whether the protected critical section can suspend;\n- the complete invariant and ownership boundary;\n- contention and read/write behavior;\n- fairness, poisoning, recovery, and cancellation obligations; and\n- capabilities supported by the selected runtime and deployment.\n\nA non-suspending critical section uses a mechanism that does not require\nsuspension support. A guard crosses suspension only when the selected mechanism\nsupports that behavior and the invariant requires the protected scope. If no\nsupported mechanism can preserve the invariant, redesign ownership or\ncoordination, or return the operation's typed unavailable outcome.\n\nDo not call external, plugin, callback, or user-controlled behavior while a\nguard is held. Do not select one synchronization implementation as a universal\ndefault for all Rust state.\n\n## Prove Cancellation State\n\nStopping or dropping future polling proves only that the future will not be\npolled by that owner. It does not prove that external I/O, a remote request, a\nblocking operation, or another independently owned side effect stopped or\nrolled back.\n\nDerive external cancellation and terminal-state claims from the affected\ncapability's contract and evidence. If external work may continue, preserve its\nidentity and ownership so completion, cancellation, reconciliation, or retry\ncan be handled explicitly.\n\n## Preserve Durable Work\n\nBefore a durable multi-step operation crosses a cancellation point, select a\ntransactional, idempotent, resumable, or compensating design that preserves its\nrequired invariant. A cancellation boundary cannot leave authoritative state\nin an unclassified partial outcome.\n\n## Own Asynchronous Cleanup\n\nCleanup that can suspend has an explicit lifecycle-owned completion path.\nSynchronous destruction may release synchronous resources or enforce a local\nsafety invariant, but it does not stand in for required asynchronous cleanup.\nDo not detach cleanup merely to let destruction or shutdown return.\n\n## Own Lifecycle Evidence\n\nThe lifecycle owner observes health, success, failure, panic, cancellation, and\nshutdown outcomes for its owned work. Leaf operations may emit diagnostic\ncontext, but leaf logging does not establish terminal-state ownership or prove\nthat a failed task remains supervised.\n\nSelect health, telemetry, and inspection mechanisms from the operational\ncontract and supported environment. Tool availability is not evidence unless\nthe lifecycle owner consumes the relevant signal and connects it to an owned\noperation and terminal outcome.\n\n## Typed Outcomes\n\nReturn the operation's typed `unsupported` or `unavailable` outcome when its\nrequired execution contract cannot be provided. Preserve operation-specific\nfailures when they are more precise. Runtime, task, and shutdown failures retain\ntheir operation-specific terminal outcome. Missing blocking-isolation,\ncapacity, synchronization, cancellation, cleanup, or observation capability\nremains explicit.\n\n## No Fallback\n\nUnresolved execution requirements cannot select sync, async, a thread, a\nruntime, blocking, or detached work by convenience. Do not silently change the\nAPI contract, block an async path, create a runtime, or discard owned work to\nmake the operation execute.\n\nMissing lifecycle proof cannot create a library-global or alternate runtime,\ndetach work, treat leaf logging as ownership, discard failure or panic, keep\nadmission open while draining, or force-abort work without authority and\ninterruption safety.\n\nMissing execution or synchronization proof cannot block inline, create an\nalternate executor or thread, run unbounded isolated work, hold an unsupported\nguard across suspension, split a related invariant, or select a universal\nmutex.\n\nRuntime construction, task ownership, shutdown sequencing, blocking isolation,\nsynchronization selection, cancellation safety, cleanup, and lifecycle\nevidence are defined above without selecting a project-specific mechanism.\n\nMissing cancellation or observation proof cannot assume external cancellation\nfrom a dropped future, leave durable work unprotected, delegate async cleanup\nonly to synchronous destruction, detach cleanup, treat leaf logging as\nownership, permit silent task death, or present tool availability as lifecycle\nevidence.\n\n## Verification\n\nEvidence covers the affected contract:\n\n- pure non-suspending logic remains callable synchronously;\n- real I/O or streaming paths suspend through the supported mechanism;\n- cancellation and resource lifetimes remain observable where contracted;\n- sync and async public consumers receive the declared API;\n- unsupported or unavailable execution capability returns a typed outcome;\n- runtime construction occurs only at the selected composition owner;\n- spawned work reaches one observed terminal outcome;\n- shutdown closes admission, signals cancellation, and drains tracked work;\n- abort paths prove authority and interruption safety; and\n- blocking work uses an equivalent async capability or governed isolation;\n- isolated work participates in admission, completion, and shutdown ownership;\n- synchronization preserves the complete invariant across any suspension;\n- unsupported isolation, capacity, or synchronization returns a typed outcome;\n- dropped future polling is distinguished from external operation state;\n- durable work remains transactional, idempotent, resumable, or compensating;\n- asynchronous cleanup reaches an owned observed completion;\n- lifecycle health and terminal outcomes are observed by their owner;\n- unavailable cancellation, cleanup, or observation returns a typed outcome;\n  and\n- no convenience fallback changes execution mode or ownership.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.concurrency",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "topic.concurrency",
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.async"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.async",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.async.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.api",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust API Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.api`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: A Rust change selects or changes public or boundary-facing type, conversion, visibility, result, panic, trait, parameter, Cargo-feature, or Rustdoc mechanisms.\n- Does not apply when: No Rust API mechanism changes, or the task only selects the generic invariant, architecture, failure, dependency, documentation, compatibility, or consumer contract.\n- Requires: `core`, `topic.contracts`, `workflow.documentation`, `profile.language.rust`\n- Specializes: `profile.language.rust`\n- Verification: Rust API decision fixtures plus affected public API, consumer, compile, and documentation evidence selected by the generic owners.\n- Canonical owner: `profiles/languages/rust/api.md`\n\n## Conditional Generic Guidance\n\nSelect [Architecture](../../../topics/architecture.md) when responsibility or\nstate ownership changes, [Resilience](../../../topics/resilience.md) when\nfailure or retry semantics change, and [Dependencies](../../../topics/dependencies.md)\nwhen dependency or feature selection changes. Select the\n[Library profile](../../applications/library.md) for a reusable package; an API\ninside an application does not by itself make that application a library.\n\n## API Mechanism Authority\n\nGeneric owners select invariants, architecture, failure behavior, dependency\nand feature contracts, documentation obligations, compatibility, and consumer\npromises. This profile selects a Rust mechanism only after those contracts are\naccepted. A Rust type, trait, derive, visibility modifier, parameter wrapper,\nconversion trait, feature, attribute, or documentation form cannot create,\nweaken, or silently complete a missing generic contract.\n\nSelect the smallest supported Rust surface that preserves the accepted\ncontract, consumer capabilities, ownership and lifetime semantics, evolution\npolicy, performance constraints, and evidence claim. Existing syntax,\necosystem convention, brevity, or compiler acceptance alone does not select the\nmechanism.\n\n## Public Contract Trait Mechanisms\n\nImplement or derive a trait only when its semantics are part of the accepted\nconsumer contract and every represented value can satisfy those semantics.\nSelect static or dynamic dispatch, associated or generic parameters, sealed or\ndownstream-implementable traits, extension markers, and result-use attributes\nfrom actual consumer, evolution, object-safety, ownership, performance, and\ncompatibility facts.\n\n`Debug`, `Display`, `Clone`, `Copy`, equality, ordering, hashing,\n`Default`, `#[must_use]`, `#[non_exhaustive]`, sealed traits, associated\ntypes, generics, and trait objects are mechanisms, not baseline requirements.\nDo not derive a trait because neighboring types do, expose implementation state\nto satisfy formatting, make an expensive or identity-bearing value copyable,\ninvent a default state, seal an intended extension point, or make a contract\nnon-exhaustive without an evolution need.\n\n## Validated Type And Conversion Mechanisms\n\nAfter Contracts selects an invariant owner, enforcement point, proof lifetime,\nand failure outcome, select a Rust representation that preserves those facts.\nApplicable mechanisms include a private-field newtype, enum, state-specific\ntype, smart constructor, `TryFrom`, `FromStr`, or another fallible conversion\nwhose success yields the accepted proof-bearing representation.\n\nChoose the mechanism from the source representation, trust boundary, invariant\ncomplexity, mutation paths, consumer needs, error contract, and toolchain\ncapability. A type cannot preserve proof after mutation or external state\ninvalidates its invariant; re-establish proof at the canonical enforcement\npoint rather than trusting stale construction.\n\nNewtypes, enums, private constructors, `TryFrom`, `FromStr`, typestate, and\nnamed two-variant enums are mechanisms, not defaults. Do not select type-level\ncomplexity from subjective bug cost, a fixed state count, public visibility,\nsecurity labels, primitive type names, a parse-once slogan, or preference over\ntests and assertions. Do not wrap every primitive, replace every boolean,\nmandate one conversion trait by input category, or treat successful parsing as\ncomplete operation-specific validation.\n\n## Parameter And Ownership Mechanisms\n\nSelect borrowed or owned parameters from what the operation reads, stores,\ntransfers, mutates, and returns, including the accepted lifetime and allocation\ncontract. Select `&str`, `&Path`, slices, owned values, `AsRef`, `Into`,\n`Cow`, or a domain type only when that mechanism preserves those facts for\nthe supported consumers.\n\nDo not accept an owned value when borrowing satisfies the contract, clone only\nto satisfy an incidental signature, add a generic conversion wrapper solely\nfor convenience, or use `Cow` without a real borrow-or-own behavior. Do not\nreplace a validated domain type with a primitive parameter or introduce a\nwrapper whose conversion, error, allocation, ambiguity, or compatibility\neffects are unowned.\n\n## Crate And Module Boundary Mechanisms\n\nAfter Architecture selects responsibility, dependency direction, public\nsurface, and composition boundaries, express those decisions with supported\nRust crate membership, modules, visibility, re-exports, and conditional\ncompilation. Keep business policy independent of adapters and bindings when the\naccepted architecture requires that separation; do not infer the separation\nfrom crate names or an incumbent workspace layout.\n\nChoose `pub`, `pub(crate)`, private modules, curated re-exports, nested modules,\nworkspace crates, target modules, or item-level `cfg` from the accepted owner\nand consumer contract, compilation boundary, platform variation, test surface,\nand toolchain capability. Conditional compilation must preserve one coherent\npublic contract or expose typed unsupported capability; it cannot silently\nselect a different authority or behavior.\n\nCrates, modules, visibility modifiers, re-exports, and `cfg` are mechanisms,\nnot architecture defaults. Do not prescribe `core`, `contracts`, `adapter`,\n`infra`, `bindings`, `app`, `server`, `cli`, or `xtask` roles; a fixed source\ntree; `lib.rs`, `error.rs`, `types.rs`, `platform`, test, benchmark, or example\nplacement; public re-exports; `pub(crate)` implementation modules; or thin\nplatform modules without the accepted architecture and consumer facts.\n\n## Failure Expression Mechanisms\n\nAfter Contracts selects expected absence, invariant, validation, and\nimpossible-state semantics, and after Resilience selects every applicable\noperational failure, recovery, retry, degradation, and availability outcome,\nexpress those decisions with supported Rust mechanisms. The Rust profile does\nnot infer whether a condition is absent, failed, invalid, impossible,\nrecoverable, degradable, or terminal.\n\nSelect `Result`, `Option`, an error type, propagation with `?`, matching,\nassertion, panic, `unreachable!`, `unwrap`, or `expect` only when the accepted\ncontract gives that mechanism the required value, error, termination,\ndiagnostic, and consumer semantics. An `Option` must not erase failure or\nunavailability. Panic, assertion, `unreachable!`, `unwrap`, and `expect` must\nnot replace a missing proof, recovery decision, or typed outcome.\n\nThese are language mechanisms, not situation defaults. Do not select them from\nan external-input label, public visibility, request or lifecycle path, test or\nexample location, prototype status, compile-time construction, or a claim that\nan operation is \"truly infallible.\" Do not mandate `thiserror`, `anyhow`, a\nspecific error-enum shape, prohibition of `Result<T, String>`, added context,\nor preference for `expect` over `unwrap` without the accepted contract and\nconsumer facts.\n\n## Rust Source Feature Expression Mechanisms\n\nAfter Dependencies selects feature, optional-dependency, default, target, and\nfootprint behavior; Contracts selects consumer-visible compatibility; Library\nselects supported real consumer configurations; Documentation selects durable\nartifacts; and Verification selects claim-matched evidence, express the\naccepted public API result with supported Rust source mechanisms.\n\nApplicable mechanisms include item-level or module-level `cfg`, public item and\nmodule exposure under an accepted feature contract, and compile-time conflict\ndiagnostics. Select only mechanisms supported by the declared Rust toolchain,\nand preserve each accepted consumer configuration without exposing an\nunintended public API or silently changing behavior.\n\nRust source mechanisms are not feature-policy defaults. Do not require `cfg`,\npublic feature exposure, mutually exclusive feature handling, `compile_error!`,\nREADME or crate-doc placement, command matrices, or an all-features\nconfiguration without the applicable generic owner decisions and capability\nevidence. Cargo manifest dependency mechanisms belong only to the Rust\nDependency profile.\n\n## Rustdoc Expression Mechanisms\n\nAfter Documentation selects the documentation trigger, artifact, placement,\naudience, and quality contract, and after each content owner supplies its\nauthoritative facts, select a supported Rustdoc expression. Content owners may\ninclude Contracts for invariant and compatibility facts, Resilience for failure\nbehavior, Dependencies for feature facts, Rust Unsafe for safety contracts, and\nLibrary for external-consumer applicability.\n\nApplicable mechanisms include crate-level `//!` documentation, item-level\n`///` documentation, headings, code blocks, doctests, examples, intra-doc links,\nand attributes that control rendered documentation. Select the form from the\naccepted artifact and audience, public surface, content contract, supported\ntoolchain, and evidence claim. Rustdoc form cannot create or weaken the fact it\ndescribes, and generated output cannot replace its canonical source.\n\nRustdoc forms are not documentation defaults. Do not require crate-level docs,\n`# Errors`, `# Panics`, `# Safety`, feature sections, README or crate-doc\nplacement, examples, or explanations of implementation mechanics without the\napplicable owner decision. The Rust Unsafe profile remains authoritative for\npublic unsafe contracts and `# Safety` obligations; this profile only expresses\nan accepted obligation in Rustdoc.\n\n## Typed Outcomes\n\nReturn typed `invalid` when the selected Rust mechanism contradicts the\naccepted contract, ownership, lifetime, consumer, or semantic facts. Return\ntyped `unsupported` when a valid contract has no supported Rust expression\nfor the selected toolchain or consumers. Return typed `unavailable` when a\nrequired contract, owner, consumer capability, toolchain fact, or evidence\nclaim cannot be established.\n\nDo not fall back to an incumbent signature, universal derive set, conventional\ntrait shape, trait object, generic wrapper, owned parameter, clone, primitive\ntype, successful compile, or smallest diff.\n\n## Verification\n\nEvidence covers applicable public consumers, trait semantics, downstream\nimplementation or sealing, dispatch behavior, invariant representation and\nproof lifetime, fallible conversion and rejected inputs, ownership and\nborrowing, allocation and conversion, compatibility, ignored-result behavior,\nand the actual supported toolchain. Compile success proves only that the\nselected program is accepted by that compiler invocation; it does not prove\nsemantic, validation, consumer, compatibility, performance, or documentation\nclaims.\n",
+    "requires": [
+      "core",
+      "topic.contracts",
+      "workflow.documentation",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.api"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.api",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.api.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.security",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Security Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.security`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: Rust consumes an untrusted filesystem path, converts untrusted dimensions, counts, offsets, strides, or lengths before bounded use, owns an external-input queue, or owns a listener boundary whose exposure, admission, connection work, or shutdown affects resource or security guarantees.\n- Does not apply when: Filesystem authority and concurrent-mutation safety are already proven for the complete operation, values are represented by a validated type whose invariant proves the complete arithmetic and resource contract, no external-input queue is affected, and no Rust listener boundary is affected.\n- Requires: `core`, `workflow.verification`, `topic.security`, `profile.language.rust`\n- Specializes: `topic.security`, `profile.language.rust`\n- Verification: Rust filesystem-authority, checked-boundary-arithmetic, external-input-queue, and listener-lifecycle decisions plus affected filesystem, parser, allocation, indexing, queue, admission, connection, and shutdown tests.\n- Canonical owner: `profiles/languages/rust/security.md`\n\n## Panic And Recoverable Error Boundary\n\nApply the [Rust API error policy](api.md#failure-expression-mechanisms)\nto public and internal fallible Rust operations. This profile specializes that\npolicy for production request paths, lifecycle code, background services, and\nnetwork handlers: recoverable errors must remain typed results and must not be\nconverted to `unwrap()` or `expect()` panics. A panic, `debug_assert!`, or\n`unreachable!` is valid only for a proven internal invariant or compile-time\nimpossibility outside a recoverable input or shutdown outcome, with the\nrequired panic documentation and evidence.\n\nTests and explicitly non-production examples may use panic assertions when\ntheir scope is declared. Missing proof that a condition is an internal\ninvariant returns typed `unavailable`; a recoverable error represented by a\npanic returns typed `invalid`. Do not replace a failed result with a default,\nsentinel, ignored error, alternate operation, or broad catch-all recovery.\n\n## Filesystem Authority Through Use\n\nApply the generic [Security filesystem contract](../../../topics/security.md#filesystem-containment)\nbefore a Rust filesystem operation. A canonicalized `PathBuf` records identity\nand containment at validation time; it does not preserve authority when a\ncomponent can be replaced before use.\n\nRecord whether concurrent component mutation is excluded for the complete\nvalidation/use interval. When mutation is possible, keep a held file or\ndirectory capability and use a handle-relative operation or an equivalent\nsupported mechanism. Anchor creation to that authority rather than\nreconstructing a pathname.\n\nImmediate revalidation is sufficient only when the recorded threat model\nexcludes concurrent mutation through the operation. If containment is invalid,\nthe required mechanism is unsupported, or necessary filesystem facts are\nunknown, return typed `invalid`, `unsupported`, or `unavailable` respectively.\n\n## Listener Admission And Lifecycle\n\nDerive the listener's interface and address exposure from the selected service\ncontract; the service exposure contract is the authority. Local-only and\nremotely accessible services have different boundaries; neither one supplies a\nuniversal address for another service.\nUnknown exposure facts return typed `unavailable`, and an exposure forbidden by\nthe selected service contract returns typed `invalid`.\n\nThe listener owner defines admission capacity and overload behavior. Acquire\ncapacity before accepting work that would exceed the owned limit. When no\ncapacity is available, apply the declared backpressure behavior or return the\ntyped overload outcome without accepting unowned work. Missing capacity facts\nor capability return typed `unavailable` or `unsupported` as applicable.\n\nApply the [Rust Async profile](async.md) to every accepted connection that may\noutlive the accept scope. The listener must register connection work with the\nselected lifecycle owner before it can outlive that scope. The lifecycle owner\nretains the operation needed to observe success, failure, panic, and\ncancellation; logging inside detached work is not ownership.\n\nShutdown must close admission, signal cancellation, drain tracked work, and\nthen report the typed result. A complete drain succeeds. An incomplete drain\nreturns the typed incomplete-shutdown outcome; excess admission returns the\ndeclared typed overload outcome before acceptance. Force-abort is permitted\nonly when the selected lifecycle owner has authority and the work is proven\ninterruption-safe.\n\n## Checked Boundary Sizing\n\nTreat dimensions, counts, offsets, strides, and lengths from FFI, IPC, network,\nfile, command-line, or other untrusted input as source-domain values until\nconversion succeeds.\n\nConvert each value into the target integer domain with `TryFrom` or an\nequivalent checked conversion before multiplication, addition, indexing,\nallocation, or slice construction. A later checked multiplication does not\nrepair an earlier lossy cast.\n\nUse checked arithmetic for every operation in the size expression. Return typed\n`invalid` for negative values, values that do not fit the target domain, and\narithmetic overflow.\n\n## Resource Limits\n\nCheck the operation's supported resource limit after representability and\narithmetic succeed. Integer fit does not prove that an allocation, collection,\nmessage, image, or other resource size is permitted.\n\nReturn typed `invalid` when the computed value exceeds the declared operation\nlimit. A zero value is accepted only when the operation contract explicitly\npermits it; otherwise return typed `invalid`.\n\n## External-Input Queues\n\nBefore accepting external input into a queue, select the queue owner's\noperation and resource contract. It defines capacity, what the queue owns,\nsupported overload behavior, retention or eviction semantics, telemetry, and\nthe typed outcome for each result. Capacity is not a universal numeric constant\nand no overload behavior is a default.\n\nWhen the selected contract supports rejection, retention, or eviction, return\nits declared typed outcome and emit the selected owner telemetry. A queue must\nnot silently discard work or retain work beyond its declared ownership. Each\naccepted item has current input and its declared lifecycle only; queue reuse\ndoes not carry prior input, cancellation, result, or failure state forward.\n\nReturn typed `invalid` for contradictory queue or resource facts,\n`unsupported` for a well-formed queue behavior outside the selected contract,\nand `unavailable` when required capacity, overload, telemetry, or ownership\ncapability cannot be established.\n\n## Interop Relationship\n\nThis profile owns checked Rust sizing for untrusted inputs. When the computed\nsize authorizes access to raw foreign memory, also apply the\n[Rust Interop profile](interop.md); numeric validity does not prove pointer,\nallocation, provenance, initialization, alignment, aliasing, or lifetime\nauthority.\n\n## No Fallback\n\nFailed filesystem authority proof cannot fall back to a plain or stale\n`PathBuf`, lexical prefix, ignored canonicalization failure, revalidation while\nconcurrent mutation remains possible, unanchored creation, an alternate root,\nor another filesystem mechanism selected only because the required one is\nunavailable.\n\nMissing listener or lifecycle capability cannot fall back to a broader\ninterface, fixed default capacity, accept-before-capacity ordering, detached\nconnection work, a discarded outcome, leaf logging as ownership, admission\nleft open during shutdown, unauthorized or unsafe force-abort, or another\nruntime, thread, or listener mechanism.\n\nFailed conversion, arithmetic, or limit proof cannot fall back to:\n\n- `as` or another lossy or unchecked conversion;\n- zero, an empty value, or a sentinel size;\n- clamping, saturation, wrapping, or truncation;\n- a smaller default allocation or operation; or\n- continuing with a partially checked expression.\n\nExternal-input queues cannot fall back to a fixed capacity, default reject-new\nor drop-oldest behavior, unbounded accumulation, silent discard, leaf-only\ntelemetry, another queue, runtime, or thread mechanism, prior-input carry-\nforward, or weaker evidence. Return the selected typed outcome.\n\nReturn the typed diagnostic before allocation, indexing, slice construction, or\nresource use.\n\n## Verification\n\nAffected tests cover:\n\n- existing-object use through held or handle-relative authority;\n- creation anchored to validated directory authority;\n- immediate revalidation only under an excluded-mutation threat model;\n- symlink or component replacement between validation and use;\n- invalid, unsupported, and unavailable authority outcomes;\n- rejection of plain-path, lexical, revalidation, alternate-root, and\n  unanchored-creation fallback;\n- local and explicitly declared remote listener exposure;\n- admission before accept and declared overload behavior;\n- tracked connection success, failure, panic, and cancellation;\n- ordered shutdown with complete and incomplete drain;\n- unavailable exposure, capacity, registration, cancellation, and drain\n  capability;\n- unsupported lifecycle capability; and\n- rejection of broad-bind, default-capacity, accept-first, detached,\n  discarded-outcome, leaf-logging, open-admission, force-abort, and\n  alternate-runtime fallback;\n- negative and target-domain-too-wide values;\n- multiplication and addition overflow;\n- values that fit the integer domain but exceed the resource limit;\n- permitted and forbidden zero values;\n- valid bounded values; and\n- rejection of cast, zero, clamp, saturation, wrap, truncation, and\n  smaller-default recovery.\n- contract-selected capacity, overload, retention, rejection, eviction, and\n  telemetry behavior for external-input queues;\n- invalid, unsupported, unavailable, and declared overload queue outcomes; and\n- rejection of fixed capacity, default overflow, unbounded, silent-discard,\n  leaf-telemetry, alternate-mechanism, prior-input, and weaker-evidence\n  fallback.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.security",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "topic.security",
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.security"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.security",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.security.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.dependencies",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Dependency Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.dependencies`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: A Rust change expresses or inspects an accepted dependency contract through Cargo manifests, workspaces, features, resolution metadata, dependency graphs, audit adapters, or build-cost measurements.\n- Does not apply when: No Rust or Cargo dependency mechanism changes, or the task only selects generic dependency, security, licensing, performance, verification, tooling, public-feature, or recipe policy.\n- Requires: `core`, `workflow.verification`, `profile.language.rust`, `topic.dependencies`\n- Specializes: `profile.language.rust`\n- Verification: Rust dependency mechanism decisions plus claim-matched Cargo resolver, manifest, graph, audit-adapter, or measurement evidence selected by generic owners.\n- Canonical owner: `profiles/languages/rust/dependencies.md`\n\n## Mechanism Authority\n\nGeneric owners select dependency requirements, ownership, candidates, features,\nsecurity and licensing findings, performance claims, verification evidence,\ntooling schedules, and public feature contracts. This profile selects a Rust or\nCargo mechanism only after every applicable contract is accepted.\n\nApplicable mechanisms may include Cargo manifest declarations, workspace\ninheritance, feature and target expressions, resolver metadata, dependency-graph\nqueries, audit-tool adapters, and build-cost measurement. Existing manifests,\nworkspace shape, installed tools, ecosystem conventions, and successful\ncommands cannot create or complete generic policy.\n\n## Typed Outcomes\n\nReturn `invalid` when the selected mechanism contradicts an accepted owner,\nconsumer, target, resolver, feature, or evidence contract. Return `unsupported`\nwhen a valid contract has no supported Cargo or Rust expression. Return\n`unavailable` when a required owner, manifest, resolver, toolchain, consumer,\ntool, or evidence fact cannot be established.\n\nDo not fall back to the incumbent manifest, root workspace, inherited\ndependency, enabled feature, cached resolution, installed audit tool,\nconventional command, successful compile, or smallest diff.\n\n## Candidate Inspection Mechanisms\n\nAfter Dependencies defines the requirement, candidate set, material comparison\nfacts, and evidence claim, select supported Cargo graph queries that expose the\nrequired facts. Applicable mechanisms include package-scoped trees, dependency\nkind and target filters, depth controls, feature views, duplicate views, and\nreverse-dependency paths.\n\nThe query scope and interpretation must match the accepted consumer, target,\nfeature, resolver, and dependency-kind facts. A graph query cannot select a\ncandidate, establish that a standard-library implementation is suitable, or\nturn a transitive-count threshold, framework label, current graph presence, or\nwritten justification into policy. Unsupported queries and incomplete graph\nfacts retain the typed outcomes above.\n\nGraph inspection scope comes from the claim being evaluated. Full, direct,\nreverse, unique, duplicate, feature, target, or dependency-kind views prove\nonly their declared graph facts for the selected resolver inputs. They cannot\nestablish dependency quality, necessity, release readiness, performance, or a\nrequired audit schedule by themselves.\n\n## Workspace Inheritance Mechanisms\n\nAfter Dependencies assigns each requirement to its owning consumers and\nselects any shared resolution contract, express accepted coordination through\nsupported Cargo workspace dependency declarations and member-level\n`workspace = true` inheritance. Each consuming package still declares its\ndirect requirement; inheritance coordinates selected manifest facts and does\nnot transfer ownership to the workspace root.\n\nSelect inheritance per accepted consumer, release, resolver, feature, target,\nand source-identity facts. Member count, repository layout, an existing root\nmanifest, or available workspace inheritance cannot require centralization.\n\n## Cargo Manifest Dependency Feature Mechanisms\n\nAfter Dependencies selects feature behavior, optionality, defaults, footprint,\nand target variants, express accepted dependency facts through supported Cargo\nmanifest mechanisms. Applicable mechanisms include dependency `features`,\n`optional = true`, `dep:` forwarding, dependency feature grouping, and\ntarget-specific dependency declarations.\n\nSelect each expression from the accepted consumer, compatibility, release,\nresolver, target, and evidence contracts. A manifest mechanism cannot require\nminimal or empty defaults, `full` or selected feature sets, optionality for a\ndependency category, dependency forwarding, or target placement. Rust `cfg`,\npublic API exposure, and compile-time conflict diagnostics belong only to the\nRust API profile.\n\n## Dependency Audit Adapter Mechanisms\n\nAfter Dependencies selects audit scope and lifecycle consequences; Security and\nLicensing classify their findings; Verification selects evidence; and Tooling\nselects execution and scheduling, use supported Rust audit adapters only to\nproduce the accepted claim. Adapter capabilities may include advisory, license,\nsource, duplicate, unused-dependency, provenance, or dependency-graph findings.\n\nAn adapter does not select its product, installation, cadence, precision,\nseverity, blocking behavior, finding disposition, or fallback. Tool availability\nand an empty result cannot establish satisfaction; missing capability or\nevidence retains a typed outcome.\n\n## Build-Cost Measurement Mechanisms\n\nAfter Performance defines the build-cost claim, metric, workload, environment,\nbaseline, variability policy, and decision threshold, use supported Cargo\ntiming and dependency-graph mechanisms to measure the accepted claim. Select\npackage, workspace, target, feature, profile, resolver, cache, and aggregation\nscope from that measurement contract.\n\nA timing report or dependency count proves only its declared measurement. It\ndoes not select a percentage threshold, alternative dependency, feature\nreduction, leaf-crate placement, optimization, or acceptance decision. Missing\nclaim authority, representative inputs, baseline, or required capability\nretains the typed outcomes above; do not substitute a conventional command,\navailable graph, warm cache, or successful build.\n\n## Verification\n\nEvidence covers the actual supported Cargo resolver and toolchain, affected\nmanifests and consumers, selected target and feature configurations, resolved\nidentity and graph, adapter diagnostics, and the measurement contract selected\nby generic owners. Command success proves only that invocation's declared\nmechanism claim.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "profile.language.rust",
+      "topic.dependencies"
+    ],
+    "specializes": [
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.dependencies"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.dependencies",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.dependencies.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.release",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Release Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.release`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: An accepted release contract must be expressed or evidenced through Rust toolchain or Cargo package, publication, workspace, automation-adapter, or release-check mechanisms.\n- Does not apply when: No Rust or Cargo release mechanism changes, or the task only selects generic release, contract, dependency, reproducibility, licensing, documentation, performance, tooling, verification, or recipe policy.\n- Requires: `core`, `workflow.verification`, `workflow.release`, `profile.language.rust`, `profile.language.rust.dependencies`\n- Specializes: `profile.language.rust`\n- Verification: Rust release mechanism decisions plus claim-matched toolchain, manifest, package, publication, adapter, and artifact evidence selected by generic owners.\n- Canonical owner: `profiles/languages/rust/release.md`\n\n## Mechanism Authority\n\nGeneric owners select release boundaries and units, version and artifact\ncontracts, reproducibility claims, dependency resolution, lockfile ownership,\nlicense and documentation facts, performance claims, tool selection,\nautomation procedures, verification claims, and evidence obligations. This\nprofile selects a supported Rust or Cargo mechanism only after every applicable\ncontract is accepted.\n\nApplicable mechanisms may include Rust toolchain declarations, Cargo package\nand workspace release metadata, publication controls, supported release-tool\nadapters, and Rust release evidence collection. Existing manifests, installed\ntools, ecosystem convention, manual procedure, and successful commands cannot\ncreate or complete generic policy.\n\n## Typed Outcomes\n\nReturn `invalid` when selected contract, release-unit, consumer, channel,\nmanifest, toolchain, mechanism, or evidence facts contradict one another.\nReturn `unsupported` when a valid contract has no supported Rust or Cargo\nexpression. Return `unavailable` when required authority, release-unit,\nconsumer, channel, toolchain, manifest, tool, artifact, or evidence facts\ncannot be established.\n\nDo not fall back to incumbent metadata, a pinned version, committed lockfile,\ninstalled release tool, manual steps, conventional command, fixed checklist,\nsuccessful build, or smallest diff.\n\n## Toolchain Declaration Mechanisms\n\nAfter Release defines the reproducibility claim and required controlled inputs,\nselect supported Rust toolchain declaration mechanisms for the accepted channel,\ncomponents, targets, consumers, and evidence environment. A declaration records\nselected toolchain facts; it does not select a version, channel, component,\ntarget, pinning policy, or reproducibility threshold.\n\nLockfile selection and resolution policy remain with Release and Dependencies.\nCargo resolver metadata and lockfile mechanisms remain with Rust Dependency.\nRust Release consumes those accepted facts and their evidence; it does not\nre-own, alias, or infer them from repository type, package category, an existing\nlockfile, or a successful resolved graph.\n\n## Cargo Package Release Metadata Mechanisms\n\nAfter Release and Contracts define artifact identity, version, publication, and\nconsumer promises, and Licensing and Documentation accept their applicable\nfacts, express the selected Rust package facts through supported Cargo package\nmetadata fields. Include only fields required by the accepted release unit,\nchannel, registry, package consumer, toolchain, and evidence contracts.\n\nCargo metadata does not select a package name, product identity, version,\nedition, minimum Rust version, description, license, repository, README,\nkeywords, categories, field completeness, or publication readiness. Existing\nmanifest values and registry acceptance cannot complete missing authority.\n\n## Cargo Publication-Control Mechanisms\n\nAfter Release defines which package artifacts may be published through each\nchannel, express the accepted decision through supported Cargo publication\ncontrols. Select the mechanism from the release unit, package identity,\nchannel, consumer, artifact composition, and registry capability.\n\nA Cargo control does not decide whether a binary, native library, internal\ntool, test harness, integration package, or workspace member is publishable.\nPackage category, crate type, workspace placement, an existing `publish` field,\nor registry behavior cannot create publication authority.\n\n## Cargo Workspace Package-Metadata Mechanisms\n\nAfter Release defines the release units and their version relationships, and\nthe applicable generic owners accept shared package facts, express selected\ncoordination through supported Cargo `[workspace.package]` declarations and\nmember package-field inheritance. Each inherited field remains an accepted fact\nof the member's release unit; inheritance does not merge release units or make\nthe workspace root their policy owner.\n\nSelect coordination per accepted release unit, package consumer, publication\nchannel, contract, toolchain, licensing, documentation, and evidence facts.\nWorkspace membership, repository layout, an existing root manifest, shared\nversions, or support for `.workspace = true` cannot require lockstep versioning\nor inheritance of any package field.\n\n## Rust Release-Automation Adapter Mechanisms\n\nAfter Release defines the release procedure and Tooling selects the automation\ntool, orchestration, and configuration authority, express accepted operations\nthrough a supported Rust release-automation adapter. Map only selected version,\ncommit, tag, changelog, publication, package, workspace, and evidence facts that\nthe adapter can represent without changing their meaning.\n\nAdapter availability or successful execution does not select `cargo-release`,\nmake automation preferable to a manual procedure, establish release cadence,\ncouple package versions, consolidate commits, choose tag syntax, mutate a\nchangelog, or define first-release behavior. Missing or contradictory procedure,\ntool, capability, configuration, or evidence facts retain the typed outcomes.\n\n## Rust Release Evidence Mechanisms\n\nAfter Release identifies the required release gates and Verification accepts\neach claim and its evidence contract, select supported Rust and Cargo mechanisms\nthat collect the named evidence for the accepted packages, features, targets,\nartifacts, consumers, and environments. Each mechanism result proves only its\ndeclared claim and remains subject to the generic owner's acceptance decision.\n\nNo fixed command set applies before every release. Workspace-wide scope, all\ntargets or features, warning denial, dependency audits, benchmarks, metadata\ncomparison, changelog checks, tag checks, artifact-name checks, and successful\ncommands cannot create or complete a release claim. Missing, contradictory, or\nunsupported claim, scope, mechanism, environment, or evidence facts retain the\ntyped outcomes rather than selecting a conventional checklist.\n\n## Verification\n\nEvidence covers the accepted release unit and channels, actual supported Rust\ntoolchain and Cargo behavior, affected manifests and packages, selected\nartifacts and consumers, adapter diagnostics, and every claim selected by the\ngeneric owners. Mechanism or command success proves only its declared claim.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "workflow.release",
+      "profile.language.rust",
+      "profile.language.rust.dependencies"
+    ],
+    "specializes": [
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.release"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.release",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.release.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.tooling",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Tooling Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.tooling`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: An accepted claim or tooling contract must be expressed through Rust or Cargo formatting, lint, test, feature-matrix, benchmark, diagnostic, coverage, or build-script adapter mechanisms.\n- Does not apply when: No Rust tooling mechanism changes, or the task only selects generic verification, test design, tooling, performance, dependency, security, target, feature, build, or recipe policy.\n- Requires: `core`, `workflow.verification`, `workflow.tooling`, `profile.language.rust`\n- Specializes: `profile.language.rust`\n- Verification: Rust tooling mechanism decisions plus claim-matched adapter, command, configuration, target, and evidence checks selected by generic owners.\n- Canonical owner: `profiles/languages/rust/tooling.md`\n\n## Practical Starting Point\n\nFor an ordinary Rust source change, SHOULD start with `cargo fmt --check`,\n`cargo check`, focused `cargo test` selection, and the repository's Clippy\npolicy. Run them in the owning crate or workspace with the toolchain and\nfeatures the repository supports. Existing scripts that implement these checks\nare suitable entrypoints; do not invent a second orchestration layer.\n\nUse the standard test runner until measured runtime, isolation, or reporting\nneeds justify another runner. Add a feature/target matrix when supported\ncombinations can change behavior; an exhaustive power set of features is not a\ndefault. Add compile-fail tests for a promised rejection by the compiler, and\nproperty tests when broad generated cases can challenge a stated invariant.\nBenchmark when the change makes a performance claim. These starting points do\nnot prove unsupported targets or replace a required boundary test.\n\n## Mechanism Authority\n\nGeneric owners select claims, evidence sufficiency, test design, lint purpose\nand severity, tools, configuration authority, orchestration, scheduling,\nperformance contracts, dependencies, security requirements, targets, features,\nbuild behavior, and acceptance. This profile selects a supported Rust or Cargo\ntooling mechanism only after every applicable contract is accepted.\n\nApplicable mechanisms may include Cargo formatting and lint adapters, test\nrunners, feature-matrix execution, compile-fail and property-test harnesses,\nbenchmark, coverage, diagnostic, and build-script adapters. Installed tools,\nworkspace shape, repository size, ecosystem convention, legacy status labels,\nexample syntax, and command success cannot create or complete generic policy.\n\n## Typed Outcomes\n\nReturn `invalid` when selected claim, authority, scope, tool, mechanism, target,\nconfiguration, or evidence facts contradict one another. Return `unsupported`\nwhen a valid contract has no supported Rust or Cargo expression. Return\n`unavailable` when required claim, authority, scope, tool, capability, target,\nconfiguration, environment, or evidence facts cannot be established.\n\nDo not fall back to an installed or popular tool, conventional Cargo command,\nworkspace-wide scope, all features or targets, fixed lint severity, CI\nexecution, retries, a required/optional/recommended label, successful no-op, or\nsmallest diff.\n\n## Cargo Baseline Command Mechanisms\n\nAfter Verification selects claims, scopes, environments, and evidence\nobligations, express each accepted Rust formatting, lint, build, test, doctest,\nor feature claim through supported Cargo and Rust tool command mechanisms. Map\nonly the packages, targets, features, profiles, environments, and diagnostics\nrequired by that claim.\n\nA baseline command mechanism does not create a universal baseline or require\nlocal and CI duplication, workspace scope, all targets, all features, warning\ndenial, doctests, no-default-feature checks, or a public-feature category.\nMissing or contradictory claim, scope, capability, environment, or evidence\nfacts retain the typed outcomes instead of selecting a conventional command.\n\n## Cargo Workspace Lint-Expression Mechanisms\n\nAfter Tooling selects lint purpose, rules, scope, severity, debt handling, and\norchestration, and Rust Unsafe accepts any unsafe-code boundary, express the\naccepted rules through supported Cargo workspace lint tables and member\ninheritance mechanisms. Each member remains within the selected lint scope;\ninheritance does not transfer lint-policy authority to the workspace root.\n\nWorkspace layout, a root manifest, available inheritance, an existing lint\ntable, or a lint name cannot require centralization, member opt-in, a rule set,\nseverity, warning or denial, or relaxation of unsafe policy. Unsupported or\nmissing expression facts retain typed outcomes rather than changing policy.\n\n## Criterion Benchmark Adapter Mechanisms\n\nAfter Performance accepts the claim, workload, metric, environment, baseline,\nvariability policy, budget or comparison, input representativeness, and\nbenchmark design, Tooling selects Criterion, and Verification accepts the\nevidence obligation, express that contract through supported Criterion Cargo\nconfiguration, harness, measurement, and reporting mechanisms. Adapter syntax\nmay preserve accepted inputs and throughput reporting but cannot create them.\n\nA performance claim, changed hot path, regression budget, Rust project,\ninstalled Criterion package, conventional `benches` directory, available\n`black_box`, example dependency version, harness setting, or CI environment\ncannot select Criterion or create benchmark triggers, thresholds, workloads,\nfixture policy, storage, schedules, or noise controls. Missing or unsupported\nadapter facts retain typed outcomes rather than weakening the accepted\nperformance or evidence contract.\n\n## Rust Test-Runner Adapter Mechanisms\n\nAfter Tooling selects a test runner, configuration, timeout, isolation,\npartition, reporting, and schedule contract, Verification accepts the test and\ndoctest claims, and Resilience accepts any retry eligibility, budgets, repeated-\nexecution safety, termination, and recovery contract, express those decisions\nthrough supported Cargo and Rust test-runner invocation and result-transport\nmechanisms. When the accepted runner is nextest, its adapter may expose only\ncapabilities selected by those contracts.\n\nAn installed nextest command, workspace size, test-binary count, CI provider,\navailable timeout, JUnit, isolation, partition, or retry feature cannot select\nnextest or create policy. Runner success cannot satisfy omitted doctest or other\nclaims. Missing or unsupported adapter facts retain typed outcomes rather than\nselecting `cargo test`, nextest, retries, or weaker evidence.\n\n## Cargo Feature-Matrix Adapter Mechanisms\n\nAfter Dependencies, Contracts, Library, and Cross-Platform accept feature,\nconsumer-configuration, footprint, target, and support contracts; Rust\nDependency and Rust API accept manifest and source expressions; Tooling selects\na matrix tool and schedule; and Verification accepts the evidence claims,\nexpress the selected matrix through supported Cargo and cargo-hack invocation\nand result mechanisms.\n\nCargo-hack availability, crate category, feature count, workspace layout,\n`no_std`, optional dependencies, platform conditions, or public visibility\ncannot select a tool, each-feature or powerset coverage, scope, exclusions,\nbaseline commands, or CI schedule. Missing or unsupported matrix facts retain\ntyped outcomes rather than selecting all features, no default features, a\nfeature-count threshold, or weaker evidence.\n\n## Compile-Fail Harness Adapter Mechanisms\n\nAfter Contracts accepts a compile-time rejection contract, Rust API accepts\nthe source expression, Tooling selects a harness and schedule, and Verification\naccepts the rejection evidence, express the claim through supported Rust\ncompile-fail harness, fixture, diagnostic-matching, and invocation mechanisms.\n\nType-level syntax, public API status, safety or correctness labels, an installed\ntrybuild dependency, or a restriction category cannot select trybuild, fixture\nshape, diagnostic matching, CI execution, or claim coverage. Missing or\nunsupported adapter facts retain typed outcomes rather than substituting a\ncompile check, runtime assertion, panic, or successful build.\n\n## Property-Test Harness Adapter Mechanisms\n\nAfter Contracts accepts the invariant and domain authority, Verification\naccepts the property, input domain, generator, shrinking, reproducibility,\noracle, and evidence contract, and Tooling selects a harness and schedule,\nexpress those decisions through supported Rust property-test generator,\nstrategy, runner, seed, shrinking, and result mechanisms.\n\nAn algorithm, roundtrip, parser, state machine, validated type, graph operation,\nor installed proptest dependency cannot select property testing, a generator,\nstrategy, oracle, case count, seed, shrink behavior, CI execution, or claim.\nMissing or unsupported adapter facts retain typed outcomes rather than\nnarrowing the domain, weakening the property, or accepting harness success.\n\n## Capability-Matched Tool Adapters\n\nAfter each generic owner accepts its claim and Tooling selects a supported\nproduct, configuration, scope, and schedule, select only the Rust adapter that\nexpresses that contract. Applicable capabilities may include formatting,\nlinting, test execution, benchmarking, feature matrices, coverage collection,\nmacro inspection, or unsafe-usage inventory. Rust Dependency owns Cargo graph,\naudit, advisory, license, duplicate, and unused-dependency adapters; Rust Unsafe\nowns Miri applicability and evidence requirements.\n\nA product name, installation, legacy required/optional/recommended label,\ncategory, ecosystem popularity, pure-Rust label, or successful command cannot\nselect a tool, adapter, scope, schedule, policy, or acceptance. Missing or\nunsupported adapter facts retain typed outcomes rather than substituting a\nnearby tool or treating visibility as proof.\n\n## Cargo Build-Script Expression Mechanisms\n\nAfter Build accepts the action, phase, authoritative inputs and outputs,\nconsumers, side effects, invalidation, environment access, and determinism;\nafter Contracts, Dependencies, Cross-Platform, Security, Release, Tooling, and\nVerification accept their applicable narrower contracts; express those\ndecisions through supported Cargo build-script mechanisms.\n\nApplicable mechanisms may include a `build.rs` entry point, precise Cargo rerun\ndirectives, Cargo metadata or configuration directives, `OUT_DIR` output,\nsupported native compiler adapters, and accepted environment reads. Each\nmechanism transports an accepted fact and cannot create build authority.\n\nAn existing build script, compile-time label, generated-code request, native\nsource, system library, target condition, Cargo directive, output directory,\ncompiler adapter, hardware capability, timestamp variable, or build dependency\ncannot select purpose, phase, output, invalidation, compiler, discovery timing,\ndeterminism, or dependency policy. Missing or unsupported expression facts\nretain typed outcomes rather than using a raw command, source-tree output,\nbroad rerun, alternate detection phase, or successful build.\n\n## `no_std` Evidence Adapter Mechanisms\n\nAfter Rust Cross-Platform accepts each target and support claim, Dependencies,\nContracts, and Library accept feature and consumer configurations, Rust API and\nRust Dependency accept source and manifest expressions, Tooling selects the\nexecution contract, and Verification accepts the evidence claims, express only\nthose claims through supported Cargo check, test, feature, package, and target\nadapter mechanisms.\n\n`no_std`, embedded, library, application, host-test, available target, or\nsuccessful compile labels cannot select default features, disabled defaults,\npackage scope, target, host tests, command combinations, or evidence strength.\nMissing or unsupported adapter facts retain typed outcomes rather than using a\nhost build, compile-only result, nearby target, or conventional Cargo command.\n\n## Verification\n\nEvidence covers the accepted claim and scope, actual supported Rust and Cargo\nmechanism behavior, selected tool and configuration authority, affected\npackages, targets, features, consumers, and environments. Mechanism or command\nsuccess proves only its declared claim.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "workflow.tooling",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.tooling"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.tooling",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.tooling.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.cross-platform",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Cross-Platform Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.cross-platform`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: A Rust target contract, target triple, support claim, target-dependent source/build configuration, Rust-produced artifact, or target evidence obligation changes.\n- Does not apply when: The Rust change neither changes nor relies on a target contract, target-specific capability, target-dependent mechanism, target artifact, or target evidence claim.\n- Requires: `core`, `workflow.verification`, `topic.cross-platform`, `profile.language.rust`\n- Specializes: `topic.cross-platform`, `profile.language.rust`\n- Verification: Rust target/configuration decisions plus compile, link, package, integration, and runtime evidence selected by each declared target claim.\n- Canonical owner: `profiles/languages/rust/cross-platform.md`\n\n## Rust Target Contract\n\nConsume the supported targets from the project, product, or release target\ncontract. For each Rust target triple, record the support claim, required\ncapabilities, produced artifacts, toolchain/linker requirements, deployment\nconditions, and evidence needed to accept the claim. Target triples and support\nlevels are adopting-project facts, not generic Rust defaults.\n\nA target absent from the selected contract is `unsupported`. Contradictory\ntarget, artifact, or capability facts are `invalid`. Missing target,\ntoolchain, linker, artifact, deployment, or evidence facts are `unavailable`.\nDo not relabel an unverified required target as best effort.\n\n## `no_std` Target Capability Contract\n\nSelect `no_std`, `alloc`, or `std` support only from accepted target\ncapabilities and real Library consumer configurations. Dependencies owns\nfeature behavior, optionality, defaults, footprint, and dependency support;\nContracts owns consumer-visible compatibility; Rust API owns source expression;\nRust Dependency owns Cargo manifest expression; Rust Tooling owns command and\nevidence adapters; Verification owns claim sufficiency.\n\nHosted, embedded, core-library, application, memory-constrained, or portability\nlabels do not select a support mode. A target requirement cannot default to\nseparate `core`/`alloc`/`std` features, `std` defaults, disabled dependency\ndefaults, host tests, or compile-only evidence. Record each supported consumer\nand target combination independently.\n\nContradictory target, consumer, feature, dependency, or support facts are\n`invalid`. A valid combination outside supported Rust, dependency, or target\ncapability is `unsupported`. Missing target, consumer, feature, dependency,\ntoolchain, or evidence facts are `unavailable`; do not substitute a host build,\nnearby target, default feature set, or practical-coverage claim.\n\n## Configuration And Placement\n\nSelect Rust `cfg`, build scripts, features, composition, and dispatch from the\ndeclared target, toolchain, artifact, and deployment facts:\n\n- use `cfg` when the selected artifact is compiled with target-specific Rust\n  items or dependencies;\n- use a build script only when build-time discovery or artifact construction is\n  part of the declared build contract;\n- use a feature only when the capability is a supported consumer selection,\n  not as a substitute for an unknown target;\n- use composition or dispatch when the deployed artifact selects among\n  capabilities at startup or runtime; and\n- combine mechanisms only when their ownership and precedence are explicit.\n\nKeep target-specific mechanics outside domain behavior at the smallest\ncohesive Rust boundary. A function, module, adapter, target-selected\nimplementation, or composed capability may be correct. No shared trait,\nplatform module, directory shape, or target-named file is universally\nrequired.\n\nInline `cfg` is valid when the conditional item remains cohesive,\ncomprehensible, and locally verifiable. Extract it when separate ownership,\ninvariants, dependencies, unsafe reasoning, or tests make a boundary clearer.\nLine counts, parameter counts, comment counts, and conditional-block counts do\nnot decide placement.\n\n## Evidence By Claim\n\nMatch evidence to the accepted support claim:\n\n- compilation proves that selected Rust items type-check for the target;\n- linking proves that the declared linker and native dependencies produce the\n  artifact;\n- packaging proves the expected target artifact and metadata are assembled;\n- integration proves selected components operate together in the qualified\n  environment; and\n- runtime evidence proves behavior on the real target or an explicitly\n  accepted environment with equivalent semantics for that claim.\n\nTarget compilation does not prove linking, packaging, integration, or runtime\nbehavior. A host build, simulator, emulator, container, cross-compilation tool,\nor hosted runner counts only for the claims the project contract explicitly\nassigns to that environment. Record the evidence environment and unresolved\nclaims.\n\nReturn typed `invalid`, `unsupported`, or `unavailable` when the selected\ntarget or its required evidence cannot be established.\n\n## No Fallback\n\nMissing target, toolchain, linker, artifact, capability, deployment, or\nevidence facts cannot select:\n\n- default target triples or support tiers;\n- best-effort status for required behavior;\n- a universal trait, module, directory, file, or inline-`cfg` threshold;\n- a named build, cross-compilation, container, runner, simulator, or emulation\n  tool;\n- another target or configuration mechanism; or\n- compile-only, simulated, host-only, or otherwise weaker evidence for a\n  stronger claim.\n\nReturn the typed diagnostic for the selected contract without changing the\ntarget claim or mechanism.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "topic.cross-platform",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "topic.cross-platform",
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.cross-platform"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.cross-platform",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.cross-platform.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.unsafe",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Unsafe Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.unsafe`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: Rust source contains or exposes an unsafe operation, unsafe function, unsafe trait contract, unsafe implementation, raw resource, or module that owns unsafe invariants.\n- Does not apply when: The affected Rust path contains no unsafe contract and does not own facts relied on by unsafe code.\n- Requires: `core`, `workflow.verification`, `profile.language.rust`\n- Specializes: `profile.language.rust`\n- Verification: Rust unsafe-contract decisions plus mechanism-selected dynamic, integration, target, and feature-path evidence.\n- Canonical owner: `profiles/languages/rust/unsafe.md`\n\n## Deny By Default\n\nDeny unsafe code by default. Relax that policy only in the smallest crate or\nmodule that explicitly owns a required unsafe mechanism, its invariants, and\nits verification.\n\nSafe Rust being inconvenient or slower is not proof that an unsafe mechanism\nis required. Record why the selected mechanism cannot meet its contract through\nthe available safe operations.\n\n## Adjacent Operation Proof\n\nEvery unsafe operation has an adjacent `SAFETY:` rationale. The rationale names\nthe operation's actual preconditions and explains which established facts prove\neach one at that point.\n\nA comment that only restates the operation, says a wrapper is safe, or refers\ngenerically to prior validation is incomplete. Link to a shared invariant when\nappropriate, but keep operation-specific proof adjacent to the operation.\n\n## Caller Contracts\n\nEvery public `unsafe fn` and unsafe trait contract has a `# Safety` section that\nstates the obligations its caller must establish. Caller obligations and local\noperation proof are separate: documentation cannot replace the implementation's\nadjacent proof, and local proof cannot omit obligations delegated to callers.\n\nSafe wrappers validate every precondition they own before entering unsafe code.\nThey cannot claim to prove allocation, provenance, initialization, lifetime,\nthread, aliasing, or other facts that remain caller- or provider-owned.\n\n## Module Invariants\n\nAn unsafe-owning module documents:\n\n- the shared invariants that make its unsafe operations valid;\n- which type, module, crate, provider, or caller establishes each invariant;\n- ownership, lifetime, aliasing, mutability, and thread constraints;\n- valid state transitions and release behavior; and\n- which safe APIs preserve the invariants.\n\nKeep unsafe mechanics out of domain logic. A safe API narrows authority; it\ndoes not erase the proof obligations of the unsafe implementation beneath it.\n\n## Mechanism-Selected Verification\n\nSelect evidence from the actual unsafe mechanism and supported environment:\n\n- pure Rust memory and aliasing paths use Miri when the mechanism and target are\n  supported;\n- concurrent or lock-free paths use the applicable model checker, race\n  detector, sanitizer, and stress evidence;\n- FFI paths use real provider/consumer contract tests and applicable\n  cross-language sanitizers;\n- memory-mapped and raw operating-system resources use target integration plus\n  applicable memory diagnostics; and\n- embedded or `no_std` paths use supported target builds plus emulator or\n  hardware evidence required by the contract.\n\nIf required evidence cannot run for the selected mechanism or target, record it\nas unavailable and keep the acceptance claim partial or blocked. Do not replace\nit with evidence for a mock, safe alternative, different target, or disabled\nfeature.\n\n## Feature-Gated Unsafe Paths\n\nA feature gate may control availability; it does not prove correctness. Test\nthe unsafe path with the feature enabled and through the real selected\nmechanism. A passing default build or safe implementation proves only that\ndifferent path.\n\n## No Fallback\n\nIncomplete unsafe proof cannot fall back to:\n\n- a safe-wrapper name or type signature as proof;\n- caller documentation without adjacent operation proof;\n- adjacent comments without complete caller obligations;\n- a feature gate, disabled feature, mock, or safe alternate path;\n- verification selected for a different unsafe mechanism or target; or\n- an unsupported verifier treated as a passing result.\n\nKeep acceptance partial or blocked until every required proof and evidence\nclaim is satisfied.\n\n## Verification\n\nAffected checks cover complete and incomplete:\n\n- adjacent unsafe-operation rationales;\n- public caller `# Safety` contracts;\n- module invariants and ownership;\n- safe-wrapper validation without caller-fact overclaim;\n- mechanism and environment selection; and\n- direct execution of every supported feature-gated unsafe path.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "profile.language.rust"
+    ],
+    "specializes": [
+      "profile.language.rust"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.unsafe"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.unsafe",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.unsafe.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.interop",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Interop Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.interop`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: Rust code converts foreign dimensions, constructs references or slices from raw foreign memory, receives borrowed callback data, or copies foreign buffers.\n- Does not apply when: Rust code uses only ordinary safe owned values and no foreign memory or resource authority.\n- Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.interop`\n- Specializes: `profile.language.rust`, `profile.boundary.interop`\n- Verification: Rust foreign-memory decisions plus affected Miri, sanitizer, and provider/consumer boundary tests selected by the unsafe mechanism.\n- Canonical owner: `profiles/languages/rust/interop.md`\n\n## Checked Dimensions\n\nConvert signed, platform-width, and wider foreign dimensions into the target\ninteger domain with `TryFrom` or equivalent checked conversion before\narithmetic. Then use checked multiplication and addition for element counts,\nstrides, offsets, and byte sizes.\n\nCheck the operation's resource limit separately from representability. A value\ncan fit `usize` and still be too large for the supported allocation or\nprovider contract.\n\nReturn a typed error for negative, too-wide, overflowed, or over-limit values.\nDo not use `as`, wrapping, saturation, truncation, clamping, or zero as a\nsubstitute for failed conversion.\n\n## Raw Slice Preconditions\n\nBefore calling `slice::from_raw_parts` or an equivalent constructor, prove:\n\n- the pointer follows Rust's non-null and alignment rules, including the\n  explicitly selected zero-length representation;\n- the complete range belongs to one allocation with compatible provenance;\n- every byte or element in the range is initialized and valid to read;\n- the total size does not exceed `isize::MAX` and address calculation does not\n  wrap;\n- aliasing and mutability rules permit the requested view; and\n- the resulting lifetime does not outlive the provider guarantee.\n\nNon-nullness and a numeric length are not complete proof. A safe wrapper may\nencode established facts, but it cannot manufacture allocation, provenance,\ninitialization, or lifetime authority.\n\n## Zero-Length Views\n\nDefine whether zero-length input is supported. If supported, use a pointer form\nthat satisfies Rust's requirements even though no element is accessed. Do not\ninfer that null is valid from a zero length or replace an invalid nonzero input\nwith an empty slice.\n\n## Copy After Proof\n\nCreate a temporary borrowed view only after all applicable preconditions hold,\nthen copy before the provider lifetime ends when owned data is required.\nCopying does not repair invalid construction and cannot precede proof.\n\nThe owned copy may escape the callback only after the copy succeeds. The raw\npointer, temporary slice, and any derived borrow remain bounded by the foreign\nprovider lifetime.\n\n## Callback And Adapter Boundary\n\nDocument callback thread, re-entry, and borrowed-input lifetime. Keep raw\npointer construction in the boundary adapter and pass validated or owned Rust\nvalues to domain logic.\n\nIf required pointer, alignment, allocation, provenance, initialization, extent,\nor lifetime evidence cannot be obtained, return typed `unavailable`.\nContradictory or malformed evidence returns typed `invalid`.\n\n## No Fallback\n\nFailed foreign-memory proof cannot fall back to:\n\n- `as usize` or another unchecked conversion;\n- `unwrap_or(0)`, an empty slice, or a sentinel length;\n- wrapping, saturating, truncating, or clamping arithmetic;\n- assuming alignment, one allocation, initialization, or provenance;\n- copying after constructing an invalid view; or\n- extending a borrow beyond the provider lifetime.\n\nReturn the typed diagnostic before any unsafe access.\n\n## Verification\n\nAffected tests cover:\n\n- negative, too-wide, overflowed, and over-limit dimensions;\n- supported and unsupported zero-length pointer forms;\n- null and misaligned pointers;\n- split or unknown allocation/provenance;\n- missing pointer, alignment, initialization, extent, or lifetime evidence;\n- partial initialization and excessive extent;\n- expired callbacks and escaped borrows;\n- successful copy after proof and rejected copy before proof; and\n- mechanism-appropriate dynamic checks for the supported targets.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "profile.language.rust",
+      "profile.boundary.interop"
+    ],
+    "specializes": [
+      "profile.language.rust",
+      "profile.boundary.interop"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.interop"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.interop",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.interop.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  },
+  {
+    "kind": "compact-read-result",
+    "snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+      "schema_version": 5
+    },
+    "policy": {
+      "handle": {
+        "kind": "snapshot-child-handle",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "child_kind": "policy",
+        "child_id": "profile.language.rust.language-bindings",
+        "schema_version": 5
+      },
+      "authority": "normative",
+      "scope": {
+        "kind": "whole-artifact"
+      }
+    },
+    "content": "# Rust Language Binding Profile\n\n**Standards metadata**\n\n- ID: `profile.language.rust.language-bindings`\n- Role: `profile`\n- Level: `PROFILE`\n- Applies when: Rust values or operations are exposed to another language through a binding framework, serialized wire contract, opaque handle, generated wrapper, or stable C ABI.\n- Does not apply when: Values remain ordinary Rust values and no host-language representation or operation changes.\n- Requires: `core`, `workflow.verification`, `profile.language.rust`, `profile.boundary.language-bindings`\n- Specializes: `profile.language.rust`, `profile.boundary.language-bindings`\n- Verification: Rust binding architecture, runtime adaptation, executor-delegation, conversion, and wire-representation decisions plus framework-free core checks and affected native/host boundary tests.\n- Canonical owner: `profiles/languages/rust/language-bindings.md`\n\n## Representation Categories\n\nClassify each exposed Rust value as exactly the representation selected for the\nconcrete boundary:\n\n- native Rust representation;\n- value lifted by a named binding framework;\n- serialized value governed by a named wire schema;\n- opaque handle with declared ownership and operations;\n- stable C-ABI representation with explicit layout and validity; or\n- generated host wrapper derived from one of those representations.\n\nFramework lifting is not C-ABI safety. `String`, `Vec<T>`, `Option<T>`, Rust\nenums, and framework object types may be supported by a named framework, but\ntheir native Rust layouts are not universally stable C-ABI values.\n\n## Enum Representation\n\nAfter selecting the boundary mechanism, define the complete enum\nrepresentation for that mechanism:\n\n- a named binding framework contract defines supported variants, host names or\n  values, payload support, and unknown-variant behavior;\n- a serialized enum follows\n  [Serialized Wire Representation](#serialized-wire-representation);\n- a stable C ABI defines discriminant width, signedness, values, payload\n  layout, validity, and ownership explicitly;\n- an opaque handle exposes only its declared operations and does not reveal\n  native enum layout; and\n- a generated wrapper remains derived from one of those selected contracts.\n\nRust source order, implicit discriminants, variant names, `repr` attributes,\nframework defaults, and generated static types do not independently establish\nthe host representation. A fieldless Rust enum is not automatically an ABI\ninteger, and a data-carrying enum is not automatically a stable tagged union.\n\nUse checked conversion in both directions. Return `invalid` for a host value,\ndiscriminant, tag, or payload that contradicts the selected representation,\n`unsupported` for a well-formed variant outside the supported contract, and\n`unavailable` when required framework, schema, ABI, generation, or conversion\ncapability cannot be obtained.\n\nDo not substitute an unknown sentinel, omit a variant, infer names or numeric\nvalues, reinterpret native layout, retry through another representation, or\nreport default success.\n\n## Serialized Wire Representation\n\nSelect the wire schema, serializer contract, and supported schema or protocol\nversion before exposing a Rust value as serialized data.\nThe effective wire representation is derived from:\n\n- the selected Rust adapter type and supported variants;\n- the serializer format and version;\n- container, variant, and field attributes that affect tagging, content,\n  names, casing, defaults, omission, flattening, aliases, and custom\n  conversion; and\n- the consumer contract for optionality, unknown fields, and unsupported\n  variants.\n\nAccount for every applicable attribute. An absent attribute may select behavior\ndefined by the chosen serializer contract, but that behavior is not a\ncross-language default and must be represented in the consumer contract.\nRust-native layout, source names, enum shape, and derived static types do not\nindependently establish serialized shape.\n\nReceiving consumers must agree with the complete effective representation.\nApply [Contracts](../../../topics/contracts.md) to wire-version and\nindependent-consumer evolution. Schema generation is valid only when the\nselected contract names the canonical generation input, generator capability,\nand derived artifacts. Generated types do not replace runtime decoding.\n\nReturn typed `invalid` when data or consumer shape contradicts the selected\nrepresentation, `unsupported` when a well-formed version or variant is outside\nthe supported contract, and `unavailable` when required schema, serializer,\ngeneration, consumer, or decoding capability cannot be obtained.\n\n## Core And Adapter Boundary\n\nKeep domain behavior and validated domain types usable without a binding\nframework, generated host code, or foreign runtime. The core owns domain\ninvariants, operations, and native types. Rust binding adapters own host\nrepresentation conversion, error mapping, handle lifecycle, host entrypoint\nadaptation, and generated-contract input.\n\nAdapters depend on core contracts; the core does not depend on adapter modules,\nbinding packages, generated wrappers, or framework behavior. Preserve that\ndirection even when core and adapter modules share a package.\n\nA source annotation may remain on a core type only when it adds no binding-\nframework dependency, host-specific behavior, or change to the domain\ncontract. A framework-owned annotation, derive, conversion, callback, or\nregistration belongs on an adapter type.\n\nSelect annotation placement from the declared binding mechanism and the core\nand adapter ownership boundary. A core annotation is valid only when it is\nindependent of framework behavior and leaves the domain contract unchanged.\nAn adapter-owned annotation is valid only when its selected mechanism requires\nit. A separate schema or interface definition is valid only when Contracts\nselects it as canonical generation authority. Do not prefer co-located proc\nmacros, a separate definition file, any framework, or any target language by\ndefault. Missing selection or placement facts return typed `unavailable`;\ncontradictory ownership or coupling returns typed `invalid`.\n\nBinding-specific dependencies, procedural macros, build scripts, and optional\nfeatures belong to an adapter or binding package. A disabled-by-default\nframework dependency in the core still couples the core when enabled and does\nnot satisfy this boundary.\n\nSerialization is selected only when a wire schema is part of the contract;\nJSON is not a universal ABI or universal wrapper representation. Generated\nhost code remains derived from adapter-owned input and contains no domain\nbehavior.\n\n### Package And Workspace Placement\n\nSelect crate, package, workspace-member, feature, generated-output, and script\nplacement from the repository's ownership boundaries, dependency direction,\ntoolchain, selected binding mechanisms, and required evidence. Core and adapter\ncode may use separate packages or remain in one package only when the declared\nmodule and dependency boundaries preserve the same core-to-adapter direction.\n\nSelect native artifact kind and crate output types from the accepted boundary,\nconsumer, deployment, and release contracts. A `cdylib`, `staticlib`, `rlib`,\nbinary, or combined output is valid only when the selected consumers and\nrelease artifact plan require it. Do not prescribe one crate name, workspace\nshape, `crate-type`, output extension, or native-library form for every Rust\nbinding project.\n\nCargo workspace membership and default-member selection are build and\ndeveloper-workflow mechanisms, not evidence waivers. A foreign runtime may use\na separately provisioned verification environment, but required adapter and\nreal host evidence remains part of acceptance. Missing package facts or\nrequired environment capability returns typed `unavailable`; contradictory\nownership or dependency direction returns typed `invalid`.\n\nDo not prescribe a crate tree, generated-output directory, script name, or\ndefault-member list from the binding framework. Do not exclude required\nadapter evidence, substitute native-only tests, select another framework, or\nreport default success when the selected host capability is unavailable.\n\n## Host Error Representation\n\nSelect the host error contract and binding mechanism before mapping Rust\nfailures. The contract defines the stable categories or codes, required\nfields, cancellation representation, retry or recovery semantics when\napplicable, and which bounded context is safe to expose.\n\nThe adapter maps each supported Rust failure exhaustively into that selected\nrepresentation. Preserve distinctions that affect host behavior, including\n`invalid`, `unsupported`, `unavailable`, cancellation, and operation-specific\nfailure categories. Multiple Rust sources may map to one host category only\nwhen the host contract intentionally gives them identical observable\nsemantics.\n\nHuman-readable messages are context, not the error contract. Keep them\nbounded and non-sensitive. Do not expose native error objects, source chains,\ndebug output, filesystem paths, credentials, payloads, or third-party error\ntypes unless the selected public contract explicitly defines a safe field and\nredaction policy.\n\nUse checked conversion when the host representation can reject a category,\nfield, code, or value. Return `unsupported` when a well-formed Rust outcome has\nno representation in the selected host contract, `unavailable` when required\nmapping or binding capability cannot be obtained, and `invalid` when mapping\ncontradicts the selected contract or would expose prohibited context.\n\nDo not flatten every failure to a string, convert every mapping through\ninfallible `From`, replace cancellation with generic failure, catch all\nunmapped variants as one internal error, substitute a framework-specific error\nterm, or report default success. Preserve the selected typed outcome.\n\n## Host Event Delivery\n\nWhen rust bindings adapt events, callback tasks, runtime handles, or executors, follow [Host Event Delivery](binding-lifecycle.md#host-event-delivery).\n\n## Host Callback Task Adaptation\n\nWhen rust bindings adapt events, callback tasks, runtime handles, or executors, follow [Host Callback Task Adaptation](binding-lifecycle.md#host-callback-task-adaptation).\n\n## Handle And Runtime Adaptation\n\nWhen rust bindings adapt events, callback tasks, runtime handles, or executors, follow [Handle And Runtime Adaptation](binding-lifecycle.md#handle-and-runtime-adaptation).\n\n## Explicit Executor Delegation\n\nWhen rust bindings adapt events, callback tasks, runtime handles, or executors, follow [Explicit Executor Delegation](binding-lifecycle.md#explicit-executor-delegation).\n\n## Fallible Conversion\n\nUse checked or fallible conversion whenever the target can reject:\n\n- narrowing or sign-changing integers;\n- platform-width sizes and offsets;\n- `u128` duration or count values narrowed to fixed-width fields;\n- non-UTF-8 paths converted to text;\n- enum variants not represented by the host contract;\n- serialization and deserialization; and\n- any framework conversion with a rejection outcome.\n\nReserve `From` and `Into` for conversions that are genuinely infallible for the\ncomplete supported domain. Use `TryFrom`, `TryInto`, or an explicit fallible\nconstructor when rejection is possible, and preserve typed `invalid`,\n`unsupported`, or `unavailable` outcomes across the host boundary.\n\n## Stable C ABI\n\nA stable C-ABI value uses ABI-defined fixed-width scalars, explicitly declared\nlayout, and an ownership contract. Dynamic Rust containers cross a C ABI only\nthrough an explicit pointer/length or opaque-handle contract governed by the\nRust Interop and Unsafe profiles; they are not passed by native layout.\n\n## Contract Discovery Adaptation\n\nImplement discovery or negotiation only when the selected Contracts-owned\nboundary requires it. That contract defines the discoverable identity,\nversion or capability representation, supported values, consumer behavior,\nand whether discovery is an exported operation, handshake field, package\nmetadata, schema identifier, or another selected mechanism.\n\nThe Rust adapter converts the canonical contract value through the selected\nbinding representation and verifies the real native/host consumer path. A\npackage version, build identifier, or exported function is not a universal\ncompatibility contract and cannot be substituted for the selected mechanism.\n\nReturn `invalid` when the adapter value contradicts the selected contract,\n`unsupported` when a well-formed discovered value is outside the supported\nset, and `unavailable` when required identity, version, capability, conversion,\nor consumer evidence cannot be obtained. Do not add a universal `version()`\nexport, guess compatibility, try alternate discovery, reuse stale discovery\nstate, or report default success.\n\n## Verification\n\nVerify the core/adapter boundary through:\n\n- core build and tests without binding features, framework packages, generated\n  host code, or a foreign runtime;\n- dependency and feature inspection proving no adapter or binding-framework\n  edge points into the core; and\n- adapter and generated-boundary checks for every supported binding mechanism.\n\nVerify contract discovery through the selected real native/host mechanism,\nincluding supported, unsupported, contradictory, and unavailable values.\n\nCore and adapter evidence are independent obligations. Core evidence exercises\ndomain behavior and validated native types through the framework-free core\ncontract. Adapter evidence exercises conversion, error mapping, lifecycle, and\nentrypoint behavior through the selected real native/host boundary. A\nnative-only adapter test does not prove host behavior, and a host integration\ntest does not prove that the core remains framework-independent.\n\nWhen the selected adapter requires a foreign runtime, its integration evidence\nmay run in a separately provisioned verification environment. That separation\ndoes not permit excluding the adapter evidence, treating a framework-specific\nwrapper as the core contract, or replacing unavailable host capability with\nnative-only tests. Record typed `invalid` when the implementation contradicts\nthe selected core/adapter boundary and typed `unavailable` when required core\nor adapter evidence or its execution capability cannot be obtained.\n\nVerify runtime and handle adaptation through:\n\n- reuse of one composition-owned runtime with fresh state for every call;\n- host-handle release without implicit runtime shutdown;\n- scoped asynchronous completion or lifecycle-owned tracked submission;\n- observed cancellation, failure, and result delivery for the current call;\n  and\n- typed failure when any required adaptation capability is unavailable.\n\nVerify host event delivery through:\n\n- real native-to-host delivery for every selected event variant and mode;\n- declared ordering, capacity, backpressure, and overflow behavior;\n- callback thread, re-entrancy, and current-input lifetime;\n- delivery failure, cancellation, and shutdown observation;\n- callback invocation outside synchronization guards;\n- lifecycle ownership for work that outlives delivery; and\n- typed invalid, unsupported, unavailable, and incomplete outcomes.\n\nVerify host callback-task adaptation through:\n\n- every supported task through the real native-to-host callback path;\n- checked task-input, result, and failure conversion;\n- callback thread, re-entrancy, input lifetime, and invocation outside guards;\n- exact response correlation and single terminal completion;\n- fresh state across repeated and concurrent invocations;\n- observed success, host failure, cancellation, panic, and shutdown;\n- lifecycle registration before work can outlive invocation; and\n- typed invalid, unsupported, unavailable, and incomplete outcomes.\n\nVerify composite executor delegation through:\n\n- successful local completion without invoking another executor;\n- delegation only for the contract's exact unsupported variant;\n- the current call's validated input reaching the selected next executor once;\n- original typed outcomes for invalid input, execution failure, cancellation,\n  resource failure, lifecycle failure, and unavailable capability;\n- scoped or lifecycle-owned completion of delegated work; and\n- typed unavailable when the selected delegate cannot be obtained.\n\nTest every conversion through:\n\n- successful native conversion;\n- every narrowing, sign, range, path, enum, and schema rejection class;\n- opaque-handle ownership and release when selected;\n- round trips where the representation contract supports them; and\n- the concrete native/host boundary for every supported framework or ABI.\n\nNative-only conversion tests do not prove host lifting, generated wrappers,\nwire compatibility, or ABI behavior.\n\nFor enum representations, verify every supported variant through the real\nnative/host boundary and cover applicable payloads, names, numeric values,\nunknown values, malformed discriminants or tags, unsupported variants, checked\nround trips, and unavailable representation capability. For a selected stable\nC ABI, verify the declared discriminant and payload layout rather than Rust\nnative layout.\n\nFor serialized representations, verify Rust-to-host and host-to-Rust behavior\nfor each supported shape. Cover tags, content, renamed variants and fields,\noptionality, defaults, omitted fields, unknown-field policy, supported and\nunsupported variants, malformed input, and unavailable schema or decoding\ncapability. Producer-only snapshots or Rust-only round trips do not prove\nconsumer agreement.\n\n## No Fallback\n\nMissing adapter, framework, generation, or packaging capability cannot add a\nbinding dependency to the core, move domain behavior into an adapter, merge\nthe layers, skip framework-free core verification, hand-edit generated output,\nor select another binding framework. Return the typed planning, build, or\noperation diagnostic for the selected boundary.\n\nMissing runtime or host-async capability cannot embed, create, replace, or\nsynchronously drive a runtime; block a host scheduler thread; detach work;\ndiscard terminal outcomes; retain prior request state; or select another\nbinding mechanism.\n\nComposite execution cannot catch every error, reinterpret a failure as\nunsupported, retry with rebuilt, default, or prior input, continue after\ncancellation, select an alternate executor, runtime, or binding mechanism,\ndetach delegated work, or discard the original typed outcome.\n\nFailed Rust binding conversion cannot fall back to:\n\n- truncation, wrapping, saturation, or unchecked casts;\n- lossy path text;\n- default values or unknown enum sentinels;\n- JSON treated as a schema-free universal ABI;\n- another binding framework or representation; or\n- native-only tests presented as host-boundary evidence.\n\nSerialized representations also cannot fall back to schema-free JSON,\nRust-native layout, assumed casing or tagging, unknown-value sentinels,\nomitted unsupported variants, another serializer or binding mechanism,\ngenerated-schema claims without the selected capability, producer-only tests,\nor weaker evidence.\n\nReturn the typed diagnostic for the selected representation.\n",
+    "requires": [
+      "core",
+      "workflow.verification",
+      "profile.language.rust",
+      "profile.boundary.language-bindings"
+    ],
+    "specializes": [
+      "profile.language.rust",
+      "profile.boundary.language-bindings"
+    ],
+    "next_operations": [
+      {
+        "operation": "related",
+        "request_kind": "related",
+        "snapshot": {
+          "kind": "snapshot-handle",
+          "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+          "schema_version": 5
+        },
+        "target": "profile.language.rust.language-bindings"
+      },
+      {
+        "operation": "inspect",
+        "request_kind": "inspect",
+        "handle": {
+          "kind": "snapshot-child-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+            "schema_version": 5
+          },
+          "child_kind": "policy",
+          "child_id": "profile.language.rust.language-bindings",
+          "schema_version": 5
+        }
+      }
+    ],
+    "detail": "compact",
+    "summary": "Read canonical standard profile.language.rust.language-bindings.",
+    "application_exposure": "unreviewed",
+    "provenance": []
+  }
+]

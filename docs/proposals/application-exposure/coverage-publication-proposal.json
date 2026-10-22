@@ -1,0 +1,248 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:13c3fa567b6a0ff5006a1ac40596c93ffe357b1376d044d83af81080e335caa7",
+    "schema_version": 7
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:b24452c8-9f63-4f8e-9e42-51a403e07ab7",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:4cb48973a3daebc9162654c2665ce1d32a57a058f7064040b3bfc9792f48f0e0",
+    "schema_version": 1
+  },
+  "status": "needs-action",
+  "next_operations": [
+    {
+      "operation": "resolve_many",
+      "required_inputs": [
+        "submissions"
+      ]
+    },
+    {
+      "operation": "resolve_workflow",
+      "required_inputs": [
+        "submission"
+      ]
+    },
+    {
+      "operation": "revise",
+      "required_inputs": [
+        "change_set"
+      ]
+    }
+  ],
+  "outcome": {
+    "kind": "workflow-analysis-summary",
+    "status": "needs-action",
+    "required_obligations": 2,
+    "pending_facts": 0,
+    "sections": [
+      {
+        "section": "obligations",
+        "count": 2
+      },
+      {
+        "section": "fact_requirements",
+        "count": 0
+      },
+      {
+        "section": "reading_plan",
+        "count": 1
+      },
+      {
+        "section": "changed_units",
+        "count": 1
+      },
+      {
+        "section": "pending_obligations",
+        "count": 2
+      }
+    ],
+    "details": {
+      "operation": "workflow_details"
+    }
+  },
+  "work": {
+    "kind": "workflow-work-page",
+    "section": "pending_obligations",
+    "observation": "sha256:6ac13271be9c916f88a8dd1f06353f8ff8281472c8d30590cf6a3fb3f29e774c",
+    "offset": 0,
+    "total": 2,
+    "items": [
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:13c3fa567b6a0ff5006a1ac40596c93ffe357b1376d044d83af81080e335caa7",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:1eb946547928258f1a92c069f760a6ca8b67b2ad5bf268816e0fc3485034433c",
+            "schema_version": 7
+          },
+          "kind": "consumer-review",
+          "target": "profile.language.rust.tooling",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "policy-impact-edge",
+              "source": "profile.language.rust.baseline",
+              "edge": "policy-impact:v1/profile.language.rust.baseline/normative-consumer/profile.language.rust.tooling",
+              "relation": "normative-consumer",
+              "evidence_owner": "review:consumer",
+              "traces": [
+                {
+                  "id": "impact-trace:sha256:0d47b311810240c65e11ad673a068349df621c79679f1114a17393a027da9fc0",
+                  "graph": "accepted",
+                  "applicability": "true"
+                },
+                {
+                  "id": "impact-trace:sha256:ecd63d5d5387a27bdf8bca9ec8ad46defc5b81240f48b9b33065a1f02767959d",
+                  "graph": "proposed",
+                  "applicability": "true"
+                }
+              ]
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "consumer-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "consumer-review",
+            "decision_contract": "decision-contract.consumer-review.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "analysis-contract",
+                "identity": "consumer-review-key:profile.language.rust.tooling",
+                "digest": "sha256:3c40aeb80f4e0ff26d352cc7a88ce3ea09abae6cb5ab9fd8efe53e1176321845"
+              },
+              {
+                "class": "evidence",
+                "identity": "review:consumer",
+                "digest": "sha256:44580705090e5dcc8d99e1a9d06fbaa171a2d4bcb92d0fdfa4893a9a7fcbfbc1"
+              },
+              {
+                "class": "policy-unit",
+                "identity": "profile.language.rust.baseline",
+                "digest": "sha256:4d4234134fab22a8e6e53578bee32971462db60c0bf97736c8368f3421be9656"
+              },
+              {
+                "class": "provider-contract",
+                "identity": "decision-contract.consumer-review.v1",
+                "digest": "sha256:879497150d0ba3a6c88462dbe9acfd1635b9ad4a06abb36f2cb919145a658e76"
+              },
+              {
+                "class": "relationship",
+                "identity": "policy-impact:v1/profile.language.rust.baseline/normative-consumer/profile.language.rust.tooling",
+                "digest": "sha256:6150387ae15461d93350adf2400de7f17457647868e55a4a498f49e7aac618ea"
+              }
+            ]
+          },
+          "applicability": "true",
+          "review_contract": {
+            "kind": "consumer-review-contract",
+            "id": "decision-contract.consumer-review.v1",
+            "version": 1,
+            "permitted_dispositions": [
+              "updated",
+              "reviewed-no-change",
+              "not-applicable",
+              "blocked"
+            ],
+            "evidence_contract": "evidence-reference.v1",
+            "authorization_capability": "standards.review.consumer",
+            "semantics": "review the exact consumer scope for every definitely applicable selector"
+          }
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:13c3fa567b6a0ff5006a1ac40596c93ffe357b1376d044d83af81080e335caa7",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:1eb946547928258f1a92c069f760a6ca8b67b2ad5bf268816e0fc3485034433c",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:13c3fa567b6a0ff5006a1ac40596c93ffe357b1376d044d83af81080e335caa7",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:cc8fda2e61472b8dc0dc9c8ed6c5f37cb9f22435df1f5e8bbc561ba4ea700589",
+            "schema_version": 7
+          },
+          "kind": "audit-coverage",
+          "target": "profile.language.rust.baseline",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "audit-coverage",
+              "source": "profile.language.rust.baseline"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "coverage-attestation"
+          ],
+          "fingerprint": {
+            "decision_kind": "audit-coverage",
+            "decision_contract": "decision-contract.audit-coverage.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "audit",
+                "identity": "sha256:4ce10ebc3bd0c5978b93fb7ce06d4afaa977588521cb50d76c8b8152756d4db4",
+                "digest": "sha256:4ce10ebc3bd0c5978b93fb7ce06d4afaa977588521cb50d76c8b8152756d4db4"
+              },
+              {
+                "class": "policy-unit",
+                "identity": "profile.language.rust.baseline",
+                "digest": "sha256:eedbf27166c968b34c7557e5669c926b4ca8b66bfbe8bb61c35ca0454baf77fd"
+              },
+              {
+                "class": "provider-contract",
+                "identity": "decision-contract.audit-coverage.v1",
+                "digest": "sha256:a597e086b78c0b000e7c65d36951ae827c068940f706f192b5f4298c98e7119d"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:13c3fa567b6a0ff5006a1ac40596c93ffe357b1376d044d83af81080e335caa7",
+            "schema_version": 7
+          },
+          "child_kind": "coverage-requirement",
+          "child_id": "sha256:4ce10ebc3bd0c5978b93fb7ce06d4afaa977588521cb50d76c8b8152756d4db4",
+          "schema_version": 7
+        }
+      }
+    ]
+  }
+}

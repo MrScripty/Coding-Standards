@@ -1,0 +1,23 @@
+{
+  "direct_ids_at_main_guard": [
+    "__main__.ContractCompilerTest.test_canonical_schema_and_interface_have_one_exact_public_closure",
+    "__main__.ContractCompilerTest.test_dialect_keyword_pattern_and_alias_profile_is_closed",
+    "__main__.ContractCompilerTest.test_inputs_are_copied_before_compilation",
+    "__main__.ContractCompilerTest.test_interface_and_schema_roots_must_agree_exactly",
+    "__main__.ContractCompilerTest.test_operation_catalog_is_authoritative_and_duplicate_dispatch_is_rejected",
+    "__main__.ContractCompilerTest.test_operation_variants_preserve_submission_capability_coverage",
+    "__main__.ContractCompilerTest.test_unreachable_missing_and_remote_references_have_typed_outcomes"
+  ],
+  "imported_ids": [
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_canonical_schema_and_interface_have_one_exact_public_closure",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_dialect_keyword_pattern_and_alias_profile_is_closed",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_inputs_are_copied_before_compilation",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_interface_and_schema_roots_must_agree_exactly",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_operation_catalog_is_authoritative_and_duplicate_dispatch_is_rejected",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_operation_variants_preserve_submission_capability_coverage",
+    "tools.standards_contracts.tests.test_compiler.ContractCompilerTest.test_unreachable_missing_and_remote_references_have_typed_outcomes",
+    "tools.standards_contracts.tests.test_compiler.OperationVariantTest.test_variant_has_its_own_closed_roots_and_immutable_selection",
+    "tools.standards_contracts.tests.test_compiler.OperationVariantTest.test_variant_rejects_unknown_definitions_fields_and_duplicate_results"
+  ],
+  "mode": "collection probe only; compiler test bodies were not executed"
+}

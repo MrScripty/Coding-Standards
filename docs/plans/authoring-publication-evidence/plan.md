@@ -2,9 +2,9 @@
 
 **Plan status:** `Active`
 
-**Current phase:** A1 implementation is complete; final acceptance and main-targeted PR review are in progress.
+**Current phase:** A1 source is integrated through `daa70d98`; the retained Interface 47 checkout implementation and private observations have passed their local integration checks. Broader objective acceptance remains pending.
 
-**Next slice:** Complete A1's exact-candidate hosted checks and required independent review. Begin A2 only after A1 is accepted and merged to `main`.
+**Next slice:** Reconcile A1's remaining acceptance evidence using the [checkout integration record](reports/checkout-reconciliation.md), and then admit A2 through its existing gate.
 
 **Acceptance status:** `pending`
 

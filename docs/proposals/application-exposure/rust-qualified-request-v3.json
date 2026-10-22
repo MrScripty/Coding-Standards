@@ -1,0 +1,130 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+    "schema_version": 7
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Qualify32 application modules and align the Rust baseline with existing sufficient-evidence policy",
+      "rationale": "The user authorized the exact Rust baseline correction and qualification of its four dependent exposures. Preserve the28 independently accepted source texts, correct only the base Rust test-addition step, register its uncovered affected baseline scope and its reviewed direct Rust Tooling consumer, and restore the4 Rust exposure approvals. Standards Authoring stays authoring-only. No CodeRabbit normative additions or project sandbox mandate are adopted.",
+      "evidence": [
+        {
+          "id": "docs/proposals/application-exposure/accepted-material.json",
+          "digest": "sha256:7194e856fdec0132e1b445ceca4b5b7b4867d326f05ff666db8875b5b294560b",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/application-exposure/rust-baseline-correction.md",
+          "digest": "sha256:08db5233b372b365ddcff35bf909da4ddcec826bb085f6e4ddefe5b04ec572e9",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "profile.language.rust",
+          "title": "Rust Language Profile",
+          "role": "profile",
+          "level": "PROFILE",
+          "applies_when": "Rust source, Cargo metadata, or Rust-generated artifacts change.",
+          "does_not_apply_when": "No Rust-owned artifact changes.",
+          "verification": "Affected Cargo formatting, lint, build, and test commands pass.",
+          "body": "This profile owns Rust mechanisms. Cross-language policy remains in Core,\nworkflows, application profiles, boundary profiles, and topics.\n\n## Baseline Rust Change\n\nFor a local library bug fix:\n\n1. Use the existing crate and workspace ownership boundaries.\n2. Establish the changed claim with adequate existing evidence or a construction\n   guarantee, or add a focused Rust regression test when needed.\n3. Run formatting for affected Rust files or the workspace.\n4. Run Clippy for the affected package/targets with repository-configured\n   warnings.\n5. Run the focused test and affected package tests.\n6. Run broader workspace checks only when shared contracts or workspace wiring\n   changed.\n\nDo not require `--all-features` when declared features are mutually exclusive.\nTest default, no-default, individual, and explicitly supported combinations\naccording to the crate's feature contract.\n\n## Rust Invariants\n\n- Prefer validated types and checked conversions at boundaries.\n- Route public or boundary-facing Rust type, trait, parameter, conversion,\n  visibility, result, panic, feature, and Rustdoc mechanisms through the\n  [Rust API profile](api.md).\n- Route Cargo declaration, workspace, resolver, dependency-graph, audit-adapter,\n  and build-cost measurement mechanisms through the\n  [Rust Dependency profile](dependencies.md).\n- Route Rust toolchain, Cargo release metadata, publication-control,\n  release-adapter, and release-evidence mechanisms through the\n  [Rust Release profile](release.md).\n- Route Rust and Cargo formatting, lint, test-runner, feature-matrix,\n  benchmark, coverage, diagnostic, and build-script adapter mechanisms through\n  the [Rust Tooling profile](tooling.md).\n- Route async API and suspension-boundary selection through the\n  [Rust Async profile](async.md).\n- Route Rust target selection, configuration placement, and target evidence\n  through the [Rust Cross-Platform profile](cross-platform.md).\n- Give async runtimes and spawned tasks explicit lifecycle owners.\n- Do not hold synchronous guards across `.await`.\n- Deny unsafe by default and route legitimate unsafe work through the\n  [Rust Unsafe profile](unsafe.md).\n- Route raw foreign memory, checked dimensions, and callback borrows through\n  the [Rust Interop profile](interop.md).\n- Route untrusted dimensions, counts, offsets, strides, and lengths through\n  the [Rust Security profile](security.md) before arithmetic or resource use.\n- Route Rust host representations and cross-language conversions through the\n  [Rust Language Binding profile](language-bindings.md).\n- Keep generated bindings derived and test both native and host sides when that\n  boundary changes.\n\n## Canonical Routing And No Legacy Authority\n\nThis profile and the specialized profiles linked above are the canonical Rust\nmechanism owners. Files under the legacy Rust standards directory are\nnon-normative migration indexes; they do not own Rust policy or supply a route\nwhen canonical facts are missing.\n\nReturn typed `unavailable` when the required owner, applicability, or capability\nfacts cannot be established, typed `invalid` when routing facts contradict, and\ntyped `unsupported` through the selected owner when a required mechanism is not\nsupported.\n\nDo not fall back to a legacy Rust file, a nearby profile, every Rust profile, or\na default runtime, tool, target, feature matrix, benchmark adapter, unsafe\npolicy, or verification command.\n"
+        },
+        "scope_updates": []
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "profile.language.rust",
+        "policy_unit": {
+          "id": "profile.language.rust.baseline",
+          "heading_chain": [
+            "Baseline Rust Change"
+          ],
+          "semantic_revision": 1,
+          "intent": "For local Rust library bug fixes, preserve generic claim-matched sufficient evidence: reuse adequate existing evidence or a construction guarantee and add focused Rust regression evidence when needed, while retaining existing Rust execution and scope obligations.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "profile.language.rust.baseline",
+          "consumer": "profile.language.rust.tooling",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "whole-artifact"
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Rust Tooling projects the Rust baseline's claim-scoped verification and execution obligations into Cargo adapters through Practical Starting Point and Cargo Baseline Command Mechanisms; it must preserve sufficient-evidence reuse/construction and selected scope rather than create a mandatory new-test or universal command requirement."
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "decision.rust-baseline.evidence-sufficiency-2026-10-04",
+          "subject": "profile.language.rust.baseline",
+          "origin": "current-justification",
+          "rationale": "Independent exposure material review found that an unconditional new Rust regression test overrides Core and Verification's sufficient-evidence exception. The user approved the exact correction so this language mechanism profile preserves the generic evidence decision. Original historical motives are unknown.",
+          "evidence": [
+            {
+              "id": "docs/proposals/application-exposure/accepted-material.json",
+              "digest": "sha256:7194e856fdec0132e1b445ceca4b5b7b4867d326f05ff666db8875b5b294560b",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/application-exposure/rust-baseline-correction.md",
+              "digest": "sha256:08db5233b372b365ddcff35bf909da4ddcec826bb085f6e4ddefe5b04ec572e9",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "assumptions": [
+            "Core and Verification retain authority over generic evidence sufficiency; adequate evidence must prove the changed claim."
+          ],
+          "limits": [
+            "The CodeRabbit findings are historical; this correction does not establish downstream behavioral improvement.",
+            "Other baseline instructions and specialist claims retain their existing authority.",
+            "Only the affected baseline scope is registered here; unchanged Rust invariants and routing are not newly audited policy units."
+          ],
+          "alternatives": [
+            "Qualify28 modules and leave the4 Rust modules unqualified pending correction.",
+            "Retain an unconditional new-test obligation; rejected because it overrides generic evidence sufficiency."
+          ],
+          "reconsideration": [
+            "Revisit if generic owners change evidence sufficiency or a specific Rust mechanism requires stronger evidence."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.async"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.api"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.security"
+      }
+    ]
+  }
+}

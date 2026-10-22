@@ -1,0 +1,1465 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+    "schema_version": 7
+  },
+  "evidence": {
+    "original": {
+      "id": "docs/proposals/application-exposure/independent-review.md",
+      "digest": "sha256:a1d55ca293cced29591c41866bec5c5f1f898413cae51ee1634b500075f92603",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    },
+    "rust": {
+      "id": "docs/proposals/application-exposure/independent-rust-review.md",
+      "digest": "sha256:998f863ef47520e7a3a7a31339c293e98fa8a92a299ebdd24c06c8fb27ebdcb1",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    },
+    "validation": {
+      "id": "docs/proposals/application-exposure/candidate-validation.md",
+      "digest": "sha256:2d5b8a053b92a2c03863416058db4ba9bddee52b39db634bf256c89bb268ab57",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    },
+    "consumer_material": {
+      "id": "docs/proposals/application-exposure/rust-consumer-material.json",
+      "digest": "sha256:efaa0decc78b28b1cf43ec16b648a6b7304c30e4ffcc129efee8de1b13ad91e0",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    }
+  },
+  "submissions": [
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:000788a57fbe2736c095f9659f00a24ad25fb084dd972801e9a7cc77346ccca6",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.architecture:proposed",
+            "digest": "sha256:6b5c62e6adf32c3fab52a3f9543b154fc28e67178ff1bab23e5e33ecd619cd29"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.architecture at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:00a27d68fb42b5c3862330f4672ac8e011748e81d56deee2b2165e5cf5ebb6f4",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.rust.api:proposed",
+            "digest": "sha256:f29c8ad02acb5685aaacad6c6860efb8c5301b1d09f4850301e02978bd38177a"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.rust.api at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:0394f289262cd09702c29aa665022d1f8d54f7d89ac9b595e7b26a7eb16196ea",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.architecture.replay:proposed",
+            "digest": "sha256:beaeb7fa903bb3ff40ee3e994e09d479b11ecf6650fe29155289cadcac34f300"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.architecture.replay at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:169674da7bf570c0349b428c4d68ea66ba0485557c72dc3061f96f219379a612",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.diagnostics:proposed",
+            "digest": "sha256:d5130f85e1287eeb59365a17274ab1be73862fc483b21d8f8c75189baec29345"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.diagnostics at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:1cb6adb8f5b22c80b2890cb259e9948f3d887c94e3a9db49be0b922a3217cac2",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.rust.async:proposed",
+            "digest": "sha256:960acf8e6d6ed5cfb96d01922563d6730ecaf46c579d65ddbbf60a389aec7679"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.rust.async at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:385451433121007093bc2061e4f1bfbb728d94fedffd7a27de481ba37cbf2314",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "provenance.rust-baseline.evidence-sufficiency-2026-10-04:proposed",
+            "digest": "sha256:d5a0be5210a804da5794aa7a0b7633a886c20213d8ba5b8f92aa5af0f09f9f94"
+          }
+        ]
+      },
+      "rationale": "Exact new provenance was independently read and accepted: current justification and user-approved correction are accurately identified, historical motives remain unknown, supporting source/correction references are pinned, alternatives and limits remain authoring-only. No extra application requirement or downstream-effectiveness claim is introduced.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:4979ed728671989deb7f87ca3e7e57c465cc06f1f4b79d82e8e0030628482f10",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.verification.platforms:proposed",
+            "digest": "sha256:bd7a1f8c399ac2a5f30a6d0cc1980d14a440372af8162ddceed7b1699af52a5b"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.verification.platforms at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:645a81c498efe690acf233f8d932321b56e59f09a8b8ec3187acbc42e11622f0",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.application.frontend:proposed",
+            "digest": "sha256:3e0c0322fc41a6565d8e41d2c846202e23f38239fa659df424bf32c486e571c1"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.application.frontend at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:69351f5b9cb74050f8881ea98e8ceab2f770c5e9d069f8f1b3694b86caa2a6cb",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.contracts.protocols:proposed",
+            "digest": "sha256:06e69c4266b2f43f01d4b82673efa248e82707bb8d940c6f10f6c68493a7ac12"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.contracts.protocols at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:73e137028646bc4ad4a05051a5edc58f7068dcb393d360f338b94ef561d12773",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.verification.oracles:proposed",
+            "digest": "sha256:c6209e5aac303ea0af28501a513fd0d401791084cd083c0ac44b1ba20a39fdb1"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.verification.oracles at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:744fea305c5e36feb183478518160793d9ab173a37846823e4d7365c908a5971",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.typescript:proposed",
+            "digest": "sha256:e1163e9e503996f96d3164a4606d1c53eab5d352b983a1e6cde29cc1955832f2"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.typescript at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:7e6b02510233f4d9228a9820ea644c408062325a4a985ec4c4266ef87e14fcf2",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.accessibility:proposed",
+            "digest": "sha256:9bd732dfe649cd8490506a65f466ac327e5c7262aab58af3444a3cd59f8c3b5a"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.accessibility at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:83eebdaf4563e8ad9c08a6bebe06e380c8468013fc26461d46fd97c87e9a93dd",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.release.operations:proposed",
+            "digest": "sha256:e018f6d42acdd492460d6bb12fe3f44a984b6e7239b81981dffe3f930015d697"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.release.operations at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:84992f6d169e3db372d30f3d526e9d42b7700470680f5e4104a5380155c01b61",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.cross-platform:proposed",
+            "digest": "sha256:510722e0686688bda4642e5059516aa5997fa4aa1ecc66ef09a80f80fad06d47"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.cross-platform at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:899be0e71801f820bf2048b01e968caf3a54b326e03ed94fcbfb6e7b5529566d",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.performance:proposed",
+            "digest": "sha256:41ef20ff0189241b0fd6ca57d4b1354237adc30932416f7f1d5cb06ea6ef954a"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.performance at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:8f9ec28b00c4cbc7b7f73e6f1a539b885f4dcc02f353b35b94eccd65962ae75f",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:reference.recipes.tooling:proposed",
+            "digest": "sha256:478ab64d6ae44f4dc5b8d7ee24e259cc959dfc27ee925a93e14c9a4ba2957c9a"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of reference.recipes.tooling at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "consumer-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:929cbdcce98ad893d4841c6c7005d1417398df931abbf034260fa116a2e785c0",
+        "schema_version": 7
+      },
+      "result": "reviewed-no-change",
+      "fingerprint": {
+        "decision_kind": "consumer-review",
+        "decision_contract": "decision-contract.consumer-review.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "analysis-contract",
+            "identity": "consumer-review-key:profile.language.rust.tooling",
+            "digest": "sha256:3c40aeb80f4e0ff26d352cc7a88ce3ea09abae6cb5ab9fd8efe53e1176321845"
+          },
+          {
+            "class": "evidence",
+            "identity": "review:consumer",
+            "digest": "sha256:44580705090e5dcc8d99e1a9d06fbaa171a2d4bcb92d0fdfa4893a9a7fcbfbc1"
+          },
+          {
+            "class": "policy-unit",
+            "identity": "profile.language.rust.baseline",
+            "digest": "sha256:ec5bd18761a722587c5c52f08ca1b7284c498bd18e90fe3492912e53622f59ab"
+          },
+          {
+            "class": "provider-contract",
+            "identity": "decision-contract.consumer-review.v1",
+            "digest": "sha256:879497150d0ba3a6c88462dbe9acfd1635b9ad4a06abb36f2cb919145a658e76"
+          },
+          {
+            "class": "relationship",
+            "identity": "policy-impact:v1/profile.language.rust.baseline/normative-consumer/profile.language.rust.tooling",
+            "digest": "sha256:f813298bf89e7f1477b041ae8253ca8fb4fb07d63dfaecb18043573316c18b64"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "consumer_material"
+        }
+      ],
+      "rationale": "Whole Rust Tooling candidate independently reviewed. Practical Starting Point and Cargo Baseline Command Mechanisms project scoped Rust verification while Mechanism Authority leaves evidence sufficiency with generic owners. No new-test requirement overrides the corrected baseline; required specialist claims remain in force. Text, Requires and Specializes are unchanged."
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:92af1119676c9a9db50c092c3ee6d35a203f84c224252fd7b445e338ec5af579",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.code-design:proposed",
+            "digest": "sha256:8fd5751d4ca592a6792ca5163f333af4e90fd588a4c170b8b1a8c5ae01dd2a6c"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.code-design at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:937cba782b7084a9506f01d272addf1dd0829df6a0434d93009304df39c8768e",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.rust:proposed",
+            "digest": "sha256:ac5e1bf439388b644241df9643bfff9788228a671fe24a4c9b8164b4960dbbca"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.rust at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Only the approved baseline evidence step changes; the established generic sufficient-evidence principle is preserved. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:9446cff79db8389ab5f93c25510eb8424648131bfdf06e455177a4c0d5ff8585",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.rust.security:proposed",
+            "digest": "sha256:4c8a5a866d5d00393f0049823dcb034422a20e45c6747c0af05b97f8226e04e5"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.rust.security at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:9569e3b4b303195bc7e478c7208863a206fdcfd1f309d0e76f12f3ac7c702d1b",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.language.typescript.async:proposed",
+            "digest": "sha256:d6fa427cf3038c8d85e63c79c3ac8f8c0e3410a009d3a2b2e7282f5206e29362"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.language.typescript.async at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:9fc2b2a2f5d91380b14f95f35b7b8b1ea9d3904d21715da39f61e45b325bdb74",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.contracts:proposed",
+            "digest": "sha256:4fb05c8c55f6c12519ce5fa651c4a1213f9236a276d153db72981c1cd82f38e9"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.contracts at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:a279ef518439aef039d17d1b1be8df0eec480061faa6ff1786157f396c6a6a2b",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.licensing:proposed",
+            "digest": "sha256:b58cea2871d1e24d002f66de89de8c6d710aa2ea7cb79e2be6a455120b24c299"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.licensing at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:a5ea40e962258c45211795623399549d219eb5d3c5c51562ec33b565a88a7621",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.documentation:proposed",
+            "digest": "sha256:0b57160e689bdc5c46ee418d0bf56209a6a43f7d613a54ac9f3bd9d051fe1e40"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.documentation at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:ac7d58cb7b9797e02a260acafb4d86494502229ca0c76107751f10147dcb3d1c",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.boundary.generated-contract:proposed",
+            "digest": "sha256:0ce4c372a040d380b636dedbffe8d791a5225d21993f4b4a984edd8a11a9aa82"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.boundary.generated-contract at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:b19c4f42252cc5eeb2050e25dc06c52b3fbb39a123957c1f2ee02c4860fc3adc",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.commit:proposed",
+            "digest": "sha256:72606939e81570d9400d4f405d6e326918bd7c5bb2d1b008a5fb4d592a1dd59e"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.commit at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:b3e016e736a895157bc7b1d9bc8d1addfa2c741461336aeb7e591edbaeba01c7",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.resilience:proposed",
+            "digest": "sha256:4cdd6036dacf5918ec80dd4ee3adfe4ccd05ce4f5fcd3953a91b68ce03275ef9"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.resilience at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:cae4d6b616bf7b70ebe5ef8357b853fe9b570722ca35641cb356bed10a4904e3",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.contracts.schemas:proposed",
+            "digest": "sha256:2058f9d04640f83b9325604491ce39f00dd049f083879654e7779b8f2deaa249"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.contracts.schemas at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "coverage-attestation",
+      "claim": {
+        "requirement": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+            "schema_version": 7
+          },
+          "child_kind": "coverage-requirement",
+          "child_id": "sha256:4ce10ebc3bd0c5978b93fb7ce06d4afaa977588521cb50d76c8b8152756d4db4",
+          "schema_version": 7
+        },
+        "conclusion": "complete",
+        "evidence": [
+          {
+            "evidence_ref": "rust"
+          },
+          {
+            "evidence_ref": "consumer_material"
+          }
+        ],
+        "explicit_exclusions": [],
+        "rationale": "The exact baseline scope at semantic revision1 has one registered normative-consumer relationship to Rust Tooling, reviewed unchanged with adequate claim-scoped evidence authority. All10 dispatched Rust specialist modules were independently inspected for actual baseline projection; the other9 consume generic policy or separate Rust invariants and are not direct baseline projections. Every consumer selected in this exact requirement's policy-impact-consumer horizon is dispositioned; no registered edge is excluded. Completeness covers this affected baseline and current declared consumer horizon, not unregistered Rust sections, unrelated generic Library wording or whole-repository behavioral effectiveness.",
+        "auditor_provenance": "Primary standards-authoring agent, with independent material review by the user-selected exposure_material_review agent; Engine audit authority must separately verify and publish the actual receipt."
+      }
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:e12839bad55cec23f5699905f300fc54de35b12a71cb7f3231482c6aabf646b7",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.build:proposed",
+            "digest": "sha256:6ffb8f8cd1ee1b70cac7cab7af31d6f2d16976b38a7b3829d6a9e1271e244b5c"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.build at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:e91370b07fd92d6eb2e4e89547810cf39613ce7b4a07ee5e7c76edff2030f5f9",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.contracts.evolution:proposed",
+            "digest": "sha256:a5b9ad9e8b1f79dcb164d768381e4820c9d2189c5e0b20d15566c5f030610676"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.contracts.evolution at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:eaf83e6c28c8dc8c24cf5777306b77184f99d3a22961a1f11f42930f9c4f111f",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "unmapped-normative-change",
+        "decision_contract": "decision-contract.unmapped-normative-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "analysis-contract",
+            "identity": "decision-contract.unmapped-normative-change.v1",
+            "digest": "sha256:8159f2c014149edb80c24bcf9a07bf5a58cc24982278b639487dbceec4094964"
+          },
+          {
+            "class": "module-locator",
+            "identity": "profile.language.rust:accepted-module",
+            "digest": "sha256:6ff68cdbd501d44d9ce2461f44757b86937fc464b984a5f59dbbe139f268cd0d"
+          },
+          {
+            "class": "module-locator",
+            "identity": "profile.language.rust:proposed-module",
+            "digest": "sha256:6ff68cdbd501d44d9ce2461f44757b86937fc464b984a5f59dbbe139f268cd0d"
+          },
+          {
+            "class": "representation",
+            "identity": "profile.language.rust:accepted-unmapped",
+            "digest": "sha256:a7fc50a6d4f1c07b2b4b3e5ceb8ad94f3e6a5deb21a4852e1fb9e09570ae77ea"
+          },
+          {
+            "class": "representation",
+            "identity": "profile.language.rust:proposed-unmapped",
+            "digest": "sha256:e62dc586ffd2a44e5448b866ac26ad691467b0e62de1f725ad3b13d44bf8a171"
+          }
+        ]
+      },
+      "rationale": "The only normative owner change is the user-approved step2 evidence exception. Independent whole-module comparison confirms all other Rust prose and relationships unchanged. The previously uncovered affected Baseline Rust Change scope is now explicitly registered with its reviewed actual Rust Tooling consumer; new revision1 does not invent a prior policy identity. Confirm this substantive correction, without certifying unchanged unregistered invariants/routing.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:ec4a1204ff8369bbdf4160213f614c3b8e79dd2dd01557c6ccf80b05566ab071",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.release:proposed",
+            "digest": "sha256:707040215d8e19afc1936f23554347b1a31dc4e23e127cfa2b66c3227ec25758"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.release at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:f6965d879ad78843cbb8fb3ee31345a574c1fd2b29ff435b229d8659c7eff0ae",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:topic.dependencies:proposed",
+            "digest": "sha256:79549aa24a8f7e4ac55dcc876aea642a48244e6ef0a518a8688f386550098b3e"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of topic.dependencies at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:fe315ea4a388224f3097085c2ca07b2a5a0ea0827eabe30f8fa3d5cc41bfa862",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:workflow.verification.gui:proposed",
+            "digest": "sha256:dcf78f5d3f9ff9db43eb18cf7ac183f0bbab3348c0baf307fde64556ba8eb442"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of workflow.verification.gui at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    },
+    {
+      "kind": "impact-disposition",
+      "obligation": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:c7eb7111ca37fbf2224d2afe36d03c8549a2673c66a5353ceec7d38a21026d20",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:ff8cbd8dcd31e5c18e53c26d2d3940d20025c36ac182d6f54553571fc2241e7a",
+        "schema_version": 7
+      },
+      "result": "confirmed",
+      "fingerprint": {
+        "decision_kind": "supporting-content-change",
+        "decision_contract": "decision-contract.supporting-content-change.v1",
+        "schema_version": 1,
+        "dependencies": [
+          {
+            "class": "representation",
+            "identity": "application-exposure:profile.boundary.persistence:proposed",
+            "digest": "sha256:1f75cb7f3f534b342b57d43ffc9611e98ddebe7fe3016d1a1b0fb458f017ac04"
+          }
+        ]
+      },
+      "rationale": "Accept application exposure of profile.boundary.persistence at the exact reviewed revision. Independent whole-module review and native application preview confirm its content, applicability, authority and qualified prerequisite path. Source text and existing Requires/Specializes remain unchanged. Optional reference and authoring-provenance separation remain intact.",
+      "evidence": [
+        {
+          "evidence_ref": "original"
+        },
+        {
+          "evidence_ref": "rust"
+        },
+        {
+          "evidence_ref": "validation"
+        }
+      ]
+    }
+  ]
+}

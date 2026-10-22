@@ -1,0 +1,1 @@
+{"scope": "original current worktree; transport/runtime/discovery only, no domain store", "invocations": 7, "enabled_disabled_failed_equivalent": true, "ordered_literal_capture": true, "runtime_identity_equal": true, "interface_version": 45}

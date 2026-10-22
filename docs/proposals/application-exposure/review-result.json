@@ -1,0 +1,45 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "readiness-handle",
+    "id": "readiness:sha256:6268b16d1d8d7a925cb66d9d2531ed35bc6415893b93e2273f41f64d839a858b",
+    "schema_version": 1
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:800744d7-33d1-4b31-9a8e-bd66d2c9d3db",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+    "schema_version": 1
+  },
+  "status": "ready",
+  "next_operations": [
+    {
+      "operation": "apply",
+      "required_inputs": []
+    },
+    {
+      "operation": "revise",
+      "required_inputs": [
+        "change_set"
+      ]
+    }
+  ],
+  "outcome": {
+    "kind": "review-proposal-result",
+    "readiness": {
+      "kind": "readiness-handle",
+      "id": "readiness:sha256:6268b16d1d8d7a925cb66d9d2531ed35bc6415893b93e2273f41f64d839a858b",
+      "schema_version": 1
+    },
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+      "schema_version": 1
+    },
+    "status": "ready"
+  }
+}

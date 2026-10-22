@@ -1423,7 +1423,7 @@ class StandardsEngine:
                             application.application_id
                         ),
                         "status": "applied",
-                        **self._application_publication_projection(application),
+                        **self._application_publication_projection(application, reconcile_checkout=True),
                     }
                 )
         except self._domain_errors() as error:
@@ -1912,7 +1912,10 @@ class StandardsEngine:
                     details=_recovery_failure_details(error),
                 )
             if prior_outcome is not None:
-                return self._recovered_application(application)
+                reconcile = call.as_contract().get("action", "observe") == "complete-publication"
+                if reconcile:
+                    self._authorize_recovery_completion(application)
+                return self._recovered_application(application, reconcile_checkout=reconcile)
             try:
                 observed = self._repository.branch_revision(CANONICAL_TARGET_BRANCH)
             except GitRepositoryError as error:
@@ -1923,6 +1926,9 @@ class StandardsEngine:
                     details=_recovery_failure_details(error),
                 )
             if observed == application.candidate:
+                reconcile = call.as_contract().get("action", "observe") == "complete-publication"
+                if reconcile:
+                    self._authorize_recovery_completion(application)
                 try:
                     self._authoring.record_applied(application)
                 except SnapshotError:
@@ -1931,7 +1937,7 @@ class StandardsEngine:
                         "APPLICATION.OUTCOME_PERSISTENCE_UNAVAILABLE",
                         "The recovered applied outcome could not be recorded durably.",
                     )
-                return self._recovered_application(application)
+                return self._recovered_application(application, reconcile_checkout=reconcile)
             if observed == application.expected_target:
                 if call.as_contract().get("action", "observe") == "complete-publication":
                     return self._complete_admitted_application(application)
@@ -1990,11 +1996,11 @@ class StandardsEngine:
                         "Recovery requires the original selected application.",
                     ))
                 if self._authoring.application_outcome(application) is not None:
-                    return self._recovered_application(application)
+                    return self._recovered_application(application, reconcile_checkout=True)
                 self._authorize_recovery_completion(application)
                 self._repository.validate_candidate(candidate)
                 failure = self._publish_admitted_application(application, candidate)
-                return failure if failure is not None else self._recovered_application(application)
+                return failure if failure is not None else self._recovered_application(application, reconcile_checkout=True)
         except self._domain_errors() as error:
             return self._application_recovery_required(
                 application, "APPLICATION.RECOVERY_BLOCKED",
@@ -3612,19 +3618,19 @@ class StandardsEngine:
         )
 
     def _recovered_application(
-        self, application: ProposalApplication
+        self, application: ProposalApplication, *, reconcile_checkout: bool = False,
     ) -> RecoverApplicationResult:
         return RecoverApplicationResult.from_value(
             {
                 "kind": "recover-application-result",
                 "application": self._application_handle(application.application_id),
                 "status": "applied",
-                **self._application_publication_projection(application),
+                **self._application_publication_projection(application, reconcile_checkout=reconcile_checkout),
             }
         )
 
     def _application_publication_projection(
-        self, application: ProposalApplication,
+        self, application: ProposalApplication, *, reconcile_checkout: bool = False,
     ) -> dict[str, object]:
         """Return durable publication identity plus fresh, bounded observations."""
         try:
@@ -3669,10 +3675,15 @@ class StandardsEngine:
             },
         }
         try:
-            observation = self._repository.observe_publication_checkout(
-                application.expected_target, application.candidate,
-                target_ref="refs/heads/" + CANONICAL_TARGET_BRANCH,
-            )
+            if reconcile_checkout and durable_state == "applied" and target_status == "candidate":
+                observation = self._repository.reconcile_publication_checkout(
+                    application.expected_target, application.candidate,
+                )
+            else:
+                observation = self._repository.observe_publication_checkout(
+                    application.expected_target, application.candidate,
+                    target_ref="refs/heads/" + CANONICAL_TARGET_BRANCH,
+                )
         except Exception:
             checkout: dict[str, object] = {
                 "kind": "publication-checkout-observation",

@@ -41,6 +41,9 @@ class PublicationRecoveryTests(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name) / "repository"
         prepare_repository(self.root)
+        self.checkout_changes = set(subprocess.check_output(
+            ["git", "diff", "--name-only", "HEAD"], cwd=self.root,
+        ).splitlines())
         self.author = AgentToolFacade.open_repository(self.root, purpose="authoring")
         self.addCleanup(lambda: self.author.close())
         self.engine = self.author._engine
@@ -73,6 +76,71 @@ class PublicationRecoveryTests(unittest.TestCase):
         self.assertEqual(completed["outcome"]["application"]["id"], self.application.application_id)
         self.assertEqual(self.engine._repository.branch_revision("main"), self.application.candidate)
         self.assertEqual(self.engine._authoring.read_selected_application(self.context["id"]), self.application)
+        self.assertEqual(completed["outcome"]["checkout"]["status"], "current")
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "diff", "--name-only", "HEAD"], cwd=self.root,
+        ).splitlines()), self.checkout_changes)
+
+    def test_apply_reconciles_publication_and_preserves_unrelated_local_work(self):
+        self.lock.unlink()
+        # The first admitted attempt failed. A second, independently reviewed
+        # reference exercises the ordinary apply path rather than recovery.
+        proposed = self.author.propose({"change_set": reference_change(self.root, "checkout")})
+        ready = self.author.review({"context": proposed["context"], "decisions": decisions(self.root)})
+        self.assertEqual(ready.get("status"), "ready", ready)
+        local = self.root / "local-work.txt"
+        local.write_bytes(b"staged engine work\n")
+        subprocess.run(["git", "add", "local-work.txt"], cwd=self.root, check=True)
+        index_blob = subprocess.check_output(["git", "rev-parse", ":local-work.txt"], cwd=self.root)
+        local.write_bytes(b"later unstaged engine work\n")
+        applied = self.author.apply({"context": ready["context"]})
+        self.assertEqual(applied.get("status"), "applied", applied)
+        self.assertEqual(applied["outcome"]["checkout"]["status"], "current")
+        self.assertEqual(set(subprocess.check_output(
+            ["git", "diff", "--name-only", "HEAD"], cwd=self.root,
+        ).splitlines()), self.checkout_changes | {b"local-work.txt"})
+        self.assertEqual(subprocess.check_output(
+            ["git", "rev-parse", ":local-work.txt"], cwd=self.root,
+        ), index_blob)
+        self.assertEqual(local.read_bytes(), b"later unstaged engine work\n")
+        self.assertEqual(subprocess.check_output(["git", "stash", "list"], cwd=self.root), b"")
+
+    def test_checkout_failure_does_not_hide_applied_publication_and_explicit_recovery_retries(self):
+        self.lock.unlink()
+        index_lock = self.root / ".git/index.lock"
+        index_lock.write_bytes(b"another writer\n")
+        completed = self.author.recover({"context": self.context, "action": "complete-publication"})
+        self.assertEqual(completed.get("status"), "applied", completed)
+        self.assertEqual(completed["outcome"]["publication"]["durable_state"], "applied")
+        self.assertEqual(completed["outcome"]["checkout"]["status"], "unavailable")
+        self.assertEqual(index_lock.read_bytes(), b"another writer\n")
+        self.assertEqual(self.engine._repository.branch_revision("main"), self.application.candidate)
+        index_lock.unlink()
+        index = (self.root / ".git/index").read_bytes()
+        with mock.patch.object(self.engine._repository, "reconcile_publication_checkout") as reconcile:
+            observed = self.author.recover({"context": self.context})
+            self.assertEqual(observed["outcome"]["checkout"]["status"], "needs-reconciliation")
+            self.author.workflow_status({"context": self.context})
+            reconcile.assert_not_called()
+        self.assertEqual((self.root / ".git/index").read_bytes(), index)
+        self.author.close()
+        self.author = AgentToolFacade.open_repository(self.root, purpose="authoring")
+        self.engine = self.author._engine
+        with mock.patch.object(self.engine._repository, "publish_candidate") as publish:
+            repaired = self.author.recover({"context": self.context, "action": "complete-publication"})
+            self.assertEqual(repaired["outcome"]["checkout"]["status"], "current", repaired)
+            publish.assert_not_called()
+
+    def test_publication_reconciliation_conflicts_preserve_local_edits(self):
+        self.lock.unlink()
+        path = self.root / "evaluation/standards-effectiveness/generated/suite-inputs.json"
+        path.write_bytes(b"local unpublished content\n")
+        index = (self.root / ".git/index").read_bytes()
+        completed = self.author.recover({"context": self.context, "action": "complete-publication"})
+        self.assertEqual(completed.get("status"), "applied", completed)
+        self.assertEqual(completed["outcome"]["checkout"]["status"], "conflicted")
+        self.assertEqual(path.read_bytes(), b"local unpublished content\n")
+        self.assertEqual((self.root / ".git/index").read_bytes(), index)
 
     def test_native_completion_and_repeated_recovery_are_idempotent(self):
         self.lock.unlink()

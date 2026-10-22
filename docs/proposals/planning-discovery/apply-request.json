@@ -1,0 +1,7 @@
+{
+  "context": {
+    "kind": "readiness-handle",
+    "id": "readiness:sha256:20ab098517b2d7a1b1e248b6155a6652edffcb7b04d42485c452169fa521c980",
+    "schema_version": 1
+  }
+}

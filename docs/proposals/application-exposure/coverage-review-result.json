@@ -1,0 +1,37 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:ff92fa3487afa24465a24b1c05a230b6d4521547f579a29c37598fd8fa6b4dd0",
+    "schema_version": 7
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:b24452c8-9f63-4f8e-9e42-51a403e07ab7",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:4cb48973a3daebc9162654c2665ce1d32a57a058f7064040b3bfc9792f48f0e0",
+    "schema_version": 1
+  },
+  "status": "rejected",
+  "next_operations": [],
+  "outcome": {
+    "kind": "rejected-result",
+    "code": "COVERAGE.PUBLICATION_EVIDENCE_UNCOMMITTED",
+    "outcome": "unavailable",
+    "message": "Published review evidence is absent from the destination candidate.",
+    "details": {
+      "validation_phase": "readiness-preflight",
+      "evidence_reference": "docs/proposals/application-exposure/independent-rust-review.md",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1",
+      "source_kind": "repository-content",
+      "material_identity": "proposal-revision:sha256:4cb48973a3daebc9162654c2665ce1d32a57a058f7064040b3bfc9792f48f0e0",
+      "expected_digest": "sha256:998f863ef47520e7a3a7a31339c293e98fa8a92a299ebdd24c06c8fb27ebdcb1",
+      "next_action": "include-reference-in-proposal"
+    },
+    "next_operations": []
+  }
+}

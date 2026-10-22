@@ -322,3 +322,12 @@ was still in progress. It predates this path fix and generated manifest update, 
 it cannot qualify the current source. The next exact-head hosted result, Passeur
 security/lifecycle review, and accepted main integration remain outstanding. A1
 stays `Verifying`; A2 remains deferred.
+
+## 2026-10-22 — retain Interface 47 and reconcile the checkout
+
+A1 source is integrated through merge `daa70d98`. The user authorized repository
+cleanup, including the existing Interface 47 reconciliation implementation,
+private interaction recording and their supporting records. The
+[cleanup report](reports/checkout-reconciliation.md) owns the exact write and
+verification summary. This integration does not implement A2's evidence-binding
+model, declare the entire A3 matrix accepted, or close the broader plan.

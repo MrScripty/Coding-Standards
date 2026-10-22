@@ -996,3 +996,34 @@ This interface does not stage or repair a checkout, retry publication, or infer
 that an unrelated checkout was updated. Request contract 6, result state and
 persisted application/workflow identities remain unchanged. Generated contracts
 and the client catalog must be refreshed together with interface 46.
+
+## Publication checkout reconciliation (interface 47)
+
+Successful apply now reconciles the selected local checkout after recording the
+durable applied outcome. Explicit `recover`/`recover_application` with
+`action: "complete-publication"` also attempts reconciliation, including for an
+already applied application after reopening. It requires current recovery and
+application authorization. Default recovery and `workflow_status` continue to
+observe without changing the checkout.
+
+Reconciliation is restricted to a checkout on `refs/heads/main` whose current
+head is the exact admitted candidate. It compares only paths changed between
+the expected predecessor and candidate. An overlapping local edit, staged
+change or untracked destination is preserved and reported as conflicted; this
+blocks the checkout update as a whole. Other branches, detached heads, diverged
+main and unsupported layouts are never repaired automatically.
+
+Repository Git holds conventional files-backend HEAD and main-ref locks,
+re-observes the checkout, and delegates the two-tree index/worktree update to
+Git `read-tree -m -u`. Git owns index locking and its final overwrite checks.
+Unrelated staged, unstaged and untracked work is retained. No stash, reset,
+branch switch, new publication or domain-store migration is performed.
+
+Reconciliation is separate from the durable standards publication. A held lock,
+unsupported layout or checkout I/O failure leaves publication applied and
+returns an unavailable checkout observation. Filesystem failure can leave a
+partly updated checkout; subsequent observations report its actual state and
+explicit completion may retry against the same publication identity. There is
+no rollback of the accepted commit or automatic retry. A current checkout is
+left untouched. Refresh generated contracts and reconnect for interface 47;
+request contract 6, result projection 8 and persisted identities remain unchanged.

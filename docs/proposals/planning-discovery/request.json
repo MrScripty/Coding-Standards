@@ -1,0 +1,1001 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Make conversational discovery the opening phase of Planning",
+      "rationale": "Prepare the user-requested formal proposal from the reviewed draft, incorporate the user's substantial-discovery definition verbatim, correct conditional plan instructions, and include the actual implementation entry and executable routing projections in one coherent unpublished candidate.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+          "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/source-draft.txt",
+          "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "create-standard",
+        "standard": {
+          "id": "workflow.planning.discovery",
+          "title": "Discovery And Design",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "Material uncertainty about user intent, behavior, constraints, feasibility, or design must be resolved before implementation planning or material replanning.",
+          "does_not_apply_when": "The intended outcome and applicable design decisions are already clear and supported; a brief confirmation may still be useful.",
+          "verification": "Focused decision fixtures and review of whether discovery produces a challengeable, evidence-backed direction without granting implementation authority.",
+          "body": "## When Discovery Is Substantial\n\nDiscovery is substantial when resolving a material decision requires developing and revising a shared understanding across multiple questions, alternatives, or constraints. A decision is material when its answer could change the intended behavior, design direction, scope, or acceptance criteria.\n\nAssess this as the discussion develops. When answers materially change other open questions or earlier design choices, use the substantial-discovery procedure.\n\n## Discover The Intended Outcome\n\nStart from the person, caller, or workflow the change serves and the result they need. Ask what a suggested mechanism is meant to enable or prevent. Establish whether it is a firm choice, a preference, an example, or a hypothesis to investigate; do not silently weaken an explicit requirement or promote a suggestion into one.\n\nChoose questions from the current uncertainty and adapt them as answers and evidence arrive. Use concrete examples, boundary cases, failure situations, and counterexamples to reveal missing invariants. Ask what would make a technically correct implementation wrong for the intended use. Reconcile contradictory answers rather than selecting whichever is easiest to implement.\n\nKeep these kinds of information distinguishable, in whatever concise representation serves the discussion:\n\n- User intent: the desired outcome, supported workflows, and behavior that must or must not occur\n- Observed behavior: what the current system demonstrably does, with relevant evidence\n- External constraints: limitations or obligations imposed by the environment, interfaces, supported consumers, or other authorities\n- Preferences: negotiable priorities whose strength and tradeoffs are understood\n- Hypotheses: unverified beliefs about needs, behavior, feasibility, or an approach\n- Decisions: choices made by the appropriate person or owner, with their scope and material reasons\n\nThese distinctions do not require six documents or a fixed schema. Keep open questions visible without making the person supply implementation details the agent can investigate.\n\n## Investigate What Can Change The Design\n\nInspect the relevant code, contracts, callers, tests, and operating conditions. Identify what is observed, what is promised, and what is merely an incumbent implementation choice. Existing code is changeable: consider refactoring, replacement, consolidation, or deletion when that better serves the intended outcome, subject to actual compatibility and lifecycle obligations.\n\nVerify material technology and API assumptions using the relevant version and authoritative documentation, plus a bounded real observation when required by [Planning's acceptance guidance](../planning.md#acceptance-claims). Report what the evidence establishes, what remains unknown, and which design decision it can change. Do not expand implementation around an untested assumption that could invalidate it.\n\n## Compare Meaningful Alternatives\n\nWhen the design is not obvious, compare materially different approaches against the same intended outcomes and constraints. Include a simpler approach, a change to the existing structure, or declining an unnecessary guarantee when any is credible. Do not create decorative alternatives or assume that the current design, a fashionable mechanism, or the smallest diff must win.\n\nConsider the consequences relevant to the task: usability for people and software agents; responsibility and state ownership; lifecycle and failure behavior; resource use; likely changes; inherent and introduced complexity; and demonstrated opportunities for reuse. Explain what each approach makes easier or harder and where the evidence is weak. Select only relevant criteria and apply the canonical [Architecture](../../topics/architecture.md),\n[Code Design](../../topics/code-design.md), [Contracts](../../topics/contracts.md),\nand other routed requirements rather than duplicating their tests here.\n\nSurface behavior implied by an approach during the discussion. Examples include new retention, recovery, compatibility, permissions, background work, or operating obligations. Distinguish behavior necessary to meet the agreed intent from an optional extension. A useful consequence is not automatically a requested requirement; bring consequential additions to the person before including them as committed plan scope.\n\n## Keep The Main Agent In The Conversation\n\nThe main agent owns the conversation, synthesis, and understanding of what is agreed. It stays responsive while research proceeds, including when the person is speaking by voice. It should ask the next useful question, explain findings, and explore implications without making the person wait for unrelated investigations.\n\nFor substantial discovery with independent research questions, delegate bounded investigations concurrently. Give each research agent its question, relevant current intent and decisions, evidence expected, scope limits, and the finding or uncertainty that ends the investigation. Apply [Planning's Concurrent Work ownership rules](../planning.md#concurrent-work); read-only research does not gain implementation or integration authority.\n\nResearch agents return useful findings promptly, with sources, limits, and implications for the current design. They do not wait to produce a comprehensive report when an earlier finding would change the conversation. The main agent need not wait for every agent before discussing a usable result. Block only the decision that genuinely depends on missing evidence and continue independent discussion or work.\n\nWhen direction changes, tell affected agents what changed. Reconcile results against the current intent before using them; an accurate finding about an abandoned direction may no longer support the decision. Bring findings that challenge an agreed decision back to the person rather than silently redefining the agreement.\n\nIf concurrent agents are unavailable or cannot operate independently, state the limitation and use bounded serial investigation while preserving conversational continuity as far as the environment permits. Do not claim concurrency that did not occur. Do not create branches, worktrees, or a concurrent-integration protocol merely because research agents participate.\n\n## Maintain A Local Visual Document\n\nFor substantial discovery, assign a separate visual-document agent as the single writer of an evolving local HTML and CSS document. Maintain it during the discussion so the person can inspect and challenge the current understanding, rather than receiving a polished visualization only after the decisions are made.\n\nThe main agent supplies the current synthesis, evidence, open questions, and decision status. The visual-document agent turns that into a readable, attractive shared picture and updates it when meaningful information changes. Research agents report to the main agent; they do not independently rewrite the shared design or its agreed status.\n\nChoose the presentation for the domain and the question. Use workflows, interaction examples, state or ownership views, comparisons, sketches, or other visual forms where they clarify the design. Show the relevant intended behavior, candidate alternatives, evidence, unresolved questions, decisions, and tradeoffs. A universal architecture diagram, fixed dashboard, or mandatory set of panels is not required.\n\nMake proposed, agreed, uncertain, and superseded material visibly distinguishable. State the document's provisional purpose and current update context. Preserve enough source links and rationale to make consequential claims traceable, without reproducing the entire research record. Do not make a visual look settled merely because its layout is complete.\n\nThe main agent owns synthesis and the record of human decisions. The visual-document agent may clarify presentation but must return substantive ambiguity or disagreement for resolution. Findings that would change an agreed design must be discussed with the person before the visual represents that change as agreed. After a direction change, reconcile or retire stale alternatives and evidence visibly.\n\nKeep the document local unless publication or sharing is separately authorized. It must remain useful to review without introducing a hosted service, backend, or persistent orchestration system solely for discovery.\n\nA small, clear task may use a concise inline explanation instead of a separate visual artifact. If a visual-document agent is unavailable, state that limitation and have the main agent maintain the local document serially when feasible. If the environment cannot create or display local HTML, provide a reviewable text or supported visual equivalent and identify the limitation. The fallback does not justify claiming that a live visual document exists.\n\n## Preserve One Source Of Decision Authority\n\nDuring discovery, the visual is a provisional discussion aid, not an implementation plan or an independent decision maker. Once an implementation plan or durable ADR owns a decision, make the visual derive from or link to that canonical source and label any remaining proposals separately. Reconcile disagreements at the owning source; do not maintain competing authoritative versions in the visual and plan.\n\nRetain or retire the visual according to its continuing review value. Keeping it does not create a new mandatory artifact lifecycle or require every future plan change to produce a separately authored visual narrative.\n\n## Explain Back And Enter Planning\n\nBefore finalizing an implementation plan, explain the proposed direction in terms the person can challenge. Cover the intended behavior and representative workflow, important invariants, material consequences that were not explicit in the original request, the selected tradeoffs, and unresolved uncertainty. Explain why the approach serves the underlying need and where evidence or a changed assumption would cause reconsideration.\n\nInvite correction on those consequential points. Use the existing conversation and explicit decisions; do not demand ritual approval of facts already settled or impose a fixed questionnaire. Resolve material misunderstandings before presenting the direction as agreed. When the person is unavailable, preserve the uncertain point and continue only work whose decisions it cannot change.\n\nIf writing the plan reveals a material new design choice or consequence, return it to the conversation before finalizing. Do not silently resolve it in plan prose or present the addition as previously agreed.\n\nApply [Planning's written-plan criteria](../planning.md#when-a-written-plan-is-required) after this discovery. If a written plan is needed, transfer the agreed outcome, constraints, decisions, acceptance claims, and meaningful development boundaries into its canonical fields. Keep detailed evidence in linked reports and durable architecture decisions in their owning ADRs. Do not turn the whole conversation into plan narration or promote tentative visual content into binding decisions.\n\nThe plan explains how its actual design satisfies applicable standards. Link to the canonical requirements and record the decisions and evidence they caused; copying a standards checklist is not a substitute for applying it. Preserve [Planning's explicit plan admission and implementation authorization\nrules](../planning.md#explicit-plan-admission).\n\nDiscovery ends when the intended behavior and chosen approach are sufficiently understood to plan or perform the bounded change, and remaining uncertainty has an explicit disposition. Do not require complete knowledge of every possible future use. Reopen the relevant discussion when new evidence changes intent, authority, scope, design, risk, or acceptance meaning."
+        },
+        "requires": [
+          "workflow.planning"
+        ],
+        "specializes": [],
+        "policy_units": [
+          {
+            "id": "workflow.planning.discovery.substantial",
+            "heading_chain": [
+              "When Discovery Is Substantial"
+            ],
+            "semantic_revision": 1,
+            "intent": "Assess substantial discovery from developing and revising shared understanding across material interdependent questions, alternatives or constraints, using the user's definition and operational trigger.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.outcome",
+            "heading_chain": [
+              "Discover The Intended Outcome"
+            ],
+            "semantic_revision": 1,
+            "intent": "Discover intended behavior, distinguish authority and epistemic status, and reconcile contradictory intent before choosing implementation.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.investigation",
+            "heading_chain": [
+              "Investigate What Can Change The Design"
+            ],
+            "semantic_revision": 1,
+            "intent": "Inspect code and verify material technical assumptions using bounded decision-relevant evidence.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.alternatives",
+            "heading_chain": [
+              "Compare Meaningful Alternatives"
+            ],
+            "semantic_revision": 1,
+            "intent": "Compare materially different approaches under canonical design requirements and surface consequential implied behavior.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.concurrent-research",
+            "heading_chain": [
+              "Keep The Main Agent In The Conversation"
+            ],
+            "semantic_revision": 1,
+            "intent": "Keep conversation and synthesis with the main agent while bounded independent research proceeds concurrently, with current-context reconciliation and truthful capability fallbacks.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.visual-document",
+            "heading_chain": [
+              "Maintain A Local Visual Document"
+            ],
+            "semantic_revision": 1,
+            "intent": "Use one separate visual-document writer for substantial discovery to maintain the provisional local HTML and CSS picture with status, traceability and defined fallback.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.decision-authority",
+            "heading_chain": [
+              "Preserve One Source Of Decision Authority"
+            ],
+            "semantic_revision": 1,
+            "intent": "Keep the visual provisional and subordinate it to canonical plan or ADR decisions when those become authoritative.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          },
+          {
+            "id": "workflow.planning.discovery.planning-handoff",
+            "heading_chain": [
+              "Explain Back And Enter Planning"
+            ],
+            "semantic_revision": 1,
+            "intent": "Explain consequential behavior and tradeoffs back, resolve misunderstandings, and transfer agreed direction into canonical planning only when written-plan criteria apply.",
+            "aliases": [],
+            "predecessors": [],
+            "successors": []
+          }
+        ]
+      },
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.planning",
+          "title": "Planning Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "Material uncertainty about intended behavior or design must be resolved, or work requires sequencing, shared decisions, migration, delegation, or acceptance across multiple boundaries.",
+          "does_not_apply_when": "A bounded local change has a clear agreed outcome, an obvious write set, a regression check, and an acceptance path, with no material uncertainty that could change those decisions.",
+          "verification": "Active-plan structure fixtures and objective-level acceptance review.",
+          "body": "## Discovery Before Implementation Planning\n\nBegin with the intended outcome and the facts needed to choose a suitable design. When material intent, behavior, constraints, or design choices remain unresolved, use [Discovery And Design](planning/discovery.md) before writing the implementation plan. Discovery is the opening phase of this workflow; it is not an approved implementation direction.\n\nUse an adaptive conversation supported by bounded investigation. Establish what the person is trying to achieve, distinguish firm requirements from suggestions and hypotheses, inspect current behavior and technical feasibility, and make consequential alternatives and implied behavior visible. Explain the emerging design back to the person before converting it into implementation work.\n\nDo not treat a suggested mechanism, the current code, or the first plausible architecture as the objective. Apply the routed standards to the actual design decisions; a plan that merely lists standards does not establish that its design meets them.\n\nKeep the effort proportionate. A small, clear task may need only a brief exchange and a concise explanation. Do not manufacture uncertainty, a questionnaire, a written plan, or an approval ceremony when the outcome and acceptance path are already clear. Conversely, the bounded-local exclusion does not apply merely because a proposed patch is small when its intended behavior remains materially unclear.\n\nFor substantial discovery, keep the main agent available for conversation while research agents investigate independent questions and a separate visual-document agent maintains the local shared picture. Follow the detailed procedure for ownership, unavailable capabilities, and the transition to canonical planning artifacts.\n\n## When A Written Plan Is Required\n\nAfter resolving material intent and design uncertainty through discovery, apply\nthe bounded-local exclusion before the written-plan triggers. A change\nwith a clear objective, exact write set, regression check, and acceptance path\nmay proceed directly even when it touches a public, generated, persistence,\nprocess, language, or user-interface boundary. State its write set inline; an\nexact write set does not require a plan artifact.\n\nCreate a written plan when the change introduces material sequencing,\nindependently owned contract, migration, coordination, rollout, risk, or\nacceptance complexity that must remain stable during implementation. A boundary\nor file category alone does not satisfy this condition. Parallel work requires\na plan only when ownership, dependency, integration, or stale-state coordination\nis material.\n\n## Artifact Model\n\nStore a planned effort under one directory:\n\n```text\ndocs/plans/<plan-slug>/\n  plan.md\n  execution-ledger.md\n  issues.md\n  reports/\n```\n\n- `plan.md` owns current objective, binding decisions, status, milestones,\n  blockers, and exactly one next slice.\n- `execution-ledger.md` owns dated slice, verification, deviation, and commit\n  summaries.\n- `issues.md` owns discovered issues and their dispositions.\n- `reports/` owns investigations and detailed evidence.\n- ADRs own durable architecture decisions that outlive the plan.\n\nGive each current decision one active owner and link to it from consumers.\n\n## Required Active-Plan Fields\n\nAn active plan states:\n\n- plan status;\n- objective and scope;\n- objective acceptance claims;\n- current acceptance status;\n- constraints and assumptions that affect decisions;\n- binding decisions and owners;\n- composed-design review applicability and, when applicable, the complete\n  Architecture-owned artifact probe;\n- current phase;\n- exactly one next slice or `none` for terminal status;\n- milestones with goals, write sets, gates, and lifecycle states;\n- blockers;\n- re-plan triggers; and\n- links to ledger, issues, reports, and ADRs.\n\nUse [the plan template](../templates/PLAN-TEMPLATE.md).\n\nEvery nonterminal written plan governed by this revision records the\ncomposed-design review as `applicable` or `not-applicable`. When applicable,\nanswer every artifact probe in\n[Architecture](../topics/architecture.md#composed-design-admission). When not\napplicable, record the concrete reason. Historical terminal plans are not\nrewritten solely to add this field.\n\n## Lifecycle\n\nDiscovery notes, candidate designs, and visual documents are provisional and do not acquire Planned status by being written. Planned continues to mean approved direction. Do not authorize implementation from a discovery artifact or add a discovery state to the implementation-plan lifecycle solely to store a discussion.\n\n| State | Meaning |\n| --- | --- |\n| `Planned` | Approved direction; implementation has not started. |\n| `Active` | The current phase or slice is being implemented. |\n| `Blocked` | A named dependency or required fact prevents progress. |\n| `Implemented` | Source work is complete; objective acceptance is pending. |\n| `Verifying` | Objective-level acceptance is running or awaiting environment. |\n| `Accepted` | The named acceptance evidence passed. |\n| `Deferred` | Work is intentionally excluded with owner and revisit trigger. |\n| `Superseded` | A newer binding decision or plan replaces this item. |\n\n`Implemented` is not complete. `Accepted` requires every objective acceptance\nclaim to be satisfied.\n\nExactly one current phase is identified. Multiple independent milestones may be\nimplemented, but the active plan still names one next integration slice.\n\n## Explicit Plan Admission\n\nBind planned implementation to one canonical repository-relative `plan.md`\npath and one operation. A human follow-up may reuse an unambiguous selection\nalready established in the conversation after checking current repository state,\nplan lifecycle, and authority. Obtain clarification when either selection is\nmissing or ambiguous. Repository location, recency, and a next-slice field alone\ndo not establish the selection or authorize execution.\n\nMachine interfaces retain their declared explicit path and operation arguments.\nConversational reuse supplies task context; it does not relax an API contract.\n\nPlanning owns these admission decisions:\n\n- `start` accepts only `Planned` and transitions it to `Active`;\n- `continue` accepts only `Active` without changing that state; and\n- `verify` accepts `Implemented` or `Verifying`, transitioning `Implemented` to\n  `Verifying` when objective verification begins.\n\n`Blocked` and `Deferred` are `unavailable`; report the blocker or revisit\nauthority. `Accepted`, `Superseded`, and operation/state contradictions are\n`invalid`. Missing plan identity, operation, lifecycle facts, or required linked\nartifacts are `unavailable`. Security owns containment and traversal or symlink\nescape rejection; unsupported filesystem representation routes conditionally\nthrough Cross-Platform. Establish the operation and its authority through the\nbinding rules above before implementation.\n\n## Concurrent Integration Routing\n\nOrdinary planning does not require a revision digest, transition envelope, or\nreconciliation identity. Apply the\n[Concurrent Plan Integration profile](../profiles/workflows/concurrent-plan-integration.md)\nonly when two or more proposals may be prepared from the same mutable plan\nrevision before integration and correctness depends on detecting whether plan\nor shared-authority state changed before a proposal is integrated.\n\nDo not select the profile merely because several people or agents participate.\nSerial collaboration, read-only investigations, non-authorizing reports,\nindependent work whose admission facts cannot become stale, and one integration\nowner working from current state with no outstanding proposals remain under\nthis workflow alone.\n\nWhen the profile applies, it owns proposal revision checks, stale-state\nclassification, compatibility, and reconciliation. This workflow continues to\nown plan lifecycle and artifact boundaries. Shared authority remains a serial\nintegration-owner write in either case.\n\n## Repository Isolation In Written Plans\n\nA written plan does not require a branch or worktree by default. When material\nreview, concurrency, experimentation, release maintenance, risk containment,\nor repository controls make isolation part of the accepted approach, record\nthe branch or worktree purpose, responsible owner, target branch, integration\nowner, visibility or long-lived status, and expected terminal disposition.\nWhen the plan authorizes worktree removal or registration pruning, also record\nthe head-reachability and commit-disposition evidence required by Commit.\nRecord an admitted base or revision only when stale-state coordination makes it\nrelevant.\n\nCommit owns ordinary branch selection, integration mechanism, history, and\nterminal cleanup. This workflow records only plan-level facts needed to keep\nscope, ownership, sequencing, or acceptance stable. File count, commit count,\nplan existence, delegation, and participant count do not independently require\nrepository isolation.\n\n\nDiscuss material development and integration boundaries before implementation. Explain what coherent outcome each boundary makes visible or reviewable, what evidence supports it, and which findings would reopen the design. Where branches or merges serve that purpose, identify their intended role and integration points using Commit's [Branch And Worktree Applicability](commit.md#branch-and-worktree-applicability),\n[Governed Branch Context](commit.md#governed-branch-context), and\n[Integration Mechanism Selection](commit.md#integration-mechanism-selection) rules.\n\nThese boundaries provide visibility into development and useful opportunities to reconsider direction. They do not require a branch per milestone, a merge per slice, a fixed commit count, or a particular history topology. If one serial change provides sufficient visibility and acceptance, say so. Commit retains authority over the actual branch, worktree, merge, history, and cleanup mechanics.\n\n## Policy Projection Completeness\n\nA normative change updates every materially affected distribution and enforcement\nsurface. Identify its canonical owner, declared semantic consumers, and review\ncoverage. Review the returned consumers and explicitly declare missing actual\nrelationships. An incomplete inventory remains an evidence need.\n\nKeep one canonical requirement owner. Prompts, templates, examples, and automation\nproject that owner's contract. When a rule prescribes a machine protocol,\nrepresentation, or automated gate, bring its applicable consumers into agreement\nbefore the rule becomes mandatory. Select those surfaces from actual use.\n\nKeep current relationships with their canonical authority and change-specific\ndispositions in the change record. Preserve the distinction between normative\ndependencies, descriptive support, optional references, and semantic impact.\nUse owned, distinguishable diagnostic outcomes; manual processes can record\nthem in prose or tables, and tools use their declared contracts.\n\nStandards-maintenance-specific declaration and publication procedures belong to\nthe normative authoring owner `workflow.standards-authoring`, retrieved through\nthe authoring interface when maintaining the library.\n\n## Acceptance Claims\n\nResolve an external-interface or environment assumption that could invalidate\nthe design through the smallest adequate real observation before expanding\nimplementation around it. Name the decision the observation can change and\nits stopping condition. Continue bounded independently useful work when the\nunavailable observation cannot change that work's decisions.\n\nDistinguish this design observation from final acceptance evidence. For a\nremaining environment-qualified claim, name its owner and executable procedure;\nrequire hardware, credentials, or a vendor service only when the claim depends\non them. Identify real producers, consumers, and the complete observable result.\n\nFollow [the verification workflow](verification.md). Record each required claim\nwith:\n\n- stable identifier and observable criterion;\n- evidence kind;\n- required environment;\n- execution mode;\n- `pending`, `blocked`, or `satisfied` status; and\n- evidence link when satisfied.\n\nThe plan-level acceptance status is:\n\n| Status | Meaning |\n| --- | --- |\n| `pending` | No required claim is satisfied yet. |\n| `partial` | Some claims are satisfied and at least one remains pending. |\n| `blocked` | At least one required claim cannot currently be run. |\n| `satisfied` | Every required claim is satisfied. |\n\nEvidence kinds, environment requirements, and execution modes are independent.\nDo not treat manual, environment-qualified, or artifact evidence as higher\npositions in one hierarchy.\n\n## Milestones And Slices\n\nOrder milestones by dependency. For each milestone record:\n\n- one goal;\n- one coherent implementation unit;\n- exact allowed write set;\n- semantics or contracts preserved/replaced;\n- focused tests or fixtures;\n- objective-relevant verification gate;\n- re-plan conditions; and\n- lifecycle state.\n\nSelect one coherent implementation unit. Split it only when separation\nmaterially improves independent acceptance, risk containment, dependency\nordering, conflict isolation, rollback, or feedback. A bounded change that can\nbe understood and verified as a whole is one slice regardless of how many files\nor layers it touches. Do not split work merely to minimize diff size or satisfy\na preferred commit cadence.\n\nA written plan may contain one milestone and one implementation slice, and the\ncomplete requested change may be that slice. Prefer thin vertical milestones\nonly when separation produces useful acceptance, risk reduction, or dependency\nordering. For cross-layer work that benefits from separation, prefer a real\nvertical path before horizontal expansion. Do not substitute a headless path\nwhen the objective is user-facing. File count, layer count, line count, and\ncommit cadence do not decide slice count.\n\nPlans define semantic work, dependencies, evidence, and lifecycle; they do not\nown Git commit topology. Do not prescribe commit count, parentage, direct-child\nchains, exact-HEAD admission, or standalone lifecycle commits. Bind review to\nthe identified material content or candidate revision, and require re-review\nonly when that reviewed meaning changes. Adding review evidence or recording an\nunchanged lifecycle result does not invalidate the reviewed subject. Collect a\nreview round's findings before revising material plan semantics. Record\nlifecycle changes with the coherent implementation, re-plan, accepted boundary,\nor final evidence that caused them; Commit owns the resulting commit boundary.\n\n## Current Plan State\n\nKeep `plan.md` concise and current:\n\n- replace old binding decisions when re-planning;\n- mark the old decision `Superseded` in the ledger or ADR history;\n- move dated implementation detail and command output to the ledger/report;\n- remove completed task narration when milestone state and evidence link are\n  sufficient; and\n- compact the plan when history obscures objective, blockers, or next slice.\n\nAutomated verification may inspect current plan structure and current authority.\nIt must not use accepted historical narration in an active plan as migration,\nbehavior, or lifecycle authority. Canonical package, disposition, lifecycle,\nand evidence records own those claims; the ledger and reports retain history.\nPerform this ownership review at completed-wave boundaries without using an\narbitrary line-count trigger.\n\nKeep one current interpretation and preserve superseded reasoning in history.\n\n## Re-Planning\n\nRepair failed checks within the current slice while its objective, authority,\nownership, contract, risk, and acceptance meaning remain valid. Add an affected\nfile to the write set when it remains inside that boundary. Replan when evidence\nchanges those decisions or shows that the admitted slice cannot deliver its\noutcome.\n\nStop and re-plan when:\n\n- objective, authority, ownership, or constraints change;\n- required facts invalidate a decision;\n- gate evidence shows that the admitted slice cannot deliver its outcome;\n- compatibility, migration, security, data, or lifecycle risk changes;\n- a directly affected file outside the stated write set changes objective,\n  ownership, contract, risk, or acceptance scope;\n- a lower-fidelity check was being used for a higher-fidelity objective; or\n- a new dependency changes sequencing;\n- a replacement design changes the admitted composition; or\n- cumulative machinery or observed change propagation materially exceeds the\n  composed-design admission.\n\nRe-planning must:\n\n1. record the trigger and evidence in the ledger;\n2. replace the binding decision in the active plan;\n3. mark the prior decision or milestone `Superseded`;\n4. update downstream milestones, gates, and next slice; and\n5. re-run the composed-design artifact probe when its composition changed; and\n6. obtain clarification when no standards-compliant decision is supported.\n\nDo not inherit a prior design's composed-design review after a material\nreplacement. The replacement owns a current applicability decision and, when\napplicable, current answers.\n\nRetain fallback behavior only for a real contract permitted by the routed\ncontract guidance.\n\n## Systemic-Finding Re-Planning\n\nTreat a finding as systemic when it reveals duplicated semantic authority,\nincomplete projection, ambient authority, a public/internal boundary leak, an\ninvalid evidence oracle, or another defect that can recur across an owning\nsemantic family. Do not admit another local example-by-example repair until\nthe owning invariant and its consumers are bounded.\n\nSystemic re-planning must:\n\n1. identify the invariant family and canonical owner;\n2. bound every authority, representation, and reachable consumer whose behavior\n   can violate the class-level claim;\n3. inspect sibling operations and equivalent representations only where they\n   share that authority, reachable failure, or consumer promise;\n4. replace local acceptance examples with a class-level acceptance claim and\n   independent evidence appropriate to that claim; and\n5. give every selected consumer a non-blocked disposition;\n6. consider deletion, consolidation, a smaller Interface, stronger\n   construction or type proof, and replacement of overlapping evidence before\n   adding machinery; and\n7. compare the repaired composition with the original objective and any\n   applicable composed-design admission before implementation resumes.\n\nExpand the bounded population when evidence reveals a new semantic owner,\nreachable consumer, material risk, or public or persistence promise. Finding\nanother implementation file inside an already bounded owner does not by itself\nexpand the design or restart the search. Stop when the canonical owner and the\nreachable consumer population have evidence-backed dispositions; do not search\nevery file, type, test, or historical representation merely because it can be\nenumerated.\n\nRecord whether the original finding was isolated or systemic and the evidence\nsupporting that classification. An empty impact result is not proof of no\nconsumers unless current audited coverage establishes completeness. Missing\nownership, inventory, or coverage is `unavailable`; contradictory authorities\nor incomplete dispositions are `invalid`. Stop implementation rather than\ncontinuing a narrow repair under either condition.\n\n## Findings\n\nRecord each discovered issue in `issues.md` with:\n\n- ID, severity, and evidence;\n- relationship to the objective;\n- owner and affected boundary;\n- fix-now, defer, or re-plan disposition;\n- verification needed; and\n- revisit trigger when deferred.\n\nFix an issue in the current slice only when it is inside the write set and\nrequired for that slice's acceptance. Otherwise defer it explicitly.\n\n## Concurrent Work\n\nDelegate only independent work with non-overlapping primary write sets. Record:\n\n- owner;\n- primary and allowed-adjacent write sets;\n- read-only context;\n- forbidden/shared files;\n- output and verification contract;\n- report path;\n- escalation rule; and\n- serial integration order.\n\nCore contracts, schemas, generated artifacts, lockfiles, shared fixtures,\nworkflow files, and active plans remain serial unless assigned to one explicit\nowner.\n\nWorkers may not delete branches, worktrees, user changes, or shared history\noutside their declared ownership. The serial integration owner may perform\npredeclared terminal cleanup for clean branches and worktrees created by the\ngoverned task after Commit-required terminal evidence is recorded. This does\nnot grant general destructive authority or permit force-removing unknown,\ndirty, locked, user-owned, or uniquely committed resources.\n\n## Completion\n\nA plan is accepted only when:\n\n- all non-deferred milestones are `Accepted` or `Superseded`;\n- plan acceptance status is `satisfied`;\n- every objective acceptance claim has matching evidence;\n- unresolved follow-ups have owners and triggers;\n- implementation files are resolved;\n- the ledger contains final verification and commit summaries; and\n- the active plan links to the final evidence.\n\nAfter acceptance, retain the plan as a concise decision/result index. The\nledger and reports preserve history."
+        },
+        "scope_updates": [
+          {
+            "policy": "workflow.planning.active-plan-fields",
+            "heading_path": [
+              "Required Active-Plan Fields"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 2,
+              "intent": "Preserve this owning section and its implementation-plan obligations unchanged while adding provisional discovery."
+            }
+          },
+          {
+            "policy": "workflow.planning.plan-admission",
+            "heading_path": [
+              "Explicit Plan Admission"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this owning section and its implementation-plan obligations unchanged while adding provisional discovery."
+            }
+          },
+          {
+            "policy": "workflow.planning.projection-completeness",
+            "heading_path": [
+              "Policy Projection Completeness"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 2,
+              "intent": "Preserve this owning section and its implementation-plan obligations unchanged while adding provisional discovery."
+            }
+          },
+          {
+            "policy": "workflow.planning.replanning",
+            "heading_path": [
+              "Re-Planning"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this owning section and its implementation-plan obligations unchanged while adding provisional discovery."
+            }
+          },
+          {
+            "policy": "workflow.planning.written-plan-applicability",
+            "heading_path": [
+              "When A Written Plan Is Required"
+            ],
+            "semantics": {
+              "kind": "change",
+              "accepted_semantic_revision": 1,
+              "proposed_semantic_revision": 2,
+              "intent": "Apply the bounded-local written-plan exclusion after material intent and design uncertainty is resolved; preserve the material coordination triggers and inline bounded-change path."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.planning",
+        "policy_unit": {
+          "id": "workflow.planning.discovery-entry",
+          "heading_chain": [
+            "Discovery Before Implementation Planning"
+          ],
+          "semantic_revision": 1,
+          "intent": "Make conversational discovery the Planning opening phase when material intent or design uncertainty remains, while preserving proportional bounded-change handling.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.planning",
+        "policy_unit": {
+          "id": "workflow.planning.lifecycle-authority",
+          "heading_chain": [
+            "Lifecycle"
+          ],
+          "semantic_revision": 1,
+          "intent": "Preserve the current implementation-plan lifecycle and make provisional discovery artifacts explicitly non-authorizing.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.planning",
+        "policy_unit": {
+          "id": "workflow.planning.repository-isolation",
+          "heading_chain": [
+            "Repository Isolation In Written Plans"
+          ],
+          "semantic_revision": 1,
+          "intent": "Explain meaningful development and integration boundaries while preserving Commit's repository isolation and history authority.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "revise-policy-unit",
+        "policy": "workflow.implementation.admission",
+        "title": "Before Editing",
+        "body": "1. Inspect repository status and preserve unrelated work.\n2. Identify one coherent behavior or contract change.\n3. Declare the exact write set and acceptance evidence.\n4. Resolve overlapping dirty work or ambiguous verification before editing.\n5. Read routed standards and directly affected source context.\n\nBefore choosing implementation work, resolve material uncertainty about intended\nbehavior, constraints, feasibility, or design through Planning's\n[Discovery And Design](planning/discovery.md). A small proposed patch does not\nestablish a clear outcome. Discovery may conclude with a bounded change and an\ninline write set; it does not itself require a written plan or authorize\nimplementation.\n\nWhen a written plan governs the change, consume\n[Planning's admission decision](planning.md#explicit-plan-admission). Bind the\ntask to one canonical repository-relative `plan.md` path and operation.\nA human follow-up may reuse an unambiguous prior selection after current\nrepository state, plan lifecycle, and authority are checked. Obtain clarification\nwhen that selection is missing or ambiguous. Machine interfaces retain their\nexplicit argument requirements.\n\nUse the Concurrent Plan Integration profile's revision, stale-state,\ncompatibility, and reconciliation decisions when its actual applicability\nconditions hold. Follow Planning's written-plan applicability: material sequencing,\nindependently owned contracts, migration, coordination, rollout, risk, or\nacceptance complexity requires a plan when it cannot be held unambiguously in\nthe task. A bounded coherent change can state its exact write set inline.",
+        "semantics": {
+          "kind": "change",
+          "accepted_semantic_revision": 1,
+          "proposed_semantic_revision": 2,
+          "intent": "Resolve material intent or design uncertainty through Planning discovery before choosing implementation work, including a small ambiguous patch, while preserving exact plan admission and the bounded inline write-set path."
+        }
+      },
+      {
+        "kind": "revise-policy-unit",
+        "policy": "router.selection-procedure",
+        "title": "Routing Procedure",
+        "body": "1. State the requested outcome and affected artifact.\n2. Select workflow modules for the activities being performed. Include Planning\n   and its discovery detail when material intent or design uncertainty remains,\n   even when the proposed implementation is bounded. Keep ordinary uncertainty\n   reduction separate when the intended behavior and design are already clear.\n3. Select application, boundary, and language profiles from actual repository\n   facts.\n4. Select topics only when the concern is affected.\n5. Follow each selected module's `Requires` metadata.\n6. Confirm common exclusions.\n7. If a required fact is unknown, report unresolved routing instead of\n   selecting a convenient default.",
+        "semantics": {
+          "kind": "change",
+          "accepted_semantic_revision": 1,
+          "proposed_semantic_revision": 2,
+          "intent": "Select Planning and its discovery detail for material intent or design uncertainty, preserving ordinary uncertainty reduction and unresolved-fact handling."
+        }
+      },
+      {
+        "kind": "put-routing-fact",
+        "fact": {
+          "id": "routing.details",
+          "semantic_revision": 4,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "profile.language.rust.binding-lifecycle",
+            "topic.architecture.replay",
+            "topic.code-design",
+            "topic.contracts.evolution",
+            "topic.contracts.protocols",
+            "topic.contracts.schemas",
+            "topic.security.untrusted-execution",
+            "workflow.planning.discovery",
+            "workflow.release.operations",
+            "workflow.standards-authoring",
+            "workflow.verification.gui",
+            "workflow.verification.oracles",
+            "workflow.verification.platforms"
+          ],
+          "aliases": [],
+          "meaning": "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns.",
+          "prompt": "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change? Must material user-intent, behavior, constraint, feasibility, or design uncertainty be resolved before implementation planning or material replanning?"
+        },
+        "rationale": "Expose material discovery as an explicit registered conditional detail; preserve all existing detail values and unknown-fact handling."
+      },
+      {
+        "kind": "put-routing-rule",
+        "rule": {
+          "id": "route.workflow.planning",
+          "target": "workflow.planning",
+          "when": {
+            "operator": "any",
+            "expressions": [
+              {
+                "operator": "contains",
+                "fact": "routing.activities",
+                "value": "planning"
+              },
+              {
+                "operator": "contains",
+                "fact": "routing.details",
+                "value": "workflow.planning.discovery"
+              }
+            ]
+          },
+          "condition": "Resolve material uncertainty about intended behavior or design, or coordinate material sequencing, migration, rollout, risk, or acceptance complexity"
+        },
+        "rationale": "Select Planning when discovery is explicitly required even without the planning activity, and preserve the existing sequencing and coordination route."
+      },
+      {
+        "kind": "put-routing-rule",
+        "rule": {
+          "id": "route.detail.workflow.planning.discovery",
+          "target": "workflow.planning.discovery",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.details",
+            "value": "workflow.planning.discovery"
+          },
+          "condition": "Material user-intent, behavior, constraint, feasibility, or design uncertainty must be resolved before implementation planning or material replanning"
+        },
+        "rationale": "Make the new discovery procedure reachable from material intent, behavior, constraint, feasibility or design uncertainty, without selecting it for all research."
+      },
+      {
+        "kind": "revise-operational-artifact",
+        "target": {
+          "kind": "authoring-target-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+            "schema_version": 5
+          },
+          "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+          "schema_version": 5
+        },
+        "title": "Planning Prompt",
+        "body": "Establish or revise an implementation direction under [Planning](../workflows/planning.md).\nBegin with its discovery phase when material intent or design questions remain.\nCreate or revise a written plan only when Planning's applicability criteria require\none. Keep this operation within planning scope.\n\n1. Read Core and route the task's actual facts through Router.\n2. Establish the intended outcome and distinguish firm choices, preferences, and hypotheses. Follow [Discovery And Design](../workflows/planning/discovery.md) for unresolved intent, behavior, constraints, feasibility, or design questions. Keep the main agent responsive to the person while bounded research agents investigate independent questions; for substantial discovery, use a separate visual-document agent to maintain the provisional local HTML and CSS view.\n3. Inspect repository state, affected code and contracts, and material technology or API assumptions. Compare meaningful alternatives when warranted, including changing the existing structure. Surface implied behavior and explain the proposed outcome, consequences, tradeoffs, and uncertainty back to the person before treating the direction as agreed.\n4. Select observable acceptance claims from that understanding. Apply Planning's written-plan criteria and use the [Plan template](../templates/PLAN-TEMPLATE.md) when a written plan is needed. Keep provisional discovery separate from approved plan lifecycle and implementation authority.\n5. Identify an early real observation for any external-interface or environment\n   assumption that could invalidate the design. Separate that design decision\n   from final acceptance, and name the owner/procedure for remaining evidence.\n6. Discuss meaningful development and integration boundaries up front; link\n   branch and merge choices to [Commit](../workflows/commit.md). When a written\n   plan is required, select coherent milestones and slices. Split for material\n   acceptance, risk, dependency, conflict, rollback, or feedback value.\n7. Bind review to material content. When a written plan governs the work, record\n   lifecycle changes with their causing outcome or evidence. Commit owns Git\n   topology and commit boundaries.\n8. Bound delegation, concurrency, and repository isolation by their actual\n   applicability; preserve the owning workflows' authority and cleanup evidence.\n9. Identify the deciding oracle for each claim. Use established dependencies\n   for difficult semantics when they satisfy the affected requirements.\n10. Record composed-design review applicability and, when applicable, the\n    current Architecture-owned artifact probe. Review a material replacement anew.\n11. Set replanning triggers for changed objective, ownership, contract, risk,\n    sequencing, or acceptance meaning. Keep ordinary repairs inside a valid slice.\n12. For systemic findings, bound the canonical owner and reachable consumers;\n    record dispositions and a stopping condition under Planning.\n13. When a written plan is required, put current decisions in the plan, findings\n    in issues, and detailed evidence and history in their linked reports and\n    ledger. Otherwise, retain the agreed outcome, consequential decisions, and\n    acceptance path in the conversation or existing task record.\n\nKeep current-format, identity, compatibility, migration, and allocation authority\nwith their actual owners. Follow the applicable Contracts and Architecture\nrequirements for independent change and invalidation.\n\nResolve missing or contradictory authoritative facts before admitting dependent\nwork. Continue bounded independent work where that uncertainty cannot change\nits decisions."
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery-entry",
+          "consumer": "router",
+          "relation": "router-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "Router's Planning condition and registered discovery detail implement Planning's material-uncertainty entry requirement."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery-entry",
+          "consumer": "workflow.implementation",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Before Editing"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Implementation's Before Editing procedure now conditionally enters the Planning-owned discovery phase."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery-entry",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt now begins with discovery when material intent or design questions remain."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt distinguishes provisional discovery from approved plan lifecycle and conditions plan lifecycle records on a written plan."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.repository-isolation",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt discusses meaningful development and integration boundaries and delegates branch and merge mechanics to Commit."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.substantial",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its When Discovery Is Substantial requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.substantial",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its When Discovery Is Substantial requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.outcome",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Discover The Intended Outcome requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.outcome",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Discover The Intended Outcome requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.investigation",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Investigate What Can Change The Design requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.investigation",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Investigate What Can Change The Design requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.alternatives",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Compare Meaningful Alternatives requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.alternatives",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Compare Meaningful Alternatives requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.concurrent-research",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Keep The Main Agent In The Conversation requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.concurrent-research",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Keep The Main Agent In The Conversation requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.visual-document",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Discovery Before Implementation Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Maintain A Local Visual Document requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.visual-document",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Maintain A Local Visual Document requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.decision-authority",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Lifecycle"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Preserve One Source Of Decision Authority requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.decision-authority",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Preserve One Source Of Decision Authority requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.planning-handoff",
+          "consumer": "workflow.planning",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "When A Written Plan Is Required"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Planning enters the detailed discovery procedure and consumes its Explain Back And Enter Planning requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery.planning-handoff",
+          "consumer": {
+            "kind": "authoring-target-handle",
+            "snapshot": {
+              "kind": "snapshot-handle",
+              "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+              "schema_version": 5
+            },
+            "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+            "schema_version": 5
+          },
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The Planning Prompt directs agents to the discovery procedure and projects its Explain Back And Enter Planning requirements."
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.planning.planning-discovery",
+          "subject": "workflow.planning",
+          "origin": "current-justification",
+          "rationale": "Planning adds a non-authorizing opening phase and clearer applicability; the bounded written-plan exclusion follows discovery and plan lifecycle stays unchanged. The prompt projects discovery entry and keeps milestones, lifecycle and artifact-placement instructions conditional on a required written plan.",
+          "evidence": [
+            {
+              "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+              "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/planning-discovery/source-draft.txt",
+              "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "alternatives": [
+            "A separate peer discovery workflow was considered; keeping discovery under Planning preserves one transition owner.",
+            "Task size, implementation difficulty and a prior preference for visualization do not decide substantial discovery."
+          ],
+          "assumptions": [
+            "Actual uncertainty and available independent agent capability determine how discovery proceeds.",
+            "The draft is proposed policy, with independent review and adoption evidence still required."
+          ],
+          "limits": [
+            "Static review and recorded user intent do not establish improved agent behavior.",
+            "This revision does not claim executable scenario coverage or independent material review."
+          ],
+          "reconsideration": [
+            "Reconsider when downstream tasks demonstrate excessive ceremony, missed discovery entry, ambiguity in the substantial-discovery trigger, or competing decision authority."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.planning.discovery.planning-discovery",
+          "subject": "workflow.planning.discovery",
+          "origin": "current-justification",
+          "rationale": "The user requested adaptive discovery, a responsive main agent, bounded concurrent research, a separate local visual writer, explain-back and canonical decision authority. The user defined substantial discovery through iterative shared understanding rather than task size, difficulty or visual preference.",
+          "evidence": [
+            {
+              "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+              "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/planning-discovery/source-draft.txt",
+              "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "alternatives": [
+            "A separate peer discovery workflow was considered; keeping discovery under Planning preserves one transition owner.",
+            "Task size, implementation difficulty and a prior preference for visualization do not decide substantial discovery."
+          ],
+          "assumptions": [
+            "Actual uncertainty and available independent agent capability determine how discovery proceeds.",
+            "The draft is proposed policy, with independent review and adoption evidence still required."
+          ],
+          "limits": [
+            "Static review and recorded user intent do not establish improved agent behavior.",
+            "This revision does not claim executable scenario coverage or independent material review."
+          ],
+          "reconsideration": [
+            "Reconsider when downstream tasks demonstrate excessive ceremony, missed discovery entry, ambiguity in the substantial-discovery trigger, or competing decision authority."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.implementation.planning-discovery",
+          "subject": "workflow.implementation",
+          "origin": "current-justification",
+          "rationale": "The reviewed current Implementation entry path needed an explicit conditional link to discovery so a small proposed patch cannot substitute for understood behavior.",
+          "evidence": [
+            {
+              "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+              "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/planning-discovery/source-draft.txt",
+              "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "alternatives": [
+            "A separate peer discovery workflow was considered; keeping discovery under Planning preserves one transition owner.",
+            "Task size, implementation difficulty and a prior preference for visualization do not decide substantial discovery."
+          ],
+          "assumptions": [
+            "Actual uncertainty and available independent agent capability determine how discovery proceeds.",
+            "The draft is proposed policy, with independent review and adoption evidence still required."
+          ],
+          "limits": [
+            "Static review and recorded user intent do not establish improved agent behavior.",
+            "This revision does not claim executable scenario coverage or independent material review."
+          ],
+          "reconsideration": [
+            "Reconsider when downstream tasks demonstrate excessive ceremony, missed discovery entry, ambiguity in the substantial-discovery trigger, or competing decision authority."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.router.planning-discovery",
+          "subject": "router",
+          "origin": "current-justification",
+          "rationale": "Executable routing needs a registered discovery detail and conditions that select both discovery and its required Planning owner. Ordinary uncertainty reduction remains separate.",
+          "evidence": [
+            {
+              "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+              "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            },
+            {
+              "id": "docs/proposals/planning-discovery/source-draft.txt",
+              "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "alternatives": [
+            "A separate peer discovery workflow was considered; keeping discovery under Planning preserves one transition owner.",
+            "Task size, implementation difficulty and a prior preference for visualization do not decide substantial discovery."
+          ],
+          "assumptions": [
+            "Actual uncertainty and available independent agent capability determine how discovery proceeds.",
+            "The draft is proposed policy, with independent review and adoption evidence still required."
+          ],
+          "limits": [
+            "Static review and recorded user intent do not establish improved agent behavior.",
+            "This revision does not claim executable scenario coverage or independent material review."
+          ],
+          "reconsideration": [
+            "Reconsider when downstream tasks demonstrate excessive ceremony, missed discovery entry, ambiguity in the substantial-discovery trigger, or competing decision authority."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.planning"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.planning.discovery"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.implementation"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "router"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": {
+          "kind": "authoring-target-handle",
+          "snapshot": {
+            "kind": "snapshot-handle",
+            "id": "snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee",
+            "schema_version": 5
+          },
+          "id": "sha256:9922a17c7edf256b92ba2d43efc0e0df4bbd7b275eaa792a1529b8fb0fba1e18",
+          "schema_version": 5
+        }
+      }
+    ]
+  }
+}

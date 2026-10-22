@@ -1,0 +1,97 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:b7f1379e-508c-4e43-b261-ecbcf23f8c5a",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Clarify source and completion scope for reviews selected as gates",
+      "rationale": "The historical audit distinguishes bot activity on 139 PRs from completed review on 45; source ranges and exclusions matter when review is relied on as evidence. Add a provider-neutral conditional scope requirement without imposing a service or review cadence.",
+      "evidence": [
+        {
+          "id": "docs/proposals/coderabbit-audit/evidence.md",
+          "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.tooling",
+          "title": "Tooling Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "A change selects, configures, schedules, or coordinates development tools or automation.",
+          "does_not_apply_when": "No development-tool selection, configuration, scheduling, or orchestration behavior changes.",
+          "verification": "Tool selection, hook orchestration, scheduling, cost, and persisted-artifact decision fixtures plus affected real automation evidence.",
+          "body": "## Tooling Authority\n\nSelect tooling from owned repository contracts, supported environments, available\ncapabilities, execution boundaries, cost constraints, and required evidence.\nReuse an established mechanism when it satisfies the affected requirements.\nReconsider it when evidence identifies a material mismatch in behavior,\nownership, safety, compatibility, or cost.\n\nTooling owns automation and orchestration. Verification owns what evidence\nproves, Implementation owns the permitted change, and Commit owns history.\nFor routine reversible choices, use adequate repository conventions within\nexisting authority and record material departures proportionately.\n\nClassify contradictory authority, scope, or orchestration facts as `invalid`;\nmissing required capabilities or access as `unavailable`; and a selected\ncontract beyond supported tools or environments as `unsupported`. State\ndevelopment uncertainty in prose under Core; machine interfaces retain their\ndeclared diagnostics. Resolve the affected requirement before relying on its result.\n\n## Hook Selection And Configuration\n\nUse a version-control hook when its execution point, inputs, failure behavior,\nbypass authority, and operator feedback satisfy the selected procedure. Choose\nthe mechanism, configuration, stage, scope, concurrency, commands, and\ninstallation from actual repository, consumer, platform, and support facts.\nTreat its result according to the Verification claim and retain Commit's\nseparate history authority.\n\n## Scheduling And Cost\n\nSchedule checks from their required environment, inputs, duration, resource use,\nfeedback needs, concurrency safety, and failure-reporting contract. Interactive\nlatency can justify an early focused check and a later broader claim. Preserve\nthe required evidence at the selected schedule. If available resources cannot\nsatisfy the claim, report the applicable diagnostic and retain it as unsatisfied.\n\n## Editor And File Configuration\n\nSelect an editor-neutral mechanism, settings, scope, and precedence from the\ncanonical formatting and encoding contracts, file semantics, consumer needs,\ngenerated-file authority, supported platforms, and tools.\n\nFor ordinary new source files, SHOULD use UTF-8, a final newline, and the\nlanguage formatter's conventional layout. Preserve an adequate existing\nconvention. Use shared editor configuration when several editors need the same\nsettings, and let the language formatter own its formatting responsibility.\n\nPreserve significant whitespace, binary/generated content, required encodings,\nand protocol line endings. Scope exceptions to affected files and verify actual\nconsumer readability. Keep normalization within the authorized change. Investigate\nmissing material consumer requirements; routine formatting choices use the\nstated defaults within existing authority.\n\n## Persisted Artifact Checks\n\nValidate persisted or generated artifacts against their producer-consumer\ncontract, authoritative schema or shape, regeneration authority, and selected\nVerification claims. Scope optimization must include every affected artifact\nand dependency. Interpret success only within the check's declared proof target.\n\n## Lint Policy And Orchestration\n\nSelect lint purpose, rules, scope, severity, automation, and schedule from owned\ndefect risks, security/type contracts, existing debt, affected inputs, capability,\ncost, and required claims. Identify governed debt and the authority to change\nits boundary. Lint supplies a supporting gate unless its property is itself\nthe selected acceptance claim. Resolve contradictory risk/debt policy, missing\nscope/severity authority, and unsupported analysis through the declared outcomes.\n\n## Formatting Policy And Orchestration\n\nDefine the formatting authority, file scope, settings source, automation points,\nmutation behavior, and schedule from repository and consumer contracts, generated\nauthority, supported editors/tools, cost, and the change procedure. Assign\nformatter and linter responsibilities by their owned properties and resolve\noverlap explicitly. Automated mutation requires authority in the active procedure\nand a reviewable diff. Formatting success proves its selected formatting claim.\n\nReport contradictory authorities as `invalid`, missing settings, scope,\nmutation, or schedule authority as `unavailable`, and required formatting\nbeyond the selected tools as `unsupported`.\n\n## CI Orchestration And Scheduling\n\nSelect dependencies, execution groups, concurrency, cancellation, failure\naggregation, and reporting from required claims, real input/artifact dependencies,\nsupported environments, resource limits, measured cost, and diagnostic needs.\nEach dependency edge represents a required input, prerequisite claim, or explicit\ncost decision.\n\nContinue independent work after failure when its evidence value justifies the\ncost and resource impact. Cancellation identifies obsolete work and preserves\nvisibility of required results. Report each claim as failed, unavailable,\ncancelled, intentionally unselected, or satisfied according to its actual outcome.\n\nResolve contradictory dependency/schedule/cancellation facts, missing cost,\nresource or reporting facts, and provider limitations through the declared\ndiagnostics before relying on the orchestration.\n\n## Review Evidence Scope\n\nWhen a project relies on a human or automated review to satisfy a named gate,\nestablish the review's completion, exact source revision or range, examined\nscope, and material exclusions. Use the existing review artifact when it supplies\nthose facts; a separate receipt is not required.\n\nBefore carrying that review into acceptance of another source revision, establish\nhow the reviewed source maps to the accepted source and which material changes\nremain unreviewed. Review-only slices may contribute coverage when their source\nmapping and examined scope establish the selected claim. Derive required\ncoverage and exclusions from that claim and the project's review authority.\n\nBot presence, summaries, command acknowledgements, skip notices, and an empty\nfinding list do not independently prove completed review of the required scope.\nThread resolution records discussion state; remediation acceptance requires the\nevidence selected for the affected behavior.\n\nMissing required completion or scope facts leaves the review claim `unavailable`;\ncontradictory scope or a false completion claim is `invalid`. Continue independent\nchecks while retaining any unsatisfied required review claim.\n\nThis rule applies only to a review the project has selected as a gate. It does\nnot require a provider, paid service, review on every edit, full-file coverage,\nor treating every exclusion as a defect.\n\n## Tool-Debt Governance\n\nWhen existing debt remains outside the current repair, record its owned findings,\naffected scope, stable identity, required claims, and explicit authority. Select\nthe comparison, stored evidence, update procedure, blocking behavior, and retirement\ncondition so that new or changed violations remain distinguishable.\nClassify every finding against the authorized debt boundary. Keep new, changed,\nor unclassified findings outside accepted debt until explicitly dispositioned;\npreserve each independently required acceptance claim.\n\nApply [Verification](verification.md#evidence-under-an-existing-failing-baseline)\nto determine whether evidence still reaches the changed behavior. A debt\ndisposition records retained findings; acceptance requires evidence for the\naffected claim. If a tool cannot distinguish governed debt from new findings,\nreport `unsupported`. Keep missing identity, scope, baseline, update or retirement\nauthority `unavailable`, and contradictory debt/acceptance authority `invalid`.\n\n## Automation Cost And Operational Evidence\n\nOptimize from measured duration, resource consumption, contention, transfer cost,\ncache behavior, and diagnostic needs while preserving every required claim and\nsupported environment.\n\nA cache defines authoritative inputs, invalidation key, excluded mutable state,\ntrust boundary, and miss behavior. A timeout or filter identifies potentially\nomitted work and demonstrates continued representation of required claims.\nDiagnostic storage defines audience, retention, redaction, recursion prevention,\nand secret handling.\n\nSelect mechanisms from those facts and provider capability. Preserve required\nobservations and blocking failures, use authoritative current state, and restrict\ndisclosure to the intended audience. Resolve contradictions as `invalid`,\nmissing measurements or authority as `unavailable`, and unsupported provider\ncontracts as `unsupported`.\n"
+        },
+        "scope_updates": [
+          {
+            "policy": "workflow.tooling.tool-debt",
+            "heading_path": [
+              "Tool-Debt Governance"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this existing registered scope and its operational semantics; the new clarification occupies a separate registered heading."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.tooling",
+        "policy_unit": {
+          "id": "workflow.tooling.review-evidence-scope",
+          "heading_chain": [
+            "Review Evidence Scope"
+          ],
+          "semantic_revision": 1,
+          "intent": "Establish completion, exact examined source/scope and accepted-source mapping only for review selected as a named gate.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.tooling.review-evidence-scope.coderabbit-audit-2026-10-04",
+          "subject": "workflow.tooling.review-evidence-scope",
+          "origin": "current-justification",
+          "rationale": "Review coverage observations support distinguishing completion and actual examined source from bot presence, summaries, skips and resolved discussions.",
+          "evidence": [
+            {
+              "id": "docs/proposals/coderabbit-audit/evidence.md",
+              "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "assumptions": [
+            "The actual acceptance claim, supported execution modes and trusted authority are established by the adopting project."
+          ],
+          "limits": [
+            "This conditional requirement does not impose CodeRabbit, paid review, full-file coverage, a review on every edit or an additional receipt format.",
+            "The audit does not prove excluded changes violated an adopting project review contract.",
+            "Historical reports were not independently reproduced; original standards adoption/version is unknown.",
+            "This is a draft and supplies no independent material review, consumer acceptance or publication authority."
+          ],
+          "alternatives": [
+            "Use the existing principle without additional guidance; this avoids new text but leaves recurring application mistakes less explicit."
+          ],
+          "reconsideration": [
+            "Revise or remove the explanation if downstream tasks show duplication, disproportionate machinery or misleading application."
+          ],
+          "supersedes": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:b7f1379e-508c-4e43-b261-ecbcf23f8c5a",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Clarify retained evidence identity and complete inventory claims",
+      "rationale": "Address recurring historical failures where current identity is attached to an old result or incomplete observations are presented as complete. Place the narrowly conditional guidance with its existing Verification owners and preserve existing scope and machinery admission.",
+      "evidence": [
+        {
+          "id": "docs/proposals/coderabbit-audit/evidence.md",
+          "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.verification",
+          "title": "Verification Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "A behavior, contract, artifact, or standards change requires evidence.",
+          "does_not_apply_when": "The task is read-only and makes no acceptance claim.",
+          "verification": "Acceptance-claim fixtures and objective-level evidence review.",
+          "body": "## Acceptance Is A Set Of Claims\n\nName the observable claims that must be true before implementation. Each claim\nhas three independent dimensions:\n\n1. evidence kind;\n2. required environment; and\n3. execution mode.\n\nAn objective may require several claims. Evidence satisfies only the claim it\nactually proves. Do not compare unrelated kinds as one scalar hierarchy.\n\nFor an ordinary regression, identify the reachable failure, assert the observable\nresult at its owner, and run affected checks. Reuse an existing test or a\nconstruction guarantee when it already proves the claim. A focused regression\ntest does not require a separate admission record or a seven-part cost review.\n\nBefore adding costly, overlapping, brittle, or architectural evidence machinery\n(such as a new validator, verifier, integrity system, snapshot framework, or\ncustom test harness), establish:\n\n- the reachable failure and its material consequence;\n- the claim, proof boundary, and adequate independent or authoritative oracle;\n- what types, construction, static analysis, a deeper Interface, existing\n  evidence, normal failure, or trace-led diagnosis already establish;\n- the mechanism's marginal deciding value after that overlap;\n- its implementation, execution, review, and maintenance cost;\n- why exact byte identity is required when the mechanism compares or hashes\n  bytes; and\n- the condition for retaining, reviewing, replacing, or removing it.\n\nAdmit permanent machinery only when it supplies material deciding value that\nthe less costly alternatives do not. Impossibility by construction may close a\nclaim without dynamic validation. A contained internal defect with an adequate\nordinary failure and diagnostic path may remain an engineering diagnosis\nresponsibility when no accepted claim or risk requires earlier detection or\nrecovery. The possibility that a value or artifact could be wrong is not by\nitself evidence that a permanent mechanism is necessary.\n\nOverlapping evidence is valid defense in depth only when it addresses an\nindependent reachable failure or supplies distinct deciding value worth its\nlifecycle cost. Remove or replace a mechanism when its claim is no longer\nrequired, the failure is no longer reachable, another proof subsumes it, its\noracle is no longer adequate, or its retained cost is no longer proportionate.\nDo not preserve it from sunk cost, convention, existing registration, or the\nabsence of a recent observed failure.\n\n## Evidence Kinds\n\n| Kind | Claim proved |\n| --- | --- |\n| `focused` | One local behavior or invariant in its canonical owner. |\n| `integration` | Multiple components collaborate correctly through their real in-scope interfaces. |\n| `contract` | A producer and consumer agree on a serialized, generated, FFI, IPC, persisted, or public contract. |\n| `system` | A capability works through its real process, service, or deployment boundaries. |\n| `user-workflow` | A user action reaches the externally visible result through the real interaction path. |\n| `release-artifact` | The built, packaged, installed, or published artifact has the named property. |\n\nKinds describe different proof targets. A contract check does not prove a user\nworkflow. A system check does not prove packaging. A release startup smoke does\nnot prove feature behavior unless the smoke procedure actually performs and\nasserts that feature workflow.\n\nStatic analysis, formatting, linting, compilation, and build checks are\nsupporting gates unless the objective is specifically the property they prove.\n\n## Quality Gates And Execution Location\n\nDerive each blocking or advisory gate from a named acceptance claim, affected\nrisk, owned contract, and required environment. State what it proves, its blocking\nauthority, and conditions for changing or removing it. Required gates must pass.\n\nRun a claim where its inputs, environment, authority, and result are available.\nLocal, hook, CI, dedicated-runner, release, and manual execution are locations;\nevidence meaning comes from the observed property. Incremental or staged checks\nprove their selected scope.\n\nClassify contradictory gate/claim authority as `invalid`, missing claim,\nenvironment, scope, or blocking authority as `unavailable`, and a required claim\nbeyond supported execution as `unsupported`. Retain the affected acceptance\nclaim as unsatisfied until adequate evidence is available.\n\n## Environment Qualification\n\nEach claim names one environment requirement:\n\n| Environment | Meaning |\n| --- | --- |\n| `not-applicable` | The claim is deterministic and has no material environment dependency. |\n| `simulated` | A controlled substitute is the intended proof target. |\n| `representative` | The claim requires a supported environment representative of real use. |\n| `required-real` | Named hardware, platform, service, credential, or deployment facts must be present. |\n\nSimulation proves only its modeled contract. It cannot satisfy a\n`required-real` claim.\n\n## Execution Mode\n\nEach claim names one mode:\n\n| Mode | Meaning |\n| --- | --- |\n| `automated` | A repeatable tool or test produces the evidence. |\n| `manual` | A named operator procedure produces recorded evidence. |\n| `either` | Either mode is acceptable for this claim. |\n\nManual execution is not stronger than automation. Use it when human perception,\nphysical interaction, or unavailable automation is part of the acceptance\ncriterion. Record the procedure, environment, result, and operator or evidence\nowner.\n\n## Selecting Claims\n\nSelect the smallest complete claim set that directly proves the objective,\nplus supporting checks for affected risks and contracts.\n\n| Change shape | Typical required claims |\n| --- | --- |\n| Local deterministic bug | `focused` |\n| Multiple in-process modules | `integration` |\n| Serialized, generated, FFI, IPC, or public boundary | `contract`, plus the consuming path when behavior matters |\n| Cross-process or deployed backend capability | `system` |\n| User-visible workflow | `user-workflow`, plus affected contracts |\n| Hardware-dependent user capability | `user-workflow` in `required-real` environment |\n| Shipped application or library | `release-artifact`, plus behavior claims changed by release |\n\nSelect every direct claim the objective needs and keep unrelated claims outside\nthe acceptance set.\n\n## Simplicity Evidence Boundary\n\nVerification can establish the selected behavior, contract, failure, and risk\nclaims of a design. Passing tests, type checks, schemas, generated freshness,\ncoverage, mutation checks, or formal review does not establish that the composed\nartifact is simple. A comparison fixture may supply simplicity evidence only\nwhen it actually examines Interface knowledge, interleaving, representative\nchange Locality, independent evolution, or deletion results. Keep that design\nevidence distinct from reliability evidence.\n\n## Acceptance Paths And Boundaries\n\nFor each non-local claim, name the observable start, externally meaningful\nresult, real in-scope boundaries, authoritative producers and consumers, and\nmaterial environment facts. Select `integration`, `contract`, `system`, or\n`user-workflow` evidence from that path.\n\nA cross-boundary objective usually needs a path claim plus separate claims for\ncontracts whose representation or invariants can regress independently. Verify\ninternal hops separately when they own such a claim. The path evidence proves\nonly the boundaries actually traversed.\n\nResolve an external-interface or environment assumption that could invalidate\nthe design through the smallest adequate real observation before expanding\nimplementation around it. Continue independently useful work when the unavailable\nobservation cannot change its decisions. Keep design-selection evidence distinct\nfrom final acceptance.\n\nFor consumer-visible behavior, exercise the real producer and consumer through\ntheir relevant interface and observe the complete promised result. A preview\nestablishes its preview behavior; full consumption requires observation of full\nconsumption.\n\nStart with the smallest path producing a useful objective-level result and add\nfocused evidence for risky branches and independent contracts. Broaden when the\nobjective, consumers, environment, scale, or failure boundaries require it.\nSelect test sequencing and suite organization from those needs.\n\nClassify contradictory path, authority, or boundary facts as `invalid`; a\ndeclared path outside supported capability as `unsupported`; and missing\nrequired boundaries, consumers, environment, or results as `unavailable`.\nRetain the claim as unsatisfied until its actual boundaries and fidelity are\nobserved.\n\n## Disabled Behavior Claims\n\nDerive claims from [Implementation's selected lifecycle](implementation.md#disabled-and-incomplete-behavior).\n\nFor deliberate removal, prove that affected advertised, registered, configured,\npersisted, and user-visible surfaces cease promising the capability and return\nthe declared typed outcome. For temporary disablement, prove surface-state\nconsistency, boundary outcomes, and accepted tracking, review, and re-enable or\nremoval criteria. For incomplete behavior, prove isolation from production\nconsumers, including isolation of test placeholders.\n\nSelect evidence kinds and environments from the affected surfaces. Documentation,\nconfiguration, tracking, and behavior observations each prove their own property.\nKeep acceptance blocked while a required surface, lifecycle fact, outcome, or\ndirect behavior claim is missing or contradicted.\n\n## Smoke Checks\n\nA smoke check proves only its explicit narrow assertions, such as:\n\n- an artifact installs;\n- a process starts and remains healthy for a bounded observation;\n- a library loads from its package; or\n- one named minimal operation succeeds.\n\nLabel the smoke by evidence kind and asserted behavior. Startup alone is usually\n`release-artifact` evidence and never substitutes for `system` or\n`user-workflow` behavior.\n\n### GUI Smoke Evidence\n\nFor interactive graphical acceptance, follow [GUI Smoke Evidence](verification/gui.md#gui-smoke-evidence).\n\n## Evidence Oracle Boundaries\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Evidence Oracle Boundaries](verification/oracles.md#evidence-oracle-boundaries).\n\n## Negative Fixture Isolation\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Negative Fixture Isolation](verification/oracles.md#negative-fixture-isolation).\n\n## Property And Differential Evidence\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Property And Differential Evidence](verification/oracles.md#property-and-differential-evidence).\n\n## Test Design\n\nDesign each focused check around one coherent observable claim or invariant.\nUse the assertions needed to prove it. Separate claims when their setup,\ndiagnosis, ownership, or lifecycle differs.\n\nMake setup, action, observation, and cleanup reviewable. Choose a structure\nsuited to the claim and add explicit phases or comments when needed for clarity.\n\nSelect real implementations or controlled substitutes from the boundary being\nproved. A substitute is adequate when its modeled contract is the intended proof\ntarget or the claim explicitly excludes the substituted real boundary.\n\nDerive examples and edge conditions from the actual domain, invariants, prior\ndefects, failure modes, transitions, resource/numeric limits, and consumer contracts.\nMissing applicable boundary evidence is `unavailable`; contradictory test and\ncontract facts are `invalid`.\n\nUse property or generative evidence when the claim owns a meaningful input-domain\nproperty and generation, shrinking, reproducibility, and oracles can preserve it.\nUse examples for named scenarios. Preserve the asserted objective, applicable\ninput domain, and required observation while repairing tests.\n\n## Test Data Authority And Lifecycle\n\nIdentify the contract owning each material test-data field, identity, relation,\ntransition, and validity rule. Construct the data required by the claim and make\nmaterial values/defaults reviewable. Choose construction mechanisms from the data\ncontract, setup cost, reuse, diagnosis, and repository tooling.\n\nOwn fixture identity and lifetime independently of the workflow that created it.\nChoose sharing, construction, synchronization, transactions, namespaces, reset,\nand cleanup from mutation, concurrency, ordering, resource cost, and the proved\nboundary. Shared mutable data requires an explicit owner, scope, initial state,\ntransitions, synchronization, reset/disposal, and failure recovery, with evidence\nthat exercises that lifecycle.\n\nEstablish material preconditions explicitly through their owners. A reused\nfixture carries its defined data contract; establish the receiving check's inputs\nand claim context independently. Preserve stable identity when required and\nallocate distinct identity when parallel or repeated execution could collide.\n\nClassify contradictory data authority, identity, isolation, or lifecycle as\n`invalid`, unsupported required construction/isolation as `unsupported`,\nand missing material ownership, reset, cleanup, synchronization, or environment\nfacts as `unavailable`. Observe the selected lifecycle property before acceptance.\n\n## Async Completion And Failure Evidence\n\nObserve asynchronous work through the terminal state and externally meaningful\nresult selected by its owner and contract. Choose the observation mechanism\nthat proves the applicable completion, failure, cancellation, timeout, or\ncontinued-operation claim, including required child work, cleanup, publication,\nand failure handling.\n\nDerive cases from the owned state machine, error contract, retry/backoff policy,\ncancellation/timeout semantics, partial-result rules, idempotency/compensation,\nand diagnostics. Verify every material applicable outcome at the selected boundary.\n\nAt service or process boundaries, assert the externally owned representation and\neffects: status or typed error, response/event, committed or compensated state,\nretry termination, cancellation propagation, bounded completion, and safe\ndiagnostic context as applicable.\n\nClassify contradictory completion, timing, boundary or error facts as `invalid`,\nrequired observations beyond supported runtime/platform/harness capability as\n`unsupported`, and missing ownership, terminal state, timing authority, boundary\nrepresentation or diagnostics as `unavailable`. Keep local observations scoped\nto their local claims.\n\n## Test Placement And Naming\n\nPlace evidence where its owner, affected implementation, fixtures, environment,\nand discovery tools make it findable and executable. Follow language, framework,\nrunner, and build conventions. Keep related evidence and fixtures discoverable\nwithout duplicating policy or creating hidden test-only APIs. Record placement\ndecisions when repository structure and tooling cannot explain them.\n\nUse stable scenario, observable-result/invariant, and differentiating-condition\nvocabulary in check names, with syntax appropriate to the tool and language.\n\nClassify contradictory ownership/discovery as `invalid`, unsupported required\nplacement as `unsupported`, and missing discovery/tooling/execution facts as\n`unavailable`. Resolve these requirements before relying on evidence discovery.\n\n## Coverage And Durable Evidence Records\n\nUse coverage to identify unexamined paths in instrumented execution. Evaluate\nline, branch, function, condition, mutation, path, or other coverage for a named\nrisk or claim. Select scope, instrumentation, threshold, baseline, and exclusions\nfrom history, generated/unreachable-code authority, risk, tooling accuracy, and\ndecision cost. State how each threshold or exclusion affects acceptance.\n\nRecord enough durable context to understand, reproduce, and review evidence\nwhen the check, code, fixture, command, result, and canonical contract cannot\nsupply it. Keep defect origin, invariant reasoning, fixture authority, environment,\nand result interpretation with their owning evidence or linked artifact.\n\nClassify contradictory metric/scope/authority/threshold/exclusion/evidence as\n`invalid`, unsupported instrumentation as `unsupported`, and missing material\nbaseline, tooling, authority or reproduction context as `unavailable`. Accept\nbehavior and boundary claims through their required observations.\n\n### Retained Evidence Identity\n\nWhen a retained result is used to satisfy a current acceptance claim, establish\nwhich material source, inputs, producer, configuration, and environment produced\nthat result. Select those facts from what can change the claimed property;\nunrelated environment details do not become required evidence.\n\nBind the result to those facts when it is produced, or establish the connection\nfrom authoritative retained records. Compare that producing context with the\ncurrent claim before reusing the result. Hashes computed from the current\ncheckout, executable, renderer, or input do not establish what produced an\nearlier result. Reconcile reported measurements and aggregates with their\nauthoritative observations when the claim depends on them.\n\nKeep historical qualification scoped to its original source and procedure.\nRerun the affected evidence when material producing facts changed or cannot be\nestablished. Missing required identity or observations leaves the current claim\n`unavailable`; contradictory identity or an unsupported inference is `invalid`.\n\nUse existing records, an adequate construction guarantee, or a proportionate\nrerun when they establish the connection. This rule does not require a new\nreceipt system, universal hash inventory, byte identity, signing, or a fixed\nrecord format. Apply the existing evidence-machinery admission criteria before\nintroducing a permanent mechanism.\n\n## Scheduling And Duration\n\nRisk, cost, and available environments determine where and when evidence runs.\nDo not assign universal durations or require a kind to run only in CI.\n\nProjects may schedule fast supporting checks per edit or commit and expensive\nclaims at pre-push, pull request, dedicated-runner, release, or manual gates.\nScheduling never changes what the evidence proves.\n\n## Supporting Gates And Claim-Directed Diagnosis\n\nClassify supporting checks by the exact property they observe. Treat a check\nas acceptance when that property is the named claim; otherwise retain its role\nas a supporting gate.\n\nWhen evidence fails, preserve the command, environment, output, timing, and\nboundary context required to reproduce the failure. Form a bounded hypothesis\nand select the next observation by authority, information gain, cost,\nreversibility, and proximity to the claim. After correction, rerun affected\nevidence and broaden to claims or contracts the correction could have changed.\n\nSelect diagnostics, traces, state inspection, focused probes, dependency source,\ngenerated artifacts, installed declarations, version-matched official\ndocumentation, history, or external references when their authority and expected\ninformation justify them. Preserve the objective and validation contract.\nAdd production diagnostics when their owned operational claim warrants them.\n\nClassify contradictory claim/evidence/environment/authority as `invalid`,\nobservations beyond supported tools or environment as `unsupported`, and\nmissing reproduction facts, authoritative information, access, or observation\npaths as `unavailable`. State the unresolved decision and continue independent\nwork under the current slice.\n\n## Evidence Under An Existing Failing Baseline\n\nUse evidence that still reaches and distinguishes the changed behavior. When\nan existing failure prevents that observation, repair the obstruction, provide\na focused discriminator, or retain the affected claim as unverified.\n\nIdentify where execution stops and which claims remain observable. Compare the\nactual findings using their owned identities and scope. Unchanged failure counts,\nnames, or source locations alone do not prove that the affected result was tested.\n\nKeep explicit debt dispositions separate from acceptance. Name an owner and\nexecutable procedure for any remaining environment-qualified observation.\n\n## Platform Evidence Coverage\n\nWhen a claim spans supported targets or requires platform-specific evidence, follow [Platform Evidence Coverage](verification/platforms.md#platform-evidence-coverage).\n\n## Unavailable Evidence\n\nWhen a required environment, credential, platform, or operator is unavailable,\nrun independent supporting checks, record the unsatisfied claim and owner, set\nacceptance to `blocked` or `partial`, and keep the plan `Blocked` or\n`Verifying` as applicable. Name the executable procedure and conditions needed\nto obtain the remaining evidence. Accept the objective when all required claims\nare satisfied.\n\n## Reporting\n\nFor each required claim record:\n\n- stable claim identifier and observable criterion;\n- evidence kind, environment, and execution mode;\n- command or procedure;\n- `pending`, `blocked`, or `satisfied`;\n- evidence location and environment facts when material; and\n- unresolved risk.\n\nDetailed logs belong in CI artifacts, reports, or an execution ledger, not the\nactive plan or commit message.\n"
+        },
+        "scope_updates": [
+          {
+            "policy": "workflow.verification.acceptance-claims",
+            "heading_path": [
+              "Acceptance Is A Set Of Claims"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 3,
+              "intent": "Preserve this existing registered scope and its operational semantics; the new clarification occupies a separate registered heading."
+            }
+          },
+          {
+            "policy": "workflow.verification.acceptance-paths",
+            "heading_path": [
+              "Acceptance Paths And Boundaries"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this existing registered scope and its operational semantics; the new clarification occupies a separate registered heading."
+            }
+          },
+          {
+            "policy": "workflow.verification.failing-baseline",
+            "heading_path": [
+              "Evidence Under An Existing Failing Baseline"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this existing registered scope and its operational semantics; the new clarification occupies a separate registered heading."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.verification.oracles",
+          "title": "Independent Test Oracles",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "A change creates a validator, negative fixture, property test, differential test, or other independent oracle.",
+          "does_not_apply_when": "Ordinary existing assertions suffice and no validation oracle, negative fixture, property, or differential mechanism changes.",
+          "verification": "Focused decision fixtures and affected boundary evidence for the rules below.",
+          "body": "## Evidence Oracle Boundaries\n\nFor each acceptance claim, identify the observation mechanism and the exact\nproperty it can decide. The expected property must come from authority\nindependent of the subject under test. Two projections that share one semantic\nimplementation can prove agreement with each other, but not conformance to an\nexternal contract.\n\nKeep these evidence boundaries explicit:\n\n- deterministic generation proves freshness from the selected source, not\n  semantic completeness;\n- an exact literal proves literal identity only when literal identity is the\n  contract;\n- coordinated edits to a subject and a copied expectation do not provide an\n  independent oracle; and\n- mutation evidence proves detection of the sampled mutations, not complete\n  detection outside the sampled domain.\n\nWhen the required claim has no independent or otherwise authoritative oracle,\nreturn `unavailable`. When the mechanism cannot decide the claimed property,\nthe evidence is `invalid`. Do not upgrade local agreement, freshness, parsing,\nsnapshot equality, or a passing harness into a stronger conformance claim.\n## Complete Inventory Evidence\n\nWhen a validator claims that a population is complete, that protected state is\nunchanged, or that every corresponding value was compared, establish the\nexpected members, cardinality, identity rules, and observation boundary from\nthe claim's independent or authoritative contract. Deriving the expected\npopulation from only the observed output cannot establish completeness.\n\nCompare every required member and relation. Reject missing or unexpected\nmembers, forbidden duplicates, mismatched cardinality, and empty populations\nwhen the contract requires members. Counts, empty iterations, and comparisons\nthat truncate to the shorter input cannot establish exact membership or a\ncomplete pairwise comparison. An empty population is valid when the owning\ncontract permits it.\n\nFor a protected filesystem or repository-state claim, observe every relevant\nstate selected by that claim. Tracked worktree content, staged content, untracked\ncontent, and ignored content are distinct possible inputs; a tracked diff does\nnot prove that all are unchanged. Include only the paths and state the claim\nactually protects, rather than expanding to a repository-wide inventory by\ndefault.\n\nAccount for relevant effects of the observation and result-publication procedure.\nA result claiming protected state remains unchanged must still be true after\nthat procedure's own writes. Select a safe output location or establish the\npostcondition according to the owned mutation contract.\n\nUse an adequate construction guarantee or the smallest complete observation\nthat establishes the property. Missing expected-population or observation facts\nis `unavailable`; incomplete comparison or contradictory membership is\n`invalid`. This rule selects no fixed fixture count, inventory format, permanent\nscanner, or requirement to sandbox a project.\n\n## Negative Fixture Isolation\n\nA negative fixture proves its intended failure only when every unrelated\nprecondition is valid and the observed result identifies the expected\ndiagnostic or failure point. Record the expected typed diagnostic and the\nrelevant complete message or structured fields when those details distinguish\nthe target failure from earlier validation failures.\n\nConstruct the fixture from a valid case by changing only the condition under\ntest where practical. A nonzero exit, thrown exception, generic rejection, or\nsubstring match is insufficient when several validators can reject the same\ninput. If the fixture cannot reach the intended boundary, classify the\nevidence as `invalid`; do not count incidental failure as acceptance.\n## Property And Differential Evidence\n\nProperty, generative, mutation, and differential evidence must name:\n\n- the property being tested;\n- the generated or sampled input domain;\n- the independent or authoritative oracle;\n- the compared implementations or projections;\n- reproducibility and shrinking behavior where applicable; and\n- the unsupported or unexamined domain.\n\nComparison between local implementations proves consistency only unless an\nindependent authority establishes expected semantics. External conformance\nclaims require the selected specification, reference implementation, official\ncorpus, or another authority that is independent of the implementations being\ncompared. A sampled counterexample can disprove a universal claim; absence of\none does not prove completeness beyond the declared domain.\n\nReturn `unsupported` when the selected oracle or corpus does not cover a\nwell-formed required domain and `unavailable` when required authority or\nreproducibility inputs cannot be obtained. Do not silently narrow the claim to\nthe cases a generator or local comparator happens to support.\n"
+        },
+        "scope_updates": [
+          {
+            "policy": "workflow.verification.evidence-oracle-boundary",
+            "heading_path": [
+              "Evidence Oracle Boundaries"
+            ],
+            "semantics": {
+              "kind": "preserve",
+              "semantic_revision": 1,
+              "intent": "Preserve this existing registered scope and its operational semantics; the new clarification occupies a separate registered heading."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.verification",
+        "policy_unit": {
+          "id": "workflow.verification.retained-evidence-identity",
+          "heading_chain": [
+            "Coverage And Durable Evidence Records",
+            "Retained Evidence Identity"
+          ],
+          "semantic_revision": 1,
+          "intent": "Bind reused acceptance evidence to its material producing context; preserve historical qualification scope and avoid retroactive identity claims.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.verification.oracles",
+        "policy_unit": {
+          "id": "workflow.verification.inventory-completeness",
+          "heading_chain": [
+            "Complete Inventory Evidence"
+          ],
+          "semantic_revision": 1,
+          "intent": "Observe independently selected expected membership, cardinality and state for complete-population claims, including relevant observer side effects.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.verification.retained-evidence-identity.coderabbit-audit-2026-10-04",
+          "subject": "workflow.verification.retained-evidence-identity",
+          "origin": "current-justification",
+          "rationale": "CR-0099, CR-0118 and CR-0124 support making producing-context identity explicit without creating a universal receipt architecture.",
+          "evidence": [
+            {
+              "id": "docs/proposals/coderabbit-audit/evidence.md",
+              "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "assumptions": [
+            "The actual acceptance claim, supported execution modes and trusted authority are established by the adopting project."
+          ],
+          "limits": [
+            "Apply only to material facts and the named claim; existing construction proofs and proportionality remain valid.",
+            "No universal receipts, hashes, signing, fixture counts, sandboxing or permanent test machinery are introduced.",
+            "Historical reports were not independently reproduced; original standards adoption/version is unknown.",
+            "This is a draft and supplies no independent material review, consumer acceptance or publication authority."
+          ],
+          "alternatives": [
+            "Use the existing principle without additional guidance; this avoids new text but leaves recurring application mistakes less explicit."
+          ],
+          "reconsideration": [
+            "Revise or remove the explanation if downstream tasks show duplication, disproportionate machinery or misleading application."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.verification.inventory-completeness.coderabbit-audit-2026-10-04",
+          "subject": "workflow.verification.inventory-completeness",
+          "origin": "current-justification",
+          "rationale": "CR-0103, CR-0127 and CR-0136 support explicit membership and complete comparisons; protected-state reports also show omitted Git state and observation side effects.",
+          "evidence": [
+            {
+              "id": "docs/proposals/coderabbit-audit/evidence.md",
+              "digest": "sha256:49be2e96e34e46e9e207aaa3e0b20d15bcd83d24ffb074ac6029df712e4a5f2e",
+              "provider_contract": "repository-content",
+              "provider_contract_version": "1"
+            }
+          ],
+          "assumptions": [
+            "The actual acceptance claim, supported execution modes and trusted authority are established by the adopting project."
+          ],
+          "limits": [
+            "Apply only to material facts and the named claim; existing construction proofs and proportionality remain valid.",
+            "No universal receipts, hashes, signing, fixture counts, sandboxing or permanent test machinery are introduced.",
+            "Historical reports were not independently reproduced; original standards adoption/version is unknown.",
+            "This is a draft and supplies no independent material review, consumer acceptance or publication authority."
+          ],
+          "alternatives": [
+            "Use the existing principle without additional guidance; this avoids new text but leaves recurring application mistakes less explicit."
+          ],
+          "reconsideration": [
+            "Revise or remove the explanation if downstream tasks show duplication, disproportionate machinery or misleading application."
+          ],
+          "supersedes": []
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1351 @@
+{
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:3a42b1c4-825c-4f13-b590-94cbaac686c6",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:6f4c4cbc99e8e9ba91855a8fe66d73bb41a2a527d2d9a21eed6697b79f7cd171",
+    "schema_version": 1
+  },
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+    "schema_version": 7
+  },
+  "status": "needs-action",
+  "accepted_base": "daa70d98328a88b125dd9df3f896a0502e8233b7",
+  "initial_edit_count": 41,
+  "placement_revision_edit_count": 3,
+  "checks": {
+    "user-definition-exact": true,
+    "user-operational-sentence-exact": true,
+    "all-discovery-sections-retained": true,
+    "discovery-parent-requirement": true,
+    "discovery-explicit-MUST": true,
+    "planning-opening-phase": true,
+    "planning-material-uncertainty-applicability": true,
+    "provisional-lifecycle-authority": true,
+    "lifecycle-table-preserved": true,
+    "explicit-plan-admission-preserved": true,
+    "concurrent-integration-boundary-preserved": true,
+    "development-boundaries-present": true,
+    "implementation-discovery-entry": true,
+    "conditional-prompt-milestones": true,
+    "conditional-prompt-lifecycle": true,
+    "conditional-prompt-artifacts": true,
+    "discovery-detail-registered": true,
+    "discovery-rule-registered": true,
+    "all-routing-cases-pass": true,
+    "discovery-row-in-conditional-details": true,
+    "other-verified-content-unchanged-in-current-revision": true
+  },
+  "routing_cases": [
+    {
+      "name": "clear-bounded-repair",
+      "activities": [
+        "implementation"
+      ],
+      "details": [],
+      "planning": false,
+      "discovery": false,
+      "result": {
+        "pass": true,
+        "kind": "proposal-route-result",
+        "actual": {
+          "planning": false,
+          "discovery": false
+        },
+        "targets": [
+          "core",
+          "router",
+          "workflow.implementation"
+        ],
+        "unresolved_questions": []
+      }
+    },
+    {
+      "name": "isolated-api-research",
+      "activities": [
+        "uncertainty-reduction"
+      ],
+      "details": [],
+      "planning": false,
+      "discovery": false,
+      "result": {
+        "pass": true,
+        "kind": "proposal-route-result",
+        "actual": {
+          "planning": false,
+          "discovery": false
+        },
+        "targets": [
+          "core",
+          "router",
+          "workflow.implementation",
+          "workflow.verification",
+          "workflow.development-proportionality"
+        ],
+        "unresolved_questions": []
+      }
+    },
+    {
+      "name": "small-feature-with-material-uncertainty",
+      "activities": [
+        "implementation",
+        "uncertainty-reduction"
+      ],
+      "details": [
+        "workflow.planning.discovery"
+      ],
+      "planning": true,
+      "discovery": true,
+      "result": {
+        "pass": true,
+        "kind": "proposal-route-result",
+        "actual": {
+          "planning": true,
+          "discovery": true
+        },
+        "targets": [
+          "core",
+          "router",
+          "workflow.verification",
+          "workflow.implementation",
+          "workflow.development-proportionality",
+          "workflow.planning",
+          "workflow.planning.discovery"
+        ],
+        "unresolved_questions": []
+      }
+    },
+    {
+      "name": "discovery-detail-without-planning-activity",
+      "activities": [],
+      "details": [
+        "workflow.planning.discovery"
+      ],
+      "planning": true,
+      "discovery": true,
+      "result": {
+        "pass": true,
+        "kind": "proposal-route-result",
+        "actual": {
+          "planning": true,
+          "discovery": true
+        },
+        "targets": [
+          "core",
+          "router",
+          "workflow.implementation",
+          "workflow.verification",
+          "workflow.development-proportionality",
+          "workflow.planning",
+          "workflow.planning.discovery"
+        ],
+        "unresolved_questions": []
+      }
+    },
+    {
+      "name": "large-settled-implementation",
+      "activities": [
+        "planning",
+        "implementation"
+      ],
+      "details": [],
+      "planning": true,
+      "discovery": false,
+      "result": {
+        "pass": true,
+        "kind": "proposal-route-result",
+        "actual": {
+          "planning": true,
+          "discovery": false
+        },
+        "targets": [
+          "core",
+          "router",
+          "workflow.verification",
+          "workflow.implementation",
+          "workflow.development-proportionality",
+          "workflow.planning"
+        ],
+        "unresolved_questions": []
+      }
+    }
+  ],
+  "pending_obligations": [
+    {
+      "kind": "impact-review",
+      "target": "application-exposure:workflow.planning.discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:05f80e0ffddd5a813b095fadfa15af12dfa0a5f7a70d298d5264ad19589c2c61",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.replanning",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:a19d694f8c06ced33208d07ad59f53815074a3ecbb20fd9490d720d7795a2167",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "templates/PLAN-TEMPLATE.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:0b14adc7aaff8b05b507c979d45fb0a7d1b31b9c4b7d1f3f63f2a8fc424392ed",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.plan-admission",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:b6fb230cb6709462488018b3a703148d901bcfe79b56f9fa4d2bded9503f0591",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.release",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:189011624dabcc6cbbb420ce70b6a21ac8a2fa03b309f30a8321eb59eba7c600",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "application-exposure:workflow.implementation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:19c3cddc63a3967f8cbf2c6f094ffd15937cf8302235c372d9a35de08fe6398c",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "reference.routing.bounded-rust-repair",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:1fbc1f2f75a6f3a5cd1ec5f2e8f1bdcb4391f34a421413c16f2aa4743a81e75d",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.decision-authority",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:7e984eb5c7b781864068e2a4014df0961f3f3fcb3706cc767fa3724abf0dddb3",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "provenance.workflow.planning.planning-discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:25933e0a09a54978c0b630fd7a7d1aca55a83a3c9913131756eeaaa10efbaa72",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "prompts/planning.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:305e3a0ada3f826a49937abdbba1b40a017c00a730bafc2b69f40111fd6003b7",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "provenance.workflow.planning.discovery.planning-discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:30fbc309ecdecd3b24a987d511caf64f22712fe33f8df48ea0595a1951974040",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "tools/standards_engine/tests/test_evidence_maintenance.py",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:3169125b59fa847b7094c66560675942488f62c1f2b367ab88fb6a98c0ae0b09",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "unmapped-normative-change",
+      "target": "workflow.planning",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:324c650f060139ca4ff99d36fc0f229d556a993b5f2e077bd7a54c55fb57032b",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.written-plan-applicability",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:ef459a82a6af83f54be85c0683105851f422cec608aaa30d8b49bc52df62b314",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.concurrent-research",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:bef527d98710642c4a7749d16bfb8c512ec18a146ff62db9a55f74a0e72f938e",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.substantial",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:f8c2b4e28edbfab83dffe88cf6442f37d3e8cb28a7bb50daa5577f82cfd225d7",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.projection-completeness",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:2df5493ae1b8b005f6f8eeb2dde555184fad1d89f6627610be69b48bb0e85512",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.lifecycle-authority",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:ce19ff444ea31e09d4e57816d8f2ccaa86c498af4b57a727358fded712a1bab7",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "prompts/implement-plan.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:57092ae63f12e5cd76a1fa155f4f2167220f556d6e4abaefd3ab7f74fff10af2",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "s1-routing",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:599e4c6cb0be95c48facd8e33c3a27b064a5dddcef73a0baf35e02211f2e6249",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.planning",
+      "scope": {
+        "kind": "structured",
+        "heading_path": [
+          "Discovery Before Implementation Planning"
+        ]
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:62cc060ee6b911b2326dc4614da086028916ac0bf64c8a8da5b98fab59591ec2",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "tools/standards_engine/standards_engine/engine.py",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:6690c3a6c3db2aa525ea58caef8481a3725fca3d60cf051e7fff1fc52efafff1",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "topic.cross-platform",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:740c5d8c29a466cfc7a49a78f45a2b3c76f60820de4e171600e89b489a2868fd",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.repository-isolation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:86c7b19607a6364509ad52c94fb18649b5d26b783adfe80f665fcf5b7f7d8421",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "tools/standards_engine/standards_engine/evidence_maintenance.py",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:7ea305efd820b4997c9f42c1b5bead049dd390b3e134b29b52d7ca0479b7dbfb",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery-entry",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:e54f66706180ef9057d04f2ce4345e99153b5c6ded5717933da521f896e123ab",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "application-exposure:workflow.planning",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:8d9ff22356e37a6196b10ee8ab6537c3530ea1e28b5103149a5a8e170fe7af01",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "router.selection-procedure",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:8eb772fcc87a050e28c940c58017dcdffdb24770ff4a13038dcf9a3e47772481",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "consumer.engine.navigation-tests",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:926d857240ba458093d10d37e62ccff6b7d8c69812086bb6c88a2e4b32a60f86",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "router",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:95dba4fe29382b477f255dba4a94d9ee8f809b582d34733984237603ee45d1b3",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "unmapped-normative-change",
+      "target": "workflow.planning.discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:9a234b28de442ba702286c79edfd9eefbb941eea7563553d5d7da915846579b5",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.standards-authoring",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:9c01364b0c7c4f32ddb3d245aad1a8c196eb036358e3dd25d914071ec4b2cd98",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.planning-handoff",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:ca8c4459a359f512354023d5c7e36eb8d9deb12e0a832effd760a5bf396a5fe1",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.visual-document",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:56acbf2cb34047317031aefdb52c5b3082a237d4cf07058d9575aac040aa4c0d",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.active-plan-fields",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:c0c1ba043a6057b6893a9306da52f1c2585cbd60bb8dd9cffd79ff038612bbbc",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "prompts/full-codebase-standards-refactor.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:a726f07789a71b63254d361ed4658ef1171b3be3b6b3600a71be9c0632a392e9",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.planning",
+      "scope": {
+        "kind": "structured",
+        "heading_path": [
+          "When A Written Plan Is Required"
+        ]
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:a9b390b06b7973af5bf5429acc8cb8f25dda44d2e64679d569ceafdf08c07b0f",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "application-exposure:router",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:ac06a56f8485a6a284753949fc625e6ac4067b0961a84565a7cd43acb884a1f6",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.implementation.admission",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:6abcba9ed2fa3430906d3a84b284382a223dacc58c80768add7117d1ba0f138f",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "planning-consolidation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:bdce723ed6cb0de1ea328cec1df0e97c768b364091f5e701d1d83f5b3afc3c23",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "application-exposure:prompts/planning.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:c29d32cd41c018e14453fb790b8a5417dc48cd3f614518821f76243d8825fc27",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "operational-aid:prompts/planning.md",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:c6fc383c779f56586533d1868f656006c62d504a54b49b700a3ec1faf4010008",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:caa1b3b5d351d025b482045d164d3eb7a5318e456f81b3727ccb3ea74b9ea24c",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "policy-semantic-impact",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:caa87ca2ad8045d45f82b5d627dd2af9ad0bc6916dbe6a3aa3f6a588176d33de",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "profile.workflow.concurrent-plan-integration",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:cce2d3012940112cb420ae5b21cd7eff1ba8ae5e616676f63567f8354ecc0c40",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.implementation",
+      "scope": {
+        "kind": "structured",
+        "heading_path": [
+          "Before Editing"
+        ]
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:cd7b4c055bdc170216bcf76ebb8487a0005c4f130ca25a789d7c6110521d7f94",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "unmapped-normative-change",
+      "target": "router",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:d8a995272734f815eb3d9d23d741d2777927419c9be3f8700d1d3787d0dd3a5b",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.planning",
+      "scope": {
+        "kind": "structured",
+        "heading_path": [
+          "Lifecycle"
+        ]
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:d97ff53798055846caf65f75818f6e6e3c8e98ef25d90ecc61ff85a40d3900e0",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "provenance.workflow.implementation.planning-discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:dbd26ce21125e966a0f6be3be1475c7b9eeed7ca1618cc11e64541f8bbfaae2c",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "workflow.implementation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:e55e6dc43eb3b8b373b33f160473e40d116995918940f6dd6208e220111093b4",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.investigation",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:9269ef73ff3f7f123ed845f9fef5519ed066a09b4d9b5087def7aeb2e014018a",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.outcome",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:83cef17317fd7f20a93a825a3beb16af2b3e62e514a0d816e45443b517cd94e8",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "impact-review",
+      "target": "provenance.router.planning-discovery",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "impact-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:f0b3f5faa31c406ff958f90cf837f5c59e878ac9bb4b018bd6428a8c4e593725",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "audit-coverage",
+      "target": "workflow.planning.discovery.alternatives",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "coverage-attestation"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "coverage-requirement",
+        "child_id": "sha256:f7e942499485d60651478ffc6eabcd2fec75c5ff6b3a79f8920969ccefa8f478",
+        "schema_version": 7
+      }
+    },
+    {
+      "kind": "consumer-review",
+      "target": "consumer.analysis.routing-tests",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "permitted_submissions": [
+        "consumer-disposition"
+      ],
+      "work": {
+        "kind": "analysis-child-handle",
+        "analysis": {
+          "kind": "analysis-handle",
+          "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+          "schema_version": 7
+        },
+        "child_kind": "obligation",
+        "child_id": "sha256:f7a48799f47ade9d4520be7642cdcc2d65b678af80ba1b23ccb3d85e6087e3de",
+        "schema_version": 7
+      }
+    }
+  ],
+  "limits": [
+    "Candidate readback and explicit routing probes do not prove conversational inference, sustained discovery behavior, or full repository verification.",
+    "The formal proposal is unpublished and still needs consumer, coverage and impact review."
+  ]
+}

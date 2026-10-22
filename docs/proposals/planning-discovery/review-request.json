@@ -1,0 +1,102 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:3cee6832cea3d8f2ce7bdcfc489d5d92eb7e764d5fe7f49266f0366f3e7184da",
+    "schema_version": 7
+  },
+  "decisions": [
+    {
+      "owner": "consumer",
+      "decision": "accept",
+      "rationale": "Accept all30 scoped consumer dispositions after exact owner/consumer/graph inspection and the13 identified missing relationships were declared. Independent material review reports accept this exact revision; current prompt/application qualifications and nine routing observations confirm the changed entry path. Unregistered policy scopes and preexisting unreviewed profile exposure retain documented limits.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/reports/application-and-consumer-review.md",
+          "digest": "sha256:91bd174eaad4c4da17cafecc0141d220fcd0fb335939c15ddaca6fc577b99c69",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/candidate-verification.json",
+          "digest": "sha256:c1a5766fd9bef9d553a3565154615574f46c3fd559a91909a0acba0c079a6c40",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/standards-final-review.md",
+          "digest": "sha256:2c1473b38c03db221fadccd3f67f3a579ff80d9080b49ea51f001ac9c215a8a9",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/spec-final-review.md",
+          "digest": "sha256:c290e9e8195929aa0409bdcfd790610a12ef6d524fa39dab62aea4f9ff454118",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    {
+      "owner": "impact",
+      "decision": "accept",
+      "rationale": "Accept the reviewed material discovery policy and supporting projections for this exact revision. Independent Standards and Spec reviewers found no outstanding finding after graph corrections. User wording is exact; written-plan instructions are conditional; Planning and Commit authority, lifecycle/admission and ordinary uncertainty distinctions are preserved. All13 impact dispositions are confirmed.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/reports/application-and-consumer-review.md",
+          "digest": "sha256:91bd174eaad4c4da17cafecc0141d220fcd0fb335939c15ddaca6fc577b99c69",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/candidate-verification.json",
+          "digest": "sha256:c1a5766fd9bef9d553a3565154615574f46c3fd559a91909a0acba0c079a6c40",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/standards-final-review.md",
+          "digest": "sha256:2c1473b38c03db221fadccd3f67f3a579ff80d9080b49ea51f001ac9c215a8a9",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/spec-final-review.md",
+          "digest": "sha256:c290e9e8195929aa0409bdcfd790610a12ef6d524fa39dab62aea4f9ff454118",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    {
+      "owner": "audit",
+      "decision": "accept",
+      "rationale": "Accept eighteen evidence-backed scoped coverage certificates with the actual consumer inventory and documented exclusions. All identified consumer relationships are declared,30 consumer scopes are dispositioned, and the stable tracked destination evidence was checked against captured accepted bytes. This claims registered-unit consumer completeness, not library-wide completeness or downstream effectiveness. Engine publication must preserve pinned evidence and pass its full candidate checkpoint.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/reports/application-and-consumer-review.md",
+          "digest": "sha256:91bd174eaad4c4da17cafecc0141d220fcd0fb335939c15ddaca6fc577b99c69",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/candidate-verification.json",
+          "digest": "sha256:c1a5766fd9bef9d553a3565154615574f46c3fd559a91909a0acba0c079a6c40",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/standards-final-review.md",
+          "digest": "sha256:2c1473b38c03db221fadccd3f67f3a579ff80d9080b49ea51f001ac9c215a8a9",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/reports/spec-final-review.md",
+          "digest": "sha256:c290e9e8195929aa0409bdcfd790610a12ef6d524fa39dab62aea4f9ff454118",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    }
+  ]
+}

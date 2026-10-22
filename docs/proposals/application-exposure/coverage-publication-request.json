@@ -1,0 +1,34 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:e9bc8154-4b9a-420c-a615-0a27069077ab",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Publish the reviewed Rust baseline coverage certificate",
+      "rationale": "Accepted readback after application confirms32 current exposures and the authorized sole Rust correction, but the newly registered baseline scope remains review-required because certificate publication requires an explicit audit-policy-unit edit. Publish that exact scope's independently reviewed consumer coverage through Engine audit authority, preserving all accepted prose, relationships and exposure approvals.",
+      "evidence": [
+        {
+          "id": "docs/proposals/application-exposure/independent-rust-review.md",
+          "digest": "sha256:998f863ef47520e7a3a7a31339c293e98fa8a92a299ebdd24c06c8fb27ebdcb1",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/application-exposure/rust-consumer-material.json",
+          "digest": "sha256:efaa0decc78b28b1cf43ec16b648a6b7304c30e4ffcc129efee8de1b13ad91e0",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "audit-policy-unit",
+        "policy": "profile.language.rust.baseline",
+        "rationale": "The affected baseline and its sole direct Rust Tooling consumer were independently reviewed. Publish the complete certificate for the existing exact requirement, retaining the reviewed ten-specialist inventory bounds and no excluded declared edges."
+      }
+    ]
+  }
+}

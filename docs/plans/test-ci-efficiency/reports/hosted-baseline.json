@@ -1,0 +1,126 @@
+{
+  "repository": "MrScripty/Coding-Standards",
+  "run_id": 36661745679,
+  "job_id": 109717824822,
+  "head_sha": "8260489e8e3ad6b7e170bbf7bd411bac90758abd",
+  "tested_sha": "fa7c4f9d5edee0a94baf6fff0ed29452ffaff7db",
+  "source": "GitHub.fetch_workflow_job_logs decoded content; summary values transcribed from each Ran ... line in workflow command order",
+  "source_url": "https://github.com/MrScripty/Coding-Standards/actions/runs/36661745679/job/109717824822",
+  "runner_image": "ubuntu-24.04",
+  "runner_image_version": "20260920.314.1",
+  "runner_os": "Ubuntu 24.04.5",
+  "runner_region": "eastus",
+  "python_minor": [
+    3,
+    12
+  ],
+  "verification_step_elapsed_seconds": 2735,
+  "job_elapsed_seconds": 2746,
+  "groups": [
+    {
+      "package": "standards_identity",
+      "tests": 16,
+      "unittest_elapsed_seconds": 0.162,
+      "summary_timestamp": "2026-09-30T02:51:34.5873184Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_applicability",
+      "tests": 13,
+      "unittest_elapsed_seconds": 0.015,
+      "summary_timestamp": "2026-09-30T02:51:34.6802276Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "graph_engine",
+      "tests": 41,
+      "unittest_elapsed_seconds": 0.27,
+      "summary_timestamp": "2026-09-30T02:51:35.0733189Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_graph",
+      "tests": 2,
+      "unittest_elapsed_seconds": 0.136,
+      "summary_timestamp": "2026-09-30T02:51:35.3504300Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_snapshots",
+      "tests": 41,
+      "unittest_elapsed_seconds": 0.322,
+      "summary_timestamp": "2026-09-30T02:51:35.7729399Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "repository_git",
+      "tests": 52,
+      "unittest_elapsed_seconds": 5.715,
+      "summary_timestamp": "2026-09-30T02:51:41.6123833Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "review_evidence",
+      "tests": 49,
+      "unittest_elapsed_seconds": 4.501,
+      "summary_timestamp": "2026-09-30T02:51:46.2773473Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_metadata",
+      "tests": 43,
+      "unittest_elapsed_seconds": 0.524,
+      "summary_timestamp": "2026-09-30T02:51:47.6923849Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_policy_impact",
+      "tests": 10,
+      "unittest_elapsed_seconds": 0.596,
+      "summary_timestamp": "2026-09-30T02:51:48.4125089Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_contracts",
+      "tests": 81,
+      "unittest_elapsed_seconds": 63.943,
+      "summary_timestamp": "2026-09-30T02:52:52.5165510Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_analysis",
+      "tests": 125,
+      "unittest_elapsed_seconds": 1.597,
+      "summary_timestamp": "2026-09-30T02:52:55.1674766Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_verifier",
+      "tests": 168,
+      "unittest_elapsed_seconds": 6.287,
+      "summary_timestamp": "2026-09-30T02:53:01.8763315Z",
+      "outcome": "OK"
+    },
+    {
+      "package": "standards_engine",
+      "tests": 613,
+      "unittest_elapsed_seconds": 2637.839,
+      "summary_timestamp": "2026-09-30T03:37:00.6716933Z",
+      "outcome": "OK"
+    }
+  ],
+  "total_test_count": 1254,
+  "other_twelve_groups_unittest_elapsed_sum_seconds": 84.068,
+  "structural_verifier": {
+    "selected": 73,
+    "passed": 73,
+    "failed": 0,
+    "blocked": 0,
+    "summary_timestamp": "2026-09-30T03:37:09.1715878Z"
+  },
+  "limitations": [
+    "unittest elapsed values are not full process wall times",
+    "No individual test durations were emitted",
+    "Approximately 8.5 seconds from Engine summary to final verifier output is a timestamp interval, not separately instrumented verifier process duration"
+  ]
+}

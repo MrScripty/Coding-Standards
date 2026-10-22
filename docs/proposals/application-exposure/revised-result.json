@@ -1,0 +1,525 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+    "schema_version": 7
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:800744d7-33d1-4b31-9a8e-bd66d2c9d3db",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+    "schema_version": 1
+  },
+  "status": "needs-action",
+  "next_operations": [
+    {
+      "operation": "resolve_many",
+      "required_inputs": [
+        "submissions"
+      ]
+    },
+    {
+      "operation": "resolve_workflow",
+      "required_inputs": [
+        "submission"
+      ]
+    },
+    {
+      "operation": "revise",
+      "required_inputs": [
+        "change_set"
+      ]
+    }
+  ],
+  "outcome": {
+    "kind": "workflow-analysis-summary",
+    "status": "needs-action",
+    "required_obligations": 28,
+    "pending_facts": 0,
+    "sections": [
+      {
+        "section": "obligations",
+        "count": 28
+      },
+      {
+        "section": "fact_requirements",
+        "count": 0
+      },
+      {
+        "section": "reading_plan",
+        "count": 0
+      },
+      {
+        "section": "changed_units",
+        "count": 0
+      },
+      {
+        "section": "pending_obligations",
+        "count": 28
+      }
+    ],
+    "details": {
+      "operation": "workflow_details"
+    }
+  },
+  "work": {
+    "kind": "workflow-work-page",
+    "section": "pending_obligations",
+    "observation": "sha256:c194e05c0eea2ce3222cabc0fa5c3d39bc2284f4800faa9dbbeedcd0a678b44a",
+    "offset": 0,
+    "total": 28,
+    "items": [
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:000788a57fbe2736c095f9659f00a24ad25fb084dd972801e9a7cc77346ccca6",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:topic.architecture",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:topic.architecture"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:topic.architecture:proposed",
+                "digest": "sha256:6b5c62e6adf32c3fab52a3f9543b154fc28e67178ff1bab23e5e33ecd619cd29"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:000788a57fbe2736c095f9659f00a24ad25fb084dd972801e9a7cc77346ccca6",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:0394f289262cd09702c29aa665022d1f8d54f7d89ac9b595e7b26a7eb16196ea",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:topic.architecture.replay",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:topic.architecture.replay"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:topic.architecture.replay:proposed",
+                "digest": "sha256:beaeb7fa903bb3ff40ee3e994e09d479b11ecf6650fe29155289cadcac34f300"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:0394f289262cd09702c29aa665022d1f8d54f7d89ac9b595e7b26a7eb16196ea",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:169674da7bf570c0349b428c4d68ea66ba0485557c72dc3061f96f219379a612",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:topic.diagnostics",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:topic.diagnostics"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:topic.diagnostics:proposed",
+                "digest": "sha256:d5130f85e1287eeb59365a17274ab1be73862fc483b21d8f8c75189baec29345"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:169674da7bf570c0349b428c4d68ea66ba0485557c72dc3061f96f219379a612",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:4979ed728671989deb7f87ca3e7e57c465cc06f1f4b79d82e8e0030628482f10",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:workflow.verification.platforms",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:workflow.verification.platforms"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:workflow.verification.platforms:proposed",
+                "digest": "sha256:bd7a1f8c399ac2a5f30a6d0cc1980d14a440372af8162ddceed7b1699af52a5b"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:4979ed728671989deb7f87ca3e7e57c465cc06f1f4b79d82e8e0030628482f10",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:645a81c498efe690acf233f8d932321b56e59f09a8b8ec3187acbc42e11622f0",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:profile.application.frontend",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:profile.application.frontend"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:profile.application.frontend:proposed",
+                "digest": "sha256:3e0c0322fc41a6565d8e41d2c846202e23f38239fa659df424bf32c486e571c1"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:645a81c498efe690acf233f8d932321b56e59f09a8b8ec3187acbc42e11622f0",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:69351f5b9cb74050f8881ea98e8ceab2f770c5e9d069f8f1b3694b86caa2a6cb",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:topic.contracts.protocols",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:topic.contracts.protocols"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:topic.contracts.protocols:proposed",
+                "digest": "sha256:06e69c4266b2f43f01d4b82673efa248e82707bb8d940c6f10f6c68493a7ac12"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:69351f5b9cb74050f8881ea98e8ceab2f770c5e9d069f8f1b3694b86caa2a6cb",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:73e137028646bc4ad4a05051a5edc58f7068dcb393d360f338b94ef561d12773",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:workflow.verification.oracles",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:workflow.verification.oracles"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:workflow.verification.oracles:proposed",
+                "digest": "sha256:c6209e5aac303ea0af28501a513fd0d401791084cd083c0ac44b1ba20a39fdb1"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:73e137028646bc4ad4a05051a5edc58f7068dcb393d360f338b94ef561d12773",
+          "schema_version": 7
+        }
+      },
+      {
+        "kind": "workflow-obligation-work",
+        "obligation": {
+          "handle": {
+            "kind": "analysis-child-handle",
+            "analysis": {
+              "kind": "analysis-handle",
+              "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+              "schema_version": 7
+            },
+            "child_kind": "obligation",
+            "child_id": "sha256:744fea305c5e36feb183478518160793d9ab173a37846823e4d7365c908a5971",
+            "schema_version": 7
+          },
+          "kind": "impact-review",
+          "target": "application-exposure:profile.language.typescript",
+          "scope": {
+            "kind": "whole-artifact"
+          },
+          "reasons": [
+            {
+              "kind": "supporting-content-change",
+              "source": "application-exposure:profile.language.typescript"
+            }
+          ],
+          "state": "required",
+          "permitted_submissions": [
+            "impact-disposition"
+          ],
+          "fingerprint": {
+            "decision_kind": "supporting-content-change",
+            "decision_contract": "decision-contract.supporting-content-change.v1",
+            "schema_version": 1,
+            "dependencies": [
+              {
+                "class": "representation",
+                "identity": "application-exposure:profile.language.typescript:proposed",
+                "digest": "sha256:e1163e9e503996f96d3164a4606d1c53eab5d352b983a1e6cde29cc1955832f2"
+              }
+            ]
+          },
+          "applicability": "not-declared"
+        },
+        "work": {
+          "kind": "analysis-child-handle",
+          "analysis": {
+            "kind": "analysis-handle",
+            "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+            "schema_version": 7
+          },
+          "child_kind": "obligation",
+          "child_id": "sha256:744fea305c5e36feb183478518160793d9ab173a37846823e4d7365c908a5971",
+          "schema_version": 7
+        }
+      }
+    ],
+    "next": {
+      "section": "pending_obligations",
+      "offset": 8,
+      "limit": 8,
+      "observation": "sha256:c194e05c0eea2ce3222cabc0fa5c3d39bc2284f4800faa9dbbeedcd0a678b44a"
+    }
+  }
+}

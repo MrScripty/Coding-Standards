@@ -1,0 +1,28 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:25409c206cf585fd60a328f8ce9b379bb903b7e71992f20b53b5930073a37619",
+    "schema_version": 7
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:800744d7-33d1-4b31-9a8e-bd66d2c9d3db",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+    "schema_version": 1
+  },
+  "status": "rejected",
+  "next_operations": [],
+  "outcome": {
+    "kind": "rejected-result",
+    "code": "POLICY_IMPACT.EVIDENCE_OWNER",
+    "outcome": "unavailable",
+    "message": "evidence owner must resolve to exactly one canonical suite node",
+    "details": {},
+    "next_operations": []
+  }
+}

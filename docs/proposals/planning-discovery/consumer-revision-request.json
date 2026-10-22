@@ -1,0 +1,264 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:912f37f077ac28088b7c725203a8174bcccd23c4158f641a4bc9e439d1ba45cc",
+    "schema_version": 7
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Complete discovery handoff and Planning consumer declarations",
+      "rationale": "Independent standards review and the bounded consumer inventory identified existing and new consumers of registered Planning rules. Add only actual scoped relationships, preserve the agreed wording and ownership, and retain explicit audit limits for unregistered Planning sections and generic conditional standards links.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+          "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/source-draft.txt",
+          "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.written-plan-applicability",
+          "consumer": "workflow.planning.discovery",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Explain Back And Enter Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Discovery's handoff explicitly consumes Planning's written-plan-applicability requirements while preserving Planning's canonical implementation authority."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.active-plan-fields",
+          "consumer": "workflow.planning.discovery",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Explain Back And Enter Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Discovery's handoff explicitly consumes Planning's active-plan-fields requirements while preserving Planning's canonical implementation authority."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.plan-admission",
+          "consumer": "workflow.planning.discovery",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Explain Back And Enter Planning"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Discovery's handoff explicitly consumes Planning's plan-admission requirements while preserving Planning's canonical implementation authority."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "workflow.planning.discovery",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Preserve One Source Of Decision Authority"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "The provisional visual cannot gain plan authority or impose a competing artifact lifecycle."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The plan template's plan, milestone and final status fields project Planning's lifecycle vocabulary and acceptance meaning."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "workflow.implementation",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "State And Findings"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Implementation maintains current lifecycle and transitions through Implemented, Verifying and Accepted according to Planning's named evidence."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The implementation prompt checks current plan lifecycle and authority before admitting the selected operation."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Proposal Contract"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "The proposal's intended resulting plan state consumes Planning lifecycle while the profile retains stale-state and integration responsibilities."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.lifecycle-authority",
+          "consumer": "planning-consolidation",
+          "relation": "enforcement-suite-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "suite:planning-consolidation",
+          "rationale": "The suite's plan_contract checks enforce valid plan status vocabulary, Accepted evidence and unfinished-state constraints; discovery does not add a lifecycle state."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.repository-isolation",
+          "consumer": "templates/PLAN-TEMPLATE.md",
+          "relation": "template-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Repository Isolation"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "The template records only applicable governed isolation context and omits branch/worktree fields for direct serial work."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.repository-isolation",
+          "consumer": "prompts/implement-plan.md",
+          "relation": "prompt-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "The prompt projects governed plan isolation and hands mechanics and authorized cleanup to Commit; this relationship conveys no new cleanup authority."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.repository-isolation",
+          "consumer": "profile.workflow.concurrent-plan-integration",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Proposal Contract"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "The proposal contract records applicable branch/worktree context without requiring isolation; Commit keeps mechanism and cleanup authority."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.planning.discovery-entry",
+          "consumer": "workflow.planning.discovery",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": null,
+          "evidence_owner": "review:consumer",
+          "rationale": "Discovery's applicability and handoff implement the Planning-owned material-uncertainty opening phase without authorizing implementation."
+        }
+      }
+    ]
+  }
+}

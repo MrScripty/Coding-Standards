@@ -174,11 +174,68 @@ permission and verifies readiness, readback, evidence and no publication. Replay
 the recorded delivery choice; old recordings default to eager and must match their
 source/catalog. The matching-source requirement is not bypassed.
 
-Neither configured Codex harness nor a paid model turn was executed here. Keep eager
+Neither configured Codex harness nor a paid model turn was executed during archive
+construction. Later connected-session observations are recorded below. Keep eager
 for supported clients that require upfront schemas. Qualify the opt-in path on the actual
 client/model/surface before promoting it. Measure actual rendered declarations where
 the host exposes them, plus task success, repair count and discovery calls. Those
 checks cannot be replaced by raw byte accounting or a synthetic trace.
+
+## Connected Codex observation — 2026-09-27
+
+After the operator set `--schema-mode native --output-schemas on-demand` and
+restarted the session, the configured authoring MCP tool reported interface 42,
+purpose `authoring`, installation state `current`, and catalog digest
+`sha256:bb76238dd7a939e9df2192f03cfad6d2c3dd42b32278fd328e1799ce421a8724`.
+Its implementation digest was
+`sha256:170b7c5524f3e0051afba79eea2c1f4f8bada11a6ca3a78ee5fa359c05cdcabc`.
+That catalog digest matched a fresh native/on-demand process launched from the saved
+registration. The fresh process's complete focused authoring tool array was 104,285
+JSON bytes, compared with 708,288 bytes for eager delivery from the same source and
+serializer. This is catalog JSON, not a measurement of model tokens or billing.
+
+The connected agent called `routing_facts`, compact `route` with a one-item content
+page and its continuation, `relationship_groups`, `read`, `related`, targeted
+`describe_output`, and an invalid `propose`. Routing selected six policies and
+preserved six unanswered fact questions and 41 unresolved policy counts; pagination,
+the exact standards-authoring read, and three declared prerequisites worked.
+`describe_output` returned the `CompactReadResult` closure with its catalog binding,
+schema digest and continuation. The invalid proposal identified missing `purpose`
+and `edits` fields and created no draft. These were direct calls through the
+restarted agent connection, not the disposable stdio fixture or automated tests.
+
+This observation does not qualify a model-authored proposal-to-readiness lifecycle
+under the exact native/on-demand connection. No legitimate production standards
+change was supplied for that connection; do not infer readiness from navigation or
+fabricate a production draft. The remaining behavioral check is a bounded proposal,
+revision, decisions, review and readback
+using a legitimate task or disposable fixture with real evidence, stopping at
+readiness. Result-contract discovery may be reused and need not run after every
+action. Supported-runtime CI for this exact diff and independent review remain
+separate acceptance gates. No actual host model-visible declaration export, token
+count or billing measurement was available for this observation.
+
+An opt-in Codex app-server qualification was attempted against the existing
+disposable fixture in a clean clone of commit `895d000e`. It used Codex CLI
+0.157.1, model `gpt-6-sol`, native/on-demand delivery, and only the run-owned
+standards MCP catalog. Its preflight observed interface 42, the same catalog
+digest above and `client_catalog_state: matches`. The fixture supplied real
+repository-content evidence to the model; exact observer schemas were kept out of
+the model context. The private report and transcript are retained at
+`/tmp/cs-on-demand-model-qual-20260927-4/`.
+
+The observer returned `failed`, not a readiness verdict: six `describe_input`
+calls selected definitions outside the proposal input closure, and the first
+`propose` attempt was blocked by Codex with “MCP tool call requires approval, but
+approval policy is never.” No proposal, revision, decision, review or readiness
+result was delivered to the model; the fixture's accepted `main` remained at
+`895d000e`. This run therefore does not answer whether the model can consume
+workflow results without eager output schemas. The approval gate belongs to this
+isolated app-server harness configuration; it is not evidence that the connected
+authoring MCP rejected a valid proposal. A future legitimate authoring task or a
+fixture run with an authorized approval path can complete the bounded check. The
+earlier connected navigation observation and this failed model attempt remain
+separate from automated tests, supported-runtime CI and independent review.
 
 Local environment: CPython 3.13.5, Linux x86-64, jsonschema 4.26.0, rpds-py 2026.5.1.
 The repository's supported locked environment is Python 3.11/3.12 with rpds-py 2026.6.3;

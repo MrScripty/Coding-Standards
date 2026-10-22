@@ -1,6 +1,6 @@
 # Standards Engine
 
-The current interface is **46**. Input contracts are native-only; `--schema-mode`
+The current interface is **47**. Input contracts are native-only; `--schema-mode`
 is no longer accepted. Exact input/output contracts remain available through
 `describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
 smaller catalog; eager output delivery remains the default.
@@ -18,6 +18,15 @@ both when an application has been admitted. Checkout observation failures are
 reported as unavailable and do not change an already successful publication
 result. Request contract 6 and persisted workflow identities are unchanged.
 See [the publication evidence contract](PURPOSE-SEPARATION.md#publication-evidence-interface-46).
+
+Interface 47 reconciles an unchanged local `main` checkout after successful apply
+or explicit `complete-publication` recovery. Git advances the published paths in
+the index and worktree while retaining unrelated local work. Overlapping edits
+are preserved and reported as conflicts; lock or checkout failures report an
+unavailable observation without undoing the standards commit. Default recovery
+and workflow status remain read-only. Restart/reconnect after deploying the
+coordinated source and generated contracts; retained stores need no migration.
+See [checkout reconciliation](PURPOSE-SEPARATION.md#publication-checkout-reconciliation-interface-47).
 
 The versioned sections below retain implementation history.
 
@@ -392,3 +401,36 @@ See [the public contract](PURPOSE-SEPARATION.md#focused-routing-fact-assertions-
 [implementation record](../../docs/plans/routing-fact-ergonomics/plan.md) and
 [host qualification](tests/ROUTING-FACT-QUALIFICATION.md). Reload the server/catalog
 after installation without changing launch arguments or deleting stores.
+
+## Private interaction observations
+
+MCP launch optionally accepts `--observation-db /existing/private/directory/observations.sqlite3`.
+Omitting the option disables observation: no observation database, serialization
+or retained recorder state is created. The parent directory must already exist.
+Use a dedicated file separate from every Engine domain store. The operator owns
+its filesystem permissions and retention; request values can contain repository
+or user material. This feature neither exports data nor performs cleanup.
+
+Each process records one session with the existing RuntimeIdentity interface
+version, catalog digest, schema digest and purpose. Ready-session `tools/call`
+parameters are committed exactly as supplied, before tool-name/argument checks;
+JSON-RPC envelopes and lifecycle traffic are excluded. Sequence numbers order
+invocations within a session. Only existing string identifiers `kind`, `code`,
+`outcome` and `status` from structured results may be attached as response
+metadata. Bodies, standards text, messages, details and nested result data are
+excluded; missing metadata remains SQL NULL and implies no classification.
+
+The local SQLite store has `PRAGMA user_version = 1`, with `sessions` and
+`interactions` as defined by the
+[observation plan](../../docs/plans/agent-interaction-observation/plan.md).
+Cold reopening appends a new session and preserves previous rows. Unknown
+versions or contradictory schemas are rejected without migration or recreation.
+On initialization, serialization or write failure, capture becomes inert for
+that process and emits at most one bounded diagnostic to private stderr.
+Diagnostic-channel failure is also contained. MCP catalogs, results and errors
+remain unchanged. Observation is evidence only and has no domain authority.
+
+To stop future recording, omit `--observation-db` on the next launch. Historical
+file deletion remains an operator action. No installed MCP registration is
+changed by this source feature; use an explicitly configured disposable launch
+for qualification before selecting a real local destination.

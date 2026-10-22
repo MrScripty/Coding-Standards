@@ -1,0 +1,151 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:5fbd6b92-a9f2-4d5e-bbcb-894f843a6a85",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Qualify reviewed application standards identified by the CodeRabbit principle audit",
+      "rationale": "Address the 33 unreviewed application exposures from the audited accepted corpus by approving the exact unchanged content of 32 application-appropriate modules and leaving the maintenance-only Standards Authoring workflow private. Review the entire source material, mandatory closure and selective reference graph. This proposal does not adopt any CodeRabbit normative additions or modify prose.",
+      "evidence": [
+        {
+          "id": "docs/proposals/application-exposure/accepted-material.json",
+          "digest": "sha256:7194e856fdec0132e1b445ceca4b5b7b4867d326f05ff666db8875b5b294560b",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.verification.oracles"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.contracts"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.cross-platform"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "reference.recipes.tooling"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.boundary.generated-contract"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.verification.platforms"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.resilience"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.diagnostics"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.documentation"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.build"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.commit"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.release"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.release.operations"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.performance"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.contracts.schemas"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.contracts.protocols"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.contracts.evolution"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.architecture"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.architecture.replay"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.code-design"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.dependencies"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.licensing"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "topic.accessibility"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.boundary.persistence"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.application.frontend"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.async"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.api"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.rust.security"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.typescript"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "profile.language.typescript.async"
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.verification.gui"
+      }
+    ]
+  }
+}

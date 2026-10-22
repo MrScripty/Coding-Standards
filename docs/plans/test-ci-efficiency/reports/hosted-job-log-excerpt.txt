@@ -1,0 +1,18 @@
+# Selected exact lines from decoded GitHub job log 109717824822.
+# This is an excerpt, not the complete log. Group labels are mapped in hosted-baseline.json
+# using the sequential package commands recorded by the workflow.
+2026-09-30T02:51:34.5873184Z Ran 16 tests in 0.162s
+2026-09-30T02:51:34.6802276Z Ran 13 tests in 0.015s
+2026-09-30T02:51:35.0733189Z Ran 41 tests in 0.270s
+2026-09-30T02:51:35.3504300Z Ran 2 tests in 0.136s
+2026-09-30T02:51:35.7729399Z Ran 41 tests in 0.322s
+2026-09-30T02:51:41.6123833Z Ran 52 tests in 5.715s
+2026-09-30T02:51:46.2773473Z Ran 49 tests in 4.501s
+2026-09-30T02:51:47.6923849Z Ran 43 tests in 0.524s
+2026-09-30T02:51:48.4125089Z Ran 10 tests in 0.596s
+2026-09-30T02:52:52.5165510Z Ran 81 tests in 63.943s
+2026-09-30T02:52:55.1674766Z Ran 125 tests in 1.597s
+2026-09-30T02:53:01.8763315Z Ran 168 tests in 6.287s
+2026-09-30T03:37:00.6716933Z Ran 613 tests in 2637.839s
+2026-09-30T03:37:00.6717293Z OK
+2026-09-30T03:37:09.1715878Z SUMMARY selected=73 passed=73 failed=0 blocked=0

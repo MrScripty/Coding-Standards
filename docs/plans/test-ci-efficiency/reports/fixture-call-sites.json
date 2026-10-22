@@ -1,0 +1,177 @@
+[
+  {
+    "path": "tools/standards_engine/tests/test_fixture_worktree.py",
+    "line": 32,
+    "function": "fixtures._clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_evidence_maintenance.py",
+    "line": 245,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_numeric_boundary.py",
+    "line": 27,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_discovered_workflow.py",
+    "line": 28,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_navigation_indexes.py",
+    "line": 137,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/workflow_interaction_trace.py",
+    "line": 26,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/mcp_workflow_client.py",
+    "line": 35,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/agent_efficiency_trace.py",
+    "line": 134,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_typed_routing_workflow.py",
+    "line": 29,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_capture_handoff_transport.py",
+    "line": 49,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_nested_materials.py",
+    "line": 28,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_process_reuse.py",
+    "line": 40,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_process_reuse.py",
+    "line": 310,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_process_reuse.py",
+    "line": 362,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_immutable_work_reuse.py",
+    "line": 336,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_review_workflow_ux.py",
+    "line": 39,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_review_workflow_ux.py",
+    "line": 289,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/codex_discovery_client.py",
+    "line": 404,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_proposal_reuse.py",
+    "line": 36,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_proposal_reuse.py",
+    "line": 424,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_consumer_publication.py",
+    "line": 26,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_workflow_detail_reuse.py",
+    "line": 31,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_agent_workflow.py",
+    "line": 98,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_request_evidence.py",
+    "line": 51,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_supporting_workflow.py",
+    "line": 37,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_revision_working_set.py",
+    "line": 45,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_replay_discovery_workflow.py",
+    "line": 37,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/mcp_policy_registration_client.py",
+    "line": 61,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_coverage_publication.py",
+    "line": 49,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_publication_recovery.py",
+    "line": 43,
+    "function": "prepare_repository"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_workflow_interaction.py",
+    "line": 25,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_workflow_presentation.py",
+    "line": 24,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_analysis.py",
+    "line": 415,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_analysis.py",
+    "line": 620,
+    "function": "_clone_tracked_worktree"
+  },
+  {
+    "path": "tools/standards_engine/tests/test_review_mcp.py",
+    "line": 18,
+    "function": "_clone_tracked_worktree"
+  }
+]

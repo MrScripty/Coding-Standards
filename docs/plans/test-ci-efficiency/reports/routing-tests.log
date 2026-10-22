@@ -1,0 +1,30 @@
+test_activity_prerequisites_do_not_invent_publication_or_history_work (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_activity_prerequisites_do_not_invent_publication_or_history_work) ... ok
+test_canonical_guidance_links_resolve_current_headings (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_canonical_guidance_links_resolve_current_headings) ... ok
+test_detail_pages_are_selected_from_the_affected_decision (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_detail_pages_are_selected_from_the_affected_decision) ... ok
+test_every_normative_module_has_an_executable_route (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_every_normative_module_has_an_executable_route) ... ok
+test_missing_detail_facts_remain_unknown (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_missing_detail_facts_remain_unknown) ... ok
+test_projection_rejects_target_drift_from_router_tables (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_projection_rejects_target_drift_from_router_tables) ... ok
+test_repository_and_frozen_sources_produce_equal_projection (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_repository_and_frozen_sources_produce_equal_projection) ... ok
+test_repository_projection_compiles_registered_modules_and_programs (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_repository_projection_compiles_registered_modules_and_programs) ... ok
+test_rust_crossings_select_language_specific_safety (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_rust_crossings_select_language_specific_safety) ... ok
+test_small_rust_fix_omits_specialized_decisions (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_small_rust_fix_omits_specialized_decisions) ... ok
+test_ui_text_and_api_changes_do_not_invent_unrelated_concerns (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_ui_text_and_api_changes_do_not_invent_unrelated_concerns) ... ok
+
+Slowest test durations
+----------------------------------------------------------------------
+0.203s     test_detail_pages_are_selected_from_the_affected_decision (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_detail_pages_are_selected_from_the_affected_decision)
+0.132s     test_activity_prerequisites_do_not_invent_publication_or_history_work (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_activity_prerequisites_do_not_invent_publication_or_history_work)
+0.070s     test_every_normative_module_has_an_executable_route (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_every_normative_module_has_an_executable_route)
+0.067s     test_ui_text_and_api_changes_do_not_invent_unrelated_concerns (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_ui_text_and_api_changes_do_not_invent_unrelated_concerns)
+0.063s     test_rust_crossings_select_language_specific_safety (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_rust_crossings_select_language_specific_safety)
+0.059s     test_repository_and_frozen_sources_produce_equal_projection (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_repository_and_frozen_sources_produce_equal_projection)
+0.040s     test_canonical_guidance_links_resolve_current_headings (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_canonical_guidance_links_resolve_current_headings)
+0.031s     test_small_rust_fix_omits_specialized_decisions (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_small_rust_fix_omits_specialized_decisions)
+0.030s     test_projection_rejects_target_drift_from_router_tables (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_projection_rejects_target_drift_from_router_tables)
+0.028s     test_repository_projection_compiles_registered_modules_and_programs (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_repository_projection_compiles_registered_modules_and_programs)
+0.026s     test_missing_detail_facts_remain_unknown (tools.standards_analysis.tests.test_routing.RouterProjectionTest.test_missing_detail_facts_remain_unknown)
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.750s
+
+OK

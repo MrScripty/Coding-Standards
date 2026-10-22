@@ -1,0 +1,394 @@
+{
+  "controls": [
+    {
+      "request": {
+        "kind": "related",
+        "target": "workflow.tooling",
+        "groups": [
+          "standards-requires"
+        ],
+        "direction": "outgoing",
+        "transitive": true
+      },
+      "result": {
+        "kind": "candidate-application-related-result",
+        "purpose": "application",
+        "target": "workflow.tooling",
+        "relationships": [
+          {
+            "source": "workflow.implementation",
+            "target": "core",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing"
+          },
+          {
+            "source": "workflow.tooling",
+            "target": "core",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing"
+          },
+          {
+            "source": "workflow.tooling",
+            "target": "workflow.implementation",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing"
+          },
+          {
+            "source": "workflow.tooling",
+            "target": "workflow.verification",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing"
+          },
+          {
+            "source": "workflow.verification",
+            "target": "core",
+            "relation": "requires",
+            "groups": [
+              "standards-requires",
+              "standards-dependencies"
+            ],
+            "direction": "outgoing"
+          }
+        ],
+        "next_operations": [
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "core"
+            }
+          },
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "workflow.implementation"
+            }
+          },
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "workflow.verification"
+            }
+          }
+        ],
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "request": {
+        "kind": "route",
+        "facts": {
+          "routing.activities": {
+            "state": "known",
+            "type": "enum-set",
+            "value": [
+              "implementation"
+            ]
+          },
+          "routing.languages": {
+            "state": "known",
+            "type": "enum-set",
+            "value": [
+              "rust"
+            ]
+          }
+        }
+      },
+      "result": {
+        "kind": "candidate-application-route-result",
+        "purpose": "application",
+        "status": "needs-facts",
+        "reading_plan": [
+          {
+            "target": "core",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "state": "selected"
+          },
+          {
+            "target": "router",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "state": "selected"
+          },
+          {
+            "target": "profile.language.rust",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "state": "selected"
+          },
+          {
+            "target": "workflow.implementation",
+            "scope": {
+              "kind": "whole-artifact"
+            },
+            "authority": "normative",
+            "state": "selected"
+          }
+        ],
+        "unresolved_questions": [
+          {
+            "fact": {
+              "id": "routing.applications",
+              "semantic_revision": 1,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "frontend",
+                "launcher",
+                "library"
+              ],
+              "aliases": [],
+              "meaning": "Application forms affected by the requested work.",
+              "prompt": "Which application forms are affected?"
+            }
+          },
+          {
+            "fact": {
+              "id": "routing.boundaries",
+              "semantic_revision": 2,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "generated-contract",
+                "interop",
+                "ipc",
+                "language-bindings",
+                "persistence"
+              ],
+              "aliases": [],
+              "meaning": "Authority or representation boundaries crossed by the requested work.",
+              "prompt": "Which authority or representation boundaries are crossed?"
+            }
+          },
+          {
+            "fact": {
+              "id": "routing.details",
+              "semantic_revision": 4,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "profile.language.rust.binding-lifecycle",
+                "topic.architecture.replay",
+                "topic.code-design",
+                "topic.contracts.evolution",
+                "topic.contracts.protocols",
+                "topic.contracts.schemas",
+                "topic.security.untrusted-execution",
+                "workflow.planning.discovery",
+                "workflow.release.operations",
+                "workflow.standards-authoring",
+                "workflow.verification.gui",
+                "workflow.verification.oracles",
+                "workflow.verification.platforms"
+              ],
+              "aliases": [],
+              "meaning": "Specialized decisions affected by the task; choose from the conditional detail table after the broad concerns.",
+              "prompt": "Does the task involve schemas, protocol adapters, compatibility, replay, advanced test oracles, GUI smoke, target evidence, binding lifecycle, or release operations? Does the task maintain this standards library through its authoring interface? Does executed behavior have less permitted authority than its host, or does a protected intermediary act for a less-trusted caller, or does an execution isolation promise change? Must material user-intent, behavior, constraint, feasibility, or design uncertainty be resolved before implementation planning or material replanning?"
+            }
+          },
+          {
+            "fact": {
+              "id": "routing.frameworks",
+              "semantic_revision": 1,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "godot"
+              ],
+              "aliases": [],
+              "meaning": "Framework-specific mechanisms affected by the requested work.",
+              "prompt": "Which framework-specific mechanisms are affected?"
+            }
+          },
+          {
+            "fact": {
+              "id": "routing.topics",
+              "semantic_revision": 1,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "accessibility",
+                "architecture",
+                "concurrency",
+                "contracts",
+                "cross-platform",
+                "dependencies",
+                "diagnostics",
+                "licensing",
+                "performance",
+                "resilience",
+                "security"
+              ],
+              "aliases": [],
+              "meaning": "Cross-cutting concerns affected by the requested work.",
+              "prompt": "Which cross-cutting concerns are affected?"
+            }
+          },
+          {
+            "fact": {
+              "id": "routing.workflow-profiles",
+              "semantic_revision": 1,
+              "type": "enum-set",
+              "nullable": false,
+              "values": [
+                "concurrent-plan-integration"
+              ],
+              "aliases": [],
+              "meaning": "Workflow profiles selected by observable coordination conditions.",
+              "prompt": "Can multiple outstanding proposals become stale before serial integration?"
+            }
+          }
+        ],
+        "next_operations": [
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "core"
+            }
+          },
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "router"
+            }
+          },
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "profile.language.rust"
+            }
+          },
+          {
+            "operation": "preview_application",
+            "revision": {
+              "kind": "proposal-revision-handle",
+              "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+              "schema_version": 1
+            },
+            "request": {
+              "kind": "read",
+              "target": "workflow.implementation"
+            }
+          }
+        ],
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+          "schema_version": 1
+        }
+      }
+    },
+    {
+      "request": {
+        "kind": "related",
+        "target": "profile.language.rust",
+        "groups": [
+          "decision-provenance"
+        ],
+        "direction": "outgoing",
+        "transitive": false
+      },
+      "result": {
+        "kind": "candidate-application-rejected-result",
+        "purpose": "application",
+        "code": "APPLICATION.CONTENT_UNAVAILABLE",
+        "outcome": "unavailable",
+        "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+        "next_operations": [],
+        "revision": {
+          "kind": "proposal-revision-handle",
+          "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+          "schema_version": 1
+        }
+      }
+    }
+  ],
+  "privateOwner": {
+    "kind": "candidate-application-rejected-result",
+    "purpose": "application",
+    "code": "APPLICATION.CONTENT_UNAVAILABLE",
+    "outcome": "unavailable",
+    "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+    "next_operations": [],
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+      "schema_version": 1
+    }
+  },
+  "privateProvenance": {
+    "kind": "candidate-application-rejected-result",
+    "purpose": "application",
+    "code": "APPLICATION.CONTENT_UNAVAILABLE",
+    "outcome": "unavailable",
+    "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+    "next_operations": [],
+    "revision": {
+      "kind": "proposal-revision-handle",
+      "id": "proposal-revision:sha256:9f0a8a377542d5372bf2c3db613a5c511693ca271e70c5b784e8290af5e14aa6",
+      "schema_version": 1
+    }
+  }
+}

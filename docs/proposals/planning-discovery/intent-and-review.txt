@@ -1,0 +1,65 @@
+Planning Discovery Standards Proposal
+Status: Draft for Standards Engine submission
+Date: 1 October 2026
+Accepted source revision: daa70d98328a88b125dd9df3f896a0502e8233b7
+
+Purpose
+Make conversational discovery the opening phase of Planning when material intent or design questions remain. Preserve adaptive questioning, bounded investigation, comparison of meaningful alternatives, a responsive main agent, concurrent independent research, a separate single writer for the evolving local HTML and CSS document during substantial discovery, explain-back, canonical decision authority, and early discussion of meaningful development and integration boundaries.
+
+Authority and scope
+The user requested review of the attached draft, then supplied the substantial-discovery definition below, accepted the conditional Planning Prompt correction and concrete routing findings, and requested a formal proposal to the coding standards. This authorizes preparing and submitting a draft proposal. Review readiness, acceptance, local publication, and remote publication are separate outcomes; this record grants none of them.
+The source draft is preserved byte-for-byte in source-draft.txt.
+
+User supplied definition
+Discovery is substantial when resolving a material decision requires developing and revising a shared understanding across multiple questions, alternatives, or constraints. A decision is material when its answer could change the intended behavior, design direction, scope, or acceptance criteria.
+
+Assess this as the discussion develops. When answers materially change other open questions or earlier design choices, use the substantial-discovery procedure.
+
+Applicability examples supplied by the user
+- A difficult API question may take considerable research but leave an otherwise understood design intact.
+- A small feature can require substantial discovery when its behavior depends on unsettled questions about ownership, permissions, and recovery.
+- A large implementation can need little discovery when its requirements and design are already well understood.
+The distinction is between getting a missing answer and working out how several answers fit together. The definition is based on developing shared understanding, not task size, implementation difficulty, or a prior choice to produce a visual.
+
+Revisions included after review
+- Plan-specific prompt instructions for milestones, lifecycle recording, and artifact placement apply when a written plan is required. A bounded outcome can remain in the conversation or existing task record.
+- Implementation's Before Editing procedure conditionally points to discovery when intent, constraints, feasibility, or design remain materially uncertain.
+- Register workflow.planning.discovery, its policy units, and actual semantic projections.
+- Add workflow.planning.discovery to the existing routing.details fact at the next semantic revision, add its conditional routing rule, and make Planning selected for that detail.
+- Keep plain uncertainty-reduction from selecting discovery automatically.
+- Preserve Planned as approved direction and preserve the current implementation-plan lifecycle and explicit admission operations.
+- Preserve Commit's branch, worktree, history, integration and cleanup ownership, and the concurrent-plan-integration applicability boundary.
+
+Observed current authority
+Snapshot snapshot:v1:7b333e49-f100-427d-89b9-2388a4e560ee captures the accepted Git revision above, not staged working-tree changes.
+The current Planning workflow starts with written-plan applicability and excludes a bounded local change with an obvious write set, regression check, and acceptance path.
+The Engine's current route for routing.activities=[uncertainty-reduction], with the other task fact sets empty, selects Development Proportionality with Core, Router, Implementation and Verification prerequisites; it selects neither Planning nor the new discovery module.
+The current routing.details vocabulary contains no workflow.planning.discovery entry.
+Planning's policy-impact graph includes the Planning Prompt, plan template, Implementation, implementation prompt, full-codebase review prompt, concurrent integration profile, routing and planning fixtures, and enforcement consumers. Declared relationships are evidence of identified consumers, not proof of an exhaustive inventory.
+
+Consumer review and adoption work
+Directly revised surfaces: Planning; new Discovery And Design; Implementation Before Editing; Router routing procedure, Planning rule, discovery rule and detail vocabulary; Planning Prompt; associated registrations, semantic relationships, provenance and candidate application exposure.
+Review the unchanged plan template, implementation prompt, full-codebase review prompt, and concurrent integration profile for continued coherence. Their existing links to canonical owners can carry new discovery procedure; preserve explicit admission and avoid adding a new state, duplicate plan schema, or integration protocol.
+Review current routing, planning and admission fixtures and add or revise executable checks where current coverage does not prove the new distinctions. Existing green tests are not evidence of the proposed behavior.
+Review the complete affected policy-impact closure and resolve new coverage, impact and consumer obligations before any publication. This proposal records identified consumers and required scenarios; it does not claim completed independent review, exhaustive coverage, or measured improvement in agent behavior.
+
+Required review scenarios
+1. Small clear repair: ordinary implementation with inline write set and acceptance path; no forced discovery artifact or written plan.
+2. Suggested mechanism masks another need: establish the underlying outcome while preserving a firm explicit choice.
+3. Difficult isolated API question: bounded authoritative research; no automatic substantial-discovery classification from research duration.
+4. Small feature with coupled ownership, permissions and recovery questions: substantial discovery with repeated reconciliation, concurrent independent research when available, and one separate visual writer.
+5. Large implementation with settled requirements and design: apply written-plan sequencing criteria without manufacturing discovery.
+6. Answers change other questions or earlier design choices: assess substantial discovery as the conversation evolves.
+7. Research challenges an agreed decision or reveals an unrequested guarantee: discuss the consequence before representing it as agreed.
+8. Direction changes: reconcile stale research and visibly retire stale alternatives in the visual.
+9. Agents or local HTML are unavailable: report the actual limitation and use the specified bounded fallback.
+10. Read-only parallel research: retain one synthesis owner without selecting concurrent-plan-integration merely from participation.
+11. Provisional notes, visual or candidate design: cannot authorize implementation or acquire Planned status solely by being written.
+12. Discovery-only Planning Prompt invocation: plan-specific steps remain conditional.
+13. Discovery selected through a detail alone: the required Planning closure is selected even if routing.activities does not include planning.
+14. Small ambiguous implementation request: the Implementation entry path reaches discovery.
+15. Settled planning and ordinary uncertainty reduction: discovery is not automatically selected.
+16. Development boundaries: explain coherent outcomes and evidence while preserving Commit's mechanics and no fixed branch or commit cadence.
+
+Evidence limits
+This record preserves actual user intent and static review observations. It is not an independent material review, a passing executable fixture report, an application readback, a coverage attestation, or approval to publish.

@@ -1,0 +1,119 @@
+{
+  "baseline": "149ba317e9397519bc181a048ecf76aef129a69c",
+  "tested_source_tree": "96d775f8b3885ef08ff9b2d72396cc13216ec90c",
+  "python": "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+  "python_version": "3.12.3",
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": ". (.:tools/standards_verifier for verifier)"
+  },
+  "package_commands": "python -m unittest discover -s tools/<package>/tests (-v for standards_engine)",
+  "groups": [
+    {
+      "package": "standards_identity",
+      "exit_code": 0,
+      "seconds": 0.245,
+      "log": "standards_identity.log",
+      "tests": 16
+    },
+    {
+      "package": "standards_applicability",
+      "exit_code": 0,
+      "seconds": 0.097,
+      "log": "standards_applicability.log",
+      "tests": 13
+    },
+    {
+      "package": "graph_engine",
+      "exit_code": 0,
+      "seconds": 0.315,
+      "log": "graph_engine.log",
+      "tests": 41
+    },
+    {
+      "package": "standards_graph",
+      "exit_code": 0,
+      "seconds": 0.211,
+      "log": "standards_graph.log",
+      "tests": 2
+    },
+    {
+      "package": "standards_snapshots",
+      "exit_code": 0,
+      "seconds": 2.297,
+      "log": "standards_snapshots.log",
+      "tests": 41
+    },
+    {
+      "package": "repository_git",
+      "exit_code": 0,
+      "seconds": 3.473,
+      "log": "repository_git.log",
+      "tests": 41
+    },
+    {
+      "package": "review_evidence",
+      "exit_code": 0,
+      "seconds": 5.588,
+      "log": "review_evidence.log",
+      "tests": 49
+    },
+    {
+      "package": "standards_metadata",
+      "exit_code": 0,
+      "seconds": 1.033,
+      "log": "standards_metadata.log",
+      "tests": 43
+    },
+    {
+      "package": "standards_policy_impact",
+      "exit_code": 0,
+      "seconds": 0.532,
+      "log": "standards_policy_impact.log",
+      "tests": 10
+    },
+    {
+      "package": "standards_contracts",
+      "exit_code": 0,
+      "seconds": 48.726,
+      "log": "standards_contracts.log",
+      "tests": 81
+    },
+    {
+      "package": "standards_analysis",
+      "exit_code": 0,
+      "seconds": 1.916,
+      "log": "standards_analysis.log",
+      "tests": 125
+    },
+    {
+      "package": "standards_verifier",
+      "exit_code": 0,
+      "seconds": 6.167,
+      "log": "standards_verifier.log",
+      "tests": 168
+    },
+    {
+      "package": "standards_engine",
+      "exit_code": 0,
+      "seconds": 2203.409,
+      "log": "standards_engine.log",
+      "tests": 625
+    }
+  ],
+  "tests": 1255,
+  "complete_verifier": {
+    "command": "python tools/standards_verifier/verify.py --complete",
+    "exit_code": 0,
+    "selected": 73,
+    "passed": 73,
+    "failed": 0,
+    "blocked": 0,
+    "log": "complete.log"
+  },
+  "source_patch_sha256": "06be9a07c87bee2b382a884e53a456ad1485a7f3095e71c49fb4c6016039b336",
+  "source_inventory_sha256": "ad6c0c2160b3580a369a5269ff86bec6959afe32a72ae28aa8e8505b3e4aaadb",
+  "source_inventory_after_execution": "all 1523 indexed file hashes unchanged",
+  "original_worktree": "73 selected; 72 passed; policy-semantic-impact evidence mismatch; exit 2",
+  "source_patch_format": "gzip-compressed git diff HEAD --binary; decompress before git apply --index on the recorded baseline"
+}

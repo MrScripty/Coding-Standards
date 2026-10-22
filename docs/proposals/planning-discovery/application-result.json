@@ -1,0 +1,92 @@
+{
+  "kind": "workflow-result",
+  "context": {
+    "kind": "readiness-handle",
+    "id": "readiness:sha256:20ab098517b2d7a1b1e248b6155a6652edffcb7b04d42485c452169fa521c980",
+    "schema_version": 1
+  },
+  "proposal": {
+    "kind": "proposal-handle",
+    "id": "proposal:v1:3a42b1c4-825c-4f13-b590-94cbaac686c6",
+    "schema_version": 1
+  },
+  "revision": {
+    "kind": "proposal-revision-handle",
+    "id": "proposal-revision:sha256:13906993f25ac027f2a6be4e9a9aac531b30bad56d3acbb64afa163ab093737a",
+    "schema_version": 1
+  },
+  "status": "applied",
+  "next_operations": [],
+  "outcome": {
+    "kind": "apply-proposal-result",
+    "application": {
+      "kind": "application-handle",
+      "id": "application:sha256:1f7bebb6ee045a659ab06288828e5642558e4497becdf62656c52fa568a4e408",
+      "schema_version": 1
+    },
+    "status": "applied",
+    "publication": {
+      "kind": "application-publication-receipt",
+      "application": {
+        "kind": "application-handle",
+        "id": "application:sha256:1f7bebb6ee045a659ab06288828e5642558e4497becdf62656c52fa568a4e408",
+        "schema_version": 1
+      },
+      "candidate_commit": "dcc56f26e884ade260770beceba2501d3746200d",
+      "candidate_tree": "4b643303e645643871864c142922574afedf862d",
+      "target_ref": "refs/heads/main",
+      "expected_predecessor": "daa70d98328a88b125dd9df3f896a0502e8233b7",
+      "durable_state": "applied",
+      "target_observation": {
+        "kind": "publication-target-observation",
+        "status": "candidate",
+        "revision": "dcc56f26e884ade260770beceba2501d3746200d"
+      }
+    },
+    "checkout": {
+      "kind": "publication-checkout-observation",
+      "status": "conflicted",
+      "worktree_id": "sha256:44fd8513f64f8e88ec7f41cadedb7acfdd3b238c0b1b0dbff9e96de949e4cd02",
+      "symbolic_branch": "refs/heads/main",
+      "head": "dcc56f26e884ade260770beceba2501d3746200d",
+      "index_observation": "sha256:88cecc98c94aad109a9142b2fdff50b6f52ee479afe79e8755813c56c84eaeef",
+      "publication_path_count": 37,
+      "index_paths": {
+        "predecessor": 28,
+        "candidate": 0,
+        "conflicted": 9
+      },
+      "worktree_paths": {
+        "predecessor": 28,
+        "candidate": 0,
+        "conflicted": 9
+      }
+    }
+  },
+  "verification": {
+    "complete_checkpoint": "passed during Engine apply before publication",
+    "resolved_obligations": {
+      "consumers": 30,
+      "coverage": 18,
+      "impact": 13
+    },
+    "independent_reviews": {
+      "standards": "accepted",
+      "spec": "accepted"
+    },
+    "accepted_snapshot": {
+      "kind": "snapshot-handle",
+      "id": "snapshot:v1:3b8df4f6-821c-4626-a413-b61f827a19dc",
+      "schema_version": 5
+    },
+    "accepted_content_matches_reviewed_revision": true,
+    "proposal_coverage_status": "all18 registered proposal policy units have current-attestation",
+    "accepted_application_readback": "reports/accepted-application-verification.json",
+    "checkout_preservation": {
+      "preexisting_staged_paths": 82,
+      "index_bytes_unchanged": true,
+      "preexisting_working_files_unchanged": true
+    },
+    "coverage_limits": "The18 scoped certificates do not certify the whole library. Core.application-guidance and Verification.acceptance-claims were already review-required in the base. The unchanged Verification.acceptance-paths certificate now requires renewal because its reviewed consumer content changed; it lies outside the proposal's eighteen changed-unit coverage claims."
+  }
+}

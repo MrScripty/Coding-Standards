@@ -9,7 +9,8 @@
 Status: Verifying
 Acceptance: pending
 Phase: local implementation and verification complete
-Next slice: supported-runtime CI, actual-host on-demand qualification and independent review.
+Next slice: supported-runtime CI, bounded model-authored readiness qualification
+under native/on-demand delivery, and independent review.
 Base: `52b122683faf05ef85c86c6903a61d54870a9be4`
 Operation: verify; user-authorized continuation of the agent interaction work.
 
@@ -93,8 +94,9 @@ reconstruction pass. Supported-runtime CI, actual client/model observation and
 independent review remain separately recorded when unavailable here.
 
 Milestones: shared discovery/catalog and local consumer measurements complete;
-base-pinned delivery verified locally. Actual-host qualification and external
-acceptance remain pending, with eager kept as the default.
+base-pinned delivery verified locally. Connected native/on-demand navigation is
+recorded in the verification report. Bounded authoring qualification and external
+acceptance remain pending, with eager kept as the default for other consumers.
 Replan only for a change to semantic authority, admission or client requirements.
 See [execution ledger](execution-ledger.md), [issues](issues.md), and
 [verification](verification.md).

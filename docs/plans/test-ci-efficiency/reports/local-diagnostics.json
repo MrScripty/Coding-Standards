@@ -1,0 +1,21 @@
+{
+  "environment": {
+    "python": "3.13.5",
+    "git": "git version 2.47.3",
+    "runtime_qualification": "diagnostic only; not locked Python 3.12 CI"
+  },
+  "timings": {
+    "tracked": [
+      0.5997268449999922,
+      0.5399579010000082,
+      0.638674610999999
+    ],
+    "overlay": [
+      0.24689834399998745,
+      0.320901957999979,
+      0.3313827180000146
+    ]
+  },
+  "engine_discovered_tests": 613,
+  "discovery_errors": []
+}

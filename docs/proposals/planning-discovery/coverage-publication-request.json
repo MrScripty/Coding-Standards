@@ -1,0 +1,119 @@
+{
+  "context": {
+    "kind": "analysis-handle",
+    "id": "analysis:sha256:98190ec2fd414c6206f7bb05ac4cfd040fc018b19f8d50b65e64f13f3355ce8a",
+    "schema_version": 7
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Publish reviewed policy coverage with the discovery proposal",
+      "rationale": "Applying the proposed policy requires durable coverage receipts for its changed policy units. These audit requests ask the Engine to publish receipts only after actual consumer-inventory evidence and audit review are complete; they do not change the proposed wording or certify coverage now.",
+      "evidence": [
+        {
+          "id": "docs/proposals/planning-discovery/intent-and-review.txt",
+          "digest": "sha256:c7274bf8960c8f3035135416d658258fa3f872a79820365529e46f1dc3e6c3f7",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        },
+        {
+          "id": "docs/proposals/planning-discovery/source-draft.txt",
+          "digest": "sha256:effe747bf46ff3c6c773b65b706b031a1b74bd5973ea247e89d3d4d1ca042892",
+          "provider_contract": "repository-content",
+          "provider_contract_version": "1"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.replanning",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.plan-admission",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.decision-authority",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.written-plan-applicability",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.concurrent-research",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.substantial",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.projection-completeness",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.lifecycle-authority",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.repository-isolation",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery-entry",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "router.selection-procedure",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.planning-handoff",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.visual-document",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.active-plan-fields",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.implementation.admission",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.investigation",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.outcome",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      },
+      {
+        "kind": "audit-policy-unit",
+        "policy": "workflow.planning.discovery.alternatives",
+        "rationale": "Inventory actual semantic consumers within audit-horizon.policy-impact-consumers, review the proposed relationships and consumer dispositions, and publish only the evidence-backed coverage claim accepted for this exact proposal."
+      }
+    ]
+  }
+}

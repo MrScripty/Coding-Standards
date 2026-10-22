@@ -1,0 +1,8 @@
+{
+  "kind": "rejected-result",
+  "code": "ANALYSIS.EVIDENCE_DIGEST_MISMATCH",
+  "outcome": "invalid",
+  "message": "Resolved evidence bytes do not match the declared digest.",
+  "details": {},
+  "next_operations": []
+}

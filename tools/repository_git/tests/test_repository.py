@@ -109,6 +109,199 @@ class GitRepositoryTests(unittest.TestCase):
             self.assertNotEqual(repository.current_revision().oid, main)
             self.assertEqual(repository.branch_revision("main").oid, main)
 
+    def test_publication_reconciliation_updates_topology_and_preserves_local_work(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            for name in ("value.txt", "removed.txt", "other.txt", "staged.txt"):
+                (root / name).write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected,
+                (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", True),
+                 CandidateFile(RepositoryPath.parse("nested/-new[1].txt"), b"added\n", False)),
+                removals=(RepositoryPath.parse("removed.txt"),), commit=_COMMIT,
+            ) as candidate:
+                (root / "other.txt").write_bytes(b"unstaged work\n")
+                (root / "staged.txt").write_bytes(b"staged work\n")
+                (root / "untracked.txt").write_bytes(b"untracked work\n")
+                self._git(root, "add", "staged.txt")
+                staged_blob = self._git(root, "rev-parse", ":staged.txt")
+                (root / "staged.txt").write_bytes(b"later unstaged work\n")
+                repository.publish_candidate(candidate, expected)
+                observation = repository.reconcile_publication_checkout(expected, candidate.revision)
+                self.assertEqual(observation.status, "current")
+                self.assertEqual(observation.index_candidate_count, 3)
+                self.assertEqual(observation.worktree_candidate_count, 3)
+                self.assertEqual((root / "value.txt").read_bytes(), b"candidate\n")
+                self.assertTrue((root / "value.txt").stat().st_mode & 0o111)
+                self.assertEqual((root / "nested/-new[1].txt").read_bytes(), b"added\n")
+                self.assertFalse((root / "removed.txt").exists())
+                self.assertEqual(self._git(root, "rev-parse", ":staged.txt"), staged_blob)
+                self.assertEqual((root / "staged.txt").read_bytes(), b"later unstaged work\n")
+                self.assertEqual((root / "other.txt").read_bytes(), b"unstaged work\n")
+                self.assertEqual((root / "untracked.txt").read_bytes(), b"untracked work\n")
+                self.assertEqual(self._git(root, "status", "--porcelain"),
+                                 " M other.txt\nMM staged.txt\n?? untracked.txt\n")
+                index = (root / ".git/index").read_bytes()
+                again = repository.reconcile_publication_checkout(expected, candidate.revision)
+                self.assertEqual(again.status, "current")
+                self.assertEqual((root / ".git/index").read_bytes(), index)
+                self.assertFalse((root / ".git/HEAD.lock").exists())
+                self.assertFalse((root / ".git/refs/heads/main.lock").exists())
+                self.assertEqual(self._git(root, "stash", "list"), "")
+
+    def test_publication_reconciliation_preserves_overlapping_edits_and_untracked_files(self) -> None:
+        for mutation in ("unstaged", "staged", "untracked-addition"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary)
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                repository = GitRepository(root)
+                expected = repository.branch_revision("main")
+                with repository.materialize_candidate(
+                    expected,
+                    (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),
+                     CandidateFile(RepositoryPath.parse("added.txt"), b"added\n", False)),
+                    commit=_COMMIT,
+                ) as candidate:
+                    repository.publish_candidate(candidate, expected)
+                    path = root / ("added.txt" if mutation == "untracked-addition" else "value.txt")
+                    path.write_bytes(b"local work\n")
+                    if mutation == "staged":
+                        self._git(root, "add", "value.txt")
+                    index = (root / ".git/index").read_bytes()
+                    observation = repository.reconcile_publication_checkout(expected, candidate.revision)
+                    self.assertEqual(observation.status, "conflicted")
+                    self.assertEqual(path.read_bytes(), b"local work\n")
+                    self.assertEqual((root / ".git/index").read_bytes(), index)
+                    self.assertEqual(repository.branch_revision("main"), candidate.revision)
+
+    def test_publication_reconciliation_git_rechecks_a_late_worktree_edit(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary)
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            repository = GitRepository(root)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected, (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                repository.publish_candidate(candidate, expected)
+                index = (root / ".git/index").read_bytes()
+                original = repository_module.git_output
+
+                def late_edit(selected_root, arguments, **kwargs):
+                    if arguments[0] == "read-tree":
+                        # Branch and HEAD writers cannot invalidate the selected
+                        # checkout while Git checks and updates its locked index.
+                        for command in (("symbolic-ref", "HEAD", "refs/heads/other"),
+                                        ("update-ref", "refs/heads/main", expected.oid)):
+                            result = subprocess.run(["git", "-C", str(root), *command], capture_output=True)
+                            self.assertNotEqual(result.returncode, 0)
+                        (root / "value.txt").write_bytes(b"late local work\n")
+                    return original(selected_root, arguments, **kwargs)
+
+                with mock.patch.object(repository_module, "git_output", side_effect=late_edit):
+                    with self.assertRaises(GitRepositoryError):
+                        repository.reconcile_publication_checkout(expected, candidate.revision)
+                self.assertEqual((root / "value.txt").read_bytes(), b"late local work\n")
+                self.assertEqual((root / ".git/index").read_bytes(), index)
+                self.assertEqual(repository.branch_revision("main"), candidate.revision)
+                self.assertFalse((root / ".git/HEAD.lock").exists())
+                self.assertFalse((root / ".git/refs/heads/main.lock").exists())
+
+    def test_publication_reconciliation_preserves_existing_git_locks(self) -> None:
+        for relative in ("HEAD.lock", "refs/heads/main.lock", "index.lock"):
+            with self.subTest(lock=relative), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary)
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                repository = GitRepository(root)
+                expected = repository.branch_revision("main")
+                with repository.materialize_candidate(
+                    expected, (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                    commit=_COMMIT,
+                ) as candidate:
+                    repository.publish_candidate(candidate, expected)
+                    lock = root / ".git" / relative
+                    lock.write_bytes(b"another writer\n")
+                    index = (root / ".git/index").read_bytes()
+                    with self.assertRaises(GitRepositoryError):
+                        repository.reconcile_publication_checkout(expected, candidate.revision)
+                    self.assertEqual(lock.read_bytes(), b"another writer\n")
+                    self.assertEqual((root / "value.txt").read_bytes(), b"predecessor\n")
+                    self.assertEqual((root / ".git/index").read_bytes(), index)
+                    for other in ("HEAD.lock", "refs/heads/main.lock", "index.lock"):
+                        if other != relative:
+                            self.assertFalse((root / ".git" / other).exists())
+
+    def test_publication_reconciliation_does_not_update_another_or_diverged_checkout(self) -> None:
+        for checkout in ("other", "detached", "diverged"):
+            with self.subTest(checkout=checkout), tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+                root = Path(temporary)
+                self._initialize(root)
+                (root / "value.txt").write_bytes(b"predecessor\n")
+                self._commit(root, "initial")
+                self._git(root, "branch", "-M", "main")
+                repository = GitRepository(root)
+                expected = repository.branch_revision("main")
+                with repository.materialize_candidate(
+                    expected, (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                    commit=_COMMIT,
+                ) as candidate:
+                    repository.publish_candidate(candidate, expected)
+                    if checkout == "other":
+                        self._git(root, "switch", "-qc", "other")
+                    elif checkout == "detached":
+                        self._git(root, "checkout", "--detach", expected.oid)
+                    else:
+                        tree = self._git(root, "rev-parse", "main^{tree}").strip()
+                        third = self._git(root, "commit-tree", tree, "-p", candidate.revision.oid,
+                                          "-m", "later publication").strip()
+                        self._git(root, "update-ref", "refs/heads/main", third)
+                    index = (root / ".git/index").read_bytes()
+                    content = (root / "value.txt").read_bytes()
+                    head = repository.current_revision()
+                    repository.reconcile_publication_checkout(expected, candidate.revision)
+                    self.assertEqual((root / "value.txt").read_bytes(), content)
+                    self.assertEqual((root / ".git/index").read_bytes(), index)
+                    self.assertEqual(repository.current_revision(), head)
+
+    def test_publication_reconciliation_supports_main_in_a_linked_worktree(self) -> None:
+        with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
+            root = Path(temporary) / "repository"
+            root.mkdir()
+            self._initialize(root)
+            (root / "value.txt").write_bytes(b"predecessor\n")
+            self._commit(root, "initial")
+            self._git(root, "branch", "-M", "main")
+            self._git(root, "switch", "-qc", "other")
+            linked = Path(temporary) / "linked"
+            self._git(root, "worktree", "add", "-q", str(linked), "main")
+            repository = GitRepository(linked)
+            expected = repository.branch_revision("main")
+            with repository.materialize_candidate(
+                expected, (CandidateFile(RepositoryPath.parse("value.txt"), b"candidate\n", False),),
+                commit=_COMMIT,
+            ) as candidate:
+                repository.publish_candidate(candidate, expected)
+                observation = repository.reconcile_publication_checkout(expected, candidate.revision)
+                self.assertEqual(observation.status, "current")
+                self.assertEqual((linked / "value.txt").read_bytes(), b"candidate\n")
+                self.assertEqual((root / "value.txt").read_bytes(), b"predecessor\n")
+                self.assertFalse((root / ".git/refs/heads/main.lock").exists())
+
     def test_publication_checkout_observes_ref_advance_without_checkout_writes(self) -> None:
         with tempfile.TemporaryDirectory(dir="/tmp") as temporary:
             root = Path(temporary)

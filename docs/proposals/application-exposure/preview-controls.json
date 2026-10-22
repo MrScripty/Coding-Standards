@@ -1,0 +1,253 @@
+[
+  {
+    "label": "tooling-required-closure",
+    "result": {
+      "kind": "candidate-application-related-result",
+      "purpose": "application",
+      "target": "workflow.tooling",
+      "relationships": [
+        {
+          "source": "workflow.implementation",
+          "target": "core",
+          "relation": "requires",
+          "groups": [
+            "standards-requires",
+            "standards-dependencies"
+          ],
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.tooling",
+          "target": "core",
+          "relation": "requires",
+          "groups": [
+            "standards-requires",
+            "standards-dependencies"
+          ],
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.tooling",
+          "target": "workflow.implementation",
+          "relation": "requires",
+          "groups": [
+            "standards-requires",
+            "standards-dependencies"
+          ],
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.tooling",
+          "target": "workflow.verification",
+          "relation": "requires",
+          "groups": [
+            "standards-requires",
+            "standards-dependencies"
+          ],
+          "direction": "outgoing"
+        },
+        {
+          "source": "workflow.verification",
+          "target": "core",
+          "relation": "requires",
+          "groups": [
+            "standards-requires",
+            "standards-dependencies"
+          ],
+          "direction": "outgoing"
+        }
+      ],
+      "next_operations": [
+        {
+          "operation": "preview_application",
+          "revision": {
+            "kind": "proposal-revision-handle",
+            "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+            "schema_version": 1
+          },
+          "request": {
+            "kind": "read",
+            "target": "core"
+          }
+        },
+        {
+          "operation": "preview_application",
+          "revision": {
+            "kind": "proposal-revision-handle",
+            "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+            "schema_version": 1
+          },
+          "request": {
+            "kind": "read",
+            "target": "workflow.implementation"
+          }
+        },
+        {
+          "operation": "preview_application",
+          "revision": {
+            "kind": "proposal-revision-handle",
+            "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+            "schema_version": 1
+          },
+          "request": {
+            "kind": "read",
+            "target": "workflow.verification"
+          }
+        }
+      ],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "reference-optional-authority",
+    "result": {
+      "kind": "candidate-application-read-result",
+      "purpose": "application",
+      "policy": {
+        "id": "reference.recipes.tooling",
+        "role": "reference",
+        "level": "REFERENCE"
+      },
+      "content": "# Tooling Recipes\n\n**Standards metadata**\n\n- ID: `reference.recipes.tooling`\n- Role: `reference`\n- Level: `REFERENCE`\n- Applies when: A project has selected a development-tool workflow and needs illustrative hook or editor configuration.\n- Does not apply when: Tool, dependency, editor-configuration, file-setting, acceptance, scheduling, or bypass decisions are being made.\n- Requires: `workflow.tooling`, `topic.dependencies`\n- Specializes: `none`\n- Verification: Tooling-reference dispositions, metadata, link, and authority checks.\n- Canonical owner: `reference/recipes/tooling.md`\n\nThis material is non-normative. [Tooling](../../workflows/tooling.md) owns tool\nselection, configuration, automation, and scheduling. [Dependencies](../../topics/dependencies.md)\nowns dependency selection and installation. Projects must make those decisions\nbefore adapting an example below.\n\n## Maintained Editor Configuration Recipe\n\nFor ordinary UTF-8 source files shared across editors, an `.editorconfig` can\nexpress the Tooling defaults without selecting a language formatter:\n\n```ini\nroot = true\n\n[*]\ncharset = utf-8\ninsert_final_newline = true\n```\n\nScope this to owned source files when the repository also contains formats\nwhose consumers require a different encoding or ending. Leave indentation and\nlanguage layout to the existing formatter. Verify an affected editor or tool\nactually consumes the settings, then check the resulting file with its real\nconsumer. The following retained migration examples illustrate additional\nmechanisms and historical configurations, not a current universal preset.\n\n## Legacy Tool Setup And Package Script Example\n\nThe legacy setup example listed EditorConfig, a formatter such as Prettier, a\nlinter such as ESLint, and a hook runner such as Lefthook or Husky. This list is\nhistorical illustration only. It does not establish a minimum setup, required\ntool category, product choice, installation checklist, or provisioning\nauthority.\n\nOne legacy `package.json` example used:\n\n```json\n{\n  \"scripts\": {\n    \"lint\": \"npm run lint:critical && npm run lint:no-new\",\n    \"lint:critical\": \"node scripts/lint-critical.mjs\",\n    \"lint:no-new\": \"node scripts/lint-no-new.mjs\",\n    \"lint:full\": \"eslint src/\",\n    \"lint:fix\": \"eslint src/ --fix\",\n    \"format\": \"prettier --write \\\"src/**/*.{ts,js,json,css}\\\"\",\n    \"format:check\": \"prettier --check \\\"src/**/*.{ts,js,json,css}\\\"\",\n    \"typecheck\": \"tsc --noEmit\",\n    \"test\": \"jest\",\n    \"prepare\": \"lefthook install\"\n  }\n}\n```\n\nFor ESLint versions using flat configuration, the legacy note omitted `--ext`\nand relied on configuration `files` patterns. Product version, package manager,\nscript names, command composition, paths, globs, flags, check allocation, hook\ninstallation, and result interpretation must come from canonical decisions;\nnone of this example is a default.\n\n## Hook Feedback\n\nA local hook can shorten feedback time for formatting, linting, type, or test\nfailures. That possible benefit does not make a hook stage, product, command,\nor check an acceptance requirement. Required evidence remains defined by the\nselected verification contract regardless of where the check runs.\n\n## Lefthook Example\n\nLefthook is one possible language-agnostic hook runner. A project that has\nselected it through its canonical tooling and dependency decisions might use\ncommands such as:\n\n```bash\nnpm install lefthook --save-dev\ncurl -sSfL https://get.lh.run | sh\nlefthook install\n```\n\nThese are alternatives from the legacy example, not installation defaults.\nVerify the selected installation source, current syntax, trust requirements,\nand version policy before use.\n\nAn illustrative configuration is:\n\n```yaml\npre-commit:\n  parallel: true\n  commands:\n    lint:\n      glob: \"*.{ts,js}\"\n      run: npm run lint {staged_files}\n    format-check:\n      glob: \"*.{ts,js,json,css}\"\n      run: npm run format:check {staged_files}\n    typecheck:\n      run: npm run typecheck\n\npre-push:\n  commands:\n    test:\n      run: npm test\n```\n\nThe product, stages, parallel mode, globs, commands, and check allocation are\nexamples only. They do not define a fallback configuration.\n\n## EditorConfig Example\n\nEditorConfig can express selected formatting settings across supporting editors\nand IDEs. It is only one possible transport. The canonical\n[Tooling workflow](../../workflows/tooling.md#editor-and-file-configuration)\nmust select the mechanism, settings, scope, and precedence before this sample is\nadapted.\n\n```ini\nroot = true\n\n[*]\nindent_style = space\nindent_size = 4\nend_of_line = lf\ncharset = utf-8\ntrim_trailing_whitespace = true\ninsert_final_newline = true\n\n[*.{js,ts,jsx,tsx,json,css,scss,html,svelte,vue}]\nindent_size = 2\n\n[*.md]\ntrim_trailing_whitespace = false\n\n[Makefile]\nindent_style = tab\n```\n\nThe mechanism, root scope, patterns, indentation, line ending, encoding,\nwhitespace, final-newline, and file-family values are examples only. They are\nnot recommended defaults and may conflict with repository or consumer\ncontracts.\n\n## Linter Category Examples\n\nTeams sometimes group lint checks as style, quality, security, or type checks.\nExample products include Prettier or ESLint for style, Pylint or Clippy for\nquality, Semgrep or Bandit for security, and TypeScript or mypy for type\nanalysis. These categories overlap and the products can serve several purposes.\n\nThe taxonomy and products are illustrative only. The canonical\n[lint policy](../../workflows/tooling.md#lint-policy-and-orchestration) selects\npurpose, rules, scope, severity, and tooling from owned facts; it does not infer\nthem from a category label or this product list.\n\n## TypeScript Tooling Examples\n\nAfter the canonical [TypeScript profile](../../profiles/languages/typescript.md#static-analysis-and-compiler-configuration)\nselects project boundaries and checks, an ESLint flat configuration might scope\ntype-aware analysis through a `files` block and an owned project configuration:\n\n```javascript\nexport default tseslint.config({\n  files: ['src/**/*.{ts,tsx}'],\n  languageOptions: { parserOptions: { project: './tsconfig.json' } },\n  extends: [...tseslint.configs.strictTypeChecked],\n});\n```\n\nProduct-specific failure modes can include applying type-aware presets to\nnon-TypeScript files, mixing ignore declarations into incompatible blocks, or\nusing command flags unsupported by the selected configuration format.\n\nA formatter configuration used by the same legacy example was:\n\n```json\n{\n  \"semi\": true,\n  \"singleQuote\": true,\n  \"tabWidth\": 2,\n  \"trailingComma\": \"es5\",\n  \"printWidth\": 100\n}\n```\n\nA compiler example might enable `strict`, `noImplicitReturns`,\n`exactOptionalPropertyTypes`, or `noUncheckedIndexedAccess`. An architecture\nexample might implement an owned prohibition through ESLint's\n`no-restricted-syntax`. These products, versions, presets, globs, project paths,\nflags, severities, and selectors are examples only, not defaults.\n\n### Illustrative React Automatic JSX Lint Adapter\n\nWhen the selected React runtime, TypeScript contract, lint purpose, and plugin\nsemantics prove that legacy JSX-scope and runtime prop-validation rules do not\napply, an ESLint adapter might contain:\n\n```javascript\nrules: {\n  'react/react-in-jsx-scope': 'off',\n  'react/prop-types': 'off',\n}\n```\n\nThis snippet does not select React, a React version, the automatic JSX runtime,\nTypeScript, ESLint, these plugins, rule disablement, severity, parser, preset, or\nvalidation strategy. A project name or version label cannot replace evidence\nthat each rule is inapplicable to every selected source and consumer.\n\n## Formatting Automation Examples\n\nAfter canonical [formatting policy](../../workflows/tooling.md#formatting-policy-and-orchestration)\nselects authority and behavior, a VS Code configuration might enable\n`editor.formatOnSave` and select a formatter extension. A project using\nPrettier and ESLint might install `eslint-config-prettier` to disable overlapping\nstyle rules.\n\nThose editor settings, products, extension identifiers, package commands, and\nformat-on-save behavior are examples only. They do not select formatting\nauthority, grant mutation authority, or establish when evidence must run.\n\nA selected Prettier check might use:\n\n```bash\nprettier --check \"src/**/*.ts\"\n```\n\nThe command, check mode, source glob, and nonzero result interpretation depend\non the selected product version and formatting claim. They are not defaults.\n\n## CI Orchestration Examples\n\nAfter canonical [CI orchestration](../../workflows/tooling.md#ci-orchestration-and-scheduling)\nselects dependencies, continuation, cancellation, and reporting behavior, a\nGitHub Actions matrix can express selected continuation with\n`strategy.fail-fast: false`. A final reporting job can use `if: always()`, and\nan explicitly advisory step can use `continue-on-error: true`.\n\nOne possible three-group graph places setup validation before independent\nquality checks and runs expensive checks only after their required claims pass.\nGitHub Actions can express those edges with `needs` and conditions such as\n`success()`. Selected commands might include `./launcher.sh --ci-preflight` or\n`npm run ci:preflight`.\n\nThe provider, matrix behavior, summary job, error continuation, dependency\nsyntax, group names, group count, execution order, and commands are examples\nonly. They do not define a fallback topology or evidence contract.\n\n## Automation Cost Examples\n\nAfter canonical [automation-cost policy](../../workflows/tooling.md#automation-cost-and-operational-evidence)\nselects caching, cancellation, and diagnostics, GitHub Actions can express\nread-only contents permission and per-run cancellation:\n\n```yaml\npermissions:\n  contents: read\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.ref }}\n  cancel-in-progress: true\n```\n\nSelected Node and Rust dependency caches might use `actions/setup-node@v4` with\n`cache: npm`, or `actions/cache@v4` for Cargo registry and Git data. Commands\nsuch as `npm ci` and `cargo test --workspace`, lockfile-derived keys, exact\ncompiled-output keys, and broad dependency-download restore keys are\nproduct-specific examples, not defaults.\n\nGitHub failure diagnostics might append a redacted summary to\n`$GITHUB_STEP_SUMMARY` and conditionally use `actions/upload-artifact@v4` for\nselected log or test-result paths. Artifact names, missing-file behavior, and\nretention periods must come from the canonical decision; the legacy example's\n14-day retention is illustrative only.\n\nThese provider actions, versions, permissions, concurrency expressions, cache\npaths, key fields, commands, summary variables, artifact paths, and retention\nvalues cannot select automation behavior or satisfy evidence by themselves.\n\n\n## Complete CI Workflow Example\n\nThis is the complete legacy GitHub Actions example. It is non-normative and may\nbe adapted only after canonical Tooling and Verification decisions select every\nbehavior represented by it.\n\n```yaml\n# .github/workflows/ci.yml\nname: CI\n\non: [push, pull_request]\n\npermissions:\n  contents: read\n\nconcurrency:\n  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}\n  cancel-in-progress: true\n\njobs:\n  preflight:\n    runs-on: ubuntu-latest\n    timeout-minutes: 8\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup Node\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n\n      - name: Install dependencies\n        run: npm ci\n\n      - name: Preflight\n        run: npm run ci:preflight\n\n  lint_critical:\n    needs: preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Setup Node\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n\n      - name: Install dependencies\n        run: npm ci\n\n      - name: Lint (critical anti-patterns)\n        run: npm run lint:critical\n\n  lint_no_new:\n    needs: preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm run lint:no-new\n\n  lint_full_audit:\n    needs: preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    continue-on-error: true\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm run lint:full\n\n  typecheck:\n    needs: preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm run typecheck\n\n  format_check:\n    needs: preflight\n    runs-on: ubuntu-latest\n    timeout-minutes: 10\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm run format:check\n\n  test:\n    needs: preflight\n    timeout-minutes: 20\n    strategy:\n      fail-fast: false\n      matrix:\n        os: [ubuntu-latest, windows-latest]\n    runs-on: ${{ matrix.os }}\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm test\n\n  integration:\n    needs: [lint_critical, lint_no_new, typecheck, format_check, test]\n    runs-on: ubuntu-latest\n    timeout-minutes: 30\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n          cache-dependency-path: package-lock.json\n      - run: npm ci\n      - run: npm run test:integration\n\n  ci_summary:\n    if: always()\n    needs: [preflight, lint_critical, lint_no_new, lint_full_audit, typecheck, format_check, test, integration]\n    runs-on: ubuntu-latest\n    timeout-minutes: 5\n    steps:\n      - name: Summarize blocking results\n        env:\n          PREFLIGHT: ${{ needs.preflight.result }}\n          LINT_CRITICAL: ${{ needs.lint_critical.result }}\n          LINT_NO_NEW: ${{ needs.lint_no_new.result }}\n          TYPECHECK: ${{ needs.typecheck.result }}\n          FORMAT_CHECK: ${{ needs.format_check.result }}\n          TEST: ${{ needs.test.result }}\n          INTEGRATION: ${{ needs.integration.result }}\n        run: |\n          failures=0\n\n          for gate in PREFLIGHT LINT_CRITICAL LINT_NO_NEW TYPECHECK FORMAT_CHECK TEST INTEGRATION; do\n            result=\"${!gate}\"\n            echo \"- ${gate}: ${result}\" >> \"$GITHUB_STEP_SUMMARY\"\n            if [ \"$result\" = \"skipped\" ]; then\n              echo \"  - Skipped because an upstream tier did not pass.\" >> \"$GITHUB_STEP_SUMMARY\"\n            fi\n            if [ \"$result\" != \"success\" ]; then\n              failures=1\n            fi\n          done\n\n          exit \"$failures\"\n```\n\nThe workflow path, provider, triggers, permissions, jobs, gates, action versions,\ncaches, commands, timeouts, matrices, dependencies, summaries, and shell logic\nare examples only and define no fallback.\n",
+      "scope": {
+        "kind": "whole-artifact"
+      },
+      "requires": [
+        "workflow.tooling",
+        "topic.dependencies"
+      ],
+      "specializes": [],
+      "next_operations": [
+        {
+          "operation": "preview_application",
+          "revision": {
+            "kind": "proposal-revision-handle",
+            "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+            "schema_version": 1
+          },
+          "request": {
+            "kind": "read",
+            "target": "workflow.tooling"
+          }
+        },
+        {
+          "operation": "preview_application",
+          "revision": {
+            "kind": "proposal-revision-handle",
+            "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+            "schema_version": 1
+          },
+          "request": {
+            "kind": "read",
+            "target": "topic.dependencies"
+          }
+        }
+      ],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "authoring-provenance-hidden",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "private-maintenance-owner",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "rust-withheld-profile.language.rust",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "rust-withheld-profile.language.rust.async",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "rust-withheld-profile.language.rust.api",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  },
+  {
+    "label": "rust-withheld-profile.language.rust.security",
+    "result": {
+      "kind": "candidate-application-rejected-result",
+      "purpose": "application",
+      "code": "APPLICATION.CONTENT_UNAVAILABLE",
+      "outcome": "unavailable",
+      "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
+      "next_operations": [],
+      "revision": {
+        "kind": "proposal-revision-handle",
+        "id": "proposal-revision:sha256:2aa97a0bc3df7967c2d596df8b8b848787641e3a448c076e1dbf4ef109426150",
+        "schema_version": 1
+      }
+    }
+  }
+]

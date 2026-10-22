@@ -1,0 +1,15 @@
+{
+  "repository": "MrScripty/Coding-Standards",
+  "branch_head": "8260489e8e3ad6b7e170bbf7bd411bac90758abd",
+  "tested_merge": "fa7c4f9d5edee0a94baf6fff0ed29452ffaff7db",
+  "tree": "c249e251efcf48ad13d4bfaf854cf496544bece7",
+  "base": "149ba317e9397519bc181a048ecf76aef129a69c",
+  "run_id": 36661745679,
+  "job_id": 109717824822,
+  "artifact_id": 11073664150,
+  "artifact_sha256": "a0b764813c3ff94acfc40906d82d31fe1be5f05d385547607e3e30a893480f62",
+  "source_modified": false,
+  "remote_mutations": false,
+  "local_complete_engine_run": false,
+  "optimized_implementation": false
+}

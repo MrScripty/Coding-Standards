@@ -1,0 +1,200 @@
+{
+  "date": "2026-10-22",
+  "accepted_start_revision": "188beda1fa477d21d576c233dd8c7f4c4c267d23",
+  "python": "Python 3.12.3",
+  "requirements_lock_sha256": "9a1727d6bb27efdc6140c96210958f4b1547d9806649a2572667ff8574c6979f",
+  "passed": true,
+  "targeted_tests": 124,
+  "groups": [
+    {
+      "group": "repository-git",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/repository_git/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 6.072,
+      "tests": 58,
+      "log_sha256": "b2f63d83292bca45fff2bb9b713f77208536bf4634f93e1e5af60e2f870fcb79"
+    },
+    {
+      "group": "contracts-compiler",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_contracts.tests.test_compiler",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 13.044,
+      "tests": 9,
+      "log_sha256": "790aae7517bb896bb6fc56b1d8784fc7fccd23656a12ef2bf35fc2d9da4c676d"
+    },
+    {
+      "group": "interaction-recorder",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_interaction_observation",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 1.484,
+      "tests": 10,
+      "log_sha256": "fe4e841176594957b0077a30914cfb0425a276e6ea91c8645d8122ff1f577fb3"
+    },
+    {
+      "group": "interaction-transport",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_interaction_observation_transport",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 17.846,
+      "tests": 4,
+      "log_sha256": "ef462c1db55b037a72c2793976ee06647e0841be4e068638a17e592125f3dc76"
+    },
+    {
+      "group": "publication-recovery",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_publication_recovery",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 172.05,
+      "tests": 17,
+      "log_sha256": "436433f6e8ddf463badfbbf44e5a95a7e0da81b3540e6a9d08b6974313b442fa"
+    },
+    {
+      "group": "consumer-publication",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_consumer_publication",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 156.022,
+      "tests": 2,
+      "log_sha256": "52903ac51487b8cd0d42e8626e7da461a3c8fd192882ad09f1f07aac903ead82"
+    },
+    {
+      "group": "capture-handoff",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_capture_handoff_transport",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 14.077,
+      "tests": 1,
+      "log_sha256": "b1ab89cd9a7deacfae1f146eae2ea6f138017a08e31c12128ea4f1b86eb002b7"
+    },
+    {
+      "group": "runtime-identity",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_runtime_identity",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 3.998,
+      "tests": 4,
+      "log_sha256": "5bea42d9bbdc27f878f90cb550dec3e4b528447f66371cb78dfe492eb6e5ae8a"
+    },
+    {
+      "group": "schema-presentation",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_schema_presentation",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 11.283,
+      "tests": 7,
+      "log_sha256": "cb93cfea128c8fcc12c6aa301c0542104b9a93129c18b08269f1d79948b5fda1"
+    },
+    {
+      "group": "routing-facts",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_routing_fact_transport",
+        "-v"
+      ],
+      "exit_code": 0,
+      "seconds": 33.599,
+      "tests": 10,
+      "log_sha256": "cd9d7199b1d7f3e40085c2b81988b01124d625be0caac3559e5cf5c7b59c24b0"
+    },
+    {
+      "group": "supporting-workflow-corrected",
+      "command": [
+        "/home/jeremy/.local/share/standards-engine/venv/bin/python",
+        "-m",
+        "unittest",
+        "tools.standards_engine.tests.test_supporting_workflow",
+        "tools.standards_engine.tests.test_process_reuse.InstalledInterfaceReuseTest.test_existing_publication_scenario_with_warm_purpose_isolated_caches",
+        "-v"
+      ],
+      "exit_code": 0,
+      "tests": 2,
+      "log_sha256": "bba3f1c213614cbd72a92a16c52ea62b0513e636ef0c1da160502a973730297e"
+    }
+  ],
+  "superseded_failure": {
+    "group": "supporting-workflow",
+    "code": "SUITE_INPUT.STALE_FILE",
+    "path": "tools/standards_engine/contracts/a1-interface.toml",
+    "disposition": "Discarded the old approval-reset fixture edit. Accepted HEAD already owns an unexposed test standard; both direct and cached workflow consumers passed after restoration."
+  },
+  "source_changes_after_initial_campaign": [
+    "tools/standards_engine/tests/test_supporting_workflow.py"
+  ],
+  "verification_scope": "Targeted implementation checks; not the full 1255-test historical isolated observation campaign. Final repository verification is recorded in checkout-reconciliation.md.",
+  "repository_verification": {
+    "refresh": {
+      "kind": "verify-repository-result",
+      "refreshed_verification_inputs": true,
+      "verification": {
+        "checks": 121,
+        "exit_code": 0,
+        "failures": [],
+        "passed": true,
+        "suites": 73
+      }
+    },
+    "readonly": {
+      "kind": "verify-repository-result",
+      "refreshed_verification_inputs": false,
+      "verification": {
+        "checks": 121,
+        "exit_code": 0,
+        "failures": [],
+        "passed": true,
+        "suites": 73
+      }
+    }
+  }
+}

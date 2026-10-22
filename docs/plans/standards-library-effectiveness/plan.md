@@ -2,11 +2,15 @@
 
 **Plan status:** `Active`
 
-**Current phase:** Milestone 8 admission and planning
+**Current phase:** Milestone 8 bounded pilot admission prepared; preceding
+packaging and test-strengthening acceptance gates remain separate.
 
-**Next slice:** select two bounded independent downstream pilots and admit the
-scenario comparison, migration guidance, and final concision review. Milestone 7
-is accepted in the [source closure report](reports/milestone-7-source-closure.md).
+**Next slice:** reconcile exact-candidate CI and acceptance-owner decisions for
+packaging and test strengthening, then freeze the Pumas-Library and Pantograph
+pilot briefs and execute the first downstream task. The scenario comparison,
+migration guidance, and final concision review are admitted by the
+[Milestone 8 boundary](reports/milestone-8-pilot-admission.md). Milestone 7 is
+accepted in the [source closure report](reports/milestone-7-source-closure.md).
 
 **Acceptance status:** `partial`
 
@@ -145,7 +149,7 @@ complete; `Accepted` requires the named evidence.
 | 5 | Contracts, compatibility, and fallbacks | `Accepted` | [Contracts](../../../topics/contracts.md) |
 | 6 | Proportional documentation and commit process | `Accepted` | [Documentation](../../../workflows/documentation.md), [Commit](../../../workflows/commit.md) |
 | 7 | Role-based consolidation and verification migration | `Accepted` | [Source closure](reports/milestone-7-source-closure.md): 27 entrypoints reviewed, ten corrected through the Engine |
-| 8 | Scenario rescore, pilots, migration publication, and final review | `Planned` | Ready for bounded admission; pilots and final review remain unexecuted |
+| 8 | Scenario comparison, pilots, migration publication, and final review | `Planned` | [Bounded admission](reports/milestone-8-pilot-admission.md) and [preceding gate reconciliation](reports/sequence-acceptance-reconciliation.md) prepared; pilots and final review remain unexecuted |
 
 ### Milestone 7 Current State
 
