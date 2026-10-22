@@ -1,0 +1,467 @@
+{
+  "snapshot": {
+    "kind": "snapshot-handle",
+    "id": "snapshot:v1:883bd716-eb6d-4afa-bd25-502e80dd139c",
+    "schema_version": 5
+  },
+  "change_set": {
+    "purpose": {
+      "summary": "Clarify evidence attribution, verification clients and proportionate acceptance",
+      "rationale": "Implement the five narrow refinements requested from the supplied audit. Align existing principles across Documentation, Verification, Proportionality, Router and Commit, with explicit executable routing and application exposure. Preserve valid existing evidence and owned fresh-execution gates.",
+      "evidence": [
+        {
+          "evidence_ref": "audit"
+        },
+        {
+          "evidence_ref": "scope"
+        }
+      ]
+    },
+    "edits": [
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.documentation",
+          "title": "Documentation Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "A change creates or alters a durable responsibility, decision, contract, or operational boundary.",
+          "does_not_apply_when": "A change preserves documented responsibilities, decisions, contracts, and operational procedures.",
+          "verification": "Documentation decision, policy consolidation, and traceability checks.",
+          "body": "## Select Documentation From Impact\n\nDurable documentation is required when a reader must understand information\nthat source code and tests do not own clearly enough:\n\n- why a meaningful module or operational boundary exists;\n- which responsibility and invariants that boundary owns;\n- what consumers rely on across a public, process, language, persistence, or\n  generated-artifact boundary;\n- why a consequential decision was selected; or\n- how an operator must perform or recover a non-obvious procedure.\n\nDirectory count, file count, and the presence of a `src/` path are not\ndocumentation requirements. A local implementation change that preserves all\ndocumented decisions and contracts follows applicable verification and\nchange-review requirements; it does not require an unrelated README or ADR edit.\n\n## Documentation Profiles\n\nSelect the smallest profile that preserves the affected knowledge:\n\n| Profile | Select when | Required content |\n| --- | --- | --- |\n| `none` | The change preserves durable responsibilities, invariants, decisions, contracts, and procedures. | No documentation artifact. |\n| `boundary-readme` | A meaningful module or operational boundary is created or its responsibility/invariants change. | Purpose, owned responsibility, invariants, entry points, and applicable links to accepted decisions or contracts. |\n| `contract-readme` | Consumers need stable behavior at a public, process, language, persistence, or generated-artifact boundary. | Boundary README plus inputs/outputs, lifecycle, failures, compatibility or migration, and producer/consumer ownership. |\n| `adr` | A durable decision crosses boundaries, has material alternatives, or must outlive the implementation plan. | Context, decision, alternatives, consequences, status, affected boundaries, and supersession links. |\n| `runbook` | Operators need a repeatable deployment, recovery, migration, or incident procedure. | Preconditions, steps, validation, failure handling, rollback or repair, and owner. |\n\nMore than one profile may apply. When an ADR or contract document owns the\nrationale, a README links to that owner and summarizes only the local\nresponsibility. Do not copy the full decision into every artifact.\n\nIf the impact cannot be classified, record an unresolved documentation\ndiagnostic. Do not create a speculative README or ADR as a fallback.\n\n## Artifact Placement\n\nFollow the adopting repository's documented placement and naming convention.\nWhen no convention exists:\n\n- keep boundary-owned documentation with the boundary;\n- place project-level decisions, plans, and reports under a root `docs/`\n  directory with concern-specific subdirectories; and\n- group multi-file work under one descriptive, lowercase, hyphenated slug.\n\nThe artifact's owner and links must remain unambiguous. Do not scatter one work\nitem across unrelated roots, reorganize unaffected documentation to satisfy\nthis default, or retain an obsolete layout as a compatibility fallback. A\nlayout replacement updates affected links and automation in the same accepted\nchange.\n\n## Boundary README\n\nA boundary README is concise and specific. It contains:\n\n- `Purpose`: why the boundary exists;\n- `Responsibility`: behavior and state owned here, plus explicit exclusions;\n- `Invariants`: conditions that must remain true;\n- `Entry Points`: the interfaces or commands a reader should start from.\n\nAdd `Consumer Contract` or `Produced Contract` only when that contract exists.\nAdd `Decision Links` only when accepted rationale or a canonical contract\nexists. Add operational instructions only when the boundary owns them. Omit\nnon-applicable sections instead of filling them with `None`, generic prose, or\ninvented alternatives.\n\n## Repository Entry Point\n\nWhen a repository is independently adopted, operated, or contributed to, its\nroot README is the discovery boundary. It states:\n\n- the repository's purpose and intended audience;\n- stable commands or interfaces needed to start;\n- the minimum verified setup and use path for that audience; and\n- links to owned contribution, operation, contract, decision, and license\n  documents when those concerns apply.\n\nSelect sections from actual audience needs. Do not require a fixed heading\nlist, duplicate detailed owner documents, or maintain a file-by-file project\ntree. Update the entry point when these facts change; unrelated implementation\nchanges require no root README churn.\n\n## Contract Documentation\n\nContract documentation states the facts a consumer needs:\n\n- input and output semantics;\n- validation and typed failure outcomes;\n- lifecycle, ordering, cancellation, idempotency, and retry behavior;\n- compatibility, versioning, migration, or coordinated replacement policy;\n- producer and consumer ownership; and\n- verification evidence or executable contract location.\n\nFollow [Contract Evolution](../topics/contracts.md). Unknown contract facts\nremain diagnostics; documentation must not invent defaults or compatibility.\n\n## Decision Traceability\n\nUpdate durable documentation only when its owned knowledge changes:\n\n- update the affected boundary README when responsibility or invariants change;\n- update the canonical contract when consumer-visible semantics change;\n- add or supersede an ADR when a durable cross-boundary decision changes; and\n- update a runbook when its procedure or recovery semantics change.\n\nEvery ADR identifies affected boundary paths or stable contract identifiers.\nAn unrelated ADR cannot satisfy traceability for a changed boundary.\n\nPlans and pull requests link to accepted rationale. They may summarize the\ncurrent change, but they do not become duplicate long-term owners.\n\nWhen automation enforces traceability, select its impact mapping from\nproject-owned trigger paths or stable contract identifiers, the exact durable\nknowledge each trigger can change, the canonical artifact that owns that\nknowledge, and the accepted documentation profile. A broad directory may be a\ntrigger only when every relevant change beneath it affects the same owned\nknowledge. Routine implementation paths do not acquire documentation\nobligations from location alone.\n\nEach invocation must identify the exact change input it evaluates. Staged mode\nevaluates only index state. Range mode requires explicit base and head revisions and\nevaluates both prior and current mapping state so deleting a trigger or map row\ncannot hide an obligation. A changed artifact satisfies only its mapped boundary\nor stable contract; an unrelated README, ADR, plan, or pull request is not a\nsubstitute.\n\nDo not default to a `src/` directory, README per directory, fixed headings,\nplaceholder content, one map location, staged or range mode, a branch name,\nadjacent revisions, or a documentation artifact. Contradictory trigger,\nboundary, profile, or artifact authority is `invalid`. Missing maps, modes,\nrevisions, paths, or canonical artifacts are `unavailable`. An enforcement\nmechanism unable to evaluate the selected repository state or prior mapping is\n`unsupported`; do not infer a diff, broaden the map, accept unrelated artifacts,\nor silently skip unresolved inputs.\n\n## Quality Rules\n\n- Write project-specific information that cannot be inferred from names alone.\n- Keep contents lists limited to stable entry points, not every file.\n- Keep examples aligned with real public entry points.\n- Remove or supersede stale decisions; do not append competing authority.\n- Treat generated documentation as derived output and update its source in the\n  same change.\n- Verify links and any executable examples affected by the change.\n"
+        }
+      },
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.verification",
+          "title": "Verification Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "A behavior, contract, artifact, or standards change requires evidence.",
+          "does_not_apply_when": "The task is read-only and makes no acceptance claim.",
+          "verification": "Acceptance-claim fixtures and objective-level evidence review.",
+          "body": "## Acceptance Is A Set Of Claims\n\nName the observable claims that must be true before implementation. Each claim\nhas three independent dimensions:\n\n1. evidence kind;\n2. required environment; and\n3. execution mode.\n\nAn objective may require several claims. Evidence satisfies only the claim it\nactually proves. Do not compare unrelated kinds as one scalar hierarchy.\n\nFor an ordinary regression, identify the reachable failure, assert the observable\nresult at its owner, and run affected checks. Reuse an existing test or a\nconstruction guarantee when it already proves the claim. A focused regression\ntest does not require a separate admission record or a seven-part cost review.\n\nBefore adding costly, overlapping, brittle, or architectural evidence machinery\n(such as a new validator, verifier, integrity system, snapshot framework, or\ncustom test harness), establish:\n\n- the reachable failure and its material consequence;\n- the claim, proof boundary, and adequate independent or authoritative oracle;\n- what types, construction, static analysis, a deeper Interface, existing\n  evidence, normal failure, or trace-led diagnosis already establish;\n- the mechanism's marginal deciding value after that overlap;\n- its implementation, execution, review, and maintenance cost;\n- why exact byte identity is required when the mechanism compares or hashes\n  bytes; and\n- the condition for retaining, reviewing, replacing, or removing it.\n\nAdmit permanent machinery only when it supplies material deciding value that\nthe less costly alternatives do not. Impossibility by construction may close a\nclaim without dynamic validation. A contained internal defect with an adequate\nordinary failure and diagnostic path may remain an engineering diagnosis\nresponsibility when no accepted claim or risk requires earlier detection or\nrecovery. The possibility that a value or artifact could be wrong is not by\nitself evidence that a permanent mechanism is necessary.\n\nOverlapping evidence is valid defense in depth only when it addresses an\nindependent reachable failure or supplies distinct deciding value worth its\nlifecycle cost. Remove or replace a mechanism when its claim is no longer\nrequired, the failure is no longer reachable, another proof subsumes it, its\noracle is no longer adequate, or its retained cost is no longer proportionate.\nDo not preserve it from sunk cost, convention, existing registration, or the\nabsence of a recent observed failure.\n\n## Evidence Kinds\n\n| Kind | Claim proved |\n| --- | --- |\n| `focused` | One local behavior or invariant in its canonical owner. |\n| `integration` | Multiple components collaborate correctly through their real in-scope interfaces. |\n| `contract` | A producer and consumer agree on a serialized, generated, FFI, IPC, persisted, or public contract. |\n| `system` | A capability works through its real process, service, or deployment boundaries. |\n| `user-workflow` | A user action reaches the externally visible result through the real interaction path. |\n| `release-artifact` | The built, packaged, installed, or published artifact has the named property. |\n\nKinds describe different proof targets. A contract check does not prove a user\nworkflow. A system check does not prove packaging. A release startup smoke does\nnot prove feature behavior unless the smoke procedure actually performs and\nasserts that feature workflow.\n\nStatic analysis, formatting, linting, compilation, and build checks are\nsupporting gates unless the objective is specifically the property they prove.\n\n## Quality Gates And Execution Location\n\nDerive each blocking or advisory gate from a named acceptance claim, affected\nrisk, owned contract, and required environment. State what it proves, its blocking\nauthority, and conditions for changing or removing it. Required gates must pass.\n\nRun a claim where its inputs, environment, authority, and result are available.\nLocal, hook, CI, dedicated-runner, release, and manual execution are locations;\nevidence meaning comes from the observed property. Incremental or staged checks\nprove their selected scope.\n\nClassify contradictory gate/claim authority as `invalid`, missing claim,\nenvironment, scope, or blocking authority as `unavailable`, and a required claim\nbeyond supported execution as `unsupported`. Retain the affected acceptance\nclaim as unsatisfied until adequate evidence is available.\n\n## Environment Qualification\n\nEach claim names one environment requirement:\n\n| Environment | Meaning |\n| --- | --- |\n| `not-applicable` | The claim is deterministic and has no material environment dependency. |\n| `simulated` | A controlled substitute is the intended proof target. |\n| `representative` | The claim requires a supported environment representative of real use. |\n| `required-real` | Named hardware, platform, service, credential, or deployment facts must be present. |\n\nSimulation proves only its modeled contract. It cannot satisfy a\n`required-real` claim.\n\n## Execution Mode\n\nEach claim names one mode:\n\n| Mode | Meaning |\n| --- | --- |\n| `automated` | A repeatable tool or test produces the evidence. |\n| `manual` | A named operator procedure produces recorded evidence. |\n| `either` | Either mode is acceptable for this claim. |\n\nManual execution is not stronger than automation. Use it when human perception,\nphysical interaction, or unavailable automation is part of the acceptance\ncriterion. Record the procedure, environment, result, and operator or evidence\nowner.\n\n## Selecting Claims\n\nSelect the smallest complete claim set that directly proves the objective,\nplus supporting checks for affected risks and contracts.\n\n| Change shape | Typical required claims |\n| --- | --- |\n| Local deterministic bug | `focused` |\n| Multiple in-process modules | `integration` |\n| Serialized, generated, FFI, IPC, or public boundary | `contract`, plus the consuming path when behavior matters |\n| Cross-process or deployed backend capability | `system` |\n| User-visible workflow | `user-workflow`, plus affected contracts |\n| Hardware-dependent user capability | `user-workflow` in `required-real` environment |\n| Shipped application or library | `release-artifact`, plus behavior claims changed by release |\n\nSelect every direct claim the objective needs and keep unrelated claims outside\nthe acceptance set.\n\n## Simplicity Evidence Boundary\n\nVerification can establish the selected behavior, contract, failure, and risk\nclaims of a design. Passing tests, type checks, schemas, generated freshness,\ncoverage, mutation checks, or formal review does not establish that the composed\nartifact is simple. A comparison fixture may supply simplicity evidence only\nwhen it actually examines Interface knowledge, interleaving, representative\nchange Locality, independent evolution, or deletion results. Keep that design\nevidence distinct from reliability evidence.\n\n## Acceptance Paths And Boundaries\n\nFor each non-local claim, name the observable start, externally meaningful\nresult, real in-scope boundaries, authoritative producers and consumers, and\nmaterial environment facts. Select `integration`, `contract`, `system`, or\n`user-workflow` evidence from that path.\n\nA cross-boundary objective usually needs a path claim plus separate claims for\ncontracts whose representation or invariants can regress independently. Verify\ninternal hops separately when they own such a claim. The path evidence proves\nonly the boundaries actually traversed.\n\nResolve an external-interface or environment assumption that could invalidate\nthe design through the smallest adequate real observation before expanding\nimplementation around it. Continue independently useful work when the unavailable\nobservation cannot change its decisions. Keep design-selection evidence distinct\nfrom final acceptance.\n\nFor consumer-visible behavior, exercise the real producer and consumer through\ntheir relevant interface and observe the complete promised result. A preview\nestablishes its preview behavior; full consumption requires observation of full\nconsumption.\n\nStart with the smallest path producing a useful objective-level result and add\nfocused evidence for risky branches and independent contracts. Broaden when the\nobjective, consumers, environment, scale, or failure boundaries require it.\nSelect test sequencing and suite organization from those needs.\n\nClassify contradictory path, authority, or boundary facts as `invalid`; a\ndeclared path outside supported capability as `unsupported`; and missing\nrequired boundaries, consumers, environment, or results as `unavailable`.\nRetain the claim as unsatisfied until its actual boundaries and fidelity are\nobserved.\n\n## Disabled Behavior Claims\n\nDerive claims from [Implementation's selected lifecycle](implementation.md#disabled-and-incomplete-behavior).\n\nFor deliberate removal, prove that affected advertised, registered, configured,\npersisted, and user-visible surfaces cease promising the capability and return\nthe declared typed outcome. For temporary disablement, prove surface-state\nconsistency, boundary outcomes, and accepted tracking, review, and re-enable or\nremoval criteria. For incomplete behavior, prove isolation from production\nconsumers, including isolation of test placeholders.\n\nSelect evidence kinds and environments from the affected surfaces. Documentation,\nconfiguration, tracking, and behavior observations each prove their own property.\nKeep acceptance blocked while a required surface, lifecycle fact, outcome, or\ndirect behavior claim is missing or contradicted.\n\n## Smoke Checks\n\nA smoke check proves only its explicit narrow assertions, such as:\n\n- an artifact installs;\n- a process starts and remains healthy for a bounded observation;\n- a library loads from its package; or\n- one named minimal operation succeeds.\n\nLabel the smoke by evidence kind and asserted behavior. Startup alone is usually\n`release-artifact` evidence and never substitutes for `system` or\n`user-workflow` behavior.\n\n### GUI Smoke Evidence\n\nFor interactive graphical acceptance, follow [GUI Smoke Evidence](verification/gui.md#gui-smoke-evidence).\n\n## Evidence Oracle Boundaries\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Evidence Oracle Boundaries](verification/oracles.md#evidence-oracle-boundaries).\n\n## Negative Fixture Isolation\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Negative Fixture Isolation](verification/oracles.md#negative-fixture-isolation).\n\n## Property And Differential Evidence\n\nWhen a change creates a validator, negative fixture, property test, differential test, or other independent oracle, follow [Property And Differential Evidence](verification/oracles.md#property-and-differential-evidence).\n\n## Test Design\n\nDesign each focused check around one coherent observable claim or invariant.\nUse the assertions needed to prove it. Separate claims when their setup,\ndiagnosis, ownership, or lifecycle differs.\n\nMake setup, action, observation, and cleanup reviewable, including the\nverification client's applicable lifecycle, dependency, and environment\npreconditions. Choose a structure suited to the claim and add explicit phases\nor comments when needed for clarity.\n\nSelect real implementations or controlled substitutes from the boundary being\nproved. A substitute is adequate when its modeled contract is the intended proof\ntarget or the claim explicitly excludes the substituted real boundary.\n\nDerive examples and edge conditions from the actual domain, invariants, prior\ndefects, failure modes, transitions, resource/numeric limits, and consumer contracts.\nMissing applicable boundary evidence is `unavailable`; contradictory test and\ncontract facts are `invalid`.\n\nUse property or generative evidence when the claim owns a meaningful input-domain\nproperty and generation, shrinking, reproducibility, and oracles can preserve it.\nUse examples for named scenarios. Preserve the asserted objective, applicable\ninput domain, and required observation while repairing tests.\n\n## Test Data Authority And Lifecycle\n\nIdentify the contract owning each material test-data field, identity, relation,\ntransition, and validity rule. Construct the data required by the claim and make\nmaterial values/defaults reviewable. Choose construction mechanisms from the data\ncontract, setup cost, reuse, diagnosis, and repository tooling.\n\nOwn fixture identity and lifetime independently of the workflow that created it.\nChoose sharing, construction, synchronization, transactions, namespaces, reset,\nand cleanup from mutation, concurrency, ordering, resource cost, and the proved\nboundary. Shared mutable data requires an explicit owner, scope, initial state,\ntransitions, synchronization, reset/disposal, and failure recovery, with evidence\nthat exercises that lifecycle.\n\nEstablish material preconditions explicitly through their owners. A reused\nfixture carries its defined data contract; establish the receiving check's inputs\nand claim context independently. Preserve stable identity when required and\nallocate distinct identity when parallel or repeated execution could collide.\n\nClassify contradictory data authority, identity, isolation, or lifecycle as\n`invalid`, unsupported required construction/isolation as `unsupported`,\nand missing material ownership, reset, cleanup, synchronization, or environment\nfacts as `unavailable`. Observe the selected lifecycle property before acceptance.\n\n## Async Completion And Failure Evidence\n\nObserve asynchronous work through the terminal state and externally meaningful\nresult selected by its owner and contract. Choose the observation mechanism\nthat proves the applicable completion, failure, cancellation, timeout, or\ncontinued-operation claim, including required child work, cleanup, publication,\nand failure handling.\n\nDerive cases from the owned state machine, error contract, retry/backoff policy,\ncancellation/timeout semantics, partial-result rules, idempotency/compensation,\nand diagnostics. Verify every material applicable outcome at the selected boundary.\n\nAt service or process boundaries, assert the externally owned representation and\neffects: status or typed error, response/event, committed or compensated state,\nretry termination, cancellation propagation, bounded completion, and safe\ndiagnostic context as applicable.\n\nClassify contradictory completion, timing, boundary or error facts as `invalid`,\nrequired observations beyond supported runtime/platform/harness capability as\n`unsupported`, and missing ownership, terminal state, timing authority, boundary\nrepresentation or diagnostics as `unavailable`. Keep local observations scoped\nto their local claims.\n\n## Test Placement And Naming\n\nPlace evidence where its owner, affected implementation, fixtures, environment,\nand discovery tools make it findable and executable. Follow language, framework,\nrunner, and build conventions. Keep related evidence and fixtures discoverable\nwithout duplicating policy or creating hidden test-only APIs. Record placement\ndecisions when repository structure and tooling cannot explain them.\n\nUse stable scenario, observable-result/invariant, and differentiating-condition\nvocabulary in check names, with syntax appropriate to the tool and language.\n\nClassify contradictory ownership/discovery as `invalid`, unsupported required\nplacement as `unsupported`, and missing discovery/tooling/execution facts as\n`unavailable`. Resolve these requirements before relying on evidence discovery.\n\n## Coverage And Durable Evidence Records\n\nUse coverage to identify unexamined paths in instrumented execution. Evaluate\nline, branch, function, condition, mutation, path, or other coverage for a named\nrisk or claim. Select scope, instrumentation, threshold, baseline, and exclusions\nfrom history, generated/unreachable-code authority, risk, tooling accuracy, and\ndecision cost. State how each threshold or exclusion affects acceptance.\n\nRecord enough durable context to understand, reproduce, and review evidence\nwhen the check, code, fixture, command, result, and canonical contract cannot\nsupply it. Keep defect origin, invariant reasoning, fixture authority, environment,\nand result interpretation with their owning evidence or linked artifact.\nBind each result or review finding to the material subject actually observed.\nObtain its identity from the same stable observation, or detect intervening\nchange before attributing the result.\n\nClassify contradictory metric/scope/authority/threshold/exclusion/evidence as\n`invalid`, unsupported instrumentation as `unsupported`, and missing material\nbaseline, tooling, authority or reproduction context as `unavailable`. Accept\nbehavior and boundary claims through their required observations.\n\n## Scheduling And Duration\n\nRisk, cost, and available environments determine where and when evidence runs.\nDo not assign universal durations or require a kind to run only in CI.\n\nProjects may schedule fast supporting checks per edit or commit and expensive\nclaims at pre-push, pull request, dedicated-runner, release, or manual gates.\nScheduling never changes what the evidence proves.\n\n## Supporting Gates And Claim-Directed Diagnosis\n\nClassify supporting checks by the exact property they observe. Treat a check\nas acceptance when that property is the named claim; otherwise retain its role\nas a supporting gate.\n\nWhen evidence fails, preserve the command, environment, output, timing, and\nboundary context required to reproduce the failure. Form a bounded hypothesis\nand select the next observation by authority, information gain, cost,\nreversibility, and proximity to the claim. After correction, rerun affected\nevidence and broaden to claims or contracts the correction could have changed.\n\nSelect diagnostics, traces, state inspection, focused probes, dependency source,\ngenerated artifacts, installed declarations, version-matched official\ndocumentation, history, or external references when their authority and expected\ninformation justify them. Preserve the objective and validation contract.\nAdd production diagnostics when their owned operational claim warrants them.\n\nClassify contradictory claim/evidence/environment/authority as `invalid`,\nobservations beyond supported tools or environment as `unsupported`, and\nmissing reproduction facts, authoritative information, access, or observation\npaths as `unavailable`. State the unresolved decision and continue independent\nwork under the current slice.\n\n## Evidence Under An Existing Failing Baseline\n\nUse evidence that still reaches and distinguishes the changed behavior. When\nan existing failure prevents that observation, repair the obstruction, provide\na focused discriminator, or retain the affected claim as unverified.\n\nIdentify where execution stops and which claims remain observable. Compare the\nactual findings using their owned identities and scope. Unchanged failure counts,\nnames, or source locations alone do not prove that the affected result was tested.\n\nKeep explicit debt dispositions separate from acceptance. Name an owner and\nexecutable procedure for any remaining environment-qualified observation.\n\n## Platform Evidence Coverage\n\nWhen a claim spans supported targets or requires platform-specific evidence, follow [Platform Evidence Coverage](verification/platforms.md#platform-evidence-coverage).\n\n## Unavailable Evidence\n\nWhen a required environment, credential, platform, or operator is unavailable,\nrun independent supporting checks, record the unsatisfied claim and owner, set\nacceptance to `blocked` or `partial`, and keep the plan `Blocked` or\n`Verifying` as applicable. Name the executable procedure and conditions needed\nto obtain the remaining evidence. Accept the objective when all required claims\nare satisfied.\n\n## Reporting\n\nFor each required claim record:\n\n- stable claim identifier and observable criterion;\n- evidence kind, environment, and execution mode;\n- command or procedure;\n- `pending`, `blocked`, or `satisfied`;\n- evidence location and environment facts when material; and\n- unresolved risk.\n\nDetailed logs belong in CI artifacts, reports, or an execution ledger, not the\nactive plan or commit message.\n"
+        }
+      },
+      {
+        "kind": "revise-standard",
+        "standard": {
+          "id": "workflow.development-proportionality",
+          "title": "Development Proportionality Workflow",
+          "role": "workflow",
+          "level": "MUST",
+          "applies_when": "Development work is being planned, or an additional investigation, evidence cycle, review, or re-plan could delay a sufficient implementation or acceptance decision.",
+          "does_not_apply_when": "Work is read-only and makes neither an implementation, acceptance, nor development-sequencing decision.",
+          "verification": "Development-decision fixtures and metadata-route closure.",
+          "body": "Development effort must be proportionate to decision-relevant uncertainty and\nthe consequence it can prevent. Reuse an established mechanism that satisfies\nthe affected requirements. Reconsider it for an evidenced mismatch in behavior,\nownership, safety, compatibility, or cost.\n\nOnce the design satisfies the admitted product contract and applicable standards,\nprefer the smallest reversible production implementation unless a named unresolved\nissue threatens an irreversible or high-consequence outcome. Keep investigation\ncost within the plausible rework or consequence it can prevent. Quantify more\nclosely when the measurement could change the decision and costs less than the\nreversible action.\n\nThis workflow owns whether the next development or evidence-gathering action is\nproportionate. Architecture owns design admission; Verification owns claims and\nevidence value; Planning owns sequencing and plan maintenance. Preserve the\nuser's explicit design choices and admitted contract.\n\nFor implementation work, use Development Decision and Handoff below. For\nacceptance or review work, use Investigation Admission and Boundary And Stopping\nRules to decide whether additional work is warranted, then return to the\napplicable Verification or project-owned acceptance procedure.\n\n## Development Decision\n\nIdentify the current contract, design conformance, exact uncertainty, decision it\ncould change, consequence of error, reversibility, and least costly adequate method.\nChoose one outcome:\n\n### Implement\n\nChoose `implement` when the design satisfies the contract and standards and\nimplementation is reversible without a plausible high-consequence outcome.\nImplementation can itself be the cheapest reliable observation.\n\n### Investigate\n\nChoose `investigate` when a bounded investigation can resolve a missing fact\npreventing a conforming design.\n\nFor an already conforming design, investigate only when the uncertainty could\nchange the current decision, error could cause irreversible/high-consequence\nharm or implementation would plausibly cost more, and the investigation has\na named decision, adequate method, and observable stopping condition.\n\n### Defer And Implement\n\nChoose `defer-and-implement` when a valid concern cannot change the current\nadmitted decision. Preserve a durable follow-up when Planning or issue management\nrequires it.\n\n### Blocked\n\nChoose `blocked` when missing authority, information, or external state prevents\nimplementation from satisfying the contract or standards. State the missing\nrequirement precisely. Keep decision-changing unknown facts `unavailable` and\ncontradictory facts `invalid` under the applicable diagnostic contract.\n\n## Investigation Admission\n\nBefore an investigation delays implementation or acceptance, name its\nuncertainty, affected decision, plausible consequence prevented, cost comparison\nwith proceeding on sufficient implementation or evidence, least costly adequate\nmethod, and stopping condition.\n\nAbsent that basis, continue reversible implementation of an already conforming\ndesign, or proceed through the applicable acceptance procedure using sufficient\nexisting evidence. End the investigation at its stopping condition and return\nto Development Decision for implementation work or the applicable acceptance\nprocedure for acceptance work. Evaluate adjacent uncertainty on its own\ndecision relevance.\n\n## Boundary And Stopping Rules\n\nExpand or block the slice for findings that invalidate its product contract,\ndemonstrate a standards violation in its design, or materially change the\nreversibility or consequence assessment.\n\nKeep review within the admitted decision boundary. After required contract and\nstandards checks pass, require further evidence only for a newly established\ndecision-relevant claim or risk. Apply these stopping rules to acceptance and\nreview work as well as implementation; preserve every required claim and owned\ngate.\n\n## Handoff\n\n- `implement`: proceed through Implementation and selected Verification.\n- `investigate`: answer one bounded question and reconsider the development decision.\n- `defer-and-implement`: proceed with the admitted slice and its required follow-up.\n- `blocked`: identify the missing authority, information, or external-state change.\n"
+        }
+      },
+      {
+        "kind": "revise-policy-unit",
+        "policy": "workflow.commit.per-commit-boundary",
+        "title": "Per-Commit Boundary",
+        "body": "Before every commit:\n\n1. inspect repository status;\n2. confirm only the declared slice write set is staged;\n3. review the staged diff, generated-file effects, and sensitive-file risk;\n4. confirm credentials, secrets, personal configuration, and unintended binary\n   artifacts are absent;\n5. confirm that the selected focused and affected verification remains valid\n   for the staged slice; run or rerun checks when relevant subject, inputs,\n   environment, or gate requirements changed, or when an owned gate requires\n   fresh execution;\n6. update active plan, issue, or ledger state only when current authority,\n   lifecycle, blockers, acceptance, next-slice state, an accepted-slice\n   boundary, a material deviation, or a material verification result changes;\n   do not mirror commit cadence into planning artifacts; and\n7. create one atomic conventional commit that describes the coherent outcome.\n\nPer-commit review concerns the index and the current slice. Do not require a\nfull unpushed-history audit before every atomic commit.\n",
+        "semantics": {
+          "kind": "change",
+          "accepted_semantic_revision": 1,
+          "proposed_semantic_revision": 2,
+          "intent": "Require valid selected evidence at the staged boundary; reuse unchanged adequate evidence while preserving relevant-change reruns and owned fresh-execution gates."
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.documentation",
+        "policy_unit": {
+          "id": "workflow.documentation.select-from-impact",
+          "heading_chain": [
+            "Select Documentation From Impact"
+          ],
+          "semantic_revision": 1,
+          "intent": "Select durable documentation by changed knowledge; defer evidence obligations to their canonical owners.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.verification",
+        "policy_unit": {
+          "id": "workflow.verification.test-design",
+          "heading_chain": [
+            "Test Design"
+          ],
+          "semantic_revision": 1,
+          "intent": "Apply reviewable lifecycle, dependency and environment preconditions to the verification client itself.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.verification",
+        "policy_unit": {
+          "id": "workflow.verification.evidence-context",
+          "heading_chain": [
+            "Coverage And Durable Evidence Records"
+          ],
+          "semantic_revision": 1,
+          "intent": "Bind results and findings to the stable material subject actually observed without imposing universal hashes or receipts.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "workflow.development-proportionality",
+        "policy_unit": {
+          "id": "workflow.development-proportionality.stopping-rules",
+          "heading_chain": [
+            "Boundary And Stopping Rules"
+          ],
+          "semantic_revision": 1,
+          "intent": "Apply marginal-value stopping rules to implementation and acceptance without waiving required claims or owned gates.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "register-policy-unit",
+        "standard": "router",
+        "policy_unit": {
+          "id": "router.workflow-selection",
+          "heading_chain": [
+            "Workflow Selection"
+          ],
+          "semantic_revision": 1,
+          "intent": "Route observable development activities, including acceptance-stage uncertainty reduction, through their canonical workflow owners.",
+          "aliases": [],
+          "predecessors": [],
+          "successors": []
+        }
+      },
+      {
+        "kind": "put-routing-rule",
+        "rule": {
+          "id": "route.workflow.development-proportionality",
+          "target": "workflow.development-proportionality",
+          "when": {
+            "operator": "contains",
+            "fact": "routing.activities",
+            "value": "uncertainty-reduction"
+          },
+          "condition": "An additional investigation, evidence cycle, review, or re-plan could delay a sufficient implementation or acceptance decision"
+        },
+        "rationale": "Make the same sufficient implementation or acceptance decision condition visible in Router and Development Proportionality."
+      },
+      {
+        "kind": "put-routing-fact",
+        "fact": {
+          "id": "routing.activities",
+          "semantic_revision": 3,
+          "type": "enum-set",
+          "nullable": false,
+          "values": [
+            "build",
+            "commit",
+            "documentation",
+            "implementation",
+            "planning",
+            "release",
+            "tooling",
+            "uncertainty-reduction",
+            "verification"
+          ],
+          "aliases": [],
+          "meaning": "The development activities performed by the requested work. The uncertainty-reduction activity includes additional investigation, evidence cycles, review, or re-planning that could delay a sufficient implementation or acceptance decision.",
+          "prompt": "Which development activities are part of the requested work? Include uncertainty-reduction when additional investigation, evidence, review, or re-planning could delay a sufficient implementation or acceptance decision."
+        },
+        "rationale": "Broaden the declared uncertainty-reduction meaning to acceptance-stage work, retaining the same enum values and routing expression."
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.documentation.evidence-ledger-audit",
+          "subject": "workflow.documentation",
+          "origin": "current-justification",
+          "rationale": "The maintainer-supplied 22 October 2026 audit identifies ambiguities in existing evidence and proportionality rules. Make the bounded clarifications recorded in the supporting scope; preserve existing failed outcomes, project gate authority, adequate proof and historical records.",
+          "evidence": [
+            {
+              "evidence_ref": "audit"
+            },
+            {
+              "evidence_ref": "scope"
+            }
+          ],
+          "limits": [
+            "Historical downstream runtime results were not reproduced. The audit does not establish that standards wording caused particular incidents.",
+            "The change adds no universal hash, receipt, fresh test, review cadence, isolation, or ledger requirement. Actual downstream effectiveness remains unmeasured."
+          ],
+          "assumptions": [
+            "Adopting projects retain authority over required claims, environment obligations, release thresholds and fresh-execution gates."
+          ],
+          "alternatives": [
+            "Retain the current wording and rely on Core precedence; this leaves the reported usability ambiguity."
+          ],
+          "reconsideration": [
+            "Reassess if downstream application still confuses evidence validity with repetition or introduces unnecessary machinery."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.documentation"
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.verification.evidence-ledger-audit",
+          "subject": "workflow.verification",
+          "origin": "current-justification",
+          "rationale": "The maintainer-supplied 22 October 2026 audit identifies ambiguities in existing evidence and proportionality rules. Make the bounded clarifications recorded in the supporting scope; preserve existing failed outcomes, project gate authority, adequate proof and historical records.",
+          "evidence": [
+            {
+              "evidence_ref": "audit"
+            },
+            {
+              "evidence_ref": "scope"
+            }
+          ],
+          "limits": [
+            "Historical downstream runtime results were not reproduced. The audit does not establish that standards wording caused particular incidents.",
+            "The change adds no universal hash, receipt, fresh test, review cadence, isolation, or ledger requirement. Actual downstream effectiveness remains unmeasured."
+          ],
+          "assumptions": [
+            "Adopting projects retain authority over required claims, environment obligations, release thresholds and fresh-execution gates."
+          ],
+          "alternatives": [
+            "Retain the current wording and rely on Core precedence; this leaves the reported usability ambiguity."
+          ],
+          "reconsideration": [
+            "Reassess if downstream application still confuses evidence validity with repetition or introduces unnecessary machinery."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.verification"
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.development-proportionality.evidence-ledger-audit",
+          "subject": "workflow.development-proportionality",
+          "origin": "current-justification",
+          "rationale": "The maintainer-supplied 22 October 2026 audit identifies ambiguities in existing evidence and proportionality rules. Make the bounded clarifications recorded in the supporting scope; preserve existing failed outcomes, project gate authority, adequate proof and historical records.",
+          "evidence": [
+            {
+              "evidence_ref": "audit"
+            },
+            {
+              "evidence_ref": "scope"
+            }
+          ],
+          "limits": [
+            "Historical downstream runtime results were not reproduced. The audit does not establish that standards wording caused particular incidents.",
+            "The change adds no universal hash, receipt, fresh test, review cadence, isolation, or ledger requirement. Actual downstream effectiveness remains unmeasured."
+          ],
+          "assumptions": [
+            "Adopting projects retain authority over required claims, environment obligations, release thresholds and fresh-execution gates."
+          ],
+          "alternatives": [
+            "Retain the current wording and rely on Core precedence; this leaves the reported usability ambiguity."
+          ],
+          "reconsideration": [
+            "Reassess if downstream application still confuses evidence validity with repetition or introduces unnecessary machinery."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.development-proportionality"
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.workflow.commit.evidence-ledger-audit",
+          "subject": "workflow.commit",
+          "origin": "current-justification",
+          "rationale": "The maintainer-supplied 22 October 2026 audit identifies ambiguities in existing evidence and proportionality rules. Make the bounded clarifications recorded in the supporting scope; preserve existing failed outcomes, project gate authority, adequate proof and historical records.",
+          "evidence": [
+            {
+              "evidence_ref": "audit"
+            },
+            {
+              "evidence_ref": "scope"
+            }
+          ],
+          "limits": [
+            "Historical downstream runtime results were not reproduced. The audit does not establish that standards wording caused particular incidents.",
+            "The change adds no universal hash, receipt, fresh test, review cadence, isolation, or ledger requirement. Actual downstream effectiveness remains unmeasured."
+          ],
+          "assumptions": [
+            "Adopting projects retain authority over required claims, environment obligations, release thresholds and fresh-execution gates."
+          ],
+          "alternatives": [
+            "Retain the current wording and rely on Core precedence; this leaves the reported usability ambiguity."
+          ],
+          "reconsideration": [
+            "Reassess if downstream application still confuses evidence validity with repetition or introduces unnecessary machinery."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "workflow.commit"
+      },
+      {
+        "kind": "put-provenance",
+        "record": {
+          "id": "provenance.router.evidence-ledger-audit",
+          "subject": "router",
+          "origin": "current-justification",
+          "rationale": "The maintainer-supplied 22 October 2026 audit identifies ambiguities in existing evidence and proportionality rules. Make the bounded clarifications recorded in the supporting scope; preserve existing failed outcomes, project gate authority, adequate proof and historical records.",
+          "evidence": [
+            {
+              "evidence_ref": "audit"
+            },
+            {
+              "evidence_ref": "scope"
+            }
+          ],
+          "limits": [
+            "Historical downstream runtime results were not reproduced. The audit does not establish that standards wording caused particular incidents.",
+            "The change adds no universal hash, receipt, fresh test, review cadence, isolation, or ledger requirement. Actual downstream effectiveness remains unmeasured."
+          ],
+          "assumptions": [
+            "Adopting projects retain authority over required claims, environment obligations, release thresholds and fresh-execution gates."
+          ],
+          "alternatives": [
+            "Retain the current wording and rely on Core precedence; this leaves the reported usability ambiguity."
+          ],
+          "reconsideration": [
+            "Reassess if downstream application still confuses evidence validity with repetition or introduces unnecessary machinery."
+          ],
+          "supersedes": []
+        }
+      },
+      {
+        "kind": "approve-application-content",
+        "target": "router"
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.verification.evidence-context",
+          "consumer": "workflow.commit",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "Per-Commit Boundary"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Staged-slice evidence validity relies on attributing evidence to the material subject actually inspected."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.verification.test-design",
+          "consumer": "workflow.tooling",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "whole-artifact"
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Verification automation, CI scheduling and retained tool evidence must respect the verification client's actual lifecycle, dependency and environment contracts."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "workflow.verification.test-design",
+          "consumer": "workflow.verification.gui",
+          "relation": "normative-consumer",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "structured",
+            "heading_path": [
+              "GUI Smoke Evidence"
+            ]
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "GUI smoke procedures are verification clients with explicit startup, environment and bounded process-lifecycle requirements."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "router.workflow-selection",
+          "consumer": "consumer.analysis.routing-tests",
+          "relation": "fixture-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "whole-artifact"
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Routing fixtures directly exercise the uncertainty-reduction activity rule and workflow selection."
+        }
+      },
+      {
+        "kind": "put-policy-relationship",
+        "relationship": {
+          "source_policy": "router.workflow-selection",
+          "consumer": "consumer.engine.navigation-tests",
+          "relation": "fixture-projection",
+          "applicability": {
+            "operator": "always"
+          },
+          "source_scope": null,
+          "consumer_scope": {
+            "kind": "whole-artifact"
+          },
+          "evidence_owner": "review:consumer",
+          "rationale": "Navigation fixtures directly exercise Development Proportionality selection and required ordering."
+        }
+      }
+    ]
+  },
+  "evidence": {
+    "audit": {
+      "id": "docs/proposals/evidence-ledger-audit/source-audit.pdf",
+      "digest": "sha256:c701c6c6d38767d5a765521068fa57fb395f2c3bd44ebabf4da1ef5fc2c3a04d",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    },
+    "scope": {
+      "id": "docs/proposals/evidence-ledger-audit/README.md",
+      "digest": "sha256:360f1c9ddb4631c98695f5368b1e0c2a029a5093ed139c40b5da78ec1c7b93a0",
+      "provider_contract": "repository-content",
+      "provider_contract_version": "1"
+    }
+  }
+}
