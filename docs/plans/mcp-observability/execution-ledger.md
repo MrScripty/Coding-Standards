@@ -68,3 +68,15 @@ No production, validator or normative edits; both call-count assertions unchange
 Final evidence retains the historical I1 failure and resolves prior I2 transport
 confusion. Reviewed bounded staged scope before committing for approved PR #4
 branch push; publication identity is the Git ref, merge remains parent-owned.
+
+## 2026-10-22 — sole recorder and operator activation
+
+The user selected this sanitized implementation as the sole supported recorder,
+authorized migration of the existing Codex launch configuration and required
+preservation of the earlier raw database. The earlier implementation was retired
+after 49 targeted checks passed. The live configuration was migrated and reloaded
+through the running daemon; all 28 observed server launches used the sanitized
+options, and new sanitized observations were confirmed. The original database
+and private recovery backups remain separate historical evidence. The
+[retirement and activation record](reports/recorder-retirement.md) owns the exact
+scope and validation; the original source qualification above is unchanged.

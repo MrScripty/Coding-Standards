@@ -6,13 +6,11 @@ operations, or change the installed agent catalog. The qualification observer re
 **observer v3**, with its existing raw-event acquisition, assessment and exact-source
 replay. The production recorder does not import the harness or rewrite verdicts.
 
-This document describes the sanitized recorder selected by `--observe-database`
-and `--observe-deployment`. The independent `--observation-db` option in the
-[Engine README](README.md#private-interaction-observations) captures raw invocation
-values under its own operator contract. Enabling sanitized observations does not
-enable raw capture. Each recorder needs a dedicated database; their schemas are
-not interchangeable. The privacy and retention rules below describe the
-sanitized recorder.
+The sanitized recorder selected by `--observe-database` and
+`--observe-deployment` is the sole supported recording mode. The earlier raw
+recorder and its `--observation-db` option are retired. Historical raw databases
+retain their original schema and remain separate evidence; configure a new
+dedicated database for sanitized observations.
 
 ## Configuration and authority
 

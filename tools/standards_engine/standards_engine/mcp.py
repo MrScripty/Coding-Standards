@@ -21,7 +21,6 @@ from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
 from .mcp_catalog import OutputSchemaDelivery, tool_catalog
-from .interaction_observation import InertInteractionRecorder, SQLiteInteractionRecorder
 from .interaction_observer import (
     DEFAULT_MAX_AGE_SECONDS, DEFAULT_MAX_BYTES, DEFAULT_MAX_CALLS,
     InteractionRecorder, RecorderConfig, serialized_bytes,
@@ -41,7 +40,6 @@ class ProtocolError(Exception):
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
                  output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
-                 observation_db: Path | None = None,
                  observation: RecorderConfig | None = None) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
@@ -64,9 +62,6 @@ class MCPServer:
         self._closed = False
         self.initialized = False
         self.ready = False
-        self._recorder = (InertInteractionRecorder() if observation_db is None
-                          else SQLiteInteractionRecorder(observation_db))
-        self._recorder.begin_session(self._runtime_identity.metadata())
 
     @property
     def purpose(self) -> Purpose:
@@ -74,7 +69,6 @@ class MCPServer:
 
     def close(self) -> None:
         """Close process-owned capture and cache; each tool call closes its domain store."""
-        self._recorder.close()
         if self._observer is not None:
             self._observer.close()
         self._compiled_cache.close()
@@ -202,16 +196,6 @@ class MCPServer:
                     "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()}}
         if method != "tools/call":
             raise ProtocolError(-32601, "Method not found.")
-        interaction = self._recorder.record_request(params)
-        result = self._call_tool(params)
-        value = result.get("structuredContent")
-        if isinstance(value, dict):
-            metadata = _response_metadata(value)
-            if metadata:
-                self._recorder.record_response_metadata(interaction, metadata)
-        return result
-
-    def _call_tool(self, params: dict) -> dict:
         name = params.get("name")
         if not isinstance(name, str) or name not in self.names:
             raise ProtocolError(-32602, "Tool unavailable in this running catalog; inspect runtime_info and refresh tools or restart/reconnect after an upgrade.",
@@ -270,12 +254,6 @@ class MCPServer:
         }
 
 
-def _response_metadata(value: dict) -> dict:
-    """Interface-owned selection: identifiers only, never result bodies."""
-    return {key: value[key] for key in ("kind", "code", "outcome", "status")
-            if key in value and isinstance(value[key], str)}
-
-
 def serve(server: MCPServer, source: TextIO, destination: TextIO) -> None:
     def deliver(response: dict) -> int | None:
         serialized = json.dumps(response) + "\n"
@@ -318,10 +296,6 @@ def main() -> int:
         default=OutputSchemaDelivery.EAGER.value,
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
     )
-    parser.add_argument(
-        "--observation-db", type=Path,
-        help="Record private local interaction evidence in this SQLite file (disabled when omitted).",
-    )
     parser.add_argument('--observe-database', type=Path,
                         help='Opt in to operator-only local SQLite observations in a trusted directory.')
     parser.add_argument('--observe-deployment', help='Required nonsensitive deployment label when recording.')
@@ -341,8 +315,7 @@ def main() -> int:
             parser.error(str(error))
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
-                  output_schemas=arguments.output_schemas,
-                  observation_db=arguments.observation_db, observation=observation),
+                  output_schemas=arguments.output_schemas, observation=observation),
         sys.stdin,
         sys.stdout,
     )

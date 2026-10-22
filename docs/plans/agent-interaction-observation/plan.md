@@ -1,10 +1,10 @@
 # Plan: Agent Interaction Observation
 
-**Plan status:** `Accepted`
+**Plan status:** `Superseded`
 
-**Current phase:** O1 — private agent-interaction capture
+**Current phase:** Raw capture retired by the user's 2026-10-22 decision; [sanitized MCP observability](../mcp-observability/plan.md) is the supported implementation. Historical O1 acceptance is retained below.
 
-**Next slice:** O1
+**Next slice:** none for this superseded implementation.
 
 **Acceptance status:** `accepted`
 
@@ -745,4 +745,4 @@ Analytics, interface-quality conclusions, and future interface redesign are sepa
 
 - Acceptance status: `accepted`
 - Deferred follow-ups: MCP proxy, native-harness adapter, analytics/query tooling, automatic retention
-- Final status: `Accepted`
+- Final status: historical O1 `Accepted`; current implementation `Superseded` by sanitized MCP observability on 2026-10-22.

@@ -159,8 +159,9 @@ the historical temporary candidate checkout is no longer present.
 
 ## Agent interaction observation
 
-[Agent interaction observation](agent-interaction-observation/plan.md) is accepted
-for its recorded isolated source. Its implementation and qualification evidence
-are retained with the Interface 47 checkout changes. The
+[Agent interaction observation](agent-interaction-observation/plan.md) retains
+historical acceptance for its isolated raw-capture source and is now Superseded.
+[Sanitized MCP observability](mcp-observability/plan.md) is the sole supported
+recorder after the user's 2026-10-22 migration decision. The
 [checkout reconciliation record](authoring-publication-evidence/reports/checkout-reconciliation.md)
-separates current integration checks from historical acceptance.
+separates historical qualification, synchronization and recorder retirement.

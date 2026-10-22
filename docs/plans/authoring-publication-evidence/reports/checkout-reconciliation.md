@@ -97,3 +97,12 @@ assertion against the actual captured runtime identity. The combined check ran
 Both recorder suites, existing MCP behavior, runtime identity, schema handling,
 snapshot handoff and the incoming Analysis fixture were covered. No standards
 wording changed during synchronization.
+
+## Subsequent recorder selection
+
+The user subsequently chose the newer sanitized implementation only, preservation
+of the historical raw database and migration of the existing configuration.
+The [retirement and activation record](../../mcp-observability/reports/recorder-retirement.md)
+supersedes the temporary dual-recorder compatibility decision above. The raw
+implementation and its tests were removed; all 49 remaining targeted checks
+passed, and the live sanitized installation was verified after reload.

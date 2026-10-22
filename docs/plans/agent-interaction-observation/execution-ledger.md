@@ -54,3 +54,13 @@ while 51 older checkout differences were restored to it. The initial complete
 repository check now passes 73 suites and 121 checks. Historical O-I1 results and
 the isolated campaign remain unchanged. Current combined Interface 47 validation
 is recorded in the [checkout reconciliation report](../authoring-publication-evidence/reports/checkout-reconciliation.md).
+
+## 2026-10-22 — raw recorder superseded
+
+After GitHub synchronization, the user explicitly selected the newer sanitized
+MCP recorder as the sole implementation, preservation of the old database and
+migration of the existing configuration. The raw source and its tests were
+retired. This plan's original acceptance and frozen qualification remain
+historical. The [migration and activation record](../mcp-observability/reports/recorder-retirement.md)
+documents the new configuration, preserved database, refreshed connections and
+49 passing targeted tests. The current plan status is Superseded.

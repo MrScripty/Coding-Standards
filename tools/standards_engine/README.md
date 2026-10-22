@@ -30,12 +30,10 @@ See [checkout reconciliation](PURPOSE-SEPARATION.md#publication-checkout-reconci
 
 The versioned sections below retain implementation history.
 
-Sanitized operator measurements use `--observe-database` with
-`--observe-deployment`; see [MCP observability](MCP-OBSERVABILITY.md). Private raw
-invocation capture uses the separate `--observation-db` option documented below.
-Both are disabled by default and preserve the existing qualification observer v3
-and agent-visible interface. Each recorder requires its own database file;
-their schemas and retained data differ.
+Optional sanitized operator measurements use `--observe-database` with
+`--observe-deployment`; see [MCP observability](MCP-OBSERVABILITY.md). Recording is
+disabled by default and preserves the existing qualification observer v3 and
+agent-visible interface. This is the sole supported MCP recorder.
 
 ## Purpose separation (interface 31)
 
@@ -409,35 +407,13 @@ See [the public contract](PURPOSE-SEPARATION.md#focused-routing-fact-assertions-
 [host qualification](tests/ROUTING-FACT-QUALIFICATION.md). Reload the server/catalog
 after installation without changing launch arguments or deleting stores.
 
-## Private interaction observations
+## Recorder migration
 
-MCP launch optionally accepts `--observation-db /existing/private/directory/observations.sqlite3`.
-Omitting the option disables observation: no observation database, serialization
-or retained recorder state is created. The parent directory must already exist.
-Use a dedicated file separate from every Engine domain store. The operator owns
-its filesystem permissions and retention; request values can contain repository
-or user material. This feature neither exports data nor performs cleanup.
-
-Each process records one session with the existing RuntimeIdentity interface
-version, catalog digest, schema digest and purpose. Ready-session `tools/call`
-parameters are committed exactly as supplied, before tool-name/argument checks;
-JSON-RPC envelopes and lifecycle traffic are excluded. Sequence numbers order
-invocations within a session. Only existing string identifiers `kind`, `code`,
-`outcome` and `status` from structured results may be attached as response
-metadata. Bodies, standards text, messages, details and nested result data are
-excluded; missing metadata remains SQL NULL and implies no classification.
-
-The local SQLite store has `PRAGMA user_version = 1`, with `sessions` and
-`interactions` as defined by the
-[observation plan](../../docs/plans/agent-interaction-observation/plan.md).
-Cold reopening appends a new session and preserves previous rows. Unknown
-versions or contradictory schemas are rejected without migration or recreation.
-On initialization, serialization or write failure, capture becomes inert for
-that process and emits at most one bounded diagnostic to private stderr.
-Diagnostic-channel failure is also contained. MCP catalogs, results and errors
-remain unchanged. Observation is evidence only and has no domain authority.
-
-To stop future recording, omit `--observation-db` on the next launch. Historical
-file deletion remains an operator action. No installed MCP registration is
-changed by this source feature; use an explicitly configured disposable launch
-for qualification before selecting a real local destination.
+The earlier raw invocation recorder was retired on 2026-10-22. Its
+`--observation-db` launch option is no longer accepted. Historical raw databases
+remain operator-owned evidence and are not converted, reused or deleted.
+Select a new dedicated database with `--observe-database` and a nonsensitive
+`--observe-deployment` label. Follow the [sanitized recorder's operating contract](MCP-OBSERVABILITY.md)
+for permissions, retained data, retention and reports. The
+[original observation plan](../../docs/plans/agent-interaction-observation/plan.md)
+retains its historical acceptance and qualification records.
