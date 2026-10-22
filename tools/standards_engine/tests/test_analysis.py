@@ -2189,6 +2189,11 @@ finally:
         self.assertIsInstance(self.engine.resolve(submission), (PendingResult, CompleteResult))
 
     def test_proposal_analysis_uses_one_projection_and_one_verified_base(self) -> None:
+        accepted = self.engine._compiled_snapshot(
+            self.engine._snapshot_id(self.snapshot)
+        )
+        policy = accepted.corpus.resolve_policy_unit(POLICY)
+        self.assertIsNotNone(policy)
         capture = self.engine._snapshots.load_content(self.engine._snapshot_id(self.snapshot))
         planning = next(item.content.decode("utf-8") for item in capture.files
                         if str(item.path) == "workflows/planning.md")
@@ -2196,7 +2201,8 @@ finally:
         created = self.engine.create_proposal(CreateProposalCall.from_value({
             "kind": "create-proposal", "base_snapshot": self.snapshot.as_contract(),
             "change_set": _policy_change_set(policy=POLICY, title=WRITTEN_PLAN_TITLE,
-                body=body, accepted_revision=1, proposed_revision=2,
+                body=body, accepted_revision=policy.semantic_revision,
+                proposed_revision=policy.semantic_revision + 1,
                 purpose="Exercise exact compiled proposal inputs."),
         }))
         self.assertIsInstance(created, CreateProposalResult)

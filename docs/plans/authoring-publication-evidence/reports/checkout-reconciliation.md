@@ -79,3 +79,21 @@ After staging the complete retained file set, both the Engine's generated-input
 refresh and a separate read-only repository verification passed all 73 suites
 and 121 checks. The [validation record](checkout-validation.json) retains both
 structured results.
+
+## GitHub synchronization
+
+The subsequent synchronization merged remote `73bd032b` into cleanup head
+`8c5a4ad4`, preserving both histories. GitHub's October 14–15 sanitized MCP
+observability implementation and README changes were retained alongside the
+earlier raw invocation recorder required by the current launch configuration.
+Both recording paths remain explicitly selected, with distinct database schemas
+and documented data policies. This merge does not migrate an installation.
+
+The MCP composition conflict was resolved by preserving both optional inputs
+and lifecycles; the suite-input conflict was regenerated through the Engine.
+The remote observer test's fixed interface-46 expectation was replaced with an
+assertion against the actual captured runtime identity. The combined check ran
+63 tests: 62 passed initially, and the corrected identity test passed on rerun.
+Both recorder suites, existing MCP behavior, runtime identity, schema handling,
+snapshot handoff and the incoming Analysis fixture were covered. No standards
+wording changed during synchronization.

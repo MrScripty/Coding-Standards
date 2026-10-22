@@ -30,6 +30,13 @@ See [checkout reconciliation](PURPOSE-SEPARATION.md#publication-checkout-reconci
 
 The versioned sections below retain implementation history.
 
+Sanitized operator measurements use `--observe-database` with
+`--observe-deployment`; see [MCP observability](MCP-OBSERVABILITY.md). Private raw
+invocation capture uses the separate `--observation-db` option documented below.
+Both are disabled by default and preserve the existing qualification observer v3
+and agent-visible interface. Each recorder requires its own database file;
+their schemas and retained data differ.
+
 ## Purpose separation (interface 31)
 
 Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`
