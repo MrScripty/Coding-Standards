@@ -3866,6 +3866,26 @@
       "minLength": 1,
       "type": "string"
     },
+    "EngineCertificateRetirement": {
+      "additionalProperties": false,
+      "properties": {
+        "rationale": {
+          "$ref": "#/$defs/NonEmptyString"
+        },
+        "requirement_id": {
+          "$ref": "#/$defs/Digest"
+        },
+        "subject": {
+          "$ref": "#/$defs/CanonicalId"
+        }
+      },
+      "required": [
+        "subject",
+        "requirement_id",
+        "rationale"
+      ],
+      "type": "object"
+    },
     "EqualsExpression": {
       "additionalProperties": false,
       "properties": {
@@ -3984,6 +4004,14 @@
             "$ref": "#/$defs/EvidenceCheckRetirement"
           },
           "type": "array"
+        },
+        "retire_engine_certificates": {
+          "description": "Explicitly retire exact registered Engine-issued certificates by subject and requirement; preserve normative policy and consumer registrations.",
+          "items": {
+            "$ref": "#/$defs/EngineCertificateRetirement"
+          },
+          "type": "array",
+          "uniqueItems": true
         },
         "retire_inputs": {
           "items": {
@@ -9938,7 +9966,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 47,
+  "interface_schema_version": 48,
   "operations": [
     {
       "capability": "standards.snapshot.create",

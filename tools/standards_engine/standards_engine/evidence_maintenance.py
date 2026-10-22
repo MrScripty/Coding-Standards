@@ -268,8 +268,51 @@ def revise_evidence(
         if _dump(doc) != before:
             result[path] = _dump(doc)
 
+    retirements = plan.get("retire_engine_certificates", [])
+    if retirements:
+        result = retire_engine_certificates(result, retirements)
     if plan["prune_stale_certificates"]:
         result = prune_certificates(result, current_requirements)
+    return result
+
+
+def retire_engine_certificates(
+    files: Mapping[str, bytes], retirements: list[Mapping]
+) -> dict[str, bytes]:
+    """Retire exact registered receipts without changing their policy subjects."""
+    selected = {
+        (item["subject"], item["requirement_id"])
+        for item in retirements
+    }
+    if len(selected) != len(retirements):
+        raise _invalid(
+            "EVIDENCE.DUPLICATE_CERTIFICATE_RETIREMENT",
+            "Each certificate identity may be selected only once.",
+        )
+    result = dict(files)
+    registry = _load(files, ATTESTATIONS)
+    matched = set()
+    retained = []
+    for path in registry.get("engine_sources", []):
+        receipt = json.loads(files[path])
+        identity = (receipt["subject"], receipt["claim"]["requirement_id"])
+        if identity not in selected:
+            retained.append(path)
+            continue
+        if identity in matched:
+            raise _invalid(
+                "EVIDENCE.AMBIGUOUS_CERTIFICATE_RETIREMENT",
+                "The selected certificate identity resolves more than once.",
+            )
+        matched.add(identity)
+        result.pop(path)
+    if matched != selected:
+        raise _invalid(
+            "EVIDENCE.UNKNOWN_CERTIFICATE_RETIREMENT",
+            "Every selected subject and requirement must identify a registered Engine receipt.",
+        )
+    registry["engine_sources"] = retained
+    result[ATTESTATIONS] = _dump(registry)
     return result
 
 

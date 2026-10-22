@@ -1,5 +1,27 @@
 # Purpose-separated Engine contract
 
+## Explicit certificate retirement (interface 48)
+
+Authoring `maintain_evidence` accepts optional
+`plan.retire_engine_certificates` selections with `subject`, `requirement_id`
+and a nonempty `rationale`. Each exact pair must identify one registered
+Engine-issued receipt. Unknown, duplicate or ambiguous selections reject the
+whole maintenance operation. The existing exact-revision, evidence,
+authorization, preview, candidate verification and guarded-write requirements
+continue to apply.
+
+Retirement removes the selected receipts from the working tree and source
+registry. Git history preserves the original records. It changes no normative
+policy, registered policy subject, semantic consumer relationship, application
+exposure or unselected receipt, and issues no replacement certificate. This
+supports explicitly retiring a proof before changing a file that proof cites
+even when the policy requirement itself has not changed. Evidence hashes remain
+strict; no inferred retirement or digest substitution is introduced.
+
+Refresh generated contracts and reconnect after deployment. Existing requests
+without retirement selections, workflow/store identities and purpose boundaries
+retain their contracts.
+
 This is implementation and deployment documentation. It describes the Engine
 mechanism; it does not classify the real standards as positively written or
 ready for application use.

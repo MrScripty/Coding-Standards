@@ -108,7 +108,7 @@ DESCRIPTIONS = {
     "apply_proposal": "Verify and publish the exact accepted readiness to the local canonical ref. Requires user authorization for application. On recovery-required use recover_application with the same readiness; never retry apply. Does not push a remote.",
     "recover_application": "Observe the original admitted application or explicitly authorize complete-publication after revalidation. Preserve the selected readiness and application identity.",
     "verify_repository": "Verify the working tree. Refreshing generated verification inputs is a mutation; inspect verification.passed.",
-    "maintain_evidence": "Maintain the accepted repository evidence catalog at an exact revision. For draft-only consumers use register-consumer in propose/revise with separate policy relationships. This operation does not edit a proposal or certify coverage.",
+    "maintain_evidence": "Maintain the accepted repository evidence catalog at an exact revision, including explicit retirement of Engine certificates by exact subject and requirement. For draft-only consumers use register-consumer in propose/revise with separate policy relationships. This operation does not edit a proposal or certify coverage.",
 }
 
 

@@ -1,6 +1,6 @@
 # Standards Engine
 
-The current interface is **47**. Input contracts are native-only; `--schema-mode`
+The current interface is **48**. Input contracts are native-only; `--schema-mode`
 is no longer accepted. Exact input/output contracts remain available through
 `describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
 smaller catalog; eager output delivery remains the default.
@@ -29,6 +29,14 @@ coordinated source and generated contracts; retained stores need no migration.
 See [checkout reconciliation](PURPOSE-SEPARATION.md#publication-checkout-reconciliation-interface-47).
 
 The versioned sections below retain implementation history.
+
+Interface 48 adds explicit certificate retirement to `maintain_evidence` through
+`plan.retire_engine_certificates`. Each selection names an exact subject,
+requirement digest and rationale. Preview the maintenance before applying it.
+This removes only the selected Engine-issued receipts and their registrations;
+normative text, policy subjects, consumer relationships and other certificates
+remain intact. It supplies no replacement coverage claim. Restart/reconnect
+after installing the coordinated source and generated contracts; preserve stores.
 
 Optional sanitized operator measurements use `--observe-database` with
 `--observe-deployment`; see [MCP observability](MCP-OBSERVABILITY.md). Recording is

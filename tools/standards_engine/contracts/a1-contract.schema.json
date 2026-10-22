@@ -5937,6 +5937,16 @@
         }
       }
     },
+    "EngineCertificateRetirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "requirement_id", "rationale"],
+      "properties": {
+        "subject": {"$ref": "#/$defs/CanonicalId"},
+        "requirement_id": {"$ref": "#/$defs/Digest"},
+        "rationale": {"$ref": "#/$defs/NonEmptyString"}
+      }
+    },
     "EvidenceMaintenancePlan": {
       "type": "object",
       "additionalProperties": false,
@@ -5952,6 +5962,12 @@
         "consumer_registrations"
       ],
       "properties": {
+        "retire_engine_certificates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/EngineCertificateRetirement"},
+          "uniqueItems": true,
+          "description": "Explicitly retire exact registered Engine-issued certificates by subject and requirement; preserve normative policy and consumer registrations."
+        },
         "prune_stale_certificates": {
           "type": "boolean"
         },
