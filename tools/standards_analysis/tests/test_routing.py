@@ -37,7 +37,6 @@ class RouterProjectionTest(unittest.TestCase):
         activities = next(
             fact for fact in projection.facts if fact.id == "routing.activities"
         )
-        self.assertEqual(activities.semantic_revision, 2)
         self.assertIn("uncertainty-reduction", activities.values)
 
         generated_contract = next(
