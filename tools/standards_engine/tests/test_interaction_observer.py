@@ -166,6 +166,19 @@ class ObserverTests(unittest.TestCase):
         projected = shape.project({'items': [{'selector': 'x' * 1_000_000}] * 100_000})
         self.assertLess(len(json.dumps(projected)), 8192)
 
+    def test_unrecognized_argument_names_are_recorded_without_values(self):
+        server = self.server()
+        initialize(server)
+        # The misreading seen in real use: `tool` sent where `operation` is expected.
+        server.dispatch(request('tools/call', {'name': 'describe_input', 'arguments': {
+            'tool': 'SENTINEL_VALUE', 'not a name!': 'SENTINEL_VALUE',
+            'SENTINEL_KEY': 1, 'x' * 25: 1}}))
+        row = self.rows("SELECT arguments FROM interactions WHERE operation='describe_input'")[0]
+        self.assertEqual(json.loads(row['arguments']), {'unrecognized': ['tool']})
+        self.assertNotIn(b'SENTINEL_VALUE', self.stored_bytes())
+        for dropped in (b'not a name', b'SENTINEL_KEY', b'x' * 25):
+            self.assertNotIn(dropped, self.stored_bytes())
+
     def test_navigation_values_results_sizes_and_task_identity_are_recorded(self):
         server = self.server()
         initialize(server)
@@ -201,7 +214,9 @@ class ObserverTests(unittest.TestCase):
         self.assertEqual(recorded['route']['outcome'], 'needs-facts')
         reused = values['read']['snapshot']
         self.assertRegex(reused, '^[0-9a-f]{12}$')
-        self.assertEqual(values['read'], {'snapshot': reused, 'target': 'core', 'detail': 'full'})
+        # Names the tool does not declare are kept as names; their values are not.
+        self.assertEqual(values['read'], {'snapshot': reused, 'target': 'core', 'detail': 'full',
+                                          'unrecognized': ['handle', 'request', 'facts']})
         self.assertEqual(values['read_many'], {'snapshot': reused, 'items': [
             {'target': 'core'}, {'target': 'router', 'detail': 'full', 'include_routing': True}]})
         self.assertEqual(results['read_many'], {'kind': 'read-many-result', 'targets': ['core', 'router']})
