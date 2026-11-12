@@ -817,7 +817,7 @@ usable after process replacement. Restart/reconnect and preserve retained state.
 There is no remote publication, auto-review, retry or migration in this increment.
 
 The focused suites and `agent_efficiency_trace.py` qualify schema semantics,
-selected text, explicit evidence decisions, cold stdio and serialized byte/call
+selected text, explicit evidence decisions, real stdio and serialized byte/call
 counts. These are not claims about model tokens, billed usage or client rendering.
 The plan records supported-runtime, configured-client and independent-review gates
 separately from local structural and unit evidence.

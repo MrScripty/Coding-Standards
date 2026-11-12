@@ -6,8 +6,10 @@ from copy import deepcopy
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch
 
@@ -21,6 +23,22 @@ from tools.standards_engine.standards_engine.tools import _contracts
 
 
 ROOT = Path(__file__).resolve().parents[3]
+
+
+def installation_root(case):
+    """A temporary root holding only the installed interface.
+
+    A tool call opens its store under the served root even when the call is then
+    rejected; serving this root keeps that store out of the repository under test.
+    """
+    temporary = tempfile.TemporaryDirectory(prefix="engine-installation-")
+    case.addCleanup(temporary.cleanup)
+    for name in ("a1-interface.toml", "a1-contract.schema.json", "generated/agent-tools.json"):
+        relative = Path("tools/standards_engine/contracts") / name
+        target = Path(temporary.name) / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    return Path(temporary.name)
 
 
 def request(method, params=None, identifier=1):
@@ -386,6 +404,7 @@ class MCPTest(unittest.TestCase):
             {"jsonrpc": "2.0", "method": "notifications/initialized"},
             request("tools/list", identifier=2),
         ]
+        # Separate process: the module starts as a client starts it, from an unrelated directory.
         result = subprocess.run(
             [
                 sys.executable,

@@ -3,19 +3,17 @@ from __future__ import annotations
 
 from copy import deepcopy
 import json
-import os
 from pathlib import Path
 import subprocess
-import sys
 import tempfile
 import unittest
 
 from tools.standards_engine.standards_engine import AgentToolFacade, SnapshotHandle
+from tools.standards_engine.tests.stdio_server import StdioServer
 from tools.standards_engine.tests.test_agent_workflow import evidence
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree, _section_body
 from tools.standards_engine.tests.test_request_evidence import shared
 
-ROOT = Path(__file__).resolve().parents[3]
 POLICY = 'workflow.planning.written-plan-applicability'
 
 
@@ -101,22 +99,12 @@ class NumericBoundaryTest(unittest.TestCase):
         self.assertEqual(self.main(), self.main_before)
 
     def cold_call(self, operation, arguments, rejected=False):
-        messages = [
-            {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
-                'protocolVersion': '2025-11-25', 'capabilities': {},
-                'clientInfo': {'name': 'boundary-regression', 'version': '1'}}},
-            {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
-            {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/call',
-                'params': {'name': operation, 'arguments': arguments}},
-        ]
-        result = subprocess.run([sys.executable, '-P', '-m',
-            'tools.standards_engine.standards_engine.mcp', '--repo-root', str(self.root),
-            '--purpose', 'authoring', '--output-schemas', 'on-demand', '--advanced', '--no-observe'],
-            input=''.join(json.dumps(m) + '\n' for m in messages), text=True,
-            capture_output=True, env={**os.environ, 'PYTHONPATH': str(ROOT)}, timeout=90)
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(result.stderr, '')
-        reply = json.loads(result.stdout.splitlines()[-1])['result']
+        # One server process, started on first use, serves every call of a test.
+        if not hasattr(self, 'server'):
+            self.server = StdioServer(self.root, purpose='authoring', client='boundary-regression',
+                                      options=('--output-schemas', 'on-demand', '--advanced'))
+            self.addCleanup(self.server.close)
+        reply = self.server.call(operation, arguments)['result']
         self.assertEqual(reply['isError'], rejected, reply)
         self.assertEqual(json.loads(reply['content'][0]['text']), reply['structuredContent'])
         return reply['structuredContent']

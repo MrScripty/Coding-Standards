@@ -1,14 +1,11 @@
-"""Snapshot-bound focused assertions, review labels and real cold stdio responses."""
+"""Snapshot-bound focused assertions, review labels and real stdio responses from another process."""
 from __future__ import annotations
 
 from copy import deepcopy
 from dataclasses import replace
 import json
-import os
 from pathlib import Path
 import shutil
-import subprocess
-import sys
 import tempfile
 import tomllib
 import unittest
@@ -19,6 +16,7 @@ from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEn
 from tools.standards_engine.standards_engine import routing_inputs
 from tools.standards_engine.standards_engine.logical_authoring import _toml_inline
 from tools.standards_engine.tests import test_purpose_projection as fixture
+from tools.standards_engine.tests.stdio_server import StdioServers
 from tools.standards_engine.tests.test_routing_fact_inputs import SPECS
 from tools.standards_metadata.standards_metadata import APPLICATION_CONTENT
 from tools.standards_snapshots.standards_snapshots import CapturedContent, SnapshotFile, SnapshotPath, SnapshotId
@@ -82,19 +80,15 @@ class RoutingFactTransportTest(unittest.TestCase):
     def route(self, purpose, facts, *, snapshot='boolean', **rest):
         return self.facades[purpose].route({'snapshot':self.snapshots[snapshot], 'facts':facts, **rest})
 
+    def setUp(self):
+        self.servers = StdioServers(client='fact-input-test', cwd=ROOT)
+        self.addCleanup(self.servers.close)
+
     def cold(self, purpose, operation, args, *, error=False):
-        messages=[{'jsonrpc':'2.0','id':1,'method':'initialize','params':{
-            'protocolVersion':'2025-11-25','capabilities':{},'clientInfo':{'name':'fact-input-test','version':'1'}}},
-            {'jsonrpc':'2.0','method':'notifications/initialized'},
-            {'jsonrpc':'2.0','id':2,'method':'tools/call','params':{'name':operation,'arguments':args}}]
-        proc=subprocess.run([sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-            '--repo-root',str(self.root),'--purpose',purpose,'--output-schemas','on-demand','--no-observe'],
-            cwd=ROOT,env={**os.environ,'PYTHONPATH':str(ROOT)},input=''.join(json.dumps(m)+'\n' for m in messages),
-            capture_output=True,text=True,check=True)
-        self.assertEqual(proc.stderr,'')
-        rows={m['id']:m for m in map(json.loads,proc.stdout.splitlines())}
-        self.assertNotIn('error',rows[2],rows[2])
-        response=rows[2]['result']
+        # One server process per purpose serves a test; it never shares the facades' process.
+        reply=self.servers.server(self.root,purpose,'--output-schemas','on-demand').call(operation,args)
+        self.assertNotIn('error',reply,reply)
+        response=reply['result']
         self.assertEqual(response['isError'],error,response)
         value=response['structuredContent']
         self.assertEqual(value,json.loads(response['content'][0]['text']))

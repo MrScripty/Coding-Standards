@@ -96,6 +96,7 @@ class PurposeTransportTest(unittest.TestCase):
             request(4, "tools/call", {"name": "read", "arguments": {"snapshot": self.snapshot, "target": "provenance.fixture"}}),
             request(5, "tools/call", {"name": "apply", "arguments": {}}),
         ]
+        # One process: every byte this server writes is checked, so the whole session is captured.
         process = subprocess.run(
             [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
              "--repo-root", str(self.root), "--purpose", "application", "--advanced", "--no-observe"],

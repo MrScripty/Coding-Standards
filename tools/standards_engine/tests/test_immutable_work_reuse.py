@@ -387,6 +387,7 @@ class ImmutableWorkPublicPathTest(unittest.TestCase):
         ), 2):
             messages.append(request('tools/call',{'name':name,'arguments':args},identifier=ident))
         results=[]
+        # Two processes: a restarted server returns what the first one did, warm and cold.
         for _ in range(2):
             process=subprocess.run(
                 [sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp','--repo-root',str(self.root),'--purpose','authoring','--output-schemas','on-demand','--no-observe'],

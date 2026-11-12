@@ -1,17 +1,17 @@
 """Cold stdio qualification of navigation and rejection feedback, without a model.
 
-Every call replaces the process. The existing qualified-snapshot fixture keeps
-production Git, standards and stores outside this transport test's write set.
+Each test uses one server process per purpose and catalog delivery, and replaces
+it where a continuation must be honoured by a process that did not issue it. The
+existing qualified-snapshot fixture keeps production Git, standards and stores
+outside this transport test's write set.
 """
 from __future__ import annotations
 
 import json
-import os
-import subprocess
-import sys
 import unittest
 
 from tools.standards_engine.tests import test_purpose_transport as fixture
+from tools.standards_engine.tests.stdio_server import StdioServers
 from tools.standards_engine.tests.test_route_content import known_assertions
 
 
@@ -26,31 +26,23 @@ class AgentInteractionTransportTest(unittest.TestCase):
     def tearDownClass(cls):
         fixture.PurposeTransportTest.tearDownClass()
 
+    def setUp(self):
+        self.servers = StdioServers(client='interaction-fixture')
+        self.addCleanup(self.servers.close)
+
     def call(self, purpose, operation, arguments, *, rejected=False, delivery="eager"):
-        messages = [
-            {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
-                'protocolVersion': '2025-11-25', 'capabilities': {},
-                'clientInfo': {'name': 'interaction-fixture', 'version': '1'}}},
-            {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
-            {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/call',
-             'params': {'name': operation, 'arguments': arguments}},
-        ]
-        process = subprocess.run(
-            [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-             '--repo-root', str(self.root), '--purpose', purpose,
-             '--output-schemas', delivery, '--no-observe'],
-            env={**os.environ, 'PYTHONPATH': str(fixture.ROOT)}, text=True,
-            input=''.join(json.dumps(value) + '\n' for value in messages),
-            capture_output=True, timeout=90,
-        )
-        self.assertEqual(process.returncode, 0, process.stderr)
-        self.assertEqual(process.stderr, '')
-        responses = {item['id']: item for item in map(json.loads, process.stdout.splitlines())}
-        self.assertNotIn('error', responses[2], responses[2])
-        result = responses[2]['result']
+        # One server process per purpose and catalog delivery serves every call of a test.
+        server = self.servers.server(self.root, purpose, '--output-schemas', delivery)
+        response = server.call(operation, arguments)
+        self.assertNotIn('error', response, response)
+        result = response['result']
         self.assertEqual(result['isError'], rejected, result)
         self.assertEqual(json.loads(result['content'][0]['text']), result['structuredContent'])
         return result['structuredContent']
+
+    def replace_server(self, purpose, delivery="eager"):
+        """End this purpose's server: its next call is answered by a new process."""
+        self.servers.restart(self.root, purpose, '--output-schemas', delivery)
 
     def test_cold_relationship_repair_and_pages_use_the_same_snapshot(self):
         for purpose in ('application', 'authoring'):
@@ -58,6 +50,8 @@ class AgentInteractionTransportTest(unittest.TestCase):
                 first = self.call(purpose, 'relationship_groups', {'snapshot': self.snapshot, 'limit': 1})
                 groups = list(first['items'])
                 page = first
+                # Cold: a process that did not issue the continuations follows them.
+                self.replace_server(purpose)
                 while 'next' in page:
                     page = self.call(purpose, 'relationship_groups', page['next'])
                     self.assertEqual(page['snapshot'], self.snapshot)
@@ -86,6 +80,8 @@ class AgentInteractionTransportTest(unittest.TestCase):
                                                    'content': {'limit': 1}})
                 self.assertEqual(len(route['unresolved_questions']), 6)
                 self.assertEqual(route['status'], 'needs-facts')
+                # Cold: a process that did not route honours the page and explanation continuations.
+                self.replace_server(purpose)
                 next_page = self.call(purpose, 'route', route['content']['next'])
                 self.assertEqual(next_page['snapshot'], self.snapshot)
                 self.assertEqual(next_page['unresolved_questions'], route['unresolved_questions'])
@@ -103,6 +99,8 @@ class AgentInteractionTransportTest(unittest.TestCase):
         feedback = invalid['input_feedback']
         self.assertEqual({item['instance_pointer'] for item in feedback['issues']},
                          {'/change_set/purpose', '/change_set/edits'})
+        # Cold: a process that did not reject the proposal answers its discovery continuation.
+        self.replace_server('authoring')
         described = self.call('authoring', 'describe_input', feedback['describe_input'])
         self.assertEqual(described['root'], 'AgentProposeCall')
         self.assertEqual(described['operation'], 'propose')

@@ -4,7 +4,6 @@ This is a deterministic consumer, not model-visible client qualification. The
 opt-in Codex harness observes that separate boundary with model-authored calls.
 """
 import json
-import sys
 from pathlib import Path
 import subprocess
 import tempfile
@@ -13,6 +12,7 @@ import unittest
 from jsonschema import Draft202012Validator
 
 from tools.standards_engine.standards_engine.mcp import MCPServer
+from tools.standards_engine.tests.stdio_server import StdioServers
 from tools.standards_engine.tests.test_agent_workflow import decisions, reference_change
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 from tools.standards_engine.tests.test_mcp import initialize, request
@@ -32,6 +32,8 @@ class DiscoveredWorkflowTest(unittest.TestCase):
         cls.temp.cleanup()
 
     def test_discovered_shapes_drive_all_five_authoring_calls_and_preserve_decisions(self):
+        stdio = StdioServers(client='output-workflow')
+        self.addCleanup(stdio.close)
         for delivery in ('eager', 'on-demand'):
             with self.subTest(delivery=delivery):
                 server = MCPServer(self.root, purpose='authoring', output_schemas=delivery)
@@ -44,20 +46,8 @@ class DiscoveredWorkflowTest(unittest.TestCase):
                         validators[operation].validate(arguments)
                     selected = request('tools/call', {'name': operation, 'arguments': arguments})
                     if delivery == 'on-demand':
-                        # The compact catalog path crosses real stdio and replaces
-                        # its process on every call; no connection cache is needed.
-                        selected['id'] = 2
-                        messages = [request('initialize', {'protocolVersion': '2025-11-25',
-                            'capabilities': {}, 'clientInfo': {'name': 'output-workflow', 'version': '1'}}),
-                            {'jsonrpc': '2.0', 'method': 'notifications/initialized'}, selected]
-                        process = subprocess.run([sys.executable, '-m',
-                            'tools.standards_engine.standards_engine.mcp', '--repo-root', str(self.root),
-                            '--purpose', 'authoring', '--output-schemas', delivery, '--no-observe'],
-                            input=''.join(json.dumps(message) + '\n' for message in messages),
-                            text=True, capture_output=True, check=True)
-                        self.assertEqual(process.stderr, '')
-                        reply = next(json.loads(line) for line in process.stdout.splitlines()
-                                     if json.loads(line).get('id') == 2)
+                        # The compact catalog path crosses real stdio, in one server process.
+                        reply = stdio.server(self.root, 'authoring', '--output-schemas', delivery).call(operation, arguments)
                         self.assertNotIn('error', reply, reply)
                         output = reply['result']
                     else:

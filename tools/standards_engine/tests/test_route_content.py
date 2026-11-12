@@ -265,6 +265,7 @@ class RoutePageBudgetOptionTest(unittest.TestCase):
                              configured or agent_navigation.ROUTE_PAGE_BYTES)
 
     def test_launch_option_is_validated_before_serving(self):
+        # One process per launch: each start accepts or refuses its own options.
         def launch(*arguments):
             return subprocess.run(
                 [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp', '--no-observe',

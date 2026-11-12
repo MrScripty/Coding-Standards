@@ -219,6 +219,7 @@ class ReadManyTest(unittest.TestCase):
                     message(2, "tools/call", {"name": "read_many", "arguments": arguments}),
                     message(3, "tools/call", {"name": "read_many", "arguments": {**arguments, "items": [{"target": "core"}, {"target": "provenance.fixture"}]}})]
         command = [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(self.root), "--purpose", "application", "--no-observe"]
+        # Two processes: a second cold server returns the identical complete value.
         for _ in range(2):
             response = subprocess.run(command, input="".join(json.dumps(m) + "\n" for m in messages), text=True, capture_output=True, env=env, timeout=60)
             self.assertEqual(response.returncode, 0, response.stderr)

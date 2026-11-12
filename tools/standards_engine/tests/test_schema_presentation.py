@@ -124,6 +124,7 @@ class NativeOnlyBoundaryTest(unittest.TestCase):
                 for value in ('native', 'compatibility'):
                     for flags in (['--schema-mode', value], ['--schema-mode=' + value]):
                         with self.subTest(module=module, flags=flags):
+                            # One process per launch: each start refuses the retired flag itself.
                             process = subprocess.run([sys.executable, '-m', module, *args, *flags],
                                 cwd=ROOT, env={**os.environ, 'PYTHONPATH': str(ROOT)},
                                 input='', text=True, capture_output=True)

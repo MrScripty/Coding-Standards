@@ -272,7 +272,8 @@ PYTHONPATH=. python3 -m unittest tools.standards_engine.tests.test_schema_presen
 PYTHONPATH=. python3 -m tools.standards_engine.tests.agent_efficiency_trace
 ```
 
-The trace uses disposable repositories, real cold MCP stdio calls and explicit
+The trace uses disposable repositories, real MCP stdio calls through one server
+process per trace (replaced where a cold read is the claim) and explicit
 fixture-owned decisions. It compares selection-plus-read to composed routing and
 inline to shared evidence, verifies exact outcomes and stops before publication.
 Use the supported locked environment for release qualification.
