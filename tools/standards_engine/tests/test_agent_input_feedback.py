@@ -10,7 +10,7 @@ from unittest.mock import patch
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_engine.standards_engine.mcp import MCPServer
-from tools.standards_engine.tests.test_mcp import initialize, request
+from tools.standards_engine.tests.test_mcp import initialize, installation_root, request
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -76,8 +76,9 @@ class AgentInputFeedbackTest(unittest.TestCase):
             self.interface.validate('ApplicationRejectedResult', result)
 
     def test_mcp_envelope_is_error_and_metadata_observers_use_safe_feedback(self):
+        root = installation_root(self)
         for purpose in ('authoring', 'application'):
-            server = MCPServer(ROOT, purpose=purpose)
+            server = MCPServer(root, purpose=purpose)
             self.addCleanup(server.close)
             initialize(server)
             for operation, arguments in (('runtime_info', {'expected_catalog': 'SECRET'}),

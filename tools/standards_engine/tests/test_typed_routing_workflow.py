@@ -1,20 +1,18 @@
-"""Real unpublished routing workflows use typed edits across replacement processes."""
+"""Real unpublished routing workflows use typed edits over stdio and survive a replacement process."""
 from __future__ import annotations
 
 from copy import deepcopy
 import json
-import os
 from pathlib import Path
 import subprocess
-import sys
 import tempfile
 import tomllib
 import unittest
 
 from tools.standards_engine.standards_engine import AgentToolFacade
+from tools.standards_engine.tests.stdio_server import StdioServers
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
 from tools.standards_engine.tests.test_agent_workflow import decisions, evidence
-from tools.standards_engine.tests.test_mcp import request
 from tools.standards_engine.tests.test_request_evidence import shared
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -30,17 +28,13 @@ class TypedRoutingWorkflowTest(unittest.TestCase):
         cls.main = subprocess.check_output(['git','-C',str(cls.root),'rev-parse','main'])
         cls.router = tomllib.loads((cls.root/'evaluation/standards-effectiveness/router-projection.toml').read_text())
 
+    def setUp(self):
+        self.servers = StdioServers(client='typed-routing-test', cwd=ROOT)
+        self.addCleanup(self.servers.close)
+
     def call(self, operation, arguments, delivery='on-demand', *, error=False):
-        messages = [request('initialize', {'protocolVersion':'2025-11-25','capabilities':{},
-                    'clientInfo':{'name':'typed-routing-test','version':'1'}}),
-                    {'jsonrpc':'2.0','method':'notifications/initialized'},
-                    request('tools/call', {'name':operation,'arguments':arguments}, 2)]
-        run = subprocess.run([sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-              '--repo-root',str(self.root),'--purpose','authoring','--output-schemas',delivery,'--no-observe'],
-              input=''.join(json.dumps(v)+'\n' for v in messages),text=True,capture_output=True,check=True,
-              cwd=ROOT,env={**os.environ,'PYTHONPATH':str(ROOT)})
-        self.assertEqual(run.stderr, '')
-        reply = next(json.loads(line) for line in run.stdout.splitlines() if json.loads(line).get('id')==2)
+        # One server process per catalog delivery serves every call of a test.
+        reply = self.servers.server(self.root, 'authoring', '--output-schemas', delivery).call(operation, arguments)
         self.assertNotIn('error', reply, reply)
         result = reply['result']
         self.assertEqual(result['isError'], error, result)
@@ -104,6 +98,8 @@ class TypedRoutingWorkflowTest(unittest.TestCase):
                 self.assertEqual(ready['status'],'ready',ready)
                 self.assertEqual(self.call('review',review,delivery),ready)
                 self.assertEqual(self.call('review',{'context':complete['context'],'decisions':decisions(self.root)},delivery),ready)
+                # A replacement process reads both revisions exactly as the first left them.
+                self.servers.restart(self.root, 'authoring', '--output-schemas', delivery)
                 read = self.call('query_proposal',{'revision':ready['revision'],'request':{'kind':'read','target':'router'}},delivery)
                 self.assertNotIn(rule['condition'],read['content'])
                 self.assertNotEqual(read['content'],preview['content'])

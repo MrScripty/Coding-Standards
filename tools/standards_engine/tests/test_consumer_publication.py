@@ -1,21 +1,21 @@
 """Proposal consumer publication through real MCP processes and Git/SQLite.
 
-Every tool call reconnects a cold local stdio process. This tests the actual
-wire boundary without requiring an optional SDK or the user's installed store.
+Each test talks to one local stdio server process per purpose and replaces it
+only where a claim is about a new process. This tests the actual wire boundary
+without requiring an optional SDK or the user's installed store.
 """
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 import subprocess
-import sys
 import tempfile
 import tomllib
 import unittest
 
 from tools.standards_engine.standards_engine.tools import INTERFACE_CONTRACT
-from tools.standards_engine.tests.test_agent_workflow import ROOT, decisions, evidence, prepare_repository
+from tools.standards_engine.tests.stdio_server import StdioServers
+from tools.standards_engine.tests.test_agent_workflow import decisions, evidence, prepare_repository
 from tools.standards_engine.tests import test_proposal_consumers as fixtures
 from tools.standards_engine.tests.test_proposal_consumers import registration
 
@@ -28,34 +28,30 @@ def installed_interface_version(root):
         return tomllib.load(source)['interface_schema_version']
 
 
-class ConsumerPublicationTest(unittest.TestCase):
+class PublicationWorkflowCase(unittest.TestCase):
+    """An isolated repository and its servers; subclasses choose how decisions are submitted."""
+
+    prepare = staticmethod(prepare_repository)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='consumer-publication-')
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name) / 'repository'
-        prepare_repository(self.root)
+        self.prepare(self.root)
         self.calls = []
+        self.servers = StdioServers(client='consumer-publication-test')
+        self.addCleanup(self.servers.close)
 
     def rpc(self, method, params, purpose='authoring'):
-        messages=[
-            {'jsonrpc':'2.0','id':1,'method':'initialize','params':{
-                'protocolVersion':'2025-11-25','capabilities':{},
-                'clientInfo':{'name':'consumer-publication-test','version':'1'}}},
-            {'jsonrpc':'2.0','method':'notifications/initialized'},
-            {'jsonrpc':'2.0','id':2,'method':method,'params':params},
-        ]
-        process=subprocess.run(
-            [sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-             '--repo-root',str(self.root),'--purpose',purpose,'--advanced','--no-observe'],
-            input=''.join(json.dumps(m)+'\n' for m in messages),text=True,capture_output=True,
-            env={**os.environ,'PYTHONPATH':str(ROOT)},timeout=180,
-        )
-        self.assertEqual(process.returncode,0,process.stderr)
-        self.assertEqual(process.stderr,'')
-        responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
+        # One server process per purpose serves every call of a test.
+        server = self.servers.server(self.root, purpose, '--advanced')
         self.assertIn(f'interface {installed_interface_version(self.root)};',
-                      responses[1]['result']['instructions'])
-        return responses[2]
+                      server.initialized['result']['instructions'])
+        return server.exchange(method, params)
+
+    def restart(self, purpose='authoring'):
+        """Replace this purpose's server: its next call is answered by a new process."""
+        self.servers.restart(self.root, purpose, '--advanced')
 
     def call(self,name,arguments,purpose='authoring',error=False):
         if name in {"propose", "revise", "analyze", "resolve_workflow", "workflow_status", "resume"}:
@@ -73,6 +69,8 @@ class ConsumerPublicationTest(unittest.TestCase):
                            'rationale':'This isolated repository owns the synthetic review evidence.',
                            'evidence':[evidence(self.root)]},'edits':edits}
 
+
+class ConsumerPublicationTest(PublicationWorkflowCase):
     def complete(self,workflow):
         seen=set()
         while workflow.get('status')=='needs-action':
@@ -135,6 +133,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertIn('error',denied)
         # A fresh process reconstructs the draft after unrelated working-tree drift.
         (self.root/F.fixture_path).write_bytes(b'LOCAL_UNPUBLISHED_INPUT_DRIFT\n')
+        self.restart()
         rebuilt=self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':F.owner,'detail':'full'}})
         self.assertEqual(rebuilt,preview)
         (self.root/F.fixture_path).write_bytes(original[F.fixture_path])
@@ -153,6 +152,8 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(published['outcome']['checkout']['status'],'current',published)
         self.assertEqual((self.root/F.doc_path).read_bytes(),
                          subprocess.check_output(['git','show','main:'+F.doc_path],cwd=self.root))
+        # Cold readback: the application process that reads starts after publication.
+        self.restart('application')
         exposed=self.call('read',{'target':F.owner,'detail':'full'},purpose='application')
         self.assertEqual(exposed['content'],preview['content'])
         self.assertEqual(exposed['scope'],preview['scope'])
@@ -198,6 +199,8 @@ class ConsumerPublicationTest(unittest.TestCase):
         lock.unlink()
         local = self.root / "unpublished-local-note.txt"
         local.write_bytes(b"independent local data\n")
+        # Cold completion: a new process holds nothing from the failed apply or its observation.
+        self.restart()
         recovered = self.call("recover", {"context": ready["context"], "action": "complete-publication"})
         self.assertEqual(recovered["status"], "applied", recovered)
         self.assertEqual(recovered["outcome"]["checkout"]["status"], "current", recovered)

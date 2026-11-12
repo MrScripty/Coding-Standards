@@ -1,4 +1,8 @@
-"""Real proposal, review, publication and readback in an isolated Git repository."""
+"""Real proposal, review, publication and readback in an isolated Git repository.
+
+Both facades use the per-purpose compiled cache that a server process owns, so
+this one run also proves that warm reuse never changes a result.
+"""
 from __future__ import annotations
 
 import json
@@ -8,6 +12,7 @@ import tempfile
 import unittest
 
 from tools.standards_engine.standards_engine import AgentToolFacade
+from tools.standards_engine.standards_engine.compiled_cache import CompiledSnapshotCache
 from tools.standards_engine.tests.test_agent_workflow import prepare_repository, evidence, decisions
 from tools.standards_metadata.standards_metadata import load_canonical_standards_corpus
 
@@ -39,12 +44,16 @@ class SupportingWorkflowTest(unittest.TestCase):
         # of which implementation branch supplied the test code.
         if subprocess.check_output(["git", "branch", "--show-current"], cwd=cls.root).decode().strip() != "main":
             subprocess.run(["git", "branch", "-m", "main"], cwd=cls.root, check=True)
-        cls.author = AgentToolFacade.open_repository(cls.root, purpose="authoring")
-        cls.app = AgentToolFacade.open_repository(cls.root, purpose="application")
+        cls.caches = {purpose: CompiledSnapshotCache(cls.root, purpose) for purpose in ("authoring", "application")}
+        cls.author = AgentToolFacade.open_repository(cls.root, purpose="authoring", compiled_cache=cls.caches["authoring"])
+        cls.app = AgentToolFacade.open_repository(cls.root, purpose="application", compiled_cache=cls.caches["application"])
 
     @classmethod
     def tearDownClass(cls):
-        cls.author.close(); cls.app.close(); cls.temporary.cleanup()
+        cls.author.close(); cls.app.close()
+        for cache in cls.caches.values():
+            cache.close()
+        cls.temporary.cleanup()
 
     def change(self, edits):
         return {"purpose": {"summary": "Exercise purpose-separated content publication",
@@ -143,3 +152,5 @@ class SupportingWorkflowTest(unittest.TestCase):
         self.assertNotEqual(current["authority"], old_snapshot)
         self.assertEqual(self.app.read({"snapshot": current["authority"], "target": RULE})["content"], first["content"])
         self.assertEqual(self.app.read({"snapshot": current["authority"], "target": REASON})["code"], "APPLICATION.UNKNOWN_TARGET")
+        # Every result above came through a warm cache that only its own purpose can use.
+        self.assertTrue(all(cache.statistics["hits"] > 0 for cache in self.caches.values()))

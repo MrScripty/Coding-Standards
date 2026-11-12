@@ -377,6 +377,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
                 identifier=2,
             ),
         ]
+        # Separate process: a server started elsewhere reads the index from the durable snapshot.
         process = subprocess.run(
             [
                 sys.executable,

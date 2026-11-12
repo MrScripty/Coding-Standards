@@ -297,6 +297,7 @@ class InputDiscoveryTest(unittest.TestCase):
                 result = json.loads(process.stdout.splitlines()[-1])['result']
                 self.assertFalse(result['isError'], result)
                 return result
+            # Two processes: the continuation is honoured by a server that did not issue it.
             first = cold({'operation': 'propose', 'limit': 1})
             second = cold(first['structuredContent']['next'])
             self.assertNotEqual(first['_meta']['standards-engine/runtime']['instance_id'], second['_meta']['standards-engine/runtime']['instance_id'])

@@ -319,6 +319,7 @@ class DetailTransportTests(unittest.TestCase):
             wire = json.loads(run.stdout.splitlines()[-1])["result"]
             self.assertEqual(json.loads(wire["content"][0]["text"]), wire["structuredContent"])
             return wire["structuredContent"]
+        # Two processes: the retry request is honoured by a server that did not issue it.
         rejected = call({"analysis": result["context"], "section": "dispositions"})
         self.assertEqual(rejected["code"], "WORKFLOW.RESULT_LIMIT")
         page = call(rejected["next_operations"][0]["request"])

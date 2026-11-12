@@ -42,6 +42,13 @@ PYTHONPATH=.:tools/standards_verifier python3 -m unittest discover -s tools/stan
 PYTHONPATH=. python3 -m unittest discover -s tools/standards_engine/tests
 ```
 
+The Engine suite is long. This runs the same tests with one unittest process per test
+module across all cores (`--jobs N` limits them) and fails if any test goes missing:
+
+```bash
+PYTHONPATH=. python3 -m tools.standards_engine.tests.parallel_unittest --durations 10
+```
+
 These tests exercise execution, navigation, authoring, publication, and failure
 handling. Use the locked environment for both commands. The low-level diagnostic
 CLI remains `tools/standards_verifier/verify.py` with `--complete`, `--suite`,

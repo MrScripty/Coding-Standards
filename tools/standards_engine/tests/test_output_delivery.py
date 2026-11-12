@@ -218,6 +218,7 @@ class OutputDeliveryTest(unittest.TestCase):
             replies=[json.loads(x) for x in process.stdout.splitlines()]
             self.assertTrue(all('outputSchema' not in t for t in replies[1]['result']['tools']))
             return replies[2]['result']['structuredContent']
+        # Two processes: the continuation is honoured by a server that did not issue it.
         first=run({'operation':'review','limit':1}); second=run(first['next'])
         self.assertEqual(first['schema_digest'],second['schema_digest'])
         self.assertEqual(first['catalog_digest'],second['catalog_digest'])

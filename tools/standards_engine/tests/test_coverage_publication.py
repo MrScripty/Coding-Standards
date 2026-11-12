@@ -600,6 +600,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
                     },
                 },
             )
+            # Separate process: a server started after publication reports the applied state.
             completed = subprocess.run(
                 [
                     sys.executable,

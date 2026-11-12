@@ -1,19 +1,17 @@
 """Cold MCP reads coexist with a reserved writer only when no purge is due.
 
 One server process audits its store once, on its first call; a newly started
-process audits again and still rejects a corrupt store.
+process audits again and still rejects a corrupt store. Each test therefore
+starts a new server process exactly where its claim is about a cold start.
 
 The fixture owns its database, evidence and processes. Publication, authorization
 and interpreter timing are not simulated; no production store is accessed.
 """
 from __future__ import annotations
 
-import json
 import os
 import shutil
 import sqlite3
-import subprocess
-import sys
 import time
 import unittest
 from contextlib import closing
@@ -22,6 +20,7 @@ from unittest import mock
 
 from tools.standards_engine.standards_engine.mcp import MCPServer
 from tools.standards_engine.tests import test_agent_interaction_transport as transport
+from tools.standards_engine.tests.stdio_server import StdioServer, StdioServers
 from tools.standards_engine.tests.test_mcp import initialize, request
 from tools.standards_engine.tests.test_route_content import known_assertions
 from tools.standards_snapshots.standards_snapshots import (
@@ -45,6 +44,10 @@ class StorageLifecycleTransportTest(unittest.TestCase):
     def tearDownClass(cls):
         transport.fixture.PurposeTransportTest.tearDownClass()
 
+    def setUp(self):
+        self.servers = StdioServers(client='interaction-fixture')
+        self.addCleanup(self.servers.close)
+
     def call(self, purpose, operation, arguments, *, rejected=False):
         return transport.AgentInteractionTransportTest.call(
             self, purpose, operation, arguments, rejected=rejected, delivery='on-demand',
@@ -54,29 +57,16 @@ class StorageLifecycleTransportTest(unittest.TestCase):
         """Run one cold authoring read whose store open fails; return its private stderr."""
         # Open-time failure retains the existing MCP private-stderr
         # boundary (no structured result), not an invented tool outcome.
-        messages = [
-            {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
-                'protocolVersion': '2025-11-25', 'capabilities': {},
-                'clientInfo': {'name': 'storage-open-fixture', 'version': '1'}}},
-            {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
-            {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/call', 'params': {
-                'name': 'read', 'arguments': {'snapshot': self.snapshot, 'target': 'core'}}},
-        ]
-        process = subprocess.run(
-            [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-             '--repo-root', str(self.root), '--purpose', 'authoring',
-             '--output-schemas', 'on-demand', '--no-observe'],
-            env={**os.environ, 'PYTHONPATH': str(transport.fixture.ROOT)},
-            input=''.join(json.dumps(message) + '\n' for message in messages),
-            text=True, capture_output=True, timeout=90,
-        )
-        self.assertEqual(process.returncode, 0, process.stderr)
-        failed = next(json.loads(line)['result'] for line in process.stdout.splitlines()
-                      if json.loads(line).get('id') == 2)
+        server = StdioServer(self.root, purpose='authoring', options=('--output-schemas', 'on-demand'),
+                             client='storage-open-fixture', silent=False)
+        try:
+            failed = server.call('read', {'snapshot': self.snapshot, 'target': 'core'})['result']
+        finally:
+            errors = server.close()
         self.assertTrue(failed['isError'])
         self.assertNotIn('structuredContent', failed)
         self.assertIn('Engine invocation failed', failed['content'][0]['text'])
-        return process.stderr
+        return errors
 
     def test_one_server_process_audits_its_store_once_across_calls(self):
         # The fixture built this store inside the test process. Discard that
@@ -145,6 +135,8 @@ class StorageLifecycleTransportTest(unittest.TestCase):
             writer.execute('INSERT INTO purged_root_tombstones VALUES (?, ?)', ('uncommitted-test', 1))
             try:
                 for purpose in ('application', 'authoring'):
+                    # Cold: a process started under the held writer audits and opens the store.
+                    self.servers.restart(self.root, purpose, '--output-schemas', 'on-demand')
                     for operation, arguments in cases:
                         with self.subTest(purpose=purpose, operation=operation):
                             self.assertEqual(self.call(purpose, operation, arguments),

@@ -27,6 +27,7 @@ from tools.standards_engine.standards_engine.interaction_observer import (
 )
 from tools.standards_engine.standards_engine.mcp import MCPServer, serve
 from tools.standards_engine.standards_engine.tools import AgentToolFacade
+from tools.standards_engine.tests import stdio_server
 from tools.standards_engine.tests.test_mcp import ROOT, initialize, request
 
 MODULE = 'tools.standards_engine.standards_engine.interaction_observer'
@@ -822,11 +823,20 @@ os._exit(0)
         # recording or name a database explicitly.
         launch = re.compile(r'''standards_engine\.mcp["']|standards_engine\.mcp import main''')
         guards = ('--no-observe', '--observe-database', 'STANDARDS_ENGINE_OBSERVE')
-        launchers = [path for folder in ('tools', 'evaluation', '.agents') for path in sorted((ROOT / folder).rglob('*.py'))
-                     if launch.search(path.read_text())]
-        self.assertGreater(len(launchers), 20)
+        sources = [path for folder in ('tools', 'evaluation', '.agents') for path in sorted((ROOT / folder).rglob('*.py'))]
+        launchers = [path for path in sources if launch.search(path.read_text())]
+        # Files that launch only through the shared server helper name no module
+        # and can pass no option that turns recording back on.
+        helper = Path(stdio_server.__file__).resolve()
+        delegating = [path for path in sources if 'tests.stdio_server import' in path.read_text()]
+        self.assertIn(helper, [path.resolve() for path in launchers])
+        self.assertGreater(len(launchers) + len(delegating), 20)
         for path in launchers:
             self.assertTrue(any(guard in path.read_text() for guard in guards), path)
+        with patch.object(stdio_server.subprocess, 'Popen', side_effect=OSError('launch observed')) as launched:
+            with self.assertRaisesRegex(OSError, 'launch observed'):
+                stdio_server.StdioServer(ROOT, purpose='application', options=('--observe-database', str(self.database)))
+        self.assertEqual(launched.call_args.args[0][-1], '--no-observe', 'the helper disables recording on every launch')
 
 
 class ProcessTests(unittest.TestCase):

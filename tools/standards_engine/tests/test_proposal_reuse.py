@@ -493,6 +493,7 @@ class ProposalReuseTest(unittest.TestCase):
         args = {"revision": self.latest["revision"], "request": {"kind": "read", "target": self.target}}
         messages += [request("tools/call", {"name": "query_proposal", "arguments": args}, i) for i in (2, 3)]
         observed = []
+        # Two processes: each fresh server reconstructs the same historical draft.
         for _ in range(2):
             process = subprocess.run(
                 [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(self.root), "--purpose", "authoring", "--no-observe"],

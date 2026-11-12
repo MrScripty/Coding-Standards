@@ -74,5 +74,7 @@ jobs:
           "$python" -m unittest discover -s tools/standards_contracts/tests
           "$python" -m unittest discover -s tools/standards_analysis/tests
           PYTHONPATH=.:tools/standards_verifier "$python" -m unittest discover -s tools/standards_verifier/tests
-          "$python" -m unittest discover -s tools/standards_engine/tests
+          # One unittest process per Engine test module, as many at a time as the runner has cores.
+          # It fails if any module fails or if fewer tests run than a serial discovery finds.
+          "$python" -m tools.standards_engine.tests.parallel_unittest --durations 25
           PYTHONPATH=.:tools/standards_verifier "$python" tools/standards_verifier/verify.py --complete

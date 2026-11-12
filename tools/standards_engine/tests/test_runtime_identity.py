@@ -100,6 +100,7 @@ class RuntimeIdentityTests(unittest.TestCase):
                         {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
                         request('tools/call', {'name': 'runtime_info', 'arguments': {}}, identifier=2)]
             environment = {**os.environ, 'PYTHONPATH': str(ROOT)}
+            # Separate processes: a server and the CLI are different instances of one installation.
             mcp = subprocess.run([sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
                     '--repo-root', str(root), '--purpose', 'application', '--advanced', '--no-observe'],
                 input=''.join(json.dumps(item)+'\n' for item in messages), text=True, capture_output=True,

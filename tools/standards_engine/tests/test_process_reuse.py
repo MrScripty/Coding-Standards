@@ -28,7 +28,7 @@ from tools.standards_engine.standards_engine.mcp import MCPServer, serve
 from tools.standards_engine.tests.test_agent_workflow import (
     prepare_repository, reference_change,
 )
-from tools.standards_engine.tests.test_mcp import initialize, request
+from tools.standards_engine.tests.test_mcp import initialize, installation_root, request
 from tools.standards_snapshots.standards_snapshots import CapturedContent, SnapshotId
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -219,6 +219,7 @@ class ProcessReuseTest(unittest.TestCase):
             request("tools/call", {"name": "read", "arguments": {"snapshot": self.original_snapshot, "target": "core"}}, identifier=3),
         ]
         observed = []
+        # Two processes: a restarted server reads the retained snapshot exactly as the first did.
         for _ in range(2):
             completed = subprocess.run(
                 [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
@@ -296,8 +297,9 @@ class ProcessReuseTest(unittest.TestCase):
 
 class InstalledInterfaceReuseTest(unittest.TestCase):
     def test_one_interface_compile_per_server_and_fresh_call_validation(self):
+        root = installation_root(self)
         with patch.object(tool_module, "_contracts", wraps=tool_module._contracts) as compiled:
-            server = MCPServer(ROOT, purpose="authoring")
+            server = MCPServer(root, purpose="authoring")
             self.addCleanup(server.close)
             initialize(server)
             for _ in range(2):
@@ -341,7 +343,7 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
             self.assertEqual(server.dispatch(request("ping"))["error"]["code"], -32000)
 
     def test_each_tool_call_opens_and_closes_its_own_facade(self):
-        server = MCPServer(ROOT, purpose="application")
+        server = MCPServer(installation_root(self), purpose="application")
         self.addCleanup(server.close)
         initialize(server)
         opened = AgentToolFacade.open_repository
@@ -389,27 +391,6 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
             (root / "CORE-STANDARDS.md").unlink()
             with AgentToolFacade.open_repository(root, purpose="authoring", interface=interface) as cold:
                 self.assertEqual(cold.read({"snapshot": first["snapshot"], "target": "core"}), first)
-
-    def test_existing_publication_scenario_with_warm_purpose_isolated_caches(self):
-        # Reuse the unchanged assertions, not a second approximate workflow.
-        from tools.standards_engine.tests.test_supporting_workflow import SupportingWorkflowTest
-        case = SupportingWorkflowTest("test_coordinated_publication_and_provenance_only_revision")
-        SupportingWorkflowTest.setUpClass()
-        caches = []
-        try:
-            for name, purpose in (("author", "authoring"), ("app", "application")):
-                getattr(case, name).close()
-                cache = CompiledSnapshotCache(case.root, purpose)
-                caches.append(cache)
-                setattr(SupportingWorkflowTest, name, AgentToolFacade.open_repository(
-                    case.root, purpose=purpose, compiled_cache=cache,
-                ))
-            case.test_coordinated_publication_and_provenance_only_revision()
-            self.assertTrue(all(cache.statistics["hits"] > 0 for cache in caches))
-        finally:
-            SupportingWorkflowTest.tearDownClass()
-            for cache in caches:
-                cache.close()
 
 
 class InstalledSchemaValidationTest(unittest.TestCase):
