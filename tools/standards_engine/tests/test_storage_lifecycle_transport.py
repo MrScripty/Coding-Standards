@@ -1,5 +1,8 @@
 """Cold MCP reads coexist with a reserved writer only when no purge is due.
 
+One server process audits its store once, on its first call; a newly started
+process audits again and still rejects a corrupt store.
+
 The fixture owns its database, evidence and processes. Publication, authorization
 and interpreter timing are not simulated; no production store is accessed.
 """
@@ -7,19 +10,27 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import sqlite3
 import subprocess
 import sys
 import time
 import unittest
 from contextlib import closing
+from pathlib import Path
+from unittest import mock
 
+from tools.standards_engine.standards_engine.mcp import MCPServer
 from tools.standards_engine.tests import test_agent_interaction_transport as transport
+from tools.standards_engine.tests.test_mcp import initialize, request
 from tools.standards_engine.tests.test_route_content import known_assertions
 from tools.standards_snapshots.standards_snapshots import (
     AggregateChild, AggregateRecord, AggregateRoot, ChildHandle,
     SnapshotError, SnapshotId, SnapshotModule,
 )
+from tools.standards_snapshots.standards_snapshots import store as snapshot_store
+
+AUDIT_STATEMENTS = ('PRAGMA integrity_check', 'PRAGMA foreign_key_check')
 
 
 class StorageLifecycleTransportTest(unittest.TestCase):
@@ -38,6 +49,85 @@ class StorageLifecycleTransportTest(unittest.TestCase):
         return transport.AgentInteractionTransportTest.call(
             self, purpose, operation, arguments, rejected=rejected, delivery='on-demand',
         )
+
+    def cold_open_failure(self):
+        """Run one cold authoring read whose store open fails; return its private stderr."""
+        # Open-time failure retains the existing MCP private-stderr
+        # boundary (no structured result), not an invented tool outcome.
+        messages = [
+            {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
+                'protocolVersion': '2025-11-25', 'capabilities': {},
+                'clientInfo': {'name': 'storage-open-fixture', 'version': '1'}}},
+            {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
+            {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/call', 'params': {
+                'name': 'read', 'arguments': {'snapshot': self.snapshot, 'target': 'core'}}},
+        ]
+        process = subprocess.run(
+            [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
+             '--repo-root', str(self.root), '--purpose', 'authoring',
+             '--output-schemas', 'on-demand'],
+            env={**os.environ, 'PYTHONPATH': str(transport.fixture.ROOT)},
+            input=''.join(json.dumps(message) + '\n' for message in messages),
+            text=True, capture_output=True, timeout=90,
+        )
+        self.assertEqual(process.returncode, 0, process.stderr)
+        failed = next(json.loads(line)['result'] for line in process.stdout.splitlines()
+                      if json.loads(line).get('id') == 2)
+        self.assertTrue(failed['isError'])
+        self.assertNotIn('structuredContent', failed)
+        self.assertIn('Engine invocation failed', failed['content'][0]['text'])
+        return process.stderr
+
+    def test_one_server_process_audits_its_store_once_across_calls(self):
+        # The fixture built this store inside the test process. Discard that
+        # record so the server below starts as a newly launched process does.
+        with snapshot_store._AUDITED_FILES_LOCK:
+            snapshot_store._AUDITED_FILES.clear()
+        opens = []
+        connect = sqlite3.connect
+
+        def traced_connect(database, *arguments, **options):
+            connection = connect(database, *arguments, **options)
+            if Path(database).resolve() == self.path.resolve():
+                opens.append([])
+                connection.set_trace_callback(opens[-1].append)
+            return connection
+
+        server = MCPServer(self.root, purpose='application')
+        self.addCleanup(server.close)
+        initialize(server)
+        arguments = {'snapshot': self.snapshot, 'target': 'core'}
+        with mock.patch.object(snapshot_store.sqlite3, 'connect', traced_connect):
+            results = [
+                server.dispatch(request('tools/call', {'name': 'read', 'arguments': arguments},
+                                        identifier))['result']
+                for identifier in (2, 3, 4)
+            ]
+        for result in results:
+            self.assertFalse(result['isError'], result)
+            self.assertEqual(result['structuredContent']['content'],
+                             transport.fixture.PurposeTransportTest.expected)
+        # Every call still opens and closes its own store connection.
+        self.assertEqual(len(opens), 3)
+        self.assertEqual([[statement for statement in statements if statement in AUDIT_STATEMENTS]
+                          for statements in opens], [list(AUDIT_STATEMENTS), [], []])
+        for statements in opens:
+            self.assertIn('PRAGMA application_id', statements)
+            self.assertIn('PRAGMA user_version', statements)
+            self.assertTrue(any('FROM sqlite_schema' in statement for statement in statements))
+
+    def test_cold_server_process_rejects_a_corrupt_store_on_its_first_call(self):
+        retained = self.path.with_name('retained-valid-store.sqlite3')
+        shutil.copyfile(self.path, retained)
+        try:
+            with closing(sqlite3.connect(self.path, isolation_level=None)) as corruptor:
+                corruptor.execute(
+                    "INSERT INTO content_files VALUES ('missing', 'a', X'', 0, 'digest')")
+            self.assertIn('SNAPSHOT_STORE.FOREIGN_KEY_FAILURE', self.cold_open_failure())
+        finally:
+            os.replace(retained, self.path)
+        recovered = self.call('authoring', 'read', {'snapshot': self.snapshot, 'target': 'core'})
+        self.assertEqual(recovered['content'], transport.fixture.PurposeTransportTest.expected)
 
     def test_cold_agent_observations_match_while_another_process_holds_writer(self):
         cases = [
@@ -82,31 +172,7 @@ class StorageLifecycleTransportTest(unittest.TestCase):
         with closing(sqlite3.connect(self.path, isolation_level=None)) as writer:
             writer.execute('BEGIN IMMEDIATE')
             try:
-                # Open-time failure retains the existing MCP private-stderr
-                # boundary (no structured result), not an invented tool outcome.
-                messages = [
-                    {'jsonrpc': '2.0', 'id': 1, 'method': 'initialize', 'params': {
-                        'protocolVersion': '2025-11-25', 'capabilities': {},
-                        'clientInfo': {'name': 'storage-busy-fixture', 'version': '1'}}},
-                    {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
-                    {'jsonrpc': '2.0', 'id': 2, 'method': 'tools/call', 'params': {
-                        'name': 'read', 'arguments': {'snapshot': self.snapshot, 'target': 'core'}}},
-                ]
-                process = subprocess.run(
-                    [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-                     '--repo-root', str(self.root), '--purpose', 'authoring',
-                     '--output-schemas', 'on-demand'],
-                    env={**os.environ, 'PYTHONPATH': str(transport.fixture.ROOT)},
-                    input=''.join(json.dumps(message) + '\n' for message in messages),
-                    text=True, capture_output=True, timeout=90,
-                )
-                self.assertEqual(process.returncode, 0, process.stderr)
-                self.assertIn('SNAPSHOT_STORE.BUSY', process.stderr)
-                failed = next(json.loads(line)['result'] for line in process.stdout.splitlines()
-                              if json.loads(line).get('id') == 2)
-                self.assertTrue(failed['isError'])
-                self.assertNotIn('structuredContent', failed)
-                self.assertIn('Engine invocation failed', failed['content'][0]['text'])
+                self.assertIn('SNAPSHOT_STORE.BUSY', self.cold_open_failure())
                 self.assertIsNotNone(writer.execute(
                     'SELECT 1 FROM snapshot_roots WHERE snapshot_id = ?', (str(expired),)
                 ).fetchone())

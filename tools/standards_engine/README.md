@@ -336,6 +336,10 @@ The process-owned compilation cache also retains exact captured-content identity
 proofs. Identity and compilation for one capture share one LRU entry and the existing
 byte budget. The Snapshot codec still defines identity, and every read reloads actual
 bytes, verifies file integrity and checks the stored identity and current lifecycle.
+These per-read checks are separate from the store's complete SQLite
+integrity/foreign-key audit, which a process runs on its first open of a store file
+and not on each store-backed call; see
+[Snapshot admission](../standards_snapshots/README.md#admission-and-maintenance-work).
 
 Focused authoring operations reuse canonical revision decoding through
 `ProposalMaterials`; the single record is released on success or exceptional exit.

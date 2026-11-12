@@ -124,9 +124,14 @@ two-entry and 32 MiB accounted-retention limit shared by snapshot and draft
 projection entries. Snapshot keys contain the exact verified
 captured paths, bytes and source revision, plus the installed compiler function.
 Python dictionary equality distinguishes hash collisions. Each new operation
-opens and validates its store, checks snapshot lifecycle and verifies complete
-content identity before lookup. Missing, quarantined, purged, replaced or corrupt
-storage therefore remains observable. Equal verified inputs may share pure
+opens its store, checks its application, version and exact schema, checks snapshot
+lifecycle and verifies complete content identity before lookup. Missing,
+quarantined, purged or replaced storage, and content that no longer matches its
+identity, therefore remain observable. The store's complete SQLite
+integrity/foreign-key audit is not repeated by every operation: a process runs it
+on its first open of a store file, as described under
+[Snapshot admission](../standards_snapshots/README.md#admission-and-maintenance-work).
+Equal verified inputs may share pure
 compilation even when obtained from distinct store roots; store-specific handles,
 access checks and result envelopes remain fresh. No store facts enter the cache.
 
@@ -185,8 +190,9 @@ Review, candidate verification, application and recovery retain their existing
 fresh replay paths. New snapshot capture retains both independent compiler passes.
 Main advancement affects new captures, never the base of an existing draft. Old
 explicit revisions retain historical meaning and can have live stale status.
-Corruption, quarantine, purge or missing/replaced stores reject before projection
-reuse. Server restart reconstructs cold, and close releases both entry kinds.
+Stored content that fails validation, quarantine, purge or missing/replaced stores
+reject before projection reuse. Server restart reconstructs cold and repeats the
+store's complete SQLite audit; close releases both entry kinds.
 
 ### Incremental successor construction
 

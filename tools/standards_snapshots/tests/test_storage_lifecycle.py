@@ -2,25 +2,66 @@
 
 No-work observations must not request a writer. A positive probe is only a hint:
 transactions still select the current due set and own all deletion effects.
+
+One process runs the complete integrity/foreign-key audit of a store file once.
+Later opens of that file keep the application, version and exact schema checks.
 """
 from __future__ import annotations
 
+import os
+import shutil
 import sqlite3
+import subprocess
+import sys
 import tempfile
 import unittest
 from contextlib import closing
 from pathlib import Path
 from typing import Callable
+from unittest import mock
 
 from tools.standards_snapshots.standards_snapshots import (
     AggregateChild, AggregateRecord, AggregateRoot, ChildHandle,
     FindAggregateRootsRequest, FindSnapshotsRequest, SnapshotError, SnapshotModule,
 )
+from tools.standards_snapshots.standards_snapshots import store as store_module
 from tools.standards_snapshots.standards_snapshots.store import SQLiteSnapshotStore
 from tools.standards_snapshots.tests.test_module import capture
 from tools.standards_snapshots.tests.test_store import (
     _populated_version_one_store, _version_one_rows,
 )
+
+ROOT = Path(__file__).resolve().parents[3]
+
+# A separate interpreter has no audit record. It reports the admission outcome
+# of the ordinary module open path for one existing store file.
+_COLD_OPEN = """
+import sys
+from pathlib import Path
+from tools.standards_snapshots.standards_snapshots import SnapshotError, SnapshotModule
+try:
+    SnapshotModule.open(Path(sys.argv[1])).close()
+except SnapshotError as error:
+    print(error.failure.code)
+else:
+    print('admitted')
+"""
+
+
+def _begin_as_new_process() -> None:
+    """Discard this process's audit record, as a newly started process has none."""
+    with store_module._AUDITED_FILES_LOCK:
+        store_module._AUDITED_FILES.clear()
+
+
+def _file_identity(path: Path) -> tuple[int, int]:
+    observed = path.lstat()
+    return observed.st_dev, observed.st_ino
+
+
+def _violate_foreign_key(path: Path) -> None:
+    with closing(sqlite3.connect(path, isolation_level=None)) as corruptor:
+        corruptor.execute("INSERT INTO content_files VALUES ('missing', 'a', X'', 0, 'digest')")
 
 
 class _ObservedAdmissionStore(SQLiteSnapshotStore):
@@ -74,6 +115,25 @@ class StorageLifecycleTest(unittest.TestCase):
         self.addCleanup(directory.cleanup)
         self.path = Path(directory.name) / 'snapshots.sqlite3'
         self.now = 2_000_000_000
+        # Audit expectations must not depend on stores opened by earlier tests,
+        # whose removed files can lend their inode numbers to these fixtures.
+        _begin_as_new_process()
+
+    def events(self, path=None):
+        opened = _ObservedAdmissionStore(path or self.path)
+        try:
+            return opened.admission_events
+        finally:
+            opened.close()
+
+    def cold_open(self, path=None):
+        completed = subprocess.run(
+            [sys.executable, '-P', '-c', _COLD_OPEN, str(path or self.path)],
+            env={**os.environ, 'PYTHONPATH': str(ROOT)},
+            text=True, capture_output=True, timeout=60,
+        )
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        return completed.stdout.strip()
 
     def module(self):
         module = SnapshotModule.open(self.path, now=lambda: self.now, quarantine_seconds=10)
@@ -311,22 +371,110 @@ class StorageLifecycleTest(unittest.TestCase):
         self.assertNotIn('BEGIN IMMEDIATE', statements)
         self.assertFalse(module._store._connection.in_transaction)
 
-    def test_new_and_current_admission_have_one_full_integrity_audit(self):
-        created = _ObservedAdmissionStore(self.path)
-        try:
-            self.assertEqual(created.admission_events, [('configure', 0, False), ('integrity', 2, False)])
-        finally:
-            created.close()
+    def test_new_and_current_admission_have_one_full_integrity_audit_per_process(self):
+        # The creating process audits its new file, and does not audit it again.
+        self.assertEqual(self.events(), [('configure', 0, False), ('integrity', 2, False)])
         for _ in range(2):
-            opened = _ObservedAdmissionStore(self.path)
-            try:
-                self.assertEqual(opened.admission_events, [('integrity', 2, False), ('configure', 2, False)])
-            finally:
-                opened.close()
+            self.assertEqual(self.events(), [('configure', 2, False)])
+        # A new process audits the existing file once, before configuration.
+        _begin_as_new_process()
+        self.assertEqual(self.events(), [('integrity', 2, False), ('configure', 2, False)])
+        for _ in range(2):
+            self.assertEqual(self.events(), [('configure', 2, False)])
+
+    def test_two_module_opens_in_one_process_audit_the_file_once(self):
+        with SnapshotModule.open(self.path, now=lambda: self.now) as initial:
+            snapshot = initial.create_snapshot(capture()).snapshot
+        _begin_as_new_process()
+        opens = []
+        connect = sqlite3.connect
+
+        def traced_connect(database, *arguments, **options):
+            # Observe each store connection from before its first statement.
+            connection = connect(database, *arguments, **options)
+            if Path(database).resolve() == self.path.resolve():
+                opens.append([])
+                connection.set_trace_callback(opens[-1].append)
+            return connection
+
+        with mock.patch.object(store_module.sqlite3, 'connect', traced_connect):
+            for _ in range(2):
+                with SnapshotModule.open(self.path, now=lambda: self.now) as reopened:
+                    self.assertEqual(reopened.load_content(snapshot), capture())
+        first, second = opens
+        audit = ['PRAGMA integrity_check', 'PRAGMA foreign_key_check']
+        self.assertEqual([statement for statement in first if statement in audit], audit)
+        # The later open omits exactly that pair and repeats every other statement.
+        self.assertEqual([statement for statement in first if statement not in audit], second)
+        self.assertIn('PRAGMA application_id', second)
+        self.assertIn('PRAGMA user_version', second)
+        self.assertTrue(any('FROM sqlite_schema' in statement for statement in second), second)
+
+    def test_replaced_file_is_audited_again(self):
+        self.assertEqual(self.events(), [('configure', 0, False), ('integrity', 2, False)])
+        self.assertEqual(self.events(), [('configure', 2, False)])
+        audited = _file_identity(self.path)
+        # The replacement exists beside the audited file, so it has another inode.
+        replacement = self.path.with_name('replacement.sqlite3')
+        shutil.copyfile(self.path, replacement)
+        self.assertNotEqual(_file_identity(replacement), audited)
+        os.replace(replacement, self.path)
+        self.assertEqual(self.events(), [('integrity', 2, False), ('configure', 2, False)])
+        self.assertEqual(self.events(), [('configure', 2, False)])
+
+    def test_corrupt_replacement_of_an_audited_file_is_rejected(self):
+        SQLiteSnapshotStore(self.path).close()
+        SQLiteSnapshotStore(self.path).close()
+        replacement = self.path.with_name('replacement.sqlite3')
+        shutil.copyfile(self.path, replacement)
+        _violate_foreign_key(replacement)
+        os.replace(replacement, self.path)
+        self.assert_code('SNAPSHOT_STORE.FOREIGN_KEY_FAILURE', lambda: SQLiteSnapshotStore(self.path))
+        # A rejected file gains no audit record: the next open audits it again.
+        self.assert_code('SNAPSHOT_STORE.FOREIGN_KEY_FAILURE', lambda: SQLiteSnapshotStore(self.path))
+        self.assertTrue(self.path.is_file())
+
+    def test_later_opens_keep_application_version_and_schema_checks(self):
+        for change, code in (
+            ('PRAGMA application_id=1', 'SNAPSHOT_STORE.INVALID_APPLICATION'),
+            ('PRAGMA user_version=3', 'SNAPSHOT_STORE.UNSUPPORTED_VERSION'),
+            ('PRAGMA user_version=0', 'SNAPSHOT_STORE.INVALID_VERSION'),
+            ('CREATE TABLE unexpected (value TEXT)', 'SNAPSHOT_STORE.INVALID_SCHEMA'),
+            ('DROP TRIGGER child_index_no_update', 'SNAPSHOT_STORE.INVALID_SCHEMA'),
+        ):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / 'snapshots.sqlite3'
+                SQLiteSnapshotStore(path).close()
+                self.assertEqual(self.events(path), [('configure', 2, False)])
+                with closing(sqlite3.connect(path, isolation_level=None)) as changer:
+                    changer.execute(change)
+                # Same file, already audited by this process: only the audit is omitted.
+                self.assert_code(code, lambda: _ObservedAdmissionStore(path))
+                self.assertTrue(path.is_file())
+
+    def test_new_process_rejects_corruption_in_a_file_audited_elsewhere(self):
+        for corruption, code in (('foreign-key', 'SNAPSHOT_STORE.FOREIGN_KEY_FAILURE'),
+                                 ('check', 'SNAPSHOT_STORE.INTEGRITY_FAILURE')):
+            with self.subTest(corruption=corruption), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / 'snapshots.sqlite3'
+                # This process audits the file; that record stays in this process.
+                SQLiteSnapshotStore(path).close()
+                self.assertEqual(self.cold_open(path), 'admitted')
+                with closing(sqlite3.connect(path, isolation_level=None)) as corruptor:
+                    if corruption == 'foreign-key':
+                        corruptor.execute("INSERT INTO content_files VALUES ('missing', 'a', X'', 0, 'digest')")
+                    else:
+                        corruptor.execute('PRAGMA ignore_check_constraints=ON')
+                        corruptor.execute("INSERT INTO content_sets VALUES ('bad', 0)")
+                self.assertEqual(self.cold_open(path), code)
+                self.assertTrue(path.is_file())
 
     def test_version_one_keeps_preconfiguration_guarded_and_final_audits(self):
         _, record = _populated_version_one_store(self.path)
         before = _version_one_rows(self.path)
+        # Building the fixture audited this same file as a current store. That
+        # record must not shorten any audit of its version-one admission.
+        self.assertTrue(store_module._audit_recorded(_file_identity(self.path)))
         opened = _ObservedAdmissionStore(self.path)
         try:
             self.assertEqual(opened.admission_events, [
@@ -337,6 +485,18 @@ class StorageLifecycleTest(unittest.TestCase):
         finally:
             opened.close()
         self.assertEqual(_version_one_rows(self.path), before)
+
+    def test_version_one_migration_in_a_new_process_keeps_every_audit(self):
+        _populated_version_one_store(self.path)
+        before = _version_one_rows(self.path)
+        _begin_as_new_process()
+        self.assertEqual(self.events(), [
+            ('integrity', 1, False), ('configure', 1, False),
+            ('integrity', 1, True), ('integrity', 2, True), ('integrity', 2, False),
+        ])
+        self.assertEqual(_version_one_rows(self.path), before)
+        # The final destination audit is this process's audit of the migrated file.
+        self.assertEqual(self.events(), [('configure', 2, False)])
 
     def test_other_opener_migration_keeps_destination_audit(self):
         _populated_version_one_store(self.path)
@@ -404,6 +564,8 @@ class StorageLifecycleTest(unittest.TestCase):
                     else:
                         corruptor.execute('PRAGMA ignore_check_constraints=ON')
                         corruptor.execute("INSERT INTO content_sets VALUES ('bad', 0)")
+                # The first open by a process is the one that audits.
+                _begin_as_new_process()
                 self.assert_code(code, lambda: _ObservedAdmissionStore(path))
                 self.assertTrue(path.is_file())
                 with closing(sqlite3.connect(path)) as observed:

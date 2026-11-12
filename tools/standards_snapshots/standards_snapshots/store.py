@@ -5,6 +5,7 @@ import json
 import os
 import sqlite3
 import stat
+import threading
 from collections.abc import Iterator
 from contextlib import closing, contextmanager
 from functools import lru_cache
@@ -34,6 +35,25 @@ from .model import (
 APPLICATION_ID = 0x43534131
 USER_VERSION = 2
 BUSY_TIMEOUT_MS = 5_000
+
+# Device and inode of every store file whose complete SQLite integrity and
+# foreign-key audit has passed in this process. A later open of the same file
+# keeps every other admission check and omits only that audit pair. The record
+# is never persisted: each new process audits again, and a file put in place
+# under a different inode has no record. It is a point-in-time observation of
+# one file, not proof that another process has left the file unchanged.
+_AUDITED_FILES: set[tuple[int, int]] = set()
+_AUDITED_FILES_LOCK = threading.Lock()
+
+
+def _audit_recorded(identity: tuple[int, int]) -> bool:
+    with _AUDITED_FILES_LOCK:
+        return identity in _AUDITED_FILES
+
+
+def _record_audit(identity: tuple[int, int]) -> None:
+    with _AUDITED_FILES_LOCK:
+        _AUDITED_FILES.add(identity)
 
 
 def _root_reference(value: object, description: str) -> None:
@@ -274,6 +294,7 @@ class SQLiteSnapshotStore:
                     "SNAPSHOT_STORE.UNSUPPORTED_PATH",
                     "SQLite path must be one regular non-symlink file",
                 )
+            identity = (observed.st_dev, observed.st_ino)
         else:
             path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
             flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
@@ -281,7 +302,7 @@ class SQLiteSnapshotStore:
             try:
                 descriptor = os.open(path, flags, 0o600)
                 observed = os.fstat(descriptor)
-                created_identity = (observed.st_dev, observed.st_ino)
+                identity = created_identity = (observed.st_dev, observed.st_ino)
                 os.close(descriptor)
             except OSError as error:
                 raise unavailable("SNAPSHOT_STORE.UNAVAILABLE", str(error)) from error
@@ -292,11 +313,18 @@ class SQLiteSnapshotStore:
             )
             self._connection = connection
             self._connection.enable_load_extension(False)
+            # SQLite has opened whichever file the path named at that moment.
+            # An audit is reused, and afterwards recorded, only for a path that
+            # still names the file observed before the connection was made.
+            same_file = self._path_identity() == identity
             if existed:
-                admitted_version = self._verify_existing_authority()
+                admitted_version = self._verify_existing_authority(
+                    audited=same_file and _audit_recorded(identity)
+                )
                 self._configure()
                 self._prepare_existing_schema()
-                # Current stores were fully audited before configuration. A v1
+                # Current stores were fully audited before configuration, in
+                # this open or an earlier one in this process. A v1
                 # admission still needs the final destination audit, including
                 # when another opener completed migration in the meantime.
                 if admitted_version != USER_VERSION:
@@ -305,6 +333,8 @@ class SQLiteSnapshotStore:
                 self._configure()
                 self._initialize_schema()
                 self._verify_integrity()
+            if same_file:
+                _record_audit(identity)
         except Exception as error:
             self._cleanup_failed_open(connection, created_identity)
             if isinstance(error, SnapshotError):
@@ -317,6 +347,13 @@ class SQLiteSnapshotStore:
 
     def close(self) -> None:
         self._connection.close()
+
+    def _path_identity(self) -> tuple[int, int] | None:
+        try:
+            observed = self.path.lstat()
+        except OSError:
+            return None
+        return (observed.st_dev, observed.st_ino)
 
     def _cleanup_failed_open(
         self,
@@ -1047,8 +1084,12 @@ class SQLiteSnapshotStore:
             self._migrate_version_one()
         self._verify_schema()
 
-    def _verify_existing_authority(self) -> int:
-        """Authenticate before configuration and return the admitted schema version."""
+    def _verify_existing_authority(self, *, audited: bool) -> int:
+        """Authenticate before configuration and return the admitted schema version.
+
+        ``audited`` reports that this process already completed the full audit
+        of this exact current-schema file. It never shortens a v1 admission.
+        """
         application_id = self._connection.execute("PRAGMA application_id").fetchone()[0]
         user_version = self._connection.execute("PRAGMA user_version").fetchone()[0]
         if application_id != APPLICATION_ID:
@@ -1071,7 +1112,8 @@ class SQLiteSnapshotStore:
                 f"expected schema version 1 or {USER_VERSION}, observed {user_version}",
             )
         self._verify_schema()
-        self._verify_integrity()
+        if not audited:
+            self._verify_integrity()
         return user_version
 
     def _migrate_version_one(self) -> None:

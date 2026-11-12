@@ -53,18 +53,33 @@ No identity domain, store format or persisted representation changes.
 
 ## Admission and maintenance work
 
-Each open of an existing current-schema database authenticates the application,
-exact schema, and complete SQLite integrity/foreign-key state **before** persistent
-configuration. Configuration is followed by the existing exact schema check. The
-same full audit is not repeated for a store admitted at the current schema version.
-This is a point-in-time audit on every open, not cached proof that the database can
-never change. Selected content and aggregate reads retain their ordinary checks.
+Each open of an existing current-schema database authenticates the application
+and exact schema **before** persistent configuration. Configuration is followed by
+the existing exact schema check. Those checks run on every open.
 
-New initialization keeps its final integrity audit and owned-file cleanup on failure.
+The complete SQLite integrity/foreign-key audit runs once per process for each
+store file. A process's first open of a file audits it before persistent
+configuration. Later opens of the same file by that process omit only this audit.
+The process remembers a passed audit in memory, by the file's device and inode, and
+only after that open succeeded; nothing is persisted. A new process audits again,
+and so does a file moved into place under a different inode. To audit a store
+again, open it from a new process. `maintain` purges expired roots; it does not run
+this audit.
+
+The audit is a point-in-time observation, not proof that the database stays valid.
+Damage that appears after a process's audit is not reported by that process's later
+opens. A file deleted and then recreated outside this package can receive the
+audited file's inode number, and that process does not audit it; replace a store by
+renaming a complete file into place, or restart the process. Selected content and
+aggregate reads retain their ordinary checks on every call.
+
+New initialization keeps its final integrity audit and owned-file cleanup on failure;
+that audit is the creating process's audit of the new file.
 A store admitted as v1 keeps the pre-configuration audit, transaction-guarded
-pre/post-migration audits, and final destination audit. The final audit also applies
+pre/post-migration audits, and final destination audit, even when the process
+audited the same file earlier. The final audit also applies
 when another opener finishes migration before this opener prepares the schema.
-No integrity policy, SQLite profile, supported migration or stored format changes.
+No SQLite profile, supported migration or stored format changes.
 
 Maintenance remains synchronous at the same module call sites. It first performs a
 short-lived existence read for quarantined roots whose deadline is at or before the
