@@ -11,11 +11,21 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 
+from tools.standards_engine.standards_engine.tools import INTERFACE_CONTRACT
 from tools.standards_engine.tests.test_agent_workflow import ROOT, decisions, evidence, prepare_repository
 from tools.standards_engine.tests import test_proposal_consumers as fixtures
 from tools.standards_engine.tests.test_proposal_consumers import registration
+
+
+def installed_interface_version(root):
+    # The server announces the interface declared by the repository it serves.
+    # Read that declaration instead of repeating a number that each interface
+    # edition would otherwise leave stale here.
+    with (root / INTERFACE_CONTRACT).open('rb') as source:
+        return tomllib.load(source)['interface_schema_version']
 
 
 class ConsumerPublicationTest(unittest.TestCase):
@@ -43,7 +53,8 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(process.returncode,0,process.stderr)
         self.assertEqual(process.stderr,'')
         responses={row['id']:row for row in map(json.loads,process.stdout.splitlines())}
-        self.assertIn('interface 47;',responses[1]['result']['instructions'])
+        self.assertIn(f'interface {installed_interface_version(self.root)};',
+                      responses[1]['result']['instructions'])
         return responses[2]
 
     def call(self,name,arguments,purpose='authoring',error=False):

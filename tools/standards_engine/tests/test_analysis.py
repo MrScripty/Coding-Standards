@@ -687,7 +687,38 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         }
                     )
                 )
+                # Apply advances this unchanged main checkout to its publication.
+                self.assertEqual(applied.checkout.status, "current")
                 return engine._authoring.read_application(applied.application.id)
+
+            def assert_checkout_presents(
+                application: ProposalApplication,
+                present: tuple[str, ...],
+                absent: tuple[str, ...] = (),
+            ) -> None:
+                # Interface 47: HEAD, index and worktree all present the exact
+                # published candidate, and no other local difference appears.
+                self.assertEqual(
+                    git_output(repository, ("rev-parse", "HEAD")).strip(),
+                    application.candidate.oid.encode("ascii"),
+                )
+                for path in present:
+                    self.assertEqual(
+                        (repository / path).read_bytes(),
+                        engine._repository.read_file(
+                            application.candidate, RepositoryPath.parse(path)
+                        ),
+                        path,
+                    )
+                for path in absent:
+                    self.assertFalse((repository / path).exists(), path)
+                self.assertEqual(
+                    git_output(
+                        repository,
+                        ("status", "--porcelain=v1", "--untracked-files=all"),
+                    ),
+                    b"",
+                )
 
             def assert_commit(
                 application: ProposalApplication,
@@ -798,7 +829,10 @@ class AnalysisWorkflowTest(unittest.TestCase):
                         impact_path: "100644",
                     },
                 )
-                self.assertFalse((repository / standard_path).exists())
+                assert_checkout_presents(
+                    create_application,
+                    (standard_path, policy_path, impact_path),
+                )
 
                 facade.close()
                 engine = StandardsEngine.open_repository(
@@ -933,7 +967,11 @@ class AnalysisWorkflowTest(unittest.TestCase):
                 )
                 self.assertIn(b"[[tombstone]]", retired_policy)
                 self.assertNotIn(b"[[policy_unit]]", retired_policy)
-                self.assertFalse((repository / standard_path).exists())
+                assert_checkout_presents(
+                    retire_application,
+                    (policy_path,),
+                    absent=(standard_path, impact_path),
+                )
 
                 facade.close()
                 engine = StandardsEngine.open_repository(
