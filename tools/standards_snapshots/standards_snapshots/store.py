@@ -41,7 +41,8 @@ BUSY_TIMEOUT_MS = 5_000
 # keeps every other admission check and omits only that audit pair. The record
 # is never persisted: each new process audits again, and a file put in place
 # under a different inode has no record. It is a point-in-time observation of
-# one file, not proof that another process has left the file unchanged.
+# one file, not proof that another process has left the file unchanged. A store
+# drops the record of the file it opened when it finds the path naming another.
 _AUDITED_FILES: set[tuple[int, int]] = set()
 _AUDITED_FILES_LOCK = threading.Lock()
 
@@ -54,6 +55,11 @@ def _audit_recorded(identity: tuple[int, int]) -> bool:
 def _record_audit(identity: tuple[int, int]) -> None:
     with _AUDITED_FILES_LOCK:
         _AUDITED_FILES.add(identity)
+
+
+def _forget_audit(identity: tuple[int, int]) -> None:
+    with _AUDITED_FILES_LOCK:
+        _AUDITED_FILES.discard(identity)
 
 
 def _root_reference(value: object, description: str) -> None:
@@ -308,33 +314,23 @@ class SQLiteSnapshotStore:
                 raise unavailable("SNAPSHOT_STORE.UNAVAILABLE", str(error)) from error
         connection: sqlite3.Connection | None = None
         try:
-            connection = sqlite3.connect(
-                path, isolation_level=None, timeout=BUSY_TIMEOUT_MS / 1000
-            )
+            connection = self._connect()
             self._connection = connection
-            self._connection.enable_load_extension(False)
+            self._connected = True
             # SQLite has opened whichever file the path named at that moment.
             # An audit is reused, and afterwards recorded, only for a path that
             # still names the file observed before the connection was made.
             same_file = self._path_identity() == identity
             if existed:
-                admitted_version = self._verify_existing_authority(
-                    audited=same_file and _audit_recorded(identity)
-                )
-                self._configure()
-                self._prepare_existing_schema()
-                # Current stores were fully audited before configuration, in
-                # this open or an earlier one in this process. A v1
-                # admission still needs the final destination audit, including
-                # when another opener completed migration in the meantime.
-                if admitted_version != USER_VERSION:
-                    self._verify_integrity()
+                self._admit_existing(audited=same_file and _audit_recorded(identity))
             else:
                 self._configure()
                 self._initialize_schema()
                 self._verify_integrity()
             if same_file:
                 _record_audit(identity)
+            # The file this store opened, when that is known.
+            self._identity = identity if same_file else None
         except Exception as error:
             self._cleanup_failed_open(connection, created_identity)
             if isinstance(error, SnapshotError):
@@ -346,7 +342,84 @@ class SQLiteSnapshotStore:
             raise
 
     def close(self) -> None:
-        self._connection.close()
+        self.release()
+
+    def release(self) -> None:
+        """Close the connection; `readmit` opens the next one.
+
+        An owner that keeps this store between uses calls this after each use,
+        so that between uses the store holds no connection, no lock and no open
+        file. A transaction the use did not end is rolled back, never committed.
+        Releasing a released store does nothing.
+        """
+        if self._connected:
+            self._connected = False
+            self._connection.close()
+
+    def readmit(self) -> bool:
+        """Open a connection for another use, as a new open of the path would.
+
+        An owner that keeps the store between uses calls this before each use.
+        False means the path no longer names the regular file this store
+        opened: nothing is opened, and the owner closes this store and opens
+        the path again, which decides what is there now and audits a file this
+        process has not audited. Otherwise a new connection replaces the
+        previous one and runs every check an open of this existing file runs,
+        failing as that open would: application, version and exact schema, the
+        required profile, and a version 1 migration with its audits. Only the
+        complete audit this process recorded for the file is not repeated. A
+        failed readmission leaves no connection open.
+        """
+        identity = self._identity
+        if identity is None:
+            return False
+        if self._path_identity() != identity:
+            # The path names another file or none. The number of the inode this
+            # store opened can be given to a later file, which must be audited,
+            # not taken for the audited one.
+            _forget_audit(identity)
+            return False
+        self.release()
+        try:
+            self._connection = self._connect()
+            self._connected = True
+            if self._path_identity() != identity:
+                # Replaced between the two observations: SQLite opened another file.
+                self.release()
+                _forget_audit(identity)
+                return False
+            self._admit_existing(audited=_audit_recorded(identity))
+        except Exception as error:
+            self.release()
+            if isinstance(error, SnapshotError):
+                raise
+            if isinstance(error, sqlite3.DatabaseError):
+                raise invalid("SNAPSHOT_STORE.INVALID_DATABASE", str(error)) from error
+            raise
+        _record_audit(identity)
+        return True
+
+    def _connect(self) -> sqlite3.Connection:
+        connection = sqlite3.connect(
+            self.path, isolation_level=None, timeout=BUSY_TIMEOUT_MS / 1000
+        )
+        try:
+            connection.enable_load_extension(False)
+        except BaseException:
+            connection.close()
+            raise
+        return connection
+
+    def _admit_existing(self, *, audited: bool) -> None:
+        admitted_version = self._verify_existing_authority(audited=audited)
+        self._configure()
+        self._prepare_existing_schema()
+        # Current stores were fully audited before configuration, in this
+        # admission or an earlier one in this process. A v1 admission still
+        # needs the final destination audit, including when another opener
+        # completed migration in the meantime.
+        if admitted_version != USER_VERSION:
+            self._verify_integrity()
 
     def _path_identity(self) -> tuple[int, int] | None:
         try:

@@ -175,8 +175,11 @@ re-entry constructs its own scope, and public request shapes remain unchanged.
 Each subsequent operation loads and verifies its own captured bytes. Publication
 verification, target compare-and-swap and recovery obtain fresh observations;
 no operation-local material crosses those barriers as permission or readiness.
-Each facade/Engine/SQLite lifetime remains per call. MCP now owns the installed
-interface and a bounded cache of pure snapshot compilation as described below.
+One MCP server process has one facade and Engine, opened by its first
+store-backed call and described under
+[One Engine per server process](#one-engine-per-server-process); the SQLite
+lifetime remains per call. The Engine keeps
+a bounded cache of pure snapshot compilation as described below.
 Operation-local workflow state, evaluations and permissions remain per-call.
 Exact draft projection retention is described separately below.
 
@@ -197,12 +200,16 @@ described under
 [Metaschema validation](../standards_contracts/README.md#metaschema-validation-and-the-recorded-schema-digest).
 Every other interface check runs at each start.
 
-One MCP process also owns a repository/purpose-scoped compilation cache with a
+Every Engine has a repository/purpose-scoped compilation cache with a
 two-entry and 32 MiB accounted-retention limit shared by snapshot and draft
-projection entries. Snapshot keys contain the exact verified
+projection entries. An Engine keeps its own until it closes, unless its owner
+lends one that outlives it; the one Engine of an MCP process keeps its own for
+that process, and a CLI invocation's Engine for that invocation. Snapshot keys
+contain the exact verified
 captured paths, bytes and source revision, plus the installed compiler function.
-Python dictionary equality distinguishes hash collisions. Each new operation
-opens its store, checks its application, version and exact schema, checks snapshot
+Python dictionary equality distinguishes hash collisions. Each new MCP call
+opens its store, checking its application, version and exact schema, and
+each operation checks snapshot
 lifecycle and verifies complete content identity before lookup. Missing,
 quarantined, purged or replaced storage, and content that no longer matches its
 identity, therefore remain observable. The store's complete SQLite
@@ -231,13 +238,67 @@ Advancing main affects new captures; historical snapshots preserve their capture
 material. Publication candidate verification and recovery keep their existing
 fresh observations. Each new process starts empty and reconstructs correctly.
 
-The transport retains serial dispatch and opens/closes a fresh facade and SQLite
-connection for each call. Pure cached structures are read-only through their
-owned interfaces; each response and continuation is newly constructed. The cache
+The transport retains serial dispatch and opens and closes a SQLite connection
+for each call. Pure cached structures are read-only
+through their owned interfaces; each response and continuation is newly
+constructed. The cache
 is not a thread-safety guarantee for concurrent use of one Engine. Independent
 server processes retain separate fixed-purpose resources. Stream EOF or failure
-releases the server-owned interface, catalog and cache; closing a borrowing Engine
+releases the server-owned interface and catalog and closes the Engine with its
+store and cache; closing an Engine that borrowed a cache
 closes its store without releasing the owner's cache.
+
+## One Engine per server process
+
+An MCP server process opens its facade and Engine with the first tool call that
+needs a store, uses them for every later call, and closes them when the server
+closes. `runtime_info`, `describe_input` and `describe_output` need no Engine
+and open none. A CLI invocation is one process with one Engine for its single
+operation, as before.
+
+The store connection is not part of that lifetime. Each call opens one and
+closes it when the call ends, so between calls the process holds no store
+connection, no SQLite lock and no open store file, journal or write-ahead log,
+and a call may come from any thread. What a call observes is what it observed
+when every call opened its own Engine:
+
+- **The store is opened for every call.** Before a call the server asks the
+  Engine to readmit, which opens a new connection and runs the statements a new
+  open of that existing file runs: application, version and exact schema, the
+  required SQLite profile, a version 1 migration with all of its audits, and the
+  maintenance probe with any due purge. A failure there is the same private
+  failure as a failed open: `isError` with the generic text, the diagnostic on
+  stderr, and no structured result. Only the complete integrity audit that the
+  process already ran for that file is not repeated, as before.
+- **Another process's work is visible to the next call.** A new connection has
+  read nothing, so committed snapshots, proposals, quarantine and purge by
+  another server or a CLI call, a store migrated or altered in place, and a
+  store file overwritten in place are all read as they are on disk.
+- **A replaced or missing store file opens a new Engine.** Before opening the
+  connection the Engine compares the repository root and store path it was
+  opened with against what they resolve to now, and the store path against the
+  file it opened. When either resolves elsewhere, or the store path names
+  another file or none, the server closes the Engine and opens a new one: that
+  open audits a file the process has not audited, creates a missing store, and
+  refuses a path that is not a regular file, exactly as an open always has. The
+  process also forgets its audit record of the file that was replaced. The
+  compilation cache belongs to the Engine, so nothing compiled from the old
+  store's content is carried to the new one except by verifying the new
+  store's bytes again.
+- **No operation state is kept.** Operation material (`ProposalMaterials`, its
+  decoded revision, base and projection) and Git read sessions and candidates
+  are created inside one operation and released when it ends, on success or
+  failure. Nothing an operation computes is attached to the facade, the Engine
+  or the snapshot module; what stays is the pure compilation cache. A store
+  transaction is committed or rolled back by the store method that began it,
+  and closing the call's connection rolls back one that was not ended.
+- **An Engine is not used after a failure nobody classified.** A typed
+  rejection is an ordinary outcome and keeps the Engine. An exception that
+  reaches the transport, an interruption, and an unclassified failure that an
+  application operation reports as its bounded `APPLICATION.INTERNAL_UNAVAILABLE`
+  rejection all close the Engine and its cache before the result is returned.
+  The next call opens a new Engine. Results and diagnostics of the failed call
+  are unchanged, and nothing is retried.
 
 ## Exact draft projection reuse
 

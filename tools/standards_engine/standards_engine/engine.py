@@ -480,7 +480,13 @@ class StandardsEngine:
 
         self._purpose = Purpose(purpose)
         self._route_page_bytes = admit_route_page_bytes(route_page_bytes)
-        if compiled_cache is not None:
+        # Compilation is a pure function of an exact capture, so an engine
+        # always reuses it. An owner may lend a cache it keeps longer than this
+        # engine; otherwise the engine keeps its own until it closes.
+        self._owns_compiled_cache = compiled_cache is None
+        if compiled_cache is None:
+            compiled_cache = CompiledSnapshotCache(repository.root, self._purpose)
+        else:
             compiled_cache.require_scope(repository.root, self._purpose)
         self._compiled_cache = compiled_cache
         self._repository = repository
@@ -490,6 +496,11 @@ class StandardsEngine:
         self._execution_context = execution_context or AnalysisExecutionContext()
         self._application_verifier = run_complete_verification
         self._temporary_store = temporary_store
+        # What `open_repository` selected and what that resolved to, when it
+        # opened this engine: (root, resolved root, store path, opened path).
+        self._opened: tuple[Path, Path, Path, Path] | None = None
+        # Set when an operation ended in a failure no owner classified.
+        self._failed = False
 
     @classmethod
     def open_repository(
@@ -514,18 +525,21 @@ class StandardsEngine:
             else:
                 temporary = tempfile.TemporaryDirectory(prefix="coding-standards-a1c-")
                 store_path = Path(temporary.name) / "snapshots.sqlite3"
-        return cls(
+        # Normalize the parent, but let the store inspect the selected final
+        # component before following it. Relative paths remain cwd-relative;
+        # intermediate symlinks are allowed by the local store contract.
+        opened_path = store_path.parent.resolve() / store_path.name
+        engine = cls(
             GitRepository(selected_root),
-            # Normalize the parent, but let the store inspect the selected final
-            # component before following it. Relative paths remain cwd-relative;
-            # intermediate symlinks are allowed by the local store contract.
-            SnapshotModule.open(store_path.parent.resolve() / store_path.name),
+            SnapshotModule.open(opened_path),
             purpose=selected_purpose,
             execution_context=execution_context,
             temporary_store=temporary,
             compiled_cache=compiled_cache,
             route_page_bytes=route_page_bytes,
         )
+        engine._opened = (root, selected_root, store_path, opened_path)
+        return engine
 
     @property
     def purpose(self) -> Purpose:
@@ -536,11 +550,53 @@ class StandardsEngine:
         """Host-selected byte budget of one application route content page."""
         return self._route_page_bytes
 
+    def release(self) -> None:
+        """Close the store connection until `readmit` opens the next one.
+
+        An owner that keeps this engine across calls releases it after each
+        one: between calls the engine holds no store connection, lock or open
+        store file, and a transaction a call did not end is rolled back. The
+        compilation cache and everything else about the engine stay.
+        """
+        self._snapshots.release()
+
+    def readmit(self) -> bool:
+        """Open the store for another operation, as opening this engine again would.
+
+        An owner that keeps this engine across calls asks before each one.
+        False means `open_repository` with the same arguments would now reach
+        another repository root or another store file: a selected path resolves
+        elsewhere, or the store path names another file or none. The owner then
+        closes this engine and opens a new one. Otherwise the store runs its
+        admission checks and due maintenance on a new connection, and their
+        failures are raised as they are from `open_repository`.
+        """
+        if self._opened is not None:
+            root, opened_root, store, opened_store = self._opened
+            if root.resolve() != opened_root or store.parent.resolve() / store.name != opened_store:
+                return False
+        return self._snapshots.readmit()
+
+    @property
+    def reusable(self) -> bool:
+        """False once this engine must not serve another operation.
+
+        An operation that ended in an unclassified failure leaves state that
+        nothing has checked. A failure raised to the caller is its own signal;
+        this reports the one an application operation turned into its bounded
+        rejection.
+        """
+        return not self._failed
+
     def close(self) -> None:
-        self._snapshots.close()
-        if self._temporary_store is not None:
-            self._temporary_store.cleanup()
-            self._temporary_store = None
+        try:
+            self._snapshots.close()
+        finally:
+            if self._owns_compiled_cache:
+                self._compiled_cache.close()
+            if self._temporary_store is not None:
+                self._temporary_store.cleanup()
+                self._temporary_store = None
 
     def __enter__(self) -> StandardsEngine:
         return self
@@ -594,8 +650,7 @@ class StandardsEngine:
             result = CreateSnapshotResult.from_value(
                 {"kind": "create-snapshot-result", "snapshot": self._summary(summary)}
             )
-            if (self._compiled_cache is not None and isinstance(second, CompiledSnapshot)
-                    and second.source is replay):
+            if isinstance(second, CompiledSnapshot) and second.source is replay:
                 # Both independent proofs and snapshot admission have succeeded.
                 # Drop the mutable recording wrapper; reuse still requires the
                 # normal durable load/identity/lifecycle checks for any handle.
@@ -2137,13 +2192,7 @@ class StandardsEngine:
 
     def _compiled_snapshot(self, snapshot: SnapshotId) -> CompiledSnapshot:
         capture = self._snapshots.load_content(snapshot, identity_reuse=self._compiled_cache)
-        if self._compiled_cache is not None:
-            return self._compiled_cache.compile_verified(capture, self._compile)
-        return self._compile(
-            FrozenContentSource(
-                (str(item.path), item.content) for item in capture.files
-            )
-        )
+        return self._compiled_cache.compile_verified(capture, self._compile)
 
     def _compiled_revision(self, revision: ProposalRevision) -> CompiledSnapshot:
         return self._proposal_projection(revision).compiled
@@ -2161,7 +2210,7 @@ class StandardsEngine:
             if accepted is None
             else accepted
         )
-        if reuse and self._compiled_cache is not None:
+        if reuse:
             return self._compiled_cache.project_verified(
                 revision, accepted, self._logical_authoring, predecessor=predecessor,
             )
@@ -2171,7 +2220,6 @@ class StandardsEngine:
             base_snapshot=str(revision.base_snapshot),
             base_repository_paths=revision.base_repository_paths,
             compiled_base=accepted,
-            predecessor=predecessor if reuse else None,
         )
 
     @staticmethod

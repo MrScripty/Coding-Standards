@@ -5,6 +5,11 @@ transactions still select the current due set and own all deletion effects.
 
 One process runs the complete integrity/foreign-key audit of a store file once.
 Later opens of that file keep the application, version and exact schema checks.
+
+An owner that keeps a store between uses releases it after each use and
+readmits it before the next. A released store holds no connection. Readmission
+opens a new one, runs the statements of a later open, and reports a path that
+no longer names the opened file so that the owner opens it again.
 """
 from __future__ import annotations
 
@@ -28,7 +33,7 @@ from tools.standards_snapshots.standards_snapshots import store as store_module
 from tools.standards_snapshots.standards_snapshots.store import SQLiteSnapshotStore
 from tools.standards_snapshots.tests.test_module import capture
 from tools.standards_snapshots.tests.test_store import (
-    _populated_version_one_store, _version_one_rows,
+    _downgrade_to_version_one, _populated_version_one_store, _version_one_rows,
 )
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -597,6 +602,248 @@ class StorageLifecycleTest(unittest.TestCase):
         with self.assertRaises(sqlite3.ProgrammingError):
             connections[0].execute('SELECT 1')
 
+    def test_readmission_runs_the_statements_of_a_later_open(self):
+        with SnapshotModule.open(self.path, now=lambda: self.now) as initial:
+            snapshot = initial.create_snapshot(capture()).snapshot
+        opens = []
+        connect = sqlite3.connect
+
+        def traced_connect(database, *arguments, **options):
+            connection = connect(database, *arguments, **options)
+            opens.append([])
+            connection.set_trace_callback(opens[-1].append)
+            return connection
+
+        with mock.patch.object(store_module.sqlite3, 'connect', traced_connect):
+            kept = SnapshotModule.open(self.path, now=lambda: self.now)
+            self.addCleanup(kept.close)
+            kept.release()
+            SnapshotModule.open(self.path, now=lambda: self.now).close()
+            opened, later = opens
+            self.assertEqual(opened, later)
+            self.assertNotIn('PRAGMA integrity_check', later)
+            for _ in range(2):
+                self.assertTrue(kept.readmit())
+                # A new connection: admission and the maintenance probe, statement for statement.
+                self.assertEqual(opens[-1], later)
+                self.assertEqual(kept.load_content(snapshot), capture())
+                kept.release()
+            self.assertEqual(len(opens), 4)
+            # A process without an audit record audits on readmission, as on open.
+            _begin_as_new_process()
+            self.assertTrue(kept.readmit())
+        self.assertEqual([statement for statement in opens[-1] if statement not in later],
+                         ['PRAGMA integrity_check', 'PRAGMA foreign_key_check'])
+        self.assertTrue(store_module._audit_recorded(_file_identity(self.path)))
+
+    def test_released_store_holds_no_connection_and_readmission_opens_a_new_one(self):
+        module = self.module()
+        snapshot, head, root = self.seed(module)
+        uses = (
+            lambda: module.load_content(snapshot),
+            lambda: module.find_snapshots(FindSnapshotsRequest(limit=10)),
+            lambda: module.inspect_child(ChildHandle(head.aggregate_id, 'requirement', 'one')),
+            lambda: module.create_snapshot(capture(b'another')),
+            lambda: self.assert_code('AGGREGATE.UNAVAILABLE', lambda: module.load_aggregate('missing')),
+            lambda: module.delete_snapshot(snapshot),
+            lambda: module.undelete_snapshot(snapshot),
+        )
+        seen = []
+        for use in uses:
+            use()
+            connection = module._store._connection
+            self.assertFalse(any(connection is earlier for earlier in seen))
+            seen.append(connection)
+            module.release()
+            self.assert_released(module)
+            # Releasing a released store does nothing.
+            module.release()
+            self.assertTrue(module.readmit())
+        # Readmission without a release also replaces the connection.
+        connection = module._store._connection
+        self.assertTrue(module.readmit())
+        self.assertIsNot(module._store._connection, connection)
+        with self.assertRaises(sqlite3.ProgrammingError):
+            connection.execute('SELECT 1')
+        self.assertEqual(module.load_aggregate_root(root.aggregate_id), root)
+        # Closing a released store does nothing either.
+        module.release()
+        module.close()
+        self.assert_released(module)
+
+    def test_release_rolls_back_a_transaction_the_use_did_not_end(self):
+        module = self.module()
+        module._store._connection.execute('BEGIN IMMEDIATE')
+        module._store._connection.execute(
+            'INSERT INTO purged_root_tombstones VALUES (?, ?)', ('left-open', 1))
+        module.release()
+        observed = self.connection()
+        self.assertIsNone(observed.execute(
+            "SELECT 1 FROM purged_root_tombstones WHERE snapshot_id = 'left-open'").fetchone())
+        self.assertFalse(self.path.with_name(self.path.name + '-journal').exists())
+        self.assertTrue(module.readmit())
+        self.assertEqual(module._store.counts()['purged_root_tombstones'], 0)
+
+    def test_readmission_reads_a_file_overwritten_in_place_as_a_new_open_does(self):
+        # Two stores with the same history but different content. Their change
+        # counters, page counts and schema cookies are equal, which is all that
+        # SQLite compares before trusting the pages a connection has read. A
+        # store that kept its connection would go on answering from the old ones.
+        first, second = self.path, self.path.with_name('second.sqlite3')
+        snapshots = {}
+        for path, content in ((first, b'first lineage'), (second, b'other lineage')):
+            with SnapshotModule.open(path, now=lambda: self.now) as module:
+                snapshots[path] = module.create_snapshot(capture(content)).snapshot
+        self.assertEqual(first.read_bytes()[24:44], second.read_bytes()[24:44])
+        self.assertEqual(first.stat().st_size, second.stat().st_size)
+        kept = SnapshotModule.open(first, now=lambda: self.now)
+        self.addCleanup(kept.close)
+        self.assertEqual(kept.load_content(snapshots[first]), capture(b'first lineage'))
+        kept.release()
+        identity = _file_identity(first)
+        shutil.copyfile(second, first)
+        self.assertEqual(_file_identity(first), identity)
+        self.assertTrue(kept.readmit())
+        # Exactly what a new open of the path reads: nothing of the old content.
+        self.assert_code('SNAPSHOT.UNAVAILABLE', lambda: kept.load_content(snapshots[first]))
+        self.assertEqual(kept.load_content(snapshots[second]), capture(b'other lineage'))
+
+    def test_readmission_reports_a_path_that_names_another_file_or_none(self):
+        def replaced(path):
+            replacement = path.with_name('replacement.sqlite3')
+            shutil.copyfile(path, replacement)
+            os.replace(replacement, path)
+
+        def moved_behind_a_link(path):
+            target = path.with_name('moved.sqlite3')
+            os.replace(path, target)
+            path.symlink_to(target)
+
+        for change, reopened in ((replaced, 'admitted'), (Path.unlink, 'admitted'),
+                                 (moved_behind_a_link, 'SNAPSHOT_STORE.UNSUPPORTED_PATH')):
+            with self.subTest(change=change.__name__), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / 'snapshots.sqlite3'
+                with SnapshotModule.open(path, now=lambda: self.now) as kept:
+                    kept.create_snapshot(capture())
+                    kept.release()
+                    self.assertTrue(kept.readmit())
+                    kept.release()
+                    opened = _file_identity(path)
+                    self.assertTrue(store_module._audit_recorded(opened))
+                    change(path)
+                    # Nothing is opened: what is at the path now is for a new open to decide.
+                    connect = sqlite3.connect
+                    with mock.patch.object(store_module.sqlite3, 'connect', wraps=connect) as connections:
+                        self.assertFalse(kept.readmit())
+                        self.assertFalse(kept.readmit())
+                    connections.assert_not_called()
+                    # A file that is given the opened file's inode number later
+                    # has no audit record.
+                    self.assertFalse(store_module._audit_recorded(opened))
+                # The owner's new open is what admits, creates or refuses the path.
+                if reopened == 'admitted':
+                    SnapshotModule.open(path, now=lambda: self.now).close()
+                else:
+                    self.assert_code(reopened, lambda: SnapshotModule.open(path))
+
+    def assert_released(self, module):
+        with self.assertRaises(sqlite3.ProgrammingError):
+            module._store._connection.execute('SELECT 1')
+        # An exclusive transaction needs every other connection to hold no lock.
+        with closing(sqlite3.connect(module._store.path, isolation_level=None, timeout=0)) as other:
+            other.execute('BEGIN EXCLUSIVE')
+            other.execute('ROLLBACK')
+
+    def test_readmission_keeps_application_version_and_schema_checks(self):
+        for change, code in (
+            ('PRAGMA application_id=1', 'SNAPSHOT_STORE.INVALID_APPLICATION'),
+            ('PRAGMA user_version=3', 'SNAPSHOT_STORE.UNSUPPORTED_VERSION'),
+            ('PRAGMA user_version=0', 'SNAPSHOT_STORE.INVALID_VERSION'),
+            ('CREATE TABLE unexpected (value TEXT)', 'SNAPSHOT_STORE.INVALID_SCHEMA'),
+            ('DROP TRIGGER child_index_no_update', 'SNAPSHOT_STORE.INVALID_SCHEMA'),
+        ):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as temporary:
+                path = Path(temporary) / 'snapshots.sqlite3'
+                with SnapshotModule.open(path, now=lambda: self.now) as kept:
+                    kept.release()
+                    self.assertTrue(kept.readmit())
+                    kept.release()
+                    with closing(sqlite3.connect(path, isolation_level=None)) as changer:
+                        changer.execute(change)
+                    # The code a new open of this file reports.
+                    self.assert_code(code, kept.readmit)
+                    self.assert_code(code, lambda: SQLiteSnapshotStore(path))
+                    # A refused readmission leaves no connection behind.
+                    self.assert_released(kept)
+
+    def test_readmission_restores_the_required_profile_as_an_open_does(self):
+        kept = self.module()
+        kept.release()
+        with closing(sqlite3.connect(self.path, isolation_level=None)) as changer:
+            self.assertEqual(changer.execute('PRAGMA journal_mode=WAL').fetchone(), ('wal',))
+        self.assertTrue(kept.readmit())
+        with closing(sqlite3.connect(self.path)) as observed:
+            self.assertEqual(observed.execute('PRAGMA journal_mode').fetchone(), ('delete',))
+        kept.create_snapshot(capture())
+        self.assertFalse(self.path.with_name(self.path.name + '-wal').exists())
+
+    def test_readmission_migrates_a_version_one_file_with_every_audit(self):
+        _, record = _populated_version_one_store(self.path)
+        kept = _ObservedAdmissionStore(self.path)
+        self.addCleanup(kept.close)
+        self.assertEqual(kept.load_aggregate(record.aggregate_id), record)
+        kept.release()
+        # Another process returns the same file to version one between uses.
+        _downgrade_to_version_one(self.path)
+        before = _version_one_rows(self.path)
+        del kept.admission_events[:]
+        self.assertTrue(kept.readmit())
+        self.assertEqual(kept.admission_events, [
+            ('integrity', 1, False), ('configure', 1, False),
+            ('integrity', 1, True), ('integrity', 2, True), ('integrity', 2, False),
+        ])
+        self.assertEqual(_version_one_rows(self.path), before)
+        self.assertEqual(kept.load_aggregate(record.aggregate_id), record)
+        kept.release()
+        del kept.admission_events[:]
+        self.assertTrue(kept.readmit())
+        self.assertEqual(kept.admission_events, [('configure', 2, False)])
+
+    def test_readmission_audits_and_rejects_a_file_without_an_audit_record(self):
+        kept = SQLiteSnapshotStore(self.path)
+        self.addCleanup(kept.close)
+        kept.release()
+        _violate_foreign_key(self.path)
+        # The record of this process's audit stands: damage after it is not looked for.
+        self.assertTrue(kept.readmit())
+        kept.release()
+        _begin_as_new_process()
+        self.assert_code('SNAPSHOT_STORE.FOREIGN_KEY_FAILURE', kept.readmit)
+        self.assertFalse(store_module._audit_recorded(_file_identity(self.path)))
+        # A refused readmission leaves no connection behind.
+        with self.assertRaises(sqlite3.ProgrammingError):
+            kept._connection.execute('SELECT 1')
+
+    def test_readmission_runs_due_maintenance_and_keeps_its_busy_failure(self):
+        module = self.module()
+        snapshot, head, root = self.seed(module)
+        module.delete_snapshot(snapshot)
+        module.release()
+        self.now += 10
+        writer = self.connection()
+        writer.execute('BEGIN IMMEDIATE')
+        try:
+            self.assert_code('SNAPSHOT_STORE.BUSY', module.readmit)
+            # The failed readmission left no connection behind.
+            with self.assertRaises(sqlite3.ProgrammingError):
+                module._store._connection.execute('SELECT 1')
+            self.assertIsNotNone(writer.execute(
+                'SELECT 1 FROM snapshot_roots WHERE snapshot_id = ?', (str(snapshot),)).fetchone())
+        finally:
+            writer.execute('ROLLBACK')
+        self.assertTrue(module.readmit())
+        self.assert_code('SNAPSHOT.EXPIRED', lambda: module.snapshot(snapshot))
+        self.assert_code('AGGREGATE.UNAVAILABLE', lambda: module.load_aggregate(head.aggregate_id))
 
 if __name__ == '__main__':
     unittest.main()

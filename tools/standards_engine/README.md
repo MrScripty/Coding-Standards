@@ -284,7 +284,10 @@ Use the supported locked environment for release qualification.
 `mcp_catalog.tool_catalog` builds tool definitions from an already compiled
 interface plus explicit purpose, focused/advanced selection and output delivery.
 It performs no installation loading, store access or connection management. MCP
-and CLI composition load the interface; `mcp.py` owns protocol and stdio lifetime.
+and CLI composition load the interface; `mcp.py` owns protocol and stdio lifetime
+and the server process's one Engine, which it opens with the first store-backed
+call and closes with the server. The store connection is opened for each call
+and closed when the call ends.
 Schema locations and reference closure belong to the contracts package. Input
 schemas are the exact reference-preserving closure of the selected declaration;
 there is no recursive inliner, size-based representation selector, input-mode enum,
@@ -352,7 +355,12 @@ smaller catalog. Preserve stores and handles across restart/reconnect.
 
 ## Immutable-work reuse (interface unchanged: 44)
 
-The process-owned compilation cache also retains exact captured-content identity
+Every Engine has a compilation cache: its own for its lifetime, or one its owner
+lends. An MCP server process has one Engine, opened by its first store-backed call
+and closed with the server, so its cache lasts for the process, while its store
+connection lasts for one call; see
+[One Engine per server process](PURPOSE-SEPARATION.md#one-engine-per-server-process).
+The cache also retains exact captured-content identity
 proofs. Identity and compilation for one capture share one LRU entry and the existing
 byte budget. The Snapshot codec still defines identity, and every read reloads actual
 bytes, verifies file integrity and checks the stored identity and current lifecycle.
@@ -395,7 +403,7 @@ reconstructed and disabled/undersized caches preserve results. See the
 Successful capture still compiles the live recorded source and the frozen replay
 independently and checks both path closure and semantic signature before durable
 snapshot publication. After admission it offers that proved frozen compilation
-to the existing bounded process cache, without retaining the recording wrapper.
+to the Engine's bounded cache, without retaining the recording wrapper.
 The first snapshot operation can reuse the result instead of compiling it again.
 
 This is computation reuse, not a stored proof or lifecycle decision. Every later

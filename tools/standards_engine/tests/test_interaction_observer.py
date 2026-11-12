@@ -348,7 +348,7 @@ class ObserverTests(unittest.TestCase):
         server = self.server()
         initialize(server)
         with patch.object(AgentToolFacade, 'open_repository') as opened, redirect_stderr(io.StringIO()):
-            opened.return_value.__enter__.side_effect = RuntimeError('SENSITIVE_EXCEPTION')
+            opened.return_value.apply.side_effect = RuntimeError('SENSITIVE_EXCEPTION')
             response = server.dispatch(request('tools/call', {'name': 'apply', 'arguments': {}}))
         self.assertTrue(response['result']['isError'])
         with patch.object(server, '_request', side_effect=KeyboardInterrupt('SENSITIVE_INTERRUPT')):
