@@ -115,7 +115,7 @@ class NativeOnlyBoundaryTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / 'untouched'
             commands = (
-                ('tools.standards_engine.standards_engine.mcp', ['--repo-root', str(root), '--purpose', 'authoring']),
+                ('tools.standards_engine.standards_engine.mcp', ['--repo-root', str(root), '--purpose', 'authoring', '--no-observe']),
                 ('tools.standards_engine.tests.catalog_inventory', ['--repo-root', str(root)]),
                 ('tools.standards_engine.tests.codex_navigation_client', []),
                 ('tools.standards_engine.tests.codex_discovery_client', ['--model', 'fixture', '--surface', 'fixture', '--evidence-dir', str(root)]),

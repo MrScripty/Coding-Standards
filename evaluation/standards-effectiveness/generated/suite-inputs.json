@@ -7347,7 +7347,7 @@
       ]
     },
     {
-      "digest": "sha256:c85b4e2d525e7d644261658b19e35b815e86f6386754d327f56de5bc8be52caa",
+      "digest": "sha256:142cffd188781617e4641812e2f9bd33b99edf7bbbbd1d54e613bbcbcc8864a2",
       "path": "tools/standards_engine/README.md",
       "state": "present",
       "uses": [
@@ -7661,7 +7661,7 @@
       ]
     },
     {
-      "digest": "sha256:bc14652d3aa78ea400495d7f89fe9c4662c4de16acf759cac41d8279239a2a78",
+      "digest": "sha256:1a6d59145f4b8d43c67c23787fc450b60b569bbd65089fca9e6817b17848edae",
       "path": "tools/standards_engine/standards_engine/interaction_observer.py",
       "state": "present",
       "uses": [
@@ -7685,7 +7685,7 @@
       ]
     },
     {
-      "digest": "sha256:899c6bb6605a9b6e07bee7992c48120f3dd10fe2a8bf77fa9d20a35a3575ab22",
+      "digest": "sha256:49b9ba34111d7fff7dfb575ec3e7e29d8d2be259ab35ba03bd7af26feb5b8c89",
       "path": "tools/standards_engine/standards_engine/mcp.py",
       "state": "present",
       "uses": [
@@ -7887,7 +7887,7 @@
       ]
     },
     {
-      "digest": "sha256:2a5e6761f159c63e3c79f8fed0d90e1edcf987ea78a86fc9878a2866c840ef03",
+      "digest": "sha256:bcb26ee92ec9e34ca2e04280c9122f43a81a515dd195b73d53dc864d55649e06",
       "path": "tools/standards_engine/tests/test_coverage_publication.py",
       "state": "present",
       "uses": [

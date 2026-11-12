@@ -10,6 +10,7 @@ import argparse
 from contextlib import redirect_stdout
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import sys
 import traceback
@@ -22,7 +23,7 @@ from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
 from .mcp_catalog import OutputSchemaDelivery, tool_catalog
 from .interaction_observer import (
-    DEFAULT_MAX_AGE_SECONDS, DEFAULT_MAX_BYTES, DEFAULT_MAX_CALLS,
+    DEFAULT_DEPLOYMENT, DEFAULT_MAX_AGE_SECONDS, DEFAULT_MAX_BYTES, DEFAULT_MAX_CALLS,
     InteractionRecorder, RecorderConfig, serialized_bytes,
 )
 
@@ -297,16 +298,19 @@ def main() -> int:
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
     )
     parser.add_argument('--observe-database', type=Path,
-                        help='Opt in to operator-only local SQLite observations in a trusted directory.')
-    parser.add_argument('--observe-deployment', help='Required nonsensitive deployment label when recording.')
+                        help='Record operator-only observations in this SQLite file instead of the default location; its directory must exist.')
+    parser.add_argument('--observe-deployment', default=DEFAULT_DEPLOYMENT,
+                        help='Nonsensitive deployment label stored with each recorded session.')
+    parser.add_argument('--no-observe', action='store_true',
+                        help='Do not record this process. STANDARDS_ENGINE_OBSERVE=off does the same.')
     parser.add_argument('--observe-max-calls', type=int, default=DEFAULT_MAX_CALLS)
     parser.add_argument('--observe-max-age-seconds', type=int, default=DEFAULT_MAX_AGE_SECONDS)
     parser.add_argument('--observe-max-bytes', type=int, default=DEFAULT_MAX_BYTES)
     arguments = parser.parse_args()
-    if (arguments.observe_database is None) != (arguments.observe_deployment is None):
-        parser.error('--observe-database and --observe-deployment must be supplied together')
+    # Recording is on for every server process. Only these two switches turn it
+    # off; in-process MCPServer construction records only when given a configuration.
     observation = None
-    if arguments.observe_database is not None:
+    if not arguments.no_observe and os.environ.get('STANDARDS_ENGINE_OBSERVE', '').strip().lower() != 'off':
         try:
             observation = RecorderConfig(arguments.observe_database, arguments.observe_deployment,
                                          arguments.observe_max_calls, arguments.observe_max_age_seconds,

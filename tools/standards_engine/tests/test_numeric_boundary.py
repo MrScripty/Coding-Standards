@@ -111,7 +111,7 @@ class NumericBoundaryTest(unittest.TestCase):
         ]
         result = subprocess.run([sys.executable, '-P', '-m',
             'tools.standards_engine.standards_engine.mcp', '--repo-root', str(self.root),
-            '--purpose', 'authoring', '--output-schemas', 'on-demand', '--advanced'],
+            '--purpose', 'authoring', '--output-schemas', 'on-demand', '--advanced', '--no-observe'],
             input=''.join(json.dumps(m) + '\n' for m in messages), text=True,
             capture_output=True, env={**os.environ, 'PYTHONPATH': str(ROOT)}, timeout=90)
         self.assertEqual(result.returncode, 0, result.stderr)

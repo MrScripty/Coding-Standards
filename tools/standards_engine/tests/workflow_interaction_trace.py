@@ -38,7 +38,7 @@ def measure(mode: str) -> dict[str, object]:
             ]
             completed = subprocess.run(
                 [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-                 "--repo-root", str(root), "--purpose", "authoring"],
+                 "--repo-root", str(root), "--purpose", "authoring", "--no-observe"],
                 input="".join(json.dumps(item) + "\n" for item in messages),
                 text=True, capture_output=True, check=True, env=os.environ.copy(),
             )

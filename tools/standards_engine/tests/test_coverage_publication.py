@@ -610,6 +610,7 @@ class EngineAuditPublicationTest(unittest.TestCase):
                     str(repository),
                     "--purpose",
                     "authoring",
+                    "--no-observe",
                 ],
                 input="".join(json.dumps(message) + "\n" for message in messages),
                 text=True,

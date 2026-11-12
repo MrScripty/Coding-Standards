@@ -52,7 +52,7 @@ class DiscoveredWorkflowTest(unittest.TestCase):
                             {'jsonrpc': '2.0', 'method': 'notifications/initialized'}, selected]
                         process = subprocess.run([sys.executable, '-m',
                             'tools.standards_engine.standards_engine.mcp', '--repo-root', str(self.root),
-                            '--purpose', 'authoring', '--output-schemas', delivery],
+                            '--purpose', 'authoring', '--output-schemas', delivery, '--no-observe'],
                             input=''.join(json.dumps(message) + '\n' for message in messages),
                             text=True, capture_output=True, check=True)
                         self.assertEqual(process.stderr, '')

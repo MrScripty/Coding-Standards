@@ -66,7 +66,7 @@ async def walkthrough(engine_python: str) -> dict[str, object]:
             return StdioServerParameters(
                 command=engine_python,
                 args=["-P", "-m", "tools.standards_engine.standards_engine.mcp",
-                      "--purpose", purpose, "--repo-root", str(repo)],
+                      "--purpose", purpose, "--repo-root", str(repo), "--no-observe"],
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
             )
 

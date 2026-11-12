@@ -283,7 +283,7 @@ class InputDiscoveryTest(unittest.TestCase):
                 messages = [request('initialize', {'protocolVersion': '2025-11-25', 'capabilities': {}, 'clientInfo': {'name': 'discovery-fixture', 'version': '1'}}),
                             {'jsonrpc': '2.0', 'method': 'notifications/initialized'},
                             request('tools/call', {'name': 'describe_input', 'arguments': arguments}, identifier=2)]
-                process = subprocess.run([sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp', '--repo-root', str(root), '--purpose', 'authoring', '--advanced'],
+                process = subprocess.run([sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp', '--repo-root', str(root), '--purpose', 'authoring', '--advanced', '--no-observe'],
                     input=''.join(json.dumps(m)+'\n' for m in messages), capture_output=True, text=True, env=environment, timeout=60)
                 self.assertEqual(process.returncode, 0, process.stderr)
                 self.assertEqual(process.stderr, '')

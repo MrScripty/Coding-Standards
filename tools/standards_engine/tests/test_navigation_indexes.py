@@ -387,6 +387,7 @@ class NavigationIndexWorkflowTest(NavigationIndexFixture):
                 "authoring",
                 "--repo-root",
                 str(self.root),
+                "--no-observe",
             ],
             input="".join(json.dumps(message) + "\n" for message in messages),
             text=True,

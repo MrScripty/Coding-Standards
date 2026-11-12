@@ -396,6 +396,7 @@ class MCPTest(unittest.TestCase):
                 "authoring",
                 "--repo-root",
                 str(ROOT),
+                "--no-observe",
             ],
             input="".join(json.dumps(message) + "\n" for message in messages),
             text=True,

@@ -46,7 +46,7 @@ class ConsumerPublicationTest(unittest.TestCase):
         ]
         process=subprocess.run(
             [sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-             '--repo-root',str(self.root),'--purpose',purpose,'--advanced'],
+             '--repo-root',str(self.root),'--purpose',purpose,'--advanced','--no-observe'],
             input=''.join(json.dumps(m)+'\n' for m in messages),text=True,capture_output=True,
             env={**os.environ,'PYTHONPATH':str(ROOT)},timeout=180,
         )

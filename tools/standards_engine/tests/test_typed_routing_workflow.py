@@ -36,7 +36,7 @@ class TypedRoutingWorkflowTest(unittest.TestCase):
                     {'jsonrpc':'2.0','method':'notifications/initialized'},
                     request('tools/call', {'name':operation,'arguments':arguments}, 2)]
         run = subprocess.run([sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-              '--repo-root',str(self.root),'--purpose','authoring','--output-schemas',delivery],
+              '--repo-root',str(self.root),'--purpose','authoring','--output-schemas',delivery,'--no-observe'],
               input=''.join(json.dumps(v)+'\n' for v in messages),text=True,capture_output=True,check=True,
               cwd=ROOT,env={**os.environ,'PYTHONPATH':str(ROOT)})
         self.assertEqual(run.stderr, '')

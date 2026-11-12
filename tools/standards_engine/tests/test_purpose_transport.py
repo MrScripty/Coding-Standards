@@ -98,7 +98,7 @@ class PurposeTransportTest(unittest.TestCase):
         ]
         process = subprocess.run(
             [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-             "--repo-root", str(self.root), "--purpose", "application", "--advanced"],
+             "--repo-root", str(self.root), "--purpose", "application", "--advanced", "--no-observe"],
             input="".join(json.dumps(value) + "\n" for value in messages), text=True,
             capture_output=True, env={**os.environ, "PYTHONPATH": str(ROOT)}, timeout=120,
         )

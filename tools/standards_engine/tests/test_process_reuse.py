@@ -220,7 +220,7 @@ class ProcessReuseTest(unittest.TestCase):
         for _ in range(2):
             completed = subprocess.run(
                 [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-                 "--repo-root", str(self.root), "--purpose", "authoring"],
+                 "--repo-root", str(self.root), "--purpose", "authoring", "--no-observe"],
                 input="".join(json.dumps(value) + "\n" for value in messages), text=True,
                 capture_output=True, check=True, timeout=60, cwd=self.temporary.name,
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
