@@ -7,10 +7,10 @@ description = "Checks fact-driven routing outcomes. Does not certify prose quali
 id = "requires-closure"
 type = "metadata_route"
 path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv"
-header = ["case", "program_consumer", "generated_source", "cross_language", "process_boundary", "durable_state", "diagnostics", "security", "facts", "expected_generated_contract", "expected_language_binding", "expected_ipc", "expected_persistence", "expected_diagnostics", "expected_security", "expected_route"]
+header = ["case", "routing.activities", "routing.applications", "routing.boundaries", "routing.topics", "expected_generated_contract", "expected_language_binding", "expected_ipc", "expected_persistence", "expected_diagnostics", "expected_security", "expected_route"]
+facts = ["routing.activities", "routing.applications", "routing.boundaries", "routing.topics"]
 expectations_path = "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv"
 route_column = "expected_route"
 resolved = "route"
 unresolved = "unresolved"
-base_modules = ["router", "workflow.planning", "workflow.implementation", "workflow.verification", "workflow.documentation", "workflow.build", "workflow.tooling", "topic.architecture", "topic.contracts", "topic.dependencies", "profile.application.library"]
 selections = [{ column = "expected_generated_contract", excluded = "exclude", module = "profile.boundary.generated-contract", selected = "select" }, { column = "expected_language_binding", excluded = "exclude", module = "profile.boundary.language-bindings", selected = "select" }, { column = "expected_ipc", excluded = "exclude", module = "profile.boundary.ipc", selected = "select" }, { column = "expected_persistence", excluded = "exclude", module = "profile.boundary.persistence", selected = "select" }, { column = "expected_diagnostics", excluded = "exclude", module = "topic.diagnostics", selected = "select" }, { column = "expected_security", excluded = "exclude", module = "topic.security", selected = "select" }]

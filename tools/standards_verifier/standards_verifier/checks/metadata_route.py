@@ -1,14 +1,32 @@
+"""Route declared task scenarios through the Router and compare the outcome.
+
+Each scenario row states task facts in the Router's own vocabulary. The check
+binds them, asks the Router projection what it selects, and compares that with
+the row's expected selections and with the reviewed route table. Nothing in a
+row is compared with another column of the same table.
+"""
 from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any
 
+from tools.standards_analysis.standards_analysis import (
+    ROUTER_PROJECTION,
+    AnalysisError,
+    RouteDecision,
+    RouterProjection,
+    load_router_projection,
+)
+from tools.standards_applicability.standards_applicability import (
+    ApplicabilityError,
+    FactSet,
+)
 from tools.standards_metadata.standards_metadata import (
     MetadataError,
     load_canonical_module_corpus,
 )
 
-from ..diagnostics import Diagnostic, EngineError
+from ..diagnostics import OUTCOMES, Diagnostic, EngineError
 from tools.standards_graph.standards_graph import (
     METADATA_REQUIRES,
     metadata_dependency_registry,
@@ -18,6 +36,11 @@ from .table import read_table_rows
 
 
 EXPECTATIONS_HEADER = ("case", "direct_modules", "requires_closure")
+CASE_COLUMN = "case"
+# A fact cell is a comma-separated value list or one of these two words.
+NO_VALUES = "none"
+UNKNOWN_VALUE = "unknown"
+SET_FACT_TYPES = frozenset({"enum-set", "string-set"})
 
 
 @dataclass(frozen=True, slots=True)
@@ -33,11 +56,11 @@ class MetadataRouteCheck:
     id: str
     path: str
     header: tuple[str, ...]
+    facts: tuple[str, ...]
     expectations_path: str
     route_column: str
     resolved: str
     unresolved: str
-    base_modules: tuple[str, ...]
     selections: tuple[RouteSelection, ...]
 
     def authority_inputs(
@@ -47,6 +70,7 @@ class MetadataRouteCheck:
         return (
             *present_inputs("routing-cases", self.path),
             *present_inputs("routing-expectations", self.expectations_path),
+            *present_inputs("router-projection", ROUTER_PROJECTION),
             *present_inputs("canonical-module-corpus", corpus.path),
             *present_inputs("canonical-module", *corpus.members),
         )
@@ -59,6 +83,17 @@ class MetadataRouteCheck:
             suite=context.suite_id,
             check=self.id,
         )
+        if not rows:
+            raise EngineError(
+                Diagnostic(
+                    "ROUTING.NO_SCENARIOS",
+                    "invalid",
+                    "routing decision table declares no scenario",
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=self.path,
+                )
+            )
         expectations = read_table_rows(
             context.repo_root,
             self.expectations_path,
@@ -68,7 +103,7 @@ class MetadataRouteCheck:
         )
         indexed = self._expectations(context, expectations)
         diagnostics: list[Diagnostic] = []
-        cases = [row["case"] for row in rows]
+        cases = [row[CASE_COLUMN] for row in rows]
         if len(set(cases)) != len(cases):
             raise EngineError(
                 Diagnostic(
@@ -94,41 +129,49 @@ class MetadataRouteCheck:
 
         try:
             corpus = load_canonical_module_corpus(context.repo_root)
-        except MetadataError as error:
-            failure = error.failure
-            raise EngineError(
-                Diagnostic(
-                    failure.code,
-                    failure.outcome,
-                    failure.message,
-                    suite=context.suite_id,
-                    check=self.id,
-                    path=failure.path,
-                    row=failure.row,
-                    field=failure.field,
-                    expected=failure.expected,
-                    observed=failure.observed,
-                )
-            ) from error
-        known_modules = {module.module_id for module in corpus.modules}
+            router = load_router_projection(context.repo_root, corpus)
+        except (MetadataError, AnalysisError) as error:
+            raise self._authority_error(context, error.failure) from error
+        self._require_router_vocabulary(context, router)
         graph = metadata_dependency_registry(context.repo_root, corpus.modules)
         for row_number, row in enumerate(rows, start=2):
-            case = row["case"]
-            expected_direct, expected_closure = indexed[case]
-            route = row[self.route_column]
-            if route == self.unresolved:
-                selected_values = {row[item.column] for item in self.selections}
-                if selected_values != {self.unresolved}:
-                    diagnostics.append(
-                        self._diagnostic(
-                            context,
-                            "ASSERT.ROUTING_UNRESOLVED_SELECTION",
-                            "an unresolved route cannot contain resolved topic selections",
-                            row=row_number,
-                            field=case,
-                            observed=",".join(sorted(selected_values)),
-                        )
+            case = row[CASE_COLUMN]
+            decision = router.decide(self._bind(context, router, row, row_number))
+            observed_route = (
+                self.unresolved if decision.unresolved_facts else self.resolved
+            )
+            expected_route = row[self.route_column]
+            if expected_route not in {self.resolved, self.unresolved}:
+                diagnostics.append(
+                    self._diagnostic(
+                        context,
+                        "ASSERT.ROUTING_STATE",
+                        "route state is neither resolved nor unresolved",
+                        row=row_number,
+                        field=self.route_column,
+                        observed=expected_route,
                     )
+                )
+                continue
+            diagnostics.extend(
+                self._selection_diagnostics(context, decision, row, row_number)
+            )
+            if observed_route != expected_route:
+                diagnostics.append(
+                    self._diagnostic(
+                        context,
+                        "ASSERT.ROUTING_RESOLUTION",
+                        "the Router's resolution does not match the scenario",
+                        row=row_number,
+                        field=case,
+                        expected=expected_route,
+                        observed=",".join((observed_route, *decision.unresolved_facts)),
+                    )
+                )
+                continue
+
+            expected_direct, expected_closure = indexed[case]
+            if observed_route == self.unresolved:
                 if (expected_direct, expected_closure) != (
                     (self.unresolved,),
                     (self.unresolved,),
@@ -143,54 +186,7 @@ class MetadataRouteCheck:
                         )
                     )
                 continue
-            if route != self.resolved:
-                diagnostics.append(
-                    self._diagnostic(
-                        context,
-                        "ASSERT.ROUTING_STATE",
-                        "route state is neither resolved nor unresolved",
-                        row=row_number,
-                        field=self.route_column,
-                        observed=route,
-                    )
-                )
-                continue
-
-            direct = set(self.base_modules)
-            invalid_selection = False
-            for selection in self.selections:
-                value = row[selection.column]
-                if value == selection.selected:
-                    direct.add(selection.module)
-                elif value != selection.excluded:
-                    diagnostics.append(
-                        self._diagnostic(
-                            context,
-                            "ASSERT.ROUTING_INCOMPLETE",
-                            "a resolved route contains an unresolved or unknown selection",
-                            row=row_number,
-                            field=selection.column,
-                            observed=value,
-                        )
-                    )
-                    invalid_selection = True
-            if invalid_selection:
-                continue
-            unknown = direct - known_modules
-            if unknown:
-                diagnostics.append(
-                    self._diagnostic(
-                        context,
-                        "ASSERT.ROUTING_UNKNOWN_MODULE",
-                        "selected route module is not canonical",
-                        row=row_number,
-                        field=case,
-                        observed=sorted(unknown)[0],
-                    )
-                )
-                continue
-
-            observed_direct = tuple(sorted(direct))
+            observed_direct = tuple(sorted(decision.selected))
             observed_closure = graph.dependency_order(
                 METADATA_REQUIRES,
                 selected=observed_direct,
@@ -200,7 +196,7 @@ class MetadataRouteCheck:
                     self._diagnostic(
                         context,
                         "ASSERT.ROUTING_DIRECT_MODULES",
-                        "direct route modules do not match reviewed expectations",
+                        "modules the Router selects do not match reviewed expectations",
                         row=row_number,
                         field=case,
                         expected=",".join(expected_direct),
@@ -220,6 +216,165 @@ class MetadataRouteCheck:
                     )
                 )
         return diagnostics
+
+    def _require_router_vocabulary(
+        self, context: CheckContext, router: RouterProjection
+    ) -> None:
+        """Reject a table written in names the Router does not declare."""
+        for fact_id in self.facts:
+            definition = router.fact_schema.resolve(fact_id)
+            if definition is None or definition.id != fact_id:
+                raise self._vocabulary_error(
+                    context,
+                    "ROUTING.UNKNOWN_FACT",
+                    "invalid",
+                    "scenario column is not a fact the Router declares",
+                    fact_id,
+                )
+            if definition.type not in SET_FACT_TYPES:
+                raise self._vocabulary_error(
+                    context,
+                    "ROUTING.FACT_TYPE",
+                    "unsupported",
+                    "scenario columns support set-valued Router facts only",
+                    fact_id,
+                )
+            if {NO_VALUES, UNKNOWN_VALUE} & set(definition.values):
+                raise self._vocabulary_error(
+                    context,
+                    "ROUTING.FACT_TOKEN_COLLISION",
+                    "unsupported",
+                    "a Router fact value collides with a scenario cell keyword",
+                    fact_id,
+                )
+        routable = {*router.base_modules, *(rule.target for rule in router.rules)}
+        for selection in self.selections:
+            if selection.module not in routable:
+                raise self._vocabulary_error(
+                    context,
+                    "ROUTING.UNROUTED_MODULE",
+                    "invalid",
+                    "expected selection names a module the Router never selects",
+                    selection.module,
+                )
+
+    def _bind(
+        self,
+        context: CheckContext,
+        router: RouterProjection,
+        row: dict[str, str],
+        row_number: int,
+    ) -> FactSet:
+        """Bind one scenario; a fact without a column does not apply to it."""
+        values: dict[str, object] = {}
+        for definition in router.facts:
+            if definition.id not in self.facts:
+                values[definition.id] = {"type": definition.type, "state": "known-absent"}
+                continue
+            cell = row[definition.id]
+            if cell == UNKNOWN_VALUE:
+                values[definition.id] = {"type": definition.type, "state": "unknown"}
+            else:
+                values[definition.id] = {
+                    "type": definition.type,
+                    "state": "known",
+                    "value": [] if cell == NO_VALUES else cell.split(","),
+                }
+        try:
+            return router.fact_schema.bind(values)
+        except ApplicabilityError as error:
+            failure = error.failure
+            raise EngineError(
+                Diagnostic(
+                    "ROUTING.FACT_VALUE",
+                    "invalid",
+                    f"scenario fact cell is not a Router value: {failure.message}",
+                    suite=context.suite_id,
+                    check=self.id,
+                    path=self.path,
+                    row=row_number,
+                    field=failure.field,
+                    observed=row.get(failure.field or "", failure.observed),
+                )
+            ) from error
+
+    def _selection_diagnostics(
+        self,
+        context: CheckContext,
+        decision: RouteDecision,
+        row: dict[str, str],
+        row_number: int,
+    ) -> list[Diagnostic]:
+        diagnostics = []
+        unresolved_targets = set(decision.unresolved_targets)
+        for selection in self.selections:
+            expected = row[selection.column]
+            if selection.module in decision.selected:
+                observed = selection.selected
+            elif selection.module in unresolved_targets:
+                observed = self.unresolved
+            else:
+                observed = selection.excluded
+            if expected not in {selection.selected, selection.excluded, self.unresolved}:
+                diagnostics.append(
+                    self._diagnostic(
+                        context,
+                        "ASSERT.ROUTING_SELECTION_VALUE",
+                        "expected selection is not a declared selection value",
+                        row=row_number,
+                        field=selection.column,
+                        observed=expected,
+                    )
+                )
+            elif expected != observed:
+                diagnostics.append(
+                    self._diagnostic(
+                        context,
+                        "ASSERT.ROUTING_SELECTION",
+                        "the Router's selection does not match the scenario",
+                        row=row_number,
+                        field=f"{row[CASE_COLUMN]}.{selection.column}",
+                        expected=expected,
+                        observed=observed,
+                    )
+                )
+        return diagnostics
+
+    def _vocabulary_error(
+        self,
+        context: CheckContext,
+        code: str,
+        outcome: str,
+        message: str,
+        observed: str,
+    ) -> EngineError:
+        return EngineError(
+            Diagnostic(
+                code,
+                outcome,
+                message,
+                suite=context.suite_id,
+                check=self.id,
+                path=self.path,
+                observed=observed,
+            )
+        )
+
+    def _authority_error(self, context: CheckContext, failure: Any) -> EngineError:
+        return EngineError(
+            Diagnostic(
+                failure.code,
+                failure.outcome if failure.outcome in OUTCOMES else "invalid",
+                failure.message,
+                suite=context.suite_id,
+                check=self.id,
+                path=failure.path,
+                row=getattr(failure, "row", None),
+                field=failure.field,
+                expected=getattr(failure, "expected", None),
+                observed=failure.observed,
+            )
+        )
 
     def _expectations(
         self,
@@ -323,11 +478,11 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
         "type",
         "path",
         "header",
+        "facts",
         "expectations_path",
         "route_column",
         "resolved",
         "unresolved",
-        "base_modules",
         "selections",
     }
     unknown = set(raw) - allowed
@@ -373,17 +528,7 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
             )
         strings[field] = value
     header = _strings(raw.get("header"), "header", suite, check)
-    if "case" not in header or strings["route_column"] not in header:
-        raise EngineError(
-            Diagnostic(
-                "CONFIG.ROUTING_HEADER",
-                "invalid",
-                "routing header must contain case and route columns",
-                suite=suite,
-                check=check,
-            )
-        )
-    base_modules = _strings(raw.get("base_modules"), "base_modules", suite, check)
+    facts = _strings(raw.get("facts"), "facts", suite, check)
     raw_selections = raw.get("selections")
     if not isinstance(raw_selections, list) or not raw_selections:
         raise EngineError(
@@ -422,17 +567,6 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
                     check=check,
                 )
             )
-        if item["column"] not in header:
-            raise EngineError(
-                Diagnostic(
-                    "CONFIG.ROUTING_HEADER",
-                    "invalid",
-                    "routing selection column is absent from the header",
-                    suite=suite,
-                    check=check,
-                    field=item["column"],
-                )
-            )
         selections.append(
             RouteSelection(
                 item["column"],
@@ -441,24 +575,44 @@ def parse_metadata_route_check(raw: dict[str, Any], suite: str) -> MetadataRoute
                 item["module"],
             )
         )
-    if len({item.column for item in selections}) != len(selections):
+    # Every column has exactly one role, so no column can go unread.
+    roles = (
+        CASE_COLUMN,
+        *facts,
+        *(item.column for item in selections),
+        strings["route_column"],
+    )
+    if len(set(roles)) != len(roles):
         raise EngineError(
             Diagnostic(
                 "CONFIG.ROUTING_SELECTIONS",
                 "invalid",
-                "routing selection columns must be unique",
+                "case, fact, selection, and route columns must be distinct",
                 suite=suite,
                 check=check,
+            )
+        )
+    if set(roles) != set(header):
+        stray = sorted(set(header) ^ set(roles))[0]
+        raise EngineError(
+            Diagnostic(
+                "CONFIG.ROUTING_HEADER",
+                "invalid",
+                "routing header must be exactly case, the fact columns, the "
+                "selection columns, and the route column",
+                suite=suite,
+                check=check,
+                field=stray,
             )
         )
     return MetadataRouteCheck(
         check,
         strings["path"],
         header,
+        facts,
         strings["expectations_path"],
         strings["route_column"],
         strings["resolved"],
         strings["unresolved"],
-        base_modules,
         tuple(selections),
     )

@@ -1,6 +1,6 @@
-case	uncertainty_reduction	planning	facts	expected_development	expected_planning	expected_route
-uncertainty_only	yes	no	complete	select	exclude	route
-planning_only	no	yes	complete	exclude	select	route
-both	yes	yes	complete	select	select	route
-neither	no	no	complete	exclude	exclude	route
-missing	yes	yes	missing	unresolved	unresolved	unresolved
+case	routing.activities	expected_development	expected_planning	expected_route
+uncertainty_only	uncertainty-reduction	select	exclude	route
+planning_only	planning	exclude	select	route
+both	planning,uncertainty-reduction	select	select	route
+neither	none	exclude	exclude	route
+missing	unknown	unresolved	unresolved	unresolved

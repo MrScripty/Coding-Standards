@@ -709,7 +709,7 @@
       ]
     },
     {
-      "digest": "sha256:52e4f2d3057fcffd984efd87e4d9f49062d3a17c5c64c04d0a7cec06dfef6432",
+      "digest": "sha256:805e3c588b26c4e2335d501873b29543fc359caf3916930335da9c40ff7e0920",
       "path": "evaluation/standards-effectiveness/fixtures/development/routing-decisions.tsv",
       "state": "present",
       "uses": [
@@ -1369,7 +1369,7 @@
       ]
     },
     {
-      "digest": "sha256:fab55008b888463280123abb32699b17e0e7898a9f4d9961eda147dceaa55f20",
+      "digest": "sha256:bfdca5f62ddaac67e41a8e1f83f1a20757bea325324fef4114ac756e7935d7f3",
       "path": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-decisions.tsv",
       "state": "present",
       "uses": [
@@ -1386,7 +1386,7 @@
       ]
     },
     {
-      "digest": "sha256:acaf8e60acd4b322dff9238f17b0d660c9a231c2b26c04509b0b893aaf1e4eb2",
+      "digest": "sha256:0363c6072f96a76449bfb2ba81ebb38a3382f1d911af25f9811d7782a798e66f",
       "path": "evaluation/standards-effectiveness/fixtures/routing/generated-contract-routes.tsv",
       "state": "present",
       "uses": [
@@ -1403,7 +1403,7 @@
       ]
     },
     {
-      "digest": "sha256:0d9371f0c2b76b3f417a1043cc98759789211d985339d46917aeabaa4e03dcc6",
+      "digest": "sha256:b217846dd43a3539834c396e829a3806f38bc6ac0babde42eae9145f5e0075d8",
       "path": "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv",
       "state": "present",
       "uses": [
@@ -1415,7 +1415,7 @@
       ]
     },
     {
-      "digest": "sha256:078308398ff5447ce76df5a774285518149b74e33093e36bddce263dff0e2d61",
+      "digest": "sha256:6f1646c36cc54eefc9cad018ae744822e75d6f6f7157bf883702bf09ed52ce15",
       "path": "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv",
       "state": "present",
       "uses": [
@@ -2136,9 +2136,24 @@
       "state": "present",
       "uses": [
         {
+          "check": "routing-closure",
+          "role": "router-projection",
+          "suite": "development-proportionality"
+        },
+        {
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
+        },
+        {
+          "check": "verifier-change-route-closure",
+          "role": "router-projection",
+          "suite": "s1-routing"
+        },
+        {
+          "check": "requires-closure",
+          "role": "router-projection",
+          "suite": "standards-recovery-routing"
         }
       ]
     },
@@ -2203,7 +2218,7 @@
       ]
     },
     {
-      "digest": "sha256:8ae02c349c6e2049ad0e8305fb3091a66a792e945303d6c57664c1806e848254",
+      "digest": "sha256:08dab633d8a18eb6a503658c62473e962f7794fe1c077ca8171edc3c7d18e978",
       "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
       "state": "present",
       "uses": [
@@ -2371,7 +2386,7 @@
       ]
     },
     {
-      "digest": "sha256:a1f2424ac4c0cb09d69156a255e8ec6bf7ff0aaf9405535156da65f11faff3e6",
+      "digest": "sha256:63cca2ceac227aacccf33a964801a645bb4083719e5011a46a313308f2628026",
       "path": "evaluation/standards-effectiveness/suites/s1-routing.toml",
       "state": "present",
       "uses": [
@@ -2395,7 +2410,7 @@
       ]
     },
     {
-      "digest": "sha256:71a5190d87ed45c55ce502d7dcc3d753a6caa6707d0b739a8c74d7555fdbc156",
+      "digest": "sha256:3d9838e58ca4728da7bda9c3a670fd5070e0b2e795e45302624efa90622b5a9f",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "state": "present",
       "uses": [
@@ -5669,7 +5684,7 @@
       ]
     },
     {
-      "digest": "sha256:907a27607f06fd1b0f7a2e839eba5f089840861c06f8ee38e771526c9c0d2518",
+      "digest": "sha256:b5c74d24adf157cf44ee2434cba94900c7f340a0de0b5085129a974cdf8800e8",
       "path": "tools/standards_analysis/standards_analysis/__init__.py",
       "state": "present",
       "uses": [
@@ -5841,7 +5856,7 @@
       ]
     },
     {
-      "digest": "sha256:a0b7763d137159600b01bb3bae1c94442dbb3c160e69f7a622427977fea293f1",
+      "digest": "sha256:50bae521cd9a0ef457d25d4ba65e24bf7d8c4eae637e9d9ad0e9de8747392815",
       "path": "tools/standards_analysis/standards_analysis/routing.py",
       "state": "present",
       "uses": [
@@ -6402,7 +6417,7 @@
       ]
     },
     {
-      "digest": "sha256:006f12dbdd8717b9069108df7b410a67c213441a1ff682dd712dcab348a708ff",
+      "digest": "sha256:20cd28c6c4a4e1277e9a53c6ee4971b26cd0b6f936a87268b0a2919d9a257697",
       "path": "tools/standards_engine/standards_engine/engine.py",
       "state": "present",
       "uses": [
@@ -7269,7 +7284,7 @@
       ]
     },
     {
-      "digest": "sha256:0ac21505152aa51a06c9b2a2f18e0185db740b6567c35f7579a447819784e534",
+      "digest": "sha256:df166607b6a3c6d251438b0ea46bd088ccdc4b32e1ad3187a015abf9eb397da4",
       "path": "tools/standards_verifier/README.md",
       "state": "present",
       "uses": [
@@ -7436,7 +7451,7 @@
       ]
     },
     {
-      "digest": "sha256:42a7223e6aad21bf6bf4239c0e37751b6c0f5499db78e2b3725d0cec95525812",
+      "digest": "sha256:cf0774afb622cb1f30d2377ab1c3a9a86017d8c98c382a18b8a3b6117a8507ea",
       "path": "tools/standards_verifier/standards_verifier/checks/metadata_route.py",
       "state": "present",
       "uses": [
@@ -10578,7 +10593,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:bf3d381d947e6ce7da07a60bbc8aaaf3752e13c6fa1b611510b41f451b19536b",
+    "digest": "sha256:4a032dc5db55056d56a8b5c3b1e68178b7a8e2f86b9bd28a620756459c0a6ad0",
     "uses": [
       {
         "check": "python-package-contract",
@@ -10658,13 +10673,13 @@
       ]
     },
     {
-      "digest": "sha256:a1f2424ac4c0cb09d69156a255e8ec6bf7ff0aaf9405535156da65f11faff3e6",
+      "digest": "sha256:63cca2ceac227aacccf33a964801a645bb4083719e5011a46a313308f2628026",
       "id": "s1-routing",
       "path": "evaluation/standards-effectiveness/suites/s1-routing.toml",
       "requires": []
     },
     {
-      "digest": "sha256:8ae02c349c6e2049ad0e8305fb3091a66a792e945303d6c57664c1806e848254",
+      "digest": "sha256:08dab633d8a18eb6a503658c62473e962f7794fe1c077ca8171edc3c7d18e978",
       "id": "development-proportionality",
       "path": "evaluation/standards-effectiveness/suites/development-proportionality.toml",
       "requires": []
@@ -10712,7 +10727,7 @@
       "requires": []
     },
     {
-      "digest": "sha256:71a5190d87ed45c55ce502d7dcc3d753a6caa6707d0b739a8c74d7555fdbc156",
+      "digest": "sha256:3d9838e58ca4728da7bda9c3a670fd5070e0b2e795e45302624efa90622b5a9f",
       "id": "standards-recovery-routing",
       "path": "evaluation/standards-effectiveness/suites/standards-recovery-routing.toml",
       "requires": []

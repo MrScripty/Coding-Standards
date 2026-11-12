@@ -73,6 +73,7 @@ from .reading import (
 )
 from .routing import (
     ROUTER_PROJECTION,
+    RouteDecision,
     RouteRule,
     RouterProjection,
     load_router_projection,
@@ -193,6 +194,7 @@ __all__ = (
     "ResolvedEvidence",
     "ReviewScope",
     "RouteRule",
+    "RouteDecision",
     "RouterProjection",
     "RoutingBaseCause",
     "RoutingRuleCause",
