@@ -1,9 +1,0 @@
-schema_version = 1
-id = "filesystem-containment-policy"
-owner = "topic.security"
-description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
-
-[[checks]]
-id = "metadata-closure"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/security.md", "topics/cross-platform.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]

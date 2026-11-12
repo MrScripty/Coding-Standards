@@ -4,6 +4,7 @@ from .errors import MetadataError, MetadataFailure
 from .corpus import load_canonical_standards_corpus
 from .loader import (
     CANONICAL_MODULE_CORPUS,
+    canonical_module_corpus_members,
     load_canonical_module_corpus,
     load_module_metadata,
     validate_module_metadata,
@@ -78,6 +79,7 @@ __all__ = (
     "SuiteInputManifest",
     "SuiteInputUse",
     "UnmappedModuleProjection",
+    "canonical_module_corpus_members",
     "load_canonical_standards_corpus",
     "load_canonical_module_corpus",
     "load_policy_unit_corpus",

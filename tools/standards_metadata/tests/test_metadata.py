@@ -11,6 +11,7 @@ from tools.standards_metadata.standards_metadata import (
     FrozenContentSource,
     MetadataError,
     RecordingContentSource,
+    canonical_module_corpus_members,
     load_canonical_standards_corpus,
     load_canonical_module_corpus,
     load_module_metadata,
@@ -101,6 +102,16 @@ class StandardsMetadataTest(unittest.TestCase):
             corpus.resolve("workflow.example"), corpus.resolve("workflow.md")
         )
         self.assertIsNone(corpus.resolve("unknown"))
+
+    def test_membership_is_read_without_reading_any_member(self) -> None:
+        self.write_manifest(("absent.md", "also-absent.md"))
+        source = RecordingContentSource(DirectoryContentSource(self.root))
+
+        members = canonical_module_corpus_members(source, "corpus.toml")
+
+        self.assertEqual(members, ("absent.md", "also-absent.md"))
+        self.assertEqual(source.requested_paths, ("corpus.toml",))
+        self.assertEqual(self.error_code(), "INPUT.UNAVAILABLE")
 
     def test_manifest_schema_and_member_paths_are_strict(self) -> None:
         cases = (

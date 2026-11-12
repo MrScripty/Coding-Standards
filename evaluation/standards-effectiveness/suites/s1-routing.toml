@@ -1,7 +1,7 @@
 schema_version = 1
 id = "s1-routing"
 owner = "migration.parent-plan"
-description = "Checks resolvable Markdown links, current metadata graph constraints, fact-driven routing outcomes. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
+description = "Checks resolvable Markdown links, fact-driven routing outcomes. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "verifier-change-route-closure"
@@ -14,11 +14,6 @@ resolved = "route"
 unresolved = "unresolved"
 base_modules = ["workflow.implementation", "workflow.verification"]
 selections = [{ column = "expected_architecture", excluded = "exclude", module = "topic.architecture", selected = "select" }, { column = "expected_performance", excluded = "exclude", module = "topic.performance", selected = "select" }, { column = "expected_planning", excluded = "exclude", module = "workflow.planning", selected = "select" }]
-
-[[checks]]
-id = "metadata-closure"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/implementation.md", "workflows/verification.md", "profiles/applications/library.md", "profiles/languages/rust/README.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "local-links"

@@ -1,12 +1,7 @@
 schema_version = 1
 id = "rust-profile-authority-closure"
 owner = "profiles/languages/rust/README.md"
-description = "Checks resolvable Markdown links, current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
-
-[[checks]]
-id = "rust-profile-metadata"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "profiles/languages/rust/README.md", "topics/code-design.md"]
+description = "Checks resolvable Markdown links. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "rust-profile-links"

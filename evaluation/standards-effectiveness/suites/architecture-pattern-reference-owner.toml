@@ -1,9 +1,0 @@
-schema_version = 1
-id = "architecture-pattern-reference-owner"
-owner = "reference.patterns.architecture"
-description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
-
-[[checks]]
-id = "metadata"
-type = "metadata_graph"
-cases = [{ expected = [], id = "reference-owner-closure", paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "topics/architecture.md", "reference/patterns/architecture.md"] }]

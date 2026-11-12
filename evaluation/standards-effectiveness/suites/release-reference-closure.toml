@@ -1,12 +1,7 @@
 schema_version = 1
 id = "release-reference-closure"
 owner = "reference.recipes.releases"
-description = "Checks declared Markdown destinations, current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
-
-[[checks]]
-id = "metadata-closure"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/verification.md", "topics/contracts.md", "workflows/release.md", "reference/recipes/releases.md", "topics/contracts/schemas.md", "topics/contracts/protocols.md", "topics/contracts/evolution.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/release/operations.md", "workflows/verification/gui.md", "topics/code-design.md"]
+description = "Checks declared Markdown destinations. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "legacy-index-destinations"

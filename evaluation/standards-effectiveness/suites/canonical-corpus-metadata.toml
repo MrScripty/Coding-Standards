@@ -1,0 +1,9 @@
+schema_version = 1
+id = "canonical-corpus-metadata"
+owner = "evaluation.metadata-schema"
+description = "Checks the metadata header and the Requires and Specializes relations of every module in the canonical corpus. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
+
+[[checks]]
+id = "canonical-corpus"
+type = "metadata_graph"
+corpus = "evaluation/standards-effectiveness/canonical-module-corpus.toml"

@@ -4,7 +4,10 @@ from dataclasses import dataclass
 from typing import Any
 
 from tools.standards_metadata.standards_metadata import (
+    ContentSourceInput,
+    MetadataError,
     MetadataFailure,
+    canonical_module_corpus_members,
     validate_module_metadata,
 )
 
@@ -21,19 +24,41 @@ class MetadataCase:
 
 @dataclass(frozen=True, slots=True)
 class MetadataGraphCheck:
+    """Validate module metadata for one of three explicit selections.
+
+    ``corpus`` names a canonical corpus manifest and validates every member it
+    declares, so a module added to the corpus is covered without editing the
+    suite. ``paths`` validates one listed set. ``cases`` compares listed sets
+    with the diagnostics each is expected to produce.
+    """
+
     id: str
     paths: tuple[str, ...] | None
     cases: tuple[MetadataCase, ...] | None
+    corpus: str | None = None
 
     def authority_inputs(
         self, context: CheckInputContext
     ) -> tuple[CheckAuthorityInput, ...]:
+        if self.corpus is not None:
+            members = _corpus_members(
+                context.inputs, self.corpus, context.suite_id, self.id
+            )
+            return (
+                *present_inputs("canonical-module-corpus", self.corpus),
+                *present_inputs("metadata", *members),
+            )
         paths = self.paths or tuple(
             path for case in self.cases or () for path in case.paths
         )
         return present_inputs("metadata", *paths)
 
     def run(self, context: CheckContext) -> list[Diagnostic]:
+        if self.corpus is not None:
+            members = _corpus_members(
+                context.repo_root, self.corpus, context.suite_id, self.id
+            )
+            return _validate_graph(context, self.id, members)
         if self.paths is not None:
             return _validate_graph(context, self.id, self.paths)
 
@@ -78,6 +103,31 @@ def _diagnostic(
     )
 
 
+def _corpus_members(
+    source: ContentSourceInput,
+    corpus: str,
+    suite: str,
+    check: str,
+) -> tuple[str, ...]:
+    try:
+        return canonical_module_corpus_members(source, corpus)
+    except MetadataError as error:
+        failure = error.failure
+        raise EngineError(
+            Diagnostic(
+                failure.code,
+                failure.outcome,
+                failure.message,
+                suite=suite,
+                check=check,
+                path=failure.path,
+                field=failure.field,
+                expected=failure.expected,
+                observed=failure.observed,
+            )
+        ) from error
+
+
 def _validate_graph(
     context: CheckContext,
     check: str,
@@ -120,7 +170,7 @@ def parse_metadata_graph_check(
     raw: dict[str, Any],
     suite_id: str,
 ) -> MetadataGraphCheck:
-    allowed = {"id", "type", "paths", "cases"}
+    allowed = {"id", "type", "paths", "cases", "corpus"}
     unknown = set(raw) - allowed
     if unknown:
         raise EngineError(
@@ -144,16 +194,31 @@ def parse_metadata_graph_check(
         )
     has_paths = "paths" in raw
     has_cases = "cases" in raw
-    if has_paths == has_cases:
+    has_corpus = "corpus" in raw
+    if has_paths + has_cases + has_corpus != 1:
         raise EngineError(
             Diagnostic(
                 "CONFIG.METADATA_MODE",
                 "invalid",
-                "metadata graph requires exactly one of paths or cases",
+                "metadata graph requires exactly one of corpus, paths, or cases",
                 suite=suite_id,
                 check=check_id,
             )
         )
+    if has_corpus:
+        corpus = raw["corpus"]
+        if not isinstance(corpus, str) or not corpus:
+            raise EngineError(
+                Diagnostic(
+                    "CONFIG.METADATA_CORPUS",
+                    "invalid",
+                    "corpus must name a canonical corpus manifest path",
+                    suite=suite_id,
+                    check=check_id,
+                    field="corpus",
+                )
+            )
+        return MetadataGraphCheck(check_id, None, None, corpus)
     if has_paths:
         return MetadataGraphCheck(
             check_id,

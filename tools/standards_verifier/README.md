@@ -18,7 +18,7 @@ owns that generated update. Neither operation certifies policy completeness.
 
 | Check kind | Actual observation |
 | --- | --- |
-| `metadata_graph` | Metadata acceptance or rejection for a corpus or fixture |
+| `metadata_graph` | Metadata acceptance for every canonical module, or expected acceptance and rejection for fixtures |
 | `metadata_route` | Routing results for declared task facts |
 | `markdown_targets` | Required navigation destinations, independent of link wording |
 | `markdown_links` | Declared links and destinations |
@@ -27,6 +27,11 @@ owns that generated update. Neither operation certifies policy completeness.
 | `policy_impact` | Declared consumer graph and fixture validity |
 | `contract_projection` | Generated Interface agrees with canonical contract |
 | `python_package_contract` | Declared Python package boundaries |
+
+A `metadata_graph` check with `corpus` names the canonical corpus manifest and
+validates every module that manifest declares. The `canonical-corpus-metadata`
+suite holds the one such check, so a new module is covered when the manifest
+gains it, without a suite edit.
 
 The complete checkpoint evaluates all registered declarative suites in dependency
 order. It does **not** execute the Python unit-test suites, assess prose quality,
