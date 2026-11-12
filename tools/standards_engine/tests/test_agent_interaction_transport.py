@@ -38,7 +38,7 @@ class AgentInteractionTransportTest(unittest.TestCase):
         process = subprocess.run(
             [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
              '--repo-root', str(self.root), '--purpose', purpose,
-             '--output-schemas', delivery],
+             '--output-schemas', delivery, '--no-observe'],
             env={**os.environ, 'PYTHONPATH': str(fixture.ROOT)}, text=True,
             input=''.join(json.dumps(value) + '\n' for value in messages),
             capture_output=True, timeout=90,

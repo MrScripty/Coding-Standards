@@ -422,7 +422,7 @@ async def run(arguments) -> dict:
     # Run-owned fixture coordinates take precedence over operator surface choices.
     command.extend(['-c', 'analytics.enabled=false',
         '-c', f'mcp_servers.{server}.command={json.dumps(sys.executable)}',
-        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--output-schemas", arguments.output_schemas])}',
+        '-c', f'mcp_servers.{server}.args={json.dumps(["-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(fixture), "--purpose", "authoring", "--output-schemas", arguments.output_schemas, "--no-observe"])}',
         '-c', f'mcp_servers.{server}.env.PYTHONPATH={json.dumps(str(ROOT))}'])
     events = []
     report = {'observer_version': OBSERVER_VERSION, 'status': 'unavailable', 'client_version': version, 'requested_model': arguments.model,

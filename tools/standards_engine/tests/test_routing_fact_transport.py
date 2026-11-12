@@ -88,7 +88,7 @@ class RoutingFactTransportTest(unittest.TestCase):
             {'jsonrpc':'2.0','method':'notifications/initialized'},
             {'jsonrpc':'2.0','id':2,'method':'tools/call','params':{'name':operation,'arguments':args}}]
         proc=subprocess.run([sys.executable,'-P','-m','tools.standards_engine.standards_engine.mcp',
-            '--repo-root',str(self.root),'--purpose',purpose,'--output-schemas','on-demand'],
+            '--repo-root',str(self.root),'--purpose',purpose,'--output-schemas','on-demand','--no-observe'],
             cwd=ROOT,env={**os.environ,'PYTHONPATH':str(ROOT)},input=''.join(json.dumps(m)+'\n' for m in messages),
             capture_output=True,text=True,check=True)
         self.assertEqual(proc.stderr,'')

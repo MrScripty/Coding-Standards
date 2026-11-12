@@ -100,7 +100,7 @@ class RuntimeIdentityTests(unittest.TestCase):
                         request('tools/call', {'name': 'runtime_info', 'arguments': {}}, identifier=2)]
             environment = {**os.environ, 'PYTHONPATH': str(ROOT)}
             mcp = subprocess.run([sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
-                    '--repo-root', str(root), '--purpose', 'application', '--advanced'],
+                    '--repo-root', str(root), '--purpose', 'application', '--advanced', '--no-observe'],
                 input=''.join(json.dumps(item)+'\n' for item in messages), text=True, capture_output=True,
                 env=environment, timeout=60)
             self.assertEqual(mcp.returncode, 0, mcp.stderr)

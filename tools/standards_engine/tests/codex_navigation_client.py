@@ -26,6 +26,10 @@ async def main(server_name, output_schemas="eager"):
             "--stdio",
             "-c",
             "analytics.enabled=false",
+            # A scripted check is not agent behaviour: keep it out of the
+            # configured server's always-on interaction recording.
+            "-c",
+            f'mcp_servers.{server_name}.env.STANDARDS_ENGINE_OBSERVE="off"',
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=log,

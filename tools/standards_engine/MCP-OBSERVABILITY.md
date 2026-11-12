@@ -1,193 +1,293 @@
-# Operator MCP interaction observations
+# MCP interaction recording
 
-This optional local recorder observes the existing MCP boundary. It does not add
-agent tools, modify domain outcomes or workflow authority, make model calls, retry
-operations, or change the installed agent catalog. The qualification observer remains
-**observer v3**, with its existing raw-event acquisition, assessment and exact-source
-replay. The production recorder does not import the harness or rewrite verdicts.
+Every Standards Engine MCP server process records how its tools are used, so the
+interface can be improved from what agents actually send and receive. Recording is
+always on, keeps about seven days, and is invisible to the agent.
 
-The sanitized recorder selected by `--observe-database` and
-`--observe-deployment` is the sole supported recording mode. The earlier raw
-recorder and its `--observation-db` option are retired. Historical raw databases
-retain their original schema and remain separate evidence; configure a new
-dedicated database for sanitized observations.
+- **Always on.** No flag is needed, in either purpose, for any client.
+- **Invisible.** Recording adds no tool, catalog entry or instruction text and
+  changes no result. It never raises into a request. A recording problem is
+  reported only on the server's stderr.
+- **No dropped records.** A call that cannot be written at once waits in memory
+  and is written by a later call or when the process closes.
+- **Seven days.** Older calls are removed automatically.
 
-## Configuration and authority
+This is the only MCP recorder. The qualification observer remains **observer v3**
+with its own raw-event evidence and exact-source replay; the recorder neither
+imports that harness nor rewrites its verdicts.
 
-Recording is off unless the operator explicitly supplies **both** options below.
-The commands illustrate a new operator-owned installation, not instructions to
-enable an existing one without its operator's approval. Replace paths and the
-nonsensitive deployment label with operator-selected values:
+## Where the file is
 
-```sh
-python3 -m tools.standards_engine.standards_engine.mcp \
-  --repo-root /operator/standards --purpose authoring \
-  --observe-database /operator/private-diagnostics/interactions.sqlite \
-  --observe-deployment qualification-fixture
+```text
+${XDG_DATA_HOME:-~/.local/share}/standards-engine/observations/interactions-v2.sqlite3
 ```
 
-The database directory must already exist, be operator controlled and exclude
-concurrent untrusted replacement of the directory or its ancestors. This initial
-recorder supports POSIX regular local files and SQLite rollback journals only.
-It refuses final-component symlinks, hardlinked files, existing group/world-readable
-files, unsupported journal modes and unsupported or unrelated database schemas.
-New files use mode 0600. It does not chmod existing files, create directories or
-use an Engine domain database. Do not place it in a repository, tracked directory,
-network share or an agent-visible artifact directory. The operator must select
-appropriate disk access, encrypted storage/backup and disposal arrangements.
+The server creates that directory with mode 0700 if it is missing and the file with
+mode 0600. Existing directories and permissions are never changed.
 
-**Same-user filesystem access is not a security boundary.** A process with the
-same OS authority can read, modify or remove the recorder database and stderr.
-Tool-catalog invisibility does not create confidentiality or tamper evidence.
-The recorder therefore excludes payload values regardless of filesystem modes.
-The deployment label must not contain account identities, credentials or secrets.
-No network exporter is included. Export/sharing requires separate operator review.
-
-Policy defaults and valid ranges:
-
-| Option | Default | Range / meaning |
+| Launch option | Default | Meaning |
 | --- | --- | --- |
-| `--observe-max-calls` | 10000 | 16–100000 retained interaction starts, across all processes |
-| `--observe-max-age-seconds` | 604800 | 60–31536000 seconds since begin |
-| `--observe-max-bytes` | 33554432 | 1048576–1073741824 bytes, SQLite main-file page quota |
+| `--observe-database PATH` | the file above | Record somewhere else. The directory must already exist; it is not created. |
+| `--observe-deployment LABEL` | `local` | A nonsensitive label stored with each server process. |
+| `--observe-max-calls N` | 10000 | 16–100000 calls kept, across all processes. |
+| `--observe-max-age-seconds N` | 604800 (7 days) | 60–31536000 seconds since a call began. |
+| `--observe-max-bytes N` | 33554432 (32 MiB) | 1048576–1073741824 bytes of database file. |
+| `--no-observe` | recording on | Do not record this process. |
 
-All processes sharing a database must use the same privacy/retention policy.
-Each connection enforces its configured page quota; mixed policies do not establish
-a shared minimum. Rollback journals may temporarily add up to roughly another
-main database's size, plus SQLite bookkeeping and bounded report/sort working space.
-The directory's filesystem quota remains the final bound on all files. No WAL,
-background thread, queue or telemetry write retry is introduced. Main files do not
-shrink on deletion: SQLite reuses freed pages. No automatic VACUUM/rebuild occurs.
+## Turning it off
 
-## Persisted contract and lifecycle
-
-Schema v1 has three owners within one recorder database:
-
-- `sessions`: exact startup runtime metadata (process instance UUID, interface,
-  purpose, catalog/schema/implementation digests), deployment label and per-tool
-  input/output schema digests. These bind the actually loaded source and effective
-  eager/on-demand catalog. They do not prove a client refreshed its catalog.
-- `interactions`: immutable begin evidence, recorder UUID, session-local ordinal,
-  wall-clock begin instant, method/installed operation, sanitized input shape and
-  its shape-only digest, safe discovery target, expected-catalog match state,
-  request byte measurement and delivery scope. This row is the begin event.
-- `events`: at most one independent end/error/incomplete observation per begin,
-  with monotonic elapsed milliseconds, wall-clock finish instant, response bytes,
-  fixed outcome class and sanitized validation locations/constraint keywords.
-
-Each mutation owns `BEGIN IMMEDIATE`/commit/rollback. Schema admission is checked
-under the same lock, including exact owned DDL and application ID. Zero-length new version-0
-SQLite files migrate transactionally once to v1; v1 reopens without rewriting
-observations. Future versions, unrelated/partial schemas and corruption are
-unavailable, never deleted or replaced. Migration interruption rolls back under
-SQLite recovery. Backup a stopped database before any future supported migration;
-no downgrade migration or automatic restoration is currently provided.
-
-Stdio begins are committed before dispatch. End/error evidence is committed only
-after the ordinary response write and flush return. `stdio-flushed` does not prove
-the client received/processed the response. The direct Python `dispatch` path uses
-`constructed` scope, which proves only that a response was produced. Parsing errors
-and malformed requests with responses are observed; valid notifications have no
-request/response pair and are excluded. Client IDs and clientInfo are not retained.
-
-A caught tool exception has a fixed `tool-exception` category; domain outcome may
-be unknown. Typed validation rejections retain `input-invalid` plus safe field
-locations. Other protocol/domain classes use fixed vocabularies, never exception
-messages, tracebacks or arbitrary result codes. Transport/interruption errors
-append `incomplete/unknown` if storage remains available. A killed process or a
-failed terminal write leaves an unmatched begin. Reports label it unknown; startup
-does not complete old calls or presume other live recorders died. Telemetry cannot
-prove a domain effect did or did not commit and cannot authorize a mutation retry.
-
-Age and count retention run transactionally on each new observed request. Expiry
-is event-driven: an idle/stopped database retains expired records until recording
-resumes or the operator disposes of it. Starts and their terminal evidence are
-removed together; unreferenced session manifests are removed in the same
-transaction. Retention can evict an in-flight call from another process. Its late
-terminal is counted as dropped and recording continues; no start is recreated.
-Retention can remove evidence before a later success, so history/repair denominators
-are limited to retained observations. Per-session prune counters themselves expire
-with their session; they are not installation-lifetime loss totals. Secure deletion
-is enabled for recorder deletes; it does not erase backups, filesystem snapshots,
-SQLite journal history or storage-device remnants.
-
-## Privacy projection
-
-No credentials/tokens, scalar input values, raw request IDs, complete prompts,
-model transcripts, standards/repository bodies, domain handles or arbitrary tool
-outputs are stored or hashed. Every scalar input becomes only its type.
-
-At each structural location, only property names declared by the installed input
-schema can appear. Recursive references/unions supply possible property names;
-this is a disclosure projection, not another input validator. Dynamic map keys
-and unknown names are removed and counted. Sensitive subtrees (`body`, `content`,
-`text`, `prompt`, `message`, `rationale`, `reason`, `evidence`, `details`, `metadata`,
-credentials/password/token/secret/authorization/api_key/environment/env) are replaced
-by a redacted marker. Other input fields still retain no scalar values. Shapes
-have at most 64 visited nodes, depth 5, four sampled array items and 8192 serialized
-ASCII bytes. Truncation is explicit. Validation feedback is limited to eight
-issues, depth-five schema-owned pointer components, wildcard indices/dynamic keys
-and fixed constraint keywords; messages and offending values are omitted.
-
-An input-shape digest groups structural samples, not raw values or exact semantic
-variants. Two scalar variants can deliberately have the same shape. Discovery
-operation values are retained only on exact installed-operation membership.
-Expected catalogs become only unspecified/matches/differs. Selector values are
-not retained. There is no legitimate cross-process session/task ID in the current
-MCP server: reports do not infer continuation from prompts or domain handles.
-
-## Health and recovery
-
-Operator stderr receives fixed JSON health at recorder startup, first degradation,
-retention-dropped terminal observations, and orderly close. It carries state,
-fixed reason, starts/terminals recorded, observations dropped and interactions
-pruned in that process. Stderr failure itself is guarded. Health is not advertised
-in the agent catalog or appended to an Engine result.
-
-Unavailable, locked (20 ms busy budget), full, unsafe, unsupported or corrupt
-storage disables recording for that process and reports degraded health. Existing
-begin evidence remains independent; no completion is invented. No further writes
-or retries occur. The MCP operation still returns its original outcome and runs
-once, including a domain result committed before the telemetry failure. A failed
-start means that interaction may have no retained evidence at all. Health counters
-cover attempted observations, not an exact census of lost interactions.
-
-The operator must monitor stderr/process supervision independently of SQLite,
-fix the owned storage condition and restart the MCP process to recover recording.
-Preserve a corrupt/unrecognized database for diagnosis; select a separately
-approved fresh path rather than silently rebuilding it. A report cannot recover
-health messages that were unavailable/lost with stderr or process termination.
-
-## Read-only inspection
+Either of these stops recording for a server process. Nothing is created or opened.
 
 ```sh
-python3 -m tools.standards_engine.standards_engine.interaction_observer \
-  --database /operator/private-diagnostics/interactions.sqlite --limit 100
+python3 -m tools.standards_engine.standards_engine.mcp --purpose application --no-observe
+STANDARDS_ENGINE_OBSERVE=off python3 -m tools.standards_engine.standards_engine.mcp --purpose application
 ```
 
-This operator CLI opens an existing v1 database in SQLite read-only/query-only
-mode and uses one read snapshot. It never creates, migrates, prunes or modifies
-observations. JSON goes only to the operator's stdout; no output file is created.
-Each group/session/histogram section is bounded by `--limit` (1–1000), with explicit
-truncation flags. Sequence analysis scans at most the latest 10000 retained starts;
-its scan count and truncation are reported. Aggregate queries scan the bounded
-retained database (at most the configured 100000 starts). Sessions show the latest
-bounded set in chronological order; catalog comparisons cover those shown manifests.
+The environment variable wins over every `--observe-*` option. Tests and harnesses
+that start a server pass `--no-observe`, set the variable, or name a temporary
+`--observe-database`, so they never write to a developer's own file; a test
+enforces this. Constructing
+`MCPServer` directly in Python records only when it is given a `RecorderConfig`.
 
-The report provides operation usage, error distribution by structural input shape,
-sanitized field/constraint failures, observed latency and serialized bytes with
-measurement counts, sanitized shapes for successful and failed calls, session
-identity and catalog additions/removals/schema changes. Totals include all retained
-starts/terminals; operation/failure/shape rows identify their delivery scope and
-have their own counts. An end is a non-error MCP response, not evidence the domain
-workflow completed. Missing measurements are null and have separate denominators.
+## What is recorded
 
-Sequence histograms count preceding observed errors/discoveries before a non-error
-tool response, by session, delivery scope and operation. Their denominator is the
-reported number of non-error responses in the bounded scan. This is a diagnostic
-candidate for investigating repair loops, not proof that errors caused discovery,
-that a schema was acquired before use, or that separate tasks share agent intent.
-No raw trace or redacted request can be reconstructed. Bytes are JSON/stdio bytes,
-not model tokens or provider billing. Preserve independent qualification evidence
-for observer-v3 replay and exact behavioral assessment; do not export actual logs
-with code or automatically rewrite contracts from these summaries.
+One row per server process (`sessions`), one per request (`interactions`) and one
+per response (`events`). Notifications are not recorded.
+
+**Per server process**
+
+- A random process id, start time, purpose, interface version and the catalog,
+  schema and implementation digests the process actually loaded.
+- The deployment label, and the client name and version from `initialize`
+  `clientInfo` (for example `codex-mcp-client 0.163.0`).
+- Per-tool input and output schema digests, stored once per distinct catalog.
+- How many calls this process pruned, and how many rows it lost (see below).
+
+**Per request**
+
+- Time, order within the process, method, installed operation name, and whether the
+  response was written to stdio or only constructed.
+- `input_shape`: the argument structure with every value replaced by its type.
+- `arguments`: the values listed in the next section, and nothing else.
+- `request_bytes` (the whole JSON-RPC line, client metadata included) and
+  `arguments_bytes` (the `arguments` object alone).
+- `expected_catalog` as `matches`, `differs` or `unspecified`; the operation a
+  `describe_input`/`describe_output` call asked about.
+- `thread`: a 16-hex-digit keyed hash of the client's thread or session id, when
+  the request metadata carries one, and `origin`: `main`, `subagent` or `unknown`.
+  Codex supplies both. A client that sends neither is recorded with no thread and
+  `unknown`; reports then treat the server process as the thread.
+
+**Per response**
+
+- Time, duration, `response_bytes` (the whole line) and `result_bytes` (one
+  serialization of `structuredContent`; the line carries that payload twice).
+- An outcome word: the result's own `outcome` or `status` (`complete`,
+  `needs-facts`, `needs-action`, `requires-change`, `ready`, `draft`, `applied`,
+  `stale`, `rejected`, `recovery-required`, `invalid`, `unavailable`, `unsupported`,
+  `unauthorized`), or `input-invalid`, `tool-exception`, a protocol error class,
+  `response`, or `unknown` for an interrupted call.
+- Where input validation failed: schema field names and the constraint keyword.
+- `result`: `kind`, `status`, `code` and `outcome`; for a route, the selected
+  target IDs, the IDs of facts still unresolved, and the content page's offset,
+  total, item count and item IDs; for reads, the target IDs returned.
+
+### Argument values that are kept
+
+Values are kept only for names on an explicit list per operation. Any other
+argument appears only as a type in `input_shape`. Strings are cut at 200
+characters, and lists and fact maps at 32 entries, with a `[truncated]` marker. A
+whole `arguments` object over 8 KB keeps only its top-level scalars and
+`truncated`.
+
+| Operation | Kept as sent |
+| --- | --- |
+| `read` | `target`, `detail`, `include_coverage`, `include_routing` |
+| `read_many` | the same four names for each item |
+| `route` | `detail`; `content.limit` and `content.offset`; every fact name and value |
+| `related` | `target`, `direction`, `transitive`, `groups` |
+| `relationship_groups` | `limit`, `offset` |
+| `describe_input`, `describe_output` | `operation`, `selector`, `limit`, `offset` |
+| `inspect` | the handle's `kind` and `child_kind` |
+| `query`, `query_proposal`, `preview_application` | the nested request's `kind`, the `read`/`related` names above, and route facts; the revision handle's `kind` |
+| `routing_facts`, `runtime_info` | nothing beyond the snapshot note below |
+
+A supplied `snapshot` is recorded as a 12-hex-digit hash of its id, so reuse of
+one snapshot is visible without keeping the handle.
+
+**Route facts are kept exactly as the agent sent them**, including names and
+values the routing vocabulary does not contain. An agent that invents a fact such
+as `python`, or passes a sentence as a `task` fact, is the most useful signal this
+recording has, so up to 200 characters of that text are stored.
+
+Every other operation is an authoring operation (`propose`, `revise`,
+`resolve_workflow`, `resolve_many`, `review`, `apply`, `recover`, `analyze`,
+`workflow_status`, `workflow_details`, `resume`, `maintain_evidence` and the
+advanced native operations). For these, a value is kept only when all of the
+following hold:
+
+- its name is declared by the installed input schema at that position;
+- it is not inside `body`, `content`, `text`, `prompt`, `message`, `rationale`,
+  `reason`, `evidence`, `explicit_exclusions`, `details`, `metadata` or a
+  credential-like field;
+- its name is one of: `kind`, `child_kind`, `detail`, `action`, `section`,
+  `result`, `decision`, `owner`, `disposition`, `relation`, `artifact_kind`,
+  `authority`, `level`, `role`, `origin`, `lifecycle`, `direction`, `id`, `policy`,
+  `standard`, `consumer`, `target`, `source_policy`, `subject`, `evidence_owner`,
+  `after_policy`, `rule`, `fact`, `requires`, `specializes`, `successors`,
+  `predecessors`, `groups`, `limit`, `offset`, `apply`, `transitive`;
+- it is a boolean, a small number, or a string shaped like a canonical identifier
+  (letters, digits and `._:/-`, no spaces) that contains no digest, UUID or other
+  long hexadecimal run.
+
+So an edit is recorded as, for example,
+`{"kind":"revise-policy-unit","policy":"workflow.planning.written-plan-applicability"}`
+and a handle as `{"kind":"analysis-handle"}`.
+
+### What is never recorded
+
+- Standards text, bodies, titles, summaries, rationales, intents, headings,
+  conditions, evidence text, file paths, or any other prose in an authoring call.
+- Result content: no standard text, messages, details or summaries.
+- Handle ids, digests, request ids and progress tokens.
+- Raw thread, session or turn ids, model names, workspace paths, repository URLs,
+  or anything else in request `_meta`.
+- Argument names the installed schema does not declare (they are counted), other
+  than route fact names.
+- Tool names the server does not install, exception messages and tracebacks.
+- Credentials or tokens, under any name.
+
+## The seven-day window
+
+Each new call first removes calls that began more than seven days ago, then the
+oldest calls beyond the count limit. When the file is within one sixteenth of its
+byte limit the oldest sixteenth of calls is removed as well, so a full file never
+stops new recording. A call and its response are removed together, and a server
+process row goes when its last call does (one that carries a loss count stays
+until it is seven days old).
+
+Removal happens only while something is recording: an idle file keeps its last
+contents until the next call. Deleted rows are overwritten in the file
+(`secure_delete`), but backups, filesystem snapshots and storage remnants are
+outside the recorder's reach. The file does not shrink; freed space is reused.
+
+## No dropped records, and what can still be lost
+
+Each request is written before it is dispatched and each response after it has
+been delivered. If the database is busy or unavailable, the row stays in an
+in-memory backlog of at most 1,000 rows and the call proceeds:
+
+- A busy database is waited for at most 20 ms per attempt, and 250 ms once at
+  process start. The backlog is written by the next request or response, and at
+  orderly close with a wait of up to 5 seconds.
+- Recording is never switched off. After any other storage error the connection
+  is reopened on a later call.
+- Several processes creating the file at the same instant all succeed: the first
+  publishes the whole schema in one commit and the others find it complete.
+
+What cannot be recovered, and how it shows:
+
+| Situation | Effect | Visible as |
+| --- | --- | --- |
+| Process killed during a call | The request has no response row. | "without an outcome" in the report |
+| Backlog over 1,000 rows | The oldest waiting rows are dropped. | `lost` on the process row and in the report |
+| A response whose request row was already pruned or dropped | The response is not stored. | counted in the same `lost` |
+| Database unreachable until the process ends | Its rows are never written. | stderr only: nothing can be stored |
+| Process killed while rows are waiting | The waiting rows are gone. | not visible |
+
+In ordinary use the write takes well under a millisecond, so the last two cases
+need a database that stays locked or broken for the life of a process.
+
+## Storage
+
+The database uses SQLite write-ahead logging. That is what keeps recording out of
+the way: a commit holds the write lock for microseconds instead of the several
+milliseconds a synced rollback journal needs, and reading a report never blocks a
+server. For the person reading the data it means:
+
+- While any server is running there are three files: the database, `-wal` and
+  `-shm`. Recent calls may exist only in `-wal`. Read through SQLite (the report
+  does) or copy all three; do not copy the database file alone.
+- The file must be on a local filesystem. Network shares are not supported.
+- After an operating-system crash or power loss the last few commits may be
+  missing. A killed or crashed server process loses nothing that was committed.
+- `-wal` is usually a few megabytes on top of the byte limit and is removed when
+  the last server closes.
+
+The recorder accepts only a new empty file or its own schema v2. It refuses
+symlinks, hardlinked files, files readable by group or others, unrelated SQLite
+files, files larger than the byte limit, and other schema versions, and leaves
+them untouched. That includes schema v1 files written by earlier releases: they
+are historical evidence, are never migrated or deleted, and are no longer written
+because the default file name is new.
+
+**Same-user file access is not a security boundary.** Any process running as the
+same user can read or change the recording. The thread hash key is stored in the
+same database: it keeps raw client ids out of the file and out of shared reports,
+but it does not hide a thread from someone who holds both the file and the id. Do
+not put the file in a repository or an agent-visible directory, and review a
+report before sharing it: route facts can contain agent-written text.
+
+## Health messages
+
+A healthy recorder writes nothing. When recording changes state, one line goes to
+the server's stderr:
+
+```text
+standards-engine observer {"backlog":6,"lost":0,"pruned_interactions":0,"reason":"storage-locked","recorded_starts":2,"recorded_terminals":2,"state":"degraded"}
+```
+
+`degraded` means rows are waiting in memory for the stated reason; it does not mean
+recording stopped. A line with `healthy` follows when they have been written, and a
+final line is written at close if anything was reported or lost. Reasons are fixed
+words: `storage-locked`, `storage-unavailable`, `storage-full`, `storage-corrupt`,
+`storage-error`, `unsafe-database-file`, `unsupported-database-schema`,
+`invalid-database-schema`, `nonpristine-database`, `database-over-budget`,
+`unsupported-journal-mode`, `unsupported-filesystem` and `recorder-error`. Paths,
+SQL and payloads never appear.
+
+## Reading the recording
+
+```sh
+python3 -m tools.standards_engine.standards_engine.interaction_observer
+python3 -m tools.standards_engine.standards_engine.interaction_observer --since-days 2
+python3 -m tools.standards_engine.standards_engine.interaction_observer --format json --limit 100
+```
+
+`--database PATH` reads another file. The command opens the database read-only,
+uses one consistent snapshot and never creates, changes or prunes a recording.
+SQLite may leave an empty `-wal` and a `-shm` file beside a database it has read.
+
+The default output is about one screen of text:
+
+- calls by client, purpose and interface version;
+- per operation: calls, share rejected, p50/p90/max duration and p50/max result
+  size;
+- the most frequent rejections with their code, the field that failed and the
+  value that was sent;
+- route fact names and values the server refused and never accepted in the window;
+- the most-read targets, counting `read`, `read_many` and route content pages;
+- how often a thread read a target it had already read;
+- routes sent without a snapshot;
+- threads, tool calls and repeated reads for main agents, subagents and clients
+  that identify neither;
+- calls without an outcome, rows lost and calls pruned.
+
+`--format json` gives every section in full, plus the structural input shapes,
+the latest server processes, catalog differences between them and the
+error-then-success sequences. `--limit` (1–1000) bounds the rows per section and
+truncation is flagged.
+
+How to read it:
+
+- "Refused and never accepted" is inferred from the recording, not checked against
+  a vocabulary: a fact name counts when its route was rejected for a fact and the
+  server neither accepted that name nor listed it as an unresolved fact in the
+  window. A value counts when the rejection points at its fact and that value was
+  never accepted.
+- A thread is the hashed client thread, or the server process when the client sent
+  none. Repeat reads are counted within a thread.
+- An unmatched call has an unknown outcome. The recording cannot show whether a
+  mutation committed and must not be used to decide a retry.
+- Bytes are serialized JSON, not model tokens or billing.
+- Recorded requests cannot be replayed. Keep qualification evidence for that.

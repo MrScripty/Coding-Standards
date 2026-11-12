@@ -213,7 +213,7 @@ class OutputDeliveryTest(unittest.TestCase):
             messages=[init,{'jsonrpc':'2.0','method':'notifications/initialized'},request('tools/list',identifier=2),
                       request('tools/call',{'name':'describe_output','arguments':call},identifier=3)]
             process=subprocess.run([sys.executable,'-m','tools.standards_engine.standards_engine.mcp',
-                '--repo-root',str(ROOT),'--purpose','authoring','--output-schemas','on-demand'],
+                '--repo-root',str(ROOT),'--purpose','authoring','--output-schemas','on-demand','--no-observe'],
                 input=''.join(json.dumps(x)+'\n' for x in messages),capture_output=True,text=True,cwd=ROOT,check=True)
             replies=[json.loads(x) for x in process.stdout.splitlines()]
             self.assertTrue(all('outputSchema' not in t for t in replies[1]['result']['tools']))

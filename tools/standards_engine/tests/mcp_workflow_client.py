@@ -51,7 +51,7 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
             )
             return StdioServerParameters(
                 command=engine_python,
-                args=["-P", *launch, "--purpose", purpose, "--repo-root", str(repo)],
+                args=["-P", *launch, "--purpose", purpose, "--repo-root", str(repo), "--no-observe"],
                 env={**os.environ, "PYTHONPATH": str(ROOT)},
             )
 

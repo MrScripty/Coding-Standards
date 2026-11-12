@@ -310,7 +310,7 @@ class DetailTransportTests(unittest.TestCase):
             root = Path(__file__).resolve().parents[3]
             run = subprocess.run(
                 [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp",
-                 "--repo-root", str(self.root), "--purpose", "authoring"],
+                 "--repo-root", str(self.root), "--purpose", "authoring", "--no-observe"],
                 input="".join(json.dumps(item) + "\n" for item in messages),
                 text=True, capture_output=True, env={**os.environ, "PYTHONPATH": str(root)},
                 check=True,

@@ -495,7 +495,7 @@ class ProposalReuseTest(unittest.TestCase):
         observed = []
         for _ in range(2):
             process = subprocess.run(
-                [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(self.root), "--purpose", "authoring"],
+                [sys.executable, "-P", "-m", "tools.standards_engine.standards_engine.mcp", "--repo-root", str(self.root), "--purpose", "authoring", "--no-observe"],
                 input="".join(json.dumps(item) + "\n" for item in messages), text=True,
                 capture_output=True, check=True, timeout=90,
                 env={**os.environ, "PYTHONPATH": str(ROOT)}, cwd=self.temporary.name,

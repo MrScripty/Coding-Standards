@@ -38,10 +38,13 @@ normative text, policy subjects, consumer relationships and other certificates
 remain intact. It supplies no replacement coverage claim. Restart/reconnect
 after installing the coordinated source and generated contracts; preserve stores.
 
-Optional sanitized operator measurements use `--observe-database` with
-`--observe-deployment`; see [MCP observability](MCP-OBSERVABILITY.md). Recording is
-disabled by default and preserves the existing qualification observer v3 and
-agent-visible interface. This is the sole supported MCP recorder.
+Every MCP server process records how its tools are used in an operator-only local
+SQLite file and keeps about seven days. See
+[MCP interaction recording](MCP-OBSERVABILITY.md) for exactly what is and is not
+recorded, where the file is, and how to turn it off (`--no-observe` or
+`STANDARDS_ENGINE_OBSERVE=off`). Recording changes nothing an agent can see and
+preserves the existing qualification observer v3. This is the sole supported MCP
+recorder.
 
 ## Purpose separation (interface 31)
 
@@ -424,8 +427,15 @@ after installation without changing launch arguments or deleting stores.
 The earlier raw invocation recorder was retired on 2026-10-22. Its
 `--observation-db` launch option is no longer accepted. Historical raw databases
 remain operator-owned evidence and are not converted, reused or deleted.
-Select a new dedicated database with `--observe-database` and a nonsensitive
-`--observe-deployment` label. Follow the [sanitized recorder's operating contract](MCP-OBSERVABILITY.md)
+
+The opt-in sanitized recorder that replaced it (schema v1, selected with
+`--observe-database` and `--observe-deployment`) is in turn replaced by always-on
+recording in a new default file (schema v2). Its v1 databases are also left
+untouched. A registration that still names a v1 file with `--observe-database`
+is refused that file and records nothing until the option is removed; remove both
+options to use the default location. `--observe-database` now only overrides the
+location and `--observe-deployment` defaults to `local`. Follow the
+[recording contract](MCP-OBSERVABILITY.md)
 for permissions, retained data, retention and reports. The
 [original observation plan](../../docs/plans/agent-interaction-observation/plan.md)
 retains its historical acceptance and qualification records.

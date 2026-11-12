@@ -65,7 +65,7 @@ class StorageLifecycleTransportTest(unittest.TestCase):
         process = subprocess.run(
             [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp',
              '--repo-root', str(self.root), '--purpose', 'authoring',
-             '--output-schemas', 'on-demand'],
+             '--output-schemas', 'on-demand', '--no-observe'],
             env={**os.environ, 'PYTHONPATH': str(transport.fixture.ROOT)},
             input=''.join(json.dumps(message) + '\n' for message in messages),
             text=True, capture_output=True, timeout=90,
