@@ -1,4 +1,4 @@
-"""Focused exposure evidence over captured content and the actual SQLite store."""
+"""Focused review-label evidence over captured content and the actual SQLite store."""
 from __future__ import annotations
 
 from dataclasses import replace
@@ -92,7 +92,8 @@ class PurposeProjectionTest(unittest.TestCase):
             self.assertEqual(value["content"], self.files["CORE-STANDARDS.md"].decode())
             self.assertIn(PUBLIC, value["content"])
             self.assertNotIn(PRIVATE, json.dumps(value))
-            self.assertEqual(set(value), {"kind", "purpose", "snapshot", "policy", "content", "scope", "requires", "specializes", "next_operations"} | ({"related"} if detail == "full" else set()))
+            self.assertEqual(set(value), {"kind", "purpose", "snapshot", "policy", "review_state", "content", "scope", "requires", "specializes", "next_operations"} | ({"related"} if detail == "full" else set()))
+            self.assertEqual(value["review_state"], "current")
             self.assertNotIn("provenance", value)
 
     def test_direct_hidden_read_and_privileged_request_are_bounded(self):
@@ -144,17 +145,141 @@ class PurposeProjectionTest(unittest.TestCase):
         self.assertEqual(reason.materials["core"].binding, self.compiled.materials["core"].binding)
         self.assertEqual(reason.supporting.exposure_state("core", reason.materials["core"].binding), "current")
 
-    def test_routing_retains_unknown_facts_and_blocks_missing_required_content(self):
+    def capture(self, files, label):
+        captured = self.engine._snapshots.create_snapshot(CapturedContent(label, (
+            SnapshotFile(SnapshotPath.parse(path), value) for path, value in refresh(dict(files)).files)))
+        return self.engine._snapshot_handle(captured.snapshot)
+
+    def implementation_facts(self):
+        facts = {"routing."+key: []
+                 for key in ("activities", "workflow-profiles", "applications", "boundaries", "languages", "frameworks", "topics", "details")}
+        facts["routing.activities"] = ["implementation"]
+        return facts
+
+    def test_routing_retains_unknown_facts_and_delivers_unapproved_selected_content(self):
         unknown = self.facade.route({"snapshot": self.snapshot, "facts": {}})
         self.assertEqual(unknown["status"], "needs-facts", unknown)
         self.assertTrue(unknown["unresolved_questions"])
-        facts = {"routing."+key: []
-                 for key in ("activities", "workflow-profiles", "applications", "boundaries", "languages", "frameworks", "topics", "details")}
-        complete = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+        facts = self.implementation_facts()
+        complete = self.facade.route({"snapshot": self.snapshot, "facts": {**facts, "routing.activities": []}})
         self.assertEqual(complete["status"], "complete", complete)
-        facts["routing.activities"] = ["implementation"]
-        blocked = self.facade.route({"snapshot": self.snapshot, "facts": facts})
-        self.assertEqual(blocked["code"], "APPLICATION.CONTENT_UNAVAILABLE", blocked)
+        self.assertEqual({entry["review_state"] for entry in complete["reading_plan"]}, {"current"})
+        selected = self.facade.route({"snapshot": self.snapshot, "facts": facts})
+        self.assertEqual(selected["kind"], "application-route-result", selected)
+        self.assertEqual(selected["status"], "complete")
+        labels = {entry["target"]: entry["review_state"] for entry in selected["reading_plan"]}
+        self.assertGreater(len(labels), len(complete["reading_plan"]))
+        self.assertEqual(labels["core"], "current")
+        self.assertEqual(labels["workflow.implementation"], "not-reviewed")
+        self.assertEqual([hint["target"] for hint in selected["next_operations"]],
+                         [entry["target"] for entry in selected["reading_plan"]])
+
+    def test_route_delivers_not_reviewed_and_changed_modules_with_correct_labels(self):
+        files = dict(self.files)
+        target = "workflow.implementation"
+        material = self.compiled.materials[target]
+        entries = [{"target": key, "binding": value.binding} for key, value in self.compiled.supporting.exposure.items()]
+        entries.append({"target": target, "binding": material.binding})
+        files[APPLICATION_CONTENT] = ("schema_version = 1\nentries = " + _toml_inline(entries) + "\n").encode()
+        approved = self.facade.read({"snapshot": self.capture(files, "approved-fixture"), "target": target})
+        self.assertEqual(approved["review_state"], "current", approved)
+        files[material.path] += b"\nEDITED_AFTER_APPROVAL_52871\n"
+        snapshot = self.capture(files, "changed-fixture")
+        facts = {**self.implementation_facts(), "routing.languages": ["rust"]}
+        arguments = {"snapshot": snapshot, "facts": facts, "content": {}}
+        plan, items = None, []
+        while arguments is not None:
+            value = self.facade.route(arguments)
+            self.assertEqual(value["kind"], "application-route-result", value)
+            plan = value["reading_plan"]
+            items.extend(value["content"]["items"])
+            arguments = value["content"].get("next")
+        labels = {entry["target"]: entry["review_state"] for entry in plan}
+        self.assertEqual(labels[target], "changed-since-review")
+        self.assertEqual(labels["core"], "current")
+        self.assertEqual(labels["profile.language.rust"], "not-reviewed")
+        self.assertEqual(set(labels.values()), {"current", "changed-since-review", "not-reviewed"})
+        # Every selected module arrives, and each item repeats its plan label beside the text.
+        self.assertEqual([item["policy"]["id"] for item in items], list(labels))
+        self.assertEqual({item["policy"]["id"]: item["review_state"] for item in items}, labels)
+        changed = next(item for item in items if item["policy"]["id"] == target)
+        self.assertIn("EDITED_AFTER_APPROVAL_52871", changed["content"])
+        self.assertNotIn(PRIVATE, json.dumps(items))
+        many = self.facade.read_many({"snapshot": snapshot, "items": [{"target": key} for key in labels]})
+        self.assertEqual(many["items"], items)
+        unit = self.compiled.corpus.policy_unit_corpus.for_module(target)[0]
+        scoped = self.facade.read({"snapshot": snapshot, "target": unit.id})
+        self.assertEqual(scoped["review_state"], "changed-since-review", scoped)
+
+    def test_router_and_core_with_lapsed_or_absent_approval_still_route(self):
+        lapsed = dict(self.files)
+        lapsed["CORE-STANDARDS.md"] += b"\nCORE_EDITED_AFTER_APPROVAL_30417\n"
+        path = "evaluation/standards-effectiveness/router-projection.toml"
+        lapsed[path] = lapsed[path].replace(self.compiled.router.facts[0].prompt.encode(),
+                                            b"Describe the selected task activities.", 1)
+        absent = dict(self.files)
+        absent[APPLICATION_CONTENT] = b"schema_version = 1\nentries = []\n"
+        for files, expected in ((lapsed, "changed-since-review"), (absent, "not-reviewed")):
+            with self.subTest(expected=expected):
+                snapshot = self.capture(files, "lapsed-" + expected)
+                vocabulary = self.facade.routing_facts({"snapshot": snapshot})
+                self.assertEqual(vocabulary["kind"], "application-routing-facts-result", vocabulary)
+                self.assertTrue(vocabulary["facts"])
+                groups = self.facade.relationship_groups({"snapshot": snapshot})
+                self.assertEqual(groups["kind"], "relationship-groups-result", groups)
+                routed = self.facade.route({"snapshot": snapshot, "facts": self.implementation_facts(), "content": {}})
+                self.assertEqual(routed["kind"], "application-route-result", routed)
+                labels = {entry["target"]: entry["review_state"] for entry in routed["reading_plan"]}
+                self.assertEqual(labels["core"], expected)
+                self.assertEqual(labels["router"], expected)
+                self.assertEqual(routed["content"]["items"][0]["policy"]["id"], "core")
+                self.assertEqual(routed["content"]["items"][0]["review_state"], expected)
+                related = self.facade.related({"snapshot": snapshot, "target": "router", "groups": ["standards-requires"],
+                                               "direction": "outgoing", "transitive": False})
+                self.assertEqual(related["kind"], "application-related-result", related)
+                self.assertEqual(self.facade.read({"snapshot": snapshot, "target": "router"})["review_state"], expected)
+
+    def test_unknown_target_has_its_own_rejection_and_nothing_awaits_publication(self):
+        handle = self.read()["policy"]["handle"]
+        rejections = [
+            self.facade.read({"snapshot": self.snapshot, "target": "core.misspelt"}),
+            self.facade.read({"snapshot": self.snapshot, "target": "provenance.fixture"}),
+            self.facade.related({"snapshot": self.snapshot, "target": "does.not.exist", "groups": ["semantic"],
+                                 "direction": "outgoing", "transitive": False}),
+            self.facade.read_many({"snapshot": self.snapshot, "items": [{"target": "core"}, {"target": "does.not.exist"}]}),
+            self.facade.inspect({"handle": {**handle, "child_id": "does.not.exist"}}),
+            self.facade.inspect({"handle": {**handle, "child_kind": "relationship", "child_id": "outgoing:does.not.exist"}}),
+            self.facade.inspect({"handle": {**handle, "child_kind": "relationship", "child_id": "sideways:core"}}),
+        ]
+        for value in rejections:
+            self.assertEqual(value["kind"], "application-rejected-result", value)
+            self.assertEqual((value["code"], value["outcome"]), ("APPLICATION.UNKNOWN_TARGET", "invalid"), value)
+            self.assertIn("not registered", value["message"])
+            self.assertIn("returned by route, read or related", value["message"])
+            self.assertNotIn(PRIVATE, json.dumps(value))
+        forbidden = self.facade.related({"snapshot": self.snapshot, "target": "core", "groups": ["policy-impact"],
+                                         "direction": "outgoing", "transitive": True})
+        self.assertEqual(forbidden["code"], "APPLICATION.TRAVERSAL_NOT_PERMITTED", forbidden)
+        self.assertIn("relationship_groups", forbidden["message"])
+        definition = _contracts(ROOT).schema["$defs"]["ApplicationRejectedResult"]
+        self.assertNotIn("APPLICATION.CONTENT_UNAVAILABLE", definition["properties"]["code"]["enum"])
+        self.assertNotIn("awaiting", json.dumps(rejections + [forbidden]))
+
+    def test_application_graph_holds_all_registered_material_and_no_provenance(self):
+        view = ApplicationView(self.compiled, c.SnapshotHandle.from_value(self.snapshot))
+        self.assertEqual(set(view.review), set(self.compiled.materials))
+        self.assertIn("not-reviewed", view.review.values())
+        self.assertLessEqual(set(self.compiled.materials) & set(self.compiled.graph.nodes), set(view.graph.nodes))
+        self.assertEqual(set(view.graph.groups), {"standards-requires", "standards-specializes",
+                                                 "standards-dependencies", "policy-impact", "semantic"})
+        self.assertFalse([node for node in view.graph.nodes if node.startswith("provenance.")])
+        hidden = set(view.graph.nodes) - set(self.compiled.materials) - {unit.id for unit in self.compiled.corpus.policy_units}
+        self.assertEqual(hidden, set())
+        # An unapproved module is a relationship endpoint like any other.
+        related = self.facade.related({"snapshot": self.snapshot, "target": "workflow.implementation",
+                                       "groups": ["standards-requires"], "direction": "outgoing", "transitive": False})
+        self.assertEqual(related["kind"], "application-related-result", related)
+        self.assertIn("core", [entry["target"] for entry in related["relationships"]])
 
     def test_hidden_intermediate_cannot_bridge_a_permitted_traversal(self):
         from tools.graph_engine.graph_engine import (
@@ -215,6 +340,44 @@ class PurposeProjectionTest(unittest.TestCase):
             serialized = json.dumps(catalog)
             for hidden in ("rationale", "ChangePurpose", "DecisionProvenanceRecord", "ProposalRevisionHandle"):
                 self.assertNotIn(hidden, serialized)
+
+    def test_application_descriptions_open_with_purpose_and_state_no_gate(self):
+        from tools.standards_engine.standards_engine.mcp_catalog import tool_catalog
+        interface = AgentToolFacade.load_interface(ROOT)
+        for delivery in ("eager", "on-demand"):
+            catalog = {tool["name"]: tool["description"] for tool in
+                       tool_catalog(interface, purpose="application", advanced=True, output_schemas=delivery)}
+            for name, description in catalog.items():
+                with self.subTest(delivery=delivery, name=name):
+                    self.assertRegex(description, r"^(Returns|Lists|Shows|Reports|Advanced form) ")
+                    for stale in ("awaiting", "unavailable item", "reviewed items", "qualified"):
+                        self.assertNotIn(stale, description)
+            self.assertNotIn("2 MiB", catalog["route"])
+            for phrase in ("content={}", "content.next", "review_state", "not-reviewed", "at least one whole module"):
+                self.assertIn(phrase, catalog["route"])
+            self.assertIn("two or three modules per call", catalog["read_many"])
+        authoring = {tool["name"]: tool["description"] for tool in tool_catalog(interface, purpose="authoring")}
+        self.assertIn("review_state", authoring["preview_application"])
+        self.assertNotIn("qualification", authoring["preview_application"])
+
+    def test_application_skill_example_uses_the_registered_vocabulary_and_labels(self):
+        skill = (ROOT / ".agents/skills/coding-standards/SKILL.md").read_text()
+        self.assertTrue(skill.startswith("---\nname: coding-standards\ndescription: "), skill[:80])
+        facts = {fact["id"]: fact["values"] for fact in self.compiled.router.fact_definitions()}
+        example = {"routing.activities": "implementation", "routing.languages": "rust", "routing.boundaries": "interop"}
+        for name, value in example.items():
+            self.assertIn(value, facts[name])
+            self.assertIn(f'"{name}": ["{value}"]', skill)
+        labels = _contracts(ROOT).schema["$defs"]["ApplicationReviewState"]["enum"]
+        self.assertEqual(labels, ["current", "changed-since-review", "not-reviewed"])
+        for phrase in (*(f"`{label}`" for label in labels), "routing_facts", "content: {}", "content.next",
+                       "snapshot", "read_many", "APPLICATION.UNKNOWN_TARGET"):
+            self.assertIn(phrase, skill)
+        routed = self.facade.route({"snapshot": self.snapshot, "content": {},
+                                    "facts": {name: [value] for name, value in example.items()}})
+        self.assertEqual(routed["kind"], "application-route-result", routed)
+        for entry in routed["reading_plan"]:
+            self.assertIn(entry["target"], skill)
 
 
     def test_whole_module_discovers_references_owned_by_its_policy_units(self):

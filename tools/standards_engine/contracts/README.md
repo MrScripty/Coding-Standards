@@ -1,5 +1,14 @@
 # Standards Engine Contracts
 
+Interface 49 adds a required `review_state` (`current`, `changed-since-review` or
+`not-reviewed`) to application and candidate-application read results and to
+application reading-plan entries. Application approval labels delivered material
+and no longer withholds it. `APPLICATION.CONTENT_UNAVAILABLE` is removed;
+`APPLICATION.UNKNOWN_TARGET` and `APPLICATION.TRAVERSAL_NOT_PERMITTED` are added,
+and candidate previews also return `APPLICATION.UNKNOWN_GROUP`. Result projection
+advances to 9; request contract 6 and persisted state versions remain unchanged.
+See [the interface-49 contract](../PURPOSE-SEPARATION.md#labelled-application-delivery-interface-49).
+
 Interface 46 adds a durable application publication receipt and a fresh,
 read-only observation of the selected Git checkout to apply/recover results and
 workflow status. Observation failures return bounded unavailable fields without
@@ -83,8 +92,8 @@ accepts a canonical registered ID or returned exact target. Fixture and source
 consumers do not acquire an editing capability.
 
 `preview_application` accepts an exact proposal revision and one application
-read/route/related request. It applies normal exposure and prerequisite checks,
-returns explicitly candidate-bound results, and provides preview-only
+read/route/related request. It applies normal application delivery and review
+labels, returns explicitly candidate-bound results, and provides preview-only
 continuations. It is absent from ordinary application catalogs. Preflight still
 checks structure rather than returning an application view. Preview does not
 certify coverage, accept review, issue exposure approval or publish the draft.

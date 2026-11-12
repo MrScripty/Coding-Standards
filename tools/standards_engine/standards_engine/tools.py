@@ -136,6 +136,7 @@ class AgentToolFacade:
         cls, root: Path, *, purpose: Purpose | str,
         interface: CompiledContracts | None = None,
         compiled_cache: CompiledSnapshotCache | None = None,
+        route_page_bytes: int | None = None,
     ) -> AgentToolFacade:
         repo_root = root.resolve()
         engine = StandardsEngine.open_repository(
@@ -145,6 +146,7 @@ class AgentToolFacade:
             ),
             purpose=purpose,
             compiled_cache=compiled_cache,
+            route_page_bytes=route_page_bytes,
         )
         try:
             return cls(engine, interface if interface is not None else _contracts(repo_root))

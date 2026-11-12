@@ -231,8 +231,10 @@ and templates support `revise-operational-artifact`.
 
 After material review, call authoring `preview_application` with the exact revision
 and an application read, route or related request. Inspect the complete returned
-content, required closure, relationship filtering and qualification results. Repair
-missing qualifications or retain authoring-only material outside application exposure.
+content, selected closure, relationship filtering and each item's `review_state`
+label. The preview delivers every registered item an application agent would
+receive; approve or withdraw exposure to change a label, and keep authoring-only
+reasoning in provenance records, which the application view never returns.
 Candidate previews remain bound to the revision and do not publish a snapshot.
 
 Refresh the client catalog after an engine update and inspect initialization's
@@ -337,7 +339,7 @@ for the code-to-content handoff. Read operational aids to obtain their captured
 authoring target. Submit provenance content and an explicit exposure decision
 in the same coherent change as applicable; the Engine binds final candidate
 content. Provenance-only maintenance retains unchanged normative revisions.
-Application eligibility starts empty and becomes active only after reviewed
+An approval changes an item's application `review_state` label only after reviewed
 publication, not after merely creating a draft.
 
 

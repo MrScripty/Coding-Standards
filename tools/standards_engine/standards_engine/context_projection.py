@@ -7,7 +7,10 @@ from functools import wraps
 from pathlib import Path
 from typing import Callable, TYPE_CHECKING
 
-from tools.graph_engine.graph_engine import Direction, EdgeRegistry, GraphContribution, GraphError
+from tools.graph_engine.graph_engine import (
+    Direction, EdgeRegistry, ForbiddenTraversalError, GraphContribution, GraphError,
+    UnknownEdgeError, UnknownGroupError, UnknownNodeError,
+)
 from tools.standards_graph.standards_graph import Provider
 from tools.standards_contracts.standards_contracts import ContractError
 
@@ -35,10 +38,15 @@ APPLICATION_CALLS = {
 }
 
 
-def application_rejection(code: str = "APPLICATION.CONTENT_UNAVAILABLE", outcome: str = "unavailable"):
+# Approval is a label on delivered material, never a condition of delivery.
+REVIEW_STATES = {"current": "current", "needs-review": "changed-since-review", "unreviewed": "not-reviewed"}
+
+
+def application_rejection(code: str = "APPLICATION.INTERNAL_UNAVAILABLE", outcome: str = "unavailable"):
     messages = {
-        "APPLICATION.CONTENT_UNAVAILABLE": "The requested guidance is awaiting application publication.",
+        "APPLICATION.UNKNOWN_TARGET": "That identity is not registered. Use an ID or handle exactly as returned by route, read or related; nothing was inferred.",
         "APPLICATION.UNKNOWN_GROUP": "Choose a permitted group from relationship_groups; no group was inferred.",
+        "APPLICATION.TRAVERSAL_NOT_PERMITTED": "That relationship group does not permit the requested direction or transitive traversal; relationship_groups lists what each group permits.",
         "APPLICATION.RESULT_LIMIT": "Select fewer items or narrower policy scopes within the 2 MiB reading limit.",
         "APPLICATION.INPUT_INVALID": "Supply arguments from this interface's published contract.",
         "APPLICATION.OPERATION_UNAVAILABLE": "This interface provides application navigation operations.",
@@ -67,12 +75,27 @@ def public_operation(function: Callable) -> Callable:
     return invoke
 
 
-class _UnqualifiedContent(Exception):
+class _UnknownTarget(Exception):
     pass
 
 
+def _lookup_rejection(error: Exception):
+    """Name what the caller can correct; any other graph failure is internal."""
+    if isinstance(error, (_UnknownTarget, UnknownEdgeError, UnknownNodeError)):
+        return application_rejection("APPLICATION.UNKNOWN_TARGET", "invalid")
+    if isinstance(error, UnknownGroupError):
+        return application_rejection("APPLICATION.UNKNOWN_GROUP", "invalid")
+    if isinstance(error, ForbiddenTraversalError):
+        return application_rejection("APPLICATION.TRAVERSAL_NOT_PERMITTED", "invalid")
+    return application_rejection("APPLICATION.INTERNAL_UNAVAILABLE")
+
+
 class ApplicationView:
-    """Build application values from the qualified portion of one snapshot."""
+    """Build application values from the registered material of one snapshot.
+
+    Every registered standard and operational aid is delivered with its review
+    label. Authoring-only provenance and unregistered consumers stay outside.
+    """
 
     def __init__(self, compiled: CompiledSnapshot,
                  authority: c.SnapshotHandle | c.ProposalRevisionHandle):
@@ -80,12 +103,12 @@ class ApplicationView:
         self.authority = authority.as_contract()
         self.candidate = isinstance(authority, c.ProposalRevisionHandle)
         self.snapshot = None if self.candidate else self.authority
-        self.eligible = frozenset(
-            identity for identity, material in compiled.materials.items()
-            if compiled.supporting.exposure_state(identity, material.binding) == "current"
-        )
-        visible = set(self.eligible)
-        visible.update(unit.id for unit in compiled.corpus.policy_units if unit.module in self.eligible)
+        self.review = {
+            identity: REVIEW_STATES[compiled.supporting.exposure_state(identity, material.binding)]
+            for identity, material in compiled.materials.items()
+        }
+        visible = set(self.review)
+        visible.update(unit.id for unit in compiled.corpus.policy_units if unit.module in self.review)
         groups = {key: value for key, value in compiled.graph.groups.items() if key in {
             "standards-requires", "standards-specializes", "standards-dependencies", "policy-impact", "semantic",
         }}
@@ -102,24 +125,13 @@ class ApplicationView:
         sources = tuple(Provider(identity, GraphContribution(*(tuple(rows) for rows in records)))
                         for identity, records in sorted(by_source.items()))
         self.graph = EdgeRegistry(Path("/"), sources,
-                                  logical_artifacts=(compiled.materials[key].path for key in self.eligible))
+                                  logical_artifacts=(material.path for material in compiled.materials.values()))
 
-    def _require(self, target: str):
+    def _resolve(self, target: str):
         selected = resolve_material(self.compiled, target)
         if selected is None:
-            raise _UnqualifiedContent()
-        material, unit = selected
-        pending, checked = [material.id], set()
-        while pending:
-            identity = pending.pop()
-            if identity in checked:
-                continue
-            if identity not in self.eligible:
-                raise _UnqualifiedContent()
-            checked.add(identity)
-            owner = self.compiled.materials[identity]
-            pending.extend((*owner.requires, *owner.specializes))
-        return material, unit
+            raise _UnknownTarget()
+        return selected
 
     def _child(self, kind: str, identity: str) -> dict:
         return {"kind": "snapshot-child-handle", "snapshot": self.snapshot,
@@ -148,13 +160,15 @@ class ApplicationView:
         return types[value["kind"]].from_value(value)
 
     def read(self, target: str, detail: str = "compact"):
-        material, unit = self._require(target)
+        material, unit = self._resolve(target)
         identity = unit.id if unit is not None else material.id
         value = self._result(
             "application-read-result",
             policy={"id": identity,
                     **({} if self.candidate else {"handle": self._child("policy", identity)}),
                     "role": material.role, "level": material.level},
+            # A scoped policy read carries the label of its containing module.
+            review_state=self.review[material.id],
             content=unit.content if unit is not None else material.content,
             scope={"kind": "structured", "heading_path": list(unit.heading_path)} if unit else {"kind": "whole-artifact"},
             requires=list(material.requires), specializes=list(material.specializes),
@@ -192,7 +206,7 @@ class ApplicationView:
         return [selected[key] for key in sorted(selected)]
 
     def related(self, target: str, groups: tuple[str, ...], direction: str, transitive: bool):
-        material, unit = self._require(target)
+        material, unit = self._resolve(target)
         identity = unit.id if unit else material.id
         relationships = self.relationships(identity, groups, Direction.parse(direction), transitive)
         neighbors = sorted({entry[key] for entry in relationships for key in ("source", "target")} - set(self._scope_targets(identity)))
@@ -206,10 +220,8 @@ class ApplicationView:
             return self.read(handle.child_id, "full")
         way, _, edge_id = handle.child_id.partition(":")
         if way not in {"incoming", "outgoing"}:
-            raise _UnqualifiedContent()
+            raise _UnknownTarget()
         edge = self.graph.edge(edge_id)
-        self._require(edge.source)
-        self._require(edge.target)
         target = edge.target if way == "incoming" else edge.source
         relationships = [entry for entry in self.relationships(target, tuple(edge.groups), Direction.parse(way), False)
                          if entry["handle"]["child_id"] == handle.child_id]
@@ -219,26 +231,25 @@ class ApplicationView:
         ))
 
     def routing_facts(self):
-        self._require("router")
         return c.ApplicationRoutingFactsResult.from_value(self._result(
             "application-routing-facts-result", facts=self.compiled.router.fact_definitions(), next_operations=[],
         ))
 
     def route(self, engine, call):
-        self._require("router")
         facts = self.compiled.router.fact_schema.bind(call.as_contract()["facts"])
         return self._route_bound(engine, facts)
 
     def _route_bound(self, engine, facts):
-        """Render a route whose Router qualification and fact binding already passed."""
+        """Render every selected entry of an already bound route with its review label."""
         _facts, _rules, _ordered, entries, unresolved = engine._bound_routing_selection(self.compiled, facts)
         reading = []
         for entry in entries:
             if entry.state != "selected":
                 continue
-            self._require(entry.target)
+            material, _unit = self._resolve(entry.target)
             reading.append({"target": entry.target, "scope": entry.scope.as_contract(),
-                            "authority": entry.authority, "state": "selected"})
+                            "authority": entry.authority, "state": "selected",
+                            "review_state": self.review[material.id]})
         facts = {fact["id"]: fact for fact in self.compiled.router.fact_definitions()}
         return self._decode(self._result(
             "application-route-result", status="needs-facts" if unresolved else "complete",
@@ -249,7 +260,7 @@ class ApplicationView:
 
 def preview_application(engine: StandardsEngine, compiled: CompiledSnapshot,
                         call: c.PreviewApplicationCall):
-    """Use application eligibility and field selection at an exact draft revision."""
+    """Use application delivery, labels and field selection at an exact draft revision."""
     view = ApplicationView(compiled, call.revision)
     request = call.request.as_contract()
     try:
@@ -259,12 +270,10 @@ def preview_application(engine: StandardsEngine, compiled: CompiledSnapshot,
             return view.related(request["target"], tuple(request["groups"]),
                                 request["direction"], request["transitive"])
         return view.route(engine, call.request)
-    except (_UnqualifiedContent, GraphError):
-        result = application_rejection().as_contract()
+    except (_UnknownTarget, GraphError) as error:
         return c.CandidateApplicationRejectedResult.from_value({
-            **result, "kind": "candidate-application-rejected-result",
+            **_lookup_rejection(error).as_contract(), "kind": "candidate-application-rejected-result",
             "revision": call.revision.as_contract(),
-            "message": "Inspect the candidate's exposure and prerequisite states through authoring reads, then preview its qualified application content.",
         })
 
 
@@ -313,11 +322,9 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             return view.read(values["target"], values.get("detail", "compact"))
         if operation == "relationship_groups":
             from .relationship_vocabulary import group_page, GROUP_PAGE_DEFAULT_ITEMS
-            view._require("router")
             return group_page(engine, snapshot, view.graph, offset=values.get("offset", 0),
                               limit=values.get("limit", GROUP_PAGE_DEFAULT_ITEMS))
         if operation == "related":
-            from tools.graph_engine.graph_engine import UnknownGroupError
             from .relationship_vocabulary import unknown_group_result
             try:
                 return view.related(values["target"], tuple(values["groups"]), values["direction"], values["transitive"])
@@ -329,8 +336,6 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
             from tools.standards_applicability.standards_applicability import ApplicabilityError
             from .agent_navigation import with_route_content
             from .routing_inputs import bind_facts, binding_rejection
-            # Private vocabulary is interpreted only after Router qualification.
-            view._require("router")
             try:
                 facts = bind_facts(compiled.router.fact_schema, values["facts"])
             except (ApplicabilityError, ContractError) as error:
@@ -342,8 +347,8 @@ def application_dispatch(engine: StandardsEngine, operation: str, call):
         if operation == "routing_facts":
             return view.routing_facts()
         return view.inspect(checked.handle)
-    except (_UnqualifiedContent, GraphError):
-        return application_rejection()
+    except (_UnknownTarget, GraphError) as error:
+        return _lookup_rejection(error)
     except engine._domain_errors() as error:
         failure = getattr(error, "failure", None)
         if getattr(failure, "outcome", None) == "unsupported":

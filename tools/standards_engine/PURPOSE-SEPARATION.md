@@ -1,5 +1,76 @@
 # Purpose-separated Engine contract
 
+## Labelled application delivery (interface 49)
+
+Application approval is a review label, not a delivery gate. Every registered
+standard and registered operational aid (prompt, template or documentation) that
+an application call selects or names is delivered. `route`, `read`, `read_many`,
+`related`, `relationship_groups`, `routing_facts`, `inspect`, native `query` and
+authoring `preview_application` no longer depend on the approval state of the
+Router, Core, the target or its prerequisites. Editing Core or the Router changes
+their labels; it does not take the application interface offline.
+
+Each application read result (single, grouped, routed content item or candidate
+preview) and each application `reading_plan` entry carries `review_state`:
+
+| `review_state` | Authoring `application_exposure` | Meaning |
+| --- | --- | --- |
+| `current` | `current` | This exact material was approved for application use. |
+| `changed-since-review` | `needs-review` | The material changed after its approval. |
+| `not-reviewed` | `unreviewed` | The material has never been approved. |
+
+A scoped policy read carries the label of its containing module. A label reports
+the item's own state; prerequisites carry their own labels where they are
+delivered. Labels describe editorial review of the wording, not whether guidance
+applies. The approval manifest, its Engine-derived bindings,
+`approve-application-content`, `withdraw-application-content`, the authoring
+`application_exposure` values and the review workflow are unchanged.
+
+The application relationship graph contains every registered material and its
+registered policy units, restricted to the `standards-requires`,
+`standards-specializes`, `standards-dependencies`, `policy-impact` and `semantic`
+groups. Decision provenance, the `decision-provenance` group and unregistered
+consumers such as fixtures and implementation artifacts stay outside it; they can
+neither be read nor connect a traversal.
+
+`APPLICATION.CONTENT_UNAVAILABLE` is removed; no path reports that guidance awaits
+publication. Rejections name what the caller can correct:
+
+| Code | Outcome | Cause |
+| --- | --- | --- |
+| `APPLICATION.UNKNOWN_TARGET` | `invalid` | The identity or handle is not registered application material. Use an ID exactly as a route, read or related result gave it. |
+| `APPLICATION.UNKNOWN_GROUP` | `invalid` | Unchanged for `related`; candidate previews now return it too. |
+| `APPLICATION.TRAVERSAL_NOT_PERMITTED` | `invalid` | The selected group does not permit that direction or transitive traversal. |
+
+Misspelt, unknown, provenance and unregistered-consumer identities receive the
+same `APPLICATION.UNKNOWN_TARGET` result, so the code does not reveal whether a
+private record exists. Any other graph failure is
+`APPLICATION.INTERNAL_UNAVAILABLE`. Candidate previews return the same codes and
+messages bound to their revision.
+
+### Client-sized route content pages
+
+Application route content pages are sized for inline display by the client. The
+page budget defaults to 40 KiB (40,960 bytes) of the result's one default JSON
+serialization, which is the MCP text copy; the duplicate structured copy and
+protocol framing are outside it. An application server accepts
+`--route-page-bytes N` from 8,192 to 2,097,152; the option is a launch error for
+authoring. Byte pressure ends a page before the next whole read, and a page always
+keeps its first whole read: a module larger than the budget is returned alone,
+never clipped or rejected. Only a result above the 2 MiB transport bound returns
+`APPLICATION.RESULT_LIMIT`. Follow `content.next` unchanged. Authoring route
+content, `read_many` in both purposes and selection-only routes keep their
+existing bounds.
+
+Application `initialize` instructions and tool descriptions state the normal
+sequence in plain language. Application agents learn the same sequence from the
+[`coding-standards` skill](../../.agents/skills/coding-standards/SKILL.md).
+
+Interface 49 and result projection 9 version these result shapes. Request contract
+6 and snapshot, Analysis, handle and store versions are unchanged, and no stored
+state is migrated. Restart the MCP process and refresh the client catalog.
+Sections below that describe an approval gate record earlier editions.
+
 ## Explicit certificate retirement (interface 48)
 
 Authoring `maintain_evidence` accepts optional
@@ -42,7 +113,7 @@ workflow. Canonical interface operation variants own each purpose's input and
 result definitions; MCP and CLI project only their reachable schema closure.
 
 The public application boundary constructs dedicated result values from
-qualified domain material. Full detail remains within that boundary. Both
+registered domain material. Full detail remains within that boundary. Both
 MCP result encodings carry the same value. Unknown/private identities and
 malformed requests receive bounded application outcomes. Detailed operational
 failures stay in host-private diagnostics, which the host must keep outside an
@@ -62,9 +133,9 @@ The two support manifests are mandatory captured inputs:
 
 Both are empty in this code delivery. Existing normative and reference bytes
 remain unchanged and authoring-readable after the code candidate is integrated
-into accepted `main`. Application reads initially report that the requested
-guidance awaits application publication. This is intentional bootstrap behavior,
-not an inference that legacy prose was reviewed.
+into accepted `main`. Material without an approval is delivered with the
+`not-reviewed` label (before interface 49 it was withheld). An empty manifest is
+intentional bootstrap state, not an inference that legacy prose was reviewed.
 
 A supported snapshot contains its exact support records, exposure decisions,
 Router inputs and material. Reopening uses those captured bytes. Later exposure
@@ -239,7 +310,7 @@ returned by routing or a single read, and select only the needed guidance.
 The result contains the original snapshot and ordered single-read results.
 One complete durable content/identity validation supplies the whole operation;
 current snapshot lifecycle is checked before every item and before return.
-Purpose, exposure, prerequisite and item-option checks use the ordinary read
+Purpose, review-label and item-option handling use the ordinary read
 projection. Any failed item or lifecycle observation rejects the entire set.
 No item content is returned on failure. A new independent call verifies durable
 content again. This is a new explicit operation, not a change to single reads.
@@ -265,19 +336,21 @@ Operational aids bind their source content and registered policy-owner facts.
 
 The derived states are `unreviewed`, `current` and `needs-review`. Content changes
 preserve the old declaration as stale until explicit renewed approval or
-withdrawal. An application read requires its selected unit and actual mandatory
-prerequisites to be current. Unknown applicability remains a request for facts;
-a missing required qualification is an explicit unavailable observation.
+withdrawal. The application view delivers material in every state and reports the
+state as its `review_state` label; see
+[labelled application delivery](#labelled-application-delivery-interface-49).
+Unknown applicability remains a request for facts.
 
 Supplementary relationships remain selective. A prompt's policy-impact
 association does not acquire `Requires` semantics. The application graph view
-contains permitted endpoints before traversal, so hidden intermediary nodes
-cannot connect otherwise disconnected visible material. Whole-module discovery
+contains its permitted endpoints (registered materials and their policy units)
+before traversal, so hidden intermediary nodes cannot connect otherwise
+disconnected visible material. Whole-module discovery
 includes relationships declared by its registered policy units.
 
-Eligibility is an editorial decision. The runtime checks the declaration,
-binding and required closure; it does not classify sentiment or prove prose
-quality. No positivity model or lexical prohibition list is part of the runtime.
+Approval is an editorial decision. The runtime checks the declaration and
+binding and reports the result as a label; it does not classify sentiment or
+prove prose quality. No positivity model or lexical prohibition list is part of the runtime.
 
 ## Decision provenance
 
@@ -414,10 +487,10 @@ identities and prior proposal records remain intact.
 An authoring caller uses `preview_application` with the exact draft revision and
 one application read, route or related request. Candidate results carry that
 revision, without published-snapshot or snapshot-child handles. Their
-continuations remain candidate previews. The same application view enforces
-qualification, prerequisite closure and graph filtering. A missing qualification
-is a candidate-application rejection, not partial acceptance. Normal application
-sessions retain their published-only operation set.
+continuations remain candidate previews. The same application view supplies
+delivery, review labels and graph filtering. An unregistered target is a
+candidate-application rejection. Normal application sessions retain their
+published-only operation set.
 
 `maintain_evidence` remains accepted-repository maintenance, not draft mutation.
 Use logical registration for draft-only scopes. After installing this change,
@@ -692,17 +765,19 @@ Focused `route` optionally accepts `content` with `offset` (default 0) and `limi
 (default 8, 1–32). Both purposes use one captured snapshot, one compiled input and
 the ordinary purpose-qualified single-read owner. Content contains whole compact
 reads for selected unique targets, in reading-plan order. The complete composed
-JSON result is limited to 2 MiB. Byte pressure ends a page before the next whole
+JSON result is limited to 2 MiB; application pages additionally use the
+[interface-49 page budget](#client-sized-route-content-pages). Byte pressure ends
+a page before the next whole
 read; `content.next` is a complete route request with identical facts, snapshot,
 limit and the next offset. Missing applicability facts remain missing. Reading
 plan and unresolved questions are not paged or suppressed.
 
 Nonzero offsets require explicit snapshot authority before capture. An offset past
-the selected count rejects; equality returns a final empty page. A single oversized
-record or oversized route envelope yields a bounded limit rejection. The caller
-may explicitly route without content, then read a target with an adequate client.
-Selected dependency qualification is checked for the whole route, not only the
-current page. Failed reads or lifecycle checks expose no successful partial prefix.
+the selected count rejects; equality returns a final empty page. In authoring, a
+single oversized record or oversized route envelope yields a bounded limit rejection;
+the caller may explicitly route without content, then read a target with an adequate
+client. Application routes deliver every selected target with its review label.
+Failed reads or lifecycle checks expose no successful partial prefix.
 The existing selection-only route, native query and candidate preview contracts
 retain their previous behavior. This is paging over a request, not an authorization
 cursor: changing facts explicitly requests another route.
@@ -819,7 +894,7 @@ closure. `unresolved_policy_count` counts reading-plan entries not selected; it 
 not evidence those policies do not apply. `explanation` is a complete full-route
 request anchored to the same snapshot and facts. Full focused route retains
 `agent-route-result`; native queries and candidate previews keep prior contracts.
-Application results remain qualified and never disclose private rule explanations.
+Application results keep their own projection and never disclose private rule explanations.
 Content paging retains detail, facts and snapshot. Rule evaluation and missing vs
 known-empty semantics are unchanged; compact presentation does not build full rule
 expression output merely to discard it.
@@ -828,12 +903,12 @@ expression output merely to discard it.
 selected graph. Its result records purpose, snapshot, total, offset, whole group
 items and next arguments. Each item contains id, registered meaning and traversal
 policy, not source locators, validator implementation or extension metadata. The
-application view supplies only permitted groups after Router qualification. A group
+application view supplies only permitted groups. A group
 can be registered with no relationships for a target. Default 8/max 32 records and
 16 KiB page JSON bound the result; oversized records return unsupported without
 truncation. Nonzero offsets require the exact snapshot, and final lifecycle failure
 discards the complete page. Unknown focused `related` queries return the same first
-page as optional rejection feedback (qualified targets are checked first). Native
+page as optional rejection feedback (registered targets are checked first). Native
 application queries share that behavior; native authoring and candidate queries keep
 existing authority-specific failures. No guessed alias or alternate graph is used.
 
@@ -971,10 +1046,10 @@ The bound selection helper reuses the existing algorithm and program schema-dige
 checks. Native query/preview callers still bind canonical typed inputs before
 selecting; they are not a fallback for old focused requests.
 
-Application dispatch first qualifies Router and its required content. It then binds
-focused input and qualifies the complete selected content closure before returning
-a route or page. The new invalid-input adaptation is confined to that known binding
-boundary, not a general change to lifecycle/qualification errors. Authoring returns
+Application dispatch binds focused input and returns the complete selected content
+closure with review labels (interface 49 removed the earlier Router and closure
+qualification step). The invalid-input adaptation is confined to that known binding
+boundary, not a general change to lifecycle errors. Authoring returns
 `ROUTE.INPUT_INVALID`; application returns `APPLICATION.INPUT_INVALID`. Both include
 bounded existing input_feedback with a route describe_input hint. Known fields may
 be named; unrecognized input keys/values are not echoed. This is one fixed-prose

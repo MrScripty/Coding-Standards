@@ -17,6 +17,9 @@ import traceback
 from typing import Callable, TextIO
 
 from .tools import AgentToolFacade
+from .agent_navigation import (
+    ROUTE_CONTENT_RESULT_BYTES, ROUTE_PAGE_BYTES, ROUTE_PAGE_MIN_BYTES, admit_route_page_bytes,
+)
 from .compiled_cache import CompiledSnapshotCache
 from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
@@ -29,6 +32,24 @@ from .interaction_observer import (
 
 
 PROTOCOL_VERSION = "2025-11-25"
+# Every application client receives this text at initialize; keep it short and plain.
+APPLICATION_INSTRUCTIONS = (
+    "This server returns the engineering standards that apply to the task you are doing. "
+    "Get them before you plan or change code, then follow them.\n"
+    "1. Call routing_facts once. It lists every fact name and its allowed values; use them exactly as written.\n"
+    "2. Call route with the facts that are true of your task and content={{}}. Leave out a fact you do not know. "
+    "Do not remove a true fact to make a call succeed.\n"
+    "3. reading_plan lists every module that applies. content.items holds the full text of this page. "
+    "While content.next is present, call route again with exactly those arguments.\n"
+    "4. Keep the returned snapshot and pass it in every later call. A module you already hold at that snapshot "
+    "has not changed; do not read it again.\n"
+    "Each module has a review_state: current (this exact text was approved for application use), "
+    "changed-since-review (edited after it was approved) or not-reviewed (never approved). "
+    "All three are delivered and all apply; the label only tells you how settled the wording is.\n"
+    "read and read_many fetch modules by ID; ask for two or three per call so your client can show the whole result. "
+    "describe_input gives exact argument shapes when your client abbreviates them.\n"
+    "Installed interface {interface}; purpose application."
+)
 
 
 class ProtocolError(Exception):
@@ -40,10 +61,12 @@ class ProtocolError(Exception):
 
 class MCPServer:
     def __init__(self, root: Path, *, purpose: Purpose | str, advanced: bool = False,
+                 route_page_bytes: int | None = None,
                  output_schemas: OutputSchemaDelivery | str = OutputSchemaDelivery.EAGER,
                  observation: RecorderConfig | None = None) -> None:
         self.root = root.resolve()
         self._purpose = Purpose(purpose)
+        self._route_page_bytes = admit_route_page_bytes(route_page_bytes)
         self.advanced = advanced
         self.output_schemas = OutputSchemaDelivery(output_schemas)
         self._interface = AgentToolFacade.load_interface(self.root)
@@ -175,11 +198,12 @@ class MCPServer:
                 "capabilities": {"tools": {"listChanged": False}},
                 "serverInfo": {"name": "standards-engine", "version": self._runtime_identity.implementation_version},
                 "_meta": {"standards-engine/runtime": self._runtime_identity.metadata()},
-                "instructions": f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. Output schemas {self.output_schemas.value}. "
+                "instructions": APPLICATION_INSTRUCTIONS.format(
+                    interface=self._interface.interface.interface_schema_version)
+                if self.purpose is Purpose.APPLICATION else
+                f"Installed interface {self._interface.interface.interface_schema_version}; purpose {self.purpose.value}. Output schemas {self.output_schemas.value}. "
                 "Use describe_input for missing or abbreviated input shapes; retain its catalog-bound selections. "
                 "Use describe_output only when an exact result contract is needed; ordinary results remain structured and server-validated. " + (
-                    "Use route with content={} to obtain applicable exact guidance; follow content.next for more. Reuse returned snapshots for consistent observations."
-                    if self.purpose is Purpose.APPLICATION else
                     "Use explicit routing facts and preserve opaque handles. Follow typed Engine outcomes and next_operations. Standards mutations belong to the Engine. Recovery-required continues through recover with the same context, never an apply retry."
                     + (
                         " Native advanced operations use recover_application with readiness."
@@ -217,6 +241,7 @@ class MCPServer:
                 with AgentToolFacade.open_repository(
                     self.root, purpose=self.purpose, interface=self._interface,
                     compiled_cache=self._compiled_cache,
+                    route_page_bytes=self._route_page_bytes,
                 ) as facade:
                     value = getattr(facade, name)(arguments)
         except Exception as error:
@@ -293,6 +318,12 @@ def main() -> int:
         help="Expose additional operations within the configured purpose.",
     )
     parser.add_argument(
+        "--route-page-bytes", type=int,
+        help=f"Application purpose only: byte budget of one route content page, measured on one JSON "
+             f"serialization of the result ({ROUTE_PAGE_MIN_BYTES} to {ROUTE_CONTENT_RESULT_BYTES}; default "
+             f"{ROUTE_PAGE_BYTES}). A page always holds at least one whole item.",
+    )
+    parser.add_argument(
         "--output-schemas", choices=[choice.value for choice in OutputSchemaDelivery],
         default=OutputSchemaDelivery.EAGER.value,
         help="Advertise complete output schemas (eager, default), or retrieve exact contracts through describe_output (on-demand).",
@@ -307,6 +338,13 @@ def main() -> int:
     parser.add_argument('--observe-max-age-seconds', type=int, default=DEFAULT_MAX_AGE_SECONDS)
     parser.add_argument('--observe-max-bytes', type=int, default=DEFAULT_MAX_BYTES)
     arguments = parser.parse_args()
+    if arguments.route_page_bytes is not None:
+        if arguments.purpose != Purpose.APPLICATION.value:
+            parser.error("--route-page-bytes applies to the application purpose")
+        try:
+            admit_route_page_bytes(arguments.route_page_bytes)
+        except ValueError as error:
+            parser.error(str(error))
     # Recording is on for every server process. Only these two switches turn it
     # off; in-process MCPServer construction records only when given a configuration.
     observation = None
@@ -319,6 +357,7 @@ def main() -> int:
             parser.error(str(error))
     serve(
         MCPServer(arguments.repo_root, purpose=arguments.purpose, advanced=arguments.advanced,
+                  route_page_bytes=arguments.route_page_bytes,
                   output_schemas=arguments.output_schemas, observation=observation),
         sys.stdin,
         sys.stdout,

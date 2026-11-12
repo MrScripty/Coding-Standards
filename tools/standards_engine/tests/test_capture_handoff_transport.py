@@ -12,6 +12,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import tomllib
 import unittest
 
 from tools.standards_engine.tests.test_analysis import _clone_tracked_worktree
@@ -74,7 +75,9 @@ class CaptureHandoffTransportTest(unittest.TestCase):
             try:
                 initialized = call('initialize',{'protocolVersion':'2025-11-25','capabilities':{},
                     'clientInfo':{'name':'capture-handoff-fixture','version':'1'}})
-                self.assertEqual(initialized['_meta']['standards-engine/runtime']['interface_version'],48)
+                installed = tomllib.loads((self.root/'tools/standards_engine/contracts/a1-interface.toml').read_text())
+                self.assertEqual(initialized['_meta']['standards-engine/runtime']['interface_version'],
+                                 installed['interface_schema_version'])
                 process.stdin.write('{"jsonrpc":"2.0","method":"notifications/initialized"}\n')
                 process.stdin.flush()
                 def tool(name, arguments):

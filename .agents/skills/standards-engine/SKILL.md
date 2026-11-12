@@ -6,8 +6,8 @@ description: Maintain this repository's coding standards through an authoring-pu
 # Standards Engine Authoring
 
 This skill is maintenance material for standards authors. Ordinary application
-agents use their application-purpose tool catalog and approved guidance, rather
-than loading this authoring skill.
+agents use their application-purpose tool catalog and the `coding-standards`
+skill, rather than loading this authoring skill.
 
 Use the generated public Interface. The Engine is the sole writer of standards
 Markdown, metadata, supplementary projections, SQLite state, and local Git

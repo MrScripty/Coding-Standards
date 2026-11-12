@@ -108,10 +108,20 @@ class ReadManyTest(unittest.TestCase):
                 self.assertEqual(result["code"], "APPLICATION.INPUT_INVALID", result)
                 self.assertNotIn("items", result)
 
+    def test_unapproved_items_are_delivered_in_order_with_their_labels(self):
+        items = [{"target": "workflow.implementation"}, {"target": "core"}, {"target": "profile.language.rust", "detail": "full"}]
+        result = self.call(items=items)
+        self.assertEqual(result["kind"], "application-read-many-result", result)
+        self.assertEqual([(item["policy"]["id"], item["review_state"]) for item in result["items"]],
+                         [("workflow.implementation", "not-reviewed"), ("core", "current"),
+                          ("profile.language.rust", "not-reviewed")])
+        self.assertEqual(result["items"], [self.app.read({"snapshot": self.snapshot, **item}) for item in items])
+        self.assertNotIn(fixture.PRIVATE, json.dumps(result))
+
     def test_unknown_or_private_item_rejects_whole_set_without_partial_data(self):
         for target in ("does.not.exist", "provenance.fixture"):
             result = self.call(items=[{"target": "core"}, {"target": target}])
-            self.assertEqual(result["code"], "APPLICATION.CONTENT_UNAVAILABLE", result)
+            self.assertEqual(result["code"], "APPLICATION.UNKNOWN_TARGET", result)
             self.assertNotIn(fixture.PUBLIC, json.dumps(result))
             self.assertNotIn(fixture.PRIVATE, json.dumps(result))
             self.assertNotIn("items", result)

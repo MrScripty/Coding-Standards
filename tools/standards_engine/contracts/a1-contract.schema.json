@@ -6948,13 +6948,14 @@
         },
         "code": {
           "enum": [
-            "APPLICATION.CONTENT_UNAVAILABLE",
+            "APPLICATION.UNKNOWN_TARGET",
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
             "APPLICATION.RESULT_LIMIT",
-            "APPLICATION.UNKNOWN_GROUP"
+            "APPLICATION.UNKNOWN_GROUP",
+            "APPLICATION.TRAVERSAL_NOT_PERMITTED"
           ]
         },
         "outcome": {
@@ -7066,6 +7067,7 @@
         "purpose",
         "snapshot",
         "policy",
+        "review_state",
         "content",
         "scope",
         "requires",
@@ -7084,6 +7086,9 @@
         },
         "policy": {
           "$ref": "#/$defs/ApplicationPolicy"
+        },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
         },
         "content": {
           "type": "string"
@@ -7162,7 +7167,8 @@
         "target",
         "scope",
         "authority",
-        "state"
+        "state",
+        "review_state"
       ],
       "properties": {
         "target": {
@@ -7179,6 +7185,9 @@
         },
         "state": {
           "const": "selected"
+        },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
         }
       }
     },
@@ -7514,6 +7523,14 @@
         "current",
         "needs-review"
       ]
+    },
+    "ApplicationReviewState": {
+      "enum": [
+        "current",
+        "changed-since-review",
+        "not-reviewed"
+      ],
+      "description": "Review label of delivered application material. current: this exact text was approved for application use. changed-since-review: the text was edited after its approval. not-reviewed: the text has never been approved. The label never withholds material; a scoped policy read carries the label of its containing module."
     },
     "ProvenanceReadResult": {
       "type": "object",
@@ -7961,7 +7978,7 @@
           "$ref": "#/$defs/ApplicationQueryRequest"
         }
       },
-      "description": "Authoring-only inspection of an exact draft through application qualification and filtering; this observation neither publishes nor grants ordinary application access."
+      "description": "Authoring-only inspection of an exact draft as an application agent would receive it, including each item's review label; this observation neither publishes nor grants ordinary application access."
     },
     "CandidateApplicationNextOperation": {
       "type": "object",
@@ -8059,6 +8076,7 @@
         "kind",
         "purpose",
         "policy",
+        "review_state",
         "content",
         "scope",
         "requires",
@@ -8075,6 +8093,9 @@
         },
         "policy": {
           "$ref": "#/$defs/CandidateApplicationPolicy"
+        },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
         },
         "content": {
           "type": "string"
@@ -8218,12 +8239,14 @@
         },
         "code": {
           "enum": [
-            "APPLICATION.CONTENT_UNAVAILABLE",
+            "APPLICATION.UNKNOWN_TARGET",
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
-            "APPLICATION.RESULT_LIMIT"
+            "APPLICATION.RESULT_LIMIT",
+            "APPLICATION.UNKNOWN_GROUP",
+            "APPLICATION.TRAVERSAL_NOT_PERMITTED"
           ]
         },
         "outcome": {
@@ -9520,7 +9543,7 @@
         }
       },
       "additionalProperties": false,
-      "description": "Exact compact reads of selected targets in Router order. Total counts selected targets, not unresolved applicability. Follow next unchanged for the remaining page."
+      "description": "Exact compact reads of selected targets in Router order, each with its review label. Total counts selected targets, not unresolved applicability. A page ends early at the host's page byte budget but holds at least one whole item while targets remain. Follow next unchanged for the remaining page."
     },
     "DescribeInputCall": {
       "type": "object",

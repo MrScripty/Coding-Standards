@@ -1,15 +1,20 @@
-"""Routed exact content across qualification, paging and lifecycle boundaries."""
+"""Routed exact content across review labels, paging and lifecycle boundaries."""
 from __future__ import annotations
 
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import agent_navigation
+from tools.standards_engine.standards_engine.mcp import MCPServer
 from tools.standards_engine.standards_engine.tools import _contracts
+from tools.standards_engine.tests.test_mcp import initialize, request
 from tools.standards_engine.tests import test_purpose_projection as fixture
 from tools.standards_snapshots.standards_snapshots import SnapshotId
 
@@ -87,34 +92,83 @@ class RouteContentTest(unittest.TestCase):
             self.assertEqual(compiled.call_count, 1)
             self.assertEqual(load.call_count, 1)
 
-    def test_unqualified_later_target_blocks_even_a_one_item_application_page(self):
+    def test_unapproved_later_target_is_delivered_with_its_label_on_its_own_page(self):
         facts = known_assertions()
         facts['routing.activities'] = ['implementation']
         value = self.route(self.app, facts=facts, content={'limit': 1})
-        self.assertEqual(value['code'], 'APPLICATION.CONTENT_UNAVAILABLE')
-        self.assertNotIn('content', value)
-        self.assertNotIn(fixture.PRIVATE, json.dumps(value))
+        self.assertEqual(value['kind'], 'application-route-result', value)
+        labels = {entry['target']: entry['review_state'] for entry in value['reading_plan']}
+        self.assertEqual(labels['workflow.implementation'], 'not-reviewed')
+        items = list(value['content']['items'])
+        while 'next' in value['content']:
+            value = self.app.route(value['content']['next'])
+            items.extend(value['content']['items'])
+        self.assertEqual({item['policy']['id']: item['review_state'] for item in items}, labels)
+        self.assertEqual(items, [self.app.read({'snapshot': self.snapshot, 'target': target}) for target in labels])
+        self.assertNotIn(fixture.PRIVATE, json.dumps(items))
 
     def test_exact_byte_limit_partial_pages_and_oversized_record(self):
         for facade in (self.author, self.app):
+            application = facade is self.app
+
+            def budget(size):
+                # Authoring pages keep the transport bound; application pages use the host budget.
+                return (patch.object(facade._engine, '_route_page_bytes', size) if application
+                        else patch.object(agent_navigation, 'ROUTE_CONTENT_RESULT_BYTES', size))
+
             first = self.route(facade, content={'limit': 1})
             full = self.route(facade, content={'limit': 2})
             full_bytes = len(json.dumps(full).encode('utf-8'))
-            with patch.object(agent_navigation, 'ROUTE_CONTENT_RESULT_BYTES', full_bytes):
+            with budget(full_bytes):
                 self.assertEqual(self.route(facade, content={'limit': 2}), full)
             first_bytes = len(json.dumps(first).encode('utf-8'))
             self.assertLess(first_bytes, full_bytes)
-            with patch.object(agent_navigation, 'ROUTE_CONTENT_RESULT_BYTES', first_bytes):
+            with budget(first_bytes):
                 partial = self.route(facade, content={'limit': 2})
                 self.assertEqual(partial['content']['items'], first['content']['items'])
                 self.assertEqual(partial['content']['next']['content']['offset'], 1)
                 self.assertLessEqual(len(json.dumps(partial).encode('utf-8')), first_bytes)
+            with budget(1):
+                oversized = self.route(facade)
+            if application:
+                # One whole item is returned alone rather than rejected or clipped.
+                self.assertEqual(oversized['content']['items'], first['content']['items'])
+                self.assertEqual(oversized['content']['next']['content'], {'offset': 1, 'limit': 8})
+                with budget(1):
+                    last = self.app.route(oversized['content']['next'])
+                self.assertEqual(first['content']['items'] + last['content']['items'], full['content']['items'])
+                self.assertNotIn('next', last['content'])
             with patch.object(agent_navigation, 'ROUTE_CONTENT_RESULT_BYTES', 1):
                 rejected = self.route(facade)
             self.assertEqual(rejected['outcome'], 'unsupported')
             self.assertNotIn('content', rejected)
+            if not application:
+                self.assertEqual(oversized, rejected)
             # The explicit non-composed operation remains available.
             self.assertIn('reading_plan', facade.route({'snapshot': self.snapshot, 'facts': known_assertions()}))
+
+    def test_application_page_budget_default_and_host_configuration(self):
+        self.assertEqual(agent_navigation.ROUTE_PAGE_BYTES, 40 * 1024)
+        self.assertEqual(self.app._engine.route_page_bytes, agent_navigation.ROUTE_PAGE_BYTES)
+        # The default holds both fixture items; each returned page stays within it.
+        default = self.route(self.app)
+        self.assertEqual(len(default['content']['items']), 2)
+        self.assertLessEqual(len(json.dumps(default).encode('utf-8')), agent_navigation.ROUTE_PAGE_BYTES)
+        first = self.route(self.app, content={'limit': 1})
+        configured = len(json.dumps(first).encode('utf-8'))
+        self.assertGreaterEqual(configured, agent_navigation.ROUTE_PAGE_MIN_BYTES)
+        with StandardsEngine.open_repository(
+                ROOT, purpose='application', store_path=fixture.PurposeProjectionTest.store_path,
+                route_page_bytes=configured) as engine:
+            self.assertEqual(engine.route_page_bytes, configured)
+            page = self.route(AgentToolFacade(engine, _contracts(ROOT)))
+        self.assertEqual(page, {**first, 'content': {**first['content'], 'next': {
+            **first['content']['next'], 'content': {'offset': 1, 'limit': 8}}}})
+        # The same budget never shortens an authoring page.
+        with StandardsEngine.open_repository(
+                ROOT, purpose='authoring', store_path=fixture.PurposeProjectionTest.store_path,
+                route_page_bytes=agent_navigation.ROUTE_PAGE_MIN_BYTES) as engine:
+            self.assertEqual(self.route(AgentToolFacade(engine, _contracts(ROOT))), self.route(self.author))
 
     def test_schema_whole_numbers_normalize_before_slicing(self):
         for facade in (self.author, self.app):
@@ -184,3 +238,46 @@ class RouteContentTest(unittest.TestCase):
             value = self.route(self.author)
         self.assertEqual(value['code'], 'FIXTURE.READ_UNAVAILABLE')
         self.assertNotIn('content', value)
+
+
+class RoutePageBudgetOptionTest(unittest.TestCase):
+    def test_budget_range_is_closed_and_whole(self):
+        admit = agent_navigation.admit_route_page_bytes
+        self.assertEqual(admit(None), agent_navigation.ROUTE_PAGE_BYTES)
+        for value in (agent_navigation.ROUTE_PAGE_MIN_BYTES, 50_000, agent_navigation.ROUTE_CONTENT_RESULT_BYTES):
+            self.assertEqual(admit(value), value)
+        for value in (0, -1, agent_navigation.ROUTE_PAGE_MIN_BYTES - 1,
+                      agent_navigation.ROUTE_CONTENT_RESULT_BYTES + 1, True, 40960.0, '40960'):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                admit(value)
+        with self.assertRaises(ValueError):
+            MCPServer(ROOT, purpose='application', route_page_bytes=1)
+
+    def test_server_passes_its_budget_to_every_call(self):
+        for configured in (None, 50_000):
+            server = MCPServer(ROOT, purpose='application', route_page_bytes=configured)
+            self.addCleanup(server.close)
+            initialize(server)
+            with patch.object(AgentToolFacade, 'open_repository') as opened:
+                opened.return_value.__enter__.return_value.route.return_value = {'kind': 'fixture'}
+                server.dispatch(request('tools/call', {'name': 'route', 'arguments': {'facts': {}}}))
+            self.assertEqual(opened.call_args.kwargs['route_page_bytes'],
+                             configured or agent_navigation.ROUTE_PAGE_BYTES)
+
+    def test_launch_option_is_validated_before_serving(self):
+        def launch(*arguments):
+            return subprocess.run(
+                [sys.executable, '-P', '-m', 'tools.standards_engine.standards_engine.mcp', '--no-observe',
+                 '--repo-root', str(ROOT), *arguments],
+                input='', text=True, capture_output=True, env={**os.environ, 'PYTHONPATH': str(ROOT)}, timeout=90)
+        accepted = launch('--purpose', 'application', '--route-page-bytes', '50000')
+        self.assertEqual((accepted.returncode, accepted.stdout, accepted.stderr), (0, '', ''))
+        for purpose, value, reason in (('application', '100', 'from 8192 to 2097152'),
+                                       ('application', '9999999', 'from 8192 to 2097152'),
+                                       ('application', 'large', 'invalid int value'),
+                                       ('authoring', '50000', 'applies to the application purpose')):
+            with self.subTest(purpose=purpose, value=value):
+                refused = launch('--purpose', purpose, '--route-page-bytes', value)
+                self.assertEqual(refused.returncode, 2)
+                self.assertEqual(refused.stdout, '')
+                self.assertIn(reason, refused.stderr)

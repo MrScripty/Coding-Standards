@@ -475,8 +475,12 @@ class StandardsEngine:
         execution_context: AnalysisExecutionContext | None = None,
         temporary_store: tempfile.TemporaryDirectory[str] | None = None,
         compiled_cache: CompiledSnapshotCache | None = None,
+        route_page_bytes: int | None = None,
     ) -> None:
+        from .agent_navigation import admit_route_page_bytes
+
         self._purpose = Purpose(purpose)
+        self._route_page_bytes = admit_route_page_bytes(route_page_bytes)
         if compiled_cache is not None:
             compiled_cache.require_scope(repository.root, self._purpose)
         self._compiled_cache = compiled_cache
@@ -498,6 +502,7 @@ class StandardsEngine:
         purpose: Purpose | str,
         execution_context: AnalysisExecutionContext | None = None,
         compiled_cache: CompiledSnapshotCache | None = None,
+        route_page_bytes: int | None = None,
     ) -> StandardsEngine:
         selected_purpose = Purpose(purpose)
         selected_root = root.resolve()
@@ -520,11 +525,17 @@ class StandardsEngine:
             execution_context=execution_context,
             temporary_store=temporary,
             compiled_cache=compiled_cache,
+            route_page_bytes=route_page_bytes,
         )
 
     @property
     def purpose(self) -> Purpose:
         return self._purpose
+
+    @property
+    def route_page_bytes(self) -> int:
+        """Host-selected byte budget of one application route content page."""
+        return self._route_page_bytes
 
     def close(self) -> None:
         self._snapshots.close()
