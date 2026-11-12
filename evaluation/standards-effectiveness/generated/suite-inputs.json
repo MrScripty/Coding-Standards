@@ -6701,7 +6701,7 @@
       ]
     },
     {
-      "digest": "sha256:09464a63f418e196c4e50bf86d83c85139f9f6035becbc22cf2bf44c02917d72",
+      "digest": "sha256:da6c51a02bd2a24d09d70b88acec826ad3744772553f8a49cc73fdf9d051957e",
       "path": "tools/standards_engine/tests/test_evidence_maintenance.py",
       "state": "present",
       "uses": [
@@ -7284,7 +7284,7 @@
       ]
     },
     {
-      "digest": "sha256:df166607b6a3c6d251438b0ea46bd088ccdc4b32e1ad3187a015abf9eb397da4",
+      "digest": "sha256:e56834537ad6ee2ef8a243141ef554c1cb24cfdc6b5b0d543e998892920a766b",
       "path": "tools/standards_verifier/README.md",
       "state": "present",
       "uses": [
@@ -7543,7 +7543,7 @@
       ]
     },
     {
-      "digest": "sha256:9bd69963a333f0590c47c86f23425412ab9358ffe2c94d676c23ba40c5b68c34",
+      "digest": "sha256:6038575351f6700b2e54331d4a69506c9e7f43bb9adbd27880e92879576ab76c",
       "path": "tools/standards_verifier/standards_verifier/cli.py",
       "state": "present",
       "uses": [
@@ -7729,7 +7729,7 @@
       ]
     },
     {
-      "digest": "sha256:9c2e21a210ce0ad4ca076e9ed73645ca34b929abbdfae4a822dc31bd0b266cae",
+      "digest": "sha256:272c4c522ea65e726705c7da73224f16fe405c09630d8db22c5642d6ab718bae",
       "path": "tools/standards_verifier/standards_verifier/suite_inputs.py",
       "state": "present",
       "uses": [
@@ -10593,7 +10593,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:4a032dc5db55056d56a8b5c3b1e68178b7a8e2f86b9bd28a620756459c0a6ad0",
+    "digest": "sha256:cc1d7663f79dececfd9bcf8527ab30ddc2e8d6be136afc64778a311bf17f9bbb",
     "uses": [
       {
         "check": "python-package-contract",

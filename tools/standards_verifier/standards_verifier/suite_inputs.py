@@ -4,6 +4,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Sequence
 
+from tools.repository_git.repository_git import GitRepositoryError
 from tools.standards_identity.standards_identity import (
     IdentityArray,
     IdentityObject,
@@ -11,6 +12,7 @@ from tools.standards_identity.standards_identity import (
 )
 from tools.standards_metadata.standards_metadata import (
     FrozenContentSource,
+    MetadataError,
     SUITE_INPUT_CONTRACT,
     SUITE_INPUT_SCHEMA_VERSION,
     RepositoryIndexObservation,
@@ -32,6 +34,13 @@ DEFAULT_REGISTRY = "evaluation/standards-effectiveness/suite-registry.toml"
 DEFAULT_PROJECTION = "evaluation/standards-effectiveness/generated/suite-inputs.json"
 CONTRACT = SUITE_INPUT_CONTRACT
 SCHEMA_VERSION = SUITE_INPUT_SCHEMA_VERSION
+# The Engine owns the generated manifest; this is its refresh operation.
+REFRESH_COMMAND = (
+    "printf '%s\\n' '{\"kind\":\"verify-repository\","
+    "\"refresh_verification_inputs\":true}' | PYTHONPATH=. python3 -P "
+    ".agents/skills/standards-engine/scripts/invoke.py --purpose authoring "
+    "verify_repository"
+)
 
 
 def repository_index_digest(paths: Sequence[str]) -> str:
@@ -181,6 +190,37 @@ def check_suite_input_projection(
         output(f"STALE {DEFAULT_PROJECTION}")
         return 2
     return 0
+
+
+def suite_input_projection_diagnostic(root: Path) -> Diagnostic | None:
+    """Explain why the committed manifest is not exact, or return ``None``.
+
+    The comparison is byte-exact against a fresh compilation, so it also
+    notices a changed repository file list, which per-file digests do not.
+    """
+    try:
+        expected = suite_input_projection_bytes(root)
+    except EngineError as error:
+        return error.diagnostic
+    except (GitRepositoryError, MetadataError) as error:
+        return Diagnostic(
+            "SUITE_INPUT.MANIFEST_UNAVAILABLE",
+            "unavailable",
+            f"suite-input manifest could not be recompiled: {error}",
+            path=DEFAULT_PROJECTION,
+        )
+    path = root / DEFAULT_PROJECTION
+    if path.is_file() and path.read_bytes() == expected:
+        return None
+    return Diagnostic(
+        "SUITE_INPUT.STALE_MANIFEST",
+        "invalid",
+        "the suite-input manifest does not match the verification inputs or "
+        "the repository file list. The file list is read from the Git index, "
+        "so stage added and removed files, then regenerate the manifest with: "
+        f"{REFRESH_COMMAND}",
+        path=DEFAULT_PROJECTION,
+    )
 
 
 def write_suite_input_projection(root: Path) -> int:

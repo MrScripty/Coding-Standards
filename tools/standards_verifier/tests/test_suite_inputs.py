@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+import contextlib
+import io
 import json
+import shutil
 import subprocess
 import tempfile
 import textwrap
@@ -16,9 +19,13 @@ from standards_verifier.model import (
     absent_inputs,
 )
 
+from standards_verifier.cli import main, run_complete_verification
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.suite_inputs import (
     CONTRACT,
+    DEFAULT_PROJECTION,
+    DEFAULT_REGISTRY,
+    REFRESH_COMMAND,
     check_suite_input_projection,
     compile_suite_input_projection,
     write_suite_input_projection,
@@ -45,7 +52,9 @@ class SuiteInputProjectionTest(unittest.TestCase):
                     ),
                 )
 
-            return SimpleNamespace(id=raw["id"], authority_inputs=inputs)
+            return SimpleNamespace(
+                id=raw["id"], authority_inputs=inputs, run=lambda context: []
+            )
 
         adapter = patch(
             "standards_verifier.config.parse_check", side_effect=parse_fixture
@@ -272,6 +281,95 @@ class SuiteInputProjectionTest(unittest.TestCase):
         self.write("consumer.md", "selected-marker changed\n")
 
         self.assertEqual(check_suite_input_projection(self.root), 2)
+
+    def complete(self, *arguments: str) -> tuple[int, str]:
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            status = main(
+                ["--repo-root", str(self.root), "--complete", *arguments],
+                default_repo_root=self.root,
+            )
+        return status, output.getvalue()
+
+    def test_complete_passes_with_the_current_manifest(self) -> None:
+        write_suite_input_projection(self.root)
+
+        status, output = self.complete()
+
+        self.assertEqual(status, 0)
+        self.assertEqual(
+            output, "PASS fixture (3 checks)\nSUMMARY selected=1 passed=1 failed=0 blocked=0\n"
+        )
+
+    def test_complete_fails_on_a_file_added_without_regenerating_the_manifest(self) -> None:
+        write_suite_input_projection(self.root)
+        self.write("tracked-later.md", "a file no check reads\n")
+        subprocess.run(("git", "add", "tracked-later.md"), cwd=self.root, check=True)
+
+        status, output = self.complete()
+
+        self.assertEqual(status, 2)
+        self.assertIn("PASS fixture (3 checks)", output)
+        self.assertIn(f"SUITE_INPUT.STALE_MANIFEST [invalid] (path={DEFAULT_PROJECTION})", output)
+        self.assertIn(REFRESH_COMMAND, output)
+        self.assertIn("--purpose authoring verify_repository", REFRESH_COMMAND)
+
+        write_suite_input_projection(self.root)
+        self.assertEqual(self.complete()[0], 0)
+
+    def test_complete_fails_on_a_changed_input_or_a_missing_manifest(self) -> None:
+        self.assertEqual(self.complete()[0], 2)
+
+        write_suite_input_projection(self.root)
+        self.write("present.md", "present changed\n")
+        self.assertEqual(self.complete()[0], 2)
+
+    def test_complete_json_reports_the_stale_manifest_beside_the_suite_results(self) -> None:
+        status, output = self.complete("--format", "json")
+
+        payload = json.loads(output)
+        self.assertEqual(status, 2)
+        self.assertEqual(payload["error"]["code"], "SUITE_INPUT.STALE_MANIFEST")
+        self.assertEqual([item["status"] for item in payload["results"]], ["passed"])
+        self.assertEqual(payload["summary"]["passed"], 1)
+
+    def test_complete_result_carries_the_stale_manifest_to_engine_callers(self) -> None:
+        stale = run_complete_verification(self.root)
+        self.assertEqual(stale.exit_code, 2)
+        self.assertEqual(stale.diagnostic.code, "SUITE_INPUT.STALE_MANIFEST")
+        self.assertEqual([item.status for item in stale.results], ["passed"])
+
+        write_suite_input_projection(self.root)
+        current = run_complete_verification(self.root)
+        self.assertEqual((current.exit_code, current.diagnostic), (0, None))
+
+    def test_complete_reports_a_manifest_that_cannot_be_recompiled(self) -> None:
+        write_suite_input_projection(self.root)
+        (self.root / "present.md").unlink()
+
+        result = run_complete_verification(self.root)
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostic.code, "INPUT.UNAVAILABLE")
+
+    def test_complete_reports_an_index_that_cannot_be_read(self) -> None:
+        write_suite_input_projection(self.root)
+        shutil.rmtree(self.root / ".git")
+        (self.root / ".git").write_text("gitdir: absent\n", encoding="utf-8")
+
+        result = run_complete_verification(self.root)
+
+        self.assertEqual(result.exit_code, 3)
+        self.assertEqual(result.diagnostic.code, "SUITE_INPUT.MANIFEST_UNAVAILABLE")
+        self.assertEqual(result.diagnostic.path, DEFAULT_PROJECTION)
+
+    def test_complete_over_another_registry_has_no_manifest_to_require(self) -> None:
+        shutil.copy2(self.root / DEFAULT_REGISTRY, self.root / "other-registry.toml")
+
+        status, output = self.complete("--registry", "other-registry.toml")
+
+        self.assertEqual(status, 0)
+        self.assertNotIn("SUITE_INPUT", output)
 
     def test_written_projection_is_canonical_json(self) -> None:
         write_suite_input_projection(self.root)

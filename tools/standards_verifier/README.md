@@ -7,12 +7,20 @@ inputs. Python dependencies come from
 
 ```bash
 printf '%s\n' '{"kind":"verify-repository","refresh_verification_inputs":false}' |
-  PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py verify_repository
+  PYTHONPATH=. python3 -P .agents/skills/standards-engine/scripts/invoke.py \
+    --purpose authoring verify_repository
 ```
 
 Inspect `verification.passed` and its diagnostics. Set
 `refresh_verification_inputs` to `true` after changing declared inputs. The Engine
 owns that generated update. Neither operation certifies policy completeness.
+
+The checkpoint fails with `SUITE_INPUT.STALE_MANIFEST` when
+`evaluation/standards-effectiveness/generated/suite-inputs.json` is not exactly
+what the current inputs compile to. The manifest pins every declared input and
+the list of tracked files, which is read from the Git index. Adding, removing or
+renaming any tracked file therefore needs a refresh: stage the change, then run
+the command above with `refresh_verification_inputs` set to `true`.
 
 ## What the checkpoint checks
 
