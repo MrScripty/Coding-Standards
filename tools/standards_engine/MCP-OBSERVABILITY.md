@@ -100,6 +100,12 @@ characters, and lists and fact maps at 32 entries, with a `[truncated]` marker. 
 whole `arguments` object over 8 KB keeps only its top-level scalars and
 `truncated`.
 
+For navigation operations, a top-level argument name the tool does not have
+(for example `tool` sent where `operation` is expected) is kept under
+`unrecognized`: up to eight names, each a short lower-case word shaped like a
+parameter name (at most 24 characters), never their values. Any other key is
+dropped.
+
 | Operation | Kept as sent |
 | --- | --- |
 | `read` | `target`, `detail`, `include_coverage`, `include_routing` |

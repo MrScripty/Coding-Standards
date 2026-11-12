@@ -6463,7 +6463,7 @@
       ]
     },
     {
-      "digest": "sha256:1a6d59145f4b8d43c67c23787fc450b60b569bbd65089fca9e6817b17848edae",
+      "digest": "sha256:9854c488b2e4bb5b93b4f0e5a65a92b520f8476b08733202aa92a7671272c3a7",
       "path": "tools/standards_engine/standards_engine/interaction_observer.py",
       "state": "present",
       "uses": [

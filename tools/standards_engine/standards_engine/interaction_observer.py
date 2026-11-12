@@ -102,6 +102,8 @@ IDENTIFIER_FIELDS = frozenset({
 })
 IDENTIFIER = re.compile(r'[A-Za-z0-9][A-Za-z0-9._:/-]{0,199}')
 OPAQUE = re.compile(r'[0-9a-fA-F]{16}|[0-9a-f]{8}-[0-9a-f]{4}-')  # Digests, handle ids, UUIDs.
+ARGUMENT_NAME = re.compile(r'[a-z][a-z0-9_]{0,23}')  # Shaped like a parameter name, nothing else.
+MAX_UNRECOGNIZED = 8
 RESULT_KIND = re.compile(r'[a-z][a-z0-9-]{0,63}')
 RESULT_CODE = re.compile(r'[A-Z][A-Z0-9_]{0,31}(\.[A-Z][A-Z0-9_]{0,47}){1,3}')
 
@@ -189,6 +191,16 @@ def _pick(value: object, names: tuple[str, ...]) -> dict:
     if not isinstance(value, dict):
         return {'type': _kind(value)}
     return {name: _sent(value[name]) for name in names if name in value}
+
+
+def _unrecognized(arguments: dict, declared: dict) -> list:
+    """Top-level argument names the tool does not declare, for example `tool`
+    sent where `operation` is expected. Only short lower-case names shaped like
+    a parameter are kept, and never their values: the wrong name is what shows
+    how the interface is misread. Any other key is dropped as caller text."""
+    return [name for name in arguments
+            if isinstance(name, str) and name not in declared
+            and ARGUMENT_NAME.fullmatch(name)][:MAX_UNRECOGNIZED]
 
 
 def _snapshot(handle: object) -> str:
@@ -732,6 +744,10 @@ class InteractionRecorder:
                     values = self._shapes[operation].identifiers(arguments)
                 elif isinstance(arguments, dict):
                     values = navigation_values(operation, arguments)
+                    unrecognized = _unrecognized(
+                        arguments, self._shapes[operation]._properties([self._shapes[operation].schema]))
+                    if unrecognized:
+                        values['unrecognized'] = unrecognized
                 values = _bounded(values)
                 try:
                     arguments_bytes = len(json.dumps(arguments, ensure_ascii=False, separators=(',', ':')).encode('utf-8'))
