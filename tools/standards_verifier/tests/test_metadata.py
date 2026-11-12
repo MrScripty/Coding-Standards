@@ -11,10 +11,15 @@ from pathlib import Path
 ENGINE_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ENGINE_ROOT))
 
-from tools.standards_metadata.standards_metadata import load_module_metadata
+from tools.standards_metadata.standards_metadata import (
+    CANONICAL_MODULE_CORPUS,
+    load_module_metadata,
+)
 
+from standards_verifier.config import extend_catalog, load_registry_catalog
 from standards_verifier.diagnostics import EngineError
 from standards_verifier.engine import Verifier
+from standards_verifier.suite_inputs import compile_suite_input_projection
 from tools.standards_graph.standards_graph import (
     METADATA_DEPENDENCIES,
     metadata_dependency_registry,
@@ -429,6 +434,144 @@ class MetadataGraphTest(unittest.TestCase):
 
         with self.assertRaisesRegex(EngineError, "exactly one"):
             Verifier(self.root, "registry.toml").run()
+
+    def write_corpus_suite(self, members: tuple[str, ...], extra: str = "") -> None:
+        encoded = ", ".join(json.dumps(member) for member in members)
+        self.write("corpus.toml", f"schema_version = 1\nmembers = [{encoded}]\n")
+        self.write(
+            "suite.toml",
+            f"""
+            schema_version = 1
+            id = "metadata"
+            owner = "metadata.schema"
+            description = "Whole corpus metadata"
+
+            [[checks]]
+            id = "corpus"
+            type = "metadata_graph"
+            corpus = "corpus.toml"
+            {extra}
+            """,
+        )
+        self.write_registry()
+
+    def corpus_result(self):
+        return Verifier(self.root, "registry.toml").run(("metadata",))[0]
+
+    def test_corpus_mode_validates_every_declared_member(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_module("workflow.md", module_id="workflow.test", requires=("core",))
+        self.write_corpus_suite(("core.md", "workflow.md"))
+
+        result = self.corpus_result()
+
+        self.assertEqual((result.status, result.check_count), ("passed", 1))
+
+    def test_corpus_mode_covers_a_new_member_without_a_suite_edit(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_corpus_suite(("core.md",))
+        suite = (self.root / "suite.toml").read_bytes()
+        self.assertEqual(self.corpus_result().status, "passed")
+
+        self.write_module("added.md", module_id="added", raw={"Level": "`MANDATORY`"})
+        self.write("corpus.toml", 'schema_version = 1\nmembers = ["core.md", "added.md"]\n')
+
+        result = self.corpus_result()
+
+        self.assertEqual((self.root / "suite.toml").read_bytes(), suite)
+        self.assertEqual(result.status, "failed")
+        self.assertEqual(
+            [(item.code, item.path) for item in result.diagnostics],
+            [("METADATA.LEVEL", "added.md")],
+        )
+
+    def test_corpus_mode_reports_every_member_failure(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_module("level.md", module_id="level", raw={"Level": "`MANDATORY`"})
+        self.write_module("owner.md", module_id="owner", owner="elsewhere.md")
+        self.write_corpus_suite(("core.md", "level.md", "owner.md"))
+
+        self.assertEqual(
+            sorted((item.code, item.path) for item in self.corpus_result().diagnostics),
+            [("METADATA.CANONICAL_OWNER", "owner.md"), ("METADATA.LEVEL", "level.md")],
+        )
+
+    def test_corpus_mode_rejects_a_relation_that_leaves_the_corpus(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_module("workflow.md", module_id="workflow.test", requires=("absent",))
+        self.write_corpus_suite(("core.md", "workflow.md"))
+
+        self.assertEqual(
+            [(item.code, item.path, item.observed) for item in self.corpus_result().diagnostics],
+            [("METADATA.UNRESOLVED_TARGET", "workflow.md", "absent")],
+        )
+
+    def test_corpus_mode_rejects_an_unreadable_or_empty_manifest(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_corpus_suite(("core.md",))
+        self.write("corpus.toml", "schema_version = 1\nmembers = []\n")
+        self.assertEqual(
+            [item.code for item in self.corpus_result().diagnostics],
+            ["CONFIG.CANONICAL_CORPUS_MEMBERS"],
+        )
+
+        (self.root / "corpus.toml").unlink()
+        self.assertEqual(
+            [item.code for item in self.corpus_result().diagnostics],
+            ["INPUT.UNAVAILABLE"],
+        )
+
+    def test_corpus_mode_declares_the_manifest_and_every_member_as_inputs(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_module("workflow.md", module_id="workflow.test", requires=("core",))
+        self.write_corpus_suite(("core.md", "workflow.md"))
+
+        projection = compile_suite_input_projection(self.root, "registry.toml")
+
+        self.assertEqual(
+            {
+                item["path"]: [use["role"] for use in item["uses"]]
+                for item in projection["files"]
+            },
+            {
+                "core.md": ["metadata"],
+                "corpus.toml": ["canonical-module-corpus"],
+                "workflow.md": ["metadata"],
+            },
+        )
+
+    def test_corpus_mode_excludes_the_other_modes_and_requires_a_path(self) -> None:
+        self.write_module("core.md", module_id="core", role="core")
+        self.write_corpus_suite(("core.md",), extra='paths = ["core.md"]')
+        with self.assertRaisesRegex(EngineError, "exactly one"):
+            Verifier(self.root, "registry.toml").run()
+
+        self.write(
+            "suite.toml",
+            (self.root / "suite.toml")
+            .read_text(encoding="utf-8")
+            .replace('corpus = "corpus.toml"', 'corpus = ""')
+            .replace('paths = ["core.md"]', ""),
+        )
+        with self.assertRaises(EngineError) as caught:
+            Verifier(self.root, "registry.toml").run()
+        self.assertEqual(caught.exception.diagnostic.code, "CONFIG.METADATA_CORPUS")
+
+    def test_repository_asserts_the_whole_canonical_corpus_exactly_once(self) -> None:
+        repository = Path(__file__).resolve().parents[3]
+        catalog = load_registry_catalog(
+            repository, "evaluation/standards-effectiveness/suite-registry.toml"
+        )
+        catalog = extend_catalog(repository, catalog, catalog.suite_ids)
+
+        whole_corpus = [
+            (suite.id, check.id)
+            for suite in catalog.suites
+            for check in suite.checks
+            if getattr(check, "corpus", None) == CANONICAL_MODULE_CORPUS
+        ]
+
+        self.assertEqual(whole_corpus, [("canonical-corpus-metadata", "canonical-corpus")])
 
 
 if __name__ == "__main__":

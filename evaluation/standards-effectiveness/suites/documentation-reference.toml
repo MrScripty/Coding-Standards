@@ -1,9 +1,0 @@
-schema_version = 1
-id = "documentation-reference"
-owner = "reference.recipes.documentation"
-description = "Checks current metadata graph constraints. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
-
-[[checks]]
-id = "metadata-closure"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "workflows/documentation.md", "reference/recipes/documentation.md", "topics/code-design.md"]

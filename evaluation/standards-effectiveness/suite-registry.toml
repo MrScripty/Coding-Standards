@@ -41,94 +41,19 @@ path = "evaluation/standards-effectiveness/suites/metadata-fixtures.toml"
 requires = []
 
 [[suites]]
+id = "canonical-corpus-metadata"
+path = "evaluation/standards-effectiveness/suites/canonical-corpus-metadata.toml"
+requires = []
+
+[[suites]]
 id = "release-reference-closure"
 path = "evaluation/standards-effectiveness/suites/release-reference-closure.toml"
 requires = []
 
 [[suites]]
-id = "release-recovery-policy"
-path = "evaluation/standards-effectiveness/suites/release-recovery-policy.toml"
-requires = ["release-reference-closure"]
-
-[[suites]]
 id = "release-maintenance-policy"
 path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"
 requires = ["release-reference-closure"]
-
-[[suites]]
-id = "release-pipeline-policy"
-path = "evaluation/standards-effectiveness/suites/release-pipeline-policy.toml"
-requires = ["release-reference-closure"]
-
-[[suites]]
-id = "release-artifact-policy"
-path = "evaluation/standards-effectiveness/suites/release-artifact-policy.toml"
-requires = ["release-reference-closure"]
-
-[[suites]]
-id = "release-publication-policy"
-path = "evaluation/standards-effectiveness/suites/release-publication-policy.toml"
-requires = ["release-reference-closure"]
-
-[[suites]]
-id = "documentation-changelog-closure"
-path = "evaluation/standards-effectiveness/suites/documentation-changelog-closure.toml"
-requires = []
-
-[[suites]]
-id = "documentation-reference"
-path = "evaluation/standards-effectiveness/suites/documentation-reference.toml"
-requires = []
-
-[[suites]]
-id = "release-workflow-foundation"
-path = "evaluation/standards-effectiveness/suites/release-workflow-foundation.toml"
-requires = []
-
-[[suites]]
-id = "rust-dependency-owner-contract"
-path = "evaluation/standards-effectiveness/suites/rust-dependency-owner-contract.toml"
-requires = []
-
-[[suites]]
-id = "rust-release-owner-contract"
-path = "evaluation/standards-effectiveness/suites/rust-release-owner-contract.toml"
-requires = []
-
-[[suites]]
-id = "rust-tooling-owner-contract"
-path = "evaluation/standards-effectiveness/suites/rust-tooling-owner-contract.toml"
-requires = []
-
-[[suites]]
-id = "rust-dependency-candidate-inspection"
-path = "evaluation/standards-effectiveness/suites/rust-dependency-candidate-inspection.toml"
-requires = []
-
-[[suites]]
-id = "rust-async-blocking-mutex"
-path = "evaluation/standards-effectiveness/suites/rust-async-blocking-mutex.toml"
-requires = []
-
-[[suites]]
-id = "rust-async-cancellation-observability"
-path = "evaluation/standards-effectiveness/suites/rust-async-cancellation-observability.toml"
-requires = []
-
-[[suites]]
-id = "rust-interop-memory"
-path = "evaluation/standards-effectiveness/suites/rust-interop-memory.toml"
-requires = []
-
-[[suites]]
-id = "contract-http-outcome-projection"
-path = "evaluation/standards-effectiveness/suites/contract-http-outcome-projection.toml"
-requires = []
-
-[[suites]]
-id = "persistence-owner-contract"
-path = "evaluation/standards-effectiveness/suites/persistence-owner-contract.toml"
-requires = []
 
 [[suites]]
 id = "s1-routing"
@@ -171,148 +96,8 @@ path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
 requires = []
 
 [[suites]]
-id = "rust-api-owner-contract"
-path = "evaluation/standards-effectiveness/suites/rust-api-owner-contract.toml"
-requires = []
-
-[[suites]]
 id = "source-index-closures"
 path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
-requires = []
-
-[[suites]]
-id = "frontend-rendering-synchronization"
-path = "evaluation/standards-effectiveness/suites/frontend-rendering-synchronization.toml"
-requires = []
-
-[[suites]]
-id = "architecture-pattern-reference-owner"
-path = "evaluation/standards-effectiveness/suites/architecture-pattern-reference-owner.toml"
-requires = []
-
-[[suites]]
-id = "rust-async-boundary"
-path = "evaluation/standards-effectiveness/suites/rust-async-boundary.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-error-mapping"
-path = "evaluation/standards-effectiveness/suites/rust-binding-error-mapping.toml"
-requires = []
-
-[[suites]]
-id = "rust-unsafe-contracts"
-path = "evaluation/standards-effectiveness/suites/rust-unsafe-contracts.toml"
-requires = []
-
-[[suites]]
-id = "documentation-policy-consolidation"
-path = "evaluation/standards-effectiveness/suites/documentation-policy-consolidation.toml"
-requires = []
-
-[[suites]]
-id = "release-procedure-policy"
-path = "evaluation/standards-effectiveness/suites/release-procedure-policy.toml"
-requires = []
-
-[[suites]]
-id = "language-binding-wire-representation"
-path = "evaluation/standards-effectiveness/suites/language-binding-wire-representation.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-enum-representation"
-path = "evaluation/standards-effectiveness/suites/rust-binding-enum-representation.toml"
-requires = []
-
-[[suites]]
-id = "rust-wire-representation"
-path = "evaluation/standards-effectiveness/suites/rust-wire-representation.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-callback-task"
-path = "evaluation/standards-effectiveness/suites/rust-binding-callback-task.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-executor-delegation"
-path = "evaluation/standards-effectiveness/suites/rust-binding-executor-delegation.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-event-delivery"
-path = "evaluation/standards-effectiveness/suites/rust-binding-event-delivery.toml"
-requires = []
-
-[[suites]]
-id = "rust-security-panic-boundary"
-path = "evaluation/standards-effectiveness/suites/rust-security-panic-boundary.toml"
-requires = []
-
-[[suites]]
-id = "rust-external-input-queue"
-path = "evaluation/standards-effectiveness/suites/rust-external-input-queue.toml"
-requires = []
-
-[[suites]]
-id = "validation-proof-lifetime"
-path = "evaluation/standards-effectiveness/suites/validation-proof-lifetime.toml"
-requires = []
-
-[[suites]]
-id = "input-validation-authority"
-path = "evaluation/standards-effectiveness/suites/input-validation-authority.toml"
-requires = []
-
-[[suites]]
-id = "network-transport-policy"
-path = "evaluation/standards-effectiveness/suites/network-transport-policy.toml"
-requires = []
-
-[[suites]]
-id = "rust-filesystem-authority"
-path = "evaluation/standards-effectiveness/suites/rust-filesystem-authority.toml"
-requires = []
-
-[[suites]]
-id = "rust-listener-lifecycle"
-path = "evaluation/standards-effectiveness/suites/rust-listener-lifecycle.toml"
-requires = []
-
-[[suites]]
-id = "rust-async-lifecycle"
-path = "evaluation/standards-effectiveness/suites/rust-async-lifecycle.toml"
-requires = []
-
-[[suites]]
-id = "rust-boundary-arithmetic"
-path = "evaluation/standards-effectiveness/suites/rust-boundary-arithmetic.toml"
-requires = []
-
-[[suites]]
-id = "filesystem-containment-policy"
-path = "evaluation/standards-effectiveness/suites/filesystem-containment-policy.toml"
-requires = []
-
-[[suites]]
-id = "ipc-payload-validation"
-path = "evaluation/standards-effectiveness/suites/ipc-payload-validation.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-runtime"
-path = "evaluation/standards-effectiveness/suites/rust-binding-runtime.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-architecture"
-path = "evaluation/standards-effectiveness/suites/rust-binding-architecture.toml"
-requires = []
-
-[[suites]]
-id = "cross-language-contract"
-path = "evaluation/standards-effectiveness/suites/cross-language-contract.toml"
 requires = []
 
 [[suites]]
@@ -331,36 +116,6 @@ path = "evaluation/standards-effectiveness/suites/a1c-public-cutover.toml"
 requires = ["generated-contract-semantic-conformance"]
 
 [[suites]]
-id = "language-binding-boundary"
-path = "evaluation/standards-effectiveness/suites/language-binding-boundary.toml"
-requires = []
-
-[[suites]]
-id = "rust-binding-conversions"
-path = "evaluation/standards-effectiveness/suites/rust-binding-conversions.toml"
-requires = []
-
-[[suites]]
-id = "runtime-decoding-policy"
-path = "evaluation/standards-effectiveness/suites/runtime-decoding-policy.toml"
-requires = []
-
-[[suites]]
-id = "interop-event-registration"
-path = "evaluation/standards-effectiveness/suites/interop-event-registration.toml"
-requires = []
-
-[[suites]]
-id = "concurrency-policy"
-path = "evaluation/standards-effectiveness/suites/concurrency-policy.toml"
-requires = []
-
-[[suites]]
 id = "contract-ownership"
 path = "evaluation/standards-effectiveness/suites/contract-ownership.toml"
-requires = []
-
-[[suites]]
-id = "interop-boundary-policy"
-path = "evaluation/standards-effectiveness/suites/interop-boundary-policy.toml"
 requires = []

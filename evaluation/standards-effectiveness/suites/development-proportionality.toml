@@ -1,7 +1,7 @@
 schema_version = 1
 id = "development-proportionality"
 owner = "workflow.development-proportionality"
-description = "Checks resolvable Markdown links, current metadata graph constraints, fact-driven routing outcomes. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
+description = "Checks resolvable Markdown links, fact-driven routing outcomes. Does not certify prose quality, consumer compliance, or unexecuted runtime behavior."
 
 [[checks]]
 id = "routing-closure"
@@ -14,11 +14,6 @@ resolved = "route"
 unresolved = "unresolved"
 base_modules = ["router"]
 selections = [{ column = "expected_development", excluded = "exclude", module = "workflow.development-proportionality", selected = "select" }, { column = "expected_planning", excluded = "exclude", module = "workflow.planning", selected = "select" }]
-
-[[checks]]
-id = "metadata-closure"
-type = "metadata_graph"
-paths = ["CORE-STANDARDS.md", "STANDARDS-ROUTER.md", "workflows/development-proportionality.md", "workflows/implementation.md", "workflows/planning.md", "workflows/verification.md", "workflows/verification/oracles.md", "workflows/verification/platforms.md", "workflows/verification/gui.md", "topics/code-design.md"]
 
 [[checks]]
 id = "local-links"

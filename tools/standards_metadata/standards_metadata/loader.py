@@ -518,10 +518,11 @@ def _members(raw: Any, manifest_path: str) -> tuple[str, ...]:
     return members
 
 
-def load_canonical_module_corpus(
+def canonical_module_corpus_members(
     source: ContentSourceInput,
     manifest_path: str = CANONICAL_MODULE_CORPUS,
-) -> CanonicalModuleCorpus:
+) -> tuple[str, ...]:
+    """Return the declared corpus membership without reading any member."""
     selected_source = content_source(source)
     raw = _load_toml(selected_source, manifest_path)
     required = {"schema_version", "members"}
@@ -546,7 +547,15 @@ def load_canonical_module_corpus(
                 observed=str(raw["schema_version"]),
             )
         )
-    members = _members(raw["members"], manifest_path)
+    return _members(raw["members"], manifest_path)
+
+
+def load_canonical_module_corpus(
+    source: ContentSourceInput,
+    manifest_path: str = CANONICAL_MODULE_CORPUS,
+) -> CanonicalModuleCorpus:
+    selected_source = content_source(source)
+    members = canonical_module_corpus_members(selected_source, manifest_path)
     validation = validate_module_metadata(selected_source, members)
     if validation.failures:
         raise MetadataError(validation.failures[0])
