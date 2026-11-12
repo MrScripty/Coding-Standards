@@ -216,7 +216,7 @@ class MCPTest(unittest.TestCase):
             patch.object(AgentToolFacade, "open_repository") as opened,
             redirect_stderr(io.StringIO()),
         ):
-            facade = opened.return_value.__enter__.return_value
+            facade = opened.return_value
             facade.apply.side_effect = RuntimeError("failure")
             response = server.dispatch(
                 request(
@@ -257,15 +257,16 @@ class MCPTest(unittest.TestCase):
     def test_preserves_typed_outcomes_and_never_retries(self):
         server = MCPServer(ROOT, advanced=True, purpose="authoring")
         initialize(server)
-        for kind in (
-            "pending-result",
-            "complete-result",
-            "rejected-result",
-            "application-recovery-required-result",
-        ):
-            value = {"kind": kind, "next_operations": ["recover_application"]}
-            with patch.object(AgentToolFacade, "open_repository") as opened:
-                facade = opened.return_value.__enter__.return_value
+        with patch.object(AgentToolFacade, "open_repository") as opened:
+            facade = opened.return_value
+            for kind in (
+                "pending-result",
+                "complete-result",
+                "rejected-result",
+                "application-recovery-required-result",
+            ):
+                value = {"kind": kind, "next_operations": ["recover_application"]}
+                facade.apply_proposal.reset_mock()
                 facade.apply_proposal.return_value = value
                 response = server.dispatch(
                     request(
@@ -283,7 +284,14 @@ class MCPTest(unittest.TestCase):
                     {"readiness": {"opaque": "identity"}}
                 )
                 facade.recover_application.assert_not_called()
-                opened.return_value.__exit__.assert_called_once()
+            # Every typed outcome, a rejection included, leaves the one Engine
+            # open for the next call, with its store connection closed after
+            # each; the server closes the Engine when it closes.
+            opened.assert_called_once()
+            self.assertEqual(facade.release.call_count, 4)
+            facade.close.assert_not_called()
+            server.close()
+            facade.close.assert_called_once()
 
     def test_internal_failure_is_tool_error_without_retry(self):
         server = MCPServer(ROOT, advanced=True, purpose="authoring")
@@ -292,7 +300,7 @@ class MCPTest(unittest.TestCase):
             patch.object(AgentToolFacade, "open_repository") as opened,
             redirect_stderr(io.StringIO()),
         ):
-            facade = opened.return_value.__enter__.return_value
+            facade = opened.return_value
             facade.apply_proposal.side_effect = RuntimeError("private diagnostic")
             response = server.dispatch(
                 request("tools/call", {"name": "apply_proposal"})
@@ -301,6 +309,11 @@ class MCPTest(unittest.TestCase):
             self.assertNotIn("private diagnostic", json.dumps(response))
             facade.apply_proposal.assert_called_once()
             facade.recover_application.assert_not_called()
+            # The Engine whose outcome is unknown is closed, not kept for the next call.
+            facade.close.assert_called_once()
+            server.dispatch(request("tools/call", {"name": "apply_proposal"}))
+            self.assertEqual(opened.call_count, 2)
+            self.assertEqual(facade.apply_proposal.call_count, 2)
 
     def test_application_failure_diagnostic_omits_private_exception(self):
         server = MCPServer(ROOT, purpose="application")
@@ -310,7 +323,7 @@ class MCPTest(unittest.TestCase):
             patch.object(AgentToolFacade, "open_repository") as opened,
             redirect_stderr(stderr),
         ):
-            opened.return_value.__enter__.return_value.read.side_effect = RuntimeError("private diagnostic")
+            opened.return_value.read.side_effect = RuntimeError("private diagnostic")
             response = server.dispatch(request("tools/call", {"name": "read"}))["result"]
         self.assertTrue(response["isError"])
         self.assertNotIn("private diagnostic", json.dumps(response) + stderr.getvalue())
@@ -321,10 +334,10 @@ class MCPTest(unittest.TestCase):
         initialize(server)
         with StandardsEngine.open_repository(ROOT, durable=False, purpose="authoring") as engine:
             facade = AgentToolFacade(engine, _contracts(ROOT))
-            # The context manager normally owns a durable store per request.
-            # Keep this test's in-memory store open across both calls.
+            # The server normally opens the durable store under its root.
+            # Serve this test's temporary store for all three calls instead.
             with patch.object(AgentToolFacade, "open_repository") as opened:
-                opened.return_value.__enter__.return_value = facade
+                opened.return_value = facade
                 created = server.dispatch(
                     request(
                         "tools/call",

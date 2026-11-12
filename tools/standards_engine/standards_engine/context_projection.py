@@ -70,6 +70,10 @@ def public_operation(function: Callable) -> Callable:
                 logging.getLogger(__name__).error(
                     "Application observation failed: %s", type(error).__name__
                 )
+                # The caller receives the same bounded rejection as for a typed
+                # failure, so record here that this one was not classified: an
+                # owner that keeps the engine across calls must not reuse it.
+                engine._failed = True
                 return application_rejection("APPLICATION.INTERNAL_UNAVAILABLE")
         return function(engine, call)
     return invoke

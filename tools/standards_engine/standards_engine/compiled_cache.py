@@ -1,8 +1,11 @@
 """Bounded reuse of pure identity and compilation products of exact material.
 
-An MCP process owns one cache for its repository, purpose and installed code.
-Its serial calls borrow results; stores, handles, decisions and responses remain
-per-call. Capacity overflow changes only whether the result is retained.
+Every Engine has one cache for its repository, purpose and installed code. It
+keeps its own until it closes unless an owner lends one that outlives it. The
+one Engine of an MCP server process therefore keeps it for the process; a CLI
+invocation or a test's Engine keeps it for that Engine. Operations borrow
+results; lifecycle observations, handles, decisions and responses are made by
+every operation. Capacity overflow changes only whether the result is retained.
 """
 from __future__ import annotations
 

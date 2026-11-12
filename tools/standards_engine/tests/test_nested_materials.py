@@ -10,6 +10,7 @@ from unittest.mock import patch
 from tools.standards_analysis.standards_analysis import AnalysisExecutionContext
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import _generated_contract as c
+from tools.standards_engine.standards_engine.compiled_cache import CompiledSnapshotCache
 from tools.standards_engine.standards_engine.logical_authoring import StandardsChangeSet
 from tools.standards_engine.standards_engine import logical_authoring as logical
 from tools.standards_engine.standards_engine.operation_materials import ProposalMaterials
@@ -66,12 +67,13 @@ class NestedMaterialTests(unittest.TestCase):
         }
 
     @contextmanager
-    def counts(self):
+    def counts(self, engine=None):
+        engine = engine or self.engine
         with (
-            patch.object(self.engine._snapshots, "load_content", wraps=self.engine._snapshots.load_content) as load,
-            patch.object(self.engine, "_compiled_snapshot", wraps=self.engine._compiled_snapshot) as compiled,
-            patch.object(self.engine, "_proposal_projection", wraps=self.engine._proposal_projection) as project,
-            patch.object(self.engine, "_evaluate", wraps=self.engine._evaluate) as evaluate,
+            patch.object(engine._snapshots, "load_content", wraps=engine._snapshots.load_content) as load,
+            patch.object(engine, "_compiled_snapshot", wraps=engine._compiled_snapshot) as compiled,
+            patch.object(engine, "_proposal_projection", wraps=engine._proposal_projection) as project,
+            patch.object(engine, "_evaluate", wraps=engine._evaluate) as evaluate,
         ):
             yield load, compiled, project, evaluate
 
@@ -90,25 +92,45 @@ class NestedMaterialTests(unittest.TestCase):
         self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]}), proposed)
 
     def test_revise_compiles_only_old_and_new_projections(self):
-        proposed = self.propose()
-        self.assertIsNone(self.engine._compiled_cache)
-        with self.counts() as counts, patch.object(
-            logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection,
-        ) as refresh:
-            revised = self.facade.revise({"detail": "full",
-                "context": proposed["context"], "change_set": self.change(revision=True),
-            })
-        self.assertEqual(revised["status"], "complete", revised)
-        self.assert_counts(counts, projections=2, evaluations=2)
-        # One preflight replay plus one suffix; not a second replay of edit one.
-        self.assertEqual(refresh.call_count, 2)
-        self.assertNotEqual(revised["revision"], proposed["revision"])
-        self.assertEqual(self.facade.workflow_status({"detail": "full", "context": proposed["context"]})["status"], "stale")
-        target = self.change()["edits"][0]["standard"]["id"]
-        old = self.facade.query_proposal({"revision": proposed["revision"], "request": {"kind": "read", "target": target}})
-        new = self.facade.query_proposal({"revision": revised["revision"], "request": {"kind": "read", "target": target}})
-        self.assertNotIn("Revised fixture text.", old["content"])
-        self.assertIn("Revised fixture text.", new["content"])
+        # An Engine that retains nothing shows all the work a revision needs.
+        retaining_nothing = CompiledSnapshotCache(self.root, "authoring", max_entries=0)
+        self.addCleanup(retaining_nothing.close)
+        cold_engine = StandardsEngine.open_repository(
+            self.root, purpose="authoring", compiled_cache=retaining_nothing,
+            execution_context=AnalysisExecutionContext(LocalAlwaysAllowAuthorizer(self.root)),
+        )
+        self.addCleanup(cold_engine.close)
+        cold = AgentToolFacade(cold_engine, _contracts(self.root))
+        self.assertTrue(self.engine._owns_compiled_cache)
+        for facade, engine, suffix, replays in (
+            # One preflight replay plus one suffix; not a second replay of edit one.
+            (cold, cold_engine, "-cold", 2),
+            # The Engine's own cache still holds the projection `propose` built,
+            # so the preflight replays nothing and only the suffix runs.
+            (self.facade, self.engine, "", 1),
+        ):
+            with self.subTest(replays=replays):
+                proposed = facade.propose({"detail": "full",
+                    "snapshot": self.snapshot, "change_set": self.change(suffix),
+                })
+                self.assertEqual(proposed["status"], "complete", proposed)
+                with self.counts(engine) as counts, patch.object(
+                    logical, "_refresh_suite_input_projection", wraps=logical._refresh_suite_input_projection,
+                ) as refresh:
+                    revised = facade.revise({"detail": "full",
+                        "context": proposed["context"], "change_set": self.change(suffix, revision=True),
+                    })
+                self.assertEqual(revised["status"], "complete", revised)
+                self.assert_counts(counts, projections=2, evaluations=2)
+                self.assertEqual(refresh.call_count, replays)
+                self.assertNotEqual(revised["revision"], proposed["revision"])
+                self.assertEqual(facade.workflow_status({"detail": "full", "context": proposed["context"]})["status"], "stale")
+                target = self.change(suffix)["edits"][0]["standard"]["id"]
+                old = facade.query_proposal({"revision": proposed["revision"], "request": {"kind": "read", "target": target}})
+                new = facade.query_proposal({"revision": revised["revision"], "request": {"kind": "read", "target": target}})
+                self.assertNotIn("Revised fixture text.", old["content"])
+                self.assertIn("Revised fixture text.", new["content"])
+        self.assertEqual(retaining_nothing.statistics["entries"], 0)
 
     def test_resolution_reuses_material_with_three_fresh_evaluations(self):
         proposed = self.propose(normative=True)

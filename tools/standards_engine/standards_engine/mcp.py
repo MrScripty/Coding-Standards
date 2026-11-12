@@ -2,6 +2,9 @@
 
 Only lifecycle, ping, and tools are supported. Requests execute serially;
 durable Engine handles, rather than transport sessions, carry domain state.
+One server process has one Engine: it is opened by the first store-backed tool
+call, serves every later call, and is closed with the server. Its store
+connection is opened for each call and closed when the call ends.
 """
 
 from __future__ import annotations
@@ -20,7 +23,6 @@ from .tools import AgentToolFacade
 from .agent_navigation import (
     ROUTE_CONTENT_RESULT_BYTES, ROUTE_PAGE_BYTES, ROUTE_PAGE_MIN_BYTES, admit_route_page_bytes,
 )
-from .compiled_cache import CompiledSnapshotCache
 from .runtime_identity import RuntimeIdentity
 from .contract_discovery import ContractDiscovery
 from .context_projection import Purpose
@@ -80,7 +82,8 @@ class MCPServer:
             self._interface, purpose=self.purpose, operation_names=self.names,
             catalog_digest=self._runtime_identity.metadata()["catalog_digest"],
         )
-        self._compiled_cache = CompiledSnapshotCache(self.root, self.purpose)
+        # Opened by the first store-backed tool call; see _invoke.
+        self._facade: AgentToolFacade | None = None
         self._observer = (InteractionRecorder(observation, self._runtime_identity.metadata(), self.tools)
                           if observation is not None else None)
         self._closed = False
@@ -92,16 +95,55 @@ class MCPServer:
         return self._purpose
 
     def close(self) -> None:
-        """Close process-owned capture and cache; each tool call closes its domain store."""
-        if self._observer is not None:
-            self._observer.close()
-        self._compiled_cache.close()
-        self._interface = None
-        self._runtime_identity = None
-        self._contract_discovery = None
-        self.tools.clear()
-        self.names.clear()
-        self._closed = True
+        """Close the process's Engine, with its cache, and its capture."""
+        try:
+            self._close_engine()
+        finally:
+            if self._observer is not None:
+                self._observer.close()
+            self._interface = None
+            self._runtime_identity = None
+            self._contract_discovery = None
+            self.tools.clear()
+            self.names.clear()
+            self._closed = True
+
+    def _close_engine(self) -> None:
+        facade, self._facade = self._facade, None
+        if facade is not None:
+            facade.close()
+
+    def _invoke(self, name: str, arguments: dict) -> dict:
+        """Run one store-backed tool call on this process's Engine.
+
+        The facade, its Engine and the compilation cache are opened by the
+        first call that needs them and serve every later call. The store
+        connection is not kept: each call opens one, running the admission a
+        new open of the store runs, and closes it when the call ends. Between
+        calls the process therefore holds no store connection, lock or open
+        store file, and every call observes the store exactly as when each
+        call opened its own Engine: another process's writes, a migration, a
+        changed schema, due maintenance, and a store file that was replaced,
+        removed or overwritten. A relocated root and a replaced or missing
+        store file close the Engine so that a new one is opened and audited.
+        An Engine that reports an unclassified failure is closed straight away.
+        """
+        facade = self._facade
+        if facade is not None and not facade.readmit():
+            self._close_engine()
+            facade = None
+        if facade is None:
+            facade = self._facade = AgentToolFacade.open_repository(
+                self.root, purpose=self.purpose, interface=self._interface,
+                route_page_bytes=self._route_page_bytes,
+            )
+        value = getattr(facade, name)(arguments)
+        # Closing rolls back a transaction the operation did not end, as it
+        # always has. A raised failure closes the whole Engine instead.
+        facade.release()
+        if not facade.reusable:
+            self._close_engine()
+        return value
 
     def dispatch(self, message: object) -> dict | None:
         return self._handle(message)
@@ -235,16 +277,17 @@ class MCPServer:
             value = self._runtime_identity.invoke(arguments)
             return self._tool_result(value)
         try:
-            # Opening per call matches the reference transport and avoids keeping
-            # store state alive across idle client sessions. No operation retries.
             with redirect_stdout(sys.stderr):
-                with AgentToolFacade.open_repository(
-                    self.root, purpose=self.purpose, interface=self._interface,
-                    compiled_cache=self._compiled_cache,
-                    route_page_bytes=self._route_page_bytes,
-                ) as facade:
-                    value = getattr(facade, name)(arguments)
-        except Exception as error:
+                value = self._invoke(name, arguments)
+        except BaseException as error:
+            # The outcome is unknown and so is the Engine's state. Close it; the
+            # next call opens a new one. No operation retries.
+            try:
+                self._close_engine()
+            except Exception as failure:
+                print(f"Engine close failed: {type(failure).__name__}", file=sys.stderr)
+            if not isinstance(error, Exception):
+                raise
             if self.purpose is Purpose.APPLICATION:
                 print(
                     f"Application invocation failed: {type(error).__name__}",

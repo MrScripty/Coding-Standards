@@ -1,4 +1,4 @@
-"""Real per-call stores with bounded pure compilation and installed API reuse."""
+"""Real stores with bounded pure compilation and installed API reuse."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -329,7 +329,12 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
 
     def test_stream_eof_and_write_failure_release_process_resources(self):
         for failing in (False, True):
-            server = MCPServer(ROOT, purpose="authoring")
+            server = MCPServer(installation_root(self), purpose="authoring")
+            # The stream ends while the process holds its Engine and cache.
+            initialize(server)
+            rejected = server.dispatch(request("tools/call", {"name": "read", "arguments": {"extra": True}}))
+            self.assertTrue(rejected["result"]["isError"])
+            engine = server._facade._engine
             if failing:
                 class FailedOutput(io.StringIO):
                     def write(self, value):
@@ -339,10 +344,15 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
             else:
                 serve(server, io.StringIO(""), io.StringIO())
             self.assertIsNone(server._interface)
-            self.assertEqual(server._compiled_cache.statistics["entries"], 0)
+            self.assertIsNone(server._facade)
+            with self.assertRaises(sqlite3.ProgrammingError):
+                engine._snapshots._store._connection.execute("SELECT 1")
+            with self.assertRaisesRegex(ValueError, "closed"):
+                engine._compiled_cache.require_scope(engine._repository.root, "authoring")
+            self.assertEqual(engine._compiled_cache.statistics["entries"], 0)
             self.assertEqual(server.dispatch(request("ping"))["error"]["code"], -32000)
 
-    def test_each_tool_call_opens_and_closes_its_own_facade(self):
+    def test_tool_calls_share_one_facade_opened_with_the_installed_interface(self):
         server = MCPServer(installation_root(self), purpose="application")
         self.addCleanup(server.close)
         initialize(server)
@@ -351,10 +361,11 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
             for _ in range(2):
                 value = server.dispatch(request("tools/call", {"name": "read", "arguments": {"extra": True}}))
                 self.assertTrue(value["result"]["isError"])
-        self.assertEqual(calls.call_count, 2)
-        for call in calls.call_args_list:
-            self.assertIs(call.kwargs["interface"], server._interface)
-            self.assertIs(call.kwargs["compiled_cache"], server._compiled_cache)
+        self.assertEqual(calls.call_count, 1)
+        self.assertIs(calls.call_args.kwargs["interface"], server._interface)
+        # No cache is lent: the process's one Engine keeps its own for its lifetime.
+        self.assertNotIn("compiled_cache", calls.call_args.kwargs)
+        self.assertTrue(server._facade._engine._owns_compiled_cache)
 
     def test_main_advancement_and_cold_historical_read_use_exact_captures(self):
         from tools.standards_verifier.standards_verifier import suite_input_projection_bytes

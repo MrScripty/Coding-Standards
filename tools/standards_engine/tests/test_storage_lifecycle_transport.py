@@ -10,6 +10,7 @@ and interpreter timing are not simulated; no production store is accessed.
 from __future__ import annotations
 
 import os
+import re
 import shutil
 import sqlite3
 import time
@@ -105,6 +106,14 @@ class StorageLifecycleTransportTest(unittest.TestCase):
             self.assertIn('PRAGMA application_id', statements)
             self.assertIn('PRAGMA user_version', statements)
             self.assertTrue(any('FROM sqlite_schema' in statement for statement in statements))
+        # A later call runs the statements of the first except its audit. Only
+        # the clock reading bound into the maintenance probe differs between calls.
+        opens = [[re.sub(r'purge_deadline <= \d+', 'purge_deadline <= :now', statement)
+                  for statement in statements] for statements in opens]
+        self.assertEqual([statement for statement in opens[0] if statement not in AUDIT_STATEMENTS],
+                         opens[1])
+        self.assertEqual(opens[1], opens[2])
+        self.assertTrue(any('purge_deadline <= :now' in statement for statement in opens[1]))
 
     def test_cold_server_process_rejects_a_corrupt_store_on_its_first_call(self):
         retained = self.path.with_name('retained-valid-store.sqlite3')

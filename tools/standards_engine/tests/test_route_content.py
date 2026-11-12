@@ -259,8 +259,12 @@ class RoutePageBudgetOptionTest(unittest.TestCase):
             self.addCleanup(server.close)
             initialize(server)
             with patch.object(AgentToolFacade, 'open_repository') as opened:
-                opened.return_value.__enter__.return_value.route.return_value = {'kind': 'fixture'}
-                server.dispatch(request('tools/call', {'name': 'route', 'arguments': {'facts': {}}}))
+                opened.return_value.route.return_value = {'kind': 'fixture'}
+                # The Engine opened with the budget is the one every call uses.
+                for _ in range(2):
+                    server.dispatch(request('tools/call', {'name': 'route', 'arguments': {'facts': {}}}))
+            opened.assert_called_once()
+            self.assertEqual(opened.return_value.route.call_count, 2)
             self.assertEqual(opened.call_args.kwargs['route_page_bytes'],
                              configured or agent_navigation.ROUTE_PAGE_BYTES)
 

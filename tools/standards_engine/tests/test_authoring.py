@@ -27,7 +27,7 @@ from tools.standards_engine.standards_engine.authoring import (
 from tools.standards_engine.standards_engine.logical_authoring import (
     StandardsChangeSet,
 )
-from tools.repository_git.repository_git import RepositoryRevision
+from tools.repository_git.repository_git import GitRepository, RepositoryRevision
 from tools.standards_engine.standards_engine.tools import _contracts
 from tools.standards_snapshots.standards_snapshots import (
     AggregateRecord,
@@ -136,8 +136,11 @@ def _authoring(
     )
 
 
-def _engine_with_stub_authoring(snapshots: SnapshotModule) -> StandardsEngine:
-    engine = StandardsEngine(object(), snapshots, purpose="authoring")  # type: ignore[arg-type]
+def _engine_with_stub_authoring(snapshots: SnapshotModule, root: Path) -> StandardsEngine:
+    # A real repository value rooted where these store-only fixtures keep no Git
+    # history: the Engine scopes its compilation cache to that root, and any
+    # Git access these tests did not intend fails instead of reading a checkout.
+    engine = StandardsEngine(GitRepository(root), snapshots, purpose="authoring")
     engine._authoring = _authoring(snapshots)
     return engine
 
@@ -619,7 +622,7 @@ class AuthoringTests(unittest.TestCase):
             snapshots = SnapshotModule.open(database)
             base = snapshots.create_snapshot(_capture()).snapshot
             with AgentToolFacade(
-                _engine_with_stub_authoring(snapshots),
+                _engine_with_stub_authoring(snapshots, repository),
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 created = facade.create_proposal(
@@ -677,7 +680,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
             snapshots = SnapshotModule.open(database)
             base = snapshots.create_snapshot(_capture()).snapshot
             with AgentToolFacade(
-                _engine_with_stub_authoring(snapshots),
+                _engine_with_stub_authoring(snapshots, Path(temporary)),
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 created = facade.create_proposal(
@@ -690,7 +693,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
 
             initial_revision = created["revision"]
             snapshots = SnapshotModule.open(database)
-            engine = _engine_with_stub_authoring(snapshots)
+            engine = _engine_with_stub_authoring(snapshots, Path(temporary))
 
             def validate_revision(revision: object) -> None:
                 change_sets = getattr(revision, "change_sets")
@@ -870,7 +873,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
             assert isinstance(purpose, dict)
             purpose["summary"] = "\ud800"
             with AgentToolFacade(
-                _engine_with_stub_authoring(snapshots),
+                _engine_with_stub_authoring(snapshots, Path(temporary)),
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 rejected = facade.create_proposal(
@@ -951,7 +954,7 @@ with AgentToolFacade.open_repository(Path(request["root"]), purpose="authoring")
                 AggregateRecord(revision_id, "proposal-revision", payload, (base,)),
             )
             with AgentToolFacade(
-                StandardsEngine(object(), snapshots, purpose="authoring"),  # type: ignore[arg-type]
+                StandardsEngine(GitRepository(Path(temporary)), snapshots, purpose="authoring"),
                 _contracts(REPOSITORY_ROOT),
             ) as facade:
                 rejected = facade.find_proposals({"kind": "find-proposals"})

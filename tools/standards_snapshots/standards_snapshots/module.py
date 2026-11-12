@@ -93,6 +93,32 @@ class SnapshotModule:
     def close(self) -> None:
         self._store.close()
 
+    def release(self) -> None:
+        """Close the store connection until `readmit` opens the next one.
+
+        Between uses the module then holds no connection, lock or open file. A
+        transaction a use did not end is rolled back.
+        """
+        self._store.release()
+
+    def readmit(self) -> bool:
+        """Open the store for another use, as opening its path again would.
+
+        False means the store path now names another file or none, and the
+        owner must close this module and open the path again. Otherwise the
+        store runs its admission on a new connection and due maintenance runs,
+        exactly as `open` does. A failure of either is raised and leaves no
+        connection open.
+        """
+        if not self._store.readmit():
+            return False
+        try:
+            self.maintain()
+        except Exception:
+            self._store.release()
+            raise
+        return True
+
     def __enter__(self) -> SnapshotModule:
         return self
 

@@ -18,6 +18,7 @@ from tools.standards_snapshots.standards_snapshots import (
     AggregateChild, CapturedContent, SnapshotError, SnapshotFile, SnapshotModule,
 )
 from tools.standards_snapshots.standards_snapshots import module as snapshot_module
+from tools.repository_git.repository_git import GitRepository
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine.authoring import (
     AuthoringError, AuthoringModule, RevisionDecoding,
@@ -314,7 +315,8 @@ class RevisionDecodingTest(unittest.TestCase):
         self.assertEqual(again.aggregate(), revision.aggregate())
 
     def test_operation_exit_clears_decoded_material_on_success_and_failure(self):
-        engine = StandardsEngine(object(), self.snapshots, purpose="authoring")
+        # The store-only fixture has no Git history; the repository value is real.
+        engine = StandardsEngine(GitRepository(Path(self.temporary.name)), self.snapshots, purpose="authoring")
         for fail in (False, True):
             materials = ProposalMaterials(engine)
             try:

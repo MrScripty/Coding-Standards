@@ -166,6 +166,22 @@ class AgentToolFacade:
     def close(self) -> None:
         self._engine.close()
 
+    def release(self) -> None:
+        """Close the store connection after a call; the facade and engine stay."""
+        self._engine.release()
+
+    def readmit(self) -> bool:
+        """Open the store for another call; False means open a new facade.
+
+        See `StandardsEngine.readmit`. Admission failures are raised.
+        """
+        return self._engine.readmit()
+
+    @property
+    def reusable(self) -> bool:
+        """False once the engine must be closed instead of serving another call."""
+        return self._engine.reusable
+
     def __enter__(self) -> AgentToolFacade:
         return self
 

@@ -47,7 +47,7 @@ still performs maintenance, reloads actual content and runs the existing per-fil
 checks. The reuse owner receives that complete capture and the Snapshot-owned codec;
 its contract requires the identical computed content ID, not a cached caller claim.
 Snapshot compares it with the currently loaded stored ID on every call. Omission
-keeps standalone behavior cold. The Engine uses its existing scoped, bounded process
+keeps standalone behavior cold. The Engine uses its scoped, bounded compilation
 cache; roots, lifecycle, authority and response values are never identity-cache data.
 No identity domain, store format or persisted representation changes.
 
@@ -80,6 +80,29 @@ pre/post-migration audits, and final destination audit, even when the process
 audited the same file earlier. The final audit also applies
 when another opener finishes migration before this opener prepares the schema.
 No SQLite profile, supported migration or stored format changes.
+
+An owner may keep a module between uses without keeping its connection; an MCP
+server process does. It calls `release` after each use and `readmit` before the
+next. `release` closes the connection: the module then holds no connection, no
+SQLite lock and no open file, and a transaction the use did not end is rolled
+back. `readmit` first compares the path with the file the module opened. If the
+path names another file, no file, or something that is not a regular file,
+`readmit` opens nothing, returns false and drops the audit record of the file it
+had opened; the owner closes the module and opens the path again, and that open
+admits, audits, creates or refuses what is there as any open does. If the path
+still names the opened file, `readmit` opens a new connection and runs the
+statements a later open of that file runs, in the same order: application,
+version and exact schema, the required profile, the schema again, a version 1
+migration with every one of its audits, and then the maintenance probe with any
+due purge. A failure is raised with the code that open raises and leaves no
+connection open. Only the audit the process has recorded for the file is
+omitted, as a later open omits it.
+
+The file is recognised by its device and inode, as the audit record is. Dropping
+the record of a file that was seen to be replaced means a later file that
+receives its inode number is audited. A file deleted and recreated between two
+uses can still receive the same inode number and is then taken for the audited
+file, which is the limit described above.
 
 Maintenance remains synchronous at the same module call sites. It first performs a
 short-lived existence read for quarantined roots whose deadline is at or before the
