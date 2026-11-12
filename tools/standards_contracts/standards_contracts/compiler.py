@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import keyword
 import re
@@ -117,9 +118,33 @@ class CompiledContracts:
         )
 
 
+def schema_digest(schema: Mapping[str, object]) -> str | None:
+    """Identify a schema by its JSON value; a value that is not plain JSON has none.
+
+    Key order is ignored; 1, 1.0 and true are different values. json.dumps writes
+    a tuple as an array and a scalar key as a string, so the document must also
+    read back equal before its digest names this value.
+    """
+    try:
+        document = json.dumps(schema, sort_keys=True, separators=(",", ":"))
+    except (TypeError, ValueError):
+        return None
+    if json.loads(document) != schema:
+        return None
+    return "sha256:" + hashlib.sha256(document.encode("ascii")).hexdigest()
+
+
 def compile_contracts(
-    schema: Mapping[str, object], interface: Mapping[str, object]
+    schema: Mapping[str, object], interface: Mapping[str, object],
+    *, validated_schema_digest: str | None = None,
 ) -> CompiledContracts:
+    """Compile the schema and interface together.
+
+    ``validated_schema_digest`` is the digest that a generated projection records
+    for the schema its generator validated. A schema with that digest is not
+    validated against the Draft 2020-12 metaschema again; any other schema is.
+    Every other check here always runs.
+    """
     selected_schema = copy.deepcopy(dict(schema))
     if selected_schema.get("$schema") != _DIALECT:
         raise failure(
@@ -128,18 +153,20 @@ def compile_contracts(
             outcome="unsupported",
             schema_pointer="/$schema",
         )
-    try:
-        Draft202012Validator.check_schema(selected_schema)
-    except SchemaError as error:
-        raise ContractError(
-            ContractFailure(
-                outcome="invalid",
-                code="CONTRACT.INVALID_SCHEMA",
-                message="the canonical schema is not valid Draft 2020-12",
-                schema_pointer=_pointer(error.absolute_schema_path),
-                keyword=str(error.validator) if error.validator is not None else None,
-            )
-        ) from None
+    if (validated_schema_digest is None
+            or schema_digest(selected_schema) != validated_schema_digest):
+        try:
+            Draft202012Validator.check_schema(selected_schema)
+        except SchemaError as error:
+            raise ContractError(
+                ContractFailure(
+                    outcome="invalid",
+                    code="CONTRACT.INVALID_SCHEMA",
+                    message="the canonical schema is not valid Draft 2020-12",
+                    schema_pointer=_pointer(error.absolute_schema_path),
+                    keyword=str(error.validator) if error.validator is not None else None,
+                )
+            ) from None
 
     _check_projection_profile(selected_schema)
     definitions = selected_schema.get("$defs")
@@ -587,6 +614,7 @@ def _python_source(
         ")",
         "",
         f"_SCHEMA = json.loads({json.dumps(schema, ensure_ascii=False, separators=(',', ':'))!r})",
+        f"VALIDATED_SCHEMA_DIGEST = {schema_digest(schema)!r}",
         f"DEFINITION_METADATA = freeze_json({_definition_metadata(definitions)!r})",
         "",
     ]

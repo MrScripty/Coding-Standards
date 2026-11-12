@@ -7,8 +7,9 @@ from tools.standards_contracts.standards_contracts import (
     ContractError,
     compile_contracts,
 )
+from tools.standards_contracts.standards_contracts.compiler import schema_digest
 
-from support import canonical_inputs
+from support import canonical_inputs, metaschema_checks
 
 
 class ContractCompilerTest(unittest.TestCase):
@@ -238,3 +239,111 @@ class OperationVariantTest(unittest.TestCase):
             with self.subTest(replacement=replacement), self.assertRaises(ContractError) as caught:
                 compile_contracts(schema, interface)
             self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
+
+
+class ValidatedSchemaDigestTest(unittest.TestCase):
+    """Only the schema named by a recorded digest skips the metaschema check."""
+
+    def test_schema_with_the_recorded_digest_is_not_validated_again(self) -> None:
+        schema, interface = canonical_inputs()
+        with metaschema_checks() as checked:
+            validated = compile_contracts(schema, interface)
+            self.assertEqual(checked.call_count, 1)
+            reused = compile_contracts(
+                schema, interface, validated_schema_digest=schema_digest(schema)
+            )
+            self.assertEqual(checked.call_count, 1)
+
+        self.assertEqual(reused.schema, validated.schema)
+        self.assertEqual(reused.interface, validated.interface)
+        self.assertEqual(reused.reachable_definitions, validated.reachable_definitions)
+        self.assertEqual(reused.project(), validated.project())
+
+    def test_schema_that_differs_from_the_digest_is_fully_validated(self) -> None:
+        schema, interface = canonical_inputs()
+        recorded = schema_digest(schema)
+        schema["$defs"]["NonEmptyString"]["minLength"] = 2
+        with metaschema_checks() as checked:
+            compiled = compile_contracts(schema, interface, validated_schema_digest=recorded)
+        self.assertEqual(checked.call_count, 1)
+        with self.assertRaises(ContractError):
+            compiled.validate("NonEmptyString", "a")
+
+    def test_invalid_schema_is_rejected_with_and_without_a_recorded_digest(self) -> None:
+        canonical, _ = canonical_inputs()
+        # -1 fails the metaschema only. true equals the canonical 1 in Python,
+        # so comparing parsed schemas instead of digests would accept it.
+        for value, keyword in ((-1, "minimum"), (True, "type")):
+            for recorded in (None, schema_digest(canonical)):
+                schema, interface = canonical_inputs()
+                schema["$defs"]["NonEmptyString"]["minLength"] = value
+                self.assertEqual(schema == canonical, value is True)
+                with self.subTest(value=value, recorded=recorded):
+                    with self.assertRaises(ContractError) as caught:
+                        compile_contracts(schema, interface, validated_schema_digest=recorded)
+                    self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_SCHEMA")
+                    self.assertEqual(caught.exception.failure.outcome, "invalid")
+                    self.assertEqual(caught.exception.failure.keyword, keyword)
+
+    def test_every_other_check_still_runs_for_a_matching_digest(self) -> None:
+        def another_dialect(schema: dict[str, object]) -> None:
+            schema["$schema"] = "https://json-schema.org/draft/2019-09/schema"
+
+        def unsupported_keyword(schema: dict[str, object]) -> None:
+            schema["$defs"]["NonEmptyString"]["format"] = "email"
+
+        def unreachable_definition(schema: dict[str, object]) -> None:
+            schema["$defs"]["Unused"] = {"type": "string"}
+
+        def missing_root(schema: dict[str, object]) -> None:
+            schema["oneOf"].pop()
+
+        for change, code in (
+            (another_dialect, "CONTRACT.UNSUPPORTED_DIALECT"),
+            (unsupported_keyword, "CONTRACT.UNSUPPORTED_PROJECTION"),
+            (unreachable_definition, "CONTRACT.UNREACHABLE_DEFINITION"),
+            (missing_root, "CONTRACT.ROOT_CLOSURE_MISMATCH"),
+        ):
+            schema, interface = canonical_inputs()
+            change(schema)
+            with self.subTest(code=code):
+                with self.assertRaises(ContractError) as caught:
+                    compile_contracts(
+                        schema, interface, validated_schema_digest=schema_digest(schema)
+                    )
+                self.assertEqual(caught.exception.failure.code, code)
+
+        schema, interface = canonical_inputs()
+        interface["operations"][0]["extra"] = True
+        with self.assertRaises(ContractError) as caught:
+            compile_contracts(schema, interface, validated_schema_digest=schema_digest(schema))
+        self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_INTERFACE")
+
+    def test_digest_names_the_json_value_not_its_key_order(self) -> None:
+        schema, _ = canonical_inputs()
+        reordered = dict(reversed(schema.items()))
+        self.assertNotEqual(list(reordered), list(schema))
+        self.assertEqual(schema_digest(reordered), schema_digest(schema))
+        self.assertRegex(schema_digest(schema), r"\Asha256:[0-9a-f]{64}\Z")
+        digests = {
+            schema_digest({"minLength": value}) for value in (1, 1.0, True, "1", [1], None)
+        }
+        self.assertEqual(len(digests), 6)
+
+    def test_python_value_that_only_serializes_like_the_schema_is_validated(self) -> None:
+        canonical, interface = canonical_inputs()
+        recorded = schema_digest(canonical)
+        # json.dumps writes this tuple as the same array, but it is not a JSON array
+        # and the metaschema rejects it.
+        schema, _ = canonical_inputs()
+        required = schema["$defs"]["QueryCall"]["required"]
+        schema["$defs"]["QueryCall"]["required"] = tuple(required)
+        self.assertIsNone(schema_digest(schema))
+        with self.assertRaises(ContractError) as caught:
+            compile_contracts(schema, interface, validated_schema_digest=recorded)
+        self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_SCHEMA")
+
+        # An integer key reads back as a string; mixed keys and a set cannot be written.
+        for not_json in ({1: "key"}, {1: "key", "a": "key"}, {"const": {1, 2}}):
+            with self.subTest(not_json=not_json):
+                self.assertIsNone(schema_digest(not_json))

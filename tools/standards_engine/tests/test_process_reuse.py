@@ -15,6 +15,8 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+from jsonschema import Draft202012Validator
+
 from tools.standards_contracts.standards_contracts import ContractError
 from tools.standards_engine.standards_engine import AgentToolFacade, StandardsEngine
 from tools.standards_engine.standards_engine import engine as engine_module
@@ -408,3 +410,61 @@ class InstalledInterfaceReuseTest(unittest.TestCase):
             SupportingWorkflowTest.tearDownClass()
             for cache in caches:
                 cache.close()
+
+
+class InstalledSchemaValidationTest(unittest.TestCase):
+    """Startup repeats metaschema validation only for a schema the generator did not validate."""
+
+    @staticmethod
+    def metaschema_checks():
+        return patch.object(
+            Draft202012Validator, "check_schema", wraps=Draft202012Validator.check_schema
+        )
+
+    def contract_root(self, change=lambda schema: None):
+        # Interface loading reads these two files and nothing else.
+        temporary = tempfile.TemporaryDirectory(prefix="installed-schema-")
+        self.addCleanup(temporary.cleanup)
+        root = Path(temporary.name)
+        schema = json.loads((ROOT / tool_module.INTERFACE_SCHEMA).read_text(encoding="utf-8"))
+        change(schema)
+        for relative, text in (
+            (tool_module.INTERFACE_SCHEMA, json.dumps(schema, indent=4)),
+            (tool_module.INTERFACE_CONTRACT, (ROOT / tool_module.INTERFACE_CONTRACT).read_text(encoding="utf-8")),
+        ):
+            (root / relative).parent.mkdir(parents=True, exist_ok=True)
+            (root / relative).write_text(text, encoding="utf-8")
+        return root
+
+    def test_generated_schema_is_not_validated_again_at_server_start(self):
+        with self.metaschema_checks() as checked:
+            server = MCPServer(ROOT, purpose="authoring")
+            self.addCleanup(server.close)
+            self.assertEqual(initialize(server)["result"]["serverInfo"]["name"], "standards-engine")
+            # The recorded digest names the JSON value, so a reformatted copy is the same schema.
+            reformatted = AgentToolFacade.load_interface(self.contract_root())
+        checked.assert_not_called()
+        self.assertEqual(reformatted.schema, server._interface.schema)
+        self.assertEqual(reformatted.reachable_definitions, server._interface.reachable_definitions)
+
+    def test_schema_changed_since_generation_is_validated_at_startup(self):
+        def edited(schema):
+            schema["description"] += " Edited without regenerating."
+        root = self.contract_root(edited)
+        with self.metaschema_checks() as checked:
+            compiled = AgentToolFacade.load_interface(root)
+        self.assertEqual(checked.call_count, 1)
+        self.assertTrue(compiled.schema["description"].endswith(" Edited without regenerating."))
+
+    def test_invalid_schema_is_rejected_at_startup(self):
+        def invalid(schema):
+            schema["$defs"]["NonEmptyString"]["minLength"] = -1
+        root = self.contract_root(invalid)
+        for name, start in (
+            ("interface", lambda: AgentToolFacade.load_interface(root)),
+            ("server", lambda: MCPServer(root, purpose="authoring")),
+        ):
+            with self.subTest(start=name):
+                with self.assertRaises(ContractError) as caught:
+                    start()
+                self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_SCHEMA")

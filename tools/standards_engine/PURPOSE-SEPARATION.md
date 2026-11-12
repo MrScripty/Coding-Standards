@@ -190,6 +190,13 @@ code or its API schema requires a controlled process restart. Ordinary standards
 publication keeps the installed interface valid. Standalone facades prepare their
 own interface unless their trusted owner supplies an already prepared one.
 
+Preparing the interface does not repeat Draft 2020-12 metaschema validation for
+the schema the contract generator already validated. The generated contract records
+that schema's digest; a schema file with another digest is validated in full, as
+described under
+[Metaschema validation](../standards_contracts/README.md#metaschema-validation-and-the-recorded-schema-digest).
+Every other interface check runs at each start.
+
 One MCP process also owns a repository/purpose-scoped compilation cache with a
 two-entry and 32 MiB accounted-retention limit shared by snapshot and draft
 projection entries. Snapshot keys contain the exact verified
