@@ -7,12 +7,12 @@ description = "Checks resolvable Markdown links, fact-driven routing outcomes. D
 id = "verifier-change-route-closure"
 type = "metadata_route"
 path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-decisions.tsv"
-header = ["case", "module_boundary", "dependency_direction", "performance_concern", "migration_lifecycle", "planning_scope", "facts", "expected_architecture", "expected_performance", "expected_planning", "expected_route"]
+header = ["case", "routing.activities", "routing.topics", "expected_architecture", "expected_performance", "expected_planning", "expected_route"]
+facts = ["routing.activities", "routing.topics"]
 expectations_path = "evaluation/standards-effectiveness/fixtures/routing/verifier-change-routes.tsv"
 route_column = "expected_route"
 resolved = "route"
 unresolved = "unresolved"
-base_modules = ["workflow.implementation", "workflow.verification"]
 selections = [{ column = "expected_architecture", excluded = "exclude", module = "topic.architecture", selected = "select" }, { column = "expected_performance", excluded = "exclude", module = "topic.performance", selected = "select" }, { column = "expected_planning", excluded = "exclude", module = "workflow.planning", selected = "select" }]
 
 [[checks]]

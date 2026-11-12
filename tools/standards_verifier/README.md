@@ -33,6 +33,14 @@ validates every module that manifest declares. The `canonical-corpus-metadata`
 suite holds the one such check, so a new module is covered when the manifest
 gains it, without a suite edit.
 
+A `metadata_route` check sends each scenario row through the Router projection.
+A fact column is named by its Router fact ID and holds a comma-separated value
+list, `none`, or `unknown`; a fact without a column does not apply to the
+scenario. The check compares what the Router selects with each expected-selection
+column, and compares the selected modules and their `Requires` closure with the
+route table. A table with no scenario fails. A routing or `Requires` change that
+alters a scenario's outcome needs its tables updated in the same change.
+
 The complete checkpoint evaluates all registered declarative suites in dependency
 order. It does **not** execute the Python unit-test suites, assess prose quality,
 or prove that downstream code follows a standard. The graph cannot discover

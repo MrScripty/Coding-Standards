@@ -8,6 +8,8 @@ from tools.standards_applicability.standards_applicability import (
     ApplicabilityProgram,
     FactContract,
     FactSchema,
+    FactSet,
+    Truth,
     compile_fact_schema,
 )
 from tools.standards_metadata.standards_metadata import (
@@ -33,6 +35,26 @@ class RouteRule:
 
 
 @dataclass(frozen=True, slots=True)
+class RouteDecision:
+    """The Router's direct decision for one bound fact set, before `Requires`.
+
+    ``rule_states`` holds each rule whose condition is true ("selected") or
+    cannot be decided from the supplied facts ("unresolved"), in rule order.
+    A rule whose condition is false is absent.
+    """
+
+    selected: tuple[str, ...]
+    unresolved_facts: tuple[str, ...]
+    rule_states: tuple[tuple[RouteRule, str], ...]
+
+    @property
+    def unresolved_targets(self) -> tuple[str, ...]:
+        return tuple(
+            rule.target for rule, state in self.rule_states if state == "unresolved"
+        )
+
+
+@dataclass(frozen=True, slots=True)
 class RouterProjection:
     id: str
     owner: str
@@ -41,6 +63,24 @@ class RouterProjection:
     facts: tuple[FactContract, ...]
     rules: tuple[RouteRule, ...]
     fact_schema: FactSchema
+
+    def decide(self, facts: FactSet) -> RouteDecision:
+        """Evaluate every rule; this is the only place routes are decided."""
+        selected = list(self.base_modules)
+        unresolved: set[str] = set()
+        rule_states: list[tuple[RouteRule, str]] = []
+        for rule in self.rules:
+            result = rule.program.evaluate(facts)
+            if result.truth is Truth.TRUE:
+                if rule.target not in selected:
+                    selected.append(rule.target)
+                rule_states.append((rule, "selected"))
+            elif result.truth is Truth.UNKNOWN:
+                rule_states.append((rule, "unresolved"))
+                unresolved.update(result.unresolved_facts)
+        return RouteDecision(
+            tuple(selected), tuple(sorted(unresolved)), tuple(rule_states)
+        )
 
     def fact_definitions(self) -> list[dict[str, object]]:
         """Canonical routing vocabulary used by material binding and navigation.

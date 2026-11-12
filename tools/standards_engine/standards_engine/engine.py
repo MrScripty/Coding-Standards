@@ -71,7 +71,6 @@ from tools.standards_applicability.standards_applicability import (
     ApplicabilityError,
     FactSet as ApplicabilityFacts,
     LANGUAGE_VERSION,
-    Truth,
 )
 from tools.standards_contracts.standards_contracts import MissingValue
 from tools.standards_graph.standards_graph import (
@@ -3026,17 +3025,10 @@ class StandardsEngine:
     @staticmethod
     def _bound_routing_selection(compiled: CompiledSnapshot, facts: ApplicabilityFacts):
         # Program evaluation retains the applicability owner's schema-digest guard.
-        selected = set(compiled.router.base_modules)
-        unresolved: set[str] = set()
-        rule_results: list[tuple[object, str]] = []
-        for rule in compiled.router.rules:
-            result = rule.program.evaluate(facts)
-            if result.truth is Truth.TRUE:
-                selected.add(rule.target)
-                rule_results.append((rule, "selected"))
-            elif result.truth is Truth.UNKNOWN:
-                rule_results.append((rule, "unresolved"))
-                unresolved.update(result.unresolved_facts)
+        decision = compiled.router.decide(facts)
+        selected = set(decision.selected)
+        unresolved = set(decision.unresolved_facts)
+        rule_results = decision.rule_states
         ordered = compiled.graph.dependency_order(METADATA_REQUIRES, selected=selected)
         closure = set(ordered)
         preferred = (

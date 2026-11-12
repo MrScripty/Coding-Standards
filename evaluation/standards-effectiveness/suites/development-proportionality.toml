@@ -7,12 +7,12 @@ description = "Checks resolvable Markdown links, fact-driven routing outcomes. D
 id = "routing-closure"
 type = "metadata_route"
 path = "evaluation/standards-effectiveness/fixtures/development/routing-decisions.tsv"
-header = ["case", "uncertainty_reduction", "planning", "facts", "expected_development", "expected_planning", "expected_route"]
+header = ["case", "routing.activities", "expected_development", "expected_planning", "expected_route"]
+facts = ["routing.activities"]
 expectations_path = "evaluation/standards-effectiveness/fixtures/development/routing-routes.tsv"
 route_column = "expected_route"
 resolved = "route"
 unresolved = "unresolved"
-base_modules = ["router"]
 selections = [{ column = "expected_development", excluded = "exclude", module = "workflow.development-proportionality", selected = "select" }, { column = "expected_planning", excluded = "exclude", module = "workflow.planning", selected = "select" }]
 
 [[checks]]
