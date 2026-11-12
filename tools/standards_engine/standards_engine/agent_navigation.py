@@ -16,6 +16,22 @@ READ_MANY_RESULT_BYTES = 2 * 1024 * 1024
 # A composed route response includes its reading plan, questions and continuation.
 ROUTE_CONTENT_RESULT_BYTES = 2 * 1024 * 1024
 ROUTE_CONTENT_DEFAULT_ITEMS = 8
+# Application route pages are sized for a client that shows a bounded tool
+# result inline. The budget counts one serialization of the structured result.
+ROUTE_PAGE_BYTES = 40 * 1024
+ROUTE_PAGE_MIN_BYTES = 8 * 1024
+
+
+def admit_route_page_bytes(value: int | None = None) -> int:
+    """Admit the host's application page budget; None selects the default."""
+    if value is None:
+        return ROUTE_PAGE_BYTES
+    if type(value) is not int or not ROUTE_PAGE_MIN_BYTES <= value <= ROUTE_CONTENT_RESULT_BYTES:
+        raise ValueError(
+            f"The route page budget is a whole number of bytes from {ROUTE_PAGE_MIN_BYTES} "
+            f"to {ROUTE_CONTENT_RESULT_BYTES}."
+        )
+    return value
 
 
 def focused_continuations(value):
@@ -205,8 +221,11 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, bound_facts,
     """Compose a bounded selected read page without another capture or compile.
 
     Results remain private through the final lifecycle check. Byte pressure ends
-    a page before a whole record; a single oversized record returns a typed limit
-    rejection so the caller can explicitly route without content and read it.
+    a page before a whole record. An application page uses the host's page budget
+    and keeps its first whole record even when that record alone exceeds the
+    budget, so following content.next always makes progress. Authoring keeps the
+    transport bound: a single oversized record returns a typed limit rejection so
+    the caller can explicitly route without content and read it.
     """
     arguments = call.as_contract()
     if "content" not in arguments:
@@ -245,8 +264,11 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, bound_facts,
             if not (hint["operation"] == "read" and hint.get("target") in covered)
         ]
 
-    def too_large():
-        return len(json.dumps(value).encode("utf-8")) > ROUTE_CONTENT_RESULT_BYTES
+    application = application_view is not None
+    budget = engine.route_page_bytes if application else ROUTE_CONTENT_RESULT_BYTES
+
+    def exceeds(limit_bytes):
+        return len(json.dumps(value).encode("utf-8")) > limit_bytes
 
     for target in targets[offset:offset + limit]:
         engine._snapshots.snapshot(snapshot_id)
@@ -256,7 +278,9 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, bound_facts,
             return result
         page["items"].append(result.as_contract())
         continuation()
-        if too_large():
+        if exceeds(budget):
+            if application and len(page["items"]) == 1:
+                break
             page["items"].pop()
             if not page["items"]:
                 return _route_content_rejection(
@@ -265,7 +289,7 @@ def with_route_content(engine, call, snapshot, compiled, routed, *, bound_facts,
                 )
             break
     continuation()
-    if too_large():
+    if exceeds(ROUTE_CONTENT_RESULT_BYTES):
         return _route_content_rejection(engine, "ROUTE.CONTENT_LIMIT", "unsupported",
                                         "Route without content to inspect this selection.")
     engine._snapshots.snapshot(snapshot_id)

@@ -126,8 +126,11 @@ class ConsumerPublicationTest(unittest.TestCase):
         self.assertEqual(preview['revision'],revision)
         self.assertNotIn('snapshot',preview);self.assertNotIn('handle',preview['policy'])
         self.assertNotIn('AUTHORING_PRIVATE_8159',json.dumps(preview))
-        hidden=self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':F.document}},error=True)
-        self.assertEqual(hidden['code'],'APPLICATION.CONTENT_UNAVAILABLE')
+        labelled=self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':F.document}})
+        self.assertEqual((labelled['kind'],labelled['review_state']),('candidate-application-read-result','not-reviewed'))
+        self.assertEqual(preview['review_state'],'current')
+        unknown=self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':'provenance.consumer-test'}},error=True)
+        self.assertEqual(unknown['code'],'APPLICATION.UNKNOWN_TARGET')
         denied=self.rpc('tools/call',{'name':'preview_application','arguments':{'revision':revision,'request':{'kind':'read','target':F.owner}}},'application')
         self.assertIn('error',denied)
         # A fresh process reconstructs the draft after unrelated working-tree drift.
@@ -157,8 +160,12 @@ class ConsumerPublicationTest(unittest.TestCase):
         for path in (F.fixture_path,F.second_path):
             self.assertEqual(subprocess.check_output(['git','show','main:'+path],cwd=self.root),original[path])
         self.assertIn(b'Apply the owned rule.',subprocess.check_output(['git','show','main:'+F.doc_path],cwd=self.root))
-        self.call('read',{'target':'provenance.consumer-test'},purpose='application',error=True)
-        self.call('read',{'target':F.document},purpose='application',error=True)
+        self.assertEqual(exposed['review_state'],'current')
+        hidden=self.call('read',{'target':'provenance.consumer-test'},purpose='application',error=True)
+        self.assertEqual(hidden['code'],'APPLICATION.UNKNOWN_TARGET')
+        document=self.call('read',{'target':F.document},purpose='application')
+        self.assertEqual(document['review_state'],'not-reviewed')
+        self.assertIn('Apply the owned rule.',document['content'])
         self.assertEqual(self.call('preview_application',{'revision':revision,'request':{'kind':'read','target':F.owner,'detail':'full'}}),preview)
         self.assertNotEqual(subprocess.check_output(['git','rev-parse','main'],cwd=self.root),before)
 

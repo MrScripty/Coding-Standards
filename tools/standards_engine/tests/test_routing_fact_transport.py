@@ -1,4 +1,4 @@
-"""Snapshot-bound focused assertions, qualification and real cold stdio responses."""
+"""Snapshot-bound focused assertions, review labels and real cold stdio responses."""
 from __future__ import annotations
 
 from copy import deepcopy
@@ -115,11 +115,21 @@ class RoutingFactTransportTest(unittest.TestCase):
             invalid=self.route(purpose,{'probe':['x']})
             self.assertEqual(invalid['input_feedback']['issues'][0]['message'],'boolean fact value is invalid')
 
-    def test_qualification_precedes_vocabulary_interpretation(self):
-        with patch.object(routing_inputs,'bind_facts',side_effect=AssertionError('private vocabulary')):
-            result=self.route('application',{'PRIVATE_FIELD':'PRIVATE_VALUE'},snapshot='unqualified')
-        self.assertEqual(result['code'],'APPLICATION.CONTENT_UNAVAILABLE')
-        self.assertNotIn('input_feedback',result)
+    def test_unapproved_router_vocabulary_is_interpreted_and_its_route_labelled(self):
+        app=self.facades['application']
+        approved=self.route('application',{'probe':True},content={'limit':1})
+        routed=self.route('application',{'probe':True},snapshot='unqualified',content={'limit':1})
+        self.assertEqual(routed['kind'],'application-route-result',routed)
+        self.assertEqual({entry['review_state'] for entry in approved['reading_plan']},{'current'})
+        self.assertEqual(routed['reading_plan'],[{**entry,'review_state':'not-reviewed'} for entry in approved['reading_plan']])
+        self.assertEqual(routed['content']['items'][0]['review_state'],'not-reviewed')
+        self.assertEqual(routed['content']['items'][0]['content'],approved['content']['items'][0]['content'])
+        self.assertEqual(app.routing_facts({'snapshot':self.snapshots['unqualified']})['facts'],
+                         app.routing_facts({'snapshot':self.snapshots['boolean']})['facts'])
+        # A wrong fact name is ordinary invalid input, not a publication state.
+        result=self.route('application',{'PRIVATE_FIELD':'PRIVATE_VALUE'},snapshot='unqualified')
+        self.assertEqual(result['code'],'APPLICATION.INPUT_INVALID')
+        self.assertIn('input_feedback',result)
         self.assertNotIn('PRIVATE',json.dumps(result))
 
     def test_single_bind_and_verified_load_per_focused_content_call(self):
@@ -210,7 +220,7 @@ class RoutingFactTransportTest(unittest.TestCase):
             self.assertIn('RoutingFactAssertion',records)
             self.assertNotIn('FactValue',records)
             self.assertNotIn('FactSet',records)
-            self.assertEqual(page['interface_version'],48)
+            self.assertEqual(page['interface_version'],self.interface.interface.interface_schema_version)
 
     def test_schema_digest_guard_and_final_lifecycle_checks_still_apply(self):
         author=self.engines['authoring']

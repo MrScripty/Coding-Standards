@@ -1558,6 +1558,9 @@
           },
           "type": "array"
         },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
+        },
         "scope": {
           "$ref": "#/$defs/ReviewScope"
         },
@@ -1576,6 +1579,7 @@
         "purpose",
         "snapshot",
         "policy",
+        "review_state",
         "content",
         "scope",
         "requires",
@@ -1593,6 +1597,9 @@
             "contextual"
           ]
         },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
+        },
         "scope": {
           "$ref": "#/$defs/ReviewScope"
         },
@@ -1607,7 +1614,8 @@
         "target",
         "scope",
         "authority",
-        "state"
+        "state",
+        "review_state"
       ],
       "type": "object"
     },
@@ -1670,13 +1678,14 @@
       "properties": {
         "code": {
           "enum": [
-            "APPLICATION.CONTENT_UNAVAILABLE",
+            "APPLICATION.UNKNOWN_TARGET",
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
             "APPLICATION.RESULT_LIMIT",
-            "APPLICATION.UNKNOWN_GROUP"
+            "APPLICATION.UNKNOWN_GROUP",
+            "APPLICATION.TRAVERSAL_NOT_PERMITTED"
           ]
         },
         "input_feedback": {
@@ -1794,6 +1803,14 @@
       ],
       "type": "object"
     },
+    "ApplicationReviewState": {
+      "description": "Review label of delivered application material. current: this exact text was approved for application use. changed-since-review: the text was edited after its approval. not-reviewed: the text has never been approved. The label never withholds material; a scoped policy read carries the label of its containing module.",
+      "enum": [
+        "current",
+        "changed-since-review",
+        "not-reviewed"
+      ]
+    },
     "ApplicationRouteResult": {
       "additionalProperties": false,
       "properties": {
@@ -1847,7 +1864,7 @@
     },
     "ApplicationRoutedContentPage": {
       "additionalProperties": false,
-      "description": "Exact compact reads of selected targets in Router order. Total counts selected targets, not unresolved applicability. Follow next unchanged for the remaining page.",
+      "description": "Exact compact reads of selected targets in Router order, each with its review label. Total counts selected targets, not unresolved applicability. A page ends early at the host's page byte budget but holds at least one whole item while targets remain. Follow next unchanged for the remaining page.",
       "properties": {
         "items": {
           "items": {
@@ -2361,6 +2378,9 @@
           },
           "type": "array"
         },
+        "review_state": {
+          "$ref": "#/$defs/ApplicationReviewState"
+        },
         "revision": {
           "$ref": "#/$defs/ProposalRevisionHandle"
         },
@@ -2378,6 +2398,7 @@
         "kind",
         "purpose",
         "policy",
+        "review_state",
         "content",
         "scope",
         "requires",
@@ -2392,12 +2413,14 @@
       "properties": {
         "code": {
           "enum": [
-            "APPLICATION.CONTENT_UNAVAILABLE",
+            "APPLICATION.UNKNOWN_TARGET",
             "APPLICATION.INPUT_INVALID",
             "APPLICATION.OPERATION_UNAVAILABLE",
             "APPLICATION.INTERNAL_UNAVAILABLE",
             "APPLICATION.UNSUPPORTED_CAPTURE",
-            "APPLICATION.RESULT_LIMIT"
+            "APPLICATION.RESULT_LIMIT",
+            "APPLICATION.UNKNOWN_GROUP",
+            "APPLICATION.TRAVERSAL_NOT_PERMITTED"
           ]
         },
         "kind": {
@@ -6040,7 +6063,7 @@
     },
     "PreviewApplicationCall": {
       "additionalProperties": false,
-      "description": "Authoring-only inspection of an exact draft through application qualification and filtering; this observation neither publishes nor grants ordinary application access.",
+      "description": "Authoring-only inspection of an exact draft as an application agent would receive it, including each item's review label; this observation neither publishes nor grants ordinary application access.",
       "properties": {
         "request": {
           "$ref": "#/$defs/ApplicationQueryRequest"
@@ -9966,7 +9989,7 @@
       "type": "object"
     }
   },
-  "interface_schema_version": 48,
+  "interface_schema_version": 49,
   "operations": [
     {
       "capability": "standards.snapshot.create",
@@ -10670,6 +10693,6 @@
     }
   ],
   "request_contract_version": 6,
-  "result_projection_version": 8,
+  "result_projection_version": 9,
   "schema_version": 1
 }

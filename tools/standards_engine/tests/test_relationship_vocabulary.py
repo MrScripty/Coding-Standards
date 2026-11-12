@@ -77,9 +77,25 @@ class RelationshipVocabularyTest(unittest.TestCase):
     def test_hidden_target_is_not_a_way_to_read_private_application_groups(self):
         result = self.app.related({'snapshot': self.snapshot, 'target': 'provenance.fixture',
                                   'groups': ['decision-provenance'], 'direction': 'outgoing', 'transitive': False})
-        self.assertEqual(result['code'], 'APPLICATION.CONTENT_UNAVAILABLE')
+        self.assertEqual(result['code'], 'APPLICATION.UNKNOWN_TARGET')
         self.assertNotIn('relationship_groups', result)
         self.assertNotIn(fixture.PRIVATE, json.dumps(result))
+        # A registered target still cannot select the authoring-only group.
+        result = self.app.related({'snapshot': self.snapshot, 'target': 'core',
+                                  'groups': ['decision-provenance'], 'direction': 'outgoing', 'transitive': False})
+        self.assertEqual(result['code'], 'APPLICATION.UNKNOWN_GROUP')
+        self.assertNotIn('decision-provenance', json.dumps(result['relationship_groups']))
+        self.assertNotIn(fixture.PRIVATE, json.dumps(result))
+
+    def test_unpermitted_application_traversal_names_the_vocabulary(self):
+        group = next(item for item in self.page(self.app, limit=32)['items'] if not item['transitive'])
+        result = self.app.related({'snapshot': self.snapshot, 'target': 'core', 'groups': [group['id']],
+                                  'direction': 'outgoing', 'transitive': True})
+        self.assertEqual((result['code'], result['outcome']), ('APPLICATION.TRAVERSAL_NOT_PERMITTED', 'invalid'))
+        self.assertIn('relationship_groups', result['message'])
+        allowed = self.app.related({'snapshot': self.snapshot, 'target': 'core', 'groups': [group['id']],
+                                   'direction': 'outgoing', 'transitive': False})
+        self.assertEqual(allowed['kind'], 'application-related-result', allowed)
 
     def test_byte_bounds_whole_records_and_numeric_equivalence(self):
         for facade in (self.author, self.app):

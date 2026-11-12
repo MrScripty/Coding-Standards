@@ -198,7 +198,7 @@ class ConsumerCompilerTests(unittest.TestCase):
             with self.subTest(identity=identity),self.assertRaises(AuthoringError):
                 self.project([self.bound([registration(identity,self.fixture_path)])])
 
-    def test_candidate_view_uses_same_qualification_without_published_handles(self):
+    def test_candidate_view_uses_same_delivery_and_labels_without_published_handles(self):
         from tools.standards_engine.standards_engine.context_projection import ApplicationView, preview_application
         from tools.standards_engine.standards_engine import _generated_contract as c
         result=self.project([self.bound(self.initial_edits())])
@@ -210,15 +210,28 @@ class ConsumerCompilerTests(unittest.TestCase):
         self.assertEqual(value['content'],normal['content'])
         self.assertEqual(value['requires'],normal['requires'])
         self.assertEqual(value['kind'],'candidate-application-read-result')
+        self.assertEqual((value['review_state'],normal['review_state']),('current','current'))
         self.assertNotIn('snapshot',value);self.assertNotIn('handle',value['policy'])
         import json
         self.assertNotIn('AUTHORING_PRIVATE_8159',json.dumps(value))
         self.assertNotIn('fixture.first',json.dumps(value))
-        for target in [self.document,'provenance.consumer-test','fixture.first']:
+        def preview(target):
             call=c.PreviewApplicationCall.from_value({'revision':revision.as_contract(),'request':{'kind':'read','target':target}})
-            denied=preview_application(None,result.compiled,call).as_contract()
+            return preview_application(None,result.compiled,call).as_contract()
+        # Registered documentation without an approval is delivered with its label.
+        document=preview(self.document)
+        self.assertEqual(document['kind'],'candidate-application-read-result')
+        self.assertEqual(document['review_state'],'not-reviewed')
+        self.assertEqual(document['content'],'# Correct Consumer Guidance\n\nApply the owned rule.\n')
+        self.assertEqual(document['review_state'],ApplicationView(result.compiled,snapshot).read(self.document).as_contract()['review_state'])
+        # Authoring provenance and unregistered consumers are not application material.
+        for target in ['provenance.consumer-test','fixture.first','topic.consumer-fixture.misspelt']:
+            denied=preview(target)
             self.assertEqual(denied['kind'],'candidate-application-rejected-result')
+            self.assertEqual((denied['code'],denied['outcome']),('APPLICATION.UNKNOWN_TARGET','invalid'))
+            self.assertIn('not registered',denied['message'])
             self.assertEqual(denied['revision'],revision.as_contract())
+            self.assertNotIn('AUTHORING_PRIVATE_8159',json.dumps(denied))
 
 
 class CandidateProjectionTests(unittest.TestCase):
@@ -267,15 +280,53 @@ class CandidateProjectionTests(unittest.TestCase):
         self.assertTrue(candidate['next_operations'])
         self.assertTrue(all(op['operation']=='preview_application' for op in candidate['next_operations']))
 
-    def test_stale_exposure_is_rejected_without_partial_candidate_content(self):
+    def test_stale_exposure_is_labelled_in_delivered_candidate_content(self):
         files=dict(self.state.files)
         files['CORE-STANDARDS.md']+=b'\nUNAPPROVED_NEW_MATERIAL\n'
         compiled=self.fixture.compile_files(files)
-        for request in ({'kind':'read','target':'core'}, {'kind':'route','facts':{}}):
-            result=self.preview(request,compiled)
-            self.assertEqual(result['code'],'APPLICATION.CONTENT_UNAVAILABLE')
-            self.assertEqual(result['revision'],self.revision.as_contract())
-            self.assertNotIn('content',result)
+        read=self.preview({'kind':'read','target':'core'},compiled)
+        self.assertEqual(read['kind'],'candidate-application-read-result')
+        self.assertEqual(read['review_state'],'changed-since-review')
+        self.assertIn('UNAPPROVED_NEW_MATERIAL',read['content'])
+        self.assertEqual(read['revision'],self.revision.as_contract())
+        route=self.preview({'kind':'route','facts':{}},compiled)
+        self.assertEqual(route['kind'],'candidate-application-route-result')
+        labels={entry['target']:entry['review_state'] for entry in route['reading_plan']}
+        self.assertEqual(labels['core'],'changed-since-review')
+        self.assertEqual(labels['router'],'current')
+
+    def test_preview_and_published_application_agree_on_labels_and_rejections(self):
+        import json
+        facts={'routing.'+key:{'type':'enum-set','state':'known','value':['implementation'] if key=='activities' else []}
+               for key in ('activities','workflow-profiles','applications','boundaries','languages','frameworks','topics','details')}
+        candidate=self.preview({'kind':'route','facts':facts})
+        published=self.state.facade.query({'snapshot':self.state.snapshot,'request':{'kind':'route','facts':facts}})
+        self.assertEqual(candidate['kind'],'candidate-application-route-result')
+        for field in ('status','reading_plan','unresolved_questions'):
+            self.assertEqual(candidate[field],published[field])
+        labels={entry['target']:entry['review_state'] for entry in candidate['reading_plan']}
+        self.assertEqual(labels['workflow.implementation'],'not-reviewed')
+        self.assertEqual(labels['core'],'current')
+        for operation in candidate['next_operations']:
+            read=self.preview(operation['request'])
+            normal=self.state.facade.read({'snapshot':self.state.snapshot,'target':operation['request']['target']})
+            for field in ('review_state','content','scope','requires','specializes'):
+                self.assertEqual(read[field],normal[field])
+            self.assertEqual(read['review_state'],labels[operation['request']['target']])
+        requests=[({'kind':'read','target':'does.not.exist'},'APPLICATION.UNKNOWN_TARGET'),
+                  ({'kind':'related','target':'does.not.exist','groups':['semantic'],'direction':'outgoing','transitive':False},'APPLICATION.UNKNOWN_TARGET'),
+                  ({'kind':'related','target':'core','groups':['plausible-but-invalid'],'direction':'outgoing','transitive':False},'APPLICATION.UNKNOWN_GROUP'),
+                  ({'kind':'related','target':'core','groups':['policy-impact'],'direction':'outgoing','transitive':True},'APPLICATION.TRAVERSAL_NOT_PERMITTED')]
+        for request,code in requests:
+            with self.subTest(request=request):
+                rejected=self.preview(request)
+                normal=self.state.facade.query({'snapshot':self.state.snapshot,'request':request})
+                self.assertEqual(rejected['kind'],'candidate-application-rejected-result')
+                for field in ('code','outcome','message'):
+                    self.assertEqual(rejected[field],normal[field])
+                self.assertEqual(rejected['code'],code)
+                self.assertEqual(rejected['revision'],self.revision.as_contract())
+                self.assertNotIn('awaiting',json.dumps(rejected))
 
 
 if __name__ == '__main__':

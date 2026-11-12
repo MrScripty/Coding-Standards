@@ -283,7 +283,7 @@ with patch.object(AuthoringModule, "record_applied", side_effect=error):
                 assert all(item["snapshot"] == visible["snapshot"] for item in grouped["items"])
                 assert "AUTHORING_SDK_MARKER_843015" not in json.dumps(grouped)
                 hidden = await call(client, "read", {"target": "provenance.purpose-client"}, error=True)
-                assert hidden["code"] == "APPLICATION.CONTENT_UNAVAILABLE", hidden
+                assert hidden["code"] == "APPLICATION.UNKNOWN_TARGET", hidden
 
         return {
             "client": "official MCP Python SDK",

@@ -9,6 +9,7 @@ on:
     paths:
       - 'tools/**'
       - '.agents/skills/standards-engine/**'
+      - '.agents/skills/coding-standards/**'
       - 'evaluation/standards-effectiveness/**'
       - '*.md'
       - 'workflows/**'

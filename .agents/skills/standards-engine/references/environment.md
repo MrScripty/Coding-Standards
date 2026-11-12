@@ -38,6 +38,13 @@ new application session after authoring. The Engine cannot erase prior context.
 }
 ```
 
+Add `"--route-page-bytes", "N"` to the application arguments only when the client
+shows more or less than about 50 KB of a tool result inline. The default page
+budget is 40,960 bytes of result JSON, the range is 8,192–2,097,152, a page always
+holds at least one whole module, and the option is a launch error for authoring.
+Application agents use the `coding-standards` skill in
+`.agents/skills/coding-standards/`; this authoring skill is for maintainers.
+
 These are separate intended audiences, not two registrations every agent should
 receive. Translate the command, arguments and environment to the client's actual
 configuration format. Restart the Engine and reconnect after the interface-41
@@ -51,7 +58,7 @@ configured purpose.
 
 The local server remains synchronous MCP stdio with protocol `2025-11-25`;
 requests execute serially and immutable Engine handles survive reconnection.
-The current implementation is 0.2.0 and Engine interface 44. No network listener,
+The current implementation is 0.2.0 and Engine interface 49. No network listener,
 paid model turn, remote publication or extra server dependency is introduced.
 The existing local authoring authorization adapter is owner-operated and
 always-allow; explicit user authorization still governs requested changes.
@@ -63,11 +70,12 @@ remote multi-user permission service.
 
 ## Bootstrap and cutover
 
-New automatic snapshots read accepted local `main`. The code release initially
-contains empty application-approval and provenance manifests. Application reads
-therefore return a bounded unavailable result until the separate content work
-reviews and publishes the required material. Authoring can read the unchanged
-standards once the code candidate is integrated into accepted main.
+New automatic snapshots read accepted local `main`. The application-approval
+manifest records which exact material was reviewed for application use. Since
+interface 49 it labels delivered material (`current`, `changed-since-review` or
+`not-reviewed`) and never withholds it, so application reads and routes work
+before, during and after the separate content review. Authoring can read the
+unchanged standards once the code candidate is integrated into accepted main.
 
 Use a disposable clone with candidate `main` for pre-merge qualification. Preserve
 active installed proposals and recovery obligations before cutover. Old Analysis

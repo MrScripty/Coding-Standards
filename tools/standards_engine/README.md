@@ -1,9 +1,23 @@
 # Standards Engine
 
-The current interface is **48**. Input contracts are native-only; `--schema-mode`
+The current interface is **49**. Input contracts are native-only; `--schema-mode`
 is no longer accepted. Exact input/output contracts remain available through
 `describe_input` and `describe_output`. Select `--output-schemas on-demand` for the
 smaller catalog; eager output delivery remains the default.
+
+Interface 49 makes application approval a review label instead of a delivery gate.
+An application agent receives every registered module its facts select or its call
+names; each read result and reading-plan entry carries `review_state` (`current`,
+`changed-since-review` or `not-reviewed`). Editing Core or the Router changes their
+labels and no longer takes the application interface offline. An unregistered
+identity returns `APPLICATION.UNKNOWN_TARGET`; `APPLICATION.CONTENT_UNAVAILABLE` is
+removed. Application route content pages default to 40 KiB of result JSON so a
+client can show them inline; `--route-page-bytes` selects 8,192–2,097,152 for an
+application server, and a page always holds at least one whole module. The
+approval manifest and authoring exposure workflow are unchanged. Application
+agents use the [`coding-standards` skill](../../.agents/skills/coding-standards/SKILL.md).
+Restart the MCP process and refresh the client catalog. See
+[labelled application delivery](PURPOSE-SEPARATION.md#labelled-application-delivery-interface-49).
 
 Interface 44 aligns logical graph, store-path, integer and evidence-digest boundaries.
 The Digest scalar now excludes trailing data explicitly. Operation shapes and stored
@@ -49,8 +63,8 @@ recorder.
 ## Purpose separation (interface 31)
 
 Version 0.2.0 / interface 31 requires host-selected `application` or `authoring`
-purpose. Application views use exact reviewed content declarations; the real
-corpus intentionally starts unqualified in this code release. Authoring retains
+purpose. Application views label material against exact reviewed content
+declarations (since interface 49 the label no longer withholds it). Authoring retains
 the complete workflow and adds provenance, registered operational-aid editing
 and explicit application exposure decisions. Analysis request 6 / state 7 bind
 explicit preservation or change to the actual candidate semantic revision.
@@ -81,7 +95,9 @@ rows. Native `query` remains available.
 `read_many` reads a selected set using one explicit snapshot. It accepts 1–32
 ordered unique items, applies the existing purpose-qualified single-read behavior,
 and returns all results or one bounded rejection. Its complete JSON domain
-payload is limited to 2 MiB. See [the grouped-read contract](PURPOSE-SEPARATION.md#bounded-grouped-reads).
+payload is limited to 2 MiB; application agents should request two or three
+modules per call so the client can show the whole result. See
+[the grouped-read contract](PURPOSE-SEPARATION.md#bounded-grouped-reads).
 
 Navigation reads immutable snapshots; proposal analysis, review, verification,
 and application operate on exact revision handles. Proposal creation and

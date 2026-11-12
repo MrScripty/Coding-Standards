@@ -100,8 +100,8 @@ DESCRIPTIONS = {
     "create_proposal": "Propose an atomic standards change with explicit domain intent and evidence against a snapshot.",
     "find_proposals": "Find durable proposals and their current revision handles.",
     "revise_proposal": "Append an atomic change to the exact expected proposal revision; stale revisions are rejected.",
-    "query_proposal": "Read, route, or traverse authoring content within an exact immutable proposal revision. Use preview_application to inspect its qualified application view.",
-    "preview_application": "Inspect an exact unpublished revision through the ordinary application qualification and filtering rules. Supply one read, route, or related request. Results and continuations stay bound to the draft; this operation neither publishes content nor approves review or exposure.",
+    "query_proposal": "Read, route, or traverse authoring content within an exact immutable proposal revision. Use preview_application to inspect its application view.",
+    "preview_application": "Inspect an exact unpublished revision as an application agent would receive it: every selected or named registered item is delivered with its review_state label (current, changed-since-review or not-reviewed). Supply one read, route, or related request. Results and continuations stay bound to the draft; this operation neither publishes content nor approves review or exposure.",
     "analyze_proposal": "Analyze an exact proposal revision and return unresolved consequences or complete analysis.",
     "review_proposal": "Accept complete current proposal analysis with explicit evidence-backed review decisions; return content-bound readiness. Requires user authorization for review.",
     "verify_proposal": "Verify the exact proposal candidate. Coverage audits require readiness. Verification does not supply review decisions or publish.",
@@ -112,18 +112,19 @@ DESCRIPTIONS = {
 }
 
 
+# Each application description opens with what the tool is for, in plain words.
 APPLICATION_DESCRIPTIONS = {
-    "describe_output": DESCRIPTIONS["describe_output"],
-    "relationship_groups": DESCRIPTIONS["relationship_groups"],
-    "describe_input": DESCRIPTIONS["describe_input"],
-    "runtime_info": DESCRIPTIONS["runtime_info"],
-    "read_many": "Read 1–32 selected reviewed items from one explicit snapshot in order. Each item supplies target and optional detail. The complete JSON result is limited to 2 MiB; an unavailable item rejects the whole request.",
-    "route": "Supply raw values in facts or one-field state markers for unknown/known-absent; omitted facts stay unknown. Types come from the qualified snapshot, not the request. Select applicable guidance from registered facts and a complete qualified dependency closure. Request content={} for selected exact guidance in this call: default 8, maximum 32 whole reads, 2 MiB total result. Follow content.next unchanged. Missing facts remain unresolved. Omit content for selection only; read_many accepts an explicit subset.",
-    "read": "Read a reviewed standard, example, or operational aid by identity. Full detail adds permitted relationships.",
-    "related": "Discover relationships among qualified guidance in one snapshot. Use relationship_groups for permitted IDs and meanings. Unknown groups return choices; an empty valid query remains successful.",
-    "routing_facts": "Read the reviewed vocabulary for routing a task. Supply known facts and retain unresolved conditions.",
-    "query": "Route, read, or traverse qualified guidance within the supplied snapshot.",
-    "inspect": "Inspect a permitted policy or relationship handle within its captured snapshot.",
+    "routing_facts": "Lists the facts you can state about a task: each fact's exact name, meaning, type and allowed values. Call it once, before your first route, and copy names and values exactly as listed. Omit snapshot to capture the current accepted standards; keep the returned snapshot and pass it to later calls.",
+    "route": "Returns the standards that apply to your task. Put the facts that are true of the task in facts, with names and values exactly as routing_facts lists them. Leave out a fact you do not know: it stays unknown and comes back in unresolved_questions. Do not remove a true fact to make a call succeed. For a fact you know is absent use {\"state\":\"known-absent\"}. Pass content={} to receive the text with the selection: reading_plan lists every selected module with its review_state, and content.items holds whole modules for this page. A page is sized for inline display (about 40 KB by default, at most content.limit items, default 8, maximum 32) and always holds at least one whole module. While content.next is present, call route again with exactly those arguments. Every selected module is delivered; review_state (current, changed-since-review or not-reviewed) says whether its text was approved for application use, not whether it applies. Omit snapshot on the first call and pass the returned snapshot afterwards. Omit content for the selection only.",
+    "read": "Returns the full text of one standard, example or operational aid by its ID, with its review_state. Use an ID exactly as a route, read or related result gave it; an unregistered ID is rejected, never guessed. detail=full adds the module's relationships. Pass the snapshot you already hold: a module you have read at that snapshot has not changed.",
+    "read_many": "Returns the full text of several modules by ID in one call, in the order asked, each with its review_state. Requires the snapshot returned by route or read. Each item gives target and optional detail. Ask for two or three modules per call so your client can show the whole result; the hard limits are 32 items and 2 MiB. An unregistered ID rejects the whole call and returns no items.",
+    "related": "Lists how one module relates to others, such as what it requires, specializes or affects. Name the groups to follow: relationship_groups lists the valid group IDs and the directions and transitive traversal each permits. An unknown group returns the valid choices. A valid query with no relationships is a normal empty result.",
+    "relationship_groups": "Lists the relationship group IDs that related accepts, with each group's meaning, permitted directions and whether transitive traversal is allowed. Pages hold 8 groups by default (maximum 32, 16 KiB); follow next exactly. Omit snapshot to capture the current accepted standards and reuse the returned snapshot with related. A listed group may have no relationships for a given module.",
+    "inspect": "Returns the detail behind a handle that an earlier result gave you: a policy handle returns that module in full, a relationship handle returns that relationship. Pass the handle unchanged.",
+    "query": "Advanced form of route, read and related: one native request against an explicit snapshot. Results carry the same review_state labels. Prefer route, read and related.",
+    "describe_input": "Shows the exact argument shape of a tool when your client abbreviates a field as unknown. Start with operation only. Read schema_json documents; $refs name selectable definitions. Select a referenced name with selector and expected_catalog from the result. Pages contain up to 16 whole records (default 8), 16 KiB result JSON; follow next unchanged for the complete selected closure. Reuse acquired shapes while catalog_digest matches. No standards state or permissions change.",
+    "describe_output": "Shows the exact result shape of a tool. Ordinary results are already structured, so you rarely need it. Start with operation; follow next for all records or select a referenced definition with expected_catalog. Combine root_schema_json with all records as $defs to validate a result. schema_digest binds the full output contract, not an approval.",
+    "runtime_info": "Reports which interface version, tool catalog and installation this running server has, without reading any standards. Supply expected_catalog to compare your client's catalog. Restart and reconnect after the server is replaced; refresh tools when only the client catalog differs.",
 }
 
 
@@ -148,12 +149,15 @@ def tool_catalog(
         name = operation["id"]
         if not advanced and name not in FOCUSED_OPERATIONS:
             continue
-        description = APPLICATION_DESCRIPTIONS[name] if purpose is Purpose.APPLICATION else DESCRIPTIONS[name]
+        application = purpose is Purpose.APPLICATION
+        description = APPLICATION_DESCRIPTIONS[name] if application else DESCRIPTIONS[name]
         if name != "describe_input":
-            description = (
+            hint = (
                 f'For abbreviated input fields, call describe_input(operation="{name}") '
-                "and reuse the returned contract while its catalog matches. " + description
+                "and reuse the returned contract while its catalog matches."
             )
+            # An application agent reads the tool's purpose first; the hint follows.
+            description = f"{description} {hint}" if application else f"{hint} {description}"
         if purpose is Purpose.AUTHORING and "agent" in operation.get("variants", {}):
             description += (
                 " Optional evidence maps request-local names to complete exact evidence references; "

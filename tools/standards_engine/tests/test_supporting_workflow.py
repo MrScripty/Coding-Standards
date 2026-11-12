@@ -113,9 +113,11 @@ class SupportingWorkflowTest(unittest.TestCase):
         # accepted corpus, and publish it without an application approval.
         unexposed = self.author.read({"snapshot": published_snapshot, "target": UNEXPOSED, "detail": "full"})
         self.assertIn(PUBLIC, unexposed["content"], unexposed)
-        empty = self.app.read({"snapshot": published_snapshot, "target": UNEXPOSED})
-        self.assertEqual(empty["code"], "APPLICATION.CONTENT_UNAVAILABLE", empty)
-        self.assertEqual(self.app.read({"snapshot": published_snapshot, "target": REFERENCE})["kind"], "application-read-result")
+        labelled = self.app.read({"snapshot": published_snapshot, "target": UNEXPOSED})
+        self.assertEqual((labelled["kind"], labelled["review_state"]), ("application-read-result", "not-reviewed"), labelled)
+        self.assertEqual(labelled["content"], unexposed["content"])
+        self.assertEqual(first["review_state"], "current")
+        self.assertEqual(self.app.read({"snapshot": published_snapshot, "target": REFERENCE})["review_state"], "current")
         for aid in aids:
             exposed = self.app.read({"snapshot": published_snapshot, "target": aid["canonical_id"]})
             self.assertEqual(exposed["kind"], "application-read-result", exposed)
@@ -140,4 +142,4 @@ class SupportingWorkflowTest(unittest.TestCase):
         self.assertEqual(current["record"]["rationale"], PRIVATE + "_REVISED")
         self.assertNotEqual(current["authority"], old_snapshot)
         self.assertEqual(self.app.read({"snapshot": current["authority"], "target": RULE})["content"], first["content"])
-        self.assertEqual(self.app.read({"snapshot": current["authority"], "target": REASON})["kind"], "application-rejected-result")
+        self.assertEqual(self.app.read({"snapshot": current["authority"], "target": REASON})["code"], "APPLICATION.UNKNOWN_TARGET")

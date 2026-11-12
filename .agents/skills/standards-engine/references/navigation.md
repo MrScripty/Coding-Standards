@@ -18,7 +18,9 @@ MCP tool definitions supplied by the client; invoke the tools directly.
    group the selected policies into `read_many` with the returned
    snapshot and ordered `items` such as `[{"target":"core"}]`. Select up to 32
    unique read items per call. The complete result is bounded to 2 MiB and any
-   unavailable item rejects the whole group; narrow the selection on a limit.
+   unregistered or failed item rejects the whole group; narrow the selection on a
+   limit. Two or three modules per call keep a result within what most clients
+   show inline.
    Grouping preserves the same exact text, authority and detail options as `read`.
 5. Use returned inspect operations and handles when more detail is needed.
    `inspect` accepts opaque handles, not repository locators.
@@ -47,16 +49,23 @@ selected, deduplicated target order. `content.total` counts all selected targets
 `route` request, preserving its facts and snapshot. Nonzero offsets require an
 explicit snapshot. Changing facts intentionally starts a different selection.
 
-The complete route result, including its plan, questions, items and continuation,
-is limited to 2 MiB. Byte pressure returns fewer whole reads. A first record that
-cannot fit returns a typed limit rejection, never clipped policy text. Request a
-selection-only route and explicitly `read` that target when the client can receive
-it. An unavailable selected dependency or a failed read rejects the result;
-partial prefixes are not returned as success. An offset equal to the selected
-count returns an empty final page; a larger offset is invalid.
+The complete authoring route result, including its plan, questions, items and
+continuation, is limited to 2 MiB. Byte pressure returns fewer whole reads. A first
+record that cannot fit returns a typed limit rejection, never clipped policy text.
+Request a selection-only route and explicitly `read` that target when the client can
+receive it. A failed read rejects the result; partial prefixes are not returned as
+success. An offset equal to the selected count returns an empty final page; a
+larger offset is invalid.
 
-All content uses the same captured authority and ordinary read/qualification
-rules. Missing facts remain unresolved even when selected text is returned.
+Application route pages are sized for inline display instead: 40 KiB of result
+JSON by default, or the application server's `--route-page-bytes` value
+(8,192–2,097,152). A page always holds at least one whole read, so a module larger
+than the budget arrives alone rather than as a rejection. Every selected module is
+delivered with its `review_state` label (`current`, `changed-since-review` or
+`not-reviewed`); approval state never withholds a selected module.
+
+All content uses the same captured authority and ordinary read rules. Missing
+facts remain unresolved even when selected text is returned.
 Only selected content is paged. Compact plans contain the complete selected closure;
 all fact questions remain present. The full explanation additionally includes
 unresolved-policy rows. Content continuations preserve the requested detail.
@@ -95,8 +104,8 @@ do not rebuild them from stale spellings or a different snapshot.
 Malformed common JSON shapes fail before capture. A vocabulary-dependent error can
 occur after capture when the snapshot was omitted; it returns invalid field feedback,
 not a successful route or authoring change. Correct the field or consult the
-snapshot-bound vocabulary. Unqualified application Router content remains unavailable
-before its vocabulary is interpreted or disclosed.
+snapshot-bound vocabulary. Application routing interprets the vocabulary whatever
+the Router's review label is.
 
 Focused authoring `route` defaults to `compact-route-result`: canonicalized
 supplied facts, selected reading entries and required dependencies, every typed
@@ -110,7 +119,7 @@ Each unanswered question carries its registered fact definition. Supply empty
 sets only when the task establishes absence, rather than to silence questions.
 Full rule expressions describe evaluated applicability, not inferred policy prose.
 Required dependency reasons identify their graph edge and source. Several reasons
-may select the same standard. Application purpose retains the same qualified
+may select the same standard. Application purpose retains the same labelled
 selection and all questions even when full detail is requested; private authoring
 rule explanations are not exposed.
 
@@ -127,7 +136,8 @@ traversal policy, without reading policy text merely to find a group name. Reuse
 its snapshot with `related`. An omitted snapshot captures accepted authority;
 nonzero page offsets require the returned snapshot. Pages contain up to 32 whole
 records (default 8), with a 16 KiB page limit; follow `next` unchanged. Application
-vocabulary comes only from its permitted graph and requires qualified Router content.
+vocabulary comes only from its permitted graph: every registered material, in the
+five application relationship groups.
 
 An unknown focused group returns `GRAPH.UNKNOWN_GROUP` (application:
 `APPLICATION.UNKNOWN_GROUP`) and `relationship_groups`, the same bounded first
@@ -135,7 +145,10 @@ vocabulary page. Choose a returned ID explicitly. A registered group can have no
 edges for the selected target; that is a successful empty query. Traversal directions
 and transitivity describe the group's traversal policy, not a claim of existing
 relationships. Authoring provenance groups are excluded from application vocabulary.
-Native authoring queries and draft previews keep their existing rejection contracts.
+A traversal the group does not permit returns `APPLICATION.TRAVERSAL_NOT_PERMITTED`
+in application purpose; an unregistered target returns `APPLICATION.UNKNOWN_TARGET`.
+Native authoring queries keep their existing rejection contracts; draft previews
+return the application codes bound to their revision.
 
 ## Accepted-Snapshot Analysis
 
@@ -172,6 +185,6 @@ instruction to infer an impact decision.
 
 Use `describe_input` for argument shapes, not policy text. It observes only the
 running purpose-qualified catalog and needs no snapshot. Application connections
-can discover their own reviewed-guidance navigation inputs but cannot discover
+can discover their own navigation inputs but cannot discover
 unpublished authoring operations or definitions. `route`, `read`, and `related`
 remain the owners of policy selection, text and relationships.

@@ -112,7 +112,13 @@ class PurposeTransportTest(unittest.TestCase):
         self.assertEqual(allowed["structuredContent"]["content"], self.expected)
         self.assertEqual(json.loads(allowed["content"][0]["text"]), allowed["structuredContent"])
         self.assertTrue(values[4]["result"]["isError"])
-        self.assertEqual(values[4]["result"]["structuredContent"]["code"], "APPLICATION.CONTENT_UNAVAILABLE")
+        self.assertEqual(values[4]["result"]["structuredContent"]["code"], "APPLICATION.UNKNOWN_TARGET")
+        self.assertEqual(allowed["structuredContent"]["review_state"], "current")
+        instructions = values[1]["result"]["instructions"]
+        for phrase in ("routing_facts", "content={}", "content.next", "snapshot", "review_state",
+                       "current", "changed-since-review", "not-reviewed"):
+            self.assertIn(phrase, instructions)
+        self.assertNotIn("awaiting", instructions)
         self.assertIn("error", values[5])
 
 

@@ -84,7 +84,14 @@ class InputDiscoveryTest(unittest.TestCase):
             self.assertTrue(tool['annotations']['readOnlyHint'])
             for item in server.tools:
                 if item['name'] != 'describe_input':
-                    self.assertIn(f'describe_input(operation="{item["name"]}")', item['description'][:250])
+                    hint = (f'For abbreviated input fields, call describe_input(operation="{item["name"]}") '
+                            'and reuse the returned contract while its catalog matches.')
+                    # Application descriptions open with the tool's purpose and end with the hint.
+                    if purpose == 'application':
+                        self.assertTrue(item['description'].endswith(' ' + hint), item['name'])
+                        self.assertNotIn('describe_input(operation=', item['description'][:-len(hint)])
+                    else:
+                        self.assertTrue(item['description'].startswith(hint + ' '), item['name'])
 
     def test_every_published_input_can_be_reconstructed_and_independently_validated(self):
         for purpose in ('application', 'authoring'):

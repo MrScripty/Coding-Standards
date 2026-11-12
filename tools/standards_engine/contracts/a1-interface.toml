@@ -1,7 +1,7 @@
 schema_version = 1
-interface_schema_version = 48
+interface_schema_version = 49
 request_contract_version = 6
-result_projection_version = 8
+result_projection_version = 9
 
 [[operations]]
 id = "create_snapshot"
