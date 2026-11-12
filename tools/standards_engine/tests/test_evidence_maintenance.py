@@ -260,6 +260,8 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                 purpose="authoring",
             ) as engine:
                 facade = AgentToolFacade(engine, _contracts(repository))
+                # The manifest pins the tracked file list: track the fixture first.
+                git_output(repository, ("add", "--", obsolete))
                 refreshed = facade.verify_repository(
                     {"kind": "verify-repository", "refresh_verification_inputs": True}
                 )
@@ -270,7 +272,6 @@ class EvidenceMaintenanceInterfaceTest(unittest.TestCase):
                         "add",
                         "--",
                         "evaluation/standards-effectiveness/generated/suite-inputs.json",
-                        obsolete,
                     ),
                 )
                 git_output(

@@ -4,21 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches: [main, implementation/purpose-separated-standards-engine]
+  # No path filter: the suite-input manifest pins the list of tracked files, so
+  # adding, removing or renaming a file anywhere can make it stale.
   pull_request:
     branches: [main]
-    paths:
-      - 'tools/**'
-      - '.agents/skills/standards-engine/**'
-      - '.agents/skills/coding-standards/**'
-      - 'evaluation/standards-effectiveness/**'
-      - '*.md'
-      - 'workflows/**'
-      - 'topics/**'
-      - 'profiles/**'
-      - 'reference/**'
-      - 'prompts/**'
-      - 'templates/**'
-      - '.github/workflows/purpose-separated-engine.yml'
 
 permissions:
   contents: read

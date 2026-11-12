@@ -5,9 +5,10 @@ import json
 from pathlib import Path
 from typing import Sequence
 
-from .diagnostics import Diagnostic, EngineError
+from .diagnostics import EXIT_CODE_BY_OUTCOME, Diagnostic, EngineError
 from .engine import Verifier
 from .model import CompleteVerificationResult, SuiteResult
+from .suite_inputs import DEFAULT_REGISTRY, suite_input_projection_diagnostic
 
 
 def _parser(default_repo_root: Path) -> argparse.ArgumentParser:
@@ -15,7 +16,7 @@ def _parser(default_repo_root: Path) -> argparse.ArgumentParser:
     parser.add_argument("--repo-root", type=Path, default=default_repo_root)
     parser.add_argument(
         "--registry",
-        default="evaluation/standards-effectiveness/suite-registry.toml",
+        default=DEFAULT_REGISTRY,
         help="repository-relative suite registry path",
     )
     selection = parser.add_mutually_exclusive_group()
@@ -24,7 +25,8 @@ def _parser(default_repo_root: Path) -> argparse.ArgumentParser:
     parser.add_argument(
         "--complete",
         action="store_true",
-        help="run the complete registered Python suite catalog",
+        help="run the complete registered Python suite catalog and require a "
+        "current suite-input manifest",
     )
     parser.add_argument("--list", action="store_true", help="list registered suite IDs")
     parser.add_argument("--format", choices=("text", "json"), default="text")
@@ -46,9 +48,10 @@ def _render_text(results: list[SuiteResult]) -> str:
     return "\n".join(lines)
 
 
-def _render_json(results: list[SuiteResult]) -> str:
+def _render_json(results: list[SuiteResult], error: Diagnostic | None = None) -> str:
     return json.dumps(
         {
+            **({} if error is None else {"error": error.as_dict()}),
             "results": [result.as_dict() for result in results],
             "summary": {
                 "selected": len(results),
@@ -70,14 +73,25 @@ def _render_error(diagnostic: Diagnostic, output_format: str) -> str:
 
 def run_complete_verification(
     repo_root: Path,
-    registry: str = "evaluation/standards-effectiveness/suite-registry.toml",
+    registry: str = DEFAULT_REGISTRY,
 ) -> CompleteVerificationResult:
+    """Run every registered suite, then require the manifest that pins them."""
     try:
         results = tuple(Verifier(repo_root, registry).run(None))
-        suite_exit = max((result.exit_code for result in results), default=0)
-        return CompleteVerificationResult(results, None, suite_exit)
     except EngineError as error:
         return CompleteVerificationResult((), error.diagnostic, error.exit_code)
+    suite_exit = max((result.exit_code for result in results), default=0)
+    # The manifest pins the canonical registry; another registry has none.
+    manifest = (
+        suite_input_projection_diagnostic(repo_root)
+        if registry == DEFAULT_REGISTRY
+        else None
+    )
+    if manifest is None:
+        return CompleteVerificationResult(results, None, suite_exit)
+    return CompleteVerificationResult(
+        results, manifest, max(suite_exit, EXIT_CODE_BY_OUTCOME[manifest.outcome])
+    )
 
 
 def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:
@@ -96,8 +110,8 @@ def main(argv: Sequence[str] | None = None, *, default_repo_root: Path) -> int:
             if args.format == "json":
                 print(
                     _render_error(complete.diagnostic, args.format)
-                    if complete.diagnostic is not None
-                    else _render_json(list(complete.results))
+                    if complete.diagnostic is not None and not complete.results
+                    else _render_json(list(complete.results), complete.diagnostic)
                 )
             else:
                 if complete.results:
