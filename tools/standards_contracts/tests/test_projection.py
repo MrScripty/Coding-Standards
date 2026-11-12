@@ -4,16 +4,21 @@ import dataclasses
 import copy
 import json
 import sys
+import tempfile
 import types
 import unittest
+from pathlib import Path
+from unittest import mock
 
 from tools.standards_contracts.standards_contracts import (
     ContractError,
     MISSING,
     compile_contracts,
 )
+from tools.standards_contracts.standards_contracts import projection
+from tools.standards_contracts.standards_contracts.compiler import schema_digest
 
-from support import canonical_inputs
+from support import canonical_inputs, metaschema_checks
 
 
 def load_generated(source: str) -> types.ModuleType:
@@ -328,6 +333,40 @@ class ContractProjectionTest(unittest.TestCase):
         self.assertEqual(tools["request_contract_version"], interface["request_contract_version"])
         self.assertEqual(tools["result_projection_version"], interface["result_projection_version"])
         json.dumps(tools)
+
+
+class RepositoryGeneratorValidationTest(unittest.TestCase):
+    """The generator owns the validation that a recorded digest stands for."""
+
+    def test_generator_validates_the_schema_whose_digest_it_records(self) -> None:
+        schema, _ = canonical_inputs()
+        with metaschema_checks() as checked:
+            projections = projection.render_repository_projections()
+        self.assertEqual(checked.call_count, 1)
+        generated = load_generated(projections[projection.PYTHON_PATH])
+        self.assertEqual(generated.VALIDATED_SCHEMA_DIGEST, schema_digest(schema))
+        self.assertNotIn("VALIDATED_SCHEMA_DIGEST", generated.__all__)
+
+    def test_generator_and_drift_check_reject_an_invalid_schema(self) -> None:
+        schema, _ = canonical_inputs()
+        schema["$defs"]["NonEmptyString"]["minLength"] = -1
+        with tempfile.TemporaryDirectory(prefix="invalid-contract-") as directory:
+            invalid = Path(directory) / "a1-contract.schema.json"
+            invalid.write_text(json.dumps(schema), encoding="utf-8")
+            outputs = (Path(directory) / "generated.py", Path(directory) / "agent-tools.json")
+            with mock.patch.multiple(
+                projection, SCHEMA_PATH=invalid, PYTHON_PATH=outputs[0], TOOLS_PATH=outputs[1]
+            ):
+                for name, run in (
+                    ("render", projection.render_repository_projections),
+                    ("check", lambda: projection.projection_main(["--check"])),
+                    ("write", lambda: projection.projection_main([])),
+                ):
+                    with self.subTest(run=name):
+                        with self.assertRaises(ContractError) as caught:
+                            run()
+                        self.assertEqual(caught.exception.failure.code, "CONTRACT.INVALID_SCHEMA")
+            self.assertFalse(any(path.exists() for path in outputs))
 
 
 if __name__ == "__main__":

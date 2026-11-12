@@ -128,3 +128,31 @@ unchanged.
 the existing Draft 2020-12 validator. Interface 44's canonical Digest uses it with
 the lowercase SHA-256 pattern to exclude trailing data, including a final newline.
 Generated tools/models preserve this constraint without a local keyword evaluator.
+
+## Metaschema validation and the recorded schema digest
+
+`compile_contracts(schema, interface)` validates the schema against the Draft
+2020-12 metaschema on every call. That validation is the slowest step of
+compilation, and a server start otherwise repeats it for a schema that has not
+changed since the generator validated it.
+
+The generated Python projection therefore records `VALIDATED_SCHEMA_DIGEST`, the
+digest of the schema the generator compiled. A caller that holds that projection
+may pass the value as `validated_schema_digest`. `compile_contracts` computes the
+digest of the schema it was given and omits metaschema validation only when the
+two are equal. A schema with any other digest is validated exactly as a call
+without the argument. The dialect, projection-profile, reference, reachability,
+root-closure and interface checks run on every call.
+
+The digest is the SHA-256 of the schema's JSON value serialized with sorted keys.
+Key order and file formatting do not change it; `1`, `1.0` and `true` are
+different values. A Python value that is not plain JSON, such as one holding a
+tuple or a non-string key, has no digest and is always validated. The argument is
+the caller's statement that a generator validated the schema with that digest, so
+pass only a digest read from a generated projection.
+
+The repository generator, its `--check` mode and the `contract_projection`
+verifier check never pass a digest: they always validate, and they report a
+generated projection whose recorded digest is not the canonical schema's as stale.
+The Engine passes the digest when it prepares its installed interface. A schema
+edited without regenerating has another digest and is validated at startup.

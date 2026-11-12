@@ -600,4 +600,9 @@ def _contracts(root: Path) -> CompiledContracts:
     schema = json.loads((root / INTERFACE_SCHEMA).read_text(encoding="utf-8"))
     with (root / INTERFACE_CONTRACT).open("rb") as source:
         interface = tomllib.load(source)
-    return compile_contracts(schema, interface)
+    # The generator validated the schema whose digest the generated contract
+    # records. Only a schema that differs from it is validated again here.
+    return compile_contracts(
+        schema, interface,
+        validated_schema_digest=generated_contract.VALIDATED_SCHEMA_DIGEST,
+    )

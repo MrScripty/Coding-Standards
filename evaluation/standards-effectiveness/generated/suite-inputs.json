@@ -7226,7 +7226,7 @@
       ]
     },
     {
-      "digest": "sha256:62aea45105e65acd37e0b8eab4c4d504092f7f0d89e3ec8d2c992675a2f05bdf",
+      "digest": "sha256:0a169d57599bbf726e74db01de12f1b22dcf7294c7de860ee0d4c96fa2a2101b",
       "path": "tools/standards_contracts/standards_contracts/compiler.py",
       "state": "present",
       "uses": [
@@ -7485,7 +7485,7 @@
       ]
     },
     {
-      "digest": "sha256:3dd7f140155b28c086c870a499fb13e435975fac445daedd5fc16c9c1444a80b",
+      "digest": "sha256:484763ea0780acaec11f78066e7176bab786fc2c9f68211736a4f6fafb1b3101",
       "path": "tools/standards_engine/standards_engine/_generated_contract.py",
       "state": "present",
       "uses": [
@@ -7846,7 +7846,7 @@
       ]
     },
     {
-      "digest": "sha256:7081d32b13c3e8b90e42aedb2a24e1e395b6a9380aa5448faf1314c6c2ae0015",
+      "digest": "sha256:cf72f9f54f6a2c5f8683ac322b86bfde1623ed9b29037ddce6811605908f00c5",
       "path": "tools/standards_engine/standards_engine/tools.py",
       "state": "present",
       "uses": [
