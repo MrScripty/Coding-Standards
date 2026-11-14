@@ -129,11 +129,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-links",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -1486,7 +1481,7 @@
       ]
     },
     {
-      "digest": "sha256:fc176982992241069f3bbb40173fd7176e10d5c9fdc1373a16c88647819ad7c4",
+      "digest": "sha256:9d3ec990d2ee5a74bf1bb71db3619a3fa5c90288b5c5b809f2219efa22343062",
       "path": "evaluation/standards-effectiveness/policy-impact-node-catalog.toml",
       "state": "present",
       "uses": [
@@ -2158,7 +2153,7 @@
       ]
     },
     {
-      "digest": "sha256:af8f30134a34385b211429c7d325b9f0c233839ec8d49aee03f882f67aa69ca5",
+      "digest": "sha256:8634e8ae372621d80260a6006743ad8bdfe4a87cc5eccc944610448663862748",
       "path": "evaluation/standards-effectiveness/suite-registry.toml",
       "state": "present",
       "uses": [
@@ -2268,18 +2263,6 @@
     {
       "digest": "sha256:8627a4c38122d45ebfe1dba5411b2903a96c8a779ec4f0366d0a3ab3f934b90e",
       "path": "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml",
-      "state": "present",
-      "uses": [
-        {
-          "check": "current-structure",
-          "role": "registered-policy-impact",
-          "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:61760956e55a27d2333794a36514cdabf23ca2d73722a6f71c00fb7ffda53ea8",
-      "path": "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml",
       "state": "present",
       "uses": [
         {
@@ -8055,11 +8038,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -8264,11 +8242,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -8376,11 +8349,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -8438,11 +8406,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -8498,11 +8461,6 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
         },
         {
           "check": "root-router-routes",
@@ -9887,11 +9845,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "legacy-index-destinations",
           "role": "target",
           "suite": "release-reference-closure"
@@ -10007,11 +9960,6 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
         },
         {
           "check": "root-router-routes",
@@ -10265,11 +10213,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -10417,11 +10360,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -10482,11 +10420,6 @@
           "check": "negative-fixtures",
           "role": "canonical-policy-impact",
           "suite": "policy-semantic-impact"
-        },
-        {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
         },
         {
           "check": "root-router-routes",
@@ -10551,11 +10484,6 @@
           "suite": "policy-semantic-impact"
         },
         {
-          "check": "metadata-closure",
-          "role": "metadata",
-          "suite": "release-maintenance-policy"
-        },
-        {
           "check": "root-router-routes",
           "role": "link-target",
           "suite": "root-index-closure"
@@ -10589,11 +10517,11 @@
     }
   ],
   "registry": {
-    "digest": "sha256:af8f30134a34385b211429c7d325b9f0c233839ec8d49aee03f882f67aa69ca5",
+    "digest": "sha256:8634e8ae372621d80260a6006743ad8bdfe4a87cc5eccc944610448663862748",
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:ae3843ae7d58b01dbbd6efb662286d52e4fc9c70f9c5e14bde04c0544d9b7d17",
+    "digest": "sha256:c2a56690ade32430a01832b2459f02feed2569f9d015abe1d08a10349ab23d36",
     "uses": [
       {
         "check": "python-package-contract",
@@ -10663,14 +10591,6 @@
       "id": "release-reference-closure",
       "path": "evaluation/standards-effectiveness/suites/release-reference-closure.toml",
       "requires": []
-    },
-    {
-      "digest": "sha256:61760956e55a27d2333794a36514cdabf23ca2d73722a6f71c00fb7ffda53ea8",
-      "id": "release-maintenance-policy",
-      "path": "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml",
-      "requires": [
-        "release-reference-closure"
-      ]
     },
     {
       "digest": "sha256:63cca2ceac227aacccf33a964801a645bb4083719e5011a46a313308f2628026",

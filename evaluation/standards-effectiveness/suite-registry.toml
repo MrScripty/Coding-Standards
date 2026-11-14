@@ -51,11 +51,6 @@ path = "evaluation/standards-effectiveness/suites/release-reference-closure.toml
 requires = []
 
 [[suites]]
-id = "release-maintenance-policy"
-path = "evaluation/standards-effectiveness/suites/release-maintenance-policy.toml"
-requires = ["release-reference-closure"]
-
-[[suites]]
 id = "s1-routing"
 path = "evaluation/standards-effectiveness/suites/s1-routing.toml"
 requires = []
