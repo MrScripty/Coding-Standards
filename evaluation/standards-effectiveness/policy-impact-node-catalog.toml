@@ -26,11 +26,6 @@ id = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-de
 metadata = { artifact_kind = "fixture", authority = "evidence", repository_path = "evaluation/standards-effectiveness/fixtures/planning/full-review-prompt-decisions.tsv" }
 
 [[nodes]]
-aliases = ["evaluation/standards-effectiveness/suites/planning-consolidation.toml"]
-id = "planning-consolidation"
-metadata = { artifact_kind = "enforcement-suite", authority = "evidence", repository_path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml", suite_id = "planning-consolidation" }
-
-[[nodes]]
 aliases = ["evaluation/standards-effectiveness/suites/policy-semantic-impact.toml"]
 id = "policy-semantic-impact"
 metadata = { artifact_kind = "enforcement-suite", authority = "evidence", repository_path = "evaluation/standards-effectiveness/suites/policy-semantic-impact.toml", suite_id = "policy-semantic-impact" }
