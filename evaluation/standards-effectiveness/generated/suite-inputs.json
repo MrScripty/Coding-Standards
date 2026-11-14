@@ -7027,7 +7027,7 @@
       ]
     },
     {
-      "digest": "sha256:e56834537ad6ee2ef8a243141ef554c1cb24cfdc6b5b0d543e998892920a766b",
+      "digest": "sha256:cbaba5def21234f44c2d45e50fc60e202dfce4fbeb5bd313ace374a3f386e362",
       "path": "tools/standards_verifier/README.md",
       "state": "present",
       "uses": [
@@ -7073,7 +7073,7 @@
       ]
     },
     {
-      "digest": "sha256:4fd26bc3eba2945d3f9ca888a9a7eb02ac4e2dcca9527a578a4d934e25fcfab3",
+      "digest": "sha256:c9100c80a3b7fec7d5b108570a603f5506161d6dd99ecbaeb76cf87bf850657a",
       "path": "tools/standards_verifier/standards_verifier/checks/__init__.py",
       "state": "present",
       "uses": [
@@ -7207,18 +7207,6 @@
           "check": "current-structure",
           "role": "registered-policy-impact",
           "suite": "policy-semantic-impact"
-        }
-      ]
-    },
-    {
-      "digest": "sha256:c7266c0564b9ee02944fc4eb12d66cc20d604fd4ddb7f051ed77d01e9fe4466e",
-      "path": "tools/standards_verifier/standards_verifier/checks/plan_contract.py",
-      "state": "present",
-      "uses": [
-        {
-          "check": "python-package-contract",
-          "role": "package-contract-input",
-          "suite": "a1c-public-cutover"
         }
       ]
     },
@@ -10281,7 +10269,7 @@
     "path": "evaluation/standards-effectiveness/suite-registry.toml"
   },
   "repository_index": {
-    "digest": "sha256:12dfb8a6e2256a3f8f428366cce7787677ee57de3745eadba0ba0f0775a6cd40",
+    "digest": "sha256:52d4a6d19cf74204f2651085cc1000ecd321debe1c8bb5fe075692c97710e7ff",
     "uses": [
       {
         "check": "python-package-contract",
