@@ -31,7 +31,6 @@ the command above with `refresh_verification_inputs` set to `true`.
 | `markdown_targets` | Required navigation destinations, independent of link wording |
 | `markdown_links` | Declared links and destinations |
 | `markdown_link_coverage` | Navigation coverage of a declared member inventory |
-| `plan_contract` | Structured plan lifecycle records |
 | `policy_impact` | Declared consumer graph and fixture validity |
 | `contract_projection` | Generated Interface agrees with canonical contract |
 | `python_package_contract` | Declared Python package boundaries |

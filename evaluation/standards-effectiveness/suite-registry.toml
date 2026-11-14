@@ -86,11 +86,6 @@ path = "evaluation/standards-effectiveness/suites/router-legacy-route-closure.to
 requires = []
 
 [[suites]]
-id = "planning-consolidation"
-path = "evaluation/standards-effectiveness/suites/planning-consolidation.toml"
-requires = []
-
-[[suites]]
 id = "source-index-closures"
 path = "evaluation/standards-effectiveness/suites/source-index-closures.toml"
 requires = []

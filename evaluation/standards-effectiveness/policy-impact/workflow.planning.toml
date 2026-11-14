@@ -10,22 +10,6 @@ evidence_owner = "review:consumer"
 rationale = "Fixture records the analysis-only full-review prompt's Router and Planning delegation decisions. Review binds this consumer and relationship; it requires substantive evidence before certification."
 
 [[relationships]]
-source = "workflow.planning.active-plan-fields"
-consumer = "planning-consolidation"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "This suite checks the current structural projection associated with the policy. Its declared checks do not establish semantic completeness or consumer behavior."
-
-[[relationships]]
-source = "workflow.planning.lifecycle-authority"
-consumer = "planning-consolidation"
-relation = "enforcement-suite-projection"
-applicability = { operator = "always" }
-evidence_owner = "suite:planning-consolidation"
-rationale = "The suite's plan_contract checks enforce valid plan status vocabulary, Accepted evidence and unfinished-state constraints; discovery does not add a lifecycle state."
-
-[[relationships]]
 source = "workflow.planning.projection-completeness"
 consumer = "policy-semantic-impact"
 relation = "enforcement-suite-projection"
