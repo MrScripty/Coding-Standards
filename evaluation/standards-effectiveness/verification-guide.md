@@ -7,7 +7,7 @@ Engine correctly. Evidence must state the behavior actually observed.
 
 Use the Engine `verify_repository` operation, documented in the
 [Verifier README](../../tools/standards_verifier/README.md). It checks declared
-metadata, routes, navigation links, plan records, consumer graph structure,
+metadata, routes, navigation links, consumer graph structure,
 generated contracts, and package boundaries. A passing checkpoint does not imply
 that every relevant consumer was declared or that downstream code conforms.
 

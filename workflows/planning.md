@@ -9,7 +9,7 @@
 - Does not apply when: A bounded local change has a clear agreed outcome, an obvious write set, a regression check, and an acceptance path, with no material uncertainty that could change those decisions.
 - Requires: `core`, `workflow.implementation`, `workflow.verification`, `workflow.development-proportionality`
 - Specializes: `none`
-- Verification: Active-plan structure fixtures and objective-level acceptance review.
+- Verification: Objective-level acceptance review.
 - Canonical owner: `workflows/planning.md`
 
 ## Discovery Before Implementation Planning
